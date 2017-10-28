@@ -429,22 +429,22 @@ module.exports = {
       "never"
     ],
     // import
-    "import/unambiguous": "warning", // custome
-    "import/default": "warning", // custom
+    "import/unambiguous": "warn", // custome
+    "import/default": "warn", // custom
     "import/export": "error",
     "import/first": "error",
     "import/no-duplicates": "error",
     "import/no-webpack-loader-syntax": "error",
     // node
-    "node/no-unpublished-require": "warning", // custom
-    "node/no-unsupported-features": "warning", // custom
+    "node/no-unpublished-require": "warn", // custom
+    "node/no-unsupported-features": "warn", // custom
     "node/no-deprecated-api": "error",
     "node/process-exit-as-throw": "error",
     // promise
-    "promise/no-callback-in-promise": "warning", // custom
-    "promise/no-promise-in-callback": "warning", // custom
-    "promise/avoid-new": "warning", // custom
-    "promise/no-nesting": "warning", // custom
+    "promise/no-callback-in-promise": "warn", // custom
+    "promise/no-promise-in-callback": "warn", // custom
+    "promise/avoid-new": "warn", // custom
+    "promise/no-nesting": "warn", // custom
     "promise/param-names": "error",
     // standard
     "standard/array-bracket-even-spacing": [
