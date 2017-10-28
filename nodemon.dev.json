@@ -1,0 +1,13 @@
+{
+  "restartable": "rs",
+  "execMap": {},
+  "colors": true,
+  "ext": "js hbs",
+  "delay": 200,
+  "watch": [
+    "src/server"
+  ],
+  "ignore": [],
+  "runOnChangeOnly": false,
+  "verbose": true
+}
