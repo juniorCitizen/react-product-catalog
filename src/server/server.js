@@ -1,6 +1,5 @@
 // load npm packages
 import bodyParser from 'body-parser'
-import cors from 'cors'
 import express from 'express'
 import exphbs from 'express-handlebars'
 import path from 'path'
@@ -19,10 +18,10 @@ const app = express()
 // setup Handlebars template engine
 console.log('setup Handlebars templating engine...')
 app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    extname: '.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts'),
-    partialsDir: path.join(__dirname, 'views/partials')
+  defaultLayout: 'main',
+  extname: '.hbs',
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials')
 }))
 app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
@@ -31,7 +30,6 @@ app.set('partials', path.join(__dirname, 'views/partials'))
 
 // global middlewares
 console.log('loading global middlewares...')
-app.use(cors()) // allowing cross origin requests
 if (eVars.NODE_ENV !== 'production') { app.use(require('morgan')('dev')) } // for debugging
 app.use(bodyParser.urlencoded({ extended: true })) // application/x-www-form-urlencoded
 app.use(bodyParser.json()) // application/json
@@ -66,31 +64,31 @@ let systemInitSequence = []
 systemInitSequence.push(db.initialize()) // initialize system database
 systemInitSequence.push(emailSystem.initialize()) // initialize email system
 Promise
-    .each(systemInitSequence, () => {
-        return Promise.resolve()
+  .each(systemInitSequence, () => {
+    return Promise.resolve()
+  })
+  .then(() => {
+    // start node express server if successful
+    console.log('spin up Node Express web server...')
+    return app.listen(eVars.PORT, (error) => {
+      if (error) {
+        console.log(`${eVars.SYS_REF} server could not be started...`)
+        return Promise.reject(error)
+      } else {
+        proxyRegistration
+          .then(() => {
+            console.log(`${eVars.SYS_REF} server activated (${eVars.HOST}:${eVars.PORT})`)
+            return Promise.resolve()
+          })
+          .catch((error) => {
+            return Promise.reject(error)
+          })
+      }
     })
-    .then(() => {
-        // start node express server if successful
-        console.log('spin up Node Express web server...')
-        return app.listen(eVars.PORT, (error) => {
-            if (error) {
-                console.log(`${eVars.SYS_REF} server could not be started...`)
-                return Promise.reject(error)
-            } else {
-                proxyRegistration
-                    .then(() => {
-                        console.log(`${eVars.SYS_REF} server activated (${eVars.HOST}:${eVars.PORT})`)
-                        return Promise.resolve()
-                    })
-                    .catch((error) => {
-                        return Promise.reject(error)
-                    })
-            }
-        })
-    })
-    .catch((error) => {
-        console.log(error.name)
-        console.log(error.message)
-        console.log(error.stack)
-        throw error
-    })
+  })
+  .catch((error) => {
+    console.log(error.name)
+    console.log(error.message)
+    console.log(error.stack)
+    throw error
+  })

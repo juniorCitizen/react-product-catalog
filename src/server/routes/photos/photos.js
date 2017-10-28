@@ -3,8 +3,8 @@ import express from 'express'
 const router = express.Router()
 
 router
-    .get('/', require('./get'))
-    .delete('/', require('./delete'))
+  .get('/', require('./get'))
+  .delete('/', require('./delete'))
 
 module.exports = router
 

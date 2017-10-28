@@ -6,11 +6,11 @@ import validatePasswordFormat from '../../middlewares/validatePasswordFormat'
 const router = express.Router()
 
 router
-    .post(
-        '/addUser',
-        localhostOnly,
-        validatePasswordFormat,
-        require('./addUser')
-    )
+  .post(
+    '/addUser',
+    localhostOnly,
+    validatePasswordFormat,
+    require('./addUser')
+  )
 
 module.exports = router
