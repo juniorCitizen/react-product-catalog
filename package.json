@@ -1,21 +1,20 @@
 {
   "name": "product-catalog",
   "version": "0.1.0",
-  "description": "product catalog website with Express backend server and management app (React Webpack version)",
+  "description": "simple product catalog website and backend with product data, user and client management functionalities suitable for small businesses, written with react and node.js",
   "author": "ASJGroup",
   "private": true,
   "main": "index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chiayutsaipersonal/product-catalog.git"
+    "url": "git+https://github.com/chiayutsaipersonal/react-product-catalog.git"
   },
   "bugs": {
-    "url": "https://github.com/chiayutsaipersonal/product-catalog/issues"
+    "url": "https://github.com/chiayutsaipersonal/react-product-catalog/issues"
   },
-  "homepage": "https://github.com/chiayutsaipersonal/product-catalog#readme",
+  "homepage": "https://github.com/chiayutsaipersonal/react-product-catalog#readme",
   "browser": {},
-  "browserify": {},
   "engines": {
     "node": ">=8.0.0"
   },
@@ -85,9 +84,6 @@
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.5.0",
     "style-loader": "^0.19.0",
-    "uglify-js": "^3.1.5",
-    "vueify": "^9.4.1",
-    "watchify": "^3.9.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
     "webpack-merge": "^4.1.0"
