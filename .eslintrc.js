@@ -437,14 +437,14 @@ module.exports = {
     "import/no-webpack-loader-syntax": "error",
     // node
     "node/no-unpublished-require": "off", // custom
-    "node/no-unsupported-features": "error",
+    "node/no-unsupported-features": "off", // custom
     "node/no-deprecated-api": "error",
     "node/process-exit-as-throw": "error",
     // promise
-    "promise/no-callback-in-promise": "error",
+    "promise/no-callback-in-promise": "off", // custom
     "promise/no-promise-in-callback": "error",
     "promise/avoid-new": "error",
-    "promise/no-nesting": "error",
+    "promise/no-nesting": "off", // custom
     "promise/param-names": "error",
     // standard
     "standard/array-bracket-even-spacing": [
