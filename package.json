@@ -52,6 +52,7 @@
     "babel-register": "^6.26.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
+    "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -104,6 +105,7 @@
     "prod": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/server/client/style/app.css ] -e src/client/app.js | uglifyjs -c warnings=false -m > dist/server/client/lib/app.js",
     "lint": "eslint --format node_modules/eslint-friendly-formatter --color src .eslintrc.js webpack.config.babel.js --cache",
     "start": "nodemon --watch webpack.config.babel.js --exec \"webpack-dev-server --env development\"",
-    "build": "webpack --env production"
+    "build": "webpack --env production",
+    "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004"
   }
 }
