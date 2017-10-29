@@ -4,7 +4,7 @@ import path from 'path'
 import logging from '../../server/controllers/logging'
 
 module.exports = () => {
-  let backupPath = './backup/blank.env'
+  let backupPath = './src/workflow/backup/blank.env'
   let liveDotEnvPath = '.env'
   return (done) => {
     fs.readFile(liveDotEnvPath)
