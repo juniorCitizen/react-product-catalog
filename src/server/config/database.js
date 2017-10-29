@@ -10,8 +10,8 @@ const sqliteConfig = {
   define: {
     underscored: false,
     freezeTableName: true,
-    timestamps: false,
-    paranoid: false,
+    timestamps: true,
+    paranoid: true,
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
@@ -35,8 +35,8 @@ const mysqlConfig = {
   define: {
     underscored: false,
     freezeTableName: true,
-    timestamps: false,
-    paranoid: false,
+    timestamps: true,
+    paranoid: true,
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'

@@ -6,7 +6,7 @@ const path = require('path')
 const Promise = require('bluebird')
 
 // load custom modules
-// const db = require('./controllers/database/database')
+const db = require('./controllers/database/database')
 // const emailSystem = require('./controllers/emails/emails')
 // const proxyRegistration = require('./controllers/proxyRegistration')
 const eVars = require('./config/eVars')
@@ -86,7 +86,7 @@ app.use(require('./middlewares/404Handler')) // catch 404's and redirect to inde
 logging.console('系統模組初始化...')
 // modules that needs to be initialized before hand goes here
 let preStartupInitSequence = [
-  '啟動前模組 1 初始化...', // dummy stub
+  db.initialize(),
   '啟動前模組 2 初始化...' // dummy stub
 ]
 // systemInitSequence.push(db.initialize()) // initialize system database
