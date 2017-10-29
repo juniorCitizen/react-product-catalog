@@ -1,4 +1,4 @@
-import eVars from '../config/environment.js'
+const eVars = require('../config/eVars.js')
 
 const cannedMessage = {
   200: '200 OK',
@@ -16,42 +16,43 @@ const cannedMessage = {
 }
 
 module.exports = {
-  image: imageResponse,
-  streamImage: streamImageResponse,
   file: fileResponse,
+  image: imageResponse,
+  imageBuffer: imageBufferResponse,
   json: jsonResponse,
+  stream: streamResponse,
   template: templateResponse
 }
 
 // requires an object argument
 // {
-//     pendingResponse: res object from the route handler,
+//     res: res object from the route handler,
 //     statusCode: intended execution status (integer),
-//     reference: string of the template file,
+//     view: string of the template file,
 //     data: object to be passed to the template file
 // }
 // example:
 // routerResponse.template({
-//     pendingResponse: response, // res obj from route handler param
+//     res: res, // res obj from route handler param
 //     statusCode: 500,
-//     reference: 'regFail', // name of template view file
+//     view: 'regFail', // name of template view file
 //     data: {
 //         title: eVars.SYS_REF
 //     }
 // });
 function templateResponse (args) {
-  return args.pendingResponse
+  return args.res
     .status(args.statusCode)
     .render(
       args.view,
-      args.data
+      args.data || {}
     )
 }
 
 // requires an object argument
 // {
-//     pendingResponse: res object from the route handler,
-//     originalRequest: req object from the route handler,
+//     res: res object from the route handler,
+//     req: req object from the route handler,
 //     statusCode: intended execution status (integer),
 //     success: result of the the route handler execution (boolean),
 //     error: object containing whatever the route handler had passed (optional),
@@ -60,49 +61,51 @@ function templateResponse (args) {
 // }
 // example:
 // routerResponse.json({
-//     pendingResponse: response,
-//     originalRequest: request,
+//     res: res,
+//     req: req,
 //     statusCode: 200,
-//     success: true,
-//     // error: {}, // optional
-//     // data: {}, // optional
+//     error: {}, // optional
+//     data: {}, // optional
 //     message: 'example message' // optional
 // });
 function jsonResponse (args) {
-  return args.pendingResponse
+  return args.res
     .status(args.statusCode)
     .json({
-      method: args.originalRequest.method,
-      endpoint: `${args.originalRequest.protocol}://${args.originalRequest.hostname}:${eVars.PORT}${args.originalRequest.originalUrl}`,
-      success: args.success,
-      statusCode: args.pendingResponse.statusCode,
-      error: ((!args.success) && (args.error)) ? args.error : null,
-      data: ((args.success) && (args.data)) ? args.data : null,
-      message: (
-        (args.message !== null) &&
-        (args.message !== undefined) &&
-        (args.message !== '')
-      ) ? args.message : cannedMessage[args.pendingResponse.statusCode.toString()]
+      method: args.req.method,
+      endpoint: `${args.req.protocol}://${args.req.hostname}:${eVars.PORT}${args.req.originalUrl}`,
+      statusCode: args.res.statusCode,
+      error: args.error ? args.error : null,
+      data: args.data ? args.data : null,
+      message: args.message ? args.message : cannedMessage[args.res.statusCode.toString()]
     }).end()
 }
 
-function imageResponse (args) {
-  return args.pendingResponse
-    .status(args.statusCode)
-    .type(args.mimeType)
-    .sendFile(args.filePath)
-}
-
-function streamImageResponse (args) {
-  return args.pendingResponse
+function imageBufferResponse (args) {
+  return args.res
     .status(args.statusCode)
     .type(args.mimeType)
     .send(args.dataBuffer)
 }
 
-function fileResponse (args) {
-  return args.pendingResponse
+function imageResponse (args) {
+  return args.res
     .status(args.statusCode)
     .type(args.mimeType)
     .sendFile(args.filePath)
+}
+
+function fileResponse (args) {
+  return args.res
+    .status(args.statusCode)
+    .type(args.mimeType)
+    .sendFile(args.filePath)
+}
+
+function streamResponse (args) {
+  args.res
+    .status(args.statusCode)
+    .type(args.mimeType)
+    .attachment(args.filenName)
+  return args.stream.pipe(args.res)
 }

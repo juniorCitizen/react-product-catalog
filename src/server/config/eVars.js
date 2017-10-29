@@ -9,24 +9,23 @@ const devMode = eVars.NODE_ENV === 'development'
 
 module.exports = (() => {
   return {
+    devMode: devMode,
     NODE_ENV: eVars.NODE_ENV,
     SYS_REF: eVars.SYS_REF,
     PROTOCOL: eVars.PROTOCOL,
     DOMAIN: domain(),
     PORT: normalizePort(eVars.PORT),
     HOST: host(),
-    CLIENT_URL: `${host()}/${eVars.SYS_REF}`,
-    API_URL: `${host()}/${eVars.SYS_REF}/api`
+    APP_ROUTE: `${host()}/${eVars.SYS_REF}`,
+    TIMEZONE: eVars.TIMEZONE,
+    ORM_VERBOSE: eVars.ORM_VERBOSE === 'true',
+    USE_DATABASE: eVars.USE_DATABASE
     // PROD_HOST: eVars.PROD_HOST,
     // LOCAL_DEV_HOST: eVars.LOCAL_DEV_HOST,
     // REMOTE_DEV_HOST: eVars.REMOTE_DEV_HOST,
-    // ,
     // RESET_DB: eVars.RESET_DB === 'true',
-    // NODEMON_VERBOSE: eVars.NODEMON_VERBOSE === 'true',
-    // SEQUELIZE_VERBOSE: eVars.SEQUELIZE_VERBOSE === 'true',
     // ENFORCE_VALIDATION: eVars.ENFORCE_VALIDATION === 'true',
     // PASS_PHRASE: eVars.PASS_PHRASE,
-    // TIMEZONE: eVars.TIMEZONE,
     // ADMIN: eVars.ADMIN,
     // EMAIL_HOST: eVars.EMAIL_HOST,
     // EMAIL_PORT: eVars.EMAIL_PORT,
