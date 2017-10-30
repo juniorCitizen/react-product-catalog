@@ -3,6 +3,7 @@ const path = require('path')
 const Promise = require('bluebird')
 const Sequelize = require('sequelize')
 
+const eVars = require('../../config/eVars')
 const dbConfig = require('../../config/database')
 const logging = require('../../controllers/logging')
 
@@ -45,9 +46,8 @@ function initialize () {
       db.OfficeLocations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
       db.OfficeLocations.hasMany(db.Users, injectOptions('officeLocationId', 'id'))
       db.Users.belongsTo(db.OfficeLocations, injectOptions('officeLocationId', 'id'))
-      return Promise.resolve()
+      return fs.readdir(db.modelPath)
     })
-    .then(() => { return fs.readdir(db.modelPath) })
     .then((fileList) => {
       prepSyncOps(fileList, db.syncOps, { force: true })
       return executeSyncOps()
@@ -108,7 +108,11 @@ function prepSyncOps (fileList, syncOps, typeObj = null) {
 function executeSyncOps () {
   return Promise
     .each(db.syncOps, (resolved, index) => {
-      logging.console(`${resolved.name} 資料表同步... 完成`)
+      if (eVars.ORM_VERBOSE) logging.console(`${resolved.name} 資料表同步... 完成`)
+    })
+    .then(() => {
+      logging.console('資料庫同步... 成功')
+      return Promise.resolve()
     })
     .catch((error) => {
       logging.error(error, '資料庫同步... 失敗')
