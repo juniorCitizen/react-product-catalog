@@ -23,8 +23,12 @@ function initialize () {
   return verifyConnection()
     .then(() => { return fs.readdir(db.modelPath) })
     .then((fileList) => {
-      prepSyncOps(fileList, db.syncOps, { force: true })
-      return executeSyncOps()
+      return getModelFileList(fileList)
+    })
+    .then((modelFileList) => {
+      registerModels(modelFileList, db.sequelize, db.Sequelize)
+      prepSyncOps(modelFileList, db.syncOps)
+      return executeSyncOps(db.syncOps)
     })
     .then(() => {
       logging.console('配置 ORM 系統關聯...')
@@ -49,8 +53,16 @@ function initialize () {
       return fs.readdir(db.modelPath)
     })
     .then((fileList) => {
-      prepSyncOps(fileList, db.syncOps, { force: true })
-      return executeSyncOps()
+      return getModelFileList(fileList)
+    })
+    .then((modelFileList) => {
+      // only to be used when generating a brand new database
+      // in order to generate correct associations and physical table relations
+      // IT'S DANGEROUS!!!
+      // THIS WILL WIPE OUT ANY AND ALL EXISTING DATA WITHOUT CONFIRMATION
+      // prepSyncOps(modelFileList, db.syncOps, { force: true })
+      prepSyncOps(modelFileList, db.syncOps)
+      return executeSyncOps(db.syncOps)
     })
     .then(() => {
       return Promise.resolve('資料庫初始化... 成功')
@@ -88,26 +100,34 @@ function verifyConnection () {
     })
 }
 
+function getModelFileList (fileList) {
+  let modelFileList = fileList.filter((file) => {
+    return ((file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
+  })
+  return Promise.resolve(modelFileList)
+}
+
+function registerModels (modelFileList, sequelize, Sequelize) {
+  modelFileList.forEach((modelFile) => {
+    db[modelName(modelFile)] = require(path.join(db.modelPath, modelFile))(sequelize, Sequelize)
+  })
+}
+
 function modelName (fileName) {
   return fileName.slice(0, -3).charAt(0).toUpperCase() + fileName.slice(0, -3).slice(1)
 }
 
-function prepSyncOps (fileList, syncOps, typeObj = null) {
-  fileList
-    .filter((file) => {
-      return ((file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
-    })
-    .forEach((file) => {
-      db[modelName(file)] = require(path.join(db.modelPath, file))(sequelize, Sequelize)
-      syncOps.push(
-        typeObj === null ? db[modelName(file)].sync() : db[modelName(file)].sync(typeObj)
-      )
-    })
+function prepSyncOps (modelFileList, syncOps, typeObj = null) {
+  modelFileList.forEach((modelFile) => {
+    syncOps.push(
+      typeObj === null ? db[modelName(modelFile)].sync() : db[modelName(modelFile)].sync(typeObj)
+    )
+  })
 }
 
-function executeSyncOps () {
+function executeSyncOps (syncOps) {
   return Promise
-    .each(db.syncOps, (resolved, index) => {
+    .each(syncOps, (resolved, index) => {
       if (eVars.ORM_VERBOSE) logging.console(`${resolved.name} 資料表同步... 完成`)
     })
     .then(() => {
