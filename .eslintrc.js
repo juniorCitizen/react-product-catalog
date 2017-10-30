@@ -430,7 +430,7 @@ module.exports = {
     ],
     // import
     "import/unambiguous": "off", // custom
-    "import/default": "error",
+    "import/default": "off", // custom
     "import/export": "error",
     "import/first": "error",
     "import/no-duplicates": "error",
@@ -446,6 +446,7 @@ module.exports = {
     "promise/avoid-new": "error",
     "promise/no-nesting": "off", // custom
     "promise/param-names": "error",
+    "promise/no-return-wrap": "off", //custom
     // standard
     "standard/array-bracket-even-spacing": [
       "error",

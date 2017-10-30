@@ -1,165 +1,140 @@
-import fs from 'fs-extra'
-import path from 'path'
-import Promise from 'bluebird'
-import Sequelize from 'sequelize' // requires the sequalize libraryc
+const fs = require('fs-extra')
+const path = require('path')
+const Promise = require('bluebird')
+const Sequelize = require('sequelize')
 
-import dbConfig from '../../config/sqliteDb'
+const eVars = require('../../config/eVars')
+const dbConfig = require('../../config/database')
+const logging = require('../../controllers/logging')
 
 const sequelize = new Sequelize(dbConfig)
 
 const db = {
+  modelPath: path.join(__dirname, '../../models'),
+  syncOps: [],
   Sequelize: Sequelize,
   sequelize: sequelize,
-  initialize: initialize // project model initialization function
+  initialize: initialize
 }
 
-const modelsPath = path.join(__dirname, '../../models')
+module.exports = db // export the database access object
 
 function initialize () {
-  let modelSyncOperations = []
-  return sequelize
-    .authenticate() // verify database connection
-    .then(() => {
-      return fs.readdir(modelsPath)
+  return verifyConnection()
+    .then(() => { return fs.readdir(db.modelPath) })
+    .then((fileList) => {
+      return getModelFileList(fileList)
     })
-    .then((files) => {
-      files
-        .filter((fileName) => {
-          return ((fileName.indexOf('.') !== 0) && (fileName.slice(-3) === '.js'))
-        })
-        .forEach((fileName) => {
-          let modelName = fileName.slice(0, -3).charAt(0).toUpperCase() + fileName.slice(0, -3).slice(1)
-          db[modelName] = require(path.join(modelsPath, fileName))(sequelize, Sequelize)
-          modelSyncOperations.push(db[modelName].sync())
-        })
-      return Promise.all(modelSyncOperations)
+    .then((modelFileList) => {
+      registerModels(modelFileList, db.sequelize, db.Sequelize)
+      prepSyncOps(modelFileList, db.syncOps)
+      return executeSyncOps(db.syncOps)
     })
     .then(() => {
-      db.Series.hasMany(db.Products, {
-        constraints: true,
-        foreignKey: 'seriesId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Products.belongsTo(db.Series, {
-        constraints: true,
-        foreignKey: 'seriesId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Products.hasOne(db.Descriptions, {
-        constraints: true,
-        foreignKey: 'productId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Products.hasMany(db.Photos, {
-        constraints: true,
-        foreignKey: 'productId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Products.belongsToMany(db.Registrations, {
-        through: db.InterestedProducts,
-        constrains: true,
-        foreignKey: 'productId',
-        // otherKey: 'registrationId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Photos.belongsTo(db.Products, {
-        constraints: true,
-        foreignKey: 'productId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Descriptions.belongsTo(db.Products, {
-        constraints: true,
-        foreignKey: 'productId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Countries.hasMany(db.Registrations, {
-        constrains: true,
-        foreignKey: 'countryId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Countries.hasMany(db.OfficeLocations, {
-        constrains: true,
-        foreignKey: 'countryId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Registrations.belongsTo(db.Countries, {
-        constraints: true,
-        foreignKey: 'countryId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Registrations.belongsToMany(db.Products, {
-        through: db.InterestedProducts,
-        constrains: true,
-        foreignKey: 'registrationId',
-        // otherKey: 'productId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.OfficeLocations.belongsTo(db.Countries, {
-        constraints: true,
-        foreignKey: 'countryId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.OfficeLocations.hasMany(db.Users, {
-        constrains: true,
-        foreignKey: 'officeLocationId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      db.Users.belongsTo(db.OfficeLocations, {
-        constraints: true,
-        foreignKey: 'officeLocationId',
-        targetKey: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      })
-      return Promise.resolve()
+      logging.console('配置 ORM 系統關聯...')
+      db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
+      db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
+      db.Products.hasOne(db.Descriptions, injectOptions('productId', 'id'))
+      db.Products.hasMany(db.Photos, injectOptions('productId', 'id'))
+      db.Products.belongsToMany(db.Registrations, injectOptions(
+        'productId', 'id', db.InterestedProducts // ,'registrationId'
+      ))
+      db.Photos.belongsTo(db.Products, injectOptions('productId', 'id'))
+      db.Descriptions.belongsTo(db.Products, injectOptions('productId', 'id'))
+      db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
+      db.Countries.hasMany(db.OfficeLocations, injectOptions('countryId', 'id'))
+      db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
+      db.Registrations.belongsToMany(db.Products, injectOptions(
+        'registrationId', 'id', db.InterestedProducts // ,'productId'
+      ))
+      db.OfficeLocations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
+      db.OfficeLocations.hasMany(db.Users, injectOptions('officeLocationId', 'id'))
+      db.Users.belongsTo(db.OfficeLocations, injectOptions('officeLocationId', 'id'))
+      return fs.readdir(db.modelPath)
+    })
+    .then((fileList) => {
+      return getModelFileList(fileList)
+    })
+    .then((modelFileList) => {
+      // only to be used when generating a brand new database
+      // in order to generate correct associations and physical table relations
+      // IT'S DANGEROUS!!!
+      // THIS WILL WIPE OUT ANY AND ALL EXISTING DATA WITHOUT CONFIRMATION
+      // prepSyncOps(modelFileList, db.syncOps, { force: true })
+      prepSyncOps(modelFileList, db.syncOps)
+      return executeSyncOps(db.syncOps)
     })
     .then(() => {
-      return fs.readdir(modelsPath)
-    })
-    .then((dirContents) => {
-      let modelSyncOperations = []
-      dirContents
-        .filter((fileName) => {
-          return ((fileName.indexOf('.') !== 0) && (fileName.slice(-3) === '.js'))
-        })
-        .forEach((fileName) => {
-          let modelName = fileName.slice(0, -3).charAt(0).toUpperCase() + fileName.slice(0, -3).slice(1)
-          modelSyncOperations.push(db[modelName].sync())
-        })
-      return Promise.all(modelSyncOperations)
+      return Promise.resolve('資料庫初始化... 成功')
     })
     .catch((error) => {
-      console.log(error.name)
-      console.log(error.message)
-      console.log(error.stack)
+      logging.error(error, '資料庫初始化... 失敗')
       return Promise.reject(error)
     })
 }
 
-module.exports = db // export the database access object
+function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = null) {
+  return Object.assign({
+    constraints: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'RESTRICT'
+  }, {
+    foreignKey: foreignKey,
+    targetKey: targetKey
+  }
+    , throughModel === null ? {} : { through: throughModel }
+    , otherKey === null ? {} : { otherKey: otherKey }
+  )
+}
+
+function verifyConnection () {
+  return db.sequelize
+    .authenticate()
+    .then(() => {
+      logging.console('資料庫連線驗證... 成功')
+      return Promise.resolve()
+    })
+    .catch((error) => {
+      logging.error(error, '資料庫連線驗證... 失敗')
+      return Promise.reject(error)
+    })
+}
+
+function getModelFileList (fileList) {
+  let modelFileList = fileList.filter((file) => {
+    return ((file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
+  })
+  return Promise.resolve(modelFileList)
+}
+
+function registerModels (modelFileList, sequelize, Sequelize) {
+  modelFileList.forEach((modelFile) => {
+    db[modelName(modelFile)] = require(path.join(db.modelPath, modelFile))(sequelize, Sequelize)
+  })
+}
+
+function modelName (fileName) {
+  return fileName.slice(0, -3).charAt(0).toUpperCase() + fileName.slice(0, -3).slice(1)
+}
+
+function prepSyncOps (modelFileList, syncOps, typeObj = null) {
+  modelFileList.forEach((modelFile) => {
+    syncOps.push(
+      typeObj === null ? db[modelName(modelFile)].sync() : db[modelName(modelFile)].sync(typeObj)
+    )
+  })
+}
+
+function executeSyncOps (syncOps) {
+  return Promise
+    .each(syncOps, (resolved, index) => {
+      if (eVars.ORM_VERBOSE) logging.console(`${resolved.name} 資料表同步... 完成`)
+    })
+    .then(() => {
+      logging.console('資料庫同步... 成功')
+      return Promise.resolve()
+    })
+    .catch((error) => {
+      logging.error(error, '資料庫同步... 失敗')
+    })
+}

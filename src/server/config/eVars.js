@@ -19,7 +19,13 @@ module.exports = (() => {
     APP_ROUTE: `${host()}/${eVars.SYS_REF}`,
     TIMEZONE: eVars.TIMEZONE,
     ORM_VERBOSE: eVars.ORM_VERBOSE === 'true',
-    USE_DATABASE: eVars.USE_DATABASE
+    USE_DATABASE: eVars.USE_DATABASE,
+    SQLITE_PATH: eVars.SQLITE_PATH,
+    MYSQl_HOST: eVars.MYSQL_HOST,
+    MYSQl_PORT: eVars.MYSQL_PORT,
+    MYSQl_NAME: eVars.MYSQL_NAME,
+    MYSQl_USER: eVars.MYSQL_USER,
+    MYSQl_PASS: eVars.MYSQL_PASS
     // PROD_HOST: eVars.PROD_HOST,
     // LOCAL_DEV_HOST: eVars.LOCAL_DEV_HOST,
     // REMOTE_DEV_HOST: eVars.REMOTE_DEV_HOST,
