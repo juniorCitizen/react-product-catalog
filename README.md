@@ -5,10 +5,10 @@ simple product catalog website and backend with product data, user and client ma
 ### instructions pending
 
 ## Usage
-### CLI
+### CLI Commands
 ### gulp
 ```
-gulp backupDotEnv - copy a skeleton copy of .env to ./backup/blank.env
+gulp backupDotEnv - copy a skeleton copy of .env to ./src/workflow/backup/blank.env
 glup removeLogs - remove *.log from the entire project file structure
 gulp resetDatabase - 將資料庫清空
   options:
