@@ -6,20 +6,30 @@ import logging from '../../server/controllers/logging'
 
 require('dotenv').config()
 
-const databaseSetting = argv['setting'] || 'development'
+const dbEnv = argv['setting'] || 'development'
+const seed = argv['seed'] || 'none'
 
 module.exports = () => {
-  let dbConfig = require('../../server/config/database')[databaseSetting]
+  let dbConfig = require('../../server/config/database')[dbEnv]
   db.sequelize = new db.Sequelize(dbConfig) // switch out the sequelize instance
 
   return (done) => {
+    if (!checkArgs(dbEnv, seed)) {
+      let error = new Error('INVALID_ARGUMENTS')
+      error.name = '參數錯誤'
+      error.message = `獲取的取參數: dbEnv: ${dbEnv} | seed: ${seed}`
+      logging.error(error, error.message)
+      return done(error)
+    }
     return disableConstraint(dbConfig.dialect)
       .then(() => {
-        return db
-          .initialize({ force: true })
+        return db.initialize({ force: true })
       })
       .then((message) => {
-        logging.console(`${databaseSetting} ${dbConfig.dialect} ${message}`)
+        logging.console(`${dbEnv} ${dbConfig.dialect} ${message}`)
+        return Promise.resolve()
+      })
+      .then(() => {
         return enableConstraint(dbConfig.dialect)
       })
       .then(() => {
@@ -30,7 +40,7 @@ module.exports = () => {
           .then(() => {
             logging.error(
               error,
-              `${databaseSetting} ${dbConfig.dialect} 資料庫重設失敗`
+              `${dbEnv} ${dbConfig.dialect} 資料庫重設失敗`
             )
             return done(error)
           })
@@ -87,4 +97,13 @@ function enableConstraint (dialect) {
       logging.error(error, '啟動資料庫關聯性控管機制失敗')
       return Promise.reject(error)
     })
+}
+
+function checkArgs (dbEnv, seed) {
+  if (
+    ['development', 'staging', 'production'].indexOf(dbEnv) !== -1 &&
+    ['mock', 'mock', 'none'].indexOf(seed) !== -1
+  ) {
+    return true
+  }
 }
