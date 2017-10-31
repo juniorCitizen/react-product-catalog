@@ -1,10 +1,10 @@
-# Product Catalog
+# PRODUCT CATALOG
 simple product catalog website and backend with product data, user and client management functionalities suitable for small businesses, written with react and node.js
 
-## Install
+## INSTALL
 ### instructions pending
 
-## Usage
+## USAGE
 ### CLI Commands
 ### gulp
 ```
@@ -18,14 +18,18 @@ gulp resetDatabase - 將資料庫淨空或者淨空後再填入基本/MOCK資料
       mock: 除了基本資料，另外再由系統亂數產生資料
       none (預設): 不植入資料 (空白資料庫)
 ```
+
 ### npm
 ```
-npm lint-backend - lint backend code
-npm watch-server - start server in development mode with nodemon
+npm start - run webpack-dev-server
+npm run build - produce a bare bone frontend bundle
+npm run lint - lint full source code
+npm run lint-backend - lint only backend code
+npm run watch-server - start server in development mode with nodemon
 ```
 
 ## API
 GET /SYS_REF - index.html and public assets
 
-## License
+## LICENSE
 MIT © [ASJ Group](chiayu.tsai.personal@gmail.com)
