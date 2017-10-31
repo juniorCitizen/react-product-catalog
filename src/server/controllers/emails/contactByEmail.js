@@ -2,7 +2,7 @@ import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
 
 import emailTransporter from '../../config/email'
-import eVars from '../../config/environment'
+import eVars from '../../config/eVars'
 
 module.exports = (registrationRecord) => {
   let websiteUrl = `${eVars.HOST}/${eVars.SYS_REF}`
