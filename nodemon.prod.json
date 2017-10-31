@@ -7,7 +7,9 @@
   "watch": [
     "dist"
   ],
-  "ignore": [],
+  "ignore": [
+    "dist/public"
+  ],
   "runOnChangeOnly": false,
   "verbose": false
 }

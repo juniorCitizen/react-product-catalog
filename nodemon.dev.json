@@ -7,7 +7,9 @@
   "watch": [
     "src/server"
   ],
-  "ignore": [],
+  "ignore": [
+    "dist/public"
+  ],
   "runOnChangeOnly": false,
   "verbose": true
 }
