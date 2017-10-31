@@ -26,12 +26,12 @@ const db = {
 
 module.exports = db // export the database access object
 
-function initialize ({ force = null }) {
+function initialize (force = null) {
   return verifyConnection(db)
     .then(() => { return prepModels(db) })
     .then(() => {
       registerModels(db)
-      return syncModels(db, force === true ? { force: true } : null)
+      return syncModels(db, force)
     })
     .then(() => {
       logging.console('配置 ORM 系統關聯...')
@@ -57,7 +57,7 @@ function initialize ({ force = null }) {
       db.Tags.belongsToMany(db.Products, injectOptions(
         'tagId', 'id', db.Labels
       ))
-      return reSyncModels(db, force === true ? { force: true } : null)
+      return reSyncModels(db, force)
     })
     .then(() => {
       return Promise.resolve('資料庫初始化... 成功')

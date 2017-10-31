@@ -3,12 +3,12 @@ const Promise = require('bluebird')
 const eVars = require('../../config/eVars')
 const logging = require('../../controllers/logging')
 
-module.exports = (db, { force = null }) => {
+module.exports = (db, force = null) => {
   db.syncOps = []
   db.modelList.forEach((modelName) => {
     db.syncOps.push(
       db[modelName]
-        .sync(force ? { force: true } : null)
+        .sync(force)
         .catch((error) => {
           logging.error(error)
           return Promise.reject(error)
