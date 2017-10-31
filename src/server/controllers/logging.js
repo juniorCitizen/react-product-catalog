@@ -14,10 +14,8 @@ function warningToConsole (warningMessage) {
   console.log(chalk.yellow.bold(warningMessage))
 }
 
-function errorToConsole () {
-  return (error, customMessage = '') => {
-    console.error(`${chalk.bgRed.bold(error.name)} - ${chalk.red.bold(customMessage)}`)
-    messageToConsole(error.message)
-    messageToConsole(error.stack)
-  }
+function errorToConsole (error, customMessage = '') {
+  console.error(`${chalk.bgRed.bold(error.name)} - ${chalk.red.bold(customMessage)}`)
+  messageToConsole(error.message)
+  messageToConsole(error.stack)
 }
