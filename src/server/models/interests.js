@@ -1,42 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-  const Photos = sequelize.define('photos', {
+  const Interests = sequelize.define('interests', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
+    // registrationId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   validate: { isUUID: 4 }
+    // },
     // productId: {
     //   type: DataTypes.UUID,
     //   allowNull: false,
     //   defaultValue: DataTypes.UUIDV4,
     //   validate: { isUUID: 4 }
     // },
-    primary: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    originalName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    encoding: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    mimeType: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    size: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    data: {
-      type: DataTypes.BLOB,
-      allowNull: false
-    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -53,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'photo',
-      plural: 'photos'
+      singular: 'interest',
+      plural: 'interests'
     }
   })
-  return Photos
+  return Interests
 }

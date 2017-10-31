@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
-    seriesId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+    // seriesId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false
+    // },
     code: {
       type: DataTypes.STRING,
       allowNull: false
@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     type: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     createdAt: {
