@@ -13,6 +13,7 @@ glup removeLogs - remove *.log from the entire project file structure
 ```
 ### npm
 ```
+npm lint-backend - lint backend code
 npm watch-server - start server in development mode with nodemon
 ```
 

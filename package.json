@@ -34,7 +34,7 @@
     "node-cron": "^1.2.1",
     "nodemailer": "^4.3.1",
     "nodemailer-express-handlebars": "^2.0.0",
-    "sequelize": "^4.19.0",
+    "sequelize": "^4.20.1",
     "sqlite3": "^3.1.13",
     "world-countries": "^1.8.1"
   },
@@ -103,7 +103,8 @@
     "server:prod:prep": "gulp buildServer",
     "preprod": "run-s client:prep server:prod:prep",
     "prod": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/server/client/style/app.css ] -e src/client/app.js | uglifyjs -c warnings=false -m > dist/server/client/lib/app.js",
-    "lint": "eslint --format node_modules/eslint-friendly-formatter --color src .eslintrc.js webpack.config.babel.js --cache",
+    "lint": "eslint --format node_modules/eslint-friendly-formatter --color src *.js --cache",
+    "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
     "start": "nodemon --watch webpack.config.babel.js --exec \"webpack-dev-server --env development\"",
     "build": "webpack --env production",
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004"
