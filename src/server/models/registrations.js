@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { isEmail: true }
     },
-    countryId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    // countryId: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false
+    // },
     comments: {
       type: DataTypes.TEXT,
       allowNull: true

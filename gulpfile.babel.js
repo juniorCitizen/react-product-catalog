@@ -17,6 +17,7 @@ function requireTaskPath (pathString) {
 
 gulp.task('backupDotEnv', requireTaskPath('backupDotEnv'))
 gulp.task('removeLogs', requireTaskPath('removeLogs'))
+gulp.task('resetDatabase', requireTaskPath('resetDatabase'))
 
 // backup tasks
 // gulp.task('backupDatabase', requireTaskPath('/database/backupDatabase'))

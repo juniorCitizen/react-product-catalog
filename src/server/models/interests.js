@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-  const InterestedProducts = sequelize.define('interestedProducts', {
+  const Interests = sequelize.define('interests', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
-    registrationId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
-      validate: { isUUID: 4 }
-    },
-    productId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
-      validate: { isUUID: 4 }
-    },
+    // registrationId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   validate: { isUUID: 4 }
+    // },
+    // productId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   validate: { isUUID: 4 }
+    // },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'interestedProduct',
-      plural: 'interestedProducts'
+      singular: 'interest',
+      plural: 'interests'
     }
   })
-  return InterestedProducts
+  return Interests
 }

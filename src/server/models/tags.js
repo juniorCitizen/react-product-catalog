@@ -1,30 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-  const OfficeLocations = sequelize.define('officeLocations', {
+  const Tags = sequelize.define('tags', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    countryId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    telephone: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    fax: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    website: {
+    color: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -44,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'officeLocation',
-      plural: 'officeLocations'
+      singular: 'tag',
+      plural: 'tags'
     }
   })
-  return OfficeLocations
+  return Tags
 }

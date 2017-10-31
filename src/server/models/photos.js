@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
-    productId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
-      validate: { isUUID: 4 }
-    },
+    // productId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   validate: { isUUID: 4 }
+    // },
     primary: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
