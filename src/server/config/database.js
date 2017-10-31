@@ -20,11 +20,11 @@ const sqliteConfig = {
 
 const mysqlConfig = {
   dialect: 'mysql',
-  host: eVars.MYSQl_HOST,
-  port: eVars.MYSQl_PORT,
-  database: eVars.MYSQl_NAME,
-  username: eVars.MYSQl_USER,
-  password: eVars.MYSQl_PASS,
+  host: eVars.MYSQL_HOST,
+  port: eVars.MYSQL_PORT,
+  database: eVars.MYSQL_DB_NAME,
+  username: eVars.MYSQL_USER,
+  password: eVars.MYSQL_PASS,
   logging: eVars.ORM_VERBOSE ? logging.warning : false,
   timezone: eVars.TIMEZONE,
   pool: {
@@ -43,15 +43,8 @@ const mysqlConfig = {
   }
 }
 
-module.exports = (() => {
-  switch (eVars.USE_DATABASE) {
-    case 'development':
-      return sqliteConfig
-    case 'staging':
-      return mysqlConfig
-    case 'production':
-      return mysqlConfig
-    default:
-      return sqliteConfig
-  }
-})()
+module.exports = {
+  development: sqliteConfig,
+  staging: mysqlConfig,
+  production: mysqlConfig
+}
