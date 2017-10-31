@@ -10,10 +10,8 @@ const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || 'none'
 
 module.exports = () => {
-  let dbConfig = require('../../server/config/database')[dbEnv]
-  db.sequelize = new db.Sequelize(dbConfig) // switch out the sequelize instance
-
   return (done) => {
+    // validate arguments
     if (!checkArgs(dbEnv, seed)) {
       let error = new Error('INVALID_ARGUMENTS')
       error.name = '參數錯誤'
@@ -21,27 +19,55 @@ module.exports = () => {
       logging.error(error, error.message)
       return done(error)
     }
+    // get database configuration
+    let dbConfig = require('../../server/config/database')[dbEnv]
+    // switch out the sequelize instance
+    db.sequelize = new db.Sequelize(dbConfig)
+    // start the reset process with disabling the database constraints
     return disableConstraint(dbConfig.dialect)
       .then(() => {
+        // initialize an empty database
         return db.initialize({ force: true })
       })
       .then((message) => {
         logging.console(`${dbEnv} ${dbConfig.dialect} ${message}`)
+        // re-enable database constraint
+        return enableConstraint(dbConfig.dialect)
+      })
+      .then(() => {
+        if (seed === 'none') {
+          // if cmd arg is empty or none, skip the data generation part the script
+          return done()
+        } else {
+          // continue with the script
+          return Promise.resolve()
+        }
+      })
+      .then(() => {
+        // TODO // 'default' data generation script
         return Promise.resolve()
       })
       .then(() => {
-        return enableConstraint(dbConfig.dialect)
+        if (seed === 'default') {
+          // if cmd arg is 'default', skip the mock data generation
+          return done()
+        } else {
+          // continue with the script
+          return Promise.resolve()
+        }
+      })
+      .then(() => {
+        // TODO // 'mock' data generation script
+        return Promise.resolve()
       })
       .then(() => {
         return done()
       })
       .catch((error) => {
+        // in case of error, enable the database constraints first
         enableConstraint(dbConfig.dialect)
           .then(() => {
-            logging.error(
-              error,
-              `${dbEnv} ${dbConfig.dialect} 資料庫重設失敗`
-            )
+            logging.error(error, `${dbEnv} ${dbConfig.dialect} 資料庫重設失敗`)
             return done(error)
           })
           .catch((error) => {
@@ -51,6 +77,7 @@ module.exports = () => {
   }
 }
 
+// disable constraint function
 function disableConstraint (dialect) {
   let queryString = ''
   switch (dialect) {
@@ -75,6 +102,7 @@ function disableConstraint (dialect) {
     })
 }
 
+// enable constraint function
 function enableConstraint (dialect) {
   let queryString = ''
   switch (dialect) {
@@ -99,6 +127,7 @@ function enableConstraint (dialect) {
     })
 }
 
+// function to validate command line argument
 function checkArgs (dbEnv, seed) {
   if (
     ['development', 'staging', 'production'].indexOf(dbEnv) !== -1 &&
