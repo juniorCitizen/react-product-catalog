@@ -55,7 +55,7 @@ module.exports = () => {
             .then(() => labels(db.Products, db.Tags))
             .then(() => photos(db.Photos, db.Products))
             .then(() => {
-              logging.warning('資料庫重設，並以完成預設資料載入...')
+              logging.warning('資料庫重設，並已完成預設資料載入...')
               return done()
             })
             .catch((error) => {
