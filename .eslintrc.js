@@ -18,13 +18,17 @@ module.exports = {
     "standard",
     "promise",
     "node",
-    "import"
+    "import",
+    "react"
   ],
   "root": true,
   "parserOptions": {
     "parser": "babel-eslint",
     "ecmaVersion": 8,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "rules": {
     "accessor-pairs": "error",
