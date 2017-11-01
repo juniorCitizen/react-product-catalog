@@ -1,4 +1,6 @@
-module.exports = [{
+import logging from '../../../server/controllers/logging'
+
+const seriesData = [{
   id: 0,
   reference: 'Crutches',
   displaySequence: 0
@@ -43,3 +45,20 @@ module.exports = [{
   reference: 'Accessories',
   displaySequence: 10
 }]
+
+module.exports = (Series) => {
+  return Series
+    .bulkCreate(seriesData)
+    .then(() => {
+      logging.warning('寫入產品系列資料... 成功')
+      return Series.findAll()
+    })
+    .map(series => series.id)
+    .then((seriesIdList) => {
+      return Promise.resolve(seriesIdList)
+    })
+    .catch((error) => {
+      logging.error(error, 'resetDatabase/series.js errored...')
+      return Promise.resolve(error)
+    })
+}

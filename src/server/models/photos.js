@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false
     },
+    carousel: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     originalName: {
       type: DataTypes.STRING,
       allowNull: false

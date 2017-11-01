@@ -8,7 +8,7 @@ module.exports = (db, force = null) => {
   db.modelList.forEach((modelName) => {
     db.syncOps.push(
       db[modelName]
-        .sync(force)
+        .sync(force ? { force: true } : { force: false })
         .catch((error) => {
           logging.error(error)
           return Promise.reject(error)
