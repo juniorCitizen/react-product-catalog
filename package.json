@@ -36,7 +36,7 @@
     "nodemailer-express-handlebars": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "sequelize": "^4.20.1",
+    "sequelize": "^4.20.3",
     "sqlite3": "^3.1.13",
     "world-countries": "^1.8.1"
   },
@@ -58,13 +58,14 @@
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "faker": "^4.1.0",
@@ -91,14 +92,16 @@
     "source-map-support": "^0.5.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.3",
+    "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.0",
     "yargs": "^10.0.3"
   },
   "scripts": {
     "start": "nodemon --watch webpack.config.babel.js --exec \"webpack-dev-server --env development\"",
     "build": "webpack --env production",
-    "lint": "eslint --color src *.js --cache",
+    "lint": "eslint --color src *.js *.jsx --cache",
     "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004"
   }
