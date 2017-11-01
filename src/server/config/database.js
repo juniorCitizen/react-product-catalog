@@ -30,7 +30,8 @@ const mysqlConfig = {
   pool: {
     max: 5,
     min: 0,
-    idle: 60000
+    idle: 300000,
+    aquire: 20000
   },
   define: {
     underscored: false,
