@@ -28,10 +28,12 @@ const mysqlConfig = {
   logging: eVars.ORM_VERBOSE ? logging.warning : false,
   timezone: eVars.TIMEZONE,
   pool: {
-    max: 5,
-    min: 0,
-    idle: 300000,
-    aquire: 20000
+    max: 5, // default: 5
+    min: 0, // default: 0
+    idle: 10000, // default: 10000
+    acquire: 10000, // default: 10000
+    evict: 10000, // default: 10000
+    retry: { max: 3 }
   },
   define: {
     underscored: false,

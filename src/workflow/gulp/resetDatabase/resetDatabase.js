@@ -30,6 +30,11 @@ module.exports = () => {
     }
     // get database configuration
     let dbConfig = require('../../../server/config/database')[dbEnv]
+    if (dbConfig.dialect === 'mysql') {
+      // prevent remote db access encounter timeout error on large file transfers
+      dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
+      dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)
+    }
     // switch out the sequelize instance
     db.sequelize = new db.Sequelize(dbConfig)
     // start the reset process with disabling the database constraints
