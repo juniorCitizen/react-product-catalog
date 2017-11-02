@@ -7,7 +7,8 @@ import logging from '../../../server/controllers/logging'
 
 const MOCK_PRODUCT_PHOTO_PATH = path.resolve(path.join(__dirname, './mockPhotos/products'))
 const MOCK_CAROUSEL_PHOTO_PATH = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
-const MAX_SECONDARY_PHOTO_COUNT = 15
+const MIN_SECONDARY_PHOTO_COUNT = 1
+const MAX_SECONDARY_PHOTO_COUNT = 3
 
 module.exports = (Photos, Products) => {
   let insertQueries = []
@@ -43,7 +44,7 @@ module.exports = (Photos, Products) => {
             // it is initialized with one random index to start with
             let photoIndexArray = [randomNumberFromRange(0, (photoCount - 1))]
             // randomly decide how many secondary photos to be inserted
-            let secondaryPhotoCount = randomNumberFromRange(2, MAX_SECONDARY_PHOTO_COUNT)
+            let secondaryPhotoCount = randomNumberFromRange(MIN_SECONDARY_PHOTO_COUNT, MAX_SECONDARY_PHOTO_COUNT)
             for (let counter = 0; counter < secondaryPhotoCount; counter++) {
               // for each 2ndary photo to be inserted, push another random photo index on to the array
               photoIndexArray.push(randomNumberFromRange(0, (photoCount - 1)))
@@ -69,9 +70,7 @@ module.exports = (Photos, Products) => {
       // run the list of insertion queries
       return Promise
         .each(insertQueries, (record, index, length) => {
-          logging.warning(record.get('originalName'))
-          logging.warning(index)
-          logging.warning(length)
+          logging.warning(`檔案: ${record.get('originalName')} 進度: ${index}/${length}`)
         })
         .then(() => {
           logging.warning('批次圖檔寫入... 成功')

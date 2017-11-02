@@ -14,7 +14,8 @@ module.exports = (() => {
     officeLocationId: 0,
     loginId: 'david',
     password: null,
-    salt: null
+    salt: null,
+    admin: true
   }, {
     email: 'cathy.liu@gentry-way.com.tw',
     name: 'Cathy Liu',

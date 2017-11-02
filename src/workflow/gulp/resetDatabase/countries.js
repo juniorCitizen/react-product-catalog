@@ -1,16 +1,22 @@
-module.exports = () => {
-  return Promise.resolve()
-}
+import logging from '../../../server/controllers/logging'
 
-// module.exports = (() => {
-//   let worldCountries = require('world-countries/dist/countries.json')
-//   let records = []
-//   worldCountries.forEach((worldCountry) => {
-//     records.push({
-//       id: worldCountry.cca3,
-//       name: worldCountry.name.common,
-//       region: worldCountry.region === '' ? 'Other' : worldCountry.region
-//     })
-//   })
-//   return records
-// })()
+module.exports = (Countries) => {
+  let countries = []
+  require('world-countries/dist/countries.json').forEach((country) => {
+    countries.push({
+      id: country.cca3,
+      name: country.name.common,
+      region: country.region === '' ? 'Other' : country.region
+    })
+  })
+  return Countries
+    .bulkCreate(countries)
+    .then(() => {
+      logging.warning('寫入國家資料... 成功')
+      return Promise.resolve()
+    })
+    .catch((error) => {
+      logging.error(error, 'resetDatabase/countries.js errored...')
+      return Promise.resolve(error)
+    })
+}

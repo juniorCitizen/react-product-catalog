@@ -2,7 +2,7 @@ import faker from 'faker'
 
 import logging from '../../../server/controllers/logging'
 
-const PRODUCTS_PER_SERIES_LIMIT = { min: 5, max: 10 }
+const PRODUCTS_PER_SERIES_LIMIT = { min: 2, max: 4 }
 
 module.exports = (Products, seriesIdList) => {
   let products = []

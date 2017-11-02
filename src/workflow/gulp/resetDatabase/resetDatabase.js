@@ -9,9 +9,9 @@ require('dotenv').config()
 const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || false
 
-// let countries = require('../mockData/countries')
+let countries = require('./countries')
 let labels = require('./labels')
-// let offices = require('../mockData/offices')
+let offices = require('./offices')
 let photos = require('./photos')
 let products = require('./products')
 let series = require('./series')
@@ -54,6 +54,8 @@ module.exports = () => {
             .then(() => tags(db.Tags))
             .then(() => labels(db.Products, db.Tags))
             .then(() => photos(db.Photos, db.Products))
+            .then(() => countries(db.Countries))
+            .then(() => offices(db.Offices))
             .then(() => {
               logging.warning('資料庫重設，並已完成預設資料載入...')
               return done()
