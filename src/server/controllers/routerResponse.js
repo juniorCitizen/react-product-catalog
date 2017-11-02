@@ -51,8 +51,8 @@ function templateResponse (args) {
 
 // requires an object argument
 // {
-//     res: res object from the route handler,
 //     req: req object from the route handler,
+//     res: res object from the route handler,
 //     statusCode: intended execution status (integer),
 //     success: result of the the route handler execution (boolean),
 //     error: object containing whatever the route handler had passed (optional),
@@ -61,8 +61,8 @@ function templateResponse (args) {
 // }
 // example:
 // routerResponse.json({
-//     res: res,
 //     req: req,
+//     res: res,
 //     statusCode: 200,
 //     error: {}, // optional
 //     data: {}, // optional

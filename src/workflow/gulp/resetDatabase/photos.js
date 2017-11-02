@@ -7,7 +7,7 @@ import logging from '../../../server/controllers/logging'
 
 require('dotenv').config()
 
-module.exports = (Photos, Products) => {
+module.exports = (Photos, Products, Series) => {
   let productPhotoPath = path.resolve(path.join(__dirname, './mockPhotos/products'))
   let carouselPhotoPath = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
   let insertQueries = []
@@ -55,6 +55,7 @@ module.exports = (Photos, Products) => {
             photoIndexArray.forEach((photoIndex, index) => {
               insertQueries.push(
                 Photos.create({
+                  productId: product.get('id'),
                   primary: index === 0, // set to true, if it's the first index in the array
                   originalName: photoFileNames[photoIndex],
                   encoding: '7bit',
@@ -69,10 +70,39 @@ module.exports = (Photos, Products) => {
         })
     })
     .then(() => {
-      // run the list of insertion queries
-      return Promise
+      return Promise // run the insertion queries
         .each(insertQueries, (record, index, length) => {
           logging.warning(`檔案: ${record.get('originalName')} 進度: ${index}/${length}`)
+        })
+        .then(() => {
+          return Series
+            .findAll()
+            .map(series => series.id)
+            .then((seriesIdList) => {
+              let queries = []
+              seriesIdList.forEach((seriesId) => {
+                queries.push(
+                  Products.find({ where: { seriesId: seriesId } })
+                )
+              })
+              return Promise.all(queries)
+            })
+            .then((representativeProducts) => {
+              let queries = []
+              representativeProducts.forEach((product) => {
+                queries.push(
+                  Photos.update({
+                    seriesId: product.get('seriesId')
+                  }, {
+                    where: {
+                      primary: true,
+                      productId: product.get('id')
+                    }
+                  })
+                )
+              })
+              return Promise.resolve()
+            })
         })
         .then(() => {
           logging.warning('批次圖檔寫入... 成功')

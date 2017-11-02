@@ -1,75 +1,65 @@
-import chalk from 'chalk'
-import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken')
 
-import db from '../controllers/database/database'
-import eVars from '../config/environment'
-import routerResponse from '../controllers/routerResponse'
+const db = require('../controllers/database/database')
+const eVars = require('../config/eVars')
+const logging = require('../controllers/logging')
+const routerResponse = require('../controllers/routerResponse')
 
-module.exports = (request, response, next) => {
+module.exports = (req, res, next) => {
   if (!eVars.ENFORCE_VALIDATION) {
-    console.log(chalk.red('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!'))
+    logging.warning('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!')
     next()
   } else {
     let accessToken =
-      (request.body && request.body.accessToken) ||
-      (request.query && request.query.accessToken) ||
-      request.headers['x-access-token']
+      (req.body && req.body.accessToken) ||
+      (req.query && req.query.accessToken) ||
+      req.headers['x-access-token']
     if (accessToken) { // if a token is found
       jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
         if (error) {
-          console.log('401 Forbidden (unrecognized token)')
+          logging.warning('UNAUTHORIZED TOKEN DETECTED!!!')
           return routerResponse.json({
-            pendingResponse: response,
-            originalRequest: request,
+            req: req,
+            res: res,
             statusCode: 401,
-            success: false,
-            error: error.name,
-            message: error.message,
-            data: error.stack
+            error: error,
+            message: 'unauthorized token'
           })
         }
         return db.Users.findOne({
           where: {
             email: decodedToken.email.toLowerCase(),
-            loginId: decodedToken.loginId
+            loginId: decodedToken.loginId,
+            admin: true
           }
         }).then((user) => {
           if (user) {
             return next()
           } else {
-            let error = new Error('401 Forbidden (unrecognized user)')
-            error.name = 'userNotExist'
+            logging.warning('UNAUTHORIZED USER LOGIN DETECTED!!!')
             return routerResponse.json({
-              pendingResponse: response,
-              originalRequest: request,
+              req: req,
+              res: res,
               statusCode: 401,
-              success: false,
-              error: error.name,
-              message: error.message
+              message: 'unauthorized user'
             })
           }
         }).catch((error) => {
+          logging.error(error, 'middlewares/validateJwt.js jwt.verify() errored')
           return routerResponse.json({
-            pendingResponse: response,
-            originalRequest: request,
-            statusCode: 401,
-            success: false,
-            error: error.name,
-            message: error.message,
-            data: error.stack
+            req: req,
+            res: res,
+            statusCode: 500,
+            error: error
           })
         })
       })
     } else { // if there is no token, return an error
-      let error = new Error('401 Forbidden (token missing)')
-      error.name = 'tokenMissing'
       return routerResponse.json({
-        pendingResponse: response,
-        originalRequest: request,
+        req: req,
+        res: res,
         statusCode: 401,
-        success: false,
-        error: error.name,
-        message: error.message
+        message: 'missing token'
       })
     }
   }

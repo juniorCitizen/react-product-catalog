@@ -71,6 +71,7 @@ ROUTERS.client.router.use('/', require(path.join(__dirname, 'routes/index'))) //
 logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 
 // set up api routes
+ROUTERS.api.router.use('/series', require('./routes/series/series'))
 // apiAccessRouter.use('/products', require('./routes/products/products'))
 // apiAccessRouter.use('/photos', require('./routes/photos/photos'))
 // apiAccessRouter.use('/countries', require('./routes/countries/countries'))
@@ -87,10 +88,9 @@ logging.console('系統模組初始化...')
 // modules that needs to be initialized before hand goes here
 let preStartupInitSequence = [
   db.initialize(),
+  // emailSystem.initialize(), // initialize email system
   '啟動前模組 2 初始化...' // dummy stub
 ]
-// systemInitSequence.push(db.initialize()) // initialize system database
-// systemInitSequence.push(emailSystem.initialize()) // initialize email system
 logging.console('伺服器啟動前置作業...')
 logging.console('前置模組初始化...')
 Promise.each( // runs the pre server start init scripts

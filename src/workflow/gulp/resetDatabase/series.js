@@ -2,47 +2,47 @@ import logging from '../../../server/controllers/logging'
 
 const seriesData = [{
   id: 0,
-  reference: 'Crutches',
+  name: 'Crutches',
   displaySequence: 0
 }, {
   id: 1,
-  reference: 'Canes',
+  name: 'Canes',
   displaySequence: 1
 }, {
   id: 2,
-  reference: 'Forearm Crutches',
+  name: 'Forearm Crutches',
   displaySequence: 2
 }, {
   id: 3,
-  reference: 'Quad Canes',
+  name: 'Quad Canes',
   displaySequence: 3
 }, {
   id: 4,
-  reference: 'Bath Seats',
+  name: 'Bath Seats',
   displaySequence: 4
 }, {
   id: 5,
-  reference: 'Walkers',
+  name: 'Walkers',
   displaySequence: 5
 }, {
   id: 6,
-  reference: 'Commode Chairs',
+  name: 'Commode Chairs',
   displaySequence: 6
 }, {
   id: 7,
-  reference: 'Bathroom Safety',
+  name: 'Bathroom Safety',
   displaySequence: 7
 }, {
   id: 8,
-  reference: 'Patient-Aids',
+  name: 'Patient-Aids',
   displaySequence: 8
 }, {
   id: 9,
-  reference: 'Rollators',
+  name: 'Rollators',
   displaySequence: 9
 }, {
   id: 10,
-  reference: 'Accessories',
+  name: 'Accessories',
   displaySequence: 10
 }]
 

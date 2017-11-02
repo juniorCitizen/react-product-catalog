@@ -1,14 +1,17 @@
-import express from 'express'
-import jwt from 'jsonwebtoken'
+const express = require('express')
+const jwt = require('jsonwebtoken')
 
-import db from '../../controllers/database/database'
-import encryption from '../../controllers/encryption'
-import eVars from '../../config/environment'
-import routerResponse from '../../controllers/routerResponse'
+const db = require('../../controllers/database/database')
+const encryption = require('../../controllers/encryption')
+const eVars = require('../../config/eVars')
+const routerResponse = require('../../controllers/routerResponse')
 
 const router = express.Router()
 
-router.post('/', loginInfoPresence, require('../../middlewares/botPrevention'), tokenRequest)
+router.post('/',
+  loginInfoPresence,
+  require('../../middlewares/botPrevention'),
+  tokenRequest)
 
 module.exports = router
 
@@ -17,20 +20,17 @@ function tokenRequest (req, res) {
     .findOne({
       where: {
         email: req.body.email,
-        loginId: req.body.loginId
+        loginId: req.body.loginId,
+        admin: true
       }
     })
     .then((apiUser) => {
       if (apiUser === null) { // reject the request if such user does not exist
-        let error = new Error('no such user')
-        error.name = 'invalidLogin'
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 401,
-          success: false,
-          error: error.name,
-          message: error.message
+          message: 'incorrect login information'
         })
       }
       // hash the submitted password against the salt string
@@ -42,36 +42,30 @@ function tokenRequest (req, res) {
           loginId: req.body.loginId
         }
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 200,
-          success: true,
           data: {
             token: jwt.sign(payload, eVars.PASS_PHRASE, { expiresIn: '24h' })
           },
           message: 'token is supplied for 24 hours'
         })
       } else { // hash verification failed
-        let error = new Error('password did not verify')
-        error.name = 'invalidPassword'
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 401,
-          error: error.name,
-          message: error.message
+          message: 'incorrect login information'
         })
       }
     })
     .catch((error) => {
       return routerResponse.json({
-        pendingResponse: res,
-        originalRequest: req,
+        req: req,
+        res: res,
         statusCode: 500,
-        success: false,
-        error: error.name,
-        message: error.message,
-        data: error.stack
+        error: error,
+        message: 'routes/token/token.js tokenRequest() errored'
       })
     })
 }
@@ -83,15 +77,11 @@ function loginInfoPresence (req, res, next) {
     (req.body.password === undefined) ||
     (req.body.botPrevention === undefined)
   ) {
-    let error = new Error('required login information missing')
-    error.name = 'missingLoginInfo'
     return routerResponse.json({
-      pendingResponse: res,
-      originalRequest: req,
+      req: req,
+      res: res,
       statusCode: 401,
-      success: false,
-      error: error.name,
-      message: error.message
+      message: 'login info is incomplete'
     })
   }
   next()

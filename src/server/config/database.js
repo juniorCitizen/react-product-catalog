@@ -15,7 +15,8 @@ const sqliteConfig = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
-  }
+  },
+  operatorsAliases: false
 }
 
 const mysqlConfig = {
@@ -43,7 +44,8 @@ const mysqlConfig = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
-  }
+  },
+  operatorsAliases: false
 }
 
 module.exports = {

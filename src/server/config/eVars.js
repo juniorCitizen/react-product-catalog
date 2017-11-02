@@ -26,13 +26,13 @@ module.exports = (() => {
     MYSQL_PORT: eVars.MYSQL_PORT,
     MYSQL_DB_NAME: eVars.MYSQL_DB_NAME,
     MYSQL_USER: eVars.MYSQL_USER,
-    MYSQL_PASS: eVars.MYSQL_PASS
+    MYSQL_PASS: eVars.MYSQL_PASS,
+    ENFORCE_VALIDATION: eVars.ENFORCE_VALIDATION === 'true',
+    PASS_PHRASE: eVars.PASS_PHRASE
     // PROD_HOST: eVars.PROD_HOST,
     // LOCAL_DEV_HOST: eVars.LOCAL_DEV_HOST,
     // REMOTE_DEV_HOST: eVars.REMOTE_DEV_HOST,
     // RESET_DB: eVars.RESET_DB === 'true',
-    // ENFORCE_VALIDATION: eVars.ENFORCE_VALIDATION === 'true',
-    // PASS_PHRASE: eVars.PASS_PHRASE,
     // ADMIN: eVars.ADMIN,
     // EMAIL_HOST: eVars.EMAIL_HOST,
     // EMAIL_PORT: eVars.EMAIL_PORT,

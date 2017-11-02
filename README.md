@@ -23,11 +23,17 @@ npm start - 啟動 webpack-dev-server
 npm run build - 產生客戶端骨架 bundle
 npm run lint - lint 整個 ./src 之下的程式碼
 npm run lint-backend - 僅 lint 後端程式碼
-npm run watch-server - 以 nodemon 啟動後端伺服器 (開發模式)
+npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 ```
 
 ## API
-GET /SYS_REF - index.html and public assets
+### index.html and public assets
+GET http://domain:port/sys_ref
+### series
+GET http://domain:port/sys_ref/api/series?(products=true)
+GET http://domain:port/sys_ref/api/series?id=x(&products=true)
+GET http://domain:port/sys_ref/api/series?name=xxxx(&products=true)
+POST http://domain:port/sys_ref/api/series?name=xxxx (headers: { "x-access-token": 'jwt string' })
 
 ## LICENSE
 MIT © [ASJ Group](chiayu.tsai.personal@gmail.com / papago75@gmail.com)
