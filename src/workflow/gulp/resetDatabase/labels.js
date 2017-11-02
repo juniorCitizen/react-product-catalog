@@ -3,7 +3,7 @@ import Promise from 'bluebird'
 
 import logging from '../../../server/controllers/logging'
 
-const TAG_LIMIT = { min: 0, max: 5 }
+require('dotenv').config()
 
 module.exports = (Products, Tags) => {
   return Promise
@@ -13,7 +13,10 @@ module.exports = (Products, Tags) => {
     ])
     .spread((products, tags) => {
       products.forEach((product) => {
-        let tagCount = faker.random.number(TAG_LIMIT)
+        let tagCount = faker.random.number({
+          min: parseInt(process.env.TAG_COUNT_FLOOR),
+          max: parseInt(process.env.TAG_COUNT_CEILING)
+        })
         let addTag = (Math.random() < 0.2)
         if ((tagCount > 0) && addTag) {
           shuffleArray(tags)

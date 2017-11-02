@@ -1,7 +1,7 @@
 import encryption from '../../../server/controllers/encryption'
 import logging from '../../../server/controllers/logging'
 
-const DEFAULT_USER_PASSWORD = '0000'
+require('dotenv').config()
 
 module.exports = (Users) => {
   let users = [{
@@ -51,7 +51,7 @@ module.exports = (Users) => {
 
   users.forEach((user) => {
     let encryptedPassword = encryption.sha512(
-      (user.password === null) ? DEFAULT_USER_PASSWORD : user.password,
+      (user.password === null) ? process.env.DEFAULT_USER_PASSWORD : user.password,
       encryption.saltGen(16)
     )
     user.password = encryptedPassword.passwordHash

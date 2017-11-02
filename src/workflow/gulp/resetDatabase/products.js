@@ -2,12 +2,15 @@ import faker from 'faker'
 
 import logging from '../../../server/controllers/logging'
 
-const PRODUCTS_PER_SERIES_LIMIT = { min: 2, max: 4 }
+require('dotenv').config()
 
 module.exports = (Products, seriesIdList) => {
   let products = []
   seriesIdList.forEach((seriesId) => {
-    let productCount = faker.random.number(PRODUCTS_PER_SERIES_LIMIT)
+    let productCount = faker.random.number({
+      min: parseInt(process.env.PRODUCTS_PER_SERIES_FLOOR),
+      max: parseInt(process.env.PRODUCTS_PER_SERIES_CEILING)
+    })
     for (let counter = 0; counter < productCount; counter++) {
       products.push({
         seriesId: seriesId,

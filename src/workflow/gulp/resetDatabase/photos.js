@@ -5,16 +5,15 @@ import Promise from 'bluebird'
 
 import logging from '../../../server/controllers/logging'
 
-const MOCK_PRODUCT_PHOTO_PATH = path.resolve(path.join(__dirname, './mockPhotos/products'))
-const MOCK_CAROUSEL_PHOTO_PATH = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
-const MIN_SECONDARY_PHOTO_COUNT = 1
-const MAX_SECONDARY_PHOTO_COUNT = 3
+require('dotenv').config()
 
 module.exports = (Photos, Products) => {
+  let productPhotoPath = path.resolve(path.join(__dirname, './mockPhotos/products'))
+  let carouselPhotoPath = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
   let insertQueries = []
   // read mock carousel photos directory for a file listing
   return fs
-    .readdir(MOCK_CAROUSEL_PHOTO_PATH)
+    .readdir(carouselPhotoPath)
     .then((photoFileNames) => {
       photoFileNames.forEach((fileName, index) => {
         // for each photo file, push a insertion query to the photos table
@@ -25,8 +24,8 @@ module.exports = (Photos, Products) => {
             originalName: fileName,
             encoding: '7bit',
             mimeType: 'image/jpeg',
-            size: fs.statSync(path.join(MOCK_CAROUSEL_PHOTO_PATH, fileName)).size,
-            data: fs.readFileSync(path.join(MOCK_CAROUSEL_PHOTO_PATH, fileName))
+            size: fs.statSync(path.join(carouselPhotoPath, fileName)).size,
+            data: fs.readFileSync(path.join(carouselPhotoPath, fileName))
           })
         )
       })
@@ -35,7 +34,7 @@ module.exports = (Photos, Products) => {
     .then(() => Products.findAll()) // get product data from database
     .then((products) => {
       // read mock product photos directory for a file listing
-      return fs.readdir(MOCK_PRODUCT_PHOTO_PATH)
+      return fs.readdir(productPhotoPath)
         .then((photoFileNames) => {
           let photoCount = photoFileNames.length
           // loop through each product in the database
@@ -44,7 +43,10 @@ module.exports = (Photos, Products) => {
             // it is initialized with one random index to start with
             let photoIndexArray = [randomNumberFromRange(0, (photoCount - 1))]
             // randomly decide how many secondary photos to be inserted
-            let secondaryPhotoCount = randomNumberFromRange(MIN_SECONDARY_PHOTO_COUNT, MAX_SECONDARY_PHOTO_COUNT)
+            let secondaryPhotoCount = randomNumberFromRange(
+              parseInt(process.env.SECONDARY_PHOTO_COUNT_FLOOR),
+              parseInt(process.env.SECONDARY_PHOTO_COUNT_CEILING)
+            )
             for (let counter = 0; counter < secondaryPhotoCount; counter++) {
               // for each 2ndary photo to be inserted, push another random photo index on to the array
               photoIndexArray.push(randomNumberFromRange(0, (photoCount - 1)))
@@ -57,8 +59,8 @@ module.exports = (Photos, Products) => {
                   originalName: photoFileNames[photoIndex],
                   encoding: '7bit',
                   mimeType: 'image/jpeg',
-                  size: fs.statSync(path.join(MOCK_PRODUCT_PHOTO_PATH, photoFileNames[photoIndex])).size,
-                  data: fs.readFileSync(path.join(MOCK_PRODUCT_PHOTO_PATH, photoFileNames[photoIndex]))
+                  size: fs.statSync(path.join(productPhotoPath, photoFileNames[photoIndex])).size,
+                  data: fs.readFileSync(path.join(productPhotoPath, photoFileNames[photoIndex]))
                 })
               )
             })
