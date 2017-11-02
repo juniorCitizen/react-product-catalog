@@ -1,18 +1,27 @@
 import { argv } from 'yargs'
 import Promise from 'bluebird'
 
-import db from '../../server/controllers/database/database'
-import logging from '../../server/controllers/logging'
+import db from '../../../server/controllers/database/database'
+import logging from '../../../server/controllers/logging'
 
 require('dotenv').config()
 
 const dbEnv = argv['setting'] || 'development'
-const seed = argv['seed'] || 'none'
+const seed = argv['seed'] || false
+
+let countries = require('./countries')
+let labels = require('./labels')
+let offices = require('./offices')
+let photos = require('./photos')
+let products = require('./products')
+let series = require('./series')
+let tags = require('./tags')
+let users = require('./users')
 
 module.exports = () => {
   return (done) => {
     // validate arguments
-    if (!checkArgs(dbEnv, seed)) {
+    if (!checkArgs(dbEnv)) {
       let error = new Error('INVALID_ARGUMENTS')
       error.name = '參數錯誤'
       error.message = `獲取的取參數: dbEnv: ${dbEnv} | seed: ${seed}`
@@ -20,7 +29,12 @@ module.exports = () => {
       return done(error)
     }
     // get database configuration
-    let dbConfig = require('../../server/config/database')[dbEnv]
+    let dbConfig = require('../../../server/config/database')[dbEnv]
+    if (dbConfig.dialect === 'mysql') {
+      // prevent remote db access encounter timeout error on large file transfers
+      dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
+      dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)
+    }
     // switch out the sequelize instance
     db.sequelize = new db.Sequelize(dbConfig)
     // start the reset process with disabling the database constraints
@@ -35,33 +49,28 @@ module.exports = () => {
         return enableConstraint(dbConfig.dialect)
       })
       .then(() => {
-        if (seed === 'none') {
-          // if cmd arg is empty or none, skip the data generation part the script
+        if (!seed) {
+          logging.warning('資料庫淨空完畢，未載入資料...')
           return done()
         } else {
-          // continue with the script
-          return Promise.resolve()
+          logging.warning('裝載基礎/預設資料...')
+          return series(db.Series)
+            .then(seriesIdList => products(db.Products, seriesIdList))
+            .then(() => tags(db.Tags))
+            .then(() => labels(db.Products, db.Tags))
+            .then(() => photos(db.Photos, db.Products))
+            .then(() => countries(db.Countries))
+            .then(() => offices(db.Offices))
+            .then(() => users(db.Users))
+            .then(() => {
+              logging.warning('資料庫重設，並已完成預設資料載入...')
+              return done()
+            })
+            .catch((error) => {
+              logging.error(error, '預設資料載入失敗...')
+              return Promise.reject(error)
+            })
         }
-      })
-      .then(() => {
-        // TODO // 'default' data generation script
-        return Promise.resolve()
-      })
-      .then(() => {
-        if (seed === 'default') {
-          // if cmd arg is 'default', skip the mock data generation
-          return done()
-        } else {
-          // continue with the script
-          return Promise.resolve()
-        }
-      })
-      .then(() => {
-        // TODO // 'mock' data generation script
-        return Promise.resolve()
-      })
-      .then(() => {
-        return done()
       })
       .catch((error) => {
         // in case of error, enable the database constraints first
@@ -110,7 +119,7 @@ function enableConstraint (dialect) {
       queryString = 'PRAGMA foreign_keys = ON;'
       break
     case 'mysql':
-      queryString = 'SET FOREIGN_KEY_CHECKS = OFF;'
+      queryString = 'SET FOREIGN_KEY_CHECKS = 1;'
       break
     default:
       return Promise.reject(new Error('INVALID_DB_DIALECT'))
@@ -128,11 +137,8 @@ function enableConstraint (dialect) {
 }
 
 // function to validate command line argument
-function checkArgs (dbEnv, seed) {
-  if (
-    ['development', 'staging', 'production'].indexOf(dbEnv) !== -1 &&
-    ['mock', 'mock', 'none'].indexOf(seed) !== -1
-  ) {
+function checkArgs (dbEnv) {
+  if (['development', 'staging', 'production'].indexOf(dbEnv) !== -1) {
     return true
   }
 }

@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    specification: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false
