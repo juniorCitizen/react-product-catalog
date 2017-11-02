@@ -6,15 +6,13 @@ router
   .get('/',
     require('./getSeries').preventDoubleQueryParameters,
     require('./getSeries').getSeries)
-  .post('/', insert)
+  .post('/',
+    require('../../middlewares/validateJwt'),
+    require('./insertSeries').insertSeries)
   .put('/', update)
   .delete('/', remove)
 
 module.exports = router
-
-function insert (req, res) {
-  return res.status(200).end()
-}
 
 function update (req, res) {
   return res.status(200).end()

@@ -33,6 +33,7 @@ GET http://domain:port/sys_ref
 GET http://domain:port/sys_ref/api/series?(products=true)
 GET http://domain:port/sys_ref/api/series?id=x(&products=true)
 GET http://domain:port/sys_ref/api/series?name=xxxx(&products=true)
+POST http://domain:port/sys_ref/api/series?name=xxxx (headers: { "x-access-token": 'jwt string' })
 
 ## LICENSE
 MIT © [ASJ Group](chiayu.tsai.personal@gmail.com / papago75@gmail.com)
