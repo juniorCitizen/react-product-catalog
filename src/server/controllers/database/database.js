@@ -7,6 +7,7 @@ const dbConfig = require('../../config/database')[eVars.USE_DATABASE]
 const logging = require('../../controllers/logging')
 
 const verifyConnection = require('./verifyConnection')
+const dropAllSchemas = require('./dropAllSchema')
 const prepModels = require('./prepModels')
 const registerModels = require('./registerModels')
 const syncModels = require('./syncModels')
@@ -28,6 +29,13 @@ module.exports = db // export the database access object
 
 function initialize (force = null) {
   return verifyConnection(db)
+    .then(() => {
+      if (force) {
+        return dropAllSchemas(db.sequelize)
+      } else {
+        return Promise.resolve()
+      }
+    })
     .then(() => { return prepModels(db) })
     .then(() => {
       registerModels(db)
