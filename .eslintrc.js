@@ -446,7 +446,7 @@ module.exports = {
     "node/process-exit-as-throw": "error",
     // promise
     "promise/no-callback-in-promise": "off", // custom
-    "promise/no-promise-in-callback": "error",
+    "promise/no-promise-in-callback": "off", // custom
     "promise/avoid-new": "error",
     "promise/no-nesting": "off", // custom
     "promise/param-names": "error",
