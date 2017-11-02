@@ -62,38 +62,6 @@ module.exports = () => {
               logging.error(error, '預設資料載入失敗...')
               return Promise.reject(error)
             })
-          // // 建立產品系列資料
-          // return db.Series.bulkCreate(series())
-          //   .then(() => {
-          //     // 查詢產品系列資料筆數
-          //     return db.Series.findAndCount()
-          //   })
-          //   .then((seriesCount) => {
-          //     // 建立產品資料
-          //     return db.Products.bulkCreate(products(seriesCount.count))
-          //   })
-          //   .then(() => {
-          //     // 建立產品標題項目
-          //     return db.Tags.bulkCreate(tags())
-          //   })
-          //   .then(() => {
-          //     // 查詢產品以及產品標題項目資料
-          //     return Promise
-          //       .all([
-          //         db.Products.findAll(),
-          //         db.Tags.findAll()
-          //       ])
-          //   })
-          //   .spread(labels)
-          //   .then(() => {
-          //     return Promise.resolve()
-          //   })
-          //   .then(() => {
-          //     // TODO // 'default' data generation script
-          //     return Promise.resolve()
-          //   })
-          //   .then(() => {
-          //   })
         }
       })
       .catch((error) => {
