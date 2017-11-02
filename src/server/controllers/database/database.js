@@ -44,6 +44,7 @@ function initialize (force = null) {
     .then(() => {
       logging.console('配置 ORM 系統關聯...')
       db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
+      db.Series.hasOne(db.Photos, injectOptions('seriesId', 'id'))
       db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Products.hasMany(db.Photos, injectOptions('productId', 'id'))
       db.Products.belongsToMany(db.Registrations, injectOptions(
@@ -53,6 +54,7 @@ function initialize (force = null) {
         'productId', 'id', db.Labels
       ))
       db.Photos.belongsTo(db.Products, injectOptions('productId', 'id'))
+      db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
       db.Countries.hasMany(db.Offices, injectOptions('countryId', 'id'))
       db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))

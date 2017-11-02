@@ -58,7 +58,7 @@ module.exports = () => {
             .then(seriesIdList => products(db.Products, seriesIdList))
             .then(() => tags(db.Tags))
             .then(() => labels(db.Products, db.Tags))
-            .then(() => photos(db.Photos, db.Products))
+            .then(() => photos(db.Photos, db.Products, db.Series))
             .then(() => countries(db.Countries))
             .then(() => offices(db.Offices))
             .then(() => users(db.Users))
