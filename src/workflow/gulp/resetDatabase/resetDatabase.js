@@ -16,7 +16,7 @@ let photos = require('./photos')
 let products = require('./products')
 let series = require('./series')
 let tags = require('./tags')
-// let users = require('../mockData/users')
+let users = require('./users')
 
 module.exports = () => {
   return (done) => {
@@ -56,6 +56,7 @@ module.exports = () => {
             .then(() => photos(db.Photos, db.Products))
             .then(() => countries(db.Countries))
             .then(() => offices(db.Offices))
+            .then(() => users(db.Users))
             .then(() => {
               logging.warning('資料庫重設，並已完成預設資料載入...')
               return done()
