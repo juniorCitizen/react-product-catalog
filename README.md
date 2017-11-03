@@ -14,8 +14,8 @@ gulp backupDotEnv - copy a skeleton copy of .env to ./src/workflow/backup/blank.
 glup removeLogs - remove *.log from the entire project file structure
 gulp resetDatabase - 將資料庫淨空或者淨空後再填入基礎或測試資料
   options:
-    -- setting (development | staging | production): 由 config/database.js 取得指定淨空的資料庫連線設定. 預設: 'development'
-    -- seed: 植入資料
+    --setting (development | staging | production): 由 config/database.js 取得指定淨空的資料庫連線設定. 預設: 'development'
+    --seed: 植入資料
 ```
 
 ### npm
@@ -37,4 +37,5 @@ GET http://domain:port/sys_ref/api/series?name=xxxx(&products=true)
 POST http://domain:port/sys_ref/api/series?name=xxxx (headers: { "x-access-token": 'jwt string' })
 
 ## LICENSE
-MIT © [ASJ Group](chiayu.tsai.personal@gmail.com / papago75@gmail.com)
+MIT © [ASJ Group] (chiayu.tsai.personal@gmail.com / papago75@gmail.com)
+test
