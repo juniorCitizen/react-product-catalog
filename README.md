@@ -29,15 +29,32 @@ npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 ## API
 ### index.html and public assets
 ```
-GET http://domain:port/sys_ref
+GET protocol://domain:port/sys_ref
 ```
 
 ### series
 ```
-GET http://domain:port/sys_ref/api/series?(products=true)
-GET http://domain:port/sys_ref/api/series?id=x(&products=true)
-GET http://domain:port/sys_ref/api/series?name=xxxx(&products=true)
-POST http://domain:port/sys_ref/api/series?name=xxxx (headers: { "x-access-token": 'jwt string' })
+GET protocol://domain:port/sys_ref/api/series?(products=true)
+
+GET protocol://domain:port/sys_ref/api/series?id=x(&products=true)
+
+GET protocol://domain:port/sys_ref/api/series?name=xxxx(&products=true)
+
+POST protocol://domain:port/sys_ref/api/series?name=xxxx
+  header: { "x-access-token": 'jwt string' }
+
+```
+
+### token
+```
+POST protocol://domain:port/sys_ref/api/token
+  header: { "Content-Type": "application/json" }
+  body: {
+	  "email": "admin@nowhere.com",
+	  "loginId": "admin",
+	  "password": "0000",
+	  "botPrevention": ""
+  }
 ```
 
 ## LICENSE

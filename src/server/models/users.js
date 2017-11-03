@@ -9,22 +9,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    // officeId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false
-    // },
     loginId: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: true
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     salt: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     admin: {
       type: DataTypes.BOOLEAN,

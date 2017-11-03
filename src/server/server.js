@@ -72,12 +72,12 @@ logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 
 // set up api routes
 ROUTERS.api.router.use('/series', require('./routes/series/series'))
+ROUTERS.api.router.use('/token', require('./routes/token/token'))
 // apiAccessRouter.use('/products', require('./routes/products/products'))
 // apiAccessRouter.use('/photos', require('./routes/photos/photos'))
 // apiAccessRouter.use('/countries', require('./routes/countries/countries'))
 // apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))
 // apiAccessRouter.use('/users', require('./routes/users/users'))
-// apiAccessRouter.use('/token', require('./routes/token/token'))
 
 // post-routing global middleware
 logging.console('載入 post-routing 全域 middlewares....')

@@ -71,8 +71,10 @@ function tokenRequest (req, res) {
 }
 
 function loginInfoPresence (req, res, next) {
+  console.log(req.body.botPrevention)
   if (
     (req.body === undefined) ||
+    (req.body.email === undefined) ||
     (req.body.loginId === undefined) ||
     (req.body.password === undefined) ||
     (req.body.botPrevention === undefined)
