@@ -1,4 +1,16 @@
-import component from './component'
-import 'react'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {
+    HashRouter,
+    Route,
+    Link
+} from 'react-router-dom'
+import Hello from './Hello'
 
-document.body.appendChild(component())
+ReactDOM.render((
+    <HashRouter>
+        <div>
+            <Route exact path="/" component={Hello} />
+        </div>
+    </HashRouter >
+), document.getElementById('root') )
