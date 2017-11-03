@@ -45,7 +45,7 @@ const commonConfig = merge([
     ]
   },
   transpiler.babel({ include: PATHS.app }),
-  eslint({ include: PATHS.app })
+  //eslint({ include: PATHS.app, excluede: './src/client' })
 ])
 
 const productionConfig = merge([
