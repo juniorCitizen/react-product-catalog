@@ -4,7 +4,7 @@ export default class Hello extends React.Component{
     render(){
         return(
             <div>
-                <span>🎨Standart D2K API🎨</span>
+                <span>🎨Hello World🎨</span>
             </div>
         );
     }
