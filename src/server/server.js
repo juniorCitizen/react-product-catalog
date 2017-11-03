@@ -80,7 +80,7 @@ ROUTERS.api.router.use('/series', require('./routes/series/series'))
 // apiAccessRouter.use('/token', require('./routes/token/token'))
 
 // post-routing global middleware
-logging.console('載入 post-routing 全域 middlewares...')
+logging.console('載入 post-routing 全域 middlewares....')
 app.use(require('./middlewares/404Handler')) // catch 404's and redirect to index.html template route
 
 // initializing system components
