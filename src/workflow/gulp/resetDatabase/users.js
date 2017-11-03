@@ -7,10 +7,7 @@ module.exports = (Users) => {
   let users = [{
     email: 'gentry88@ms46.hinet.net',
     name: 'General Service',
-    officeId: 0,
-    loginId: 'gentryWay',
-    password: null,
-    salt: null
+    officeId: 0
   }, {
     email: 'david.tsai@gentry-way.com.tw',
     name: 'David Tsai',
@@ -22,40 +19,41 @@ module.exports = (Users) => {
   }, {
     email: 'cathy.liu@gentry-way.com.tw',
     name: 'Cathy Liu',
-    officeId: 0,
-    loginId: 'cathy',
-    password: null,
-    salt: null
+    officeId: 0
   }, {
     email: 'candy.wu@gentry-way.com.tw',
     name: 'Candy Wu',
-    officeId: 0,
-    loginId: 'candy',
-    password: null,
-    salt: null
+    officeId: 0
   }, {
     email: 'gentry@vip.163.com',
     name: 'General Service',
-    officeId: 1,
-    loginId: 'gentryHardware',
-    password: null,
-    salt: null
+    officeId: 1
   }, {
     email: 'altecqc@msn.com',
     name: 'Johnson Wu',
-    officeId: 1,
-    loginId: 'johnson',
-    password: null,
-    salt: null
+    officeId: 1
+  }, {
+    email: 'nobody@nowhere.com',
+    name: '無名氏'
+  }, {
+    email: 'admin@nowhere.com',
+    name: 'administrator',
+    loginId: 'admin'
   }]
 
   users.forEach((user) => {
-    let encryptedPassword = encryption.sha512(
-      (user.password === null) ? process.env.DEFAULT_USER_PASSWORD : user.password,
-      encryption.saltGen(16)
-    )
-    user.password = encryptedPassword.passwordHash
-    user.salt = encryptedPassword.salt
+    // if use has loginId property, create and encrypt a password (preset or default)
+    if (user.hasOwnProperty('loginId')) {
+      let encryptedPassword = encryption.sha512(
+        (user.hasOwnProperty('password') && (user.password !== null)) ? user.password : process.env.DEFAULT_USER_PASSWORD,
+        encryption.saltGen(16)
+      )
+      user.password = encryptedPassword.passwordHash
+      user.salt = encryptedPassword.salt
+      user.admin = true
+    } else {
+      user.admin = false
+    }
   })
 
   return Users
