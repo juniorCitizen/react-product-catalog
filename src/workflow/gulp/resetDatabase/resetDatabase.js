@@ -42,7 +42,7 @@ module.exports = () => {
       .authenticate() // verify db connection
       .catch((error) => {
         logging(error, 'database not connected')
-        throw error
+        return Promise.reject(error)
       })
       .then(() => {
         // start the reset process with disabling the database constraints
