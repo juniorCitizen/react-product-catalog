@@ -30,7 +30,6 @@ module.exports = () => {
       return done(error)
     }
     // get database configuration
-    console.log()
     let dbConfig = require(path.resolve('./src/server/config/database.js'))[dbEnv]
     if (dbConfig.dialect === 'mysql') {
       // prevent remote db access encounter timeout error on large file transfers
@@ -39,8 +38,16 @@ module.exports = () => {
     }
     // switch out the sequelize instance and initialize
     db.sequelize = new db.Sequelize(dbConfig)
-    // start the reset process with disabling the database constraints
-    return disableConstraint(dbConfig.dialect)
+    return db.sequelize
+      .authenticate() // verify db connection
+      .catch((error) => {
+        logging(error, 'database not connected')
+        throw error
+      })
+      .then(() => {
+        // start the reset process with disabling the database constraints
+        return disableConstraint(dbConfig.dialect)
+      })
       .then(() => {
         // initialize an empty database
         return db.initialize({ force: true })
