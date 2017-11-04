@@ -1,22 +1,23 @@
 import { argv } from 'yargs'
+import path from 'path'
 import Promise from 'bluebird'
 
-import db from '../../../server/controllers/database/database'
-import logging from '../../../server/controllers/logging'
+const db = require(path.resolve('./src/server/controllers/database/database.js'))
+const logging = require(path.resolve('./src/server/controllers/logging.js'))
 
 require('dotenv').config()
 
 const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || false
 
-let countries = require('./countries')
-let labels = require('./labels')
-let offices = require('./offices')
-let photos = require('./photos')
-let products = require('./products')
-let series = require('./series')
-let tags = require('./tags')
-let users = require('./users')
+let countries = require(path.resolve(path.join(__dirname, 'countries.js')))
+let labels = require(path.resolve(path.join(__dirname, 'labels.js')))
+let offices = require(path.resolve(path.join(__dirname, 'offices.js')))
+let photos = require(path.resolve(path.join(__dirname, 'photos.js')))
+let products = require(path.resolve(path.join(__dirname, 'products.js')))
+let series = require(path.resolve(path.join(__dirname, 'series.js')))
+let tags = require(path.resolve(path.join(__dirname, 'tags.js')))
+let users = require(path.resolve(path.join(__dirname, 'users.js')))
 
 module.exports = () => {
   return (done) => {
@@ -29,7 +30,8 @@ module.exports = () => {
       return done(error)
     }
     // get database configuration
-    let dbConfig = require('../../../server/config/database')[dbEnv]
+    console.log()
+    let dbConfig = require(path.resolve('./src/server/config/database.js'))[dbEnv]
     if (dbConfig.dialect === 'mysql') {
       // prevent remote db access encounter timeout error on large file transfers
       dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
