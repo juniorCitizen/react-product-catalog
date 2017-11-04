@@ -55,8 +55,10 @@ function initialize (force = null) {
       ))
       db.Photos.belongsTo(db.Products, injectOptions('productId', 'id'))
       db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
+      db.Photos.belongsTo(db.Countries, injectOptions('countryId', 'id'))
       db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
       db.Countries.hasMany(db.Offices, injectOptions('countryId', 'id'))
+      db.Countries.hasOne(db.Photos, injectOptions('countryId', 'id'))
       db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
       db.Registrations.belongsToMany(db.Products, injectOptions(
         'registrationId', 'id', db.Interests

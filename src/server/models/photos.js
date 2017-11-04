@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     encoding: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     mimeType: {
       type: DataTypes.STRING,

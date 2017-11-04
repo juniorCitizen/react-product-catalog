@@ -7,9 +7,10 @@ import logging from '../../../server/controllers/logging'
 
 require('dotenv').config()
 
-module.exports = (Photos, Products, Series) => {
+module.exports = (Photos, Products, Series, Countries) => {
   let productPhotoPath = path.resolve(path.join(__dirname, './mockPhotos/products'))
   let carouselPhotoPath = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
+  let flagSvgPath = path.resolve('./node_modules/world-countries/data')
   let insertQueries = []
   // read mock carousel photos directory for a file listing
   return fs
@@ -69,6 +70,24 @@ module.exports = (Photos, Products, Series) => {
           return Promise.resolve()
         })
     })
+    .then(() => Countries.findAll()) // get country data from database
+    .then((countries) => {
+      // insert flags into the database photos table
+      countries.forEach((country) => {
+        // for each country, push a insertion query of the flag svg files to the photos table
+        insertQueries.push(
+          Photos.create({
+            countryId: country.id,
+            originalName: country.id.toLowerCase() + '.svg',
+            encoding: null,
+            mimeType: 'image/svg+xml',
+            size: fs.statSync(path.join(flagSvgPath, country.id.toLowerCase() + '.svg')).size,
+            data: fs.readFileSync(path.join(flagSvgPath, country.id.toLowerCase() + '.svg'))
+          })
+        )
+      })
+      return Promise.resolve()
+    })
     .then(() => {
       return Promise // run the insertion queries
         .each(insertQueries, (record, index, length) => {
@@ -77,8 +96,9 @@ module.exports = (Photos, Products, Series) => {
         .then(() => {
           return Series
             .findAll()
-            .map(series => series.id)
+            .map(series => series.id) // get a list of series id
             .then((seriesIdList) => {
+              // find ONE product for each series and return a list of these products
               let queries = []
               seriesIdList.forEach((seriesId) => {
                 queries.push(
@@ -88,6 +108,8 @@ module.exports = (Photos, Products, Series) => {
               return Promise.all(queries)
             })
             .then((representativeProducts) => {
+              // get a list of photos of these products and update the photo with the seriesId
+              // purpose: indicate this is the representative photo of the series
               let queries = []
               representativeProducts.forEach((product) => {
                 queries.push(
