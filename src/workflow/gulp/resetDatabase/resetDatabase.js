@@ -35,7 +35,7 @@ module.exports = () => {
       dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
       dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)
     }
-    // switch out the sequelize instance
+    // switch out the sequelize instance and initialize
     db.sequelize = new db.Sequelize(dbConfig)
     // start the reset process with disabling the database constraints
     return disableConstraint(dbConfig.dialect)
