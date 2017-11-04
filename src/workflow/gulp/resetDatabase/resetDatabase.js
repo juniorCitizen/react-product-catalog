@@ -1,6 +1,4 @@
 import { argv } from 'yargs'
-import fs from 'fs-extra'
-import path from 'path'
 import Promise from 'bluebird'
 
 import db from '../../../server/controllers/database/database'
