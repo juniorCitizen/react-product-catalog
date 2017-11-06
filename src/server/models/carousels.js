@@ -1,21 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-  const Photos = sequelize.define('photos', {
+  const Carousels = sequelize.define('carousels', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
-    // productId: {
-    //   type: DataTypes.UUID,
-    //   allowNull: false,
-    //   defaultValue: DataTypes.UUIDV4,
-    //   validate: { isUUID: 4 }
-    // },
-    // seriesId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false
-    // },
+    displaySequence: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     primary: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -57,9 +51,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'photo',
-      plural: 'photos'
+      singular: 'carousel',
+      plural: 'carousels'
     }
   })
-  return Photos
+  return Carousels
 }
