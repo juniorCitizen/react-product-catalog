@@ -10,6 +10,7 @@ require('dotenv').config()
 const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || false
 
+let carousels = require(path.resolve(path.join(__dirname, 'carousels.js')))
 let countries = require(path.resolve(path.join(__dirname, 'countries.js')))
 let labels = require(path.resolve(path.join(__dirname, 'labels.js')))
 let offices = require(path.resolve(path.join(__dirname, 'offices.js')))
@@ -67,19 +68,20 @@ module.exports = () => {
             .then(seriesIdList => products(db.Products, seriesIdList))
             .then(() => tags(db.Tags))
             .then(() => labels(db.Products, db.Tags))
-            .then(() => photos(db.Photos, db.Products, db.Series))
-            .then(() => countries(db.Countries))
-            .then(() => offices(db.Offices))
+            .then(() => countries(db.Countries, db.Flags))
+            .then(() => offices(db.Offices, db.Flags))
             .then(() => users(db.Users))
-            .then(() => {
-              logging.warning('資料庫重設，並已完成預設資料載入...')
-              return done()
-            })
+            .then(() => photos(db.Photos, db.Products, db.Series))
+            .then(() => carousels(db.Carousels))
             .catch((error) => {
               logging.error(error, '預設資料載入失敗...')
               return Promise.reject(error)
             })
         }
+      })
+      .then(() => {
+        logging.warning('資料庫重設，並已完成預設資料載入...')
+        return done()
       })
       .catch((error) => {
         // in case of error, enable the database constraints first

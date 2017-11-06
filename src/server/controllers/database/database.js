@@ -15,8 +15,25 @@ const reSyncModels = require('./reSyncModels')
 
 const sequelize = new Sequelize(dbConfig)
 
+const dropSchemaSequence = [
+  'users',
+  'flags',
+  'offices',
+  'countries',
+  'interests',
+  'registrations',
+  'labels',
+  'tags',
+  'photos',
+  'products',
+  'series',
+  'carousels'
+]
+
 const db = {
-  modelPath: path.join(__dirname, '../../models'),
+  modelPath: eVars.devMode
+    ? path.resolve('./src/server/models')
+    : path.resolve('./dist/models'),
   fileList: [],
   modelList: [],
   syncOps: [],
@@ -31,7 +48,7 @@ function initialize (force = null) {
   return verifyConnection(db)
     .then(() => {
       if (force) {
-        return dropAllSchemas(db.sequelize)
+        return dropAllSchemas(db.sequelize, dropSchemaSequence)
       } else {
         return Promise.resolve()
       }
@@ -57,6 +74,8 @@ function initialize (force = null) {
       db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
       db.Countries.hasMany(db.Offices, injectOptions('countryId', 'id'))
+      db.Countries.hasOne(db.Flags, injectOptions('id', 'id'))
+      db.Flags.belongsTo(db.Countries, injectOptions('id', 'id'))
       db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
       db.Registrations.belongsToMany(db.Products, injectOptions(
         'registrationId', 'id', db.Interests
@@ -78,9 +97,9 @@ function initialize (force = null) {
     })
 }
 
-function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = null) {
+function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = null, constraints = true) {
   return Object.assign({
-    constraints: true,
+    constraints: constraints,
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   }, {

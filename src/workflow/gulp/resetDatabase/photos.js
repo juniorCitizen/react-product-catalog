@@ -9,38 +9,19 @@ require('dotenv').config()
 
 module.exports = (Photos, Products, Series) => {
   let productPhotoPath = path.resolve(path.join(__dirname, './mockPhotos/products'))
-  let carouselPhotoPath = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
   let insertQueries = []
-  // read mock carousel photos directory for a file listing
-  return fs
-    .readdir(carouselPhotoPath)
-    .then((photoFileNames) => {
-      photoFileNames.forEach((fileName, index) => {
-        // for each photo file, push a insertion query to the photos table
-        insertQueries.push(
-          Photos.create({
-            carousel: true,
-            primary: index === 0, // set to true, if it's the first index in the array
-            originalName: fileName,
-            encoding: '7bit',
-            mimeType: 'image/jpeg',
-            size: fs.statSync(path.join(carouselPhotoPath, fileName)).size,
-            data: fs.readFileSync(path.join(carouselPhotoPath, fileName))
-          })
-        )
-      })
-      return Promise.resolve()
-    })
-    .then(() => Products.findAll()) // get product data from database
+  return Products
+    .findAll() // get product data from database
     .then((products) => {
       // read mock product photos directory for a file listing
-      return fs.readdir(productPhotoPath)
+      return fs
+        .readdir(productPhotoPath)
         .then((photoFileNames) => {
           let photoCount = photoFileNames.length
           // loop through each product in the database
           products.forEach((product) => {
             // declare an array to hold the index of photos to be inserted to the db
-            // it is initialized with one random index to start with
+            // (it is initialized with one random index to start with)
             let photoIndexArray = [randomNumberFromRange(0, (photoCount - 1))]
             // randomly decide how many secondary photos to be inserted
             let secondaryPhotoCount = randomNumberFromRange(
@@ -72,46 +53,54 @@ module.exports = (Photos, Products, Series) => {
     .then(() => {
       return Promise // run the insertion queries
         .each(insertQueries, (record, index, length) => {
-          logging.warning(`檔案: ${record.get('originalName')} 進度: ${index}/${length}`)
+          logging.warning(`檔案: ${record.get('originalName')} 進度: ${index + 1}/${length}`)
         })
         .then(() => {
           return Series
             .findAll()
-            .map(series => series.id)
+            .map(series => series.id) // get a list of series id
             .then((seriesIdList) => {
-              let queries = []
-              seriesIdList.forEach((seriesId) => {
-                queries.push(
-                  Products.find({ where: { seriesId: seriesId } })
-                )
+              // run queries and find one product in each series
+              return Promise.all(
+                seriesIdList.map((seriesId) => {
+                  return Products.find({ where: { seriesId: seriesId } })
+                })
+              ).catch((error) => {
+                logging.error(error, '批次圖檔寫入... 失敗')
+                return Promise.reject(error)
               })
-              return Promise.all(queries)
             })
             .then((representativeProducts) => {
-              let queries = []
-              representativeProducts.forEach((product) => {
-                queries.push(
-                  Photos.update({
-                    seriesId: product.get('seriesId')
+              // get a list of photos of these products
+              // and update the photo with the seriesId
+              // purpose: indicate the representative photo of each series
+              return Promise.all(
+                representativeProducts.map((product) => {
+                  return Photos.update({
+                    seriesId: product.seriesId
                   }, {
                     where: {
                       primary: true,
-                      productId: product.get('id')
+                      productId: product.id
                     }
                   })
-                )
+                })
+              ).catch((error) => {
+                logging.error(error, '建立產品類別代表圖檔參照... 失敗')
+                return Promise.reject(error)
               })
-              return Promise.resolve()
             })
         })
         .then(() => {
-          logging.warning('批次圖檔寫入... 成功')
           return Promise.resolve()
         })
         .catch((error) => {
-          logging.error(error, '批次圖檔寫入... 失敗')
           return Promise.reject(error)
         })
+    })
+    .then(() => {
+      logging.warning('批次圖檔寫入... 成功')
+      return Promise.resolve()
     })
     .catch((error) => {
       logging.error(error, 'resetDatabase/photo.js errored...')
