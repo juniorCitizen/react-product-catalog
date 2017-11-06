@@ -57,6 +57,12 @@ function insertSeries (req, res) {
     })
     .catch((error) => {
       logging.error(error, 'routes/series/insertSeries.js errored')
-      return Promise.reject(error)
+      return routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error,
+        message: 'routes/series/insertSeries.js errored'
+      })
     })
 }
