@@ -1,12 +1,7 @@
 const db = require('../../controllers/database/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = {
-  preventDoubleQueryParameters: preventDoubleQueryParameters,
-  getSeries: getSeries
-}
-
-function getSeries (req, res) {
+module.exports = (req, res) => {
   let queryParameter = defaultQueryParameter()
   processIdentifierQuery(req.query, queryParameter, 'id')
   processIdentifierQuery(req.query, queryParameter, 'name')
@@ -27,18 +22,6 @@ function getSeries (req, res) {
       statusCode: 500,
       error: error
     }))
-}
-
-function preventDoubleQueryParameters (req, res, next) {
-  if ((req.query.id !== undefined) && (req.query.name !== undefined)) {
-    return routerResponse.json({
-      req: req,
-      res: res,
-      statusCode: 400,
-      message: '不接受同時存在 id & name query 條件'
-    })
-  }
-  next()
 }
 
 function defaultQueryParameter () {
@@ -67,7 +50,6 @@ function processIdentifierQuery (requestQueries, currentQueryParameters, identif
 }
 
 function queryComponents (requestQueries, identifier) {
-  console.log(requestQueries.limit)
   let queryComponents = {
     id: { where: { id: requestQueries.id } },
     name: { where: { name: requestQueries.name } },

@@ -42,6 +42,10 @@ GET protocol://domain:port/sys_ref/api/series?name=xxxx(&products=true)
 
 POST protocol://domain:port/sys_ref/api/series?name=xxxx
 
+DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
+
+DELETE protocol://domain:port/sys_ref/api/series?id=x
+
 ```
 
 ### token
