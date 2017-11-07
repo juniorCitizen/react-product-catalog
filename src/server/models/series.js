@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Series = sequelize.define('series', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      validate: {
+        min: 0
+      }
     },
     name: {
       type: DataTypes.STRING,
