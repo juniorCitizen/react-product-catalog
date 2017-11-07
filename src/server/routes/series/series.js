@@ -11,15 +11,12 @@ const ensureSingleQueryParameter = require('./middleware').ensureSingleQueryPara
 const getSeries = require('./getSeries')
 const insertSeries = require('./insertSeries')
 const removeSeries = require('./removeSeries')
+const updateSeries = require('./updateSeries')
 
 router
   .get('/', preventDoubleQueryParameters, getSeries)
   .post('/', validateJwt, insertSeries)
-  .put('/', updateSeries)
+  .put('/', validateJwt, updateSeries)
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
 module.exports = router
-
-function updateSeries (req, res) {
-  return res.status(200).end()
-}
