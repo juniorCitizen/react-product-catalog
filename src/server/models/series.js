@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Series = sequelize.define('series', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      validate: {
+        min: 0
+      }
     },
     name: {
       type: DataTypes.STRING,
@@ -11,22 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     displaySequence: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    },
-    deletedAt: {
-      type: DataTypes.DATE,
       allowNull: true
     }
+    // ,
+    // createdAt: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.NOW
+    // },
+    // updatedAt: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false,
+    //   defaultValue: DataTypes.NOW
+    // },
+    // deletedAt: {
+    //   type: DataTypes.DATE,
+    //   allowNull: true
+    // }
   }, {
     name: {
       singular: 'series',

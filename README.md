@@ -34,27 +34,25 @@ GET protocol://domain:port/sys_ref
 
 ### series
 ```
-GET protocol://domain:port/sys_ref/api/series?(products=true)
+GET protocol://domain:port/sys_ref/api/series(?products=true)
 
 GET protocol://domain:port/sys_ref/api/series?id=x(&products=true)
 
 GET protocol://domain:port/sys_ref/api/series?name=xxxx(&products=true)
 
 POST protocol://domain:port/sys_ref/api/series?name=xxxx
-  header: { "x-access-token": 'jwt string' }
+
+DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
+
+DELETE protocol://domain:port/sys_ref/api/series?id=x
+
+PUT protocol://domain:port/sys_ref/api/series(?products=true)
 
 ```
 
 ### token
 ```
 POST protocol://domain:port/sys_ref/api/token
-  header: { "Content-Type": "application/json" }
-  body: {
-	  "email": "admin@nowhere.com",
-	  "loginId": "admin",
-	  "password": "0000",
-	  "botPrevention": ""
-  }
 ```
 
 ## LICENSE

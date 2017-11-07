@@ -4,7 +4,7 @@ import path from 'path'
 import logging from '../../server/controllers/logging'
 
 module.exports = () => {
-  let backupPath = './src/workflow/backup/blank.env'
+  let backupPath = path.resolve('./backup/blank.env')
   let liveDotEnvPath = '.env'
   return (done) => {
     fs.readFile(liveDotEnvPath)
@@ -25,7 +25,7 @@ module.exports = () => {
           .catch(error => Promise.reject(error))
       })
       .then((liveEnvEntries) => {
-        logging.warning(`備份 .env 設定檔範本至 ${path.resolve(backupPath)}... 完成`)
+        logging.warning(`備份 .env 設定檔範本至 ${backupPath}... 完成`)
         return done()
       })
       .catch(error => {
