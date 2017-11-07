@@ -34,7 +34,7 @@ GET protocol://domain:port/sys_ref
 
 ### series
 ```
-GET protocol://domain:port/sys_ref/api/series?(products=true)
+GET protocol://domain:port/sys_ref/api/series(?products=true)
 
 GET protocol://domain:port/sys_ref/api/series?id=x(&products=true)
 
@@ -45,6 +45,8 @@ POST protocol://domain:port/sys_ref/api/series?name=xxxx
 DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
 
 DELETE protocol://domain:port/sys_ref/api/series?id=x
+
+PUT protocol://domain:port/sys_ref/api/series(?products=true)
 
 ```
 
