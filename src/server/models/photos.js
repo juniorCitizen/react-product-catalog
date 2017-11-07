@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     data: {
       type: DataTypes.BLOB,
       allowNull: false
+    },
+    publish: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
     // ,
     // createdAt: {

@@ -17,7 +17,8 @@ module.exports = (Products, seriesIdList) => {
         code: faker.random.number({ min: 100, max: 999 }).toString() + '-' + faker.random.alphaNumeric(6).toUpperCase(),
         name: faker.commerce.productName(),
         specification: faker.lorem.sentences(faker.random.number({ min: 2, max: 5 })),
-        description: faker.lorem.paragraphs(faker.random.number({ min: 2, max: 5 }), '\n')
+        description: faker.lorem.paragraphs(faker.random.number({ min: 2, max: 5 }), '\n'),
+        publish: true
       })
     }
   })
