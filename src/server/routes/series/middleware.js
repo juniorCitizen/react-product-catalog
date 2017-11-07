@@ -2,7 +2,8 @@ const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = {
   preventDoubleQueryParameters: preventDoubleQueryParameters,
-  ensureSingleQueryParameter: ensureSingleQueryParameter
+  ensureSingleQueryParameter: ensureSingleQueryParameter,
+  ensureIdAndDisplaySequenceAreIntegers: ensureIdAndDisplaySequenceAreIntegers
 }
 
 function preventDoubleQueryParameters (req, res, next) {
@@ -33,5 +34,11 @@ function ensureSingleQueryParameter (req, res, next) {
       message: '必須使用 id 或者是 name query 其一'
     })
   }
+  return next()
+}
+
+function ensureIdAndDisplaySequenceAreIntegers (req, res, next) {
+  req.body.id = parseInt(req.body.id)
+  req.body.displaySequence = parseInt(req.body.displaySequence)
   return next()
 }

@@ -8,10 +8,13 @@ module.exports = (req, res) => {
       let originalPosition = null
       return db.Series
         .findById(req.body.id, trxObj)
+        .catch(error => Promise.reject(error))
         .then((targetRecord) => {
           originalPosition = targetRecord.displaySequence
           if ((req.body.name !== undefined) && (req.body.name !== targetRecord.name)) {
-            return targetRecord.update({ name: req.body.name }, trxObj)
+            return targetRecord
+              .update({ name: req.body.name }, trxObj)
+              .catch(error => Promise.reject(error))
           } else {
             return Promise.resolve()
           }
@@ -23,39 +26,47 @@ module.exports = (req, res) => {
           if ((req.body.displaySequence !== undefined) && (req.body.displaySequence !== originalPosition)) {
             return db.Series
               .findAll({ order: ['displaySequence'] }, trxObj)
+              .catch(error => Promise.reject(error))
               .then((seriesDataset) => {
-                // prevent skipping of displaySequence (e.g. 0, 1, 2, 4)
-                if ((req.body.displaySequence !== undefined) && (req.body.displaySequence > seriesDataset.length)) {
-                  req.body.displaySequence = seriesDataset.length
+                if (req.body.displaySequence !== undefined) {
+                  // prevent skipping of displaySequence (e.g. 0, 1, 2, 4)
+                  if (req.body.displaySequence > seriesDataset.length) {
+                    req.body.displaySequence = seriesDataset.length
+                  }
                 }
                 if (req.body.displaySequence < originalPosition) { // advance in sequential order
-                  return db.Series.update({
-                    displaySequence: db.Sequelize.literal('`displaySequence` + 1')
-                  }, Object.assign({
-                    where: {
-                      id: { [db.Sequelize.Op.ne]: req.body.id },
-                      displaySequence: {
-                        [db.Sequelize.Op.between]: [req.body.displaySequence, originalPosition - 1]
+                  return db.Series
+                    .update({
+                      displaySequence: db.Sequelize.literal('`displaySequence` + 1')
+                    }, Object.assign({
+                      where: {
+                        id: { [db.Sequelize.Op.ne]: req.body.id },
+                        displaySequence: {
+                          [db.Sequelize.Op.between]: [req.body.displaySequence, originalPosition - 1]
+                        }
                       }
-                    }
-                  }, trxObj))
+                    }, trxObj))
+                    .catch(error => Promise.reject(error))
                 } else { // push back in sequential order
-                  return db.Series.update({
-                    displaySequence: db.Sequelize.literal('`displaySequence` - 1')
-                  }, Object.assign({
-                    where: {
-                      id: { [db.Sequelize.Op.ne]: req.body.id },
-                      displaySequence: {
-                        [db.Sequelize.Op.between]: [originalPosition + 1, req.body.displaySequence]
+                  return db.Series
+                    .update({
+                      displaySequence: db.Sequelize.literal('`displaySequence` - 1')
+                    }, Object.assign({
+                      where: {
+                        id: { [db.Sequelize.Op.ne]: req.body.id },
+                        displaySequence: {
+                          [db.Sequelize.Op.between]: [originalPosition + 1, req.body.displaySequence]
+                        }
                       }
-                    }
-                  }, trxObj))
+                    }, trxObj))
+                    .catch(error => Promise.reject(error))
                 }
               })
               .then(() => {
                 // actually update the target record's sequential order
                 return db.Series
                   .findById(req.body.id, trxObj)
+                  .catch(error => Promise.reject(error))
                   .then((targetRecord) => {
                     return targetRecord.update({ displaySequence: req.body.displaySequence }, trxObj)
                   })
@@ -65,7 +76,33 @@ module.exports = (req, res) => {
         })
     })
     .then(() => {
-      return db.Series.findAll({ order: ['displaySequence'] })
+      let queryParameter = req.query.products === 'true'
+        ? {
+          include: [{
+            model: db.Products,
+            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+            include: [{
+              model: db.Tags,
+              attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] }
+            }, {
+              model: db.Photos,
+              attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
+            }]
+          }, {
+            model: db.Photos,
+            attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
+          }],
+          order: [
+            'displaySequence',
+            [db.Products, 'code'],
+            [db.Products, db.Tags, 'name'],
+            [db.Products, db.Photos, 'primary', 'DESC']
+          ]
+        }
+        : { order: ['displaySequence'] }
+      return db.Series
+        .findAll(queryParameter)
+        .catch(error => Promise.reject(error))
     })
     .then((series) => {
       return routerResponse.json({

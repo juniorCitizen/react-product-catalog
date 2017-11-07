@@ -6,6 +6,7 @@ const router = express.Router()
 const validateJwt = require('../../middlewares/validateJwt')
 const preventDoubleQueryParameters = require('./middleware').preventDoubleQueryParameters
 const ensureSingleQueryParameter = require('./middleware').ensureSingleQueryParameter
+const ensureIdAndDisplaySequenceAreIntegers = require('./middleware').ensureIdAndDisplaySequenceAreIntegers
 
 // route handlers
 const getSeries = require('./getSeries')
@@ -16,7 +17,7 @@ const updateSeries = require('./updateSeries')
 router
   .get('/', preventDoubleQueryParameters, getSeries)
   .post('/', validateJwt, insertSeries)
-  .put('/', validateJwt, updateSeries)
+  .put('/', validateJwt, ensureIdAndDisplaySequenceAreIntegers, updateSeries)
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
 module.exports = router
