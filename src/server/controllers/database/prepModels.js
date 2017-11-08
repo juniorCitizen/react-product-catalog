@@ -1,6 +1,13 @@
 const fs = require('fs-extra')
+const path = require('path')
 
-const logging = require('../../controllers/logging')
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
 
 module.exports = (db) => {
   return fs

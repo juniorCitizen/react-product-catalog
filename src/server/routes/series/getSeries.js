@@ -1,5 +1,13 @@
-const db = require('../../controllers/database/database')
-const routerResponse = require('../../controllers/routerResponse')
+const path = require('path')
+
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
+const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
 
 module.exports = {
   complete: complete,

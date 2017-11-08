@@ -1,7 +1,14 @@
 const express = require('express')
+const path = require('path')
 
-const eVars = require('../config/eVars')
-const routerResponse = require('../controllers/routerResponse')
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const eVars = require(path.join(accessPath, 'config/eVars'))
+const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
 
 const router = express.Router()
 

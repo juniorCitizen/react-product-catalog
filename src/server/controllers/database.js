@@ -2,16 +2,22 @@ const path = require('path')
 const Promise = require('bluebird')
 const Sequelize = require('sequelize')
 
-const eVars = require('../../config/eVars')
-const dbConfig = require('../../config/database')[eVars.USE_DATABASE]
-const logging = require('../../controllers/logging')
+require('dotenv').config()
 
-const verifyConnection = require('./verifyConnection')
-const dropAllSchemas = require('./dropAllSchema')
-const prepModels = require('./prepModels')
-const registerModels = require('./registerModels')
-const syncModels = require('./syncModels')
-const reSyncModels = require('./reSyncModels')
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const eVars = require(path.join(accessPath, 'config/eVars'))
+const dbConfig = require(path.join(accessPath, 'config/database'))[eVars.USE_DATABASE]
+const logging = require(path.join(accessPath, 'controllers/logging'))
+
+const verifyConnection = require(path.join(__dirname, 'database/verifyConnection'))
+const dropAllSchemas = require(path.join(__dirname, 'database/dropAllSchema'))
+const prepModels = require(path.join(__dirname, 'database/prepModels'))
+const registerModels = require(path.join(__dirname, 'database/registerModels'))
+const syncModels = require(path.join(__dirname, 'database/syncModels'))
+const reSyncModels = require(path.join(__dirname, 'database/reSyncModels'))
 
 const sequelize = new Sequelize(dbConfig)
 
@@ -31,9 +37,7 @@ const dropSchemaSequence = [
 ]
 
 const db = {
-  modelPath: eVars.devMode
-    ? path.resolve('./src/server/models')
-    : path.resolve('./dist/models'),
+  modelPath: path.join(accessPath, 'models'),
   fileList: [],
   modelList: [],
   syncOps: [],

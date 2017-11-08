@@ -1,12 +1,13 @@
 const express = require('express')
+const path = require('path')
 
 const router = express.Router()
 
 // route handlers
-const getSeries = require('./getSeries')
-const insertSeries = require('./insertSeries')
-const updateSeries = require('./updateSeries')
-const removeSeries = require('./removeSeries')
+const getSeries = require(path.join(__dirname, 'series/getSeries'))
+const insertSeries = require(path.join(__dirname, 'series/insertSeries'))
+const updateSeries = require(path.join(__dirname, 'series/updateSeries'))
+const removeSeries = require(path.join(__dirname, 'series/removeSeries'))
 
 router
   .get(...getSeries.complete())

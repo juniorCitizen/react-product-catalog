@@ -1,18 +1,23 @@
-import routerResponse from '../controllers/routerResponse'
+const path = require('path')
+
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
+const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
 
 module.exports = (req, res, next) => {
-  if (req.hostname === 'localhost') {
+  if ((req.hostname === 'localhost') || (req.host === '127.0.0.1')) {
     next()
   } else {
-    let error = new Error('protected routes are being accessed from unauthorized locations')
-    error.name = 'onlyLocalhostAllowed'
+    logging.warning('protected routes are being accessed from unauthorized locations')
     return routerResponse.json({
-      pendingResponse: res,
-      originalRequest: req,
-      statusCode: 500,
-      success: false,
-      error: error.name,
-      message: error.message
+      req: req,
+      res: res,
+      statusCode: 400
     })
   }
 }

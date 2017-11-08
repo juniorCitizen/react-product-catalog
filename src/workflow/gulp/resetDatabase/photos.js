@@ -3,12 +3,16 @@ import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
-import logging from '../../../server/controllers/logging'
-
 require('dotenv').config()
 
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
+
 module.exports = (Photos, Products, Series) => {
-  let productPhotoPath = path.resolve(path.join(__dirname, './mockPhotos/products'))
+  let productPhotoPath = path.join(__dirname, 'mockPhotos/products')
   let insertQueries = []
   return Products
     .findAll() // get product data from database

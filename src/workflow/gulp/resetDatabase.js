@@ -2,23 +2,27 @@ import { argv } from 'yargs'
 import path from 'path'
 import Promise from 'bluebird'
 
-const db = require(path.resolve('./src/server/controllers/database/database.js'))
-const logging = require(path.resolve('./src/server/controllers/logging.js'))
-
 require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
+const logging = require(path.join(accessPath, 'controllers/logging.js'))
 
 const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || false
 
-let carousels = require(path.resolve(path.join(__dirname, 'carousels.js')))
-let countries = require(path.resolve(path.join(__dirname, 'countries.js')))
-let labels = require(path.resolve(path.join(__dirname, 'labels.js')))
-let offices = require(path.resolve(path.join(__dirname, 'offices.js')))
-let photos = require(path.resolve(path.join(__dirname, 'photos.js')))
-let products = require(path.resolve(path.join(__dirname, 'products.js')))
-let series = require(path.resolve(path.join(__dirname, 'series.js')))
-let tags = require(path.resolve(path.join(__dirname, 'tags.js')))
-let users = require(path.resolve(path.join(__dirname, 'users.js')))
+const carousels = require(path.resolve(path.join(__dirname, 'resetDatabase/carousels.js')))
+const countries = require(path.resolve(path.join(__dirname, 'resetDatabase/countries.js')))
+const labels = require(path.resolve(path.join(__dirname, 'resetDatabase/labels.js')))
+const offices = require(path.resolve(path.join(__dirname, 'resetDatabase/offices.js')))
+const photos = require(path.resolve(path.join(__dirname, 'resetDatabase/photos.js')))
+const products = require(path.resolve(path.join(__dirname, 'resetDatabase/products.js')))
+const series = require(path.resolve(path.join(__dirname, 'resetDatabase/series.js')))
+const tags = require(path.resolve(path.join(__dirname, 'resetDatabase/tags.js')))
+const users = require(path.resolve(path.join(__dirname, 'resetDatabase/users.js')))
 
 module.exports = () => {
   return (done) => {

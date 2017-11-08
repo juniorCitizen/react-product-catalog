@@ -1,6 +1,7 @@
-import cron from 'node-cron'
+const cron = require('node-cron')
+const path = require('path')
 
-import jobScheduler from './jobScheduler'
+const jobScheduler = require(path.join(__dirname, 'jobScheduler'))
 
 // how to use nodemailer with gmail
 // https://www.youtube.com/watch?v=JJ44WA_eV8E
@@ -18,10 +19,8 @@ class EmailBroadcastSystem {
     this.job = cron.schedule(broadcastFrequency, jobScheduler, false)
   }
   initialize () {
-    return new Promise((resolve, reject) => {
-      this.job.start()
-      resolve('Email broadcast system initialized...')
-    })
+    this.job.start()
+    return Promise.resolve('Email broadcast system initialized...')
   }
 }
 
