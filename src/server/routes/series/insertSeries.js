@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function inserByName () {
-  return ['/name/:name', validateJwt, async (req, res) => {
+  return ['/:name', validateJwt, async (req, res) => {
     return db.Series.create({
       id: await nextAvailableId(),
       name: req.params.name,

@@ -20,7 +20,9 @@ router
   .get(...getSeries.queryByName())
   .get(...getSeries.queryByNameWithProducts())
   .post(...insertSeries.byName())
-  .put(...updateSeries.byId())
+  .put(...updateSeries.updateById())
+  .patch(...updateSeries.patchNameById())
+  .patch(...updateSeries.patchDisplaySequenceById())
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
 module.exports = router

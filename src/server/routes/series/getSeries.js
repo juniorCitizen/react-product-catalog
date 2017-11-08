@@ -72,7 +72,7 @@ function queryWithProducts () {
 }
 
 function queryById () {
-  return ['/id/:id', (req, res) => {
+  return ['/:id', (req, res) => {
     return db.Series
       .findById(req.params.id)
       .then((targetRecord) => {
@@ -93,7 +93,7 @@ function queryById () {
 }
 
 function queryByIdWithProducts () {
-  return ['/id/:id/products', (req, res) => {
+  return ['/:id/products', (req, res) => {
     let queryParameters = {
       include: [{
         model: db.Products,
