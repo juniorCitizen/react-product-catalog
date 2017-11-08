@@ -2,15 +2,15 @@ const db = require('../../controllers/database/database')
 const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = {
-  query: query,
-  queryWithProducts: queryWithProducts,
-  queryById: queryById,
-  queryByIdWithProducts: queryByIdWithProducts,
-  queryByName: queryByName,
-  queryByNameWithProducts: queryByNameWithProducts
+  complete: complete,
+  completeWithProducts: completeWithProducts,
+  byId: byId,
+  byIdWithProducts: byIdWithProducts,
+  byName: byName,
+  byNameWithProducts: byNameWithProducts
 }
 
-function query () {
+function complete () {
   return ['/', (req, res) => {
     let queryParameters = { order: ['order'] }
     return db.Series
@@ -32,7 +32,7 @@ function query () {
   }]
 }
 
-function queryWithProducts () {
+function completeWithProducts () {
   return ['/products', (req, res) => {
     let queryParameters = {
       include: [{
@@ -71,7 +71,7 @@ function queryWithProducts () {
   }]
 }
 
-function queryById () {
+function byId () {
   return ['/:id', (req, res) => {
     return db.Series
       .findById(req.params.id)
@@ -92,7 +92,7 @@ function queryById () {
   }]
 }
 
-function queryByIdWithProducts () {
+function byIdWithProducts () {
   return ['/:id/products', (req, res) => {
     let queryParameters = {
       include: [{
@@ -131,7 +131,7 @@ function queryByIdWithProducts () {
   }]
 }
 
-function queryByName () {
+function byName () {
   return ['/name/:name', (req, res) => {
     let queryParameters = {
       where: {
@@ -157,7 +157,7 @@ function queryByName () {
   }]
 }
 
-function queryByNameWithProducts () {
+function byNameWithProducts () {
   return ['/name/:name/products', (req, res) => {
     let queryParameters = {
       where: {
