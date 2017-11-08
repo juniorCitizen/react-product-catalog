@@ -42,7 +42,8 @@ module.exports = (Photos, Products, Series) => {
                   encoding: '7bit',
                   mimeType: 'image/jpeg',
                   size: fs.statSync(path.join(productPhotoPath, photoFileNames[photoIndex])).size,
-                  data: fs.readFileSync(path.join(productPhotoPath, photoFileNames[photoIndex]))
+                  data: fs.readFileSync(path.join(productPhotoPath, photoFileNames[photoIndex])),
+                  publish: true
                 })
               )
             })

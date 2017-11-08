@@ -34,19 +34,20 @@ GET protocol://domain:port/sys_ref
 
 ### series
 ```
-GET protocol://domain:port/sys_ref/api/series(?products=true)
+GET protocol://domain:port/sys_ref/api/series - get full series dataset only
+GET protocol://domain:port/sys_ref/api/series/products - get full series dataset with product and photo details (without photo data)
+GET protocol://domain:port/sys_ref/api/series/id/:id - get series item by id only
+GET protocol://domain:port/sys_ref/api/series/id/:id/products - get series item by id with product and photo details (without photo data)
+GET protocol://domain:port/sys_ref/api/series/name/:name - get series item by name only
+GET protocol://domain:port/sys_ref/api/series/name/:name/products - get series item by name with product and photo details (without photo data)
 
-GET protocol://domain:port/sys_ref/api/series?id=x(&products=true)
+POST protocol://domain:port/sys_ref/api/series/name/:name - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable displaySequence position)
 
-GET protocol://domain:port/sys_ref/api/series?name=xxxx(&products=true)
-
-POST protocol://domain:port/sys_ref/api/series?name=xxxx
+PUT protocol://domain:port/sys_ref/api/series/id/:id/name/:name/displaySequence/:displaySequence - update a series record's 'name' and 'displaySequence' value by id
 
 DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
 
 DELETE protocol://domain:port/sys_ref/api/series?id=x
-
-PUT protocol://domain:port/sys_ref/api/series(?products=true)
 
 ```
 

@@ -1,121 +1,90 @@
 const db = require('../../controllers/database/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = (req, res) => {
-  return db.sequelize // initialize transaction
-    .transaction((trx) => {
-      let trxObj = { transaction: trx }
-      let originalPosition = null
-      return db.Series
-        .findById(req.body.id, trxObj)
-        .catch(error => Promise.reject(error))
-        .then((targetRecord) => {
-          originalPosition = targetRecord.displaySequence
-          if ((req.body.name !== undefined) && (req.body.name !== targetRecord.name)) {
-            return targetRecord
-              .update({ name: req.body.name }, trxObj)
-              .catch(error => Promise.reject(error))
-          } else {
-            return Promise.resolve()
+const validateJwt = require('../../middlewares/validateJwt')
+
+module.exports = {
+  byId: updateById
+}
+
+function updateById () {
+  let endpoint = '/id/:id/name/:name/displaySequence/:displaySequence'
+  return [
+    endpoint,
+    validateJwt,
+    determineDisplaySequence,
+    (req, res) => {
+      return db.sequelize
+        .transaction(async (trx) => {
+          let trxObj = { transaction: trx }
+          let targetRecord = await db.Series.findById(req.params.id, trxObj)
+          let originalPosition = targetRecord.displaySequence
+          let targetPosition = req.displaySequence
+          // update targetRecord.name
+          if (req.params.name !== targetRecord.name) {
+            await targetRecord.update({ name: req.params.name }, trxObj)
           }
-        })
-        .then(() => {
-          // make sure sequential reorder is only done when:
-          // 1. req data actually has a displaySequence value
-          // 2. the requested value is different from the original displaySeq value
-          if ((req.body.displaySequence !== undefined) && (req.body.displaySequence !== originalPosition)) {
-            return db.Series
-              .findAll({ order: ['displaySequence'] }, trxObj)
-              .catch(error => Promise.reject(error))
-              .then((seriesDataset) => {
-                if (req.body.displaySequence !== undefined) {
-                  // prevent skipping of displaySequence (e.g. 0, 1, 2, 4)
-                  if (req.body.displaySequence > seriesDataset.length) {
-                    req.body.displaySequence = seriesDataset.length
-                  }
-                }
-                if (req.body.displaySequence < originalPosition) { // advance in sequential order
-                  return db.Series
-                    .update({
-                      displaySequence: db.Sequelize.literal('`displaySequence` + 1')
-                    }, Object.assign({
-                      where: {
-                        id: { [db.Sequelize.Op.ne]: req.body.id },
-                        displaySequence: {
-                          [db.Sequelize.Op.between]: [req.body.displaySequence, originalPosition - 1]
-                        }
-                      }
-                    }, trxObj))
-                    .catch(error => Promise.reject(error))
-                } else { // push back in sequential order
-                  return db.Series
-                    .update({
-                      displaySequence: db.Sequelize.literal('`displaySequence` - 1')
-                    }, Object.assign({
-                      where: {
-                        id: { [db.Sequelize.Op.ne]: req.body.id },
-                        displaySequence: {
-                          [db.Sequelize.Op.between]: [originalPosition + 1, req.body.displaySequence]
-                        }
-                      }
-                    }, trxObj))
-                    .catch(error => Promise.reject(error))
-                }
-              })
+          // skip reordering if original and target position is the same
+          let queryOptions = { replacements: { targetId: req.params.id } }
+          let queryString = null
+          if (originalPosition !== targetPosition) {
+            if (originalPosition < targetPosition) {
+              // push back in sequential order
+              queryString = 'UPDATE series SET displaySequence = displaySequence - 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+              queryOptions.replacements.floor = originalPosition + 1
+              queryOptions.replacements.ceiling = targetPosition
+            } else { // advance in sequential order
+              queryString = 'UPDATE series SET displaySequence = displaySequence + 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+              queryOptions.replacements.floor = targetPosition
+              queryOptions.replacements.ceiling = originalPosition - 1
+            }
+            return db.sequelize
+              .query(queryString, Object.assign(queryOptions, trxObj))
               .then(() => {
-                // actually update the target record's sequential order
-                return db.Series
-                  .findById(req.body.id, trxObj)
-                  .catch(error => Promise.reject(error))
-                  .then((targetRecord) => {
-                    return targetRecord.update({ displaySequence: req.body.displaySequence }, trxObj)
-                  })
+                return targetRecord.update({ displaySequence: req.displaySequence }, trxObj)
               })
+              .catch(error => Promise.reject(error))
           }
-          return Promise.resolve()
         })
-    })
-    .then(() => {
-      let queryParameter = req.query.products === 'true'
-        ? {
-          include: [{
-            model: db.Products,
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-            include: [{
-              model: db.Tags,
-              attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] }
-            }, {
-              model: db.Photos,
-              attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
-            }]
-          }, {
-            model: db.Photos,
-            attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
-          }],
-          order: [
-            'displaySequence',
-            [db.Products, 'code'],
-            [db.Products, db.Tags, 'name'],
-            [db.Products, db.Photos, 'primary', 'DESC']
-          ]
-        }
-        : { order: ['displaySequence'] }
-      return db.Series
-        .findAll(queryParameter)
-        .catch(error => Promise.reject(error))
-    })
-    .then((series) => {
-      return routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 200,
-        data: series
-      })
+        .then(async () => {
+          return routerResponse.json({
+            req: req,
+            res: res,
+            statusCode: 200,
+            data: await db.Series
+              .findAll({ order: ['displaySequence'] })
+              .catch(error => Promise.reject(error))
+          })
+        })
+        .catch(error => routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 500,
+          error: error,
+          message: '產品大類內容變更失敗'
+        }))
+    }]
+}
+
+function determineDisplaySequence (req, res, next) {
+  return db.Series
+    .findAll()
+    .then(seriesDataset => {
+      if (req.params.displaySequence > seriesDataset.length) {
+        req.displaySequence = seriesDataset.length
+      } else if (req.params.displaySequence < 0) {
+        req.displaySequence = 0
+      } else {
+        req.displaySequence = req.params.displaySequence
+      }
+      next()
+      return Promise.resolve()
     })
     .catch(error => routerResponse.json({
       req: req,
       res: res,
       statusCode: 500,
-      error: error
+      error: error,
+      message: 'updateSeries.js determineDisplaySequence() errored'
     }))
 }

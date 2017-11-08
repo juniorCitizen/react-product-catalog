@@ -4,20 +4,23 @@ const router = express.Router()
 
 // middlewares
 const validateJwt = require('../../middlewares/validateJwt')
-const preventDoubleQueryParameters = require('./middleware').preventDoubleQueryParameters
 const ensureSingleQueryParameter = require('./middleware').ensureSingleQueryParameter
-const ensureIdAndDisplaySequenceAreIntegers = require('./middleware').ensureIdAndDisplaySequenceAreIntegers
 
 // route handlers
 const getSeries = require('./getSeries')
 const insertSeries = require('./insertSeries')
-const removeSeries = require('./removeSeries')
 const updateSeries = require('./updateSeries')
+const removeSeries = require('./removeSeries')
 
 router
-  .get('/', preventDoubleQueryParameters, getSeries)
-  .post('/', validateJwt, insertSeries)
-  .put('/', validateJwt, ensureIdAndDisplaySequenceAreIntegers, updateSeries)
+  .get(...getSeries.query())
+  .get(...getSeries.queryWithProducts())
+  .get(...getSeries.queryById())
+  .get(...getSeries.queryByIdWithProducts())
+  .get(...getSeries.queryByName())
+  .get(...getSeries.queryByNameWithProducts())
+  .post(...insertSeries.byName())
+  .put(...updateSeries.byId())
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
 module.exports = router

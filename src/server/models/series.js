@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     displaySequence: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    publish: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
     // ,
     // createdAt: {
