@@ -4,10 +4,10 @@ const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = {
-  byName: inserSeriesByName
+  byName: inserByName
 }
 
-function inserSeriesByName () {
+function inserByName () {
   return ['/name/:name', validateJwt, async (req, res) => {
     return db.Series.create({
       id: await nextAvailableId(),
