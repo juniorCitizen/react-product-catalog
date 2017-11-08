@@ -1,72 +1,49 @@
 const db = require('../../controllers/database/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = (req, res) => {
-  let queryParameter = defaultQueryParameter()
-  processIdentifierQuery(req.query, queryParameter, 'id')
-  processIdentifierQuery(req.query, queryParameter, 'name')
-  processIdentifierQuery(req.query, queryParameter, 'products')
-  return db.Series
-    .findAll(queryParameter)
-    .then((series) => {
-      return routerResponse.json({
+module.exports = {
+  query: query,
+  queryWithProducts: queryWithProducts,
+  queryById: queryById,
+  queryByIdWithProducts: queryByIdWithProducts,
+  queryByName: queryByName,
+  queryByNameWithProducts: queryByNameWithProducts
+}
+
+function query () {
+  return ['/', (req, res) => {
+    let queryParameters = { order: ['displaySequence'] }
+    return db.Series
+      .findAll(queryParameters)
+      .then((seriesData) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: seriesData
+        })
+      })
+      .catch(error => routerResponse.json({
         req: req,
         res: res,
-        statusCode: 200,
-        data: series
-      })
-    })
-    .catch(error => routerResponse.json({
-      req: req,
-      res: res,
-      statusCode: 500,
-      error: error
-    }))
+        statusCode: 500,
+        error: error
+      }))
+  }]
 }
 
-function defaultQueryParameter () {
-  return {
-    attributes: {
-      exclude: [
-        'createdAt',
-        'updatedAt',
-        'deletedAt'
-      ]
-    },
-    order: ['displaySequence']
-  }
-}
-
-function processIdentifierQuery (requestQueries, currentQueryParameters, identifier) {
-  if (
-    ((identifier === 'products') && (requestQueries[identifier] === 'true')) ||
-    (requestQueries[identifier] !== undefined)
-  ) {
-    return Object.assign(
-      currentQueryParameters,
-      queryComponents(requestQueries, identifier)
-    )
-  }
-}
-
-function queryComponents (requestQueries, identifier) {
-  let queryComponents = {
-    id: { where: { id: requestQueries.id } },
-    name: { where: { name: requestQueries.name } },
-    products: {
+function queryWithProducts () {
+  return ['/products', (req, res) => {
+    let queryParameters = {
       include: [{
         model: db.Products,
-        attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        include: [{
-          model: db.Tags,
-          attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] }
-        }, {
+        include: [{ model: db.Tags }, {
           model: db.Photos,
-          attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
+          attributes: { exclude: ['data'] }
         }]
       }, {
         model: db.Photos,
-        attributes: { exclude: ['data', 'createdAt', 'updatedAt', 'deletedAt'] }
+        attributes: { exclude: ['data'] }
       }],
       order: [
         'displaySequence',
@@ -75,6 +52,149 @@ function queryComponents (requestQueries, identifier) {
         [db.Products, db.Photos, 'primary', 'DESC']
       ]
     }
-  }
-  return queryComponents[identifier]
+    return db.Series
+      .findAll(queryParameters)
+      .then((seriesData) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: seriesData
+        })
+      })
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error
+      }))
+  }]
+}
+
+function queryById () {
+  return ['/id/:id', (req, res) => {
+    return db.Series
+      .findById(req.params.id)
+      .then((targetRecord) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: targetRecord
+        })
+      })
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error
+      }))
+  }]
+}
+
+function queryByIdWithProducts () {
+  return ['/id/:id/products', (req, res) => {
+    let queryParameters = {
+      include: [{
+        model: db.Products,
+        include: [{ model: db.Tags }, {
+          model: db.Photos,
+          attributes: { exclude: ['data'] }
+        }]
+      }, {
+        model: db.Photos,
+        attributes: { exclude: ['data'] }
+      }],
+      order: [
+        'displaySequence',
+        [db.Products, 'code'],
+        [db.Products, db.Tags, 'name'],
+        [db.Products, db.Photos, 'primary', 'DESC']
+      ]
+    }
+    return db.Series
+      .findById(req.params.id, queryParameters)
+      .then((targetRecord) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: targetRecord
+        })
+      })
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error
+      }))
+  }]
+}
+
+function queryByName () {
+  return ['/name/:name', (req, res) => {
+    let queryParameters = {
+      where: {
+        name: req.params.name
+      }
+    }
+    return db.Series
+      .findOne(queryParameters)
+      .then((targetRecord) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: targetRecord
+        })
+      })
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error
+      }))
+  }]
+}
+
+function queryByNameWithProducts () {
+  return ['/name/:name/products', (req, res) => {
+    let queryParameters = {
+      where: {
+        name: req.params.name
+      },
+      include: [{
+        model: db.Products,
+        include: [{ model: db.Tags }, {
+          model: db.Photos,
+          attributes: { exclude: ['data'] }
+        }]
+      }, {
+        model: db.Photos,
+        attributes: { exclude: ['data'] }
+      }],
+      order: [
+        'displaySequence',
+        [db.Products, 'code'],
+        [db.Products, db.Tags, 'name'],
+        [db.Products, db.Photos, 'primary', 'DESC']
+      ]
+    }
+    return db.Series
+      .findOne(queryParameters)
+      .then((targetRecord) => {
+        return routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: targetRecord
+        })
+      })
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error
+      }))
+  }]
 }

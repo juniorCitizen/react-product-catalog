@@ -34,11 +34,12 @@ GET protocol://domain:port/sys_ref
 
 ### series
 ```
-GET protocol://domain:port/sys_ref/api/series(?products=true)
-
-GET protocol://domain:port/sys_ref/api/series?id=x(&products=true)
-
-GET protocol://domain:port/sys_ref/api/series?name=xxxx(&products=true)
+GET protocol://domain:port/sys_ref/api/series - get full series dataset only
+GET protocol://domain:port/sys_ref/api/series/products - get full series dataset with product and photo details (without photo data)
+GET protocol://domain:port/sys_ref/api/series/id/:id - get series item by id only
+GET protocol://domain:port/sys_ref/api/series/id/:id/products - get series item by id with product and photo details (without photo data)
+GET protocol://domain:port/sys_ref/api/series/name/:name - get series item by name only
+GET protocol://domain:port/sys_ref/api/series/name/:name/products - get series item by name with product and photo details (without photo data)
 
 POST protocol://domain:port/sys_ref/api/series?name=xxxx
 
