@@ -23,6 +23,7 @@ router
   .put(...updateSeries.updateById())
   .patch(...updateSeries.updateNameById())
   .patch(...updateSeries.updateOrderById())
-  .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
+  .delete(...removeSeries.byId())
+  .delete(...removeSeries.byName())
 
 module.exports = router

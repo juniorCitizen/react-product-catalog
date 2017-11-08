@@ -54,15 +54,14 @@ PATCH protocol://domain:port/sys_ref/api/series/:id/name/:name - update a series
 
 PATCH protocol://domain:port/sys_ref/api/series/:id/order/:order - update a series record's 'order' value by id
 
-DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
+DELETE protocol://domain:port/sys_ref/api/series/id/:id - delete a series record by id
 
-DELETE protocol://domain:port/sys_ref/api/series?id=x
-
+DELETE protocol://domain:port/sys_ref/api/series/name/:name - delete a series record by name
 ```
 
 ### token
 ```
-POST protocol://domain:port/sys_ref/api/token
+POST protocol://domain:port/sys_ref/api/token - apply for jwt token to access data modification end points
 ```
 
 ## LICENSE
