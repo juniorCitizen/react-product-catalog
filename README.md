@@ -27,7 +27,7 @@ npm run lint-backend - 僅 lint 後端程式碼
 npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 ```
 
-## API
+## WEBAPI
 ### client access
 * **GET protocol://domain:port/sys_ref** - index.html
 * **GET protocol://domain:port/sys_ref/path** - public assets
@@ -45,6 +45,9 @@ npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 * **PATCH protocol://domain:port/sys_ref/api/series/:id/order/:order** - update a series record's 'order' value by id
 * **DELETE protocol://domain:port/sys_ref/api/series/id/:id** - delete a series record by id
 * **DELETE protocol://domain:port/sys_ref/api/series/name/:name** - delete a series record by name
+
+### products
+* **GET protocol://domain:port/sys_ref/api/series(?details=true)** - get full product catalog
 
 ### token
 * **POST protocol://domain:port/sys_ref/api/token** - apply for jwt token to access data modification end points

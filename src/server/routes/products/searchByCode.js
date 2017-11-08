@@ -1,4 +1,4 @@
-import db from '../../controllers/database/database'
+import db from '../../controllers/database'
 import routerResponse from '../../controllers/routerResponse'
 
 module.exports = (req, res) => {

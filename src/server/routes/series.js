@@ -9,7 +9,7 @@ const insertSeries = require(path.join(__dirname, 'series/insertSeries'))
 const updateSeries = require(path.join(__dirname, 'series/updateSeries'))
 const removeSeries = require(path.join(__dirname, 'series/removeSeries'))
 
-router
+module.exports = router
   .get(...getSeries.complete())
   .get(...getSeries.completeWithProducts())
   .get(...getSeries.byId())
@@ -22,5 +22,3 @@ router
   .patch(...updateSeries.updateOrderById())
   .delete(...removeSeries.byId())
   .delete(...removeSeries.byName())
-
-module.exports = router
