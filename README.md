@@ -41,7 +41,7 @@ GET protocol://domain:port/sys_ref/api/series/id/:id/products - get series item 
 GET protocol://domain:port/sys_ref/api/series/name/:name - get series item by name only
 GET protocol://domain:port/sys_ref/api/series/name/:name/products - get series item by name with product and photo details (without photo data)
 
-POST protocol://domain:port/sys_ref/api/series?name=xxxx
+POST protocol://domain:port/sys_ref/api/series/name/:name - insert a new series with :name (id is automatically given and set at the next avaialable displaySequence position)
 
 DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
 

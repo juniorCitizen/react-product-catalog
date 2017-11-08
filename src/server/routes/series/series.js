@@ -15,14 +15,13 @@ const removeSeries = require('./removeSeries')
 const updateSeries = require('./updateSeries')
 
 router
-  // .get('/', preventDoubleQueryParameters, getSeries)
   .get(...getSeries.query())
   .get(...getSeries.queryWithProducts())
   .get(...getSeries.queryById())
   .get(...getSeries.queryByIdWithProducts())
   .get(...getSeries.queryByName())
   .get(...getSeries.queryByNameWithProducts())
-  .post('/', validateJwt, insertSeries)
+  .post(...insertSeries.byName())
   .put('/', validateJwt, ensureIdAndDisplaySequenceAreIntegers, updateSeries)
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
