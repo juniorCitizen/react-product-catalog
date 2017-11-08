@@ -11,54 +11,29 @@ const routerResponse = require(path.join(accessPath, 'controllers/routerResponse
 
 module.exports = {
   complete: complete,
-  completeWithProducts: completeWithProducts,
   byId: byId,
-  byIdWithProducts: byIdWithProducts,
-  byName: byName,
-  byNameWithProducts: byNameWithProducts
+  byName: byName
 }
 
 function complete () {
   return ['/', (req, res) => {
     let queryParameters = { order: ['order'] }
-    return db.Series
-      .findAll(queryParameters)
-      .then((seriesData) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: seriesData
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error
-      }))
-  }]
-}
-
-function completeWithProducts () {
-  return ['/products', (req, res) => {
-    let queryParameters = {
-      include: [{
-        model: db.Products,
-        include: [{ model: db.Tags }, {
+    if (req.query.hasOwnProperty('details')) {
+      queryParameters.order.push([db.Products, 'code'])
+      queryParameters.order.push([db.Products, db.Tags, 'name'])
+      queryParameters.order.push([db.Products, db.Photos, 'primary', 'DESC'])
+      Object.assign(queryParameters, {
+        include: [{
+          model: db.Products,
+          include: [{ model: db.Tags }, {
+            model: db.Photos,
+            attributes: { exclude: ['data'] }
+          }]
+        }, {
           model: db.Photos,
           attributes: { exclude: ['data'] }
         }]
-      }, {
-        model: db.Photos,
-        attributes: { exclude: ['data'] }
-      }],
-      order: [
-        'order',
-        [db.Products, 'code'],
-        [db.Products, db.Tags, 'name'],
-        [db.Products, db.Photos, 'primary', 'DESC']
-      ]
+      })
     }
     return db.Series
       .findAll(queryParameters)
@@ -74,54 +49,36 @@ function completeWithProducts () {
         req: req,
         res: res,
         statusCode: 500,
-        error: error
+        error: error,
+        message: '產品類別總表查詢失敗'
       }))
   }]
 }
 
 function byId () {
-  return ['/:id', (req, res) => {
-    return db.Series
-      .findById(req.params.id)
-      .then((targetRecord) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: targetRecord
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error
-      }))
-  }]
-}
-
-function byIdWithProducts () {
-  return ['/:id/products', (req, res) => {
-    let queryParameters = {
-      include: [{
-        model: db.Products,
-        include: [{ model: db.Tags }, {
+  return ['/id/:id', (req, res) => {
+    let queryParameters = [req.params.id]
+    if (req.query.hasOwnProperty('details')) {
+      queryParameters.push({
+        include: [{
+          model: db.Products,
+          include: [{ model: db.Tags }, {
+            model: db.Photos,
+            attributes: { exclude: ['data'] }
+          }]
+        }, {
           model: db.Photos,
           attributes: { exclude: ['data'] }
-        }]
-      }, {
-        model: db.Photos,
-        attributes: { exclude: ['data'] }
-      }],
-      order: [
-        'order',
-        [db.Products, 'code'],
-        [db.Products, db.Tags, 'name'],
-        [db.Products, db.Photos, 'primary', 'DESC']
-      ]
+        }],
+        order: [
+          [db.Products, 'code'],
+          [db.Products, db.Tags, 'name'],
+          [db.Products, db.Photos, 'primary', 'DESC']
+        ]
+      })
     }
     return db.Series
-      .findById(req.params.id, queryParameters)
+      .findById(...queryParameters)
       .then((targetRecord) => {
         return routerResponse.json({
           req: req,
@@ -134,7 +91,8 @@ function byIdWithProducts () {
         req: req,
         res: res,
         statusCode: 500,
-        error: error
+        error: error,
+        message: '產品類別以 id 查詢失敗'
       }))
   }]
 }
@@ -146,47 +104,24 @@ function byName () {
         name: req.params.name
       }
     }
-    return db.Series
-      .findOne(queryParameters)
-      .then((targetRecord) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: targetRecord
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error
-      }))
-  }]
-}
-
-function byNameWithProducts () {
-  return ['/name/:name/products', (req, res) => {
-    let queryParameters = {
-      where: {
-        name: req.params.name
-      },
-      include: [{
-        model: db.Products,
-        include: [{ model: db.Tags }, {
+    if (req.query.hasOwnProperty('details')) {
+      queryParameters = Object.assign(queryParameters, {
+        include: [{
+          model: db.Products,
+          include: [{ model: db.Tags }, {
+            model: db.Photos,
+            attributes: { exclude: ['data'] }
+          }]
+        }, {
           model: db.Photos,
           attributes: { exclude: ['data'] }
-        }]
-      }, {
-        model: db.Photos,
-        attributes: { exclude: ['data'] }
-      }],
-      order: [
-        'order',
-        [db.Products, 'code'],
-        [db.Products, db.Tags, 'name'],
-        [db.Products, db.Photos, 'primary', 'DESC']
-      ]
+        }],
+        order: [
+          [db.Products, 'code'],
+          [db.Products, db.Tags, 'name'],
+          [db.Products, db.Photos, 'primary', 'DESC']
+        ]
+      })
     }
     return db.Series
       .findOne(queryParameters)
@@ -202,7 +137,8 @@ function byNameWithProducts () {
         req: req,
         res: res,
         statusCode: 500,
-        error: error
+        error: error,
+        message: '產品類別以名稱查詢失敗'
       }))
   }]
 }
