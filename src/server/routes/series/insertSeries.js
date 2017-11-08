@@ -12,7 +12,7 @@ function inserByName () {
     return db.Series.create({
       id: await nextAvailableId(),
       name: req.params.name,
-      displaySequence: await nextAvailableSequenceNumber()
+      order: await nextAvailableValueInSequence()
     }).then((newSeries) => {
       return routerResponse.json({
         req: req,
@@ -47,17 +47,17 @@ function nextAvailableId () {
     .catch(error => Promise.reject(error))
 }
 
-function nextAvailableSequenceNumber () {
-  let nextAvailableSequenceNumber = 0
+function nextAvailableValueInSequence () {
+  let nextAvailableValueInSequence = 0
   return db.Series
     .findAll()
-    .map(series => series.displaySequence)
-    .then((displaySequenceNumberList) => {
-      // loop through and find the next available unused id
-      while (displaySequenceNumberList.indexOf(nextAvailableSequenceNumber) !== -1) {
-        nextAvailableSequenceNumber++
+    .map(series => series.order)
+    .then((orderSequence) => {
+      // loop through and find the next available order sequence value
+      while (orderSequence.indexOf(nextAvailableValueInSequence) !== -1) {
+        nextAvailableValueInSequence++
       }
-      return Promise.resolve(nextAvailableSequenceNumber)
+      return Promise.resolve(nextAvailableValueInSequence)
     })
     .catch(error => Promise.reject(error))
 }

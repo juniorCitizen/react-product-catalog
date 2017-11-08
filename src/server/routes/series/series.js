@@ -21,8 +21,8 @@ router
   .get(...getSeries.queryByNameWithProducts())
   .post(...insertSeries.byName())
   .put(...updateSeries.updateById())
-  .patch(...updateSeries.patchNameById())
-  .patch(...updateSeries.patchDisplaySequenceById())
+  .patch(...updateSeries.updateNameById())
+  .patch(...updateSeries.updateOrderById())
   .delete('/', validateJwt, ensureSingleQueryParameter, removeSeries)
 
 module.exports = router

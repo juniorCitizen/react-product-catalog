@@ -46,13 +46,13 @@ GET protocol://domain:port/sys_ref/api/series/name/:name - get series item by na
 
 GET protocol://domain:port/sys_ref/api/series/name/:name/products - get series item by name with product and photo details (without photo data)
 
-POST protocol://domain:port/sys_ref/api/series/:name - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable displaySequence position)
+POST protocol://domain:port/sys_ref/api/series/:name - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable order position)
 
-PUT protocol://domain:port/sys_ref/api/series/:id/:name/:displaySequence - update a series record's 'name' and 'displaySequence' value by id
+PUT protocol://domain:port/sys_ref/api/series/:id/:name/:order - update a series record's 'name' and 'order' value by id
 
 PATCH protocol://domain:port/sys_ref/api/series/:id/name/:name - update a series record's 'name' value by id
 
-PATCH protocol://domain:port/sys_ref/api/series/:id/displaySequence/:displaySequence - update a series record's 'displaySequence' value by id
+PATCH protocol://domain:port/sys_ref/api/series/:id/order/:order - update a series record's 'order' value by id
 
 DELETE protocol://domain:port/sys_ref/api/series?name=xxxx
 

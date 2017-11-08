@@ -5,19 +5,19 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = {
   updateById: updateById,
-  patchNameById: patchNameById,
-  patchDisplaySequenceById: patchDisplaySequenceById
+  updateNameById: updateNameById,
+  updateOrderById: updateOrderById
 }
 
 function updateById () {
-  let endpoint = '/:id/:name/:displaySequence'
-  return [endpoint, validateJwt, validateDisplaySequence, (req, res) => {
+  let endpoint = '/:id/:name/:order'
+  return [endpoint, validateJwt, validateOrderValue, (req, res) => {
     return db.sequelize
       .transaction(async trx => {
         let trxObj = { transaction: trx }
         let targetRecord = await db.Series.findById(req.params.id, trxObj)
-        let originalPosition = targetRecord.displaySequence
-        let targetPosition = req.displaySequence
+        let originalPosition = targetRecord.order
+        let targetPosition = req.order
         // update targetRecord.name
         await targetRecord.update({ name: req.params.name }, trxObj)
         // resequence affected records
@@ -25,12 +25,12 @@ function updateById () {
         let queryString = null
         if (originalPosition < targetPosition) {
           // prepare query for push back target record in sequential order
-          queryString = 'UPDATE series SET displaySequence = displaySequence - 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+          queryString = 'UPDATE series SET order = order - 1 WHERE id != :targetId AND order BETWEEN :floor AND :ceiling;'
           queryOptions.replacements.floor = originalPosition + 1
           queryOptions.replacements.ceiling = targetPosition
         } else {
           // prepare query for advance target record in sequential order
-          queryString = 'UPDATE series SET displaySequence = displaySequence + 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+          queryString = 'UPDATE series SET order = order + 1 WHERE id != :targetId AND order BETWEEN :floor AND :ceiling;'
           queryOptions.replacements.floor = targetPosition
           queryOptions.replacements.ceiling = originalPosition - 1
         }
@@ -38,8 +38,8 @@ function updateById () {
         return db.sequelize
           .query(queryString, Object.assign(queryOptions, trxObj))
           .then(() => {
-            // actually adjust the target record's displaySequence
-            return targetRecord.update({ displaySequence: req.displaySequence }, trxObj)
+            // actually adjust the target record's order
+            return targetRecord.update({ order: req.order }, trxObj)
           })
           .catch(error => Promise.reject(error))
       })
@@ -49,7 +49,7 @@ function updateById () {
           res: res,
           statusCode: 200,
           data: await db.Series
-            .findAll({ order: ['displaySequence'] })
+            .findAll({ order: ['order'] })
             .catch(error => Promise.reject(error))
         })
       })
@@ -63,7 +63,7 @@ function updateById () {
   }]
 }
 
-function patchNameById () {
+function updateNameById () {
   return ['/:id/name/:name', validateJwt, (req, res) => {
     return db.Series
       .update({
@@ -89,26 +89,26 @@ function patchNameById () {
   }]
 }
 
-function patchDisplaySequenceById () {
-  let endpoint = '/:id/displaySequence/:displaySequence'
-  return [endpoint, validateJwt, validateDisplaySequence, (req, res) => {
+function updateOrderById () {
+  let endpoint = '/:id/order/:order'
+  return [endpoint, validateJwt, validateOrderValue, (req, res) => {
     return db.sequelize
       .transaction(async trx => {
         let trxObj = { transaction: trx }
         let targetRecord = await db.Series.findById(req.params.id, trxObj)
-        let originalPosition = targetRecord.displaySequence
-        let targetPosition = req.displaySequence
+        let originalPosition = targetRecord.order
+        let targetPosition = req.order
         // resequence affected records
         let queryOptions = { replacements: { targetId: req.params.id } }
         let queryString = null
         if (originalPosition < targetPosition) {
           // prepare query for push back target record in sequential order
-          queryString = 'UPDATE series SET displaySequence = displaySequence - 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+          queryString = 'UPDATE series SET order = order - 1 WHERE id != :targetId AND order BETWEEN :floor AND :ceiling;'
           queryOptions.replacements.floor = originalPosition + 1
           queryOptions.replacements.ceiling = targetPosition
         } else {
           // prepare query for advance target record in sequential order
-          queryString = 'UPDATE series SET displaySequence = displaySequence + 1 WHERE id != :targetId AND displaySequence BETWEEN :floor AND :ceiling;'
+          queryString = 'UPDATE series SET order = order + 1 WHERE id != :targetId AND order BETWEEN :floor AND :ceiling;'
           queryOptions.replacements.floor = targetPosition
           queryOptions.replacements.ceiling = originalPosition - 1
         }
@@ -116,8 +116,8 @@ function patchDisplaySequenceById () {
         return db.sequelize
           .query(queryString, Object.assign(queryOptions, trxObj))
           .then(() => {
-            // actually adjust the target record's displaySequence
-            return targetRecord.update({ displaySequence: req.displaySequence }, trxObj)
+            // actually adjust the target record's order
+            return targetRecord.update({ order: req.order }, trxObj)
           })
           .catch(error => Promise.reject(error))
       })
@@ -127,7 +127,7 @@ function patchDisplaySequenceById () {
           res: res,
           statusCode: 200,
           data: await db.Series
-            .findAll({ order: ['displaySequence'] })
+            .findAll({ order: ['order'] })
             .catch(error => Promise.reject(error))
         })
       })
@@ -141,16 +141,16 @@ function patchDisplaySequenceById () {
   }]
 }
 
-function validateDisplaySequence (req, res, next) {
+function validateOrderValue (req, res, next) {
   return db.Series
     .findAll()
     .then(seriesDataset => {
-      if (req.params.displaySequence > seriesDataset.length) {
-        req.displaySequence = seriesDataset.length
-      } else if (req.params.displaySequence < 0) {
-        req.displaySequence = 0
+      if (req.params.order > seriesDataset.length) {
+        req.order = seriesDataset.length
+      } else if (req.params.order < 0) {
+        req.order = 0
       } else {
-        req.displaySequence = req.params.displaySequence
+        req.order = req.params.order
       }
       next()
       return Promise.resolve()
@@ -160,6 +160,6 @@ function validateDisplaySequence (req, res, next) {
       res: res,
       statusCode: 500,
       error: error,
-      message: 'updateSeries.js determineDisplaySequence() errored'
+      message: 'updateSeries.js validateOrderValue() errored'
     }))
 }

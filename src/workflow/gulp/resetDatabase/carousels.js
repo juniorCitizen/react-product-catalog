@@ -16,7 +16,7 @@ module.exports = (Carousels) => {
           photoFileNames.map((photoFileName, index) => {
             return Carousels.create({
               primary: index === 0, // set to true, if it's the first index in the array
-              displaySequence: index,
+              order: index,
               originalName: photoFileName,
               encoding: '7bit',
               mimeType: 'image/jpeg',

@@ -12,7 +12,7 @@ module.exports = {
 
 function query () {
   return ['/', (req, res) => {
-    let queryParameters = { order: ['displaySequence'] }
+    let queryParameters = { order: ['order'] }
     return db.Series
       .findAll(queryParameters)
       .then((seriesData) => {
@@ -46,7 +46,7 @@ function queryWithProducts () {
         attributes: { exclude: ['data'] }
       }],
       order: [
-        'displaySequence',
+        'order',
         [db.Products, 'code'],
         [db.Products, db.Tags, 'name'],
         [db.Products, db.Photos, 'primary', 'DESC']
@@ -106,7 +106,7 @@ function queryByIdWithProducts () {
         attributes: { exclude: ['data'] }
       }],
       order: [
-        'displaySequence',
+        'order',
         [db.Products, 'code'],
         [db.Products, db.Tags, 'name'],
         [db.Products, db.Photos, 'primary', 'DESC']
@@ -174,7 +174,7 @@ function queryByNameWithProducts () {
         attributes: { exclude: ['data'] }
       }],
       order: [
-        'displaySequence',
+        'order',
         [db.Products, 'code'],
         [db.Products, db.Tags, 'name'],
         [db.Products, db.Photos, 'primary', 'DESC']
