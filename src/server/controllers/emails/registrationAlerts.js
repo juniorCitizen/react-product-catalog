@@ -1,18 +1,24 @@
-import hbs from 'nodemailer-express-handlebars'
-import path from 'path'
+const hbs = require('nodemailer-express-handlebars')
+const path = require('path')
 
-import emailTransporter from '../../config/email'
-import eVars from '../../config/environment'
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const emailTransporter = require(path.join(accessPath, 'config/email'))
+const eVars = require(path.join(accessPath, 'config/eVars'))
 
 module.exports = (registrationRecord) => {
   emailTransporter.use('compile', hbs({
     viewEngin: {
       defaultLayout: 'main',
       extname: '.hbs',
-      layoutsDir: path.join(__dirname, '../../views/layouts'),
-      partialsDir: path.join(__dirname, '../../views/partials')
+      layoutsDir: path.join(accessPath, 'views/layouts'),
+      partialsDir: path.join(accessPath, 'views/partials')
     },
-    viewPath: path.join(__dirname, '../../views'),
+    viewPath: path.join(accessPath, 'views'),
     extName: '.hbs'
   }))
   let emailOptions = {

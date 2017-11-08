@@ -1,9 +1,14 @@
 import faker from 'faker'
+import path from 'path'
 import Promise from 'bluebird'
 
-import logging from '../../../server/controllers/logging'
-
 require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
 
 module.exports = (Products, Tags) => {
   return Promise

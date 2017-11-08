@@ -2,20 +2,24 @@ import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
-import logging from '../../../server/controllers/logging'
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
 
 module.exports = (Carousels) => {
-  let carouselPhotoPath = path.resolve(path.join(__dirname, 'mockPhotos/carousel'))
-  // let insertQueries = []
+  let carouselPhotoPath = path.join(__dirname, 'mockPhotos/carousel')
   return fs
     .readdir(carouselPhotoPath)
     .then((photoFileNames) => {
       return Promise // run insertion queries in sequence
         .each(
-        // insertQueries,
           photoFileNames.map((photoFileName, index) => {
             return Carousels.create({
-              primary: index === 0, // set to true, if it's the first index in the array
+              primary: index === 0, // true if is the first element in array
               order: index,
               originalName: photoFileName,
               encoding: '7bit',

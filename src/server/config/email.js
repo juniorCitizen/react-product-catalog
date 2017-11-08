@@ -1,6 +1,13 @@
-import nodemailer from 'nodemailer'
+const nodemailer = require('nodemailer')
+const path = require('path')
 
-import eVars from '../config/eVars'
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const eVars = require(path.join(accessPath, 'config/eVars'))
 
 module.exports = (() => {
   return nodemailer.createTransport({

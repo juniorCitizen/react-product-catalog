@@ -1,4 +1,12 @@
-import logging from '../../../server/controllers/logging'
+import path from 'path'
+
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
 
 const seriesData = [{
   id: 0,

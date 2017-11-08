@@ -1,17 +1,23 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
+const path = require('path')
 
-const db = require('../../controllers/database/database')
-const encryption = require('../../controllers/encryption')
-const eVars = require('../../config/eVars')
-const routerResponse = require('../../controllers/routerResponse')
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
+const encryption = require(path.join(accessPath, 'controllers/encryption'))
+const eVars = require(path.join(accessPath, 'config/eVars'))
+const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
+
+const botPrevention = require(path.join(accessPath, 'middlewares/botPrevention'))
 
 const router = express.Router()
 
-router.post('/',
-  loginInfoPresence,
-  require('../../middlewares/botPrevention'),
-  tokenRequest)
+router.post('/', loginInfoPresence, botPrevention, tokenRequest)
 
 module.exports = router
 
@@ -71,7 +77,6 @@ function tokenRequest (req, res) {
 }
 
 function loginInfoPresence (req, res, next) {
-  console.log(req.body.botPrevention)
   if (
     (req.body === undefined) ||
     (req.body.email === undefined) ||

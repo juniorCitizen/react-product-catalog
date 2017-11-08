@@ -1,67 +1,39 @@
-import Promise from 'bluebird'
+const path = require('path')
+const Promise = require('bluebird')
 
-import db from '../../controllers/database/database'
+require('dotenv').config()
 
-import contactByEmail from './contactByEmail'
-import processEmailsOnQueue from './processEmailsOnQueue'
-import registrationAlerts from './registrationAlerts'
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
+const logging = require(path.join(accessPath, 'controllers/logging'))
+
+const contactByEmail = require(path.join(__dirname, 'contactByEmail'))
+const processEmailsOnQueue = require(path.join(__dirname, 'processEmailsOnQueue'))
+const registrationAlerts = require(path.join(__dirname, 'registrationAlerts'))
 
 module.exports = () => {
-  console.log('Email broadcast system job triggered...')
+  logging.warning('Email broadcasting job triggered...')
   let jobList = [{
     searchCriteria: {
-      attributes: {
-        exclude: ['updatedAt', 'deletedAt']
-      },
-      where: {
-        notified: false
-      },
-      include: [{
-        model: db.Products,
-        through: {
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'deletedAt']
-          }
-        }
-      }, {
-        model: db.Countries,
-        attributes: {
-          exclude: ['createdAt', 'updatedAt', 'deletedAt']
-        }
-      }]
+      where: { notified: false },
+      include: [{ model: db.Products }, { model: db.Countries }]
     },
     processor: registrationAlerts,
     updateAction: { notified: true }
   }, {
     searchCriteria: {
-      attributes: {
-        exclude: ['updatedAt', 'deletedAt']
-      },
-      where: {
-        contacted: false
-      },
+      where: { contacted: false },
       include: [{
         model: db.Products,
-        through: {
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'deletedAt']
-          }
-        },
         include: [{
           model: db.Photos,
-          attributes: {
-            exclude: [
-              'data',
-              'createdAt',
-              'updatedAt',
-              'deletedAt'
-            ]
-          }
+          attributes: { exclude: ['data'] }
         }]
       }],
-      order: [
-        [db.Products, 'code']
-      ]
+      order: [[db.Products, 'code']]
     },
     processor: contactByEmail,
     updateAction: { contacted: true }
@@ -72,9 +44,7 @@ module.exports = () => {
       .then((pendingRecords) => {
         let pendingEmails = []
         pendingRecords.forEach((pendingRecord) => {
-          pendingEmails.push(
-            job.processor(pendingRecord)
-          )
+          pendingEmails.push(job.processor(pendingRecord))
         })
         return processEmailsOnQueue(pendingEmails, job.updateAction, pendingRecords)
       })
@@ -82,9 +52,7 @@ module.exports = () => {
         return Promise.resolve(message)
       })
       .catch((error) => {
-        console.log(error.name)
-        console.log(error.message)
-        console.log(error.stack)
+        logging.error(error, '/controllers/emails/jobScheduler.js errored')
         return Promise.reject(error)
       })
   })

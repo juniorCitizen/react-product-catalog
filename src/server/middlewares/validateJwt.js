@@ -1,9 +1,16 @@
 const jwt = require('jsonwebtoken')
+const path = require('path')
 
-const db = require('../controllers/database/database')
-const eVars = require('../config/eVars')
-const logging = require('../controllers/logging')
-const routerResponse = require('../controllers/routerResponse')
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
+const eVars = require(path.join(accessPath, 'config/eVars'))
+const logging = require(path.join(accessPath, 'controllers/logging'))
+const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
 
 module.exports = (req, res, next) => {
   if (!eVars.ENFORCE_VALIDATION) {

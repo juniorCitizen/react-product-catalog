@@ -2,9 +2,13 @@ import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
-import logging from '../../../server/controllers/logging'
-
 require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const logging = require(path.join(accessPath, 'controllers/logging'))
 
 module.exports = (Countries, Flags) => {
   let flagSvgPath = path.resolve('./node_modules/world-countries/data')
