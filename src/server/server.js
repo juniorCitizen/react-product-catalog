@@ -72,7 +72,7 @@ logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 // set up api endpoints
 ROUTERS.api.router.use('/token', require(path.join(__dirname, 'routes/token')))
 ROUTERS.api.router.use('/series', require(path.join(__dirname, 'routes/series')))
-// apiAccessRouter.use('/products', require('./routes/products/products'))
+ROUTERS.api.router.use('/products', require(path.join(__dirname, 'routes/products')))
 // apiAccessRouter.use('/photos', require('./routes/photos/photos'))
 // apiAccessRouter.use('/countries', require('./routes/countries/countries'))
 // apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))

@@ -3,7 +3,7 @@
 import fs from 'fs-extra'
 import Promise from 'bluebird'
 
-import db from '../../controllers/database/database'
+import db from '../../controllers/database'
 import routerResponse from '../../controllers/routerResponse'
 
 function updateProductRecord (req, res) {
