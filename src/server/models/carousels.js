@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       validate: { isUUID: 4 }
     },
-    displaySequence: {
+    order: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     // deletedAt: {
     //   type: DataTypes.DATE,
     //   allowNull: true
-  // }
+    // }
   }, {
     name: {
       singular: 'carousel',

@@ -3,32 +3,55 @@ const Promise = require('bluebird')
 const db = require('../../controllers/database/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = (req, res) => {
-  // set query WHERE parameters
-  let queryParameter = req.query.id !== undefined
-    ? { where: { id: req.query.id } }
-    : { where: { name: req.query.name } }
-  return db.Series
-    // find one record that matches the query parameter
-    .findOne(queryParameter)
-    .then((seriesItem) => {
-      return (seriesItem === null)
-        ? Promise.resolve()
-        : seriesItem.destroy()
-    })
-    .then((result) => {
-      routerResponse.json({
+const validateJwt = require('../../middlewares/validateJwt')
+
+module.exports = {
+  byId: deleteById,
+  byName: deleteByName
+}
+
+function deleteById () {
+  return ['/id/:id', validateJwt, (req, res) => {
+    return db.Series
+      .destroy({ where: { id: req.params.id } })
+      .then((result) => {
+        routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: result
+        })
+        return Promise.resolve()
+      })
+      .catch(error => routerResponse.json({
         req: req,
         res: res,
-        statusCode: 200,
-        data: result
+        statusCode: 500,
+        error: error,
+        message: `產品系列記錄 id = ${req.params.id} 刪除失敗`
+      }))
+  }]
+}
+
+function deleteByName () {
+  return ['/name/:name', validateJwt, (req, res) => {
+    return db.Series
+      .destroy({ where: { name: req.params.name } })
+      .then((result) => {
+        routerResponse.json({
+          req: req,
+          res: res,
+          statusCode: 200,
+          data: result
+        })
+        return Promise.resolve()
       })
-      return Promise.resolve()
-    })
-    .catch(error => routerResponse.json({
-      req: req,
-      res: res,
-      statusCode: 500,
-      error: error
-    }))
+      .catch(error => routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error,
+        message: `產品系列記錄 id = ${req.params.name} 刪除失敗`
+      }))
+  }]
 }

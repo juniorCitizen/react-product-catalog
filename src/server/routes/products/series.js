@@ -34,7 +34,7 @@ module.exports = (req, res) => {
         }]
       }],
       order: [
-        ['displaySequence'],
+        ['order'],
         [db.Products, 'code'],
         [db.Products, db.Photos, 'primary', 'DESC']
       ]
