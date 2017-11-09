@@ -26,7 +26,16 @@ function inserByName () {
         req: req,
         res: res,
         statusCode: 200,
-        data: newSeries
+        data: (() => {
+          if (req.query.hasOwnProperty('details')) {
+            return Object.assign(newSeries.dataValues, {
+              products: [],
+              photo: null
+            })
+          } else {
+            return newSeries
+          }
+        })()
       })
     }).catch((error) => {
       return routerResponse.json({
