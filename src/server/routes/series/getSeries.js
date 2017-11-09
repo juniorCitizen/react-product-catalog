@@ -19,21 +19,8 @@ function complete () {
   return ['/', (req, res) => {
     let queryParameters = { order: ['order'] }
     if (req.query.hasOwnProperty('details')) {
-      queryParameters.order.push([db.Products, 'code'])
-      queryParameters.order.push([db.Products, db.Tags, 'name'])
-      queryParameters.order.push([db.Products, db.Photos, 'primary', 'DESC'])
-      Object.assign(queryParameters, {
-        include: [{
-          model: db.Products,
-          include: [{ model: db.Tags }, {
-            model: db.Photos,
-            attributes: { exclude: ['data'] }
-          }]
-        }, {
-          model: db.Photos,
-          attributes: { exclude: ['data'] }
-        }]
-      })
+      Object.assign(queryParameters, additionalDetails())
+      queryParameters.order.splice(0, 0, 'order')
     }
     return db.Series
       .findAll(queryParameters)
@@ -59,23 +46,9 @@ function byId () {
   return ['/id/:id', (req, res) => {
     let queryParameters = [req.params.id]
     if (req.query.hasOwnProperty('details')) {
-      queryParameters.push({
-        include: [{
-          model: db.Products,
-          include: [{ model: db.Tags }, {
-            model: db.Photos,
-            attributes: { exclude: ['data'] }
-          }]
-        }, {
-          model: db.Photos,
-          attributes: { exclude: ['data'] }
-        }],
-        order: [
-          [db.Products, 'code'],
-          [db.Products, db.Tags, 'name'],
-          [db.Products, db.Photos, 'primary', 'DESC']
-        ]
-      })
+      queryParameters.push(
+        Object.assign({}, additionalDetails())
+      )
     }
     return db.Series
       .findById(...queryParameters)
@@ -99,29 +72,9 @@ function byId () {
 
 function byName () {
   return ['/name/:name', (req, res) => {
-    let queryParameters = {
-      where: {
-        name: req.params.name
-      }
-    }
+    let queryParameters = { where: { name: req.params.name } }
     if (req.query.hasOwnProperty('details')) {
-      queryParameters = Object.assign(queryParameters, {
-        include: [{
-          model: db.Products,
-          include: [{ model: db.Tags }, {
-            model: db.Photos,
-            attributes: { exclude: ['data'] }
-          }]
-        }, {
-          model: db.Photos,
-          attributes: { exclude: ['data'] }
-        }],
-        order: [
-          [db.Products, 'code'],
-          [db.Products, db.Tags, 'name'],
-          [db.Products, db.Photos, 'primary', 'DESC']
-        ]
-      })
+      Object.assign(queryParameters, additionalDetails())
     }
     return db.Series
       .findOne(queryParameters)
@@ -141,4 +94,24 @@ function byName () {
         message: '產品類別以名稱查詢失敗'
       }))
   }]
+}
+
+function additionalDetails () {
+  return {
+    include: [{
+      model: db.Products,
+      include: [{ model: db.Tags }, {
+        model: db.Photos,
+        attributes: { exclude: ['data'] }
+      }]
+    }, {
+      model: db.Photos,
+      attributes: { exclude: ['data'] }
+    }],
+    order: [
+      [db.Products, 'code'],
+      [db.Products, db.Tags, 'name'],
+      [db.Products, db.Photos, 'primary', 'DESC']
+    ]
+  }
 }
