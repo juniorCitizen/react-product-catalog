@@ -49,7 +49,7 @@ npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/series(?details)** - get full product catalog
+* **GET protocol://domain:port/sys_ref/api/products(?details)** - get full product catalog
 
 ### token
 
