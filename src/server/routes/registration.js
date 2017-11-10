@@ -1,114 +1,79 @@
-import express from 'express'
+const express = require('express')
 
-import db from '../../controllers/database/database'
-import routerResponse from '../../controllers/routerResponse'
+const db = require('../controllers/database')
+const routerResponse = require('../controllers/routerResponse')
 
-const router = express.Router()
+const botPrevention = require('../middlewares/botPrevention')
 
-router
+module.exports = express.Router()
   .get('/', (req, res) => {
     db.Registrations
-      .findAll({
-        order: ['name']
-      })
+      .findAll({ order: ['name'] })
       .then((registrationRecords) => {
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 200,
-          success: true,
           data: registrationRecords
         })
       })
       .catch((error) => {
-        console.log(error.name)
-        console.log(error.message)
-        console.log(error.stack)
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 500,
-          success: false,
-          error: error
+          error: error,
+          message: 'GET /api/registration errored'
         })
       })
   })
   .get('/byCountryId', (req, res) => {
     let queryFilter = {
       where: { id: req.query.countryId },
-      include: [{
-        model: db.Registrations
-      }],
-      order: [
-        [db.Registrations, 'name']
-      ]
+      include: [{ model: db.Registrations }],
+      order: [[db.Registrations, 'name']]
     }
     db.Countries
       .findAll(queryFilter)
       .then((regRecordsByCountry) => {
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 200,
-          success: true,
           data: regRecordsByCountry
         })
       })
       .catch((error) => {
-        console.log(error.name)
-        console.log(error.message)
-        console.log(error.stack)
         return routerResponse.json({
-          pendingResponse: res,
-          originalRequest: req,
+          req: req,
+          res: res,
           statusCode: 500,
-          success: false,
-          error: error
+          error: error,
+          message: 'GET /api/registration/byCountryId errored'
         })
       })
   })
-  .post('/',
-    require('../../middlewares/botPrevention'),
-    (req, res) => {
-      if (req.body.authorized) {
-        return productRequest(req, res)
-      } else {
-        return standardRegistration(req, res)
-      }
-    })
+  .post('/productRequest', botPrevention, productRequest)
+  .post('/', botPrevention, registration)
 
-module.exports = router
-
-function standardRegistration (req, res) {
+function registration (req, res) {
   db.Registrations
-    .create({
-      company: req.body.company,
-      name: req.body.name,
-      email: req.body.email,
-      countryId: req.body.countryId,
-      comments: req.body.comments,
-      notified: false,
-      contacted: false
-    })
-    .then((newRegistrationRecord) => {
+    .create(req.body)
+    .then((registration) => {
       return routerResponse.json({
-        pendingResponse: res,
-        originalRequest: req,
+        req: req,
+        res: res,
         statusCode: 200,
-        success: true,
-        data: newRegistrationRecord
+        data: registration
       })
     })
     .catch((error) => {
-      console.log(error.name)
-      console.log(error.message)
-      console.log(error.stack)
       return routerResponse.json({
-        pendingResponse: res,
-        originalRequest: req,
+        req: req,
+        res: res,
         statusCode: 500,
-        success: false,
-        error: error
+        error: error,
+        message: 'POST /api/registration'
       })
     })
 }
@@ -118,15 +83,7 @@ function productRequest (req, res) {
     .transaction((trx) => {
       let trxObj = { transaction: trx }
       return db.Registrations
-        .create({
-          company: req.body.company,
-          name: req.body.name,
-          email: req.body.email,
-          countryId: req.body.countryId.toUpperCase(),
-          comments: req.body.comments,
-          notified: false,
-          contacted: false
-        }, trxObj)
+        .create(req.body, trxObj)
         .then((newRegistrationRecord) => {
           let insertProductInfoRequestRecords = []
           req.body.interestedProducts.map((interestedProductId) => {

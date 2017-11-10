@@ -1,26 +1,16 @@
 const jwt = require('jsonwebtoken')
-const path = require('path')
 
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const db = require(path.join(accessPath, 'controllers/database'))
-const eVars = require(path.join(accessPath, 'config/eVars'))
-const logging = require(path.join(accessPath, 'controllers/logging'))
-const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
+const db = require('../controllers/database')
+const eVars = require('../config/eVars')
+const logging = require('../controllers/logging')
+const routerResponse = require('../controllers/routerResponse')
 
 module.exports = (req, res, next) => {
   if (!eVars.ENFORCE_VALIDATION) {
     logging.warning('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!')
     next()
   } else {
-    let accessToken =
-      (req.body && req.body.accessToken) ||
-      (req.query && req.query.accessToken) ||
-      req.headers['x-access-token']
+    let accessToken = req.get('x-access-token')
     if (accessToken) { // if a token is found
       return jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
         // if decoding error is encountered

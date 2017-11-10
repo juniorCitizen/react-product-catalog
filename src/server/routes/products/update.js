@@ -1,10 +1,9 @@
-// import del from 'del'
-// import fs from 'fs'
-import fs from 'fs-extra'
-import Promise from 'bluebird'
+// const del = require('del')
+const fs = require('fs-extra')
+const Promise = require('bluebird')
 
-import db from '../../controllers/database'
-import routerResponse from '../../controllers/routerResponse'
+const db = require('../../controllers/database')
+const routerResponse = require('../../controllers/routerResponse')
 
 function updateProductRecord (req, res) {
   // console.log(req.files)

@@ -1,14 +1,11 @@
+import dotEnv from 'dotenv'
 import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const logging = require(path.join(accessPath, 'controllers/logging'))
+dotEnv.config()
+const ormVerbose = process.env.ORM_VERBOSE === 'true'
+const logging = require('../../../server/controllers/logging')
 
 module.exports = (Countries, Flags) => {
   let flagSvgPath = path.resolve('./node_modules/world-countries/data')
@@ -37,7 +34,7 @@ module.exports = (Countries, Flags) => {
       return Promise.each(
         countries.map(country => Countries.create(country)),
         (country, index, length) => {
-          if (process.env.ORM_VERBOSE === 'true') {
+          if (ormVerbose) {
             logging.console(`進度: ${index + 1}/${length} - ${country.name} 國家資料已建立`)
           }
         }
@@ -51,7 +48,7 @@ module.exports = (Countries, Flags) => {
       return Promise.each(
         flags.map(flag => Flags.create(flag)),
         (flag, index, length) => {
-          if (process.env.ORM_VERBOSE === 'true') {
+          if (ormVerbose) {
             logging.console(`進度: ${index + 1}/${length} - ${countries[index].name} 國旗資料已建立`)
           }
         }

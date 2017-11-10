@@ -1,18 +1,15 @@
 const express = require('express')
 // const multer = require('multer')
-const path = require('path')
-
-const router = express.Router()
+// const path = require('path')
 
 // route handlers
-const getProducts = require(path.join(__dirname, 'products/getProducts'))
+const getProducts = require('./products/getProducts')
 // import routerResponse from '../controllers/routerResponse'
 // import validateJwt from '../middlewares/validateJwt'
 
-// const router = express.Router()
 // const upload = multer({ dest: path.join(__dirname, '../../upload/') })
 
-module.exports = router
+module.exports = express.Router()
   .get(...getProducts.complete())
 // .get('/series', require('./series'))
 // .get('/searchByCode', require('./products/searchByCode'))

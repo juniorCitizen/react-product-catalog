@@ -1,16 +1,7 @@
-const path = require('path')
-
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const db = require(path.join(accessPath, 'controllers/database'))
-const logging = require(path.join(accessPath, 'controllers/logging'))
-const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
-
-const validateJwt = require(path.join(accessPath, 'middlewares/validateJwt'))
+const db = require('../../controllers/database')
+const logging = require('../../controllers/logging')
+const routerResponse = require('../../controllers/routerResponse')
+const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = {
   updateById: updateById,

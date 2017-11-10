@@ -6,11 +6,11 @@ const path = require('path')
 const Promise = require('bluebird')
 
 // load custom modules
-const db = require(path.join(__dirname, 'controllers/database'))
-// const emailSystem = require(path.join(__dirname,'controllers/emails/emails'))
-// const proxyRegistration = require(path.join(__dirname,'controllers/proxyRegistration'))
-const eVars = require(path.join(__dirname, 'config/eVars'))
-const logging = require(path.join(__dirname, 'controllers/logging'))
+const db = require('./controllers/database')
+// const emailSystem = require('./controllers/emails/emails')
+// const proxyRegistration = require('./controllers/proxyRegistration')
+const eVars = require('./config/eVars')
+const logging = require('./controllers/logging')
 
 // instantiating Express Framework
 logging.console('初始化 Express 框架...')
@@ -33,11 +33,9 @@ app.set('partials', path.join(__dirname, 'views/partials'))
 logging.console('載入 pre-routing 全域 middlewares...')
 if (eVars.devMode) { app.use(require('morgan')('dev')) } // request logger
 // parse request with application/x-www-form-urlencoded body data
-app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' })) // for request with large body data
+app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' })) // for request with large body data
 // parse request with application/json body data
-app.use(bodyParser.json())
-// app.use(bodyParser.json({ limit: '5mb' })) // for request with large body data
+app.use(bodyParser.json({ limit: '5mb' })) // for request with large body data
 
 // setup routing
 logging.console('宣告系統 routing 定義...')
@@ -67,12 +65,12 @@ logging.console('宣告 end-point 處理程序...')
 ROUTERS.assets.router.use(express.static(ROUTERS.assets.path))
 logging.console(`public assets 實體檔案路徑... ${ROUTERS.assets.path}`)
 // setup SPA index.html endpoint
-ROUTERS.client.router.use('/', require(path.join(__dirname, 'routes/index')))
+ROUTERS.client.router.use('/', require('./routes/index'))
 logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 // set up api endpoints
-ROUTERS.api.router.use('/token', require(path.join(__dirname, 'routes/token')))
-ROUTERS.api.router.use('/series', require(path.join(__dirname, 'routes/series')))
-ROUTERS.api.router.use('/products', require(path.join(__dirname, 'routes/products')))
+ROUTERS.api.router.use('/token', require('./routes/token'))
+ROUTERS.api.router.use('/series', require('./routes/series'))
+ROUTERS.api.router.use('/products', require('./routes/products'))
 // apiAccessRouter.use('/photos', require('./routes/photos/photos'))
 // apiAccessRouter.use('/countries', require('./routes/countries/countries'))
 // apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))
@@ -81,7 +79,7 @@ ROUTERS.api.router.use('/products', require(path.join(__dirname, 'routes/product
 // post-routing global middleware
 logging.console('載入 post-routing 全域 middlewares....')
 // catch 404's and redirect to index.html template route
-app.use(require(path.join(__dirname, 'middlewares/404Handler')))
+app.use(require('./middlewares/404Handler'))
 
 // initializing system components
 logging.console('系統模組初始化...')
