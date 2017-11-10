@@ -1,25 +1,14 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const path = require('path')
 
-require('dotenv').config()
+const db = require('../controllers/database')
+const encryption = require('../controllers/encryption')
+const eVars = require('../config/eVars')
+const routerResponse = require('../controllers/routerResponse')
 
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
+const botPrevention = require('../middlewares/botPrevention')
 
-const db = require(path.join(accessPath, 'controllers/database'))
-const encryption = require(path.join(accessPath, 'controllers/encryption'))
-const eVars = require(path.join(accessPath, 'config/eVars'))
-const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
-
-const botPrevention = require(path.join(accessPath, 'middlewares/botPrevention'))
-
-const router = express.Router()
-
-router.post('/', loginInfoPresence, botPrevention, tokenRequest)
-
-module.exports = router
+module.exports = express.Router().post('/', loginInfoPresence, botPrevention, tokenRequest)
 
 function tokenRequest (req, res) {
   db.Users

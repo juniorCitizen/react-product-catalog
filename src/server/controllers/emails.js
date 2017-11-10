@@ -1,7 +1,6 @@
 const cron = require('node-cron')
-const path = require('path')
 
-const jobScheduler = require(path.join(__dirname, 'jobScheduler'))
+const jobScheduler = require('./emails/jobScheduler')
 
 // how to use nodemailer with gmail
 // https://www.youtube.com/watch?v=JJ44WA_eV8E

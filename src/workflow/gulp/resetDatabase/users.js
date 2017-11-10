@@ -1,13 +1,9 @@
-import path from 'path'
+import dotEnv from 'dotenv'
 
-require('dotenv').config()
+dotEnv.config()
 
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const encryption = require(path.join(accessPath, 'controllers/encryption'))
-const logging = require(path.join(accessPath, 'controllers/logging'))
+const encryption = require('../../../server/controllers/encryption')
+const logging = require('../../../server/controllers/logging')
 
 module.exports = (Users) => {
   let users = [{

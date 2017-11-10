@@ -1,18 +1,9 @@
-const path = require('path')
-const Promise = require('bluebird')
+const db = require('../database')
+const logging = require('../logging')
 
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const db = require(path.join(accessPath, 'controllers/database'))
-const logging = require(path.join(accessPath, 'controllers/logging'))
-
-const contactByEmail = require(path.join(__dirname, 'contactByEmail'))
-const processEmailsOnQueue = require(path.join(__dirname, 'processEmailsOnQueue'))
-const registrationAlerts = require(path.join(__dirname, 'registrationAlerts'))
+const contactByEmail = require('./contactByEmail')
+const processEmailsOnQueue = require('./processEmailsOnQueue')
+const registrationAlerts = require('./registrationAlerts')
 
 module.exports = () => {
   logging.warning('Email broadcasting job triggered...')

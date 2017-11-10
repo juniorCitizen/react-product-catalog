@@ -3,13 +3,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const logging = require(path.join(accessPath, 'controllers/logging'))
+const logging = require('../../../server/controllers/logging')
 
 module.exports = (Photos, Products, Series) => {
   let productPhotoPath = path.join(__dirname, 'mockPhotos/products')

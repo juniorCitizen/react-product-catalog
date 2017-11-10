@@ -1,12 +1,8 @@
-import express from 'express'
+const express = require('express')
 
-const router = express.Router()
-
-router
-  .get('/', require('./get'))
-  .delete('/', require('./delete'))
-
-module.exports = router
+module.exports = express.Router()
+  .get('/', require('./photos/get'))
+  .delete('/', require('./photos/delete'))
 
 // deal with photo uploads and place inside the database (unused, pending deprecation)
 // import del from 'del'

@@ -18,7 +18,7 @@ gulp resetDatabase - 將資料庫淨空或者淨空後再填入基礎或測試�
   options:
     --setting (development | staging | production): 由 config/database.js 取得指定淨空的資料庫連線設定. 預設: 'development'
     --seed: 植入資料
-  example: gulp resetDatabase --setting development --seed
+  example: **gulp resetDatabase --setting development --seed**
 
 ### npm
 
@@ -32,28 +32,28 @@ npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 
 ### client access
 
-* **GET protocol://domain:port/sys_ref** - index.html
-* **GET protocol://domain:port/sys_ref/path** - public assets
+* **GET    protocol://domain:port/sys_ref** - index.html
+* **GET    protocol://domain:port/sys_ref/path** - public assets
 
 ### series
 
-* **GET protocol://domain:port/sys_ref/api/series(?details)** - get full series dataset
-* **GET protocol://domain:port/sys_ref/api/series/id/:id(?details)** - get series item by id
-* **GET protocol://domain:port/sys_ref/api/series/name/:name(?details)** - get series item by name
-* **POST protocol://domain:port/sys_ref/api/series/:name(?details)** - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable order position)
-* **PUT protocol://domain:port/sys_ref/api/series/:id/:name/:order(?details)** - update a series record's 'name' and 'order' value by id
-* **PATCH protocol://domain:port/sys_ref/api/series/:id/name/:name(?details)** - update a series record's 'name' value by id
-* **PATCH protocol://domain:port/sys_ref/api/series/:id/order/:order(?details)** - update a series record's 'order' value by id
+* **GET    protocol://domain:port/sys_ref/api/series(?details)** - get full series dataset
+* **GET    protocol://domain:port/sys_ref/api/series/id/:id(?details)** - get series item by id
+* **GET    protocol://domain:port/sys_ref/api/series/name/:name(?details)** - get series item by name
+* **POST   protocol://domain:port/sys_ref/api/series/:name(?details)** - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable order position)
+* **PUT    protocol://domain:port/sys_ref/api/series/:id/:name/:order(?details)** - update a series record's 'name' and 'order' value by id
+* **PATCH  protocol://domain:port/sys_ref/api/series/:id/name/:name(?details)** - update a series record's 'name' value by id
+* **PATCH  protocol://domain:port/sys_ref/api/series/:id/order/:order(?details)** - update a series record's 'order' value by id
 * **DELETE protocol://domain:port/sys_ref/api/series/id/:id(?details)** - delete a series record by id
 * **DELETE protocol://domain:port/sys_ref/api/series/name/:name(?details)** - delete a series record by name
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/series(?details)** - get full product catalog
+* **GET    protocol://domain:port/sys_ref/api/products(?details)** - get full product catalog
 
 ### token
 
-* **POST protocol://domain:port/sys_ref/api/token** - apply for jwt token to access data modification end points
+* **POST   protocol://domain:port/sys_ref/api/token** - apply for jwt token to access data modification end points
 
 ## LICENSE
 

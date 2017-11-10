@@ -1,13 +1,6 @@
-const path = require('path')
 const Promise = require('bluebird')
 
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const logging = require(path.join(accessPath, 'controllers/logging'))
+const logging = require('../logging')
 
 module.exports = (sequelize, sequence) => {
   logging.warning('所有資料表將被依序移除')

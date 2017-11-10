@@ -1,12 +1,4 @@
-const path = require('path')
-
-require('dotenv').config()
-
-const accessPath = process.env.NODE_ENV === 'development'
-  ? path.resolve('./src/server')
-  : path.resolve('./dist')
-
-const routerResponse = require(path.join(accessPath, 'controllers/routerResponse'))
+const routerResponse = require('../controllers/routerResponse')
 
 module.exports = (req, res, next) => {
   if (
@@ -16,8 +8,8 @@ module.exports = (req, res, next) => {
     return routerResponse.json({
       req: req,
       res: res,
-      statusCode: 500,
-      message: 'invalid password'
+      statusCode: 401,
+      message: 'password not transmitted or is of incorrect length'
     })
   }
   next()
