@@ -1,221 +1,83 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
-module.exports = {
-  updateById: updateById,
-  updateNameById: updateNameById,
-  updateOrderById: updateOrderById
-}
+const seriesQueryParameters = require('../../models/ormQueryParameters/series')
 
-function updateById () {
-  let endpoint = '/:id/:name/:order'
-  return [endpoint, validateJwt, validateOrderValue, (req, res) => {
+module.exports = () => {
+  return [validateJwt, (req, res) => {
     return db.sequelize
       .transaction(async trx => {
         let trxObj = { transaction: trx }
-        let targetRecord = await db.Series.findById(req.params.id, trxObj)
+        let targetRecord = await db.Series
+          .findById(req.body.id, trxObj)
+          .catch(error => Promise.reject(error))
         let originalPosition = targetRecord.order
-        let targetPosition = req.order
-        // update targetRecord.name
-        await targetRecord.update({ name: req.params.name }, trxObj)
-        // resequence affected records
-        let queryOptions = { replacements: { targetId: req.params.id } }
-        let queryString = null
-        if (originalPosition < targetPosition) {
-          // prepare query for push back target record in sequential order
-          queryString = 'UPDATE `series` SET `order` = `order` - 1 WHERE `id` != :targetId AND `order` BETWEEN :floor AND :ceiling;'
-          queryOptions.replacements.floor = originalPosition + 1
-          queryOptions.replacements.ceiling = targetPosition
-        } else {
-          // prepare query for advance target record in sequential order
-          queryString = 'UPDATE `series` SET `order` = `order` + 1 WHERE `id` != :targetId AND `order` BETWEEN :floor AND :ceiling;'
-          queryOptions.replacements.floor = targetPosition
-          queryOptions.replacements.ceiling = originalPosition - 1
-        }
-        // run the query
-        return db.sequelize
-          .query(queryString, Object.assign({}, trxObj, queryOptions))
-          .then(() => {
-            // actually adjust the target record's order
-            return targetRecord.update({ order: req.order }, trxObj)
-          })
-          .catch(error => Promise.reject(error))
-      })
-      .then(() => {
-        return db.Series
-          .findAll(queryParameters(req.query.hasOwnProperty('details')))
-          .then(seriesDataset =>
-            routerResponse.json({
-              req: req,
-              res: res,
-              statusCode: 200,
-              data: seriesDataset
-            }))
-          .catch(error => Promise.reject(error))
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品大類內容變更失敗'
-      }))
-  }]
-}
-
-function updateNameById () {
-  return ['/:id/name/:name', validateJwt, (req, res) => {
-    return db.Series
-      .update(
-        { name: req.params.name },
-        { where: { id: req.params.id } }
-      )
-      .then(() => {
-        let queryParameters = [req.params.id]
-        if (req.query.hasOwnProperty('details')) {
-          queryParameters.push(
-            Object.assign({}, {
-              include: [{
-                model: db.Products,
-                include: [{ model: db.Tags }, {
-                  model: db.Photos,
-                  attributes: { exclude: ['data'] }
-                }]
-              }, {
-                model: db.Photos,
-                attributes: { exclude: ['data'] }
-              }],
-              order: [
-                [db.Products, 'code'],
-                [db.Products, db.Tags, 'name'],
-                [db.Products, db.Photos, 'primary', 'DESC']
-              ]
+        let targetPosition = await (() => {
+          return db.Series
+            .findAndCountAll(trxObj)
+            .then((result) => {
+              if (!req.body.hasOwnProperty('order')) {
+                return Promise.resolve(originalPosition)
+              } else if (req.body.order > (result.count - 1)) {
+                return Promise.resolve(result.count)
+              } else if (req.body.order < 0) {
+                return Promise.resolve(0)
+              } else {
+                return Promise.resolve(parseInt(req.body.order))
+              }
             })
-          )
-        }
-        return db.Series.findById(...queryParameters)
-      })
-      .then((targetRecord) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: targetRecord
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品大類名稱變更失敗'
-      }))
-  }]
-}
-
-function updateOrderById () {
-  let endpoint = '/:id/order/:order'
-  return [endpoint, validateJwt, validateOrderValue, (req, res) => {
-    return db.sequelize
-      .transaction(async trx => {
-        let trxObj = { transaction: trx }
-        let targetRecord = await db.Series.findById(req.params.id, trxObj)
-        let originalPosition = targetRecord.order
-        let targetPosition = req.order
-        // resequence affected records
-        let queryOptions = { replacements: { targetId: req.params.id } }
-        let queryString = null
-        if (originalPosition < targetPosition) {
-          // prepare query for push back target record in sequential order
-          queryString = 'UPDATE `series` SET `order` = `order` - 1 WHERE `id` != :targetId AND `order` BETWEEN :floor AND :ceiling;'
-          queryOptions.replacements.floor = originalPosition + 1
-          queryOptions.replacements.ceiling = targetPosition
-        } else {
-          // prepare query for advance target record in sequential order
-          queryString = 'UPDATE `series` SET `order` = `order` + 1 WHERE `id` != :targetId AND `order` BETWEEN :floor AND :ceiling;'
-          queryOptions.replacements.floor = targetPosition
-          queryOptions.replacements.ceiling = originalPosition - 1
-        }
-        // run the query
+            .catch(error => Promise.reject(error))
+        })()
         return db.sequelize
-          .query(queryString, Object.assign({}, trxObj, queryOptions))
+          .query(adjustmentQuery(originalPosition, targetPosition, req.body.id), trxObj)
           .then(() => {
-            // actually adjust the target record's order
-            return targetRecord.update({ order: req.order }, trxObj)
+            if (req.body.hasOwnProperty('name')) targetRecord.name = req.body.name
+            if (req.body.hasOwnProperty('order')) targetRecord.order = targetPosition
+            if (req.body.hasOwnProperty('public')) targetRecord.publish = req.body.publish
+            return targetRecord
+              .save(trxObj)
+              .catch(error => Promise.reject(error))
           })
-          .catch(error => {
-            logging.error(error, 'abc')
-            return Promise.reject(error)
-          })
-      })
-      .then(() => {
-        return db.Series
-          .findAll(queryParameters(req.query.hasOwnProperty('details')))
-          .then(seriesDataset =>
-            routerResponse.json({
-              req: req,
-              res: res,
-              statusCode: 200,
-              data: seriesDataset
-            }))
           .catch(error => Promise.reject(error))
       })
+      .then(() => {
+        return db.Series.findAll((() => {
+          return req.params.hasOwnProperty('details')
+            ? seriesQueryParameters.details()
+            : seriesQueryParameters.simple()
+        })()).catch(error => Promise.reject(error))
+      })
+      .then((data) => routerResponse.json({
+        req,
+        res,
+        statusCode: 200,
+        data
+      }))
       .catch(error => routerResponse.json({
-        req: req,
-        res: res,
+        req,
+        res,
         statusCode: 500,
-        error: error,
-        message: '產品大類順序變更失敗'
+        error,
+        message: 'error updating series data'
       }))
   }]
 }
 
-function validateOrderValue (req, res, next) {
-  return db.Series
-    .findAll()
-    .then(seriesDataset => {
-      if (req.params.order > seriesDataset.length) {
-        req.order = seriesDataset.length
-      } else if (req.params.order < 0) {
-        req.order = 0
-      } else {
-        req.order = parseInt(req.params.order)
-      }
-      next()
-      return Promise.resolve()
-    })
-    .catch(error => routerResponse.json({
-      req: req,
-      res: res,
-      statusCode: 500,
-      error: error,
-      message: 'updateSeries.js validateOrderValue() errored'
-    }))
-}
-
-function queryParameters (detailed = false) {
-  return detailed
-    ? {
-      include: [{
-        model: db.Products,
-        include: [{ model: db.Tags }, {
-          model: db.Photos,
-          attributes: { exclude: ['data'] }
-        }]
-      }, {
-        model: db.Photos,
-        attributes: { exclude: ['data'] }
-      }],
-      order: [
-        'order',
-        [db.Products, 'code'],
-        [db.Products, db.Tags, 'name'],
-        [db.Products, db.Photos, 'primary', 'DESC']
-      ]
-    }
-    : {
-      order: ['order']
-    }
+function adjustmentQuery (originalPosition, targetPosition, targetId) {
+  if (originalPosition === targetPosition) {
+    return 'SELECT 0;'
+  } else if (originalPosition < targetPosition) {
+    return `
+      UPDATE \`series\`
+      SET \`order\` = \`order\` - 1
+      WHERE \`id\` != ${targetId}
+        AND \`order\` BETWEEN ${originalPosition + 1} AND ${targetPosition};`
+  } else {
+    return `
+      UPDATE \`series\`
+      SET \`order\` = \`order\` + 1
+      WHERE \`id\` != ${targetId}
+        AND \`order\` BETWEEN ${targetPosition} AND ${originalPosition - 1};`
+  }
 }
