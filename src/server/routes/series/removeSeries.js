@@ -69,7 +69,7 @@ module.exports = (() => {
       res,
       statusCode: error.httpStatusCode || 500,
       error,
-      message: 'error removing series data'
+      message: 'error removing series record'
     }))
   }]
 })()

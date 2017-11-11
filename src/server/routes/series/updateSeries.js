@@ -59,7 +59,7 @@ module.exports = (() => {
         res,
         statusCode: 500,
         error,
-        message: 'error updating series data'
+        message: 'error updating series record'
       }))
   }]
 })()
