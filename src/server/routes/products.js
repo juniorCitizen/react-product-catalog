@@ -11,7 +11,7 @@ const notImplemented = require('../middlewares/notImplemented')
 // const upload = multer({ dest: path.join(__dirname, '../../upload/') })
 
 module.exports = express.Router()
-  .get(...getProducts.complete())
+  .get('/', getProducts)
   .post('/', notImplemented)
   .put('/', notImplemented)
   .patch('/', notImplemented)
