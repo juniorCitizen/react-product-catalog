@@ -4,7 +4,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 const seriesQueryParameters = require('../../models/ormQueryParameters/series')
 
-module.exports = () => {
+module.exports = (() => {
   return [validateJwt, (req, res) => {
     let targetPosition = null
     let query = null
@@ -72,4 +72,4 @@ module.exports = () => {
       message: 'error removing series data'
     }))
   }]
-}
+})()

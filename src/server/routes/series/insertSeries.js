@@ -2,7 +2,7 @@ const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
-module.exports = () => {
+module.exports = (() => {
   return [validateJwt, async (req, res) => {
     if (!req.query.hasOwnProperty('name')) {
       return routerResponse.json({
@@ -40,7 +40,7 @@ module.exports = () => {
       })
     })
   }]
-}
+})()
 
 function nextAvailableId () {
   let nextAvailableId = 0

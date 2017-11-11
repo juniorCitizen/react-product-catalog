@@ -4,7 +4,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 const seriesQueryParameters = require('../../models/ormQueryParameters/series')
 
-module.exports = () => {
+module.exports = (() => {
   return [validateJwt, (req, res) => {
     return db.sequelize
       .transaction(async trx => {
@@ -34,7 +34,7 @@ module.exports = () => {
           .then(() => {
             if (req.body.hasOwnProperty('name')) targetRecord.name = req.body.name
             if (req.body.hasOwnProperty('order')) targetRecord.order = targetPosition
-            if (req.body.hasOwnProperty('public')) targetRecord.publish = req.body.publish
+            if (req.body.hasOwnProperty('publish')) targetRecord.publish = req.body.publish
             return targetRecord
               .save(trxObj)
               .catch(error => Promise.reject(error))
@@ -62,7 +62,7 @@ module.exports = () => {
         message: 'error updating series data'
       }))
   }]
-}
+})()
 
 function adjustmentQuery (originalPosition, targetPosition, targetId) {
   if (originalPosition === targetPosition) {

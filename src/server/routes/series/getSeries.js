@@ -3,13 +3,12 @@ const routerResponse = require('../../controllers/routerResponse')
 
 const seriesQueryParameters = require('../../models/ormQueryParameters/series')
 
-module.exports = () => {
+module.exports = (() => {
   return [(req, res) => {
-    let queryParameters = { order: ['order'] }
+    let queryParameters = req.query.hasOwnProperty('details')
+      ? seriesQueryParameters.details()
+      : seriesQueryParameters.simple()
     let query = null
-    if (req.query.hasOwnProperty('details')) {
-      Object.assign(queryParameters, seriesQueryParameters.details())
-    }
     if ((req.query.hasOwnProperty('id')) &&
       !(req.query.hasOwnProperty('name'))) {
       // lookup by id
@@ -50,4 +49,4 @@ module.exports = () => {
         message: 'error reading series data'
       }))
   }]
-}
+})()
