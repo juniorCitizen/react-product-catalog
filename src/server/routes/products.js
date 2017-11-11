@@ -6,11 +6,16 @@ const express = require('express')
 const getProducts = require('./products/getProducts')
 // import routerResponse from '../controllers/routerResponse'
 // import validateJwt from '../middlewares/validateJwt'
+const notImplemented = require('../middlewares/notImplemented')
 
 // const upload = multer({ dest: path.join(__dirname, '../../upload/') })
 
 module.exports = express.Router()
   .get(...getProducts.complete())
+  .post('/', notImplemented)
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
+  .delete('/', notImplemented)
 // .get('/series', require('./series'))
 // .get('/searchByCode', require('./products/searchByCode'))
 // .post('/',
