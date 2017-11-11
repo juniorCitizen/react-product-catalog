@@ -30,15 +30,13 @@ module.exports = (() => {
           } else { return newSeriesRecord }
         })()
       })
-    }).catch((error) => {
-      return routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: 'error inserting series data'
-      })
-    })
+    }).catch(error => routerResponse.json({
+      req,
+      res,
+      statusCode: 500,
+      error,
+      message: 'error inserting series record'
+    }))
   }]
 })()
 
