@@ -7,8 +7,14 @@ const eVars = require('../config/eVars')
 const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
+const notImplemented = require('../middlewares/notImplemented')
 
-module.exports = express.Router().post('/', loginInfoPresence, botPrevention, tokenRequest)
+module.exports = express.Router()
+  .get('/', notImplemented)
+  .post('/', loginInfoPresence, botPrevention, tokenRequest)
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
+  .delete('/', notImplemented)
 
 function tokenRequest (req, res) {
   db.Users
