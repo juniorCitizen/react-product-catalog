@@ -1,10 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Carousels = sequelize.define('carousels', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
-      validate: { isUUID: 4 }
+      validate: {
+        min: 0
+      }
     },
     order: {
       type: DataTypes.INTEGER,

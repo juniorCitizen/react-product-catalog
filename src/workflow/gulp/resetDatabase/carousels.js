@@ -13,6 +13,7 @@ module.exports = (Carousels) => {
         .each(
           photoFileNames.map((photoFileName, index) => {
             return Carousels.create({
+              id: index,
               primary: index === 0, // true if is the first element in array
               order: index,
               originalName: photoFileName,
