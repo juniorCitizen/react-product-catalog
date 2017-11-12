@@ -46,6 +46,7 @@ simple product catalog website and backend with product data, user and client ma
     1. GET protocol://domain:port/sys_ref/api/series(?details)
     2. GET protocol://domain:port/sys_ref/api/series(?id=x(&details))
     3. GET protocol://domain:port/sys_ref/api/series(?name=xxx(&details))
+
 * **POST protocol://domain:port/sys_ref/api/series** - insert series record
   * request header: { "x-access-token": "jwt-token-string" }
   * examples: POST protocol://domain:port/sys_ref/api/series?name=xxx(&details)
@@ -62,7 +63,26 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET    protocol://domain:port/sys_ref/api/products(?details)** - get full product catalog
+* **GET    protocol://domain:port/sys_ref/api/products** - get product catalog
+
+  * examples:
+    1. GET protocol://domain:port/sys_ref/api/products(?details)
+    2. GET protocol://domain:port/sys_ref/api/products(?id=x(&details))
+    3. GET protocol://domain:port/sys_ref/api/products(?code=xxx(&details))
+* **POST protocol://domain:port/sys_ref/api/products** - insert product and photo records
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body: {
+
+        "code": "xxx",
+        "name": "xxx",
+        "specification": "xxx",
+        "description": "xxx",
+        "tags": ["tagId", "tagId"...], // optional
+        "primaryPhoto": file, // optional, but must exist if secondaryPhotos are sent
+        "secondaryPhotos": files // optional
+
+    }
+  * examples: POST protocol://domain:port/sys_ref/api/products?name=xxx(&details)
 
 ### token
 
