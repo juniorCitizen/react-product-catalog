@@ -51,7 +51,11 @@ const ROUTERS = {
   assets: {
     router: express.Router(),
     endpoint: `/${eVars.SYS_REF}`,
-    path: path.resolve('./dist/public')
+    path: (() => {
+      return eVars.devMode
+        ? path.resolve('./src/client/assets')
+        : path.resolve('./dist/assets')
+    })()
   }
 }
 app.use(ROUTERS.api.endpoint, ROUTERS.api.router)
@@ -63,14 +67,15 @@ logging.console('宣告 end-point 處理程序...')
 
 // setup public assets endpoint
 ROUTERS.assets.router.use(express.static(ROUTERS.assets.path))
+ROUTERS.assets.router.use('/carousels', require('./routes/carousels'))
 logging.console(`public assets 實體檔案路徑... ${ROUTERS.assets.path}`)
 // setup SPA index.html endpoint
 ROUTERS.client.router.use('/', require('./routes/index'))
 logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 // set up api endpoints
-ROUTERS.api.router.use('/token', require('./routes/token'))
-ROUTERS.api.router.use('/series', require('./routes/series'))
 ROUTERS.api.router.use('/products', require('./routes/products'))
+ROUTERS.api.router.use('/series', require('./routes/series'))
+ROUTERS.api.router.use('/tokens', require('./routes/tokens'))
 // apiAccessRouter.use('/photos', require('./routes/photos/photos'))
 // apiAccessRouter.use('/countries', require('./routes/countries/countries'))
 // apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))

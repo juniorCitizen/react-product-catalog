@@ -1,9 +1,20 @@
 const express = require('express')
 
 const localhostOnly = require('../middlewares/localhostOnly')
+const notImplemented = require('../middlewares/notImplemented')
+const validateJwt = require('../middlewares/validateJwt')
 const validatePasswordFormat = require('../middlewares/validatePasswordFormat')
 
 const addUser = require('./users/addUser')
 
 module.exports = express.Router()
-  .post('/addUser', localhostOnly, validatePasswordFormat, addUser)
+  .get('/', notImplemented)
+  .post('/', notImplemented)
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
+  .delete('/', notImplemented)
+  .get('/addUser', notImplemented)
+  .post('/addUser', localhostOnly, validateJwt, validatePasswordFormat, addUser)
+  .put('/addUser', notImplemented)
+  .patch('/addUser', notImplemented)
+  .delete('/addUser', notImplemented)

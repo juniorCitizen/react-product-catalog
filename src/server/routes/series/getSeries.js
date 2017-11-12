@@ -1,109 +1,52 @@
 const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = {
-  complete: complete,
-  byId: byId,
-  byName: byName
-}
+const seriesQueryParameters = require('../../models/ormQueryParameters/series')
 
-function complete () {
-  return ['/', (req, res) => {
-    let queryParameters = { order: ['order'] }
-    if (req.query.hasOwnProperty('details')) {
-      Object.assign(queryParameters, additionalDetails())
-      queryParameters.order.splice(0, 0, 'order')
+module.exports = (() => {
+  return [(req, res) => {
+    let queryParameters = req.query.hasOwnProperty('details')
+      ? seriesQueryParameters.details()
+      : seriesQueryParameters.simple()
+    let query = null
+    if ((req.query.hasOwnProperty('id')) &&
+      !(req.query.hasOwnProperty('name'))) {
+      // lookup by id
+      query = db.Series
+        .findById(req.query.id, queryParameters)
+        .catch(error => Promise.reject(error))
+    } else if ((req.query.hasOwnProperty('name')) &&
+      !(req.query.hasOwnProperty('id'))) {
+      // lookup by name
+      Object.assign(queryParameters, { where: { name: req.query.name } })
+      query = db.Series
+        .findOne(queryParameters)
+        .catch(error => Promise.reject(error))
+    } else if ((req.query.hasOwnProperty('name')) &&
+      (req.query.hasOwnProperty('id'))) {
+      // if id and name exists at the same time
+      let error = Error('name and id url queries cannot co-exist')
+      error.name = 'NAME_AND_ID_COEXIST_CONFLICT'
+      error.httpStatusCode = 400
+      return Promise.reject(error)
+    } else {
+      // query for full recordset
+      query = db.Series
+        .findAll(queryParameters)
+        .catch(error => Promise.reject(error))
     }
-    return db.Series
-      .findAll(queryParameters)
-      .then((seriesData) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: seriesData
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品類別總表查詢失敗'
+    return query
+      .then(data => routerResponse.json({
+        req,
+        res,
+        statusCode: 200,
+        data
+      })).catch(error => routerResponse.json({
+        req,
+        res,
+        statusCode: error.httpStatusCode || 500,
+        error,
+        message: 'error reading series data'
       }))
   }]
-}
-
-function byId () {
-  return ['/id/:id', (req, res) => {
-    let queryParameters = [req.params.id]
-    if (req.query.hasOwnProperty('details')) {
-      queryParameters.push(
-        Object.assign({}, additionalDetails())
-      )
-    }
-    return db.Series
-      .findById(...queryParameters)
-      .then((targetRecord) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: targetRecord
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品類別以 id 查詢失敗'
-      }))
-  }]
-}
-
-function byName () {
-  return ['/name/:name', (req, res) => {
-    let queryParameters = { where: { name: req.params.name } }
-    if (req.query.hasOwnProperty('details')) {
-      Object.assign(queryParameters, additionalDetails())
-    }
-    return db.Series
-      .findOne(queryParameters)
-      .then((targetRecord) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: targetRecord
-        })
-      })
-      .catch(error => routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品類別以名稱查詢失敗'
-      }))
-  }]
-}
-
-function additionalDetails () {
-  return {
-    include: [{
-      model: db.Products,
-      include: [{ model: db.Tags }, {
-        model: db.Photos,
-        attributes: { exclude: ['data'] }
-      }]
-    }, {
-      model: db.Photos,
-      attributes: { exclude: ['data'] }
-    }],
-    order: [
-      [db.Products, 'code'],
-      [db.Products, db.Tags, 'name'],
-      [db.Products, db.Photos, 'primary', 'DESC']
-    ]
-  }
-}
+})()

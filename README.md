@@ -12,44 +12,77 @@ simple product catalog website and backend with product data, user and client ma
 
 ### gulp
 
-gulp backupDotEnv - copy a skeleton copy of .env to ./src/workflow/backup/blank.env
-glup removeLogs - remove *.log from the entire project file structure
-gulp resetDatabase - 將資料庫淨空或者淨空後再填入基礎或測試資料
-  options:
+1. gulp backupDotEnv - copy a skeleton copy of .env to ./src/workflow/backup/blank.env
+2. glup removeLogs - remove *.log from the entire project file structure
+3. gulp resetDatabase - 將資料庫淨空或者淨空後再填入基礎或測試資料
+
+   * options:
+
     --setting (development | staging | production): 由 config/database.js 取得指定淨空的資料庫連線設定. 預設: 'development'
+
     --seed: 植入資料
-  example: **gulp resetDatabase --setting development --seed**
+
+   * example: **gulp resetDatabase --setting development --seed**
 
 ### npm
 
-npm start - 啟動 webpack-dev-server
-npm run build - 產生客戶端骨架 bundle
-npm run lint - lint 整個 ./src 之下的程式碼
-npm run lint-backend - 僅 lint 後端程式碼
-npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
+1. npm start - 啟動 webpack-dev-server
+2. npm run build - 產生客戶端骨架 bundle
+3. npm run lint - lint 整個 ./src 之下的程式碼
+4. npm run lint-backend - 僅 lint 後端程式碼
+5. npm run watch-server - 用 nodemon 以開發模式啟動後端伺服器
 
 ## WEBAPI
 
 ### client access
 
-* **GET    protocol://domain:port/sys_ref** - index.html
-* **GET    protocol://domain:port/sys_ref/path** - public assets
+* **GET protocol://domain:port/sys_ref** - index.html
+* **GET protocol://domain:port/sys_ref/path** - public assets
 
 ### series
 
-* **GET    protocol://domain:port/sys_ref/api/series(?details)** - get full series dataset
-* **GET    protocol://domain:port/sys_ref/api/series/id/:id(?details)** - get series item by id
-* **GET    protocol://domain:port/sys_ref/api/series/name/:name(?details)** - get series item by name
-* **POST   protocol://domain:port/sys_ref/api/series/:name(?details)** - insert a new series with 'name' field value of :name (id is automatically given and set at the next avaialable order position)
-* **PUT    protocol://domain:port/sys_ref/api/series/:id/:name/:order(?details)** - update a series record's 'name' and 'order' value by id
-* **PATCH  protocol://domain:port/sys_ref/api/series/:id/name/:name(?details)** - update a series record's 'name' value by id
-* **PATCH  protocol://domain:port/sys_ref/api/series/:id/order/:order(?details)** - update a series record's 'order' value by id
-* **DELETE protocol://domain:port/sys_ref/api/series/id/:id(?details)** - delete a series record by id
-* **DELETE protocol://domain:port/sys_ref/api/series/name/:name(?details)** - delete a series record by name
+* **GET protocol://domain:port/sys_ref/api/series** - get series data
+  * examples:
+    1. GET protocol://domain:port/sys_ref/api/series(?details)
+    2. GET protocol://domain:port/sys_ref/api/series(?id=x(&details))
+    3. GET protocol://domain:port/sys_ref/api/series(?name=xxx(&details))
+
+* **POST protocol://domain:port/sys_ref/api/series** - insert series record
+  * request header: { "x-access-token": "jwt-token-string" }
+  * examples: POST protocol://domain:port/sys_ref/api/series?name=xxx(&details)
+* **PUT protocol://domain:port/sys_ref/api/series** - update a series record
+  * request body: { "id": 11, "name": "hello", "order": 7 }
+  * request header: { "x-access-token": "jwt-token-string" }
+  * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
+* **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id
+  * request body: { "id": 11, "name": "hello", "order": 7 }
+  * request header: { "x-access-token": "jwt-token-string" }
+  * examples:
+    1. DELETE protocol://domain:port/sys_ref/api/series?id=x(&details)
+    2. DELETE protocol://domain:port/sys_ref/api/series?name=xxx(&details)
 
 ### products
 
-* **GET    protocol://domain:port/sys_ref/api/products(?details)** - get full product catalog
+* **GET    protocol://domain:port/sys_ref/api/products** - get product catalog
+
+  * examples:
+    1. GET protocol://domain:port/sys_ref/api/products(?details)
+    2. GET protocol://domain:port/sys_ref/api/products(?id=x(&details))
+    3. GET protocol://domain:port/sys_ref/api/products(?code=xxx(&details))
+* **POST protocol://domain:port/sys_ref/api/products** - insert product and photo records
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body: {
+
+        "code": "xxx",
+        "name": "xxx",
+        "specification": "xxx",
+        "description": "xxx",
+        "tags": ["tagId", "tagId"...], // optional
+        "primaryPhoto": file, // optional, but must exist if secondaryPhotos are sent
+        "secondaryPhotos": files // optional
+
+    }
+  * examples: POST protocol://domain:port/sys_ref/api/products?name=xxx(&details)
 
 ### token
 
