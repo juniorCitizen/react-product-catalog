@@ -1,9 +1,13 @@
+const uuidV4 = require('uuid/v4')
+
 module.exports = (sequelize, DataTypes) => {
   const Products = sequelize.define('products', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: () => {
+        return uuidV4().toUpperCase()
+      },
       validate: { isUUID: 4 }
     },
     // seriesId: {
