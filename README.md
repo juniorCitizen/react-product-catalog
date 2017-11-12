@@ -55,7 +55,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **PUT protocol://domain:port/sys_ref/api/series** - update a series record
 
-  * request header: { "x-access-token": "jwt-token-string" }
+  * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
   * request body: { "id": 11, "name": "hello", "order": 7 }
   * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
 
@@ -90,6 +90,22 @@ simple product catalog website and backend with product data, user and client ma
 
     }
   * examples: POST protocol://domain:port/sys_ref/api/products?name=xxx(&details)
+
+* **PUT protocol://domain:port/sys_ref/api/products** - update multiple fields of a product record by id
+
+  * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
+  * request body: {
+
+        "id": "product uuid", // required
+        "code": "xxx", // optional
+        "name": "xxx", // optional
+        "specification": "xxx", // optional
+        "description": "xxx", // optional
+        "publish": true/false, // optional
+        "seriesId": integer // optional
+
+    }
+  * note: 除了必要的 product id 值，至少要有另一個欄位存在
 
 ### token
 
