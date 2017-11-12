@@ -13,7 +13,7 @@ module.exports = (() => {
       !(req.query.hasOwnProperty('code'))) {
       // lookup by id
       query = db.Products
-        .findById(req.query.id, queryParameters)
+        .findById(req.query.id.toUpperCase(), queryParameters)
         .catch(error => Promise.reject(error))
     } else if ((req.query.hasOwnProperty('code')) &&
       !(req.query.hasOwnProperty('id'))) {
