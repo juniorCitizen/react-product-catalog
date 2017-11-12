@@ -94,13 +94,13 @@ function removeTempPhotoFiles (req, res, next) {
   if (req.files.secondaryPhotos) {
     req.files.secondaryPhotos.forEach((photo) => {
       fs.remove(photo.path)
-        .then(() => logging.warning(`${photo.originalname} removed...`))
+        .then(() => logging.warning(`temp file ${photo.originalname} removed...`))
         .catch(error => logging.error(error, 'temp secondaryPhotos files removal failure...'))
     })
   }
   if (req.files.primaryPhoto) {
     fs.remove(req.files.primaryPhoto[0].path)
-      .then(() => logging.warning(`${req.files.primaryPhoto[0].originalname} removed...`))
+      .then(() => logging.warning(`temp file ${req.files.primaryPhoto[0].originalname} removed...`))
       .catch(error => logging.error(error, 'temp primaryPhoto file removal failure...'))
   }
   next()
