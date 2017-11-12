@@ -71,3 +71,6 @@ temp/
 *.db-journal
 *.backup.db
 !productCatalog.blank.db
+
+# photo upload files
+upload

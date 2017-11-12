@@ -2,43 +2,43 @@ const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
-module.exports = {
-  byName: inserByName
-}
-
-function inserByName () {
-  return ['/:name', validateJwt, async (req, res) => {
+module.exports = (() => {
+  return [validateJwt, async (req, res) => {
+    if (!req.query.hasOwnProperty('name')) {
+      return routerResponse.json({
+        req,
+        res,
+        statusCode: 400,
+        message: 'did not find valid name string in url query'
+      })
+    }
     return db.Series.create({
       id: await nextAvailableId(),
-      name: req.params.name,
+      name: req.query.name,
       order: await nextAvailableValueInSequence()
-    }).then((newSeries) => {
+    }).then((newSeriesRecord) => {
       return routerResponse.json({
-        req: req,
-        res: res,
+        req,
+        res,
         statusCode: 200,
         data: (() => {
           if (req.query.hasOwnProperty('details')) {
-            return Object.assign(newSeries.dataValues, {
+            return Object.assign(newSeriesRecord.dataValues, {
               products: [],
               photo: null
             })
-          } else {
-            return newSeries
-          }
+          } else { return newSeriesRecord }
         })()
       })
-    }).catch((error) => {
-      return routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: '產品系列資料新增失敗'
-      })
-    })
+    }).catch(error => routerResponse.json({
+      req,
+      res,
+      statusCode: 500,
+      error,
+      message: 'error inserting series record'
+    }))
   }]
-}
+})()
 
 function nextAvailableId () {
   let nextAvailableId = 0
