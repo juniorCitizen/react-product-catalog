@@ -42,20 +42,25 @@ simple product catalog website and backend with product data, user and client ma
 ### series
 
 * **GET protocol://domain:port/sys_ref/api/series** - get series data
+
   * examples:
     1. GET protocol://domain:port/sys_ref/api/series(?details)
     2. GET protocol://domain:port/sys_ref/api/series(?id=x(&details))
     3. GET protocol://domain:port/sys_ref/api/series(?name=xxx(&details))
 
 * **POST protocol://domain:port/sys_ref/api/series** - insert series record
+
   * request header: { "x-access-token": "jwt-token-string" }
   * examples: POST protocol://domain:port/sys_ref/api/series?name=xxx(&details)
+
 * **PUT protocol://domain:port/sys_ref/api/series** - update a series record
+
+  * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
   * request body: { "id": 11, "name": "hello", "order": 7 }
-  * request header: { "x-access-token": "jwt-token-string" }
   * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
+
 * **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id
-  * request body: { "id": 11, "name": "hello", "order": 7 }
+
   * request header: { "x-access-token": "jwt-token-string" }
   * examples:
     1. DELETE protocol://domain:port/sys_ref/api/series?id=x(&details)
@@ -69,7 +74,9 @@ simple product catalog website and backend with product data, user and client ma
     1. GET protocol://domain:port/sys_ref/api/products(?details)
     2. GET protocol://domain:port/sys_ref/api/products(?id=x(&details))
     3. GET protocol://domain:port/sys_ref/api/products(?code=xxx(&details))
+
 * **POST protocol://domain:port/sys_ref/api/products** - insert product and photo records
+
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
   * request body: {
 
@@ -83,6 +90,22 @@ simple product catalog website and backend with product data, user and client ma
 
     }
   * examples: POST protocol://domain:port/sys_ref/api/products?name=xxx(&details)
+
+* **PUT protocol://domain:port/sys_ref/api/products** - update multiple fields of a product record by id
+
+  * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
+  * request body: {
+
+        "id": "product uuid", // required
+        "code": "xxx", // optional
+        "name": "xxx", // optional
+        "specification": "xxx", // optional
+        "description": "xxx", // optional
+        "publish": true/false, // optional
+        "seriesId": integer // optional
+
+    }
+  * note: 除了必要的 product id 值，至少要有另一個欄位存在
 
 ### token
 

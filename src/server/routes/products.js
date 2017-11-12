@@ -1,12 +1,9 @@
 const express = require('express')
-// const multer = require('multer')
-// const path = require('path')
 
 // route handlers
 const getProducts = require('./products/getProducts')
 const insertProduct = require('./products/insertProduct')
-// import routerResponse from '../controllers/routerResponse'
-// import validateJwt from '../middlewares/validateJwt'
+const updateProduct = require('./products/updateProduct')
 const notImplemented = require('../middlewares/notImplemented')
 
 // const upload = multer({ dest: path.join(__dirname, '../../upload/') })
@@ -14,7 +11,7 @@ const notImplemented = require('../middlewares/notImplemented')
 module.exports = express.Router()
   .get('/', ...getProducts)
   .post('/', ...insertProduct)
-  .put('/', notImplemented)
+  .put('/', ...updateProduct)
   .patch('/', notImplemented)
   .delete('/', notImplemented)
 // .get('/series', require('./series'))
