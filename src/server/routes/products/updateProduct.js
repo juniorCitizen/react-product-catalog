@@ -8,7 +8,7 @@ const productQueryParameters = require('../../models/ormQueryParameters/products
 module.exports = ((req, res) => {
   return [
     validateJwt,
-    filterData,
+    filterBodyData,
     (req, res) => {
       return db.Products
         .update(req.filteredData, { where: { id: req.body.id.toUpperCase() } })
@@ -35,7 +35,7 @@ module.exports = ((req, res) => {
 
 // check field data presented in req.body and put in custom 'filteredData' object in req
 // to avoid unexpected behaviors during update
-function filterData (req, res, next) {
+function filterBodyData (req, res, next) {
   req.filteredData = {}
   let expectedFields = ['code', 'name', 'specification', 'description', 'publish', 'seriesId']
   expectedFields.forEach(fieldName => {
