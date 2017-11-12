@@ -65,16 +65,6 @@ function prepPrimaryPhotoData (req, res, next) {
         })
         return next()
       })
-      .catch(error => {
-        logging.error(error, 'test')
-        return routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error processing the primary photo'
-        })
-      })
       // error occured while reading the primary photo
       .catch(error => routerResponse.json({
         req,
