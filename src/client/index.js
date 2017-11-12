@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-    HashRouter,
-    Route,
-    Link
-} from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { login_user } from '../../actions'
+
 import Hello from './Hello'
 
+const app = document.getElementById('app')
+
 ReactDOM.render((
-    <HashRouter>
+    <BrowserRouter>
         <div>
-            <Route exact path="/" component={Hello} />
+            <Route exact path="/" component={Hello}/>
         </div>
-    </HashRouter >
-), document.getElementById('root') )
+    </BrowserRouter> 
+), app)
