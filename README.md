@@ -59,12 +59,13 @@ simple product catalog website and backend with product data, user and client ma
   * request body: { "id": 11, "name": "hello", "order": 7 }
   * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
 
-* **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id
+* **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id or name
 
   * request header: { "x-access-token": "jwt-token-string" }
   * examples:
     1. DELETE protocol://domain:port/sys_ref/api/series?id=x(&details)
     2. DELETE protocol://domain:port/sys_ref/api/series?name=xxx(&details)
+  * notes: will error if existing product/photo is still associated with the target series
 
 ### products
 
@@ -107,9 +108,18 @@ simple product catalog website and backend with product data, user and client ma
     }
   * note: 除了必要的 product id 值，至少要有另一個欄位存在
 
+* **DELETE protocol://domain:port/sys_ref/api/products** - delete a product record by id
+
+  * request header: { "x-access-token": "jwt-token-string" }
+  * examples: DELETE protocol://domain:port/sys_ref/api/series?id=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  * notes:
+    1. target id must be in url query
+    2. associated tags are disassociated by removal of related entry in the labels table
+    3. associated photos only as 'productId' field set to null, so orphan photos may be created.  It's done intentionally as photos may be associated with a series, or, the photos may be still be used
+
 ### token
 
-* **POST   protocol://domain:port/sys_ref/api/token** - apply for jwt token to access data modification end points
+* **POST   protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
   * request header: { "Content-Type": "application/json"}
   * request body: { // all fields are required
