@@ -1,6 +1,6 @@
 import del from 'del'
 
-import logging from '../../server/controllers/logging'
+const logging = require('../../server/controllers/logging')
 
 module.exports = () => {
   return (done) => {

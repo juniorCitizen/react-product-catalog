@@ -1,5 +1,5 @@
-import db from '../../controllers/database/database'
-import routerResponse from '../../controllers/routerResponse'
+const db = require('../../controllers/database')
+const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = (req, res) => {
   return db.Series
@@ -34,7 +34,7 @@ module.exports = (req, res) => {
         }]
       }],
       order: [
-        ['displaySequence'],
+        ['order'],
         [db.Products, 'code'],
         [db.Products, db.Photos, 'primary', 'DESC']
       ]

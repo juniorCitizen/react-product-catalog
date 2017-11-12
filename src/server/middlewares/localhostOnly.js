@@ -1,18 +1,14 @@
-import routerResponse from '../controllers/routerResponse'
+const routerResponse = require('../controllers/routerResponse')
 
 module.exports = (req, res, next) => {
-  if (req.hostname === 'localhost') {
+  if ((req.hostname === 'localhost') || (req.host === '127.0.0.1')) {
     next()
   } else {
-    let error = new Error('protected routes are being accessed from unauthorized locations')
-    error.name = 'onlyLocalhostAllowed'
     return routerResponse.json({
-      pendingResponse: res,
-      originalRequest: req,
-      statusCode: 500,
-      success: false,
-      error: error.name,
-      message: error.message
+      req: req,
+      res: res,
+      statusCode: 400,
+      message: 'the route you are trying to access is protected and only accessible from localhost'
     })
   }
 }

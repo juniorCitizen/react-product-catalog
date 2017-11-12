@@ -1,4 +1,4 @@
-const eVars = require('../config/eVars.js')
+const eVars = require('../config/eVars')
 
 const cannedMessage = {
   200: '200 OK',
@@ -9,10 +9,10 @@ const cannedMessage = {
   401: '401 Unauthorized',
   403: '403 Forbidden',
   404: '404 Not Found',
-  405: '405 Method Not Allowed',
   500: '500 Internal Server Error',
   501: '501 Not Implemented',
-  503: '503 Service Unavailable'
+  503: '503 Service Unavailable',
+  505: '505 Permission Denied'
 }
 
 module.exports = {
@@ -43,10 +43,7 @@ module.exports = {
 function templateResponse (args) {
   return args.res
     .status(args.statusCode)
-    .render(
-      args.view,
-      args.data || {}
-    )
+    .render(args.view, args.data || {})
 }
 
 // requires an object argument

@@ -1,22 +1,40 @@
+const dotEnv = require('dotenv')
 const path = require('path')
 const Promise = require('bluebird')
 const Sequelize = require('sequelize')
 
-const eVars = require('../../config/eVars')
-const dbConfig = require('../../config/database')[eVars.USE_DATABASE]
-const logging = require('../../controllers/logging')
+dotEnv.config()
+const dbConfig = require('../config/database')[process.env.USE_DATABASE]
+const logging = require('../controllers/logging')
 
-const verifyConnection = require('./verifyConnection')
-const dropAllSchemas = require('./dropAllSchema')
-const prepModels = require('./prepModels')
-const registerModels = require('./registerModels')
-const syncModels = require('./syncModels')
-const reSyncModels = require('./reSyncModels')
+const verifyConnection = require('./database/verifyConnection')
+const dropAllSchemas = require('./database/dropAllSchema')
+const prepModels = require('./database/prepModels')
+const registerModels = require('./database/registerModels')
+const syncModels = require('./database/syncModels')
+const reSyncModels = require('./database/reSyncModels')
 
 const sequelize = new Sequelize(dbConfig)
 
+const dropSchemaSequence = [
+  'users',
+  'flags',
+  'offices',
+  'countries',
+  'interests',
+  'registrations',
+  'labels',
+  'tags',
+  'photos',
+  'products',
+  'series',
+  'carousels'
+]
+
 const db = {
-  modelPath: path.join(__dirname, '../../models'),
+  modelPath: process.env.NODE_ENV === 'development'
+    ? path.resolve('./src/server/models')
+    : path.resolve('./dist/models'),
   fileList: [],
   modelList: [],
   syncOps: [],
@@ -31,7 +49,7 @@ function initialize (force = null) {
   return verifyConnection(db)
     .then(() => {
       if (force) {
-        return dropAllSchemas(db.sequelize)
+        return dropAllSchemas(db.sequelize, dropSchemaSequence)
       } else {
         return Promise.resolve()
       }
@@ -57,6 +75,8 @@ function initialize (force = null) {
       db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
       db.Countries.hasMany(db.Offices, injectOptions('countryId', 'id'))
+      db.Countries.hasOne(db.Flags, injectOptions('id', 'id'))
+      db.Flags.belongsTo(db.Countries, injectOptions('id', 'id'))
       db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
       db.Registrations.belongsToMany(db.Products, injectOptions(
         'registrationId', 'id', db.Interests
@@ -78,9 +98,9 @@ function initialize (force = null) {
     })
 }
 
-function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = null) {
+function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = null, constraints = true) {
   return Object.assign({
-    constraints: true,
+    constraints: constraints,
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   }, {

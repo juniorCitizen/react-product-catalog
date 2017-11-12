@@ -1,19 +1,14 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 
-const db = require('../../controllers/database/database')
-const encryption = require('../../controllers/encryption')
-const eVars = require('../../config/eVars')
-const routerResponse = require('../../controllers/routerResponse')
+const db = require('../controllers/database')
+const encryption = require('../controllers/encryption')
+const eVars = require('../config/eVars')
+const routerResponse = require('../controllers/routerResponse')
 
-const router = express.Router()
+const botPrevention = require('../middlewares/botPrevention')
 
-router.post('/',
-  loginInfoPresence,
-  require('../../middlewares/botPrevention'),
-  tokenRequest)
-
-module.exports = router
+module.exports = express.Router().post('/', loginInfoPresence, botPrevention, tokenRequest)
 
 function tokenRequest (req, res) {
   db.Users
@@ -73,6 +68,7 @@ function tokenRequest (req, res) {
 function loginInfoPresence (req, res, next) {
   if (
     (req.body === undefined) ||
+    (req.body.email === undefined) ||
     (req.body.loginId === undefined) ||
     (req.body.password === undefined) ||
     (req.body.botPrevention === undefined)

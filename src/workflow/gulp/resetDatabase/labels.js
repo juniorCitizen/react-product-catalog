@@ -1,9 +1,10 @@
+import dotEnv from 'dotenv'
 import faker from 'faker'
 import Promise from 'bluebird'
 
-import logging from '../../../server/controllers/logging'
+dotEnv.config()
 
-require('dotenv').config()
+const logging = require('../../../server/controllers/logging')
 
 module.exports = (Products, Tags) => {
   return Promise

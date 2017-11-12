@@ -1,7 +1,7 @@
 const Promise = require('bluebird')
 
 const eVars = require('../../config/eVars')
-const logging = require('../../controllers/logging')
+const logging = require('../logging')
 
 module.exports = (db, force = null) => {
   db.syncOps = []

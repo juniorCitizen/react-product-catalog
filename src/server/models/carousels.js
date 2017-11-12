@@ -1,31 +1,39 @@
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('users', {
-    email: {
-      type: DataTypes.STRING,
+  const Carousels = sequelize.define('carousels', {
+    id: {
+      type: DataTypes.UUID,
       primaryKey: true,
-      validate: { isEmail: true }
+      defaultValue: DataTypes.UUIDV4,
+      validate: { isUUID: 4 }
     },
-    name: {
-      type: DataTypes.STRING,
+    order: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    loginId: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    salt: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    admin: {
+    primary: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    originalName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    encoding: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    mimeType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    data: {
+      type: DataTypes.BLOB,
+      allowNull: false
     }
     // ,
     // createdAt: {
@@ -44,9 +52,9 @@ module.exports = (sequelize, DataTypes) => {
     // }
   }, {
     name: {
-      singular: 'user',
-      plural: 'users'
+      singular: 'carousel',
+      plural: 'carousels'
     }
   })
-  return Users
+  return Carousels
 }

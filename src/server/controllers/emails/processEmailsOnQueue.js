@@ -1,15 +1,20 @@
-import Promise from 'bluebird'
+const path = require('path')
+const Promise = require('bluebird')
 
-import db from '../../controllers/database/database'
+require('dotenv').config()
+
+const accessPath = process.env.NODE_ENV === 'development'
+  ? path.resolve('./src/server')
+  : path.resolve('./dist')
+
+const db = require(path.join(accessPath, 'controllers/database'))
 
 module.exports = (emailQueue, updateAction, sourceRecords) => {
   if (emailQueue.length > 0) {
     return Promise
-      .each(emailQueue, (emailInfo, noticeIndex) => {
-        db.Registrations.update(updateAction, {
-          where: {
-            id: sourceRecords[noticeIndex].id
-          }
+      .each(emailQueue, async (emailInfo, noticeIndex) => {
+        await db.Registrations.update(updateAction, {
+          where: { id: sourceRecords[noticeIndex].id }
         })
       })
       .then(() => {

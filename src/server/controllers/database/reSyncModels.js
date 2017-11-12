@@ -1,4 +1,4 @@
-const logging = require('../../controllers/logging')
+const logging = require('../logging')
 
 module.exports = (db, force = null) => {
   return db.sequelize

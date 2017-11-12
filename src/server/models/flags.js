@@ -1,25 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Series = sequelize.define('series', {
+  const Flags = sequelize.define('flags', {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      validate: {
-        min: 0
-      }
-    },
-    name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      primaryKey: true
     },
-    order: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    publish: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
+    data: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
     // ,
     // createdAt: {
@@ -38,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     // }
   }, {
     name: {
-      singular: 'series',
-      plural: 'series'
+      singular: 'flag',
+      plural: 'flags'
     }
   })
-  return Series
+  return Flags
 }

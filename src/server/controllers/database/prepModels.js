@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 
-const logging = require('../../controllers/logging')
+const logging = require('../logging')
 
 module.exports = (db) => {
   return fs

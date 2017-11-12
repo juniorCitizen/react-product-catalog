@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const db = require('../controllers/database/database')
+const db = require('../controllers/database')
 const eVars = require('../config/eVars')
 const logging = require('../controllers/logging')
 const routerResponse = require('../controllers/routerResponse')
@@ -10,12 +10,10 @@ module.exports = (req, res, next) => {
     logging.warning('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!')
     next()
   } else {
-    let accessToken =
-      (req.body && req.body.accessToken) ||
-      (req.query && req.query.accessToken) ||
-      req.headers['x-access-token']
+    let accessToken = req.get('x-access-token')
     if (accessToken) { // if a token is found
-      jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
+      return jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
+        // if decoding error is encountered
         if (error) {
           logging.warning('UNAUTHORIZED TOKEN DETECTED!!!')
           return routerResponse.json({
@@ -25,34 +23,40 @@ module.exports = (req, res, next) => {
             error: error,
             message: 'unauthorized token'
           })
-        }
-        return db.Users.findOne({
-          where: {
-            email: decodedToken.email.toLowerCase(),
-            loginId: decodedToken.loginId,
-            admin: true
-          }
-        }).then((user) => {
-          if (user) {
-            return next()
-          } else {
-            logging.warning('UNAUTHORIZED USER LOGIN DETECTED!!!')
+        } else { // successfully decoded
+          return db.Users.findOne({
+            where: {
+              email: decodedToken.email.toLowerCase(),
+              loginId: decodedToken.loginId,
+              admin: true
+            }
+          }).then((user) => {
+            if (user) {
+              next()
+              return Promise.resolve()
+            } else {
+              logging.warning('UNAUTHORIZED USER LOGIN DETECTED!!!')
+              routerResponse.json({
+                req: req,
+                res: res,
+                statusCode: 401,
+                message: 'unauthorized user login detected'
+              })
+              let error = new Error('UNAUTHORIZED_USER')
+              error.name = 'UNAUTHORIZED_USER'
+              error.message = 'unauthorized user login detected'
+              return Promise.reject(error)
+            }
+          }).catch((error) => {
+            logging.error(error, 'middlewares/validateJwt.js jwt.verify() errored')
             return routerResponse.json({
               req: req,
               res: res,
-              statusCode: 401,
-              message: 'unauthorized user'
+              statusCode: 500,
+              error: error
             })
-          }
-        }).catch((error) => {
-          logging.error(error, 'middlewares/validateJwt.js jwt.verify() errored')
-          return routerResponse.json({
-            req: req,
-            res: res,
-            statusCode: 500,
-            error: error
           })
-        })
+        }
       })
     } else { // if there is no token, return an error
       return routerResponse.json({

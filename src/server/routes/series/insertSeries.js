@@ -1,62 +1,71 @@
-const db = require('../../controllers/database/database')
-const logging = require('../../controllers/logging')
+const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
+const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = {
-  insertSeries: insertSeries
+  byName: inserByName
 }
 
-function insertSeries (req, res) {
+function inserByName () {
+  return ['/:name', validateJwt, async (req, res) => {
+    return db.Series.create({
+      id: await nextAvailableId(),
+      name: req.params.name,
+      order: await nextAvailableValueInSequence()
+    }).then((newSeries) => {
+      return routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 200,
+        data: (() => {
+          if (req.query.hasOwnProperty('details')) {
+            return Object.assign(newSeries.dataValues, {
+              products: [],
+              photo: null
+            })
+          } else {
+            return newSeries
+          }
+        })()
+      })
+    }).catch((error) => {
+      return routerResponse.json({
+        req: req,
+        res: res,
+        statusCode: 500,
+        error: error,
+        message: '產品系列資料新增失敗'
+      })
+    })
+  }]
+}
+
+function nextAvailableId () {
   let nextAvailableId = 0
-  let nextSequenceNumber = 0
-  return db.Series.findAll()
+  return db.Series
+    .findAll()
     .map(series => series.id)
-    .then((seriesIdList) => {
-      while (seriesIdList.indexOf(nextAvailableId) !== -1) {
+    .then((seriesIds) => {
+      // loop through and find the next available unused id
+      while (seriesIds.indexOf(nextAvailableId) !== -1) {
         nextAvailableId++
       }
-      return db.Series.findAll()
+      return Promise.resolve(nextAvailableId)
     })
-    .map(series => series.displaySequence)
-    .then((existingSequenceNumbers) => {
-      while (existingSequenceNumbers.indexOf(nextSequenceNumber) !== -1) {
-        nextSequenceNumber++
+    .catch(error => Promise.reject(error))
+}
+
+function nextAvailableValueInSequence () {
+  let nextAvailableValueInSequence = 0
+  return db.Series
+    .findAll()
+    .map(series => series.order)
+    .then((orderSequence) => {
+      // loop through and find the next available order sequence value
+      while (orderSequence.indexOf(nextAvailableValueInSequence) !== -1) {
+        nextAvailableValueInSequence++
       }
-      return Promise.resolve()
+      return Promise.resolve(nextAvailableValueInSequence)
     })
-    .then(() => {
-      if (req.query.name === undefined) {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 400,
-          message: '未發現 req.query.name'
-        })
-      } else {
-        return db.Series.create({
-          id: nextAvailableId,
-          name: req.query.name,
-          displaySequence: nextSequenceNumber
-        }).then((newSeries) => {
-          return routerResponse.json({
-            req: req,
-            res: res,
-            statusCode: 200,
-            data: newSeries
-          })
-        }).catch((error) => {
-          return routerResponse.json({
-            req: req,
-            res: res,
-            statusCode: 500,
-            error: error,
-            message: '產品系列資料新增失敗'
-          })
-        })
-      }
-    })
-    .catch((error) => {
-      logging.error(error, 'routes/series/insertSeries.js errored')
-      return Promise.reject(error)
-    })
+    .catch(error => Promise.reject(error))
 }

@@ -1,6 +1,6 @@
-import nodemailer from 'nodemailer'
+const nodemailer = require('nodemailer')
 
-import eVars from '../config/eVars'
+const eVars = require('./eVars')
 
 module.exports = (() => {
   return nodemailer.createTransport({

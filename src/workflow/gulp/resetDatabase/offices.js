@@ -1,8 +1,10 @@
-import logging from '../../../server/controllers/logging'
+import dotEnv from 'dotenv'
 
-require('dotenv').config()
+dotEnv.config()
 
-module.exports = (Offices) => {
+const logging = require('../../../server/controllers/logging')
+
+module.exports = (Offices, Flags) => {
   let eVars = process.env
   let devMode = process.env.NODE_ENV === 'development'
   let websiteUrl = `${eVars.PROTOCOL}://${devMode ? eVars.LOCAL_DEV_DOMAIN : eVars.PROD_DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}`
@@ -10,7 +12,7 @@ module.exports = (Offices) => {
     id: 0,
     title: 'Gentry Way Co., Ltd.',
     address: 'No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.',
-    countryId: 'TWN',
+    countryId: 'twn',
     telephone: '+886-(0)6-6529052',
     fax: '+886-(0)6-6527093',
     website: websiteUrl
@@ -18,7 +20,7 @@ module.exports = (Offices) => {
     id: 1,
     title: 'Gentry Hardware Products Co., Ltd.',
     address: 'No. 158, Dongcheng Rd., Dongsheng Town, Zhongshan, Guangdong, China',
-    countryId: 'CHN',
+    countryId: 'chn',
     telephone: '+86-760-22229026 ~ 28',
     fax: '+86-760-22820916',
     website: websiteUrl

@@ -1,22 +1,22 @@
 import { argv } from 'yargs'
+import path from 'path'
 import Promise from 'bluebird'
 
-import db from '../../../server/controllers/database/database'
-import logging from '../../../server/controllers/logging'
-
-require('dotenv').config()
+const db = require('../../server/controllers/database')
+const logging = require('../../server/controllers/logging')
 
 const dbEnv = argv['setting'] || 'development'
 const seed = argv['seed'] || false
 
-let countries = require('./countries')
-let labels = require('./labels')
-let offices = require('./offices')
-let photos = require('./photos')
-let products = require('./products')
-let series = require('./series')
-let tags = require('./tags')
-let users = require('./users')
+const carousels = require('./resetDatabase/carousels')
+const countries = require('./resetDatabase/countries')
+const labels = require('./resetDatabase/labels')
+const offices = require('./resetDatabase/offices')
+const photos = require('./resetDatabase/photos')
+const products = require('./resetDatabase/products')
+const series = require('./resetDatabase/series')
+const tags = require('./resetDatabase/tags')
+const users = require('./resetDatabase/users')
 
 module.exports = () => {
   return (done) => {
@@ -29,16 +29,24 @@ module.exports = () => {
       return done(error)
     }
     // get database configuration
-    let dbConfig = require('../../../server/config/database')[dbEnv]
+    let dbConfig = require(path.resolve('./src/server/config/database.js'))[dbEnv]
     if (dbConfig.dialect === 'mysql') {
       // prevent remote db access encounter timeout error on large file transfers
       dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
       dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)
     }
-    // switch out the sequelize instance
+    // switch out the sequelize instance and initialize
     db.sequelize = new db.Sequelize(dbConfig)
-    // start the reset process with disabling the database constraints
-    return disableConstraint(dbConfig.dialect)
+    return db.sequelize
+      .authenticate() // verify db connection
+      .catch((error) => {
+        logging(error, 'database not connected')
+        return Promise.reject(error)
+      })
+      .then(() => {
+        // start the reset process with disabling the database constraints
+        return disableConstraint(dbConfig.dialect)
+      })
       .then(() => {
         // initialize an empty database
         return db.initialize({ force: true })
@@ -58,19 +66,20 @@ module.exports = () => {
             .then(seriesIdList => products(db.Products, seriesIdList))
             .then(() => tags(db.Tags))
             .then(() => labels(db.Products, db.Tags))
-            .then(() => photos(db.Photos, db.Products, db.Series))
-            .then(() => countries(db.Countries))
-            .then(() => offices(db.Offices))
+            .then(() => countries(db.Countries, db.Flags))
+            .then(() => offices(db.Offices, db.Flags))
             .then(() => users(db.Users))
-            .then(() => {
-              logging.warning('資料庫重設，並已完成預設資料載入...')
-              return done()
-            })
+            .then(() => photos(db.Photos, db.Products, db.Series))
+            .then(() => carousels(db.Carousels))
             .catch((error) => {
               logging.error(error, '預設資料載入失敗...')
               return Promise.reject(error)
             })
         }
+      })
+      .then(() => {
+        logging.warning('資料庫重設，並已完成預設資料載入...')
+        return done()
       })
       .catch((error) => {
         // in case of error, enable the database constraints first
