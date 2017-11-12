@@ -111,6 +111,16 @@ simple product catalog website and backend with product data, user and client ma
 
 * **POST   protocol://domain:port/sys_ref/api/token** - apply for jwt token to access data modification end points
 
+  * request header: { "Content-Type": "application/json"}
+  * request body: { // all fields are required
+
+        "email":"admin@nowhere.com",
+	      "loginId":"admin",
+	      "password":"0000",
+	      "botPrevention":""
+
+    }
+
 ## LICENSE
 
 MIT © [ASJ Group] (chiayu.tsai.personal@gmail.com / papago75@gmail.com)
