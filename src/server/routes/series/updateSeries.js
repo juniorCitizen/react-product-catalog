@@ -18,7 +18,7 @@ module.exports = (() => {
         .transaction(async trx => {
           let trxObj = { transaction: trx }
           let targetRecord = await db.Series
-            .findById(req.params.id, trxObj)
+            .findById(req.params.seriesId, trxObj)
             .catch(logging.reject)
           let originalPosition = targetRecord.order
           let targetPosition = await (() => {
@@ -38,7 +38,7 @@ module.exports = (() => {
               .catch(logging.reject)
           })()
           return db.sequelize
-            .query(adjustmentQuery(originalPosition, targetPosition, req.params.id), trxObj)
+            .query(adjustmentQuery(originalPosition, targetPosition, req.params.seriesId), trxObj)
             .then(() => {
               return targetRecord
                 .update(req.filteredData, trxObj)

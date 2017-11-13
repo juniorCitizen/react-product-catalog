@@ -10,7 +10,7 @@ module.exports = (() => {
     setResponseDetailLevel,
     (req, res) => {
       return db.Series
-        .findById(req.params.id, req.queryParameters)
+        .findById(req.params.seriesId, req.queryParameters)
         .then((data) => routerResponse.json({
           req, res, statusCode: 200, data
         }))

@@ -15,7 +15,7 @@ module.exports = (() => {
         .transaction((trx) => {
           let trxObj = { transaction: trx }
           return db.Series
-            .findById(req.params.id)
+            .findById(req.params.seriesId)
             .then((targetRecord) => {
               if (targetRecord) {
                 // delete record instance after recording it's original ordering position
