@@ -14,3 +14,13 @@ module.exports = express.Router()
   .put('/', ...updateSeries)
   .patch('/', notImplemented)
   .delete('/', ...removeSeries)
+  .get('/:id/photos', notImplemented)
+  .post('/:id/photos', notImplemented) // add a photo to a series
+  .put('/:id/photos', notImplemented)
+  .patch('/:id/photos', notImplemented) // publish/unpublish a photo
+  .delete('/:id/photos', notImplemented) // disassociate a photo from a series
+  .get('/:id/products', notImplemented)
+  .post('/:id/products', notImplemented)
+  .put('/:id/products', notImplemented)
+  .patch('/:id/products', notImplemented)
+  .delete('/:id/products', notImplemented)
