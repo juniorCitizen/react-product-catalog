@@ -41,30 +41,20 @@ simple product catalog website and backend with product data, user and client ma
 
 ### series
 
-* **GET protocol://domain:port/sys_ref/api/series** - get series data
-
-  * examples:
-    1. GET protocol://domain:port/sys_ref/api/series(?details)
-    2. GET protocol://domain:port/sys_ref/api/series(?id=x(&details))
-    3. GET protocol://domain:port/sys_ref/api/series(?name=xxx(&details))
-
-* **POST protocol://domain:port/sys_ref/api/series** - insert series record
-
+* **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details (photo/tags)
+  * return: json object with recordset and optional details under 'data' property
+* **GET protocol://domain:port/sys_ref/api/series/:id(?details)** - get series by id with optional details (photo/tags)
+  * return: json object with record and optional details under 'data' property
+* **POST protocol://domain:port/sys_ref/api/series?name=nameString(&details)** - insert new series record
   * request header: { "x-access-token": "jwt-token-string" }
-  * examples: POST protocol://domain:port/sys_ref/api/series?name=xxx(&details)
-
-* **PUT protocol://domain:port/sys_ref/api/series** - update a series record
-
+  * return: json object with new record and optional details under 'data' property
+* **PUT protocol://domain:port/sys_ref/api/series/:id(?details)** - update multiple fields of a series record by id
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
-  * request body: { "id": 11, "name": "hello", "order": 7 }
-  * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
-
-* **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id or name
-
+  * request body: { "name": "hello", "order": 7 }
+  * return: json object with updated series recordset and optional details under 'data' property
+* **DELETE protocol://domain:port/sys_ref/api/series/:id(?details)** - delete a series record by id
   * request header: { "x-access-token": "jwt-token-string" }
-  * examples:
-    1. DELETE protocol://domain:port/sys_ref/api/series?id=x(&details)
-    2. DELETE protocol://domain:port/sys_ref/api/series?name=xxx(&details)
+  * return: json object with updated series recordset and optional details under 'data' property
   * notes: will error if existing product/photo is still associated with the target series
 
 ### products

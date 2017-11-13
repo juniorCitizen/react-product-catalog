@@ -1,43 +1,40 @@
 const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
+
+const ensureUrlQueryParametersExistence = require('./middlewares').ensureUrlQueryParametersExistence
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
-  return [validateJwt, async (req, res) => {
-    if (!req.query.hasOwnProperty('name')) {
-      return routerResponse.json({
+  return [
+    validateJwt,
+    ensureUrlQueryParametersExistence(['name']),
+    async (req, res) => {
+      return db.Series.create({
+        id: await nextAvailableId(),
+        name: req.query.name,
+        order: await nextAvailableValueInSequence()
+      }).then((newSeriesRecord) => {
+        return routerResponse.json({
+          req,
+          res,
+          statusCode: 200,
+          data: (() => {
+            if (req.query.hasOwnProperty('details')) {
+              return Object.assign(newSeriesRecord.dataValues, {
+                products: [],
+                photo: null
+              })
+            } else { return newSeriesRecord }
+          })()
+        })
+      }).catch(error => routerResponse.json({
         req,
         res,
-        statusCode: 400,
-        message: 'did not find valid name string in url query'
-      })
-    }
-    return db.Series.create({
-      id: await nextAvailableId(),
-      name: req.query.name,
-      order: await nextAvailableValueInSequence()
-    }).then((newSeriesRecord) => {
-      return routerResponse.json({
-        req,
-        res,
-        statusCode: 200,
-        data: (() => {
-          if (req.query.hasOwnProperty('details')) {
-            return Object.assign(newSeriesRecord.dataValues, {
-              products: [],
-              photo: null
-            })
-          } else { return newSeriesRecord }
-        })()
-      })
-    }).catch(error => routerResponse.json({
-      req,
-      res,
-      statusCode: 500,
-      error,
-      message: 'error inserting series record'
-    }))
-  }]
+        statusCode: 500,
+        error,
+        message: 'error inserting series record'
+      }))
+    }]
 })()
 
 function nextAvailableId () {

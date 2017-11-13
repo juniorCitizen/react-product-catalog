@@ -10,18 +10,16 @@ module.exports = (() => {
     setResponseDetailLevel,
     (req, res) => {
       return db.Series
-        .findAll(req.queryParameters)
-        .then(data => routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data
-        })).catch(error => routerResponse.json({
+        .findById(req.params.id, req.queryParameters)
+        .then((data) => routerResponse.json({
+          req, res, statusCode: 200, data
+        }))
+        .catch(error => routerResponse.json({
           req,
           res,
           statusCode: 500,
           error,
-          message: 'query series errored'
+          message: 'query series by id errored'
         }))
     }]
 })()
