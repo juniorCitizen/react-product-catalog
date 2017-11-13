@@ -91,5 +91,6 @@ module.exports = (env) => {
   if (env === 'production') {
     return merge(commonConfig, productionConfig)
   }
-  return merge(commonConfig, developmentConfig)
+  //return merge(commonConfig, developmentConfig)
+  return merge(commonConfig, productionConfig)
 }

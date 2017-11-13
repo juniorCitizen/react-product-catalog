@@ -1,5 +1,9 @@
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 // 1. Initial variables
 @import "functions.sass";
+
 // Colors
 $black:        hsl(0, 0%, 4%) ;
 $black-bis:    hsl(0, 0%, 7%) ;
@@ -23,6 +27,19 @@ $blue:         rgb(36, 102, 207) ;
 $purple:       rgb(183, 107, 255) ;
 $red:          rgb(226, 17, 59) ;
 $newBlue:      rgb(94, 189, 237) ;
+
+$menu-background-color: #f7f7f7;
+$menu-item-hover-background-color: #dddddd;
+
+$bg-primary: #007bff;
+$bg-secondary: #868e96;
+$bg-success: #28a745;
+$bg-danger: #dc3545;
+$bg-warning: #ffc107;
+$bg-info: #17a2b8;
+$bg-light: #f8f9fa;
+$bg-dark: #343a40;
+$bg-white: #fff;
 
 // Typography
 $family-sans-serif: "微軟正黑體", "BlinkMacSystemFont", "-apple-system", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
@@ -63,6 +80,8 @@ $radius: 3px ;
 $radius-large: 5px ;
 $speed: 86ms ;
 
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 // 2. Primary colors
 
 $primary: $blue ;
@@ -73,6 +92,9 @@ $danger: $red ;
 $light: $white-ter ;
 $dark: $grey-darker ;
 
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 // 3. Applied variables
 
 // Invert colors
@@ -135,6 +157,8 @@ $size-normal: $size-6 ;
 $size-medium: $size-5 ;
 $size-large: $size-4 ;
 
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 // 4. Lists and maps
 
 $colors: (
