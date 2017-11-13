@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Root from './components/root'
+import Main from './components/main'
 import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 const store = configureStore();
 
 ReactDOM.render((
     <Provider store={store}>
-        <Root />
+        <Main />
     </Provider>
 ), app)

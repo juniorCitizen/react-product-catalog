@@ -14,6 +14,8 @@ import sourceMaps from './src/workflow/webpack/sourceMaps'
 import style from './src/workflow/webpack/style'
 import transpiler from './src/workflow/webpack/transpilers'
 
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
 dotEnv.config()
 const eVars = process.env
 
