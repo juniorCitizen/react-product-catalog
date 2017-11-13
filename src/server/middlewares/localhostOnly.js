@@ -1,7 +1,7 @@
 const routerResponse = require('../controllers/routerResponse')
 
 module.exports = (req, res, next) => {
-  if ((req.hostname === 'localhost') || (req.host === '127.0.0.1')) {
+  if ((req.hostname === 'localhost') || (req.ip === '127.0.0.1')) {
     next()
   } else {
     return routerResponse.json({

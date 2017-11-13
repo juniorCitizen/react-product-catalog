@@ -4,23 +4,19 @@ const notImplemented = require('../middlewares/notImplemented')
 
 // route handlers
 const getSeries = require('./series/getSeries')
+const getSeriesById = require('./series/getSeriesById')
 const insertSeries = require('./series/insertSeries')
 const updateSeries = require('./series/updateSeries')
 const removeSeries = require('./series/removeSeries')
 
 module.exports = express.Router()
-  .get('/', ...getSeries)
-  .post('/', ...insertSeries)
-  .put('/', ...updateSeries)
+  .get('/', ...getSeries) // get series dataset
+  .post('/', ...insertSeries) // create new series record
+  .put('/', notImplemented)
   .patch('/', notImplemented)
-  .delete('/', ...removeSeries)
-  .get('/:id/photos', notImplemented)
-  .post('/:id/photos', notImplemented) // add a photo to a series
-  .put('/:id/photos', notImplemented)
-  .patch('/:id/photos', notImplemented) // publish/unpublish a photo
-  .delete('/:id/photos', notImplemented) // disassociate a photo from a series
-  .get('/:id/products', notImplemented)
-  .post('/:id/products', notImplemented)
-  .put('/:id/products', notImplemented)
-  .patch('/:id/products', notImplemented)
-  .delete('/:id/products', notImplemented)
+  .delete('/', notImplemented)
+  .get('/:seriesId', ...getSeriesById) // get series by id
+  .post('/:seriesId', notImplemented)
+  .put('/:seriesId', ...updateSeries) // update multiple series fields by id
+  .patch('/:seriesId', notImplemented)
+  .delete('/:seriesId', ...removeSeries) // delete series by id

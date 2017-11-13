@@ -10,15 +10,16 @@ module.exports = (() => {
     setResponseDetailLevel,
     (req, res) => {
       return db.Series
-        .findAll(req.queryOptions)
-        .then(data => routerResponse.json({
+        .findById(req.params.seriesId, req.queryOptions)
+        .then((data) => routerResponse.json({
           req, res, statusCode: 200, data
-        })).catch(error => routerResponse.json({
+        }))
+        .catch(error => routerResponse.json({
           req,
           res,
           statusCode: 500,
           error,
-          message: 'error getting series dataset'
+          message: 'series record query by id errored'
         }))
     }]
 })()
