@@ -3,11 +3,15 @@ const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
-const setResponseDetailLevel = require('./middlewares').setResponseDetailLevel
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('series')
+
+const queryString = `UPDATE \`series\` SET \`order\` = \`order\` - 1 WHERE \`order\` > :targetPosition;`
 
 module.exports = (() => {
   return [
     validateJwt,
+    setBaseQueryParameters,
     setResponseDetailLevel,
     (req, res) => {
       let targetPosition = null
@@ -30,16 +34,16 @@ module.exports = (() => {
             })
             .then(() => {
               // advance records' record value that were after the deleted target
-              let queryString = `UPDATE \`series\` SET \`order\` = \`order\` - 1 WHERE \`order\` > :targetPosition;`
               return db.sequelize
-                .query(queryString, Object.assign({
-                  replacements: { targetPosition: targetPosition }
-                }, trxObj))
+                .query(queryString, {
+                  replacements: { targetPosition: targetPosition },
+                  transaction: trx
+                })
                 .catch(logging.reject('failure to adjust order values of affected records'))
             })
         }).then(() => {
           return db.Series
-            .findAll(req.queryParameters)
+            .findAll(req.queryOptions)
             .catch(logging.reject('DELETE operation completed, but couldn\'t retrieve updated dataset'))
         }).then((data) => routerResponse.json({
           req,

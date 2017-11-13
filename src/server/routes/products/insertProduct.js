@@ -7,94 +7,8 @@ const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
-
-const productQueryParameters = require('../../models/ormQueryParameters/products')
-
-function prepPhotoData (req, res, next) {
-  req.photoData = { photos: [] }
-  next()
-}
-
-function prepSecondaryPhotoData (req, res, next) {
-  // check existence of secondary photos
-  if (req.files.secondaryPhotos) {
-    // only proceed if primaryPhoto existed
-    if (req.files.primaryPhoto) {
-      req.files.secondaryPhotos.forEach(async (secondaryPhoto) => {
-        req.photoData.photos.push({
-          primary: false,
-          originalName: secondaryPhoto.originalname,
-          encoding: secondaryPhoto.encoding,
-          mimeType: secondaryPhoto.mimetype,
-          size: secondaryPhoto.size,
-          publish: false,
-          data: await fs.readFile(secondaryPhoto.path)
-        })
-      })
-      next()
-    } else {
-      // secondaryPhotos existed but not primaryPhoto
-      return routerResponse.json({
-        req,
-        res,
-        statusCode: 400,
-        message: 'primaryPhoto must exist to insert secondaryPhotos'
-      })
-    }
-  } else {
-    next() // no secondary photos found
-  }
-}
-
-function prepPrimaryPhotoData (req, res, next) {
-  if (req.files.primaryPhoto) {
-    // only process if primary photo existed in the request
-    let primaryPhoto = req.files.primaryPhoto[0]
-    // read the photo into the photoData object array
-    return fs
-      .readFile(primaryPhoto.path)
-      .then(bufferedPhoto => {
-        req.photoData.photos.splice(0, 0, {
-          primary: true,
-          originalName: primaryPhoto.originalname,
-          encoding: primaryPhoto.encoding,
-          mimeType: primaryPhoto.mimetype,
-          size: primaryPhoto.size,
-          publish: true,
-          data: bufferedPhoto
-        })
-        return next()
-      })
-      // error occured while reading the primary photo
-      .catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: 'error processing the primary photo'
-      }))
-  }
-  next() // no primary photo found
-}
-
-function removeTempPhotoFiles (req, res, next) {
-  // non-critical process
-  // server will continue to operate even failure is encountered
-  // app operation does not wait for this middleware to complete operation
-  if (req.files.secondaryPhotos) {
-    req.files.secondaryPhotos.forEach((photo) => {
-      fs.remove(photo.path)
-        .then(() => logging.warning(`temp file ${photo.originalname} removed...`))
-        .catch(error => logging.error(error, 'temp secondaryPhotos files removal failure...'))
-    })
-  }
-  if (req.files.primaryPhoto) {
-    fs.remove(req.files.primaryPhoto[0].path)
-      .then(() => logging.warning(`temp file ${req.files.primaryPhoto[0].originalname} removed...`))
-      .catch(error => logging.error(error, 'temp primaryPhoto file removal failure...'))
-  }
-  next()
-}
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('products')
 
 module.exports = ((req, res) => {
   return [
@@ -104,9 +18,11 @@ module.exports = ((req, res) => {
       { name: 'secondaryPhotos', maxCount: eVars.SECONDARY_PHOTO_COUNT_CEILING }
     ]),
     prepPhotoData,
-    prepSecondaryPhotoData,
+    prepSecondaryPhotoData, // should be called before primary photo processing middleware
     prepPrimaryPhotoData,
     removeTempPhotoFiles,
+    setBaseQueryParameters,
+    setResponseDetailLevel,
     (req, res) => {
       return db.sequelize
         .transaction(trx => {
@@ -136,17 +52,9 @@ module.exports = ((req, res) => {
               }
             })
         })
-        .then(newProduct => db.Products.findById(
-          newProduct.id,
-          req.query.hasOwnProperty('details')
-            ? productQueryParameters.details()
-            : productQueryParameters.simple()
-        ))
+        .then(newProduct => db.Products.findById(newProduct.id, req.queryOptions))
         .then(data => routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data
+          req, res, statusCode: 200, data
         }))
         .catch(error => routerResponse.json({
           req,
@@ -157,3 +65,105 @@ module.exports = ((req, res) => {
         }))
     }]
 })()
+
+function prepPhotoData (req, res, next) {
+  req.photoData = { photos: [] }
+  next()
+}
+
+function prepSecondaryPhotoData (req, res, next) {
+  // check existence of secondary photos
+  if (req.files.secondaryPhotos) {
+    // only proceed if primaryPhoto existed
+    if (req.files.primaryPhoto) {
+      req.files.secondaryPhotos.forEach(async (secondaryPhoto) => {
+        req.photoData.photos.push({
+          primary: false,
+          originalName: secondaryPhoto.originalname,
+          encoding: secondaryPhoto.encoding,
+          mimeType: secondaryPhoto.mimetype,
+          size: secondaryPhoto.size,
+          publish: false,
+          data: await fs
+            .readFile(secondaryPhoto.path)
+            // error occured while reading the secondary photos
+            .catch(error => {
+              routerResponse.json({
+                req,
+                res,
+                statusCode: 500,
+                error,
+                message: 'error processing the secondary photos'
+              })
+              next('SECONDARY_PHOTO_PROCESSING_FAILURE')
+            })
+        })
+      })
+      next()
+    } else {
+      // secondaryPhotos existed but primaryPhoto is not found
+      routerResponse.json({
+        req,
+        res,
+        statusCode: 400,
+        message: 'primaryPhoto must exist to insert secondaryPhotos'
+      })
+      next('PRIMARY_PHOTO_MISSING')
+    }
+  } else {
+    next() // no secondary photos found
+  }
+}
+
+function prepPrimaryPhotoData (req, res, next) {
+  if (req.files.primaryPhoto) {
+    // only process if primary photo existed in the request
+    let primaryPhoto = req.files.primaryPhoto[0]
+    // read the photo into the photoData object array
+    return fs
+      .readFile(primaryPhoto.path)
+      .then(bufferedPhoto => {
+        req.photoData.photos.splice(0, 0, {
+          primary: true,
+          originalName: primaryPhoto.originalname,
+          encoding: primaryPhoto.encoding,
+          mimeType: primaryPhoto.mimetype,
+          size: primaryPhoto.size,
+          publish: true,
+          data: bufferedPhoto
+        })
+        return next()
+      })
+      // error occured while reading the primary photo
+      .catch(error => {
+        routerResponse.json({
+          req,
+          res,
+          statusCode: 500,
+          error,
+          message: 'error processing the primary photo'
+        })
+        next('PRIMARY_PHOTO_PROCESSING_FAILURE')
+      })
+  }
+  next() // no primary photo found
+}
+
+function removeTempPhotoFiles (req, res, next) {
+  // non-critical process
+  // server will continue to operate when failure is encountered
+  // app operation does not wait for this middleware to complete operation
+  if (req.files.secondaryPhotos) {
+    req.files.secondaryPhotos.forEach((photo) => {
+      fs.remove(photo.path)
+        .then(() => logging.warning(`temp file ${photo.originalname} removed...`))
+        .catch(error => logging.error(error, 'secondaryPhotos temp files removal failure...'))
+    })
+  }
+  if (req.files.primaryPhoto) {
+    fs.remove(req.files.primaryPhoto[0].path)
+      .then(() => logging.warning(`temp file ${req.files.primaryPhoto[0].originalname} removed...`))
+      .catch(error => logging.error(error, 'primaryPhoto temp file removal failure...'))
+  }
+  next()
+}

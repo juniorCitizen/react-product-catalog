@@ -4,28 +4,19 @@ const notImplemented = require('../middlewares/notImplemented')
 
 // route handlers
 const getProducts = require('./products/getProducts')
+const getProductById = require('./products/getProductById')
 const insertProduct = require('./products/insertProduct')
 const updateProduct = require('./products/updateProduct')
 const deleteProduct = require('./products/deleteProduct')
 
 module.exports = express.Router()
-  .get('/', ...getProducts)
-  .post('/', ...insertProduct)
-  .put('/', ...updateProduct)
+  .get('/', ...getProducts) // get product dataset
+  .post('/', ...insertProduct) // create new product complete with optional photos and tags
+  .put('/', notImplemented)
   .patch('/', notImplemented)
-  .delete('/', ...deleteProduct)
-  .get('/:productId', notImplemented)
+  .delete('/', notImplemented)
+  .get('/:productId', ...getProductById) // get product record by id
   .post('/:productId', notImplemented)
-  .put('/:productId', notImplemented)
+  .put('/:productId', ...updateProduct) // update multiple product fields by id
   .patch('/:productId', notImplemented)
-  .delete('/:productId', notImplemented)
-  .get('/:productId/photos', notImplemented)
-  .post('/:productId/photos', notImplemented) // add a photo to a product
-  .put('/:productId/photos', notImplemented)
-  .patch('/:productId/photos', notImplemented) // publish/unpublish a photo
-  .delete('/:productId/photos', notImplemented) // disassociate a photo from a product
-  .get('/:productId/tags', notImplemented)
-  .post('/:productId/tags', notImplemented) // add a tag to a product
-  .put('/:productId/tags', notImplemented)
-  .patch('/:productId/tags', notImplemented)
-  .delete('/:productId/tags', notImplemented) // disassociate a tag from a product
+  .delete('/:productId', ...deleteProduct) // delete product by id

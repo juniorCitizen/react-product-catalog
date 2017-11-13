@@ -10,13 +10,13 @@ const updateSeries = require('./series/updateSeries')
 const removeSeries = require('./series/removeSeries')
 
 module.exports = express.Router()
-  .get('/', ...getSeries) // get series
-  .post('/', ...insertSeries) // create new series
+  .get('/', ...getSeries) // get series dataset
+  .post('/', ...insertSeries) // create new series record
   .put('/', notImplemented)
   .patch('/', notImplemented)
   .delete('/', notImplemented)
   .get('/:seriesId', ...getSeriesById) // get series by id
   .post('/:seriesId', notImplemented)
-  .put('/:seriesId', ...updateSeries) // update multiple series field by id
+  .put('/:seriesId', ...updateSeries) // update multiple series fields by id
   .patch('/:seriesId', notImplemented)
   .delete('/:seriesId', ...removeSeries) // delete series by id

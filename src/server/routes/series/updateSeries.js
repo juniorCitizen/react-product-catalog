@@ -3,23 +3,23 @@ const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
-const setBaseQueryParameters = require('./middlewares').setBaseQueryParameters
-const setResponseDetailLevel = require('./middlewares').setResponseDetailLevel
-const filterBodyData = require('./middlewares').filterBodyData
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('series')
+const filterBodyDataProperties = require('../../middlewares/filterBodyDataProperties')('series')
 
 module.exports = (() => {
   return [
     validateJwt,
     setBaseQueryParameters,
     setResponseDetailLevel,
-    filterBodyData,
+    filterBodyDataProperties,
     (req, res) => {
       return db.sequelize
         .transaction(async trx => {
           let trxObj = { transaction: trx }
           let targetRecord = await db.Series
             .findById(req.params.seriesId, trxObj)
-            .catch(logging.reject)
+            .catch(logging.reject('error querying for target record'))
           let originalPosition = targetRecord.order
           let targetPosition = await (() => {
             return db.Series
@@ -35,27 +35,24 @@ module.exports = (() => {
                   return Promise.resolve(parseInt(req.body.order))
                 }
               })
-              .catch(logging.reject)
+              .catch(logging.reject('error counting dataset length'))
           })()
           return db.sequelize
             .query(adjustmentQuery(originalPosition, targetPosition, req.params.seriesId), trxObj)
             .then(() => {
               return targetRecord
                 .update(req.filteredData, trxObj)
-                .catch(logging.reject)
+                .catch(logging.reject('error updating target record'))
             })
-            .catch(logging.reject)
+            .catch(logging.reject('error updating affected records'))
         })
         .then(() => {
           return db.Series
-            .findAll(req.queryParameters)
-            .catch(logging.reject)
+            .findAll(req.queryOptions)
+            .catch(logging.reject('update operation completed but couldn\'t retrieve updated dataset'))
         })
         .then((data) => routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data
+          req, res, statusCode: 200, data
         }))
         .catch(error => routerResponse.json({
           req,
@@ -69,10 +66,14 @@ module.exports = (() => {
 
 function adjustmentQuery (originalPosition, targetPosition, targetId) {
   if (originalPosition === targetPosition) {
+    // if the target position is the same as the original
+    // return a dummy query
     return 'SELECT 0;'
   } else if (originalPosition < targetPosition) {
+    // increase order value (push back)
     return `UPDATE \`series\` SET \`order\` = \`order\` - 1 WHERE \`id\` != ${targetId} AND \`order\` BETWEEN ${originalPosition + 1} AND ${targetPosition};`
   } else {
+    // advance in position
     return `UPDATE \`series\` SET \`order\` = \`order\` + 1 WHERE \`id\` != ${targetId} AND \`order\` BETWEEN ${targetPosition} AND ${originalPosition - 1};`
   }
 }

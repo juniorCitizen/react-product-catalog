@@ -1,8 +1,8 @@
 const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-const setBaseQueryParameters = require('./middlewares').setBaseQueryParameters
-const setResponseDetailLevel = require('./middlewares').setResponseDetailLevel
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('series')
 
 module.exports = (() => {
   return [
@@ -10,7 +10,7 @@ module.exports = (() => {
     setResponseDetailLevel,
     (req, res) => {
       return db.Series
-        .findById(req.params.seriesId, req.queryParameters)
+        .findById(req.params.seriesId, req.queryOptions)
         .then((data) => routerResponse.json({
           req, res, statusCode: 200, data
         }))
@@ -19,7 +19,7 @@ module.exports = (() => {
           res,
           statusCode: 500,
           error,
-          message: 'query series by id errored'
+          message: 'series record query by id errored'
         }))
     }]
 })()

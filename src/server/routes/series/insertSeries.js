@@ -1,7 +1,7 @@
 const db = require('../../controllers/database')
 const routerResponse = require('../../controllers/routerResponse')
 
-const ensureUrlQueryParametersExistence = require('./middlewares').ensureUrlQueryParametersExistence
+const ensureUrlQueryParametersExistence = require('../../middlewares/ensureUrlQueryParametersExistence')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
@@ -9,31 +9,34 @@ module.exports = (() => {
     validateJwt,
     ensureUrlQueryParametersExistence(['name']),
     async (req, res) => {
-      return db.Series.create({
-        id: await nextAvailableId(),
-        name: req.query.name,
-        order: await nextAvailableValueInSequence()
-      }).then((newSeriesRecord) => {
-        return routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data: (() => {
-            if (req.query.hasOwnProperty('details')) {
-              return Object.assign(newSeriesRecord.dataValues, {
+      return db.Series
+        .create({
+          id: await nextAvailableId(),
+          name: req.query.name,
+          order: await nextAvailableValueInSequence()
+        })
+        .then((newSeriesRecord) => (() => {
+          if (req.query.hasOwnProperty('details')) {
+            return Promise.resolve(
+              Object.assign(newSeriesRecord.dataValues, {
                 products: [],
                 photo: null
               })
-            } else { return newSeriesRecord }
-          })()
+            )
+          } else { return Promise.resolve(newSeriesRecord) }
+        })())
+        .then((data) => {
+          return routerResponse.json({
+            req, res, statusCode: 200, data
+          })
         })
-      }).catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: 'error inserting series record'
-      }))
+        .catch(error => routerResponse.json({
+          req,
+          res,
+          statusCode: 500,
+          error,
+          message: 'error inserting series record'
+        }))
     }]
 })()
 

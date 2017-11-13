@@ -10,15 +10,16 @@ module.exports = (() => {
     setResponseDetailLevel,
     (req, res) => {
       return db.Products
-        .findAll(req.queryOptions)
-        .then(data => routerResponse.json({
+        .findById(req.params.productId.toUpperCase(), req.queryOptions)
+        .then((data) => routerResponse.json({
           req, res, statusCode: 200, data
-        })).catch(error => routerResponse.json({
+        }))
+        .catch(error => routerResponse.json({
           req,
           res,
           statusCode: 500,
           error,
-          message: 'error getting product dataset'
+          message: 'product record query by id errored'
         }))
     }]
 })()
