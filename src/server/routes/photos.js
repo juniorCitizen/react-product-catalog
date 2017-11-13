@@ -1,7 +1,12 @@
 const express = require('express')
 
+const notImplemented = require('../middlewares/notImplemented')
+
 module.exports = express.Router()
   .get('/', require('./photos/get'))
+  .post('/', notImplemented)
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
   .delete('/', require('./photos/delete'))
 
 // deal with photo uploads and place inside the database (unused, pending deprecation)

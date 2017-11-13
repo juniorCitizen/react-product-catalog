@@ -18,10 +18,10 @@ module.exports = express.Router()
   .get('/:id/photos', notImplemented)
   .post('/:id/photos', notImplemented) // add a photo to a product
   .put('/:id/photos', notImplemented)
-  .patch('/:id/photos', notImplemented) // publish a photo
-  .delete('/:id/photos', notImplemented) // remove a photo from a product
+  .patch('/:id/photos', notImplemented) // publish/unpublish a photo
+  .delete('/:id/photos', notImplemented) // disassociate a photo from a product
   .get('/:id/tags', notImplemented)
   .post('/:id/tags', notImplemented) // add a tag to a product
   .put('/:id/tags', notImplemented)
   .patch('/:id/tags', notImplemented)
-  .delete('/:id/tags', notImplemented) // remove a tag from a product
+  .delete('/:id/tags', notImplemented) // disassociate a tag from a product
