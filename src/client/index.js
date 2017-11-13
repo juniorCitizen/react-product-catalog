@@ -1,17 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { login_user } from './actions'
-
-import Hello from './Hello'
-
-const app = document.getElementById('app')
+import Root from './components/route'
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
+const store = configureStore();
 
 ReactDOM.render((
-    <BrowserRouter>
-        <div>
-            <Route exact path="/" component={Hello}/>
-        </div>
-    </BrowserRouter> 
+    <Provider store={store}>
+        <Root />
+    </Provider>
 ), app)
