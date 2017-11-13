@@ -42,17 +42,26 @@ simple product catalog website and backend with product data, user and client ma
 ### series
 
 * **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details (photo/tags)
+
   * return: json object with recordset and optional details under 'data' property
+
 * **GET protocol://domain:port/sys_ref/api/series/:id(?details)** - get series by id with optional details (photo/tags)
+
   * return: json object with record and optional details under 'data' property
+
 * **POST protocol://domain:port/sys_ref/api/series?name=nameString(&details)** - insert new series record
+
   * request header: { "x-access-token": "jwt-token-string" }
   * return: json object with new record and optional details under 'data' property
+
 * **PUT protocol://domain:port/sys_ref/api/series/:id(?details)** - update multiple fields of a series record by id
+
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
   * request body: { "name": "hello", "order": 7 }
   * return: json object with updated series recordset and optional details under 'data' property
+
 * **DELETE protocol://domain:port/sys_ref/api/series/:id(?details)** - delete a series record by id
+
   * request header: { "x-access-token": "jwt-token-string" }
   * return: json object with updated series recordset and optional details under 'data' property
   * notes: will error if existing product/photo is still associated with the target series
