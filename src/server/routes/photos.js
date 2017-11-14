@@ -2,17 +2,22 @@ const express = require('express')
 
 const notImplemented = require('../middlewares/notImplemented')
 
+const getPhotoById = require('./photos/getPhotoById')
+const insertPhoto = require('./photos/insertPhoto')
+const removePhoto = require('./photos/removePhoto')
+const togglePhotoPublishState = require('./photos/togglePhotoPublishState')
+
 module.exports = express.Router()
-  .get('/', require('./photos/get'))
-  .post('/', notImplemented)
+  .get('/', notImplemented)
+  .post('/', ...insertPhoto) // batch insert photos
   .put('/', notImplemented)
   .patch('/', notImplemented)
-  .delete('/', require('./photos/delete'))
-  .get('/:photoId', notImplemented)
+  .delete('/', notImplemented)
+  .get('/:photoId', ...getPhotoById) // get photo by id
   .post('/:photoId', notImplemented)
   .put('/:photoId', notImplemented)
-  .patch('/:photoId', notImplemented)
-  .delete('/:photoId', notImplemented)
+  .patch('/:photoId', ...togglePhotoPublishState) // publish/unpublish a photo
+  .delete('/:photoId', ...removePhoto) // remove photo by id
   .get('/:photoId/products/:productId', notImplemented)
   .post('/:photoId/products/:productId', notImplemented)
   .put('/:photoId/products/:productId', notImplemented)

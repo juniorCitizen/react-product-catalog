@@ -17,7 +17,6 @@ const cannedMessage = {
 
 module.exports = {
   file: fileResponse,
-  image: imageResponse,
   imageBuffer: imageBufferResponse,
   json: jsonResponse,
   stream: streamResponse,
@@ -43,6 +42,7 @@ module.exports = {
 function templateResponse (args) {
   return args.res
     .status(args.statusCode)
+    .type('application/html;charset=utf-8')
     .render(args.view, args.data || {})
 }
 
@@ -68,6 +68,7 @@ function templateResponse (args) {
 function jsonResponse (args) {
   return args.res
     .status(args.statusCode)
+    .type('application/json;charset=utf-8')
     .json({
       method: args.req.method,
       endpoint: `${args.req.protocol}://${args.req.hostname}:${eVars.PORT}${args.req.originalUrl}`,
@@ -85,13 +86,6 @@ function imageBufferResponse (args) {
     .send(args.dataBuffer)
 }
 
-function imageResponse (args) {
-  return args.res
-    .status(args.statusCode)
-    .type(args.mimeType)
-    .sendFile(args.filePath)
-}
-
 function fileResponse (args) {
   return args.res
     .status(args.statusCode)
@@ -103,6 +97,6 @@ function streamResponse (args) {
   args.res
     .status(args.statusCode)
     .type(args.mimeType)
-    .attachment(args.filenName)
+    .attachment(args.fileName)
   return args.stream.pipe(args.res)
 }
