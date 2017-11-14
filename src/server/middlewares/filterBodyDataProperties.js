@@ -2,7 +2,14 @@ const routerResponse = require('../controllers/routerResponse')
 
 const expectedFields = {
   series: ['name', 'order', 'publish'],
-  products: ['code', 'name', 'specification', 'description', 'publish', 'seriesId']
+  products: ['code', 'name', 'specification', 'description', 'publish', 'seriesId'],
+  photos: ['primary', 'productId', 'seriesId', 'publish']
+}
+
+const capitalizationEnforcedFields = {
+  series: [],
+  products: ['seriesId'],
+  photos: ['productId', 'seriesId']
 }
 
 module.exports = (modelReference) => {
@@ -11,9 +18,15 @@ module.exports = (modelReference) => {
     req.filteredData = {}
     // loop through fields according to the modelReference parameter value
     expectedFields[modelReference].forEach((fieldName) => {
-      if (req.body.hasOwnProperty(fieldName)) {
+      if (fieldName in req.body) {
         // if match is found, place into req.filteredData object
-        req.filteredData[fieldName] = req.body[fieldName]
+        req.filteredData[fieldName] = (() => {
+          if (fieldName.indexOf(capitalizationEnforcedFields[modelReference]) === -1) {
+            return req.body[fieldName]
+          } else {
+            return req.body[fieldName].toUpperCase()
+          }
+        })()
       }
     })
     if (Object.keys(req.filteredData).length === 0 && req.filteredData.constructor === Object) {

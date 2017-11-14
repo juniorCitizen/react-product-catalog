@@ -105,9 +105,36 @@ simple product catalog website and backend with product data, user and client ma
     1. associated tags are disassociated by removal of related entry in the 'labels' table
     2. associated photos only has 'productId' field set to null, so orphan photos may be created
 
+### photos
+
+* **GET protocol://domain:port/sys_ref/api/photos/:photoId** - get **photo data** by id
+
+* **POST protocol://domain:port/sys_ref/api/photos** - batch photo insert
+
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body:
+
+        {
+          "primary": boolean, // optional
+          "publish": boolean, // optional
+          "seriesId": integer, // optional
+          "productId": uuid, //optional
+          "photos": files // at least one file must exist in the property
+        }
+  * note: photo files are deleted during operation
+
+* **PATCH protocol://domain:port/sys_ref/api/photos** - publish or unpublish a photo
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **DELETE protocol://domain:port/sys_ref/api/photos/:photoId** - delete photo record by id
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
 ### token
 
-* **POST   protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
+* **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
+
   * request header: { "Content-Type": "application/json"}
   * request body:
 

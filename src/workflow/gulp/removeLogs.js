@@ -11,7 +11,7 @@ module.exports = () => {
         return Promise.resolve(candidates)
       })
       .then((candidates) => {
-        return del(candidates)
+        return del(candidates) // del is chosen over fs-extra.remove() due to the ability to work with globs
       })
       .then(() => {
         logging.console('記錄檔清除... 完成')
