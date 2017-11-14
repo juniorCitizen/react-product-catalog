@@ -5,8 +5,8 @@ module.exports = (req, res, next) => {
     next()
   } else {
     return routerResponse.json({
-      req: req,
-      res: res,
+      req,
+      res,
       statusCode: 400,
       message: 'the route you are trying to access is protected and only accessible from localhost'
     })

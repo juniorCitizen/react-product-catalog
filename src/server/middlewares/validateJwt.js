@@ -13,14 +13,12 @@ module.exports = (req, res, next) => {
     let accessToken = req.get('x-access-token')
     if (accessToken) { // if a token is found
       return jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
-        // if decoding error is encountered
-        if (error) {
-          logging.warning('UNAUTHORIZED TOKEN DETECTED!!!')
+        if (error) { // if decoding error is encountered
           return routerResponse.json({
-            req: req,
-            res: res,
+            req,
+            res,
             statusCode: 401,
-            error: error,
+            error,
             message: 'unauthorized token'
           })
         } else { // successfully decoded
@@ -35,33 +33,28 @@ module.exports = (req, res, next) => {
               next()
               return Promise.resolve()
             } else {
-              logging.warning('UNAUTHORIZED USER LOGIN DETECTED!!!')
               routerResponse.json({
-                req: req,
-                res: res,
+                req,
+                res,
                 statusCode: 401,
-                message: 'unauthorized user login detected'
+                message: 'unauthorized credential'
               })
-              let error = new Error('UNAUTHORIZED_USER')
-              error.name = 'UNAUTHORIZED_USER'
-              error.message = 'unauthorized user login detected'
-              return Promise.reject(error)
+              return Promise.reject(new Error('UNAUTHORIZED_CREDENTIAL'))
             }
           }).catch((error) => {
-            logging.error(error, 'middlewares/validateJwt.js jwt.verify() errored')
             return routerResponse.json({
-              req: req,
-              res: res,
+              req,
+              res,
               statusCode: 500,
-              error: error
+              error
             })
           })
         }
       })
     } else { // if there is no token, return an error
       return routerResponse.json({
-        req: req,
-        res: res,
+        req,
+        res,
         statusCode: 401,
         message: 'missing token'
       })
