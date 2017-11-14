@@ -80,6 +80,7 @@ simple product catalog website and backend with product data, user and client ma
           "primaryPhoto": file, // optional, but must exist if secondaryPhotos are present
           "secondaryPhotos": files // optional
         }
+
   * note: photo files are deleted during operation
 
 * **PUT protocol://domain:port/sys_ref/api/products/:productId(?details)** - update multiple fields of a product record by id
@@ -125,9 +126,18 @@ simple product catalog website and backend with product data, user and client ma
           "productId": uuid, //optional
           "photos": files // at least one file must exist in the property
         }
+
   * note: photo files are deleted during operation
 
 * **PATCH protocol://domain:port/sys_ref/api/photos** - publish or unpublish a photo
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/photos/:photoId/products/:productId** - assign a photo to a product
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/photos/:photoId/series/:seriesId** - assign a photo to a series
 
   * request header: { "x-access-token": "jwt-token-string" }
 

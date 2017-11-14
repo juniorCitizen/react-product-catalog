@@ -17,10 +17,7 @@ module.exports = (() => {
         let data = updatedRecord.dataValues
         delete data.data
         return routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data
+          req, res, statusCode: 200, data
         })
       })
       .catch(error => routerResponse.json({

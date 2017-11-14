@@ -5,7 +5,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')
 const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('products')
 
-module.exports = ((req, res) => {
+module.exports = (() => {
   return [
     validateJwt,
     setBaseQueryParameters,
@@ -27,6 +27,5 @@ module.exports = ((req, res) => {
           error,
           message: 'failure to assign product to a series'
         }))
-    }
-  ]
+    }]
 })()
