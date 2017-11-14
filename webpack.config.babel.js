@@ -34,6 +34,9 @@ const commonConfig = merge([
       path: PATHS.build,
       filename: '[name].js'
     },
+    devServer: {
+      historyApiFallback: true,
+    },
     plugins: [
       new HtmlWebpackPlugin({
         title: eVars.SYS_REF,
