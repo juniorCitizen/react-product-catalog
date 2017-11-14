@@ -66,7 +66,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/product/:productId(?details)** - get product by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/products** - insert product with optional photo uploads and tags association
+* **POST protocol://domain:port/sys_ref/api/products(?details)** - insert product with optional photo uploads and tags association
 
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
   * request body:
@@ -82,7 +82,7 @@ simple product catalog website and backend with product data, user and client ma
         }
   * note: photo files are deleted during operation
 
-* **PUT protocol://domain:port/sys_ref/api/products/:productId** - update multiple fields of a product record by id
+* **PUT protocol://domain:port/sys_ref/api/products/:productId(?details)** - update multiple fields of a product record by id
 
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
   * request body:
@@ -96,7 +96,11 @@ simple product catalog website and backend with product data, user and client ma
           "seriesId": integer // optional
         }
 
-  * note: at least one field must be present
+  * note: at least one field must be
+
+* **PATCH protocol://domain:port/sys_ref/api/products/:productId/series/:seriesId(?details)** - assign product to a series
+
+  * request header: { "x-access-token": "jwt-token-string" }
 
 * **DELETE protocol://domain:port/sys_ref/api/products/:productId** - delete a product record by id
 
