@@ -2,24 +2,29 @@ const express = require('express')
 
 const notImplemented = require('../middlewares/notImplemented')
 
+const getCarousel = require('./carousels/getCarousel')
+const insertCarousel = require('./carousels/insertCarousel')
+const toggleCarouselPrimaryStatus = require('./carousels/toggleCarouselPrimaryStatus')
+const removeCarousel = require('./carousels/removeCarousel')
+
 module.exports = express.Router()
-  .get('/', (req, res) => notImplemented) // get all carousel **
-  .post('/', (req, res) => notImplemented) // add a carousel image **
-  .put('/', (req, res) => notImplemented)
-  .patch('/', (req, res) => notImplemented)
-  .delete('/', (req, res) => notImplemented)
-  .get('/:id', (req, res) => notImplemented) // get one carousel **
-  .post('/:id', (req, res) => notImplemented)
-  .put('/:id', (req, res) => notImplemented)
-  .patch('/:id', (req, res) => notImplemented)
-  .delete('/:id', (req, res) => notImplemented) // remove a carousel image **
-  .get('/:id/order/:order', (req, res) => notImplemented)
-  .post('/:id/order/:order', (req, res) => notImplemented)
-  .put('/:id/order/:order', (req, res) => notImplemented)
-  .patch('/:id/order/:order', (req, res) => notImplemented) // update order **
-  .delete('/:id/order/:order', (req, res) => notImplemented)
-  .get('/:id/primary', (req, res) => notImplemented)
-  .post('/:id/primary', (req, res) => notImplemented)
-  .put('/:id/primary', (req, res) => notImplemented)
-  .patch('/:id/primary', (req, res) => notImplemented) // switch primary status **
-  .delete('/:id/primary', (req, res) => notImplemented)
+  .get('/', notImplemented)
+  .post('/', ...insertCarousel) // add a carousel image
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
+  .delete('/', notImplemented)
+  .get('/:carouselId', ...getCarousel) // get one carousel
+  .post('/:carouselId', notImplemented)
+  .put('/:carouselId', notImplemented)
+  .patch('/:carouselId', notImplemented)
+  .delete('/:carouselId', ...removeCarousel) // remove a carousel image
+  .get('/:carouselId/order/:order', notImplemented)
+  .post('/:carouselId/order/:order', notImplemented)
+  .put('/:carouselId/order/:order', notImplemented)
+  .patch('/:carouselId/order/:order', notImplemented) // update order **
+  .delete('/:carouselId/order/:order', notImplemented)
+  .get('/:carouselId/primary', notImplemented)
+  .post('/:carouselId/primary', notImplemented)
+  .put('/:carouselId/primary', notImplemented)
+  .patch('/:carouselId/primary', ...toggleCarouselPrimaryStatus) // switch primary status
+  .delete('/:carouselId/primary', notImplemented)

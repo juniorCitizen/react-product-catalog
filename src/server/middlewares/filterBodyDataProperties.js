@@ -3,13 +3,15 @@ const routerResponse = require('../controllers/routerResponse')
 const expectedFields = {
   series: ['name', 'order', 'publish'],
   products: ['code', 'name', 'specification', 'description', 'publish', 'seriesId'],
-  photos: ['primary', 'productId', 'seriesId', 'publish']
+  photos: ['primary', 'productId', 'seriesId', 'publish'],
+  carousels: ['order', 'primary']
 }
 
 const capitalizationEnforcedFields = {
   series: [],
   products: ['seriesId'],
-  photos: ['productId', 'seriesId']
+  photos: ['productId', 'seriesId'],
+  carousels: []
 }
 
 module.exports = (modelReference) => {
