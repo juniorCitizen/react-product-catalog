@@ -37,99 +37,86 @@ simple product catalog website and backend with product data, user and client ma
 ### client access
 
 * **GET protocol://domain:port/sys_ref** - index.html
+
 * **GET protocol://domain:port/sys_ref/path** - public assets
 
 ### series
 
-* **GET protocol://domain:port/sys_ref/api/series** - get series data
+* **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details
 
-  * examples:
-    1. GET protocol://domain:port/sys_ref/api/series(?details)
-    2. GET protocol://domain:port/sys_ref/api/series(?id=x(&details))
-    3. GET protocol://domain:port/sys_ref/api/series(?name=xxx(&details))
+* **GET protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - get series by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/series** - insert series record
+* **POST protocol://domain:port/sys_ref/api/series?name=nameString(&details)** - insert new series record of 'nameString'
 
   * request header: { "x-access-token": "jwt-token-string" }
-  * examples: POST protocol://domain:port/sys_ref/api/series?name=xxx(&details)
 
-* **PUT protocol://domain:port/sys_ref/api/series** - update a series record
+* **PUT protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - update multiple fields of a series record by id
 
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
-  * request body: { "id": 11, "name": "hello", "order": 7 }
-  * examples: PUT protocol://domain:port/sys_ref/api/series(?details)
+  * request body: { "name": "hello", "order": 7 }
 
-* **DELETE protocol://domain:port/sys_ref/api/series** - delete a series record by id or name
+* **DELETE protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - delete a series record by id
 
   * request header: { "x-access-token": "jwt-token-string" }
-  * examples:
-    1. DELETE protocol://domain:port/sys_ref/api/series?id=x(&details)
-    2. DELETE protocol://domain:port/sys_ref/api/series?name=xxx(&details)
   * notes: will error if existing product/photo is still associated with the target series
 
 ### products
 
-* **GET    protocol://domain:port/sys_ref/api/products** - get product catalog
+* **GET protocol://domain:port/sys_ref/api/products(?details)** - get product catalog with optional details
 
-  * examples:
-    1. GET protocol://domain:port/sys_ref/api/products(?details)
-    2. GET protocol://domain:port/sys_ref/api/products(?id=x(&details))
-    3. GET protocol://domain:port/sys_ref/api/products(?code=xxx(&details))
+* **GET protocol://domain:port/sys_ref/api/product/:productId(?details)** - get product by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/products** - insert product and photo records
+* **POST protocol://domain:port/sys_ref/api/products** - insert product with optional photo uploads and tags association
 
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
-  * request body: {
+  * request body:
 
-        "code": "xxx",
-        "name": "xxx",
-        "specification": "xxx",
-        "description": "xxx",
-        "tags": ["tagId", "tagId"...], // optional
-        "primaryPhoto": file, // optional, but must exist if secondaryPhotos are sent
-        "secondaryPhotos": files // optional
+        {
+          "code": "xxx",
+          "name": "xxx",
+          "specification": "xxx",
+          "description": "xxx",
+          "tags": ["tagId", "tagId"...], // optional
+          "primaryPhoto": file, // optional, but must exist if secondaryPhotos are present
+          "secondaryPhotos": files // optional
+        }
+  * note: photo files are deleted during operation
 
-    }
-  * examples: POST protocol://domain:port/sys_ref/api/products?name=xxx(&details)
-
-* **PUT protocol://domain:port/sys_ref/api/products** - update multiple fields of a product record by id
+* **PUT protocol://domain:port/sys_ref/api/products/:productId** - update multiple fields of a product record by id
 
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
-  * request body: {
+  * request body:
 
-        "id": "product uuid", // required
-        "code": "xxx", // optional
-        "name": "xxx", // optional
-        "specification": "xxx", // optional
-        "description": "xxx", // optional
-        "publish": true/false, // optional
-        "seriesId": integer // optional
+        {
+          "code": "xxx", // optional
+          "name": "xxx", // optional
+          "specification": "xxx", // optional
+          "description": "xxx", // optional
+          "publish": true/false, // optional
+          "seriesId": integer // optional
+        }
 
-    }
-  * note: 除了必要的 product id 值，至少要有另一個欄位存在
+  * note: at least one field must be present
 
-* **DELETE protocol://domain:port/sys_ref/api/products** - delete a product record by id
+* **DELETE protocol://domain:port/sys_ref/api/products/:productId** - delete a product record by id
 
   * request header: { "x-access-token": "jwt-token-string" }
-  * examples: DELETE protocol://domain:port/sys_ref/api/series?id=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   * notes:
-    1. target id must be in url query
-    2. associated tags are disassociated by removal of related entry in the labels table
-    3. associated photos only as 'productId' field set to null, so orphan photos may be created.  It's done intentionally as photos may be associated with a series, or, the photos may be still be used
+    1. associated tags are disassociated by removal of related entry in the 'labels' table
+    2. associated photos only has 'productId' field set to null, so orphan photos may be created
 
 ### token
 
 * **POST   protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
-
   * request header: { "Content-Type": "application/json"}
-  * request body: { // all fields are required
+  * request body:
 
-        "email":"admin@nowhere.com",
-	      "loginId":"admin",
-	      "password":"0000",
-	      "botPrevention":""
-
-    }
+        { // all fields are required
+          "email": "admin@nowhere.com",
+          "loginId": "admin",
+          "password": "0000",
+          "botPrevention": ""
+        }
 
 ## LICENSE
 

@@ -4,13 +4,19 @@ const notImplemented = require('../middlewares/notImplemented')
 
 // route handlers
 const getSeries = require('./series/getSeries')
+const getSeriesById = require('./series/getSeriesById')
 const insertSeries = require('./series/insertSeries')
 const updateSeries = require('./series/updateSeries')
 const removeSeries = require('./series/removeSeries')
 
 module.exports = express.Router()
-  .get('/', ...getSeries)
-  .post('/', ...insertSeries)
-  .put('/', ...updateSeries)
+  .get('/', ...getSeries) // get series dataset
+  .post('/', ...insertSeries) // create new series record
+  .put('/', notImplemented)
   .patch('/', notImplemented)
-  .delete('/', ...removeSeries)
+  .delete('/', notImplemented)
+  .get('/:seriesId', ...getSeriesById) // get series by id
+  .post('/:seriesId', notImplemented)
+  .put('/:seriesId', ...updateSeries) // update multiple series fields by id
+  .patch('/:seriesId', notImplemented)
+  .delete('/:seriesId', ...removeSeries) // delete series by id
