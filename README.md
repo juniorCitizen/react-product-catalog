@@ -46,7 +46,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - get series by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/series?name=nameString(&details)** - insert new series record of 'nameString'
+* **POST protocol://domain:port/sys_ref/api/series/name/:name(?details)** - insert new series record of 'name'
 
   * request header: { "x-access-token": "jwt-token-string" }
 

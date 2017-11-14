@@ -67,7 +67,6 @@ logging.console('宣告 end-point 處理程序...')
 
 // setup public assets endpoint
 ROUTERS.assets.router.use(express.static(ROUTERS.assets.path))
-ROUTERS.assets.router.use('/carousels', require('./routes/carousels'))
 logging.console(`public assets 實體檔案路徑... ${ROUTERS.assets.path}`)
 // setup SPA index.html endpoint
 ROUTERS.client.router.use('/', require('./routes/index'))
@@ -79,6 +78,7 @@ ROUTERS.api.router.use('/tokens', require('./routes/tokens'))
 ROUTERS.api.router.use('/photos', require('./routes/photos'))
 ROUTERS.api.router.use('/regions', require('./routes/regions'))
 ROUTERS.api.router.use('/countries', require('./routes/countries'))
+ROUTERS.api.router.use('/carousels', require('./routes/carousels'))
 // apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))
 // apiAccessRouter.use('/users', require('./routes/users/users'))
 

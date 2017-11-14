@@ -1,18 +1,17 @@
 const db = require('../../controllers/database')
+const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
-const ensureUrlQueryParametersExistence = require('../../middlewares/ensureUrlQueryParametersExistence')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
   return [
     validateJwt,
-    ensureUrlQueryParametersExistence(['name']),
     async (req, res) => {
       return db.Series
         .create({
           id: await nextAvailableId(),
-          name: req.query.name,
+          name: req.params.name,
           order: await nextAvailableValueInSequence()
         })
         .then((newSeriesRecord) => (() => {
@@ -52,7 +51,7 @@ function nextAvailableId () {
       }
       return Promise.resolve(nextAvailableId)
     })
-    .catch(error => Promise.reject(error))
+    .catch(logging.reject('error getting the next available id value'))
 }
 
 function nextAvailableValueInSequence () {
@@ -67,5 +66,5 @@ function nextAvailableValueInSequence () {
       }
       return Promise.resolve(nextAvailableValueInSequence)
     })
-    .catch(error => Promise.reject(error))
+    .catch(logging.reject('error getting the next available order value'))
 }
