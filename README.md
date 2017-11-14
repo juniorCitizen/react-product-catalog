@@ -159,6 +159,16 @@ simple product catalog website and backend with product data, user and client ma
           "botPrevention": ""
         }
 
+### regions
+
+* **GET protocol://domain:port/sys_ref/api/regions** - get a list of world regions
+
+### countries
+
+* **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
+
+* **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
+
 ## LICENSE
 
 MIT © [ASJ Group] (chiayu.tsai.personal@gmail.com / papago75@gmail.com)
