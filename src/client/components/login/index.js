@@ -7,19 +7,10 @@ export default class Login extends React.Component {
             form: {
                 email: '',
                 password: '',
-                confirm: '',
-                name: '',
-                address: '',
-                contact: '',
             },
             msg:{
                 email: '',
                 password: '',
-                confirm: '',
-                name: '',
-                address: '',
-                contact: '',
-                submit: '',
             },
             isLoading: false,
         }
@@ -37,24 +28,12 @@ export default class Login extends React.Component {
         this.setState({ form: form })
     }
 
-    checkEmail() {
-        
-    }
-
-    checkPassword() {
-        let { form, msg } = this.state
-        if (form.password !== form.confirm) {
-           msg.confirm = '密碼與確認密碼不一致'
-           this.setState({msg: msg}) 
-        }
-    }
-
     checkSpace() {
         let { form, msg } = this.state
         let err = false
         Object.keys(form).map((key) => {
             if (form[key] === '') {
-                msg[key] = '必填'
+                msg[key] = '不得空白'
                 this.setState({msg: msg})
                 err = true
             } 
@@ -62,7 +41,7 @@ export default class Login extends React.Component {
         return err
     }
 
-    submit() {
+    login() {
         if (this.checkSpace()) {
             return
         }
@@ -77,22 +56,22 @@ export default class Login extends React.Component {
         .then(function (response) {
             let res = response.data
             if (res.result) {
-                self.submitSuccess()
+                self.loginSuccess()
             } else {
-                self.submitError(res.msg)
+                self.loginError(res.msg)
             }
         }).catch(function (error) {
             console.log(error)
-            self.submitError(error)
+            self.loginError(error)
         })
         
     }
 
-    submitSuccess() {
+    loginSuccess() {
 
     }
 
-    submitError(str) {
+    loginError(str) {
         let msg = this.state.msg
         msg.submit = str
         self.setState({
@@ -123,49 +102,13 @@ export default class Login extends React.Component {
                     </div>
                     <p className="help is-danger">{msg.password}</p>
                 </div>
-                <div className="field">
-                    <label className="label">確認密碼</label>
-                    <div className="control">
-                        <input className="input" type="password" placeholder="再次確認密碼"
-                            value={form.confirm} onChange={this.inputChange.bind(this, 'confirm')}
-                        />
-                    </div>
-                    <p className="help is-danger">{msg.confirm}</p>
-                </div>
-                <div className="field">
-                    <label className="label">姓名/公司行號</label>
-                    <div className="control">
-                        <input className="input" type="text" placeholder="請輸入姓名或公司行號"
-                            value={form.name} onChange={this.inputChange.bind(this, 'name')}
-                        />
-                    </div>
-                    <p className="help is-danger">{msg.name}</p>
-                </div>
-                <div className="field">
-                    <label className="label">地址</label>
-                    <div className="control">
-                        <input className="input" type="text" placeholder="請輸入地址"
-                            value={form.address} onChange={this.inputChange.bind(this, 'address')}
-                        />
-                    </div>
-                    <p className="help is-danger">{msg.address}</p>
-                </div>
-                <div className="field">
-                    <label className="label">聯絡電話</label>
-                    <div className="control">
-                        <input className="input" type="text" placeholder="請輸入聯絡電話" 
-                            value={form.contact} onChange={this.inputChange.bind(this, 'contact')}
-                        />
-                    </div>
-                    <p className="help is-danger">{msg.contact}</p>
-                </div>
                 <div className="field-body">
                     <div className="field">
                         <div className="control">
-                            <button className="button is-primary" onClick={this.submit.bind(this)}>
-                                註冊帳號
+                            <button className="button is-primary" onClick={this.login.bind(this)}>
+                                登入
                             </button>
-                            <span className="help is-danger">{msg.submit}</span>
+                            <span className="help is-danger">{msg.login}</span>
                         </div>
                     </div>
                 </div>

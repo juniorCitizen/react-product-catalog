@@ -20,6 +20,13 @@ class Main extends React.Component {
         super(props)
         this.state = {
             auth: false,
+            select: {
+                product: 'is-active',
+                login: '',
+                register: '',
+                contact: '',
+                order: '',
+            }
         }
     }
 
@@ -27,8 +34,17 @@ class Main extends React.Component {
 
     }
 
+    tabActive(tab) {
+        let select = this.state
+        Object.keys(select).map((key) => {
+            select[key] = ''
+        })
+        select[tab] = 'is-active'
+        this.setState({select: select})
+    }
+
     render() {
-        const { auth } = this.state
+        const { auth, select } = this.state
         return(  
             <BrowserRouter>  
                 <div>            
@@ -42,11 +58,16 @@ class Main extends React.Component {
                     <nav className="navbar has-shadow">
                         <div className="container">
                             <nav className="tabs">
-                                <Link className="navbar-item is-tab is-active" to="/">產品列表</Link>
-                                <Link className="navbar-item is-tab" to="/login">會員登入</Link>
-                                <Link className="navbar-item is-tab" to="/register">會員註冊</Link>
-                                <Link className="navbar-item is-tab" to="/contact">聯絡我們</Link>
-                                {auth && <Link className="navbar-item is-tab" to="/order">訂購清單</Link>}
+                                <Link className={"navbar-item is-tab " + select.product} 
+                                    onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
+                                <Link className={"navbar-item is-tab " + select.login} 
+                                    onClick={this.tabActive.bind(this, 'login')} to="/login">會員登入</Link>
+                                <Link className={"navbar-item is-tab " + select.register} 
+                                    onClick={this.tabActive.bind(this, 'register')} to="/register">會員註冊</Link>
+                                <Link className={"navbar-item is-tab " + select.contact}
+                                    onClick={this.tabActive.bind(this, 'contact')} to="/contact">聯絡我們</Link>
+                                {auth && <Link className={"navbar-item is-tab " + select.order}
+                                    onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>}
                             </nav>
                         </div>
                     </nav>
