@@ -145,7 +145,7 @@ simple product catalog website and backend with product data, user and client ma
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-### token
+### tokens
 
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
