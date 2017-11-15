@@ -1,19 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login_user } from '../../actions'
-import '../../assets/bulma.scss'
+import { login_user } from '../actions'
+import '../assets/bulma.scss'
 
-import Content from '../content'
-import Function from '../function'
-import Product from '../product'
-import Login from '../login'
-import Register from '../register'
-import Contact from '../contact'
-import Order from '../order'
+import Content from './content'
+import Function from './function'
+import Product from './product'
+import Login from './login'
+import Register from './register'
+import Order from './order'
 
-import Hello from '../../containers/hello'
-import Logo from '../../containers/logo'
+import Contact from '../containers/contact'
+import Hello from '../containers/hello'
+import Logo from '../containers/logo'
 
 class Main extends React.Component {
     constructor(props) {
