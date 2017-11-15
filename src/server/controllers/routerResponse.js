@@ -74,7 +74,7 @@ function jsonResponse (args) {
       endpoint: `${args.req.protocol}://${args.req.hostname}:${eVars.PORT}${args.req.originalUrl}`,
       statusCode: args.res.statusCode,
       error: args.error ? args.error : null,
-      data: args.data ? args.data : null,
+      data: ((args.data === null) || (args.data === undefined)) ? null : args.data,
       message: args.message ? args.message : cannedMessage[args.res.statusCode.toString()]
     }).end()
 }
