@@ -10,6 +10,7 @@ import Product from './product'
 import Login from './login'
 import Register from './register'
 import Order from './order'
+import Admin from './admin'
 
 import Contact from '../containers/contact'
 import Hello from '../containers/hello'

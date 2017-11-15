@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default class Order extends React.Component {
+export default class Admin extends React.Component {
     render() {
         return(          
             <h1 className="title">
-                This is Order!!!
+                This is Admin!!!
             </h1>
         )
     }
