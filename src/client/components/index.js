@@ -27,7 +27,7 @@ class Main extends React.Component {
                 register: '',
                 contact: '',
                 order: '',
-            }
+            },
         }
     }
 
@@ -58,7 +58,7 @@ class Main extends React.Component {
                     </section>
                     <nav className="navbar has-shadow">
                         <div className="container">
-                            <nav className="tabs">
+                            <nav className="tabs is-large">
                                 <Link className={"navbar-item is-tab " + select.product} 
                                     onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
                                 <Link className={"navbar-item is-tab " + select.login} 
