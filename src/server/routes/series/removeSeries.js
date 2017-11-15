@@ -1,8 +1,8 @@
 const db = require('../../controllers/database')
 const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
-const validateJwt = require('../../middlewares/validateJwt')
 
+const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
 const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('series')
 
