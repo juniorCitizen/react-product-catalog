@@ -10,10 +10,7 @@ const store = configureStore();
 ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter> 
-            <div>
-                <Route exact path="/" component={Main}/>  
-                <Route path="/admin" component={Admin}/>  
-            </div>
+            <Main />
         </BrowserRouter> 
     </Provider>
 ), app) 
