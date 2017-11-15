@@ -169,6 +169,29 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
 
+### carousels
+
+* **GET protocol://domain:port/sys_ref/api/carousels/:carouselId** - get carousel image by Id
+
+* **POST protocol://domain:port/sys_ref/api/carousels** - add carousel photo
+
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body: { "image": file }
+  * note: photo files are deleted during operation
+
+* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/primary** - toggle carousel photo's primary state
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/order/:order** - update carousel order
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **DELETE protocol://domain:port/sys_ref/api/carousels/:carouselId** - delete a carousel image record by id
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+
 ## LICENSE
 
 MIT © [ASJ Group] (chiayu.tsai.personal@gmail.com / papago75@gmail.com)
