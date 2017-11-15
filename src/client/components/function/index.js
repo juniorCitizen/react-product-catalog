@@ -9,13 +9,18 @@ class Function extends React.Component {
         this.state = {
             auth: false,
             select: {
-                product: 'is-active',
+                product: '',
                 login: '',
                 register: '',
                 contact: '',
                 order: '',
             },
         }
+    }
+
+    componentDidMount() {
+        let { tab } = this.props
+        this.tabActive(tab)
     }
 
     tabActive(tab) {

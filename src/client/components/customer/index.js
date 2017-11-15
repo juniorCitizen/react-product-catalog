@@ -54,6 +54,7 @@ class Main extends React.Component {
                     <Route path="/register" component={Register}/>
                     <Route path="/contact" component={Contact}/>
                     <Route path="/order" component={Order}/>
+                    <Route path="/admin" component={Admin}/>
                 </div>
             </BrowserRouter>
         )
