@@ -1,5 +1,4 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')

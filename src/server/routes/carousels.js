@@ -6,6 +6,7 @@ const getCarousel = require('./carousels/getCarousel')
 const insertCarousel = require('./carousels/insertCarousel')
 const toggleCarouselPrimaryStatus = require('./carousels/toggleCarouselPrimaryStatus')
 const removeCarousel = require('./carousels/removeCarousel')
+const updateCarouselOrder = require('./carousels/updateCarouselOrder')
 
 module.exports = express.Router()
   .get('/', notImplemented)
@@ -21,7 +22,7 @@ module.exports = express.Router()
   .get('/:carouselId/order/:order', notImplemented)
   .post('/:carouselId/order/:order', notImplemented)
   .put('/:carouselId/order/:order', notImplemented)
-  .patch('/:carouselId/order/:order', notImplemented) // update order **
+  .patch('/:carouselId/order/:order', ...updateCarouselOrder) // update order of carousels
   .delete('/:carouselId/order/:order', notImplemented)
   .get('/:carouselId/primary', notImplemented)
   .post('/:carouselId/primary', notImplemented)
