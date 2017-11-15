@@ -3,36 +3,53 @@ const express = require('express')
 const db = require('../controllers/database')
 const routerResponse = require('../controllers/routerResponse')
 
-const regions = require('./countries/regions')
-const flags = require('./countries/flags')
-const officeLocations = require('./countries/officeLocations')
+const notImplemented = require('../middlewares/notImplemented')
 
-const router = express.Router()
+module.exports = express.Router()
+  .get('/', ...getCountries()) // get countries
+  .post('/', notImplemented)
+  .put('/', notImplemented)
+  .patch('/', notImplemented)
+  .delete('/', notImplemented)
+  .get('/:countryId/flag', ...getFlagByCountryId()) // get flag from countryId
+  .post('/:countryId/flag', notImplemented)
+  .put('/:countryId/flag', notImplemented)
+  .patch('/:countryId/flag', notImplemented)
+  .delete('/:countryId/flag', notImplemented)
 
-router
-  .get('/', (req, res) => {
-    return db.Countries
-      .findAll({ order: [['name']] })
-      .then((data) => {
+function getFlagByCountryId () {
+  return [(req, res) => {
+    return db.Flags
+      .findById(req.params.countryId.toLowerCase())
+      .then(svgData => routerResponse.imageBuffer({
+        res,
+        statusCode: 200,
+        mimeType: 'image/svg+xml',
+        dataBuffer: svgData.data
+      }))
+      .catch((error) => {
         return routerResponse.json({
-          res: res,
-          req: req,
-          statusCode: 200,
-          data: data
+          req,
+          res,
+          statusCode: 500,
+          error,
+          message: 'failure getting flag svg'
         })
+      })
+  }]
+}
+
+function getCountries () {
+  return [(req, res) => {
+    return db.Countries
+      .findAll({ order: ['name'] })
+      .then((data) => {
+        return routerResponse.json({ res, req, statusCode: 200, data })
       })
       .catch((error) => {
         return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 500,
-          error: error,
-          message: 'database access error'
+          req, res, statusCode: 500, error, message: 'failure getting country dataset'
         })
       })
-  })
-  .get('/regions', regions)
-  .get('/flags', flags)
-  .get('/officeLocations', officeLocations)
-
-module.exports = router
+  }]
+}

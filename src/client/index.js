@@ -9,4 +9,4 @@ ReactDOM.render((
     <Provider store={store}>
         <Main />
     </Provider>
-), app)
+), app) 

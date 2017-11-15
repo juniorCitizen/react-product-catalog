@@ -50,7 +50,7 @@ class Main extends React.Component {
                             </nav>
                         </div>
                     </nav>
-                    <div className="container">
+                    <div className="container" style={style.container}>
                         <Route exact path="/" component={Product}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
@@ -61,6 +61,12 @@ class Main extends React.Component {
             </BrowserRouter>
         )
     }
+}
+
+const style = {
+    container: {
+        padding: '10px',
+    },
 }
 
 function mapStateToProps(state) {

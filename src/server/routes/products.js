@@ -8,6 +8,7 @@ const getProductById = require('./products/getProductById')
 const insertProduct = require('./products/insertProduct')
 const updateProduct = require('./products/updateProduct')
 const deleteProduct = require('./products/deleteProduct')
+const assignToSeries = require('./products/assignToSeries')
 
 module.exports = express.Router()
   .get('/', ...getProducts) // get product dataset
@@ -20,3 +21,8 @@ module.exports = express.Router()
   .put('/:productId', ...updateProduct) // update multiple product fields by id
   .patch('/:productId', notImplemented)
   .delete('/:productId', ...deleteProduct) // delete product by id
+  .get('/:productId/series/:seriesId', notImplemented)
+  .post('/:productId/series/:seriesId', notImplemented)
+  .put('/:productId/series/:seriesId', notImplemented)
+  .patch('/:productId/series/:seriesId', ...assignToSeries) // assign a product to a series
+  .delete('/:productId/series/:seriesId', notImplemented)

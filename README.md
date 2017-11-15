@@ -46,7 +46,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - get series by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/series?name=nameString(&details)** - insert new series record of 'nameString'
+* **POST protocol://domain:port/sys_ref/api/series/name/:name(?details)** - insert new series record of 'name'
 
   * request header: { "x-access-token": "jwt-token-string" }
 
@@ -66,7 +66,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/product/:productId(?details)** - get product by id with optional details
 
-* **POST protocol://domain:port/sys_ref/api/products** - insert product with optional photo uploads and tags association
+* **POST protocol://domain:port/sys_ref/api/products(?details)** - insert product with optional photo uploads and tags association
 
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
   * request body:
@@ -80,9 +80,10 @@ simple product catalog website and backend with product data, user and client ma
           "primaryPhoto": file, // optional, but must exist if secondaryPhotos are present
           "secondaryPhotos": files // optional
         }
+
   * note: photo files are deleted during operation
 
-* **PUT protocol://domain:port/sys_ref/api/products/:productId** - update multiple fields of a product record by id
+* **PUT protocol://domain:port/sys_ref/api/products/:productId(?details)** - update multiple fields of a product record by id
 
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
   * request body:
@@ -96,7 +97,11 @@ simple product catalog website and backend with product data, user and client ma
           "seriesId": integer // optional
         }
 
-  * note: at least one field must be present
+  * note: at least one field must be
+
+* **PATCH protocol://domain:port/sys_ref/api/products/:productId/series/:seriesId(?details)** - assign product to a series
+
+  * request header: { "x-access-token": "jwt-token-string" }
 
 * **DELETE protocol://domain:port/sys_ref/api/products/:productId** - delete a product record by id
 
@@ -105,9 +110,45 @@ simple product catalog website and backend with product data, user and client ma
     1. associated tags are disassociated by removal of related entry in the 'labels' table
     2. associated photos only has 'productId' field set to null, so orphan photos may be created
 
+### photos
+
+* **GET protocol://domain:port/sys_ref/api/photos/:photoId** - get **photo data** by id
+
+* **POST protocol://domain:port/sys_ref/api/photos** - batch photo insert
+
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body:
+
+        {
+          "primary": boolean, // optional
+          "publish": boolean, // optional
+          "seriesId": integer, // optional
+          "productId": uuid, //optional
+          "photos": files // at least one file must exist in the property
+        }
+
+  * note: photo files are deleted during operation
+
+* **PATCH protocol://domain:port/sys_ref/api/photos** - publish or unpublish a photo
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/photos/:photoId/products/:productId** - assign a photo to a product
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/photos/:photoId/series/:seriesId** - assign a photo to a series
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **DELETE protocol://domain:port/sys_ref/api/photos/:photoId** - delete photo record by id
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
 ### token
 
-* **POST   protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
+* **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
+
   * request header: { "Content-Type": "application/json"}
   * request body:
 
@@ -117,6 +158,16 @@ simple product catalog website and backend with product data, user and client ma
           "password": "0000",
           "botPrevention": ""
         }
+
+### regions
+
+* **GET protocol://domain:port/sys_ref/api/regions** - get a list of world regions
+
+### countries
+
+* **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
+
+* **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
 
 ## LICENSE
 
