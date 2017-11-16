@@ -1,9 +1,6 @@
 const express = require('express')
-const jwt = require('jsonwebtoken')
 
 const db = require('../controllers/database')
-const encryption = require('../controllers/encryption')
-const eVars = require('../config/eVars')
 const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
@@ -65,28 +62,13 @@ API_ROUTER
   .delete('/carousels/:carouselId/primary', notImplemented)
 
 // REGIONS
+const getRegions = require('./countries/getRegions')
 API_ROUTER
-  .get('/regions', ...getRegions()) // get regions
+  .get('/regions', ...getRegions) // get regions
   .post('/regions', notImplemented)
   .put('/regions', notImplemented)
   .patch('/regions', notImplemented)
   .delete('/regions', notImplemented)
-
-function getRegions () {
-  return [(req, res) => {
-    return db.Countries
-      .findAll({
-        attributes: ['region'],
-        group: 'region'
-      })
-      .then(data => routerResponse.json({
-        req, res, statusCode: 200, data
-      }))
-      .catch(error => routerResponse.json({
-        req, res, statusCode: 500, error, message: 'get region failed'
-      }))
-  }]
-}
 
 // COUNTRIES
 const countCountries = require('./countries/countCountries')
@@ -111,8 +93,10 @@ API_ROUTER
   .delete('/countries/:countryId/flag', notImplemented)
 
 // OFFICES **
+const getOffices = require('./offices/getOffices')
+
 API_ROUTER
-  .get('/offices', ...getOffices()) // get office dataset complete with country and staff info
+  .get('/offices', ...getOffices) // get office dataset complete with country and staff info
   .post('/offices', notImplemented)
   .put('/offices', notImplemented)
   .patch('/offices', notImplemented)
@@ -132,23 +116,6 @@ API_ROUTER
   .put('/offices/:officeId/user/:userId', notImplemented)
   .patch('/offices/:officeId/user/:userId', notImplemented)
   .delete('/offices/:officeId/user/:userId', notImplemented)
-
-function getOffices () {
-  return [(req, res) => {
-    return db.offices.findAll({
-      include: [{
-        model: db.Countries
-      }, {
-        model: db.Users,
-        attributes: { exclude: ['loginId', 'password', 'salt'] }
-      }]
-    }).then(data => routerResponse.json({
-      req, res, statusCode: 200, data
-    })).catch(error => routerResponse.json({
-      req, res, statusCode: 500, error
-    }))
-  }]
-}
 
 // PHOTOS
 const getPhotoById = require('./photos/getPhotoById')
@@ -212,65 +179,14 @@ API_ROUTER
   .delete('/products/:productId/series/:seriesId', notImplemented)
 
 // TOKENS
+const processJwtRequest = require('./tokens/processJwtRequest')
+
 API_ROUTER
   .get('/tokens', notImplemented)
-  .post('/tokens', ...processJwtRequest()) // verify against user credentials and provide a jwt upon success
+  .post('/tokens', ...processJwtRequest) // verify against user credentials and provide a jwt upon success
   .put('/tokens', notImplemented)
   .patch('/tokens', notImplemented)
   .delete('/tokens', notImplemented)
-
-function processJwtRequest () {
-  return [
-    loginInfoPresence,
-    botPrevention,
-    (req, res) => {
-      return db.Users.findOne({
-        where: { email: req.body.email, loginId: req.body.loginId, admin: true }
-      }).then((apiUser) => {
-        if (!apiUser) {
-          // reject the request if such user does not exist
-          return routerResponse.json({
-            req, res, statusCode: 401, message: 'incorrect login information'
-          })
-        }
-        // hash the submitted password against the salt string
-        let currentHash = encryption.sha512(req.body.password, apiUser.salt).passwordHash
-        // compare with the stored hash
-        if (currentHash === apiUser.password) { // hash verified
-          let payload = {
-            email: req.body.email,
-            loginId: req.body.loginId
-          }
-          return routerResponse.json({
-            req,
-            res,
-            statusCode: 200,
-            data: jwt.sign(payload, eVars.PASS_PHRASE, { expiresIn: '24h' }),
-            message: 'token is supplied for 24 hours'
-          })
-        } else { // hash verification failed
-          return routerResponse.json({
-            req, res, statusCode: 401, message: 'incorrect login information'
-          })
-        }
-      }).catch(error => routerResponse.json({
-        req, res, statusCode: 500, error, message: 'jwt request failure'
-      }))
-    }]
-}
-
-function loginInfoPresence (req, res, next) {
-  let expectedFields = ['email', 'loginId', 'password', 'botPrevention']
-  expectedFields.forEach((fieldName) => {
-    if (!req.body.hasOwnProperty(fieldName)) {
-      routerResponse.json({
-        req, res, statusCode: 401, message: 'login info is incomplete'
-      })
-      return next('LOGIN_INFO_IMCOMPLETE')
-    }
-  })
-  next()
-}
 
 // REGISTRATIONS
 API_ROUTER
