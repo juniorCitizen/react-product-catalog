@@ -52,10 +52,14 @@ module.exports = (perPageDefault = 5, perPageCeilingDefault = 20, getRecordCount
         req.linkHeader.next.per_page = perPage
         req.linkHeader.next.url += `?per_page=${perPage}&page=${currentPage + 1}`
       }
-
-      ['first', 'prev', 'self', 'next', 'last'].forEach((prop) => {
-        if (prop in req.linkHeader) {
-          req.linkHeader[prop].url += ('details' in req.query) ? '&details' : ''
+      // place additional url query properties back into the generated url's
+      ['first', 'prev', 'self', 'next', 'last'].forEach((linkHeaderProp) => {
+        if (linkHeaderProp in req.linkHeader) {
+          for (let urlQueryProp in req.query) {
+            if ((urlQueryProp !== 'page') && (urlQueryProp !== 'per_page')) {
+              req.linkHeader[linkHeaderProp].url += `&${urlQueryProp}=${req.query[urlQueryProp]}`
+            }
+          }
         }
       })
       res.set('Link', formatLinkHeader(req.linkHeader))
