@@ -145,7 +145,7 @@ simple product catalog website and backend with product data, user and client ma
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-### token
+### tokens
 
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
@@ -164,6 +164,8 @@ simple product catalog website and backend with product data, user and client ma
 * **GET protocol://domain:port/sys_ref/api/regions** - get a list of world regions
 
 ### countries
+
+* **GET protocol://domain:port/sys_ref/api/countries/count** - get total number of records in countries
 
 * **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
 
