@@ -62,7 +62,9 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products(?details)** - get product catalog with optional details
+* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset
+
+* **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
 
 * **GET protocol://domain:port/sys_ref/api/product/:productId(?details)** - get product by id with optional details
 
@@ -167,7 +169,7 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/countries/count** - get total number of records in countries
 
-* **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
+* **GET protocol://domain:port/sys_ref/api/countries(&per_page=x&page=y)** - get a list of countries sorted by name and optional pagination
 
 * **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
 

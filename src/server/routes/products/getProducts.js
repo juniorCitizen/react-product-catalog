@@ -1,13 +1,24 @@
 const db = require('../../controllers/database')
+const eVars = require('../../config/eVars')
+const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
-const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')
-const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('products')
+const modelReference = 'products'
+
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')(modelReference)
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')(modelReference)
+const paginationLinkHeader = require('../../middlewares/paginationLinkHeader')
 
 module.exports = (() => {
+  let getRecordCount = require('axios')({
+    method: 'get',
+    url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api/${modelReference}/count`
+  }).then(res => res.data.data).catch(logging.reject)
+
   return [
     setBaseQueryParameters,
     setResponseDetailLevel,
+    paginationLinkHeader(5, 0, getRecordCount),
     (req, res) => {
       return db.Products
         .findAll(req.queryOptions)

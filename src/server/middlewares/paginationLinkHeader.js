@@ -4,7 +4,7 @@ const eVars = require('../config/eVars')
 
 module.exports = (perPageDefault = 5, perPageCeilingDefault = 20, getRecordCountAsyncFn) => {
   return async (req, res, next) => {
-    if (req.query.hasOwnProperty('per_page')) {
+    if ('per_page' in req.query) {
       let recordCount = await getRecordCountAsyncFn
       let perPage = (() => {
         let a = parseInt(req.query.per_page) || perPageDefault
@@ -62,6 +62,9 @@ module.exports = (perPageDefault = 5, perPageCeilingDefault = 20, getRecordCount
           }
         }
       })
+      req.queryOptions.limit = perPage
+      req.queryOptions.offset = perPage * (currentPage - 1)
+      // put link header into the res object
       res.set('Link', formatLinkHeader(req.linkHeader))
     }
     next()
