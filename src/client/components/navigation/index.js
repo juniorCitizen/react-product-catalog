@@ -35,22 +35,29 @@ class Navigation extends React.Component {
     render() {
         const { auth, select } = this.state
         return(    
-            <nav className="navbar has-shadow">
-                <div className="container">
-                    <nav className="tabs is-large">
-                        <Link className={"navbar-item is-tab " + select.product} 
-                            onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
-                        <Link className={"navbar-item is-tab " + select.login} 
-                            onClick={this.tabActive.bind(this, 'login')} to="/login">會員登入</Link>
-                        <Link className={"navbar-item is-tab " + select.register} 
-                            onClick={this.tabActive.bind(this, 'register')} to="/register">會員註冊</Link>
-                        <Link className={"navbar-item is-tab " + select.contact}
-                            onClick={this.tabActive.bind(this, 'contact')} to="/contact">聯絡我們</Link>
-                        {auth && <Link className={"navbar-item is-tab " + select.order}
-                            onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>}
-                    </nav>
+            <div className="container">
+                <div className="tabs is-centered is-fullwidth">
+                    <ul>
+                        <li className={select.product}>
+                            <Link onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
+                        </li>
+                        <li className={select.login}>
+                            <Link onClick={this.tabActive.bind(this, 'login')} to="/login">會員登入</Link>
+                        </li>
+                        <li className={select.register}>
+                            <Link onClick={this.tabActive.bind(this, 'register')} to="/register">會員註冊</Link>
+                        </li>
+                        <li className={select.contact}>
+                            <Link onClick={this.tabActive.bind(this, 'contact')} to="/contact">聯絡我們</Link>
+                        </li>
+                        {auth && 
+                            <li className={select.order}>
+                                <Link onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>
+                            </li>
+                        }
+                    </ul>
                 </div>
-            </nav>
+            </div>
         )
     }
 }
