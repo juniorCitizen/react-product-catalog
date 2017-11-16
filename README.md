@@ -165,6 +165,8 @@ simple product catalog website and backend with product data, user and client ma
 
 ### countries
 
+* **GET protocol://domain:port/sys_ref/api/countries/count** - get total number of records in countries
+
 * **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
 
 * **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
