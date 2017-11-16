@@ -66,17 +66,29 @@ function templateResponse (args) {
 //     message: 'example message' // optional
 // });
 function jsonResponse (args) {
+  let resJson = {
+    method: args.req.method,
+    endpoint: `${args.req.protocol}://${args.req.hostname}:${eVars.PORT}${args.req.originalUrl}`,
+    statusCode: args.res.statusCode,
+    error: args.error ? args.error : null,
+    data: ((args.data === null) || (args.data === undefined)) ? null : args.data,
+    message: args.message ? args.message : cannedMessage[args.res.statusCode.toString()]
+  }
+  if ('linkHeader' in args.req) {
+    let source = args.req.linkHeader.last
+    Object.assign(resJson, {
+      pagination: {
+        totalRecords: source.per_page * source.page,
+        totalPages: source.page,
+        perPage: source.per_page
+      }
+    })
+  }
   return args.res
     .status(args.statusCode)
     .type('application/json;charset=utf-8')
-    .json({
-      method: args.req.method,
-      endpoint: `${args.req.protocol}://${args.req.hostname}:${eVars.PORT}${args.req.originalUrl}`,
-      statusCode: args.res.statusCode,
-      error: args.error ? args.error : null,
-      data: ((args.data === null) || (args.data === undefined)) ? null : args.data,
-      message: args.message ? args.message : cannedMessage[args.res.statusCode.toString()]
-    }).end()
+    .json(resJson)
+    .end()
 }
 
 function imageBufferResponse (args) {

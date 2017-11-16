@@ -8,7 +8,7 @@ const baseOptions = {
 
 module.exports = (modelReference) => {
   return (req, res, next) => {
-    if (!baseOptions.hasOwnProperty(modelReference)) {
+    if (!(modelReference in baseOptions)) {
       routerResponse.json({
         req,
         res,
@@ -17,7 +17,7 @@ module.exports = (modelReference) => {
       })
       next('BASE_QUERY_OPTIONS_UNIMPLEMENTED')
     }
-    req.queryOptions = Object.assign({}, baseOptions[modelReference])
+    req.queryOptions = baseOptions[modelReference]
     next()
   }
 }

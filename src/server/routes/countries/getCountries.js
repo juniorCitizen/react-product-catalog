@@ -3,21 +3,21 @@ const eVars = require('../../config/eVars')
 const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
+const modelReference = 'countries'
+
+const setQueryBaseOptions = require('../../middlewares/setQueryBaseOptions')(modelReference)
 const paginationLinkHeader = require('../../middlewares/paginationLinkHeader')
-const setQueryBaseOptions = require('../../middlewares/setQueryBaseOptions')('countries')
 
 module.exports = (() => {
   let getRecordCount = require('axios')({
     method: 'get',
-    url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api/countries/count`
+    url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api/${modelReference}/count`
   }).then(res => res.data.data).catch(logging.reject)
 
   return [
     setQueryBaseOptions,
-    paginationLinkHeader(5, 0, getRecordCount),
+    paginationLinkHeader(getRecordCount, 5, 0),
     (req, res) => {
-      console.log(req.linkHeader)
-      console.log(req.queryOptions)
       return db.Countries
         .findAll(req.queryOptions)
         .then((data) => {

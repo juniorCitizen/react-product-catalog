@@ -36,7 +36,7 @@ API_ROUTER
   .delete('/series/:seriesId', ...removeSeries) // delete series by id
 
 // CAROUSELS
-const getCarousel = require('./carousels/getCarousel')
+const getCarouselById = require('./carousels/getCarouselById')
 const insertCarousel = require('./carousels/insertCarousel')
 const toggleCarouselPrimaryStatus = require('./carousels/toggleCarouselPrimaryStatus')
 const removeCarousel = require('./carousels/removeCarousel')
@@ -48,7 +48,7 @@ API_ROUTER
   .put('/carousels', notImplemented)
   .patch('/carousels', notImplemented)
   .delete('/carousels', notImplemented)
-  .get('/carousels/:carouselId', ...getCarousel) // get one carousel
+  .get('/carousels/:carouselId', ...getCarouselById) // get one carousel
   .post('/carousels/:carouselId', notImplemented)
   .put('/carousels/:carouselId', notImplemented)
   .patch('/carousels/:carouselId', notImplemented)
@@ -187,6 +187,7 @@ const insertProduct = require('./products/insertProduct')
 const updateProduct = require('./products/updateProduct')
 const deleteProduct = require('./products/deleteProduct')
 const assignToSeries = require('./products/assignToSeries')
+const getProductCount = require('./products/getProductCount')
 
 API_ROUTER
   .get('/products', ...getProducts) // get product dataset
@@ -194,6 +195,11 @@ API_ROUTER
   .put('/products', notImplemented)
   .patch('/products', notImplemented)
   .delete('/products', notImplemented)
+  .get('/products/count', ...getProductCount) // get total number of product in dataset
+  .post('/products/count', notImplemented)
+  .put('/products/count', notImplemented)
+  .patch('/products/count', notImplemented)
+  .delete('/products/count', notImplemented)
   .get('/products/:productId', ...getProductById) // get product record by id
   .post('/products/:productId', notImplemented)
   .put('/products/:productId', ...updateProduct) // update multiple product fields by id
