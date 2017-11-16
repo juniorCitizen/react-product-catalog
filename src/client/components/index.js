@@ -5,7 +5,7 @@ import { login_user } from '../actions'
 import '../assets/bulma.scss'
 
 import Content from './content'
-import Function from './function'
+import Navigation from './navigation'
 import Product from './product'
 import Login from './login'
 import Register from './register'
@@ -42,13 +42,7 @@ class Main extends React.Component {
         return(  
             <BrowserRouter>  
                 <div>            
-                    <section className="hero is-light">
-                        <div className="hero-head">
-                            <div className="container">
-                                <Logo />
-                            </div>
-                        </div>
-                    </section>
+                    <Logo />
                     <Route exact path="/" component={Product}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
