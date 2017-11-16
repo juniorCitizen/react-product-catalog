@@ -16,7 +16,7 @@ module.exports = (() => {
 
   return [
     setQueryBaseOptions,
-    paginationLinkHeader(5, 0, getRecordCount),
+    paginationLinkHeader(getRecordCount, 5, 0),
     (req, res) => {
       return db.Countries
         .findAll(req.queryOptions)

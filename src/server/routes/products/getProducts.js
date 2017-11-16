@@ -18,9 +18,8 @@ module.exports = (() => {
   return [
     setBaseQueryParameters,
     setResponseDetailLevel,
-    paginationLinkHeader(5, 0, getRecordCount),
+    paginationLinkHeader(getRecordCount, 20, 100),
     (req, res) => {
-      console.log(req.queryOptions)
       return db.Products
         .findAll(req.queryOptions)
         .then(data => routerResponse.json({
