@@ -89,6 +89,7 @@ function getRegions () {
 }
 
 // COUNTRIES
+const countCountries = require('./countries/countCountries')
 const getCountries = require('./countries/getCountries')
 const getFlagByCountryId = require('./countries/getFlagByCountryId')
 
@@ -98,6 +99,11 @@ API_ROUTER
   .put('/countries', notImplemented)
   .patch('/countries', notImplemented)
   .delete('/countries', notImplemented)
+  .get('/countries/count', ...countCountries) // get record count
+  .post('/countries/count', notImplemented)
+  .put('/countries/count', notImplemented)
+  .patch('/countries/count', notImplemented)
+  .delete('/countries/count', notImplemented)
   .get('/countries/:countryId/flag', ...getFlagByCountryId) // get flag from countryId
   .post('/countries/:countryId/flag', notImplemented)
   .put('/countries/:countryId/flag', notImplemented)
