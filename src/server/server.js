@@ -132,3 +132,8 @@ Promise.each( // runs the pre server start init scripts
 process.on('uncaughtException', (error) => {
   logging.error(error, '發生未預期 exception !!!')
 })
+
+process.on('unhandledRejection', (error, promise) => {
+  logging.error(error, '發現未處理的 Promise Rejection')
+  logging.warning(promise)
+})
