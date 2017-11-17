@@ -72,16 +72,7 @@ logging.console(`public assets 實體檔案路徑... ${ROUTERS.assets.path}`)
 ROUTERS.client.router.use('/', require('./routes/index'))
 logging.console(`index.html 端點... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 // set up api endpoints
-ROUTERS.api.router.use('/', require('./routes/apiRoutes'))
-// ROUTERS.api.router.use('/products', require('./routes/products'))
-// ROUTERS.api.router.use('/series', require('./routes/series'))
-// ROUTERS.api.router.use('/tokens', require('./routes/tokens'))
-// ROUTERS.api.router.use('/photos', require('./routes/photos'))
-// ROUTERS.api.router.use('/regions', require('./routes/regions'))
-// ROUTERS.api.router.use('/countries', require('./routes/countries'))
-// ROUTERS.api.router.use('/carousels', require('./routes/carousels'))
-// apiAccessRouter.use('/registrations', require('./routes/registrations/registrations'))
-// apiAccessRouter.use('/users', require('./routes/users/users'))
+ROUTERS.api.router.use('/', require('./routes/apiRouteHandlers'))
 
 // post-routing global middleware
 logging.console('載入 post-routing 全域 middlewares....')
