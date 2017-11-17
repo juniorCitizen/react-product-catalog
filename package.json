@@ -44,7 +44,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.22.6",
+    "sequelize": "^4.22.7",
     "sqlite3": "^3.1.13",
     "uuid": "^3.1.0",
     "world-countries": "^1.8.1"
