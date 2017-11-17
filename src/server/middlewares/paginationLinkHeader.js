@@ -9,9 +9,11 @@ module.exports = (getRecordCountAsyncFn, perPageDefault = 5, perPageCeiling = 20
     let recordCount = await getRecordCountAsyncFn
     // determine per_page value
     let perPage = 'per_page' in query // if per_page is specified
-      ? parseInt(query.per_page) <= perPageCeiling
-        ? parseInt(query.per_page) // set to specified if within ceiling
-        : perPageCeiling // set to ceiling if over
+      ? perPageCeiling <= 0
+        ? parseInt(query.per_page) // no ceiling is specified, set to user specified value
+        : parseInt(query.per_page) <= perPageCeiling
+          ? parseInt(query.per_page) // set to specified if within ceiling
+          : perPageCeiling // set to ceiling if over ceiling
       : perPageDefault // use default if perPage not specified
     // calculate last page
     let lastPage = Math.ceil(recordCount / perPage)
