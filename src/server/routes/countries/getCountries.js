@@ -1,5 +1,4 @@
 const db = require('../../controllers/database')
-const eVars = require('../../config/eVars')
 const logging = require('../../controllers/logging')
 const routerResponse = require('../../controllers/routerResponse')
 
