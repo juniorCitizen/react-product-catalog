@@ -9,28 +9,34 @@ const setQueryBaseOptions = require('../../middlewares/setQueryBaseOptions')(mod
 const paginationLinkHeader = require('../../middlewares/paginationLinkHeader')
 
 module.exports = (() => {
-  let getRecordCount = require('axios')({
-    method: 'get',
-    url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api/${modelReference}/count`
-  }).then(res => res.data.data).catch(logging.reject)
-
   return [
     setQueryBaseOptions,
-    paginationLinkHeader(getRecordCount, 5, 0),
-    (req, res) => {
+    (req, res, next) => {
+      return db.Countries
+        .findAndCountAll()
+        .then(result => {
+          req.dataSourceRecordCount = result.count
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => {
+          logging.error(error)
+          error.statusCode = 500
+          return next(error)
+        })
+    },
+    paginationLinkHeader(5, 0),
+    (req, res, next) => {
       return db.Countries
         .findAll(req.queryOptions)
         .then((data) => {
           return routerResponse.json({ res, req, statusCode: 200, data })
         })
-        .catch((error) => {
-          return routerResponse.json({
-            req,
-            res,
-            statusCode: 500,
-            error,
-            message: 'failure getting country dataset'
-          })
+        .catch(error => {
+          logging.error(error)
+          error.statusCode = 500
+          error.customMessage = 'failure getting dataset from countries'
+          return next(error)
         })
     }]
 })()

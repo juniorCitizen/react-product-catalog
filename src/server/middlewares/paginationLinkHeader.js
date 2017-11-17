@@ -2,11 +2,11 @@ const formatLinkHeader = require('format-link-header')
 
 const eVars = require('../config/eVars')
 
-module.exports = (getRecordCountAsyncFn, perPageDefault = 5, perPageCeiling = 20) => {
+module.exports = (perPageDefault = 5, perPageCeiling = 20) => {
   return async (req, res, next) => {
     let query = req.query
     // get total record count of dataset
-    let recordCount = await getRecordCountAsyncFn
+    let recordCount = req.dataSourceRecordCount
     // determine per_page value
     let perPage = 'per_page' in query // if per_page is specified
       ? perPageCeiling <= 0
