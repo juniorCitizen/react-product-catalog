@@ -1,22 +1,15 @@
-const express = require('express')
 const jwt = require('jsonwebtoken')
 
-const db = require('../controllers/database')
-const encryption = require('../controllers/encryption')
-const eVars = require('../config/eVars')
-const routerResponse = require('../controllers/routerResponse')
+const eVars = require('../../config/eVars')
 
-const botPrevention = require('../middlewares/botPrevention')
-const notImplemented = require('../middlewares/notImplemented')
+const db = require('../../controllers/database')
+const encryption = require('../../controllers/encryption')
+const routerResponse = require('../../controllers/routerResponse')
 
-module.exports = express.Router()
-  .get('/', notImplemented)
-  .post('/', ...processJwtRequest()) // verify against user credentials and provide a jwt upon success
-  .put('/', notImplemented)
-  .patch('/', notImplemented)
-  .delete('/', notImplemented)
+const botPrevention = require('../../middlewares/botPrevention')
+const loginInfoPresence = require('../../middlewares/loginInfoPresence')
 
-function processJwtRequest () {
+module.exports = (() => {
   return [
     loginInfoPresence,
     botPrevention,
@@ -54,17 +47,4 @@ function processJwtRequest () {
         req, res, statusCode: 500, error, message: 'jwt request failure'
       }))
     }]
-}
-
-function loginInfoPresence (req, res, next) {
-  let expectedFields = ['email', 'loginId', 'password', 'botPrevention']
-  expectedFields.forEach((fieldName) => {
-    if (!req.body.hasOwnProperty(fieldName)) {
-      routerResponse.json({
-        req, res, statusCode: 401, message: 'login info is incomplete'
-      })
-      return next('LOGIN_INFO_IMCOMPLETE')
-    }
-  })
-  next()
-}
+})()
