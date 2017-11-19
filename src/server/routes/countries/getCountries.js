@@ -1,6 +1,4 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const modelReference = 'countries'
 
@@ -18,24 +16,17 @@ module.exports = (() => {
           next()
           return Promise.resolve()
         })
-        .catch(error => {
-          logging.error(error)
-          error.statusCode = 500
-          return next(error)
-        })
+        .catch(error => next(error))
     },
     paginationLinkHeader(5, 0),
     (req, res, next) => {
       return db.Countries
         .findAll(req.queryOptions)
-        .then((data) => {
-          return routerResponse.json({ res, req, statusCode: 200, data })
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
         })
-        .catch(error => {
-          logging.error(error)
-          error.statusCode = 500
-          error.customMessage = 'failure getting dataset from countries'
-          return next(error)
-        })
+        .catch(error => next(error))
     }]
 })()

@@ -1,14 +1,13 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
-  return [validateJwt, (req, res) => {
+  return [validateJwt, (req, res, next) => {
     return db.sequelize.transaction((trx) => {
       let trxObj = { transaction: trx }
       return db.Carousels
-        .findById(req.params.carouselId, trxObj)
+        .findById(parseInt(req.params.carouselId), trxObj)
         .then(targetCarousel => {
           if (!targetCarousel) {
             // id does not exist
@@ -29,11 +28,12 @@ module.exports = (() => {
             }))
         })
     }).then((data) => {
-      return routerResponse.json({
-        req, res, statusCode: 200, data
-      })
-    }).catch(error => routerResponse.json({
-      req, res, statusCode: 500, error
-    }))
+      req.resJson = { data }
+      req.resJson.message = data === 0
+        ? 'Carousel not found'
+        : 'Carousel deleted'
+      next()
+      return Promise.resolve()
+    }).catch(error => next(error))
   }]
 })()

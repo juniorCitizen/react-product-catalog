@@ -6,11 +6,12 @@ const validateJwt = require('../../middlewares/validateJwt')
 module.exports = ((req, res) => {
   return [
     validateJwt,
-    (req, res) => {
+    (req, res, next) => {
+      let productId = req.params.productId.toUpperCase()
       return db.sequelize
         .transaction(trx => {
-          let associatedOptions = { where: { productId: req.params.productId.toUpperCase() }, transaction: trx }
-          let targetOptions = { where: { id: req.params.productId.toUpperCase() }, transaction: trx }
+          let associatedOptions = { where: { productId: productId }, transaction: trx }
+          let targetOptions = { where: { id: productId }, transaction: trx }
           // only product record is deleted
           // associated tags are preserved by only remove related entries of labels table
           // and photos only has 'productId' set to null
@@ -23,16 +24,12 @@ module.exports = ((req, res) => {
             // delete product record
             .then(() => db.Products.destroy(targetOptions))
         })
-        .then((data) => routerResponse.json({
-          req, res, statusCode: 200, data
-        }))
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'failure deleting product record by id'
-        }))
+        .then((data) => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }
   ]
 })()

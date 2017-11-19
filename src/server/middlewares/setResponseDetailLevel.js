@@ -1,6 +1,9 @@
 const db = require('../controllers/database')
-const routerResponse = require('../controllers/routerResponse')
 
+// due to database being initialized 'after' the api endpoints
+// declaration, the object must be wrapped in an function,
+// in order to obtain initialized properties of 'db' module
+// otherwise all models will be undefined
 const detailedOptions = {
   series: () => {
     return {
@@ -40,58 +43,14 @@ module.exports = (modelReference) => {
   return (req, res, next) => {
     if ('details' in req.query) {
       if (modelReference in detailedOptions) {
-        Object.assign({}, req.queryOptions, detailedOptions[modelReference]())
+        req.queryOptions = Object.assign({}, detailedOptions[modelReference]())
       } else {
-        throw new Error('MODEL_REFERENCE_UNDEFINED')
+        res.status(501)
+        let error = new Error(`資料表模板 ${modelReference} 查詢選項尚未設置`)
+        error.message = `資料表模板 ${modelReference} 查詢選項尚未設置`
+        return next(error)
       }
     }
-    next()
+    return next()
   }
 }
-
-// switch (modelReference) {
-//   case 'series':
-//     Object.assign(req.queryOptions, {
-//       include: [{
-//         model: db.Products,
-//         include: [
-//           { model: db.Tags },
-//           { model: db.Photos, attributes: { exclude: ['data'] } }
-//         ]
-//       }, {
-//         model: db.Photos, attributes: { exclude: ['data'] }
-//       }],
-//       order: [
-//         'order',
-//         [db.Products, 'code'],
-//         [db.Products, db.Tags, 'name'],
-//         [db.Products, db.Photos, 'primary', 'DESC']
-//       ]
-//     })
-//     break
-//   case 'products':
-//     Object.assign(req.queryOptions, {
-//       include: [
-//         { model: db.Tags },
-//         { model: db.Photos, attributes: { exclude: ['data'] } }
-//       ],
-//       order: [
-//         'code',
-//         [db.Tags, 'name'],
-//         [db.Photos, 'primary', 'DESC']
-//       ]
-//     })
-//     break
-//   default:
-//     routerResponse.json({
-//       req,
-//       res,
-//       statusCode: 501,
-//       message: `detailed query options hasn't been implemented for ${modelReference} model`
-//     })
-// next('DETAILED_QUERY_OPTIONS_UNIMPLEMENTED')
-// }
-//     }
-//     next()
-//   }
-// }

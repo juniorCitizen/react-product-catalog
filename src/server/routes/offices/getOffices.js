@@ -1,19 +1,17 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = (() => {
-  return [(req, res) => {
+  return [(req, res, next) => {
     return db.Offices.findAll({
       include: [{
         model: db.Countries
       }, {
         model: db.Users,
-        attributes: { exclude: ['loginId', 'password', 'salt'] }
+        attributes: { exclude: ['loginId', 'password', 'salt', 'admin'] }
       }]
-    }).then(data => routerResponse.json({
-      req, res, statusCode: 200, data
-    })).catch(error => routerResponse.json({
-      req, res, statusCode: 500, error
-    }))
+    }).then(data => {
+      req.resJson = { data }
+      return next()
+    }).catch(error => next(error))
   }]
 })()

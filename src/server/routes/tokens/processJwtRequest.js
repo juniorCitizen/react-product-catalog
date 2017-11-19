@@ -4,47 +4,84 @@ const eVars = require('../../config/eVars')
 
 const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
-const routerResponse = require('../../controllers/routerResponse')
-
-const botPrevention = require('../../middlewares/botPrevention')
-const loginInfoPresence = require('../../middlewares/loginInfoPresence')
 
 module.exports = (() => {
   return [
     loginInfoPresence,
     botPrevention,
-    (req, res) => {
-      return db.Users.findOne({
-        where: { email: req.body.email, loginId: req.body.loginId, admin: true }
-      }).then((apiUser) => {
-        if (!apiUser) {
-          // reject the request if such user does not exist
-          return routerResponse.json({
-            req, res, statusCode: 401, message: 'incorrect login information'
-          })
-        }
-        // hash the submitted password against the salt string
-        let currentHash = encryption.sha512(req.body.password, apiUser.salt).passwordHash
-        // compare with the stored hash
-        if (currentHash === apiUser.password) { // hash verified
-          let payload = {
-            email: req.body.email,
-            loginId: req.body.loginId
-          }
-          return routerResponse.json({
-            req,
-            res,
-            statusCode: 200,
-            data: jwt.sign(payload, eVars.PASS_PHRASE, { expiresIn: '24h' }),
-            message: 'token is supplied for 24 hours'
-          })
-        } else { // hash verification failed
-          return routerResponse.json({
-            req, res, statusCode: 401, message: 'incorrect login information'
-          })
-        }
-      }).catch(error => routerResponse.json({
-        req, res, statusCode: 500, error, message: 'jwt request failure'
-      }))
-    }]
+    accountDiscovery,
+    checkPassword
+  ]
 })()
+
+function loginInfoPresence (req, res, next) {
+  if (
+    !('email' in req.body) ||
+    !('loginId' in req.body) ||
+    !('password' in req.body) ||
+    !('botPrevention' in req.body)
+  ) {
+    res.status(400)
+    let error = new Error('Login info is incomplete')
+    return next(error)
+  }
+  return next()
+}
+
+function botPrevention (req, res, next) {
+  if (req.body.botPrevention === '') return next()
+  res.status(401)
+  let error = new Error('Bot-like activity detected')
+  return next(error)
+}
+
+function accountDiscovery (req, res, next) {
+  // find the account
+  return db.Users.findOne({
+    where: {
+      email: req.body.email.toLowerCase(),
+      loginId: req.body.loginId
+    }
+  }).then(user => {
+    if (!user) { // account isn't found
+      res.status(401)
+      let error = new Error('Unauthorized')
+      return next(error)
+    }
+    if (user.admin === false) {
+      // account does not have admin status
+      res.status(401)
+      let error = new Error('Forbidden')
+      return next(error)
+    }
+    req.accountData = Object.assign({}, user.dataValues)
+    next()
+    return Promise.resolve()
+  }).catch(error => next(error))
+}
+
+function checkPassword (req, res, next) {
+  if (res.statusCode >= 400) return next()
+  // hash the submitted password against the salt string
+  let currentHash = encryption
+    .sha512(req.body.password, req.accountData.salt)
+    .passwordHash
+  // compare with the stored hash
+  if (currentHash === req.accountData.password) {
+    // hash checks out
+    let token = jwt.sign({
+      email: req.body.email,
+      loginId: req.body.loginId
+    }, eVars.PASS_PHRASE, { expiresIn: '24h' })
+    req.resJson = {
+      data: token,
+      message: 'token is supplied for 24 hours'
+    }
+    return next()
+  } else {
+    // hash verification failed
+    res.status(403)
+    let error = new Error('Forbidden')
+    return next(error)
+  }
+}

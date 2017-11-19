@@ -77,6 +77,6 @@ module.exports = (perPageDefault = 5, perPageCeiling = 20) => {
     req.queryOptions.offset = perPage * (currentPage - 1)
     // put link header into the res object
     res.set('Link', formatLinkHeader(req.linkHeader))
-    next()
+    return next()
   }
 }

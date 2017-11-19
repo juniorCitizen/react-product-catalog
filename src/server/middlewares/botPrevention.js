@@ -1,14 +1,8 @@
-const routerResponse = require('../controllers/routerResponse')
-
 module.exports = (req, res, next) => {
-  if (req.body.botPrevention === '') {
-    next()
-  } else {
-    return next(routerResponse.json({
-      req,
-      res,
-      statusCode: 400,
-      message: 'bot-like activity detected'
-    }))
+  if (req.body.botPrevention === '') next()
+  res.status(401)
+  req.resJson = {
+    message: 'bot-like activity detected'
   }
+  next()
 }

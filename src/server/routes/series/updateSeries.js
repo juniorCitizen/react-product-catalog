@@ -1,6 +1,4 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 const validateJwt = require('../../middlewares/validateJwt')
 
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
@@ -13,13 +11,13 @@ module.exports = (() => {
     setBaseQueryParameters,
     setResponseDetailLevel,
     filterBodyDataProperties,
-    (req, res) => {
+    (req, res, next) => {
       return db.sequelize
         .transaction(async trx => {
           let trxObj = { transaction: trx }
           let targetRecord = await db.Series
             .findById(req.params.seriesId, trxObj)
-            .catch(logging.reject('error querying for target record'))
+            .catch(error => next(error))
           let originalPosition = targetRecord.order
           let targetPosition = await (() => {
             return db.Series
@@ -35,32 +33,26 @@ module.exports = (() => {
                   return Promise.resolve(parseInt(req.body.order))
                 }
               })
-              .catch(logging.reject('error counting dataset length'))
+              .catch(error => next(error))
           })()
           return db.sequelize
             .query(adjustmentQuery(originalPosition, targetPosition, req.params.seriesId), trxObj)
             .then(() => {
               return targetRecord
                 .update(req.filteredData, trxObj)
-                .catch(logging.reject('error updating target record'))
+                .catch(error => next(error))
             })
-            .catch(logging.reject('error updating affected records'))
         })
         .then(() => {
           return db.Series
             .findAll(req.queryOptions)
-            .catch(logging.reject('update operation completed but couldn\'t retrieve updated dataset'))
+            .catch(error => next(error))
         })
-        .then((data) => routerResponse.json({
-          req, res, statusCode: 200, data
-        }))
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error updating series record'
-        }))
+        .then((data) => {
+          req.resJson = { data }
+          return next()
+        })
+        .catch(error => next(error))
     }]
 })()
 
