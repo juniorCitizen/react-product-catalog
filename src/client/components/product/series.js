@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
+import { series_list } from '../../actions'
 
 class Series extends React.Component {
     constructor(props) {
@@ -44,19 +45,21 @@ class Series extends React.Component {
                         },
                     },
                 }
-            },
+            }
         }
+    }
+
+    componentDidMount() {
+            
+    }
+
+    selectSeries(code) {
+        alert(code)
     }
 
     render() {
         const { auth, series } = this.state
-        console.log(series)
-        Object.keys(series).map((key) => {
-            console.log(series[key].name)
-            Object.keys(series[key].sub_list).map((sub_key) => {
-                console.log(series[key].sub_list[sub_key].name)
-            })
-        })
+        const { series_list } = this.props
         return(          
             <div>
                 <aside className="menu">
@@ -68,7 +71,9 @@ class Series extends React.Component {
                                     <ul>
                                         {Object.keys(series[key].sub_list).map((sub_key) => (
                                             <li key={sub_key}>
-                                            <a className={series[key].sub_list[sub_key].active ? "is-active" : ""}>
+                                            <a className={series[key].sub_list[sub_key].active ? "is-active" : ""}
+                                                onClick={this.selectSeries.bind(this, series[key].sub_list[sub_key].name)}
+                                            >
                                                 {series[key].sub_list[sub_key].name}</a>
                                             </li>
                                         ))}
@@ -88,9 +93,10 @@ const style = {
 }
 
 function mapStateToProps(state) {
-	const { login } = state
+	const { login, series } = state
 	return {
-		login
+        login,
+        series,
 	}
 }
 
