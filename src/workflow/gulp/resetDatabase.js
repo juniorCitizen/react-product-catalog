@@ -31,6 +31,7 @@ module.exports = () => {
     // get database configuration
     let dbConfig = require(path.resolve('./src/server/config/database.js'))[dbEnv]
     if (dbConfig.dialect === 'mysql') {
+      console.log('mysql')
       // prevent remote db access encounter timeout error on large file transfers
       dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
       dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)

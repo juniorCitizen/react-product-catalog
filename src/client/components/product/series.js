@@ -9,14 +9,18 @@ class Series extends React.Component {
         super(props)
         this.state = {
             auth: false,
+            
             series: {
                 0: {
                     name: 'series 1',
                     active: true,
+                    products: true,
+                    code: '',
                     sub_list: {
                         0: {
                             name: 'series 1-1',
                             active: true,
+                            sub_list: {},
                         },
                         1: {
                             name: 'series 1-2',
