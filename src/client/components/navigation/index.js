@@ -38,7 +38,7 @@ class Navigation extends React.Component {
         const { auth, select } = this.state
         return( 
             <div className="container">
-                <div className="tabs is-centered is-large">
+                <div className="tabs is-large">
                     <ul>
                         <li className={select.product}> 
                             <Link onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>

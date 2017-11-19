@@ -204,3 +204,7 @@ table tr.is-orange td, table tr.is-orange th {
 table.is-orange tr td, table.is-orange tr th {
     border-color: $orange;
 }
+
+.menu-list ul li a.is-active {
+    background: #3393fa;
+} 

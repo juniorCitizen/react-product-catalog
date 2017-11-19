@@ -90,7 +90,7 @@ export default class Login extends React.Component {
                 <Nav tab="login" />
                 <div className="container" style={style.container}>
                     <div className="columns">
-                        <div className="column is-4">
+                        <div className="column is-6 is-offset-3">
                             <div className="box is-4" style={style.box}>
                                 <div className="field">
                                     <label className="label">電子郵件</label>
