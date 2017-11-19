@@ -4,7 +4,6 @@ const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 const db = require('../../controllers/database')
 const eVars = require('../../config/eVars')
 const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')

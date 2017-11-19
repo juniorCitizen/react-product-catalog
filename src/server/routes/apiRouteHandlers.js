@@ -89,32 +89,35 @@ API_ROUTER
 
 // Photos
 const getPhotoById = require('./photos/getPhotoById')
-const insertPhoto = require('./photos/insertPhoto')
+const insertPhoto = require('./photos/insertPhotos')
 const removePhoto = require('./photos/removePhoto')
 const togglePhotoPublishState = require('./photos/togglePhotoPublishState')
 const assignPhotoToSeries = require('./photos/assignPhoto').toSeries
 const assignPhotoToProduct = require('./photos/assignPhoto').toProduct
-API_ROUTER
-  .get('/photos', notImplemented)
-  .post('/photos', ...insertPhoto) // batch insert photos
-  .put('/photos', notImplemented)
-  .patch('/photos', notImplemented)
-  .delete('/photos/photos', notImplemented)
-  .get('/photos/:photoId', ...getPhotoById) // get photo by id
-  .post('/photos/:photoId', notImplemented)
-  .put('/photos/:photoId', notImplemented)
-  .patch('/photos/:photoId', ...togglePhotoPublishState) // publish/unpublish a photo
-  .delete('/photos/:photoId', ...removePhoto) // remove photo by id
-  .get('/photos/:photoId/products/:productId', notImplemented)
-  .post('/photos/:photoId/products/:productId', notImplemented)
-  .put('/photos/:photoId/products/:productId', notImplemented)
-  .patch('/photos/:photoId/products/:productId', ...assignPhotoToProduct) // assign a photo to a product
-  .delete('/photos/:photoId/products/:productId', notImplemented)
-  .get('/photos/:photoId/series/:seriesId', notImplemented)
-  .post('/photos/:photoId/series/:seriesId', notImplemented)
-  .put('/photos/:photoId/series/:seriesId', notImplemented)
-  .patch('/photos/:photoId/series/:seriesId', ...assignPhotoToSeries) // assign a photo to a series
-  .delete('/photos/:photoId/series/:seriesId', notImplemented)
+API_ROUTER.route('/photos')
+  .get(notImplemented)
+  .post(...insertPhoto) // batch insert photos
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/photos/:photoId')
+  .get(...getPhotoById) // get photo by id
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...togglePhotoPublishState) // publish/unpublish a photo
+  .delete(...removePhoto) // remove photo by id
+API_ROUTER.route('/photos/:photoId/products/:productId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...assignPhotoToProduct) // assign a photo to a product
+  .delete(notImplemented)
+API_ROUTER.route('/photos/:photoId/series/:seriesId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...assignPhotoToSeries) // assign a photo to a series
+  .delete(notImplemented)
 
 // Products
 const getProducts = require('./products/getProducts')
@@ -320,7 +323,6 @@ API_ROUTER
 
 // Users
 const addUser = require('./users/addUser')
-
 API_ROUTER
   .get('/users', notImplemented) // get users **
   .post('/users', ...addUser) // add a user to the system
