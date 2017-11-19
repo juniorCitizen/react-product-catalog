@@ -1,5 +1,3 @@
-const routerResponse = require('../controllers/routerResponse')
-
 const baseOptions = {
   series: { order: ['order'] },
   products: { order: ['code'] },
@@ -9,15 +7,12 @@ const baseOptions = {
 module.exports = (modelReference) => {
   return (req, res, next) => {
     if (!(modelReference in baseOptions)) {
-      routerResponse.json({
-        req,
-        res,
-        statusCode: 501,
-        message: `base query options hasn't been implemented for ${modelReference} model`
-      })
-      next('BASE_QUERY_OPTIONS_UNIMPLEMENTED')
+      res.status(501)
+      let error = new Error(`資料表模板 ${modelReference} 基礎查詢選項尚未設置`)
+      error.message = `資料表模板 ${modelReference} 基礎查詢選項尚未設置`
+      return next(error)
     }
     req.queryOptions = baseOptions[modelReference]
-    next()
+    return next()
   }
 }

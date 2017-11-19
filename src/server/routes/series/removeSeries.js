@@ -1,6 +1,4 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
@@ -13,7 +11,8 @@ module.exports = (() => {
     validateJwt,
     setBaseQueryParameters,
     setResponseDetailLevel,
-    (req, res) => {
+    (req, res, next) => {
+      if (res.statusCode >= 400) return next()
       let targetPosition = null
       return db.sequelize
         .transaction((trx) => {
@@ -22,40 +21,34 @@ module.exports = (() => {
             .findById(req.params.seriesId)
             .then((targetRecord) => {
               if (targetRecord) {
-                // delete record instance after recording it's original ordering position
+                // recording target's original ordering position
                 targetPosition = targetRecord.order
+                // delete target record
                 return targetRecord
                   .destroy(trxObj)
-                  .catch(logging.reject('failure to delete target series record'))
+                  .catch(error => next(error))
               } else {
                 // if targetRecord is null (no such record found)
                 return Promise.resolve()
               }
             })
             .then(() => {
-              // advance records' record value that were after the deleted target
+              // advance affected records
+              // records with 'order' value larger then the target
               return db.sequelize
                 .query(queryString, {
                   replacements: { targetPosition: targetPosition },
                   transaction: trx
                 })
-                .catch(logging.reject('failure to adjust order values of affected records'))
+                .catch(error => next(error))
             })
         }).then(() => {
           return db.Series
             .findAll(req.queryOptions)
-            .catch(logging.reject('DELETE operation completed, but couldn\'t retrieve updated dataset'))
-        }).then((data) => routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data
-        })).catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error removing series record'
-        }))
+            .catch(error => next(error))
+        }).then((data) => {
+          req.resJson = { data }
+          return next()
+        }).catch(error => next(error))
     }]
 })()

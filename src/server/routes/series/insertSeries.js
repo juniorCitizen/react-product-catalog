@@ -1,13 +1,13 @@
 const db = require('../../controllers/database')
 const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
   return [
     validateJwt,
-    async (req, res) => {
+    async (req, res, next) => {
+      if (res.statusCode >= 400) return next()
       return db.Series
         .create({
           id: await nextAvailableId(),
@@ -15,27 +15,19 @@ module.exports = (() => {
           order: await nextAvailableValueInSequence()
         })
         .then((newSeriesRecord) => (() => {
-          if (req.query.hasOwnProperty('details')) {
-            return Promise.resolve(
-              Object.assign(newSeriesRecord.dataValues, {
-                products: [],
-                photo: null
-              })
-            )
+          if ('details' in req.query) {
+            let detailedData = Object.assign({
+              products: [],
+              photo: null
+            }, newSeriesRecord.dataValues)
+            return Promise.resolve(detailedData)
           } else { return Promise.resolve(newSeriesRecord) }
         })())
         .then((data) => {
-          return routerResponse.json({
-            req, res, statusCode: 200, data
-          })
+          req.resJson = { data }
+          return next()
         })
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error inserting series record'
-        }))
+        .catch(error => next(error))
     }]
 })()
 

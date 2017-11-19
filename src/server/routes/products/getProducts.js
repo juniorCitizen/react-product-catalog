@@ -1,7 +1,4 @@
 const db = require('../../controllers/database')
-const eVars = require('../../config/eVars')
-const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const modelReference = 'products'
 
@@ -10,26 +7,28 @@ const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel
 const paginationLinkHeader = require('../../middlewares/paginationLinkHeader')
 
 module.exports = (() => {
-  let getRecordCount = require('axios')({
-    method: 'get',
-    url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api/${modelReference}/count`
-  }).then(res => res.data.data).catch(logging.reject)
-
   return [
     setBaseQueryParameters,
     setResponseDetailLevel,
-    paginationLinkHeader(getRecordCount, 20, 100),
-    (req, res) => {
+    (req, res, next) => {
+      return db.Products
+        .findAndCountAll()
+        .then(result => {
+          req.dataSourceRecordCount = result.count
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
+    },
+    paginationLinkHeader(20, 100),
+    (req, res, next) => {
+      console.log(req.resJson)
       return db.Products
         .findAll(req.queryOptions)
-        .then(data => routerResponse.json({
-          req, res, statusCode: 200, data
-        })).catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error getting product dataset'
-        }))
+        .then(data => {
+          req.resJson = { data }
+          return next()
+        })
+        .catch(error => next(error))
     }]
 })()

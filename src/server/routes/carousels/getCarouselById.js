@@ -1,21 +1,22 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = (() => {
-  return [(req, res) => {
+  return [(req, res, next) => {
+    let id = parseInt(req.params.carouselId)
     return db.Carousels
-      .findById(req.params.carouselId)
-      .then(carousel => routerResponse.imageBuffer({
-        res,
-        statusCode: 200,
-        mimeType: carousel.mimeType,
-        dataBuffer: carousel.data
-      }))
-      .catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error
-      }))
+      .findById(id)
+      .then(carousel => {
+        if (carousel === null) {
+          req.resJson = { message: `carousel (id: ${id}) is missing` }
+        } else {
+          req.resImage = {
+            mimeType: carousel.mimeType,
+            data: carousel.data
+          }
+        }
+        next()
+        return Promise.resolve()
+      })
+      .catch(error => next(error))
   }]
 })()

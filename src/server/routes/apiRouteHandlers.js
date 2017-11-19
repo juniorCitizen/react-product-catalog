@@ -6,39 +6,21 @@ const routerResponse = require('../controllers/routerResponse')
 const botPrevention = require('../middlewares/botPrevention')
 const notImplemented = require('../middlewares/notImplemented')
 
+const responseHandler = require('../middlewares/responseHandler')
+
 const API_ROUTER = express.Router()
 
-// SERIES
-const getSeries = require('./series/getSeries')
-const getSeriesById = require('./series/getSeriesById')
-const insertSeries = require('./series/insertSeries')
-const updateSeries = require('./series/updateSeries')
-const removeSeries = require('./series/removeSeries')
-
+// Utilities
+const getTotalRecordCount = require('./utilities/getTotalRecordCount')
 API_ROUTER
-  .get('/series', ...getSeries) // get series dataset
-  .post('/series', notImplemented)
-  .put('/series', notImplemented)
-  .patch('/series', notImplemented)
-  .delete('/series', notImplemented)
-  .get('/series/name/:name', notImplemented)
-  .post('/series/name/:name', ...insertSeries) // create new series record
-  .put('/series/name/:name', notImplemented)
-  .patch('/series/name/:name', notImplemented)
-  .delete('/series/name/:name', notImplemented)
-  .get('/series/:seriesId', ...getSeriesById) // get series by id
-  .post('/series/:seriesId', notImplemented)
-  .put('/series/:seriesId', ...updateSeries) // update multiple series fields by id
-  .patch('/series/:seriesId', notImplemented)
-  .delete('/series/:seriesId', ...removeSeries) // delete series by id
+  .get('/recordCount/:modelReference', ...getTotalRecordCount)
 
-// CAROUSELS
+// Carousels
 const getCarouselById = require('./carousels/getCarouselById')
 const insertCarousel = require('./carousels/insertCarousel')
 const toggleCarouselPrimaryStatus = require('./carousels/toggleCarouselPrimaryStatus')
 const removeCarousel = require('./carousels/removeCarousel')
 const updateCarouselOrder = require('./carousels/updateCarouselOrder')
-
 API_ROUTER
   .get('/carousels', notImplemented)
   .post('/carousels', ...insertCarousel) // add a carousel image
@@ -61,27 +43,16 @@ API_ROUTER
   .patch('/carousels/:carouselId/primary', ...toggleCarouselPrimaryStatus) // switch primary status
   .delete('/carousels/:carouselId/primary', notImplemented)
 
-// REGIONS
-const getRegions = require('./countries/getRegions')
-API_ROUTER
-  .get('/regions', ...getRegions) // get regions
-  .post('/regions', notImplemented)
-  .put('/regions', notImplemented)
-  .patch('/regions', notImplemented)
-  .delete('/regions', notImplemented)
-
-// COUNTRIES
-const countCountries = require('./countries/countCountries')
+// Countries
 const getCountries = require('./countries/getCountries')
 const getFlagByCountryId = require('./countries/getFlagByCountryId')
-
 API_ROUTER
   .get('/countries', ...getCountries) // get countries
   .post('/countries', notImplemented)
   .put('/countries', notImplemented)
   .patch('/countries', notImplemented)
   .delete('/countries', notImplemented)
-  .get('/countries/count', ...countCountries) // get record count
+  .get('/countries/count', notImplemented)
   .post('/countries/count', notImplemented)
   .put('/countries/count', notImplemented)
   .patch('/countries/count', notImplemented)
@@ -92,9 +63,8 @@ API_ROUTER
   .patch('/countries/:countryId/flag', notImplemented)
   .delete('/countries/:countryId/flag', notImplemented)
 
-// OFFICES **
+// Offices **
 const getOffices = require('./offices/getOffices')
-
 API_ROUTER
   .get('/offices', ...getOffices) // get office dataset complete with country and staff info
   .post('/offices', notImplemented)
@@ -117,14 +87,13 @@ API_ROUTER
   .patch('/offices/:officeId/user/:userId', notImplemented)
   .delete('/offices/:officeId/user/:userId', notImplemented)
 
-// PHOTOS
+// Photos
 const getPhotoById = require('./photos/getPhotoById')
 const insertPhoto = require('./photos/insertPhoto')
 const removePhoto = require('./photos/removePhoto')
 const togglePhotoPublishState = require('./photos/togglePhotoPublishState')
 const assignPhotoToSeries = require('./photos/assignPhoto').toSeries
 const assignPhotoToProduct = require('./photos/assignPhoto').toProduct
-
 API_ROUTER
   .get('/photos', notImplemented)
   .post('/photos', ...insertPhoto) // batch insert photos
@@ -147,22 +116,20 @@ API_ROUTER
   .patch('/photos/:photoId/series/:seriesId', ...assignPhotoToSeries) // assign a photo to a series
   .delete('/photos/:photoId/series/:seriesId', notImplemented)
 
-// PRODUCTS
+// Products
 const getProducts = require('./products/getProducts')
 const getProductById = require('./products/getProductById')
 const insertProduct = require('./products/insertProduct')
 const updateProduct = require('./products/updateProduct')
 const deleteProduct = require('./products/deleteProduct')
 const assignToSeries = require('./products/assignToSeries')
-const getProductCount = require('./products/getProductCount')
-
 API_ROUTER
   .get('/products', ...getProducts) // get product dataset
   .post('/products', ...insertProduct) // create new product complete with optional photos and tags
   .put('/products', notImplemented)
   .patch('/products', notImplemented)
   .delete('/products', notImplemented)
-  .get('/products/count', ...getProductCount) // get total number of product in dataset
+  .get('/products/count', notImplemented)
   .post('/products/count', notImplemented)
   .put('/products/count', notImplemented)
   .patch('/products/count', notImplemented)
@@ -178,17 +145,16 @@ API_ROUTER
   .patch('/products/:productId/series/:seriesId', ...assignToSeries) // assign a product to a series
   .delete('/products/:productId/series/:seriesId', notImplemented)
 
-// TOKENS
-const processJwtRequest = require('./tokens/processJwtRequest')
-
+// Regions
+const getRegions = require('./countries/getRegions')
 API_ROUTER
-  .get('/tokens', notImplemented)
-  .post('/tokens', ...processJwtRequest) // verify against user credentials and provide a jwt upon success
-  .put('/tokens', notImplemented)
-  .patch('/tokens', notImplemented)
-  .delete('/tokens', notImplemented)
+  .get('/regions', ...getRegions) // get regions
+  .post('/regions', notImplemented)
+  .put('/regions', notImplemented)
+  .patch('/regions', notImplemented)
+  .delete('/regions', notImplemented)
 
-// REGISTRATIONS
+// Registrations **
 API_ROUTER
   .get('/', (req, res) => {
     db.Registrations
@@ -320,7 +286,39 @@ function productRequest (req, res) {
     })
 }
 
-// USERS
+// series
+const getSeries = require('./series/getSeries')
+const getSeriesById = require('./series/getSeriesById')
+const insertSeries = require('./series/insertSeries')
+const updateSeries = require('./series/updateSeries')
+const removeSeries = require('./series/removeSeries')
+API_ROUTER
+  .get('/series', ...getSeries) // get series dataset
+  .post('/series', notImplemented)
+  .put('/series', notImplemented)
+  .patch('/series', notImplemented)
+  .delete('/series', notImplemented)
+  .get('/series/name/:name', notImplemented)
+  .post('/series/name/:name', ...insertSeries) // create new series record
+  .put('/series/name/:name', notImplemented)
+  .patch('/series/name/:name', notImplemented)
+  .delete('/series/name/:name', notImplemented)
+  .get('/series/:seriesId', ...getSeriesById) // get series by id
+  .post('/series/:seriesId', notImplemented)
+  .put('/series/:seriesId', ...updateSeries) // update multiple series fields by id
+  .patch('/series/:seriesId', notImplemented)
+  .delete('/series/:seriesId', ...removeSeries) // delete series by id
+
+// Tokens
+const processJwtRequest = require('./tokens/processJwtRequest')
+API_ROUTER
+  .get('/tokens', notImplemented)
+  .post('/tokens', ...processJwtRequest) // verify against user credentials and provide a jwt upon success
+  .put('/tokens', notImplemented)
+  .patch('/tokens', notImplemented)
+  .delete('/tokens', notImplemented)
+
+// Users
 const addUser = require('./users/addUser')
 
 API_ROUTER
@@ -344,5 +342,12 @@ API_ROUTER
   .patch('/users/:userId/password', notImplemented) // change password **
   .patch('/users/:userId/admin', notImplemented) // admin status toggle **
   .patch('/users/:userId/name/:name', notImplemented) // change name **
+
+API_ROUTER.use(responseHandler.file)
+API_ROUTER.use(responseHandler.image)
+API_ROUTER.use(responseHandler.json)
+API_ROUTER.use(responseHandler.template)
+API_ROUTER.use(notImplemented) // catch all api calls that fell through
+API_ROUTER.use(responseHandler.error) // router specific error handler
 
 module.exports = API_ROUTER
