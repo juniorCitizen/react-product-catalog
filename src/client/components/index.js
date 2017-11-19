@@ -5,7 +5,6 @@ import { login_user } from '../actions'
 import '../assets/bulma.scss'
 
 import Content from './content'
-import Function from './function'
 import Product from './product'
 import Login from './login'
 import Register from './register'

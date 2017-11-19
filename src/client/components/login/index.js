@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Nav from '../navigation'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -86,17 +87,7 @@ export default class Login extends React.Component {
         const { auth, form, msg } = this.state
         return (
             <div>
-                <nav className="navbar has-shadow">
-                    <div className="container">
-                        <nav className="tabs is-large">
-                            <Link className="navbar-item is-tab" to="/">產品列表</Link>
-                            {!auth &&<Link className="navbar-item is-tab is-active" to="/login">會員登入</Link>}
-                            <Link className="navbar-item is-tab" to="/register">會員註冊</Link>
-                            <Link className="navbar-item is-tab" to="/contact">聯絡我們</Link>
-                            {auth && <Link className="navbar-item is-tab" to="/order">訂購清單</Link>}
-                        </nav>
-                    </div>
-                </nav>
+                <Nav tab="login" />
                 <div className="container" style={style.container}>
                     <div className="columns">
                         <div className="column is-4">
