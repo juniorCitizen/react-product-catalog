@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
 
-class Navbar extends React.Component {
+class Navigation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,41 +40,34 @@ class Navbar extends React.Component {
             <div className="container">
                 <div className="tabs is-centered is-large">
                     <ul>
-                        <li>
-                            <Link className={select.product} 
-                                onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
+                        <li className={select.product}> 
+                            <Link onClick={this.tabActive.bind(this, 'product')} to="/">產品列表</Link>
                         </li>
                         {auth ? 
-                            <li>
-                                <Link className={select.logout} 
-                                    onClick={this.tabActive.bind(this, 'logout')} to="/logout">會員登出</Link>
+                            <li className={select.logout}>
+                                <Link onClick={this.tabActive.bind(this, 'logout')} to="/logout">會員登出</Link>
                             </li>
                         :
-                            <li>
-                                <Link className={select.login} 
-                                    onClick={this.tabActive.bind(this, 'login')} to="/login">會員登入</Link>
+                            <li className={select.login}>
+                                <Link onClick={this.tabActive.bind(this, 'login')} to="/login">會員登入</Link>
                             </li>
                         }
                         {auth ?
-                            <li>
-                                <Link className={select.modify} 
-                                    onClick={this.tabActive.bind(this, 'modify')} to="/modify">修改會員資料</Link>
+                            <li className={select.modify}>
+                                <Link onClick={this.tabActive.bind(this, 'modify')} to="/modify">修改會員資料</Link>
                             </li>
                         :
-                            <li>
-                                <Link className={select.register} 
-                                    onClick={this.tabActive.bind(this, 'register')} to="/register">會員註冊</Link>
+                            <li className={select.register}>
+                                <Link onClick={this.tabActive.bind(this, 'register')} to="/register">會員註冊</Link>
                             </li>
                         }
                         
-                        <li>
-                            <Link className={select.contact}
-                                onClick={this.tabActive.bind(this, 'contact')} to="/contact">聯絡我們</Link>
+                        <li className={select.contact}>
+                            <Link onClick={this.tabActive.bind(this, 'contact')} to="/contact">聯絡我們</Link>
                         </li>
                         {auth && 
-                            <li>
-                                <Link className={select.order}
-                                    onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>
+                            <li className={select.order}>
+                                <Link onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>
                             </li>
                         }
                     </ul>
@@ -91,4 +84,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(Function)
+export default connect(mapStateToProps)(Navigation)
