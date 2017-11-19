@@ -1,22 +1,34 @@
 const db = require('../../controllers/database')
-const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
-  return [validateJwt, async (req, res) => {
-    let target = await getTarget(req.params.carouselId)
-    let dataset = await getDataset(db.Carousels)
+  return [validateJwt, async (req, res, next) => {
+    // get target carousel instance
+    let target = await db.Carousels
+      .findById(parseInt(req.params.carouselId))
+      .catch(error => next(error))
+    // get model dataset
+    let dataset = await db.Carousels
+      .findAll({
+        attributes: { exclude: ['data'] },
+        order: ['order']
+      })
+      .catch(error => next(error))
     let originalPosition = target.order
     let intendedPosition = parseInt(req.params.order)
     let targetPosition = getTargetPosition(intendedPosition, dataset.length)
     if (originalPosition === targetPosition) {
-      return routerResponse.json({
-        req, res, statusCode: 200, data: dataset
-      })
+      // return the original dataset if the
+      // specified order does not change data
+      req.resJson = {
+        data: dataset,
+        message: `Carousel of id: '${req.params.carouselId}' is already at order position: '${req.params.order}'`
+      }
+      return next()
     }
-    return db.sequelize.transaction(trx => {
+    return db.sequelize.transaction(trx => { // start transaction
+      // determine adjustment parameters and compose query
       let floor = (originalPosition > targetPosition)
         ? targetPosition
         : (originalPosition + 1)
@@ -27,39 +39,25 @@ module.exports = (() => {
         ? '+ 1'
         : '- 1'
       let queryString = `UPDATE \`carousels\` SET \`order\` = \`order\` ${adjustment} WHERE \`order\` BETWEEN ${floor} AND ${ceiling};`
+      // run the adjustment query
       return db.sequelize
         .query(queryString, { transaction: trx })
+        // update target if dataset order is successfully adjusted
         .then(() => target.update({ order: targetPosition }, { transaction: trx }))
-        .catch(logging.reject)
-    }).then(() => getDataset(db.Carousels))
-      .then(data => routerResponse.json({
-        req, res, statusCode: 200, data
-      })).catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: 'error reordering carousels'
-      }))
+        .catch(error => next(error))
+    }).then(() => {
+      // query the new dataset after order adjustment
+      return db.Carousels.findAll({
+        attributes: { exclude: ['data'] },
+        order: ['order']
+      }).catch(Promise.reject)
+    }).then(data => {
+      req.resJson = { data }
+      next()
+      return Promise.resolve()
+    }).catch(error => next(error))
   }]
 })()
-
-function getTarget (id) {
-  return db.Carousels
-    .findById(id)
-    .then(targetRecord => Promise.resolve(targetRecord))
-    .catch(logging.reject)
-}
-
-function getDataset (model) {
-  return model
-    .findAll({
-      attributes: { exclude: ['data'] },
-      order: ['order']
-    })
-    .then(dataset => Promise.resolve(dataset))
-    .catch(logging.reject)
-}
 
 function getTargetPosition (intendedPosition, datasetLength) {
   if (intendedPosition > (datasetLength - 1)) return datasetLength
