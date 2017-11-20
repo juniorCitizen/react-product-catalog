@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Navigation from '../navigation'
+import Series from './series'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
 
@@ -18,7 +19,14 @@ class Product extends React.Component {
             <div>
                 <Navigation tab="product"/>
                 <div className="container" style={style.container}>
-                    <h1>this product</h1>
+                    <div className="columns">
+                        <div className="column is-one-fifth">
+                            <Series />
+                        </div>
+                        <div className="column">
+                            Second column
+                        </div>
+                    </div>
                 </div>
             </div>
         )
