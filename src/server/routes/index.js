@@ -1,7 +1,7 @@
 const express = require('express')
 
 const eVars = require('../config/eVars')
-const routerReponse = require('../middlewares/responseHandler')
+const routerReponse = require('../middlewares/responseHandlers')
 
 module.exports = express.Router()
   .get('/',

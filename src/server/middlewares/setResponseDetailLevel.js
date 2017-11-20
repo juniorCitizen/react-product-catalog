@@ -1,9 +1,5 @@
 const db = require('../controllers/database')
 
-// due to database being initialized 'after' the api endpoints
-// declaration, the object must be wrapped in an function,
-// in order to obtain initialized properties of 'db' module
-// otherwise all models will be undefined
 const detailedOptions = {
   series: () => {
     return {

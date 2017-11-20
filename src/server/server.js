@@ -16,16 +16,16 @@ const db = require('./controllers/database')
 const eVars = require('./config/eVars')
 const logging = require('./controllers/logging')
 
-// ///////////////////////////////////////////////////////////////
-// 系統部件初始化程序 - 網頁伺服器以及路由配置啟動之前必須啟動的服務原件
-// ///////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+// 系統部件初始化程序 - 伺服器以及路由配置啟動之前必須啟動的服務原件
+// ///////////////////////////////////////////////////////////
 logging.console('系統模組初始化...')
 // 服務原件先行加載
 let preStartupInitSequence = [
   db.initialize(), // 資料庫系統
   // emailSystem.initialize(), // email 發送系統
-  '其他網頁伺服器啟動前置模組 1 初始化...', // dummy stub
-  '其他網頁伺服器啟動前置模組 2 初始化...' // dummy stub
+  '其他伺服器啟動前置模組 1 初始化...', // dummy stub
+  '其他伺服器啟動前置模組 2 初始化...' // dummy stub
 ]
 logging.console('伺服器啟動前置作業...')
 logging.console('前置模組初始化...')
@@ -65,7 +65,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     app.use(bodyParser.json({ limit: '5mb' })) // for request with large body data
 
     // ///////////// Routing Setup //////////////////////////////////////////
-    logging.console('路由端點定義...')
+    logging.console('路由器端點定義...')
     const ROUTERS = {
       api: {
         router: express.Router(),
@@ -114,13 +114,13 @@ Promise.each( // 依序執行服務原件的啟動程序
       }
       logging.console(`${eVars.SYS_REF} 伺服器正常啟動... (${eVars.HOST})`)
 
-      // ///////////////////////////////////////////////////////////////
-      // 系統部件初始化程序 - 網頁伺服器以及路由配置啟動之後才需啟動的服務原件
-      // ///////////////////////////////////////////////////////////////
+      // ///////////////////////////////////////////////////////////
+      // 系統部件初始化程序 - 伺服器以及路由配置啟動之後才需啟動的服務原件
+      // ///////////////////////////////////////////////////////////
       // modules that can be initialized afterwards goes here
       let postStartupInitSequence = [
-        '啟動後模組 1 初始化...', // dummy stub
-        '啟動後模組 2 初始化...' // dummy stub
+        '伺服器啟動後置模組 1 初始化...', // dummy stub
+        '伺服器啟動後置模組 2 初始化...' // dummy stub
       ]
       logging.console('後置模組初始化...')
       return Promise

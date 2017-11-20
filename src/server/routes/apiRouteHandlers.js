@@ -5,9 +5,14 @@ const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
 const notImplemented = require('../middlewares/notImplemented')
-const responseHandler = require('../middlewares/responseHandler')
+const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
+
+// //////////////////////////////////////////////////////
+// API router specific pre-routing processing middlewares
+// //////////////////////////////////////////////////////
+API_ROUTER.use(require('../middlewares/routingRecorder/init'))
 
 // /////////////////////////////////////////////////////
 // Utilities
@@ -49,12 +54,6 @@ const getCountries = require('./countries/getCountries')
 const getFlagByCountryId = require('./countries/getFlagByCountryId')
 API_ROUTER.route('/countries')
   .get(...getCountries) // get countries
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/countries/count')
-  .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
@@ -134,12 +133,6 @@ API_ROUTER.route('/products')
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/products/count')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 API_ROUTER.route('/products/:productId')
   .get(...require('./products/getProductById')) // get product record by id
   .post(notImplemented)
@@ -167,6 +160,7 @@ API_ROUTER.route('/regions')
 // Registrations **
 // /////////////////////////////////////////////////////
 API_ROUTER
+  .post('/', botPrevention, registration)
   .get('/', (req, res) => {
     db.Registrations
       .findAll({ order: ['name'] })
@@ -215,7 +209,6 @@ API_ROUTER
       })
   })
   .post('/productRequest', botPrevention, productRequest)
-  .post('/', botPrevention, registration)
 
 function registration (req, res) {
   db.Registrations
@@ -324,7 +317,7 @@ API_ROUTER.route('/series/:seriesId')
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/tokens')
   .get(notImplemented)
-  .post(...require('./tokens/processJwtRequest')) // verify against user credentials and provide a jwt upon success
+  .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
@@ -369,14 +362,15 @@ API_ROUTER.route('/users/:userId/name/:name')
   .patch(notImplemented) // change name **
   .delete(notImplemented)
 
-// /////////////////////////////////////////////////////
-// API router specific post route processing middlewares
-// /////////////////////////////////////////////////////
-API_ROUTER.use(responseHandler.file)
-API_ROUTER.use(responseHandler.image)
-API_ROUTER.use(responseHandler.json)
-API_ROUTER.use(responseHandler.template)
+// ///////////////////////////////////////////////////////
+// API router specific post-routing processing middlewares
+// ///////////////////////////////////////////////////////
+API_ROUTER.use(require('../middlewares/routingRecorder/reporting'))
+API_ROUTER.use(responseHandlers.file)
+API_ROUTER.use(responseHandlers.image)
+API_ROUTER.use(responseHandlers.json)
+API_ROUTER.use(responseHandlers.template)
 API_ROUTER.use(notImplemented) // catch all api calls that fell through
-API_ROUTER.use(responseHandler.error) // router specific error handler
+API_ROUTER.use(responseHandlers.error) // router specific error handler
 
 module.exports = API_ROUTER
