@@ -1,5 +1,4 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')

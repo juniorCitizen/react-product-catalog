@@ -5,160 +5,162 @@ const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
 const notImplemented = require('../middlewares/notImplemented')
-
-const responseHandler = require('../middlewares/responseHandler')
+const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
 
+// //////////////////////////////////////////////////////
+// API router specific pre-routing processing middlewares
+// //////////////////////////////////////////////////////
+API_ROUTER.use(require('../middlewares/routingRecorder/init'))
+
+// /////////////////////////////////////////////////////
 // Utilities
-const getTotalRecordCount = require('./utilities/getTotalRecordCount')
-API_ROUTER
-  .get('/recordCount/:modelReference', ...getTotalRecordCount)
+// /////////////////////////////////////////////////////
+API_ROUTER.get('/recordCount/:modelReference', ...require('./utilities/getTotalRecordCount'))
 
+// /////////////////////////////////////////////////////
 // Carousels
-const getCarouselById = require('./carousels/getCarouselById')
-const insertCarousel = require('./carousels/insertCarousel')
-const toggleCarouselPrimaryStatus = require('./carousels/toggleCarouselPrimaryStatus')
-const removeCarousel = require('./carousels/removeCarousel')
-const updateCarouselOrder = require('./carousels/updateCarouselOrder')
-API_ROUTER
-  .get('/carousels', notImplemented)
-  .post('/carousels', ...insertCarousel) // add a carousel image
-  .put('/carousels', notImplemented)
-  .patch('/carousels', notImplemented)
-  .delete('/carousels', notImplemented)
-  .get('/carousels/:carouselId', ...getCarouselById) // get one carousel
-  .post('/carousels/:carouselId', notImplemented)
-  .put('/carousels/:carouselId', notImplemented)
-  .patch('/carousels/:carouselId', notImplemented)
-  .delete('/carousels/:carouselId', ...removeCarousel) // remove a carousel image
-  .get('/carousels/:carouselId/order/:order', notImplemented)
-  .post('/carousels/:carouselId/order/:order', notImplemented)
-  .put('/carousels/:carouselId/order/:order', notImplemented)
-  .patch('/carousels/:carouselId/order/:order', ...updateCarouselOrder) // update order of carousels
-  .delete('/carousels/:carouselId/order/:order', notImplemented)
-  .get('/carousels/:carouselId/primary', notImplemented)
-  .post('/carousels/:carouselId/primary', notImplemented)
-  .put('/carousels/:carouselId/primary', notImplemented)
-  .patch('/carousels/:carouselId/primary', ...toggleCarouselPrimaryStatus) // switch primary status
-  .delete('/carousels/:carouselId/primary', notImplemented)
-
-// Countries
-const getCountries = require('./countries/getCountries')
-const getFlagByCountryId = require('./countries/getFlagByCountryId')
-API_ROUTER
-  .get('/countries', ...getCountries) // get countries
-  .post('/countries', notImplemented)
-  .put('/countries', notImplemented)
-  .patch('/countries', notImplemented)
-  .delete('/countries', notImplemented)
-  .get('/countries/count', notImplemented)
-  .post('/countries/count', notImplemented)
-  .put('/countries/count', notImplemented)
-  .patch('/countries/count', notImplemented)
-  .delete('/countries/count', notImplemented)
-  .get('/countries/:countryId/flag', ...getFlagByCountryId) // get flag from countryId
-  .post('/countries/:countryId/flag', notImplemented)
-  .put('/countries/:countryId/flag', notImplemented)
-  .patch('/countries/:countryId/flag', notImplemented)
-  .delete('/countries/:countryId/flag', notImplemented)
-
-// Offices **
-const getOffices = require('./offices/getOffices')
-API_ROUTER
-  .get('/offices', ...getOffices) // get office dataset complete with country and staff info
-  .post('/offices', notImplemented)
-  .put('/offices', notImplemented)
-  .patch('/offices', notImplemented)
-  .delete('/offices', notImplemented)
-  .get('/offices/:officeId', notImplemented)
-  .post('/offices/:officeId', notImplemented)
-  .put('/offices/:officeId', notImplemented)
-  .patch('/offices/:officeId', notImplemented)
-  .delete('/offices/:officeId', notImplemented)
-  .get('/offices/:officeId/user', notImplemented)
-  .post('/offices/:officeId/user', notImplemented)
-  .put('/offices/:officeId/user', notImplemented)
-  .patch('/offices/:officeId/user', notImplemented)
-  .delete('/offices/:officeId/user', notImplemented)
-  .get('/offices/:officeId/user/:userId', notImplemented)
-  .post('/offices/:officeId/user/:userId', notImplemented)
-  .put('/offices/:officeId/user/:userId', notImplemented)
-  .patch('/offices/:officeId/user/:userId', notImplemented)
-  .delete('/offices/:officeId/user/:userId', notImplemented)
-
-// Photos
-const getPhotoById = require('./photos/getPhotoById')
-const insertPhoto = require('./photos/insertPhotos')
-const removePhoto = require('./photos/removePhoto')
-const togglePhotoPublishState = require('./photos/togglePhotoPublishState')
-const assignPhotoToSeries = require('./photos/assignPhoto').toSeries
-const assignPhotoToProduct = require('./photos/assignPhoto').toProduct
-API_ROUTER.route('/photos')
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/carousels')
   .get(notImplemented)
-  .post(...insertPhoto) // batch insert photos
+  .post(...require('./carousels/insertCarousel')) // add a carousel image
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/photos/:photoId')
-  .get(...getPhotoById) // get photo by id
+API_ROUTER.route('/carousels/:carouselId')
+  .get(...require('./carousels/getCarouselById')) // get one carousel
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...togglePhotoPublishState) // publish/unpublish a photo
-  .delete(...removePhoto) // remove photo by id
+  .patch(notImplemented)
+  .delete(...require('./carousels/removeCarousel')) // remove a carousel image
+API_ROUTER.route('/carousels/:carouselId/order/:order')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...require('./carousels/updateCarouselOrder')) // update order of carousels
+  .delete(notImplemented)
+API_ROUTER.route('/carousels/:carouselId/primary')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...require('./carousels/toggleCarouselPrimaryStatus')) // switch primary status
+  .delete(notImplemented)
+
+// /////////////////////////////////////////////////////
+// Countries
+// /////////////////////////////////////////////////////
+const getCountries = require('./countries/getCountries')
+const getFlagByCountryId = require('./countries/getFlagByCountryId')
+API_ROUTER.route('/countries')
+  .get(...getCountries) // get countries
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/countries/:countryId/flag')
+  .get(...getFlagByCountryId) // get flag from countryId
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+// /////////////////////////////////////////////////////
+// Offices **
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/offices')
+  .get(...require('./offices/getOffices')) // get office dataset complete with country and staff info
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/offices/:officeId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/offices/:officeId/user')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/offices/:officeId/user/:userId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+// ///////////////////////////////////////////////////////////////
+// Photos
+// ///////////////////////////////////////////////////////////////
+API_ROUTER.route('/photos')
+  .get(notImplemented)
+  .post(...require('./photos/insertPhotos')) // batch insert photos
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+API_ROUTER.route('/photos/:photoId')
+  .get(...require('./photos/getPhotoById')) // get photo by id
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...require('./photos/togglePhotoPublishState')) // publish/unpublish a photo
+  .delete(...require('./photos/removePhotoById')) // remove photo by id
+
 API_ROUTER.route('/photos/:photoId/products/:productId')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...assignPhotoToProduct) // assign a photo to a product
+  .patch(...require('./photos/assignPhoto').toProduct) // assign a photo to a product
   .delete(notImplemented)
+
 API_ROUTER.route('/photos/:photoId/series/:seriesId')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...assignPhotoToSeries) // assign a photo to a series
+  .patch(...require('./photos/assignPhoto').toSeries) // assign a photo to a series
   .delete(notImplemented)
 
+// /////////////////////////////////////////////////////
 // Products
-const getProducts = require('./products/getProducts')
-const getProductById = require('./products/getProductById')
-const insertProduct = require('./products/insertProduct')
-const updateProduct = require('./products/updateProduct')
-const deleteProduct = require('./products/deleteProduct')
-const assignToSeries = require('./products/assignToSeries')
-API_ROUTER
-  .get('/products', ...getProducts) // get product dataset
-  .post('/products', ...insertProduct) // create new product complete with optional photos and tags
-  .put('/products', notImplemented)
-  .patch('/products', notImplemented)
-  .delete('/products', notImplemented)
-  .get('/products/count', notImplemented)
-  .post('/products/count', notImplemented)
-  .put('/products/count', notImplemented)
-  .patch('/products/count', notImplemented)
-  .delete('/products/count', notImplemented)
-  .get('/products/:productId', ...getProductById) // get product record by id
-  .post('/products/:productId', notImplemented)
-  .put('/products/:productId', ...updateProduct) // update multiple product fields by id
-  .patch('/products/:productId', notImplemented)
-  .delete('/products/:productId', ...deleteProduct) // delete product by id
-  .get('/products/:productId/series/:seriesId', notImplemented)
-  .post('/products/:productId/series/:seriesId', notImplemented)
-  .put('/products/:productId/series/:seriesId', notImplemented)
-  .patch('/products/:productId/series/:seriesId', ...assignToSeries) // assign a product to a series
-  .delete('/products/:productId/series/:seriesId', notImplemented)
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/products')
+  .get(...require('./products/getProducts')) // get product dataset
+  .post(...require('./products/insertProduct')) // create new product complete with optional photos and tags
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/products/:productId')
+  .get(...require('./products/getProductById')) // get product record by id
+  .post(notImplemented)
+  .put(...require('./products/updateProduct')) // update multiple product fields by id
+  .patch(notImplemented)
+  .delete(...require('./products/deleteProduct')) // delete product by id
+API_ROUTER.route('/products/:productId/series/:seriesId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...require('./products/assignToSeries')) // assign a product to a series
+  .delete(notImplemented)
 
+// /////////////////////////////////////////////////////
 // Regions
-const getRegions = require('./countries/getRegions')
-API_ROUTER
-  .get('/regions', ...getRegions) // get regions
-  .post('/regions', notImplemented)
-  .put('/regions', notImplemented)
-  .patch('/regions', notImplemented)
-  .delete('/regions', notImplemented)
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/regions')
+  .get(...require('./countries/getRegions')) // get regions
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
 
+// /////////////////////////////////////////////////////
 // Registrations **
+// /////////////////////////////////////////////////////
 API_ROUTER
+  .post('/', botPrevention, registration)
   .get('/', (req, res) => {
     db.Registrations
       .findAll({ order: ['name'] })
@@ -207,7 +209,6 @@ API_ROUTER
       })
   })
   .post('/productRequest', botPrevention, productRequest)
-  .post('/', botPrevention, registration)
 
 function registration (req, res) {
   db.Registrations
@@ -289,67 +290,87 @@ function productRequest (req, res) {
     })
 }
 
+// /////////////////////////////////////////////////////
 // series
-const getSeries = require('./series/getSeries')
-const getSeriesById = require('./series/getSeriesById')
-const insertSeries = require('./series/insertSeries')
-const updateSeries = require('./series/updateSeries')
-const removeSeries = require('./series/removeSeries')
-API_ROUTER
-  .get('/series', ...getSeries) // get series dataset
-  .post('/series', notImplemented)
-  .put('/series', notImplemented)
-  .patch('/series', notImplemented)
-  .delete('/series', notImplemented)
-  .get('/series/name/:name', notImplemented)
-  .post('/series/name/:name', ...insertSeries) // create new series record
-  .put('/series/name/:name', notImplemented)
-  .patch('/series/name/:name', notImplemented)
-  .delete('/series/name/:name', notImplemented)
-  .get('/series/:seriesId', ...getSeriesById) // get series by id
-  .post('/series/:seriesId', notImplemented)
-  .put('/series/:seriesId', ...updateSeries) // update multiple series fields by id
-  .patch('/series/:seriesId', notImplemented)
-  .delete('/series/:seriesId', ...removeSeries) // delete series by id
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/series')
+  .get(...require('./series/getSeries')) // get series dataset
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/series/name/:name')
+  .get(notImplemented)
+  .post(...require('./series/insertSeries')) // create new series record
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/series/:seriesId')
+  .get(...require('./series/getSeriesById')) // get series by id
+  .post(notImplemented)
+  .put(...require('./series/updateSeries')) // update multiple series fields by id
+  .patch(notImplemented)
+  .delete(...require('./series/removeSeries')) // delete series by id
 
+// /////////////////////////////////////////////////////
 // Tokens
-const processJwtRequest = require('./tokens/processJwtRequest')
-API_ROUTER
-  .get('/tokens', notImplemented)
-  .post('/tokens', ...processJwtRequest) // verify against user credentials and provide a jwt upon success
-  .put('/tokens', notImplemented)
-  .patch('/tokens', notImplemented)
-  .delete('/tokens', notImplemented)
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/tokens')
+  .get(notImplemented)
+  .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
 
+// /////////////////////////////////////////////////////
 // Users
-const addUser = require('./users/addUser')
-API_ROUTER
-  .get('/users', notImplemented) // get users **
-  .post('/users', ...addUser) // add a user to the system
-  .put('/users', notImplemented)
-  .patch('/users', notImplemented)
-  .delete('/users', notImplemented)
-  .get('/users/:userId', notImplemented) // get user by id **
-  .post('/users/:userId', notImplemented)
-  .put('/users/:userId', notImplemented)
-  .patch('/users/:userId', notImplemented)
-  .patch('/users/:userId', notImplemented)
-  .patch('/users/:userId', notImplemented)
-  .delete('/users/:userId', notImplemented) // delete user by id **
-  .get('/users/:userId/offices/:officeId', notImplemented)
-  .post('/users/:userId/offices/:officeId', notImplemented)
-  .put('/users/:userId/offices/:officeId', notImplemented)
-  .patch('/users/:userId/offices/:officeId', notImplemented) // assign user to an office **
-  .delete('/users/:userId/offices/:officeId', notImplemented)
-  .patch('/users/:userId/password', notImplemented) // change password **
-  .patch('/users/:userId/admin', notImplemented) // admin status toggle **
-  .patch('/users/:userId/name/:name', notImplemented) // change name **
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/users')
+  .get(notImplemented) // get users **
+  .post(...require('./users/addUser')) // add a user to the system
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/users/:userId')
+  .get(notImplemented) // get user by id **
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented) // delete user by id **
+API_ROUTER.route('/users/:userId/offices/:officeId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented) // assign user to an office **
+  .delete(notImplemented)
+API_ROUTER.route('/users/:userId/password')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented) // change password **
+  .delete(notImplemented)
+API_ROUTER.route('/users/:userId/admin')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented) // admin status toggle **
+  .delete(notImplemented)
+API_ROUTER.route('/users/:userId/name/:name')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented) // change name **
+  .delete(notImplemented)
 
-API_ROUTER.use(responseHandler.file)
-API_ROUTER.use(responseHandler.image)
-API_ROUTER.use(responseHandler.json)
-API_ROUTER.use(responseHandler.template)
+// ///////////////////////////////////////////////////////
+// API router specific post-routing processing middlewares
+// ///////////////////////////////////////////////////////
+API_ROUTER.use(require('../middlewares/routingRecorder/reporting'))
+API_ROUTER.use(responseHandlers.file)
+API_ROUTER.use(responseHandlers.image)
+API_ROUTER.use(responseHandlers.json)
+API_ROUTER.use(responseHandlers.template)
 API_ROUTER.use(notImplemented) // catch all api calls that fell through
-API_ROUTER.use(responseHandler.error) // router specific error handler
+API_ROUTER.use(responseHandlers.error) // router specific error handler
 
 module.exports = API_ROUTER

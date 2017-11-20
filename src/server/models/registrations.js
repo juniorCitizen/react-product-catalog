@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { isEmail: true }
     },
-    // countryId: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false
-    // },
     comments: {
       type: DataTypes.TEXT,
       allowNull: true
@@ -41,21 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false
     }
-    // ,
-    // createdAt: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: DataTypes.NOW
-    // },
-    // updatedAt: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: DataTypes.NOW
-    // },
-    // deletedAt: {
-    //   type: DataTypes.DATE,
-    //   allowNull: true
-    // }
   }, {
     name: {
       singular: 'registration',
@@ -65,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: false,
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    deletedAt: null // 'deletedAt'
+    deletedAt: null
   })
   return Registrations
 }
