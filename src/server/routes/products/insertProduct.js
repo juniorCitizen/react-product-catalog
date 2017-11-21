@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const piexif = require('piexifjs')
 const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 
 const db = require('../../controllers/database')
@@ -72,6 +73,7 @@ function prepSecondaryPhotoData (req, res, next) {
     // only proceed if primaryPhoto existed
     if (req.files.primaryPhoto) {
       req.files.secondaryPhotos.forEach(async (secondaryPhoto) => {
+        let bufferedPhoto = await fs.readFile(secondaryPhoto.path).catch(error => next(error))
         req.photoData.photos.push({
           primary: false,
           originalName: secondaryPhoto.originalname,
@@ -79,10 +81,7 @@ function prepSecondaryPhotoData (req, res, next) {
           mimeType: secondaryPhoto.mimetype,
           size: secondaryPhoto.size,
           publish: false,
-          data: await fs
-            .readFile(secondaryPhoto.path)
-            // error occured while reading the secondary photos
-            .catch(error => next(error))
+          data: Buffer.from(piexif.remove(bufferedPhoto.toString('binary')), 'binary')
         })
       })
       return next()
@@ -113,7 +112,7 @@ function prepPrimaryPhotoData (req, res, next) {
           mimeType: primaryPhoto.mimetype,
           size: primaryPhoto.size,
           publish: true,
-          data: bufferedPhoto
+          data: Buffer.from(piexif.remove(bufferedPhoto.toString('binary')), 'binary')
         })
         return next()
       })
