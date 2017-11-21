@@ -1,5 +1,4 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
@@ -30,6 +29,5 @@ module.exports = ((req, res) => {
           return Promise.resolve()
         })
         .catch(error => next(error))
-    }
-  ]
+    }]
 })()
