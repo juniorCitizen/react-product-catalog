@@ -1,10 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-import Navigation from '../navigation'
-=======
 import Nav from '../navigation'
->>>>>>> master
 
 export default class Register  extends React.Component {
     constructor(props) {

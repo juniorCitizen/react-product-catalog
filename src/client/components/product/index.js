@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Navigation from '../navigation'
-import Series from './series'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
 import Nav from '../navigation'
