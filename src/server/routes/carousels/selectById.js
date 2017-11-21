@@ -7,7 +7,10 @@ module.exports = (() => {
       .findById(id)
       .then(carousel => {
         if (carousel === null) {
-          req.resJson = { message: `carousel (id: ${id}) is missing` }
+          req.resJson = {
+            data: null,
+            message: `carousel (id: ${id}) is missing`
+          }
         } else {
           req.resImage = {
             mimeType: carousel.mimeType,
