@@ -13,7 +13,6 @@ const Promise = require('bluebird')
 // /////////////
 const db = require('./controllers/database')
 // const emailSystem = require('./controllers/emails/emails')
-// const proxyRegistration = require('./controllers/proxyRegistration')
 const eVars = require('./config/eVars')
 const logging = require('./controllers/logging')
 
