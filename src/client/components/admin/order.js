@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class order extends React.Component {
+export default class Order extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

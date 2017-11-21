@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Product extends React.Component {
+export default class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -34,7 +34,7 @@ export default class Product extends React.Component {
         const { auth, select } = this.state
         return( 
             <h1 className="title">
-                This is product management!!!
+                This is series management!!!
             </h1>         
         )
     }
