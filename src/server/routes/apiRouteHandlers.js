@@ -1,6 +1,9 @@
 const express = require('express')
 
+const eVars = require('../config/eVars')
+
 const db = require('../controllers/database')
+const logging = require('../controllers/logging')
 const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
@@ -24,27 +27,27 @@ API_ROUTER.get('/recordCount/:modelReference', ...require('./utilities/getTotalR
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/carousels')
   .get(notImplemented)
-  .post(...require('./carousels/insertCarousel')) // add a carousel image
+  .post(...require('./carousels/insert')) // insert a carousel image
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
 API_ROUTER.route('/carousels/:carouselId')
-  .get(...require('./carousels/getCarouselById')) // get one carousel
+  .get(...require('./carousels/selectById')) // get a carousel image data by id
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
-  .delete(...require('./carousels/removeCarousel')) // remove a carousel image
+  .delete(...require('./carousels/deleteById')) // remove a carousel image by id
 API_ROUTER.route('/carousels/:carouselId/order/:order')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...require('./carousels/updateCarouselOrder')) // update order of carousels
+  .patch(...require('./carousels/updateOrderById')) // update order of carousels
   .delete(notImplemented)
 API_ROUTER.route('/carousels/:carouselId/primary')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...require('./carousels/toggleCarouselPrimaryStatus')) // switch primary status
+  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
@@ -369,8 +372,17 @@ API_ROUTER.use(require('../middlewares/routingRecorder/reporting'))
 API_ROUTER.use(responseHandlers.file)
 API_ROUTER.use(responseHandlers.image)
 API_ROUTER.use(responseHandlers.json)
+API_ROUTER.use(responseHandlers.redirect)
 API_ROUTER.use(responseHandlers.template)
-API_ROUTER.use(notImplemented) // catch all api calls that fell through
+API_ROUTER.use((req, res, next) => {
+  logging.warning(`客戶端要求不存在的 API 端點: ${eVars.HOST}${req.path}`)
+  res.status(404)
+  return res.json({
+    method: req.method.toLowerCase(),
+    endpoint: `${eVars.HOST}${req.path}`,
+    message: '端點不存在'
+  })
+}) // catch all api calls that fell through
 API_ROUTER.use(responseHandlers.error) // router specific error handler
 
 module.exports = API_ROUTER

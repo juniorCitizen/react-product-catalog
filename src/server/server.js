@@ -103,7 +103,11 @@ Promise.each( // 依序執行服務原件的啟動程序
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////
     logging.console('載入 post-routing 全域 middlewares....')
-    app.use(require('./middlewares/404Handler'))
+    app.use((req, res, next) => {
+      logging.warning(`客戶端要求不存在的頁面: ${eVars.HOST}${req.path}`)
+      res.status(404)
+      return res.redirect(`${eVars.APP_ROUTE}`)
+    })
 
     // ///////////////// Web Server ///////////////////////////////////////////
     logging.console(`啟動 ${eVars.SYS_REF} 伺服器...`)
