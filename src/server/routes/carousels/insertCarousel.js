@@ -3,7 +3,6 @@ const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 
 const db = require('../../controllers/database')
 const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
@@ -12,35 +11,40 @@ module.exports = (() => {
     validateJwt,
     uploads.single('image'),
     prepImageData,
-    (req, res) => {
+    (req, res, next) => {
       return db.Carousels
         .create(req.imageData)
-        .then(newCarousel => routerResponse.json({
-          req,
-          res,
-          statusCode: 200,
-          data: {
-            id: newCarousel.id,
-            order: newCarousel.order,
-            primary: newCarousel.primary,
-            originalName: newCarousel.originalName,
-            encoding: newCarousel.encoding,
-            mimeType: newCarousel.mimeType,
-            size: newCarousel.size
+        .then(newCarousel => {
+          req.resJson = {
+            data: {
+              id: newCarousel.id,
+              order: newCarousel.order,
+              primary: newCarousel.primary,
+              originalName: newCarousel.originalName,
+              encoding: newCarousel.encoding,
+              mimeType: newCarousel.mimeType,
+              size: newCarousel.size
+            }
           }
-        }))
-        .catch(error => routerResponse.json({
-          req, res, statusCode: 500, error
-        }))
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }]
 })()
 
 function prepImageData (req, res, next) {
   let uploadedImage = req.file
+  if (!uploadedImage) {
+    res.status(400)
+    let error = new Error('No image uploaded')
+    return next(error)
+  }
   return fs
     .readFile(uploadedImage.path)
     .then(async bufferedImage => {
       fs.remove(uploadedImage.path)
+        .catch(error => logging.error(error, 'carousel temp file removal failure...'))
       req.imageData = {
         id: await nextAvailableId(),
         order: await nextAvailableValueInSequence(),
@@ -54,12 +58,7 @@ function prepImageData (req, res, next) {
       next()
       return Promise.resolve()
     })
-    .catch(error => {
-      routerResponse.json({
-        req, res, statusCode: 500, error
-      })
-      return next('CAROUSEL_PREPERATION_FAILURE')
-    })
+    .catch(error => next(error))
 }
 
 function nextAvailableId () {
@@ -74,7 +73,7 @@ function nextAvailableId () {
       }
       return Promise.resolve(nextAvailableId)
     })
-    .catch(logging.reject('error getting the next available id value'))
+    .catch(Promise.reject)
 }
 
 function nextAvailableValueInSequence () {
@@ -89,5 +88,5 @@ function nextAvailableValueInSequence () {
       }
       return Promise.resolve(nextAvailableValueInSequence)
     })
-    .catch(logging.reject('error getting the next available order value'))
+    .catch(Promise.reject)
 }

@@ -1,23 +1,18 @@
-const routerResponse = require('../controllers/routerResponse')
+const baseOptions = {
+  series: { order: ['order'] },
+  products: { order: ['code'] },
+  countries: { order: ['name'] }
+}
 
 module.exports = (modelReference) => {
   return (req, res, next) => {
-    switch (modelReference) {
-      case 'series':
-        req.queryOptions = { order: ['order'] }
-        break
-      case 'products':
-        req.queryOptions = { order: ['code'] }
-        break
-      default:
-        routerResponse.json({
-          req,
-          res,
-          statusCode: 501,
-          message: `base query options hasn't been implemented for ${modelReference} model`
-        })
-        next('BASE_QUERY_OPTIONS_UNIMPLEMENTED')
+    if (!(modelReference in baseOptions)) {
+      res.status(501)
+      let error = new Error(`資料表模板 ${modelReference} 基礎查詢選項尚未設置`)
+      error.message = `資料表模板 ${modelReference} 基礎查詢選項尚未設置`
+      return next(error)
     }
-    next()
+    req.queryOptions = baseOptions[modelReference]
+    return next()
   }
 }

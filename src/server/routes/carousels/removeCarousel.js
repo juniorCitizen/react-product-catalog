@@ -1,32 +1,39 @@
 const db = require('../../controllers/database')
-// const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
-  return [validateJwt, (req, res) => {
+  return [validateJwt, (req, res, next) => {
     return db.sequelize.transaction((trx) => {
       let trxObj = { transaction: trx }
-      return db.Carousels.findById(req.params.carouselId, trxObj)
+      return db.Carousels
+        .findById(parseInt(req.params.carouselId), trxObj)
         .then(targetCarousel => {
           if (!targetCarousel) {
-            return Promise.resolve()
+            // id does not exist
+            return Promise.resolve(0)
           }
-          return db.Carousels.update(
-            { order: db.sequelize.literal('`order`-1') },
-            {
+          return db.Carousels
+            .update({
+              order: db.sequelize.literal('`order`-1')
+            }, {
               where: { order: { [db.Sequelize.Op.gt]: targetCarousel.order } },
               transaction: trx
-            }
-          ).then(() => {
-            return targetCarousel.destroy(trxObj)
-          })
+            })
+            .then(() => targetCarousel.destroy(trxObj))
+            .then(() => db.Carousels.findAll({
+              attributes: { exclude: ['data'] },
+              order: ['order'],
+              transaction: trx
+            }))
         })
-    }).then(() => routerResponse.json({
-      req, res, statusCode: 200
-    })).catch(error => routerResponse.json({
-      req, res, statusCode: 500, error
-    }))
+    }).then((data) => {
+      req.resJson = { data }
+      req.resJson.message = data === 0
+        ? 'Carousel not found'
+        : 'Carousel deleted'
+      next()
+      return Promise.resolve()
+    }).catch(error => next(error))
   }]
 })()

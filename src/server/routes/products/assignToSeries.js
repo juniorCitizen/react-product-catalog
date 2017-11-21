@@ -10,22 +10,21 @@ module.exports = (() => {
     validateJwt,
     setBaseQueryParameters,
     setResponseDetailLevel,
-    (req, res) => {
+    (req, res, next) => {
+      let productId = req.params.productId.toUpperCase()
       return db.Products
         .update(
           { seriesId: req.params.seriesId },
-          { where: { id: req.params.productId.toUpperCase() } }
+          { where: { id: productId } }
         )
-        .then(() => db.Products.findById(req.params.productId.toUpperCase(), req.queryOptions))
-        .then((data) => routerResponse.json({
-          req, res, statusCode: 200, data
-        }))
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'failure to assign product to a series'
-        }))
+        .then(() => db.Products
+          .findById(productId, req.queryOptions)
+        )
+        .then((data) => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }]
 })()

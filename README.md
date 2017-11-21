@@ -62,7 +62,9 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products(?details)** - get product catalog with optional details
+* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset
+
+* **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
 
 * **GET protocol://domain:port/sys_ref/api/product/:productId(?details)** - get product by id with optional details
 
@@ -145,7 +147,7 @@ simple product catalog website and backend with product data, user and client ma
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-### token
+### tokens
 
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
@@ -165,9 +167,34 @@ simple product catalog website and backend with product data, user and client ma
 
 ### countries
 
-* **GET protocol://domain:port/sys_ref/api/countries** - get a list of countries sorted by name
+* **GET protocol://domain:port/sys_ref/api/countries/count** - get total number of records in countries
+
+* **GET protocol://domain:port/sys_ref/api/countries(&per_page=x&page=y)** - get a list of countries sorted by name and optional pagination
 
 * **GET protocol://domain:port/sys_ref/api/countries/:countryId/flag** - get the flag svg from countryId
+
+### carousels
+
+* **GET protocol://domain:port/sys_ref/api/carousels/:carouselId** - get carousel image by Id
+
+* **POST protocol://domain:port/sys_ref/api/carousels** - add carousel photo
+
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "multipart/form-data"}
+  * request body: { "image": file }
+  * note: photo files are deleted during operation
+
+* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/primary** - toggle carousel photo's primary state
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/order/:order** - update carousel order
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
+* **DELETE protocol://domain:port/sys_ref/api/carousels/:carouselId** - delete a carousel image record by id
+
+  * request header: { "x-access-token": "jwt-token-string" }
+
 
 ## LICENSE
 

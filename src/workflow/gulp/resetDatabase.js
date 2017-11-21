@@ -1,8 +1,10 @@
 import { argv } from 'yargs'
+import fs from 'fs-extra'
 import path from 'path'
 import Promise from 'bluebird'
 
 const db = require('../../server/controllers/database')
+const eVars = require('../../server/config/eVars')
 const logging = require('../../server/controllers/logging')
 
 const dbEnv = argv['setting'] || 'development'
@@ -34,6 +36,15 @@ module.exports = () => {
       // prevent remote db access encounter timeout error on large file transfers
       dbConfig.pool.idle = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_IDLE)
       dbConfig.pool.acquire = parseInt(process.env.MYSQL_LARGE_DATASET_POOL_ACQUIRE)
+    }
+    // for linux based systems
+    // if './database' does not exist in project root
+    // gulp script will fail
+    if (dbConfig.dialect === 'sqlite') {
+      fs.ensureDirSync(eVars.SQLITE_PATH, error => {
+        logging.error(error, error.message)
+        return done(error)
+      })
     }
     // switch out the sequelize instance and initialize
     db.sequelize = new db.Sequelize(dbConfig)

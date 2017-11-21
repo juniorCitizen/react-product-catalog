@@ -1,4 +1,6 @@
-const routerResponse = require('../controllers/routerResponse')
+// middleware to get only expected properties from the req.body
+// and put the required data in req.filteredData
+// also fields such as uuid field are automatically capitalized
 
 const expectedFields = {
   series: ['name', 'order', 'publish'],
@@ -7,10 +9,10 @@ const expectedFields = {
   carousels: ['order', 'primary']
 }
 
-const capitalizationEnforcedFields = {
+const capEnforcedFields = {
   series: [],
-  products: ['seriesId'],
-  photos: ['productId', 'seriesId'],
+  products: [],
+  photos: ['productId'],
   carousels: []
 }
 
@@ -23,29 +25,27 @@ module.exports = (modelReference) => {
       if (fieldName in req.body) {
         // if match is found, place into req.filteredData object
         req.filteredData[fieldName] = (() => {
-          if (fieldName.indexOf(capitalizationEnforcedFields[modelReference]) === -1) {
-            return req.body[fieldName]
-          } else {
-            return req.body[fieldName].toUpperCase()
-          }
+          return capEnforcedFields[modelReference].indexOf(fieldName) >= 0
+            ? req.body[fieldName].toUpperCase()
+            : req.body[fieldName]
         })()
       }
     })
-    if (Object.keys(req.filteredData).length === 0 && req.filteredData.constructor === Object) {
-      // respond with error 400, if request body did not contain any expected field properties
-      let message = 'at least one of the following fields must be present in the request body: '
+    if (
+      Object.keys(req.filteredData).length === 0 &&
+      req.filteredData.constructor === Object
+    ) {
+      // request body did not contain any expected field properties
+      let message = 'At least one of the following fields must be present in the request body: '
       expectedFields[modelReference].forEach((fieldName) => {
         message += `'${fieldName}', `
       })
       message += message.slice(0, message.length - 2)
-      routerResponse.json({
-        req,
-        res,
-        statusCode: 400,
-        message: message
-      })
-      next('REQUEST_BODY_EMPTY')
+      res.status(400)
+      let error = new Error('Missing data properties')
+      error.customMessage = message
+      return next(error)
     }
-    next()
+    return next()
   }
 }

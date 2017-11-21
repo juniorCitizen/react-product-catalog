@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Navigation from '../navigation'
+import Nav from '../navigation'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -87,7 +87,7 @@ export default class Login extends React.Component {
         const { auth, form, msg } = this.state
         return (
             <div>
-                <Navigation tab="login"/>
+                <Nav tab="login" />
                 <div className="container" style={style.container}>
                     <div className="columns">
                         <div className="column is-6 is-offset-3">

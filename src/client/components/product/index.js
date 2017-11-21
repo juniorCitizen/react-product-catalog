@@ -4,6 +4,9 @@ import Navigation from '../navigation'
 import Series from './series'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
+import Nav from '../navigation'
+import Series from './series'
+import Block from './block'
 
 class Product extends React.Component {
     constructor(props) {
@@ -17,14 +20,14 @@ class Product extends React.Component {
         const { auth } = this.state
         return(          
             <div>
-                <Navigation tab="product"/>
+                <Nav tab="product"/>
                 <div className="container" style={style.container}>
                     <div className="columns">
                         <div className="column is-one-fifth">
                             <Series />
                         </div>
                         <div className="column">
-                            Second column
+                            <Block />
                         </div>
                     </div>
                 </div>

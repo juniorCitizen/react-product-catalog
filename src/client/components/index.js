@@ -5,13 +5,12 @@ import { login_user } from '../actions'
 import '../assets/bulma.scss'
 
 import Content from './content'
-import Navigation from './navigation'
 import Product from './product'
 import Login from './login'
 import Register from './register'
 import Order from './order'
 import Admin from './admin'
-
+import Series from './product/series'
 import Contact from '../containers/contact'
 import Hello from '../containers/hello'
 import Logo from '../containers/logo'
@@ -49,6 +48,7 @@ class Main extends React.Component {
                     <Route path="/contact" component={Contact}/>
                     <Route path="/order" component={Order}/>
                     <Route path="/admin" component={Admin}/>
+                    <Route path="/Series" component={Series}/>
                 </div>
             </BrowserRouter>
         )

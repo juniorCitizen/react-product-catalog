@@ -1,31 +1,23 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 module.exports = (() => {
   return [
-    (req, res) => {
+    (req, res, next) => {
+      let id = req.params.photoId.toUpperCase()
       return db.Photos
-        .findById(req.params.photoId.toUpperCase())
+        .findById(id)
         .then((photo) => {
           if (photo === null) {
-            return routerResponse.json({
-              req, res, statusCode: 200, data: null
-            })
+            req.resJson = { message: `Photo of id: '${id}' does not exist` }
           } else {
-            return routerResponse.imageBuffer({
-              res,
-              statusCode: 200,
+            req.resImage = {
               mimeType: photo.mimeType,
-              dataBuffer: Buffer.from(photo.data)
-            })
+              data: Buffer.from(photo.data)
+            }
           }
+          next()
+          return Promise.resolve()
         })
-        .catch((error) => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error: error,
-          message: 'photo retrieval failure'
-        }))
+        .catch(error => next(error))
     }]
 })()

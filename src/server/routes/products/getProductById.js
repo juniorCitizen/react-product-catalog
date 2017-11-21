@@ -1,25 +1,22 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
-const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')
-const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('products')
+const modelReference = 'products'
+
+const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')(modelReference)
+const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')(modelReference)
 
 module.exports = (() => {
   return [
     setBaseQueryParameters,
     setResponseDetailLevel,
-    (req, res) => {
+    (req, res, next) => {
       return db.Products
         .findById(req.params.productId.toUpperCase(), req.queryOptions)
-        .then((data) => routerResponse.json({
-          req, res, statusCode: 200, data
-        }))
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'product record query by id errored'
-        }))
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }]
 })()

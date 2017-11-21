@@ -4,7 +4,6 @@ const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 const db = require('../../controllers/database')
 const eVars = require('../../config/eVars')
 const logging = require('../../controllers/logging')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('products')
@@ -23,7 +22,7 @@ module.exports = ((req, res) => {
     removeTempPhotoFiles,
     setBaseQueryParameters,
     setResponseDetailLevel,
-    (req, res) => {
+    (req, res, next) => {
       return db.sequelize
         .transaction(trx => {
           let productData = {
@@ -53,22 +52,18 @@ module.exports = ((req, res) => {
             })
         })
         .then(newProduct => db.Products.findById(newProduct.id, req.queryOptions))
-        .then(data => routerResponse.json({
-          req, res, statusCode: 200, data
-        }))
-        .catch(error => routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error inserting product record'
-        }))
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }]
 })()
 
 function prepPhotoData (req, res, next) {
   req.photoData = { photos: [] }
-  next()
+  return next()
 }
 
 function prepSecondaryPhotoData (req, res, next) {
@@ -87,31 +82,19 @@ function prepSecondaryPhotoData (req, res, next) {
           data: await fs
             .readFile(secondaryPhoto.path)
             // error occured while reading the secondary photos
-            .catch(error => {
-              routerResponse.json({
-                req,
-                res,
-                statusCode: 500,
-                error,
-                message: 'error processing the secondary photos'
-              })
-              next('SECONDARY_PHOTO_PROCESSING_FAILURE')
-            })
+            .catch(error => next(error))
         })
       })
-      next()
+      return next()
     } else {
       // secondaryPhotos existed but primaryPhoto is not found
-      routerResponse.json({
-        req,
-        res,
-        statusCode: 400,
-        message: 'primaryPhoto must exist to insert secondaryPhotos'
-      })
-      next('PRIMARY_PHOTO_MISSING')
+      res.status(400)
+      let error = new Error('Missing primary photo')
+      error.message('Primary photo must present to insert secondary photos')
+      return next(error)
     }
   } else {
-    next() // no secondary photos found
+    return next() // no secondary photos found
   }
 }
 
@@ -135,18 +118,9 @@ function prepPrimaryPhotoData (req, res, next) {
         return next()
       })
       // error occured while reading the primary photo
-      .catch(error => {
-        routerResponse.json({
-          req,
-          res,
-          statusCode: 500,
-          error,
-          message: 'error processing the primary photo'
-        })
-        next('PRIMARY_PHOTO_PROCESSING_FAILURE')
-      })
+      .catch(error => next(error))
   }
-  next() // no primary photo found
+  return next() // no primary photo found
 }
 
 function removeTempPhotoFiles (req, res, next) {

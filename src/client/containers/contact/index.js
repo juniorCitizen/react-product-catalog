@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../config'
-import Navigation from '../../components/navigation'
+import Nav from '../../components/navigation'
 
 export default class Contact extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export default class Contact extends React.Component {
         const { auth } = this.state
         return( 
             <div>
-                <Navigation tab="contact"/>
+                <Nav tab="contact"/>
                 <div className="container" style={style.container}>
                     <div>
                         <h2 className="title is-2">{contact.name}</h2>

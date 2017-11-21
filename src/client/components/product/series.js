@@ -2,80 +2,106 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
+import { series_list } from '../../actions'
 
 class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             auth: false,
+            
+            series: {
+                0: {
+                    name: 'series 1',
+                    active: true,
+                    products: true,
+                    code: '',
+                    sub_list: {
+                        0: {
+                            name: 'series 1-1',
+                            active: true,
+                            sub_list: {},
+                        },
+                        1: {
+                            name: 'series 1-2',
+                            active: false,
+                        },
+                    },
+                },
+                1: {
+                    name: 'series 2',
+                    active: false,
+                    sub_list: {
+                        0: {
+                            name: 'series 2-1',
+                        },
+                    },
+                },
+                2: {
+                    name: 'series 3',
+                    active: false,
+                    sub_list: {
+                        0: {
+                            name: 'series 3-1',
+                        },
+                        1: {
+                            name: 'series 3-2',
+                        },
+                    },
+                }
+            }
         }
     }
 
     componentDidMount() {
+            
+    }
 
+    selectSeries(code) {
+        alert(code)
     }
 
     render() {
-        const { auth } = this.state
-        return (
-            <nav className="panel">
-                <p className="panel-heading">
-                    repositories
-                </p>
-                <div className="panel-block">
-                    <p className="control has-icons-left">
-                    <input className="input is-small" type="text" placeholder="search" />
-                    <span className="icon is-small is-left">
-                        <i className="fa fa-search"></i>
-                    </span>
-                    </p>
-                </div>
-                <a className="panel-block is-active">
-                    <span className="panel-icon">
-                        <i className="fa fa-book"></i>
-                    </span>
-                    bulma
-                </a>
-                <a className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-book"></i>
-                    </span>
-                    marksheet
-                </a>
-                <a className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-book"></i>
-                    </span>
-                    minireset.css
-                </a>
-                <a className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-book"></i>
-                    </span>
-                    jgthms.github.io
-                </a>
-                <a className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-code-fork"></i>
-                    </span>
-                    daniellowtw/infboard
-                </a>
-                <a className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-code-fork"></i>
-                    </span>
-                    mojs
-                </a>
-            </nav>
+        const { auth, series } = this.state
+        const { series_list } = this.props
+        return(          
+            <div>
+                <aside className="menu">
+                    <ul className="menu-list">
+                        {Object.keys(series).map((key) => (
+                            <li key={key}>
+                                <a className={series[key].active ? "is-active" : ""}>{series[key].name}</a>
+                                {series[key].active &&
+                                    <ul>
+                                        {Object.keys(series[key].sub_list).map((sub_key) => (
+                                            <li key={sub_key}>
+                                            <a className={series[key].sub_list[sub_key].active ? "is-active" : ""}
+                                                onClick={this.selectSeries.bind(this, series[key].sub_list[sub_key].name)}
+                                            >
+                                                {series[key].sub_list[sub_key].name}</a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                }
+                            </li>
+                        ))}
+                    </ul>
+              </aside>
+            </div>
         )
     }
 }
 
+const style = {
+
+}
+
 function mapStateToProps(state) {
-	const {login} = state
+	const { login, series } = state
 	return {
-                        login
-                    }
-                    }
+        login,
+        series,
+	}
+}
 
 export default connect(mapStateToProps)(Series)

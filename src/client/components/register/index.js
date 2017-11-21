@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import Navigation from '../navigation'
+=======
+import Nav from '../navigation'
+>>>>>>> master
 
 export default class Register  extends React.Component {
     constructor(props) {
@@ -108,7 +112,7 @@ export default class Register  extends React.Component {
         const { auth, form, msg } = this.state
         return (
             <div>
-                <Navigation tab="register"/>
+                <Nav tab="register"/>
                 <div className="container" style={style.container}>
                     <div className="columns">
                         <div className="column is-6 is-offset-3">

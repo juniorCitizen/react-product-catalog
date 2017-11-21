@@ -1,5 +1,4 @@
 const db = require('../../controllers/database')
-const routerResponse = require('../../controllers/routerResponse')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
@@ -9,49 +8,37 @@ module.exports = {
 }
 
 function assignPhotoToProduct () {
-  return [validateJwt, (req, res) => {
+  return [validateJwt, (req, res, next) => {
     return db.Photos
       .findById(req.params.photoId.toUpperCase())
-      .then((targetRecord) => {
-        return targetRecord.update({ productId: req.params.productId })
+      .then(targetRecord => {
+        return targetRecord.update({ productId: req.params.productId.toUpperCase() })
       })
-      .then((updatedRecord) => {
+      .then(updatedRecord => {
         let data = updatedRecord.dataValues
         delete data.data
-        return routerResponse.json({
-          req, res, statusCode: 200, data
-        })
+        req.resJson = { data }
+        next()
+        return Promise.resolve()
       })
-      .catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: `failure to assign photo to a product`
-      }))
+      .catch(error => next(error))
   }]
 }
 
 function assignPhotoToSeries () {
-  return [validateJwt, (req, res) => {
+  return [validateJwt, (req, res, next) => {
     return db.Photos
       .findById(req.params.photoId.toUpperCase())
-      .then((targetRecord) => {
-        return targetRecord.update({ seriesId: req.params.seriesId })
+      .then(targetRecord => {
+        return targetRecord.update({ seriesId: parseInt(req.params.seriesId) })
       })
-      .then((updatedRecord) => {
+      .then(updatedRecord => {
         let data = updatedRecord.dataValues
         delete data.data
-        return routerResponse.json({
-          req, res, statusCode: 200, data
-        })
+        req.resJson = { data }
+        next()
+        return Promise.resolve()
       })
-      .catch(error => routerResponse.json({
-        req,
-        res,
-        statusCode: 500,
-        error,
-        message: `failure to assign photo to a series`
-      }))
+      .catch(error => next(error))
   }]
 }
