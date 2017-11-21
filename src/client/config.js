@@ -1,4 +1,10 @@
 export default {
+    server: {
+        host: 'http://localhost:9004/'
+    },
+    project: {
+        name: 'reactProductCatalog',
+    },
     contact: {
         name: '秀田醫療器材有限公司',
         info: {

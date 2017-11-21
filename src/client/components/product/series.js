@@ -1,64 +1,49 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
 import { series_list } from '../../actions'
+import config from '../../config'
+
+const url = config.server.host + config.project.name + '/api'
 
 class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             auth: false,
-            
-            series: {
-                0: {
-                    name: 'series 1',
-                    active: true,
-                    products: true,
-                    code: '',
-                    sub_list: {
-                        0: {
-                            name: 'series 1-1',
-                            active: true,
-                            sub_list: {},
-                        },
-                        1: {
-                            name: 'series 1-2',
-                            active: false,
-                        },
-                    },
-                },
-                1: {
-                    name: 'series 2',
-                    active: false,
-                    sub_list: {
-                        0: {
-                            name: 'series 2-1',
-                        },
-                    },
-                },
-                2: {
-                    name: 'series 3',
-                    active: false,
-                    sub_list: {
-                        0: {
-                            name: 'series 3-1',
-                        },
-                        1: {
-                            name: 'series 3-2',
-                        },
-                    },
-                }
-            }
+            series: [],
         }
     }
 
     componentDidMount() {
-            
+        axios({
+            method: 'get',
+            url: 'http://localhost:9004/reactProductCatalog/api/series',
+            data:{},
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",  
+                'Accept': 'application/json'  
+            }
+        })
+        .then(function (response) {
+            if (response.data.statusCode === 200) {
+                self.setState({
+                    series: response.data
+                })
+                console.log(response.data)
+            } else {
+                console.log(response.data)
+            }
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     selectSeries(code) {
-        alert(code)
+        console.log('select series' + code)
     }
 
     render() {
@@ -68,17 +53,17 @@ class Series extends React.Component {
             <div>
                 <aside className="menu">
                     <ul className="menu-list">
-                        {Object.keys(series).map((key) => (
-                            <li key={key}>
-                                <a className={series[key].active ? "is-active" : ""}>{series[key].name}</a>
-                                {series[key].active &&
+                        {series.map((item, index) => (
+                            <li key={index}>
+                                <a className={item.active ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
+                                {item.sub_list &&
                                     <ul>
-                                        {Object.keys(series[key].sub_list).map((sub_key) => (
-                                            <li key={sub_key}>
-                                            <a className={series[key].sub_list[sub_key].active ? "is-active" : ""}
-                                                onClick={this.selectSeries.bind(this, series[key].sub_list[sub_key].name)}
+                                        {item.sub_list.map((item, index) => (
+                                            <li key={index}>
+                                            <a className={item.active ? "is-active" : ""}
+                                                onClick={this.selectSeries.bind(this, item.id)}
                                             >
-                                                {series[key].sub_list[sub_key].name}</a>
+                                                {item.name}</a>
                                             </li>
                                         ))}
                                     </ul>
