@@ -31,6 +31,7 @@ const commonConfig = merge([
       app: ['babel-polyfill', PATHS.app]
     },
     output: {
+      publicPath: '/',
       path: PATHS.build,
       filename: '[name].js'
     },
