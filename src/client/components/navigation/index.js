@@ -1,13 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login_user } from '../../actions'
+import { auth_state } from '../../actions'
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             select: {
                 product: '',
                 login: '',
@@ -22,6 +21,7 @@ class Navigation extends React.Component {
 
     componentDidMount() {
         let { tab } = this.props
+        this.checkLogin()
         this.tabActive(tab)
     }
 
@@ -34,8 +34,22 @@ class Navigation extends React.Component {
         this.setState({select: select})
     }
 
+    checkLogin() {
+        const { dispatch } = this.props;
+        const token = window.localStorage["jwt-token"]
+        if (token) {
+            dispatch(auth_state(true))
+        }
+    }
+
+    logout() {
+        alert('logout')
+    }
+
     render() {
-        const { auth, select } = this.state
+        const { select } = this.state
+        const { login } = this.props
+        const auth = login.auth
         return( 
             <div className="container">
                 <div className="tabs is-large">
@@ -45,7 +59,7 @@ class Navigation extends React.Component {
                         </li>
                         {auth ? 
                             <li className={select.logout}>
-                                <Link onClick={this.tabActive.bind(this, 'logout')} to="/logout">會員登出</Link>
+                                <a onClick={this.logout.bind(this)}>會員登出</a>
                             </li>
                         :
                             <li className={select.login}>

@@ -2,15 +2,16 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Nav from '../navigation'
+import { auth_state } from '../../actions'
+import { connect } from 'react-redux'
 import config from '../../config'
 
 const api = config.api
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             token: '',
             form: {
                 email: '',
@@ -26,8 +27,20 @@ export default class Login extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        this.checkAuth()
+    }
 
+    componentDidMount() {
+        
+    }
+
+    checkAuth() {
+        const { login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (login.auth || token) {
+            window.location = '/'
+        }
     }
 
     inputChange(cont, e) {
@@ -83,7 +96,6 @@ export default class Login extends React.Component {
                 console.log(response.data)
                 window.localStorage["jwt-token"] = response.data.data
                 self.setState({
-                    auth: true,
                     token: response.data.data,
                 })
                 self.loginSuccess()
@@ -96,7 +108,11 @@ export default class Login extends React.Component {
     }
 
     loginSuccess() {
+        const { dispatch } = this.props;
+        dispatch(auth_state(true))
         console.log('login success')
+        console.log(window.localStorage["jwt-token"])
+        window.location = '/'
     }
 
     loginError(str) {
@@ -109,7 +125,7 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const { auth, form, msg } = this.state
+        const { form, msg } = this.state
         return (
             <div>
                 <Nav tab="login" />
@@ -122,6 +138,15 @@ export default class Login extends React.Component {
                                     <div className="control">
                                         <input className="input" type="text" placeholder="請輸入電子郵件"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
+                                        />
+                                    </div>
+                                    <p className="help is-danger">{msg.email}</p>
+                                </div>
+                                <div className="field">
+                                    <label className="label">帳號</label>
+                                    <div className="control">
+                                        <input className="input" type="text" placeholder="請輸入帳號"
+                                            value={form.loginId} onChange={this.inputChange.bind(this, 'loginId')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.email}</p>
@@ -162,3 +187,12 @@ const style = {
         padding: '10px',
     },
 }
+
+function mapStateToProps(state) {
+	const { login } = state
+	return {
+        login
+	}
+}
+
+export default connect(mapStateToProps)(Login)
