@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const piexif = require('piexifjs')
 const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 
 const db = require('../../controllers/database')
@@ -53,7 +54,7 @@ function prepImageData (req, res, next) {
         encoding: uploadedImage.encoding,
         mimeType: uploadedImage.mimetype,
         size: uploadedImage.size,
-        data: bufferedImage
+        data: Buffer.from(piexif.remove(bufferedImage.toString('binary')), 'binary')
       }
       next()
       return Promise.resolve()

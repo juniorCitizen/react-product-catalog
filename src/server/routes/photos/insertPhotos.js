@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const piexif = require('piexifjs')
 const Promise = require('bluebird')
 const uploads = require('multer')({ dest: require('path').resolve('./upload') })
 
@@ -76,7 +77,7 @@ function prepPhotoData (req, res, next) {
                 encoding: uploadedPhotos[index].encoding,
                 mimeType: uploadedPhotos[index].mimetype,
                 size: uploadedPhotos[index].size,
-                data: bufferedPhoto
+                data: Buffer.from(piexif.remove(bufferedPhoto.toString('binary')), 'binary')
               }, req.filteredData)
             )
           }

@@ -2,6 +2,7 @@
 // npm 模組加載
 // ///////////
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require('path')
@@ -59,6 +60,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     // ////////////// Pre-Routing Global Middlewares ////////////////////////
     logging.console('載入 pre-routing 全域 middlewares...')
     if (eVars.devMode) { app.use(require('morgan')('dev')) } // request logger
+    app.use(cors()) // enable CORS for all origins
     // parse request with application/x-www-form-urlencoded body data
     app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' })) // for request with large body data
     // parse request with application/json body data
@@ -103,7 +105,11 @@ Promise.each( // 依序執行服務原件的啟動程序
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////
     logging.console('載入 post-routing 全域 middlewares....')
-    app.use(require('./middlewares/404Handler'))
+    app.use((req, res, next) => {
+      logging.warning(`客戶端要求不存在的頁面: ${eVars.HOST}${req.path}`)
+      res.status(404)
+      return res.redirect(`${eVars.APP_ROUTE}`)
+    })
 
     // ///////////////// Web Server ///////////////////////////////////////////
     logging.console(`啟動 ${eVars.SYS_REF} 伺服器...`)
