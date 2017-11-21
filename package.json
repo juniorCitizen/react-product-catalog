@@ -38,6 +38,7 @@
     "nodemailer": "^4.4.0",
     "nodemailer-express-handlebars": "^2.0.0",
     "parse-link-header": "^1.0.1",
+    "piexifjs": "^1.0.3",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
