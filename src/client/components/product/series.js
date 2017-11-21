@@ -3,10 +3,10 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login_user } from '../../actions'
-import { series_list } from '../../actions'
+import { get_series } from '../../actions'
 import config from '../../config'
 
-const url = config.server.host + config.project.name + '/api'
+const api = config.api
 
 class Series extends React.Component {
     constructor(props) {
@@ -18,22 +18,30 @@ class Series extends React.Component {
     }
 
     componentDidMount() {
+        const { dispatch } = this.props;
+        this.getSeries()
+    }
+
+    selectSeries(code) {
+        console.log('select series' + code)
+    }
+
+    getSeries() {
+        const self = this
         axios({
             method: 'get',
-            url: 'http://localhost:9004/reactProductCatalog/api/series',
-            data:{},
+            url: api + 'series',
+            data: {},
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",  
-                'Accept': 'application/json'  
+                'x-access-token': window.localStorage["jwt-token"]
             }
         })
         .then(function (response) {
-            if (response.data.statusCode === 200) {
-                self.setState({
-                    series: response.data
-                })
+            if (response.status === 200) {
                 console.log(response.data)
+                self.setState({
+                    series: response.data.data
+                })
             } else {
                 console.log(response.data)
             }
@@ -42,13 +50,9 @@ class Series extends React.Component {
         })
     }
 
-    selectSeries(code) {
-        console.log('select series' + code)
-    }
-
     render() {
         const { auth, series } = this.state
-        const { series_list } = this.props
+        const { login } = this.props
         return(          
             <div>
                 <aside className="menu">
@@ -77,15 +81,10 @@ class Series extends React.Component {
     }
 }
 
-const style = {
-
-}
-
 function mapStateToProps(state) {
-	const { login, series } = state
+	const { login } = state
 	return {
-        login,
-        series,
+        login
 	}
 }
 

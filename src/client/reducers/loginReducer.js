@@ -3,7 +3,11 @@ import {
 } from '../constants/actionType'
 
 const initalState = {
-    user_info: [],
+    user_info: {
+        id: null,
+        name: null,
+        email: null,
+    },
 }
 
 export default function login(state = initalState, action) {

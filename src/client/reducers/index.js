@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import login from './loginReducer'
-import serise from './seriseReducer'
+import series from './seriesReducer'
 
 const rootReducer = combineReducers({
     login,
-    serise,
+    series,
 })
 
 export default rootReducer

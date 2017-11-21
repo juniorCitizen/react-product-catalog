@@ -2,6 +2,6 @@ import {
     SERIES,
 } from '../constants/actionType'
   
-export function getSerise(series_code) {
+export function get_series(series_code = null) {
     return {type: SERIES, series_code}
 }
