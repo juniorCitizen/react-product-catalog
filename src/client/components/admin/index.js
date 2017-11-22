@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import Product from './product'
 import Order from './order'
+import Series from './series'
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class Admin extends React.Component {
                 product: '',
                 logout: '',
                 order: '',
+                series: '',
             },
         }
     }
@@ -48,6 +50,9 @@ export default class Admin extends React.Component {
                         <li className={select.order}> 
                             <Link onClick={this.tabActive.bind(this, 'order')} to={url + "/order"}>訂單管理</Link>
                         </li>
+                        <li className={select.series}> 
+                            <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
+                        </li>
                         <li className={select.logout}> 
                             <a onClick={this.logout.bind()}>{"登出"}</a>
                         </li>
@@ -55,6 +60,7 @@ export default class Admin extends React.Component {
                 </div>
                 <Route path={url + "/product"} component={Product}/>
                 <Route path={url + "/order"} component={Order}/>
+                <Route path={url + "/series"} component={Series}/>
                 <Route exact path={url} component={ () => (
                     <h1>admin management</h1>
                 )}/>
