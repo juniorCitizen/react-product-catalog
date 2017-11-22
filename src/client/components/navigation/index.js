@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { auth_state, isAdmin } from '../../actions'
+import { user_info, user_logout } from '../../actions'
 import Confirm from '../../containers/modal/confirm'
 
 class Navigation extends React.Component {
@@ -40,8 +40,10 @@ class Navigation extends React.Component {
     checkLogin() {
         const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
+        const auth = login.user_info.auth
+        let user = []
         if (token) {
-            dispatch(auth_state(true))
+            dispatch(user_info(user))
         }
     }
 
@@ -55,15 +57,14 @@ class Navigation extends React.Component {
     logout() {
         const { dispatch } = this.props
         window.localStorage["jwt-token"] = ''
-        dispatch(auth_state(false))
-        dispatch(isAdmin(false))
-        this.props.history.push("/");
+        dispatch(user_logout())
+        window.location = '/'
     }
 
     render() {
         const { select, confirmShow, confirmMsg } = this.state
         const { login } = this.props
-        const auth = login.auth
+        const auth = login.user_info.auth
         console.log(login)
         return( 
             <div>
@@ -98,11 +99,6 @@ class Navigation extends React.Component {
                             {auth && 
                                 <li className={select.order}>
                                     <Link onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>
-                                </li>
-                            }
-                            {login.isAdmin &&
-                                <li>
-                                    <Link to="/admin">後台管理</Link>
                                 </li>
                             }
                         </ul>

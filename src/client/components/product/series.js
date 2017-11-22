@@ -16,7 +16,6 @@ export default class Series extends React.Component {
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;
         this.getSeries()
     }
 
@@ -60,7 +59,6 @@ export default class Series extends React.Component {
 
     render() {
         const { series, alertShow, alertMsg } = this.state
-        const { login } = this.props
         return(          
             <div>
                 <aside className="menu">

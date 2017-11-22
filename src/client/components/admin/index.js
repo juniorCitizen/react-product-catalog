@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { auth_state, isAdmin } from '../../actions'
+import { admin_info, admin_logout } from '../../actions'
 import Product from './product'
 import Order from './order'
 import Series from './series'
 import Confirm from '../../containers/modal/confirm'
+import Login from './login'
 
 class Admin extends React.Component {
     constructor(props) {
@@ -22,21 +23,22 @@ class Admin extends React.Component {
         }
     }
 
+    componentWillMount() {
+        this.checkAdmin()
+    }
+
     componentDidMount() {
         let { tab } = this.props
-        this.checkAdmin()
         this.tabActive(tab)
     }
 
     checkAdmin() {
         const { dispatch, login } = this.props
-        const token = window.localStorage["jwt-token"]
-        if (!login.auth && !login.isAdmin) {
-            this.logout()
-        }
-        if (token && isAdmin) {
-            dispatch(auth_state(true))
-            dispatch(isAdmin(true))
+        console.log(login)
+        const token = window.localStorage["jwt-admin-token"]
+        let admin = []
+        if (token) {
+            dispatch(admin_info(info))
         }
     }
 
@@ -58,47 +60,54 @@ class Admin extends React.Component {
 
     logout() {
         const { dispatch } = this.props
-        window.localStorage["jwt-token"] = ''
-        dispatch(auth_state(false))
-        dispatch(isAdmin(false))
+        window.localStorage["jwt-admin-token"] = ''
+        dispatch(admin_logout())
         this.props.history.push("/");
     }
     
     render() {
         const { select, confirmShow, confirmMsg } = this.state
-        const { match } = this.props
+        const { login, match } = this.props
         const url = match.url
+        const auth = login.admin_info.auth
         return( 
-            <div className="container">
-                <div className="tabs is-large">
-                    <ul>
-                        <li className={select.product}> 
-                            <Link onClick={this.tabActive.bind(this, 'product')} to={url + "/product"}>產品管理</Link>
-                        </li>
-                        <li className={select.order}> 
-                            <Link onClick={this.tabActive.bind(this, 'order')} to={url + "/order"}>訂單管理</Link>
-                        </li>
-                        <li className={select.series}> 
-                            <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
-                        </li>
-                        <li className={select.logout}> 
-                            <a onClick={this.logoutConfirm.bind(this)}>{"登出"}</a>
-                        </li>
-                    </ul>
-                </div>
-                <Route path={url + "/product"} component={Product}/>
-                <Route path={url + "/order"} component={Order}/>
-                <Route path={url + "/series"} component={Series}/>
-                <Route exact path={url} component={ () => (
-                    <h1>admin management</h1>
-                )}/>
+            <div>
+                {auth &&
+                    <div className="container">
+                        <div className="tabs is-large">
+                            <ul>
+                                <li className={select.product}> 
+                                    <Link onClick={this.tabActive.bind(this, 'product')} to={url + "/product"}>產品管理</Link>
+                                </li>
+                                <li className={select.order}> 
+                                    <Link onClick={this.tabActive.bind(this, 'order')} to={url + "/order"}>訂單管理</Link>
+                                </li>
+                                <li className={select.series}> 
+                                    <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
+                                </li>
+                                <li className={select.logout}> 
+                                    <a onClick={this.logoutConfirm.bind(this)}>{"登出"}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                {auth ?
+                    <div className="container">
+                        <Route path={url + "/product"} component={Product}/>
+                        <Route path={url + "/order"} component={Order}/>
+                        <Route path={url + "/series"} component={Series}/>
+                    </div>
+                :
+                    <Route exact path={url} component={Login}/>
+                }
                 <Confirm 
                     show={confirmShow}
                     message={confirmMsg} 
                     click_ok={this.logout.bind(this)} 
                     click_cancel={() => {this.setState({confirmShow: false})}} 
-                />
-            </div>         
+                /> 
+            </div>
         )
     }
 }

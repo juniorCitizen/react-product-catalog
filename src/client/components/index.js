@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login_user } from '../actions'
 import '../assets/bulma.scss'
 
 import Content from './content'
@@ -14,7 +13,6 @@ import Contact from '../containers/contact'
 import Hello from '../containers/hello'
 import Logo from '../containers/logo'
 import Modify from './modify'
-import NoMatch from '../containers/error404'
 
 class Main extends React.Component {
     constructor(props) {
@@ -24,6 +22,7 @@ class Main extends React.Component {
 
     render() {
         const { login } = this.props
+        const auth = login.user_info.auth
         return(  
             <BrowserRouter>  
                 <div>            
@@ -32,9 +31,9 @@ class Main extends React.Component {
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/contact" component={Contact}/>
-                    {login.auth && <Route path="/order" component={Order}/>}
-                    {login.auth && login.isAdmin && <Route path="/admin" component={Admin}/>}
-                    {login.auth && <Route path="/modify" component={Modify}/>}
+                    {auth && <Route path="/order" component={Order}/>}
+                    {auth && <Route path="/modify" component={Modify}/>}
+                    <Route path="/admin" component={Admin}/>
                 </div>
             </BrowserRouter>
         )
