@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { auth_state } from '../../actions'
+import { auth_state, isAdmin } from '../../actions'
 import Confirm from '../../containers/modal/confirm'
 
 class Navigation extends React.Component {
@@ -38,7 +38,7 @@ class Navigation extends React.Component {
     }
 
     checkLogin() {
-        const { dispatch } = this.props
+        const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
         if (token) {
             dispatch(auth_state(true))
@@ -56,13 +56,15 @@ class Navigation extends React.Component {
         const { dispatch } = this.props
         window.localStorage["jwt-token"] = ''
         dispatch(auth_state(false))
-        window.location = '/'
+        dispatch(isAdmin(false))
+        this.props.history.push("/");
     }
 
     render() {
         const { select, confirmShow, confirmMsg } = this.state
         const { login } = this.props
         const auth = login.auth
+        console.log(login)
         return( 
             <div>
                 <div className="container">
@@ -96,6 +98,11 @@ class Navigation extends React.Component {
                             {auth && 
                                 <li className={select.order}>
                                     <Link onClick={this.tabActive.bind(this, 'order')} to="/order">訂購清單</Link>
+                                </li>
+                            }
+                            {login.isAdmin &&
+                                <li>
+                                    <Link to="/admin">後台管理</Link>
                                 </li>
                             }
                         </ul>

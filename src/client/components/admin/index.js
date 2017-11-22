@@ -1,26 +1,43 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { auth_state, isAdmin } from '../../actions'
 import Product from './product'
 import Order from './order'
 import Series from './series'
+import Confirm from '../../containers/modal/confirm'
 
-export default class Admin extends React.Component {
+class Admin extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             select: {
                 product: '',
                 logout: '',
                 order: '',
                 series: '',
             },
+            confirmShow: false,
+            confirmMsg: '',
         }
     }
 
     componentDidMount() {
         let { tab } = this.props
+        this.checkAdmin()
         this.tabActive(tab)
+    }
+
+    checkAdmin() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (!login.auth && !login.isAdmin) {
+            this.logout()
+        }
+        if (token && isAdmin) {
+            dispatch(auth_state(true))
+            dispatch(isAdmin(true))
+        }
     }
 
     tabActive(tab) {
@@ -32,12 +49,23 @@ export default class Admin extends React.Component {
         this.setState({select: select})
     }
 
-    logout() {
+    logoutConfirm() {
+        this.setState({
+            confirmShow: true,
+            confirmMsg: '您確定要登出嗎？'
+        })
+    }
 
+    logout() {
+        const { dispatch } = this.props
+        window.localStorage["jwt-token"] = ''
+        dispatch(auth_state(false))
+        dispatch(isAdmin(false))
+        this.props.history.push("/");
     }
     
     render() {
-        const { auth, select } = this.state
+        const { select, confirmShow, confirmMsg } = this.state
         const { match } = this.props
         const url = match.url
         return( 
@@ -54,7 +82,7 @@ export default class Admin extends React.Component {
                             <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
                         </li>
                         <li className={select.logout}> 
-                            <a onClick={this.logout.bind()}>{"登出"}</a>
+                            <a onClick={this.logoutConfirm.bind(this)}>{"登出"}</a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +92,22 @@ export default class Admin extends React.Component {
                 <Route exact path={url} component={ () => (
                     <h1>admin management</h1>
                 )}/>
+                <Confirm 
+                    show={confirmShow}
+                    message={confirmMsg} 
+                    click_ok={this.logout.bind(this)} 
+                    click_cancel={() => {this.setState({confirmShow: false})}} 
+                />
             </div>         
         )
     }
 }
+
+function mapStateToProps(state) {
+	const { login } = state
+	return {
+		login
+	}
+}
+
+export default connect(mapStateToProps)(Admin)

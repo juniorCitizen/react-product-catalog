@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Nav from '../navigation'
-import { auth_state } from '../../actions'
+import { auth_state, isAdmin } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
@@ -38,7 +38,7 @@ class Login extends React.Component {
     checkAuth() {
         const { login } = this.props
         const token = window.localStorage["jwt-token"]
-        if (login.auth || token) {
+        if (login.auth && token) {
             window.location = '/'
         }
     }
@@ -108,11 +108,12 @@ class Login extends React.Component {
     }
 
     loginSuccess() {
-        const { dispatch } = this.props;
+        const { dispatch } = this.props
         dispatch(auth_state(true))
+        dispatch(isAdmin(true))
         console.log('login success')
         console.log(window.localStorage["jwt-token"])
-        window.location = '/'
+        this.props.history.push("/");
     }
 
     loginError(str) {

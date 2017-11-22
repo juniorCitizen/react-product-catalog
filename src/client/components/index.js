@@ -14,30 +14,16 @@ import Contact from '../containers/contact'
 import Hello from '../containers/hello'
 import Logo from '../containers/logo'
 import Modify from './modify'
+import NoMatch from '../containers/error404'
 
 class Main extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            auth: false,
-        }
-    }
-
-    componentDidMount() {
-
-    }
-
-    tabActive(tab) {
-        let select = this.state
-        Object.keys(select).map((key) => {
-            select[key] = ''
-        })
-        select[tab] = 'is-active'
-        this.setState({select: select})
+        this.state = {}
     }
 
     render() {
-        const { auth, select } = this.state
+        const { login } = this.props
         return(  
             <BrowserRouter>  
                 <div>            
@@ -46,19 +32,13 @@ class Main extends React.Component {
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/contact" component={Contact}/>
-                    <Route path="/order" component={Order}/>
-                    <Route path="/admin" component={Admin}/>
-                    <Route path="/modify" component={Modify}/>
+                    {login.auth && <Route path="/order" component={Order}/>}
+                    {login.auth && login.isAdmin && <Route path="/admin" component={Admin}/>}
+                    {login.auth && <Route path="/modify" component={Modify}/>}
                 </div>
             </BrowserRouter>
         )
     }
-}
-
-const style = {
-    container: {
-        padding: '10px',
-    },
 }
 
 function mapStateToProps(state) {
