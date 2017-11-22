@@ -10,10 +10,10 @@ import Login from './login'
 import Register from './register'
 import Order from './order'
 import Admin from './admin'
-import Series from './product/series'
 import Contact from '../containers/contact'
 import Hello from '../containers/hello'
 import Logo from '../containers/logo'
+import Modify from './modify'
 
 class Main extends React.Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class Main extends React.Component {
                     <Route path="/contact" component={Contact}/>
                     <Route path="/order" component={Order}/>
                     <Route path="/admin" component={Admin}/>
-                    <Route path="/Series" component={Series}/>
+                    <Route path="/modify" component={Modify}/>
                 </div>
             </BrowserRouter>
         )
