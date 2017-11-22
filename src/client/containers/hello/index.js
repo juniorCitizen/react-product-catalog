@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../assets/bulma.scss'
 
 export default class Hello extends React.Component {
     render() {

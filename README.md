@@ -139,7 +139,8 @@ simple product catalog website and backend with product data, user and client ma
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-* **PATCH protocol://domain:port/sys_ref/api/photos/:photoId/series/:seriesId** - assign a photo to a series
+* **PATCH protocol://domain:port/sys_ref/api/photos/:pnameh: "SJ GROUP",
+otoId/series/:seriesId** - assign a photo to a series
 
   * request header: { "x-access-token": "jwt-token-string" }
 
@@ -149,6 +150,30 @@ simple product catalog website and backend with product data, user and client ma
 
 ### tokens
 
+* **POST protocol://domain:prot/sys_ref/api/login** - login and get user info
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        { // all fields are required
+          "email": "example@example.com",
+          "password": "**********",
+        }
+  * auth success response
+    {
+      "result": true,
+      "user_info": {
+        "id": 0,
+        "email": "example@example.com",
+        "name": "JS GROUP",
+        "address": "777 xxx",
+        "contact": "02-12345678",
+      },
+    }
+  * auth fail response
+    {
+      "result": false,
+      "msg": "auth fail0",
+    }
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
   * request header: { "Content-Type": "application/json"}

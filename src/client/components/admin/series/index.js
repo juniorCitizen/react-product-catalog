@@ -5,17 +5,11 @@ export default class Series extends React.Component {
         super(props)
         this.state = {
             auth: false,
-            select: {
-                product: '',
-                logout: '',
-                order: '',
-            },
         }
     }
 
     componentDidMount() {
-        let { tab } = this.props
-        this.tabActive(tab)
+
     }
 
     tabActive(tab) {
@@ -27,9 +21,7 @@ export default class Series extends React.Component {
         this.setState({select: select})
     }
 
-    logout() {
-
-    }
+    
     render() {
         const { auth, select } = this.state
         return( 
