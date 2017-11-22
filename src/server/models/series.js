@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    publish: {
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false

@@ -2,11 +2,11 @@ const db = require('../../controllers/database')
 
 module.exports = (() => {
   return [(req, res, next) => {
-    return db.Offices.findAll({
+    return db.Companies.findAll({
       include: [{
         model: db.Countries
       }, {
-        model: db.Users,
+        model: db.Contacts,
         attributes: { exclude: ['loginId', 'password', 'salt', 'admin'] }
       }]
     }).then(data => {

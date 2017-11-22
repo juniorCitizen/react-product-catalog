@@ -15,12 +15,6 @@ module.exports = (Tags) => {
   })
   return Tags
     .bulkCreate(tags)
-    .then(() => {
-      logging.warning('寫入產品標籤資料... 成功')
-      return Promise.resolve()
-    })
-    .catch((error) => {
-      logging.error(error, 'resetDatabase/tags.js errored...')
-      return Promise.resolve(error)
-    })
+    .then(logging.resolve('寫入產品標籤資料... 成功'))
+    .catch(logging.reject('寫入產品標籤資料... 失敗'))
 }

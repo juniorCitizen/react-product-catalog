@@ -1,7 +1,7 @@
 {
   "name": "product-catalog",
   "version": "0.1.0",
-  "description": "simple product catalog website and backend with product data, user and client management functionalities suitable for small businesses, written with react and node.js",
+  "description": "simple product catalog website and backend with product data, contact management functionalities suitable for small businesses, written with react and node.js",
   "author": "ASJGroup",
   "private": true,
   "main": "index.js",
@@ -29,6 +29,8 @@
     "express-handlebars": "^3.0.0",
     "format-link-header": "^2.1.0",
     "fs-extra": "^4.0.2",
+    "inquirer": "^4.0.0",
+    "isemail": "^3.0.0",
     "jsonwebtoken": "^8.1.0",
     "moment": "^2.19.2",
     "moment-timezone": "^0.5.14",

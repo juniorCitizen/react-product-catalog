@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     region: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    flagSvg: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     name: {

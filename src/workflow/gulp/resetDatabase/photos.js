@@ -1,9 +1,13 @@
+import dotEnv from 'dotenv'
 import faker from 'faker'
 import fs from 'fs-extra'
 import path from 'path'
+import piexif from 'piexifjs'
 import Promise from 'bluebird'
 
 const logging = require('../../../server/controllers/logging')
+
+dotEnv.config()
 
 module.exports = (Photos, Products, Series) => {
   let productPhotoPath = path.join(__dirname, 'mockPhotos/products')
@@ -32,18 +36,30 @@ module.exports = (Photos, Products, Series) => {
             }
             // for each index in the array, push an insertion query
             photoIndexArray.forEach((photoIndex, index) => {
-              insertQueries.push(
-                Photos.create({
-                  productId: product.get('id'),
-                  primary: index === 0, // set to true, if it's the first index in the array
-                  originalName: photoFileNames[photoIndex],
-                  encoding: '7bit',
-                  mimeType: 'image/jpeg',
-                  size: fs.statSync(path.join(productPhotoPath, photoFileNames[photoIndex])).size,
-                  data: fs.readFileSync(path.join(productPhotoPath, photoFileNames[photoIndex])),
-                  publish: true
+              return fs
+                .readFile(path.join(productPhotoPath, photoFileNames[photoIndex]))
+                .then(bufferedPhoto => {
+                  let data = null
+                  try {
+                    data = Buffer.from(piexif.remove(bufferedPhoto.toString('binary')), 'binary')
+                  } catch (e) {
+                    logging.warning(`${photoFileNames[photoIndex]} does not have EXIF information attached`)
+                    data = bufferedPhoto
+                  }
+                  insertQueries.push(
+                    Photos.create({
+                      primary: index === 0, // set to true, if it's the first index in the array
+                      originalName: photoFileNames[photoIndex],
+                      encoding: '7bit',
+                      mimeType: 'image/jpeg',
+                      size: fs.statSync(path.join(productPhotoPath, photoFileNames[photoIndex])).size,
+                      data,
+                      active: true,
+                      productId: product.get('id')
+                    })
+                  )
+                  return Promise.resolve()
                 })
-              )
             })
           })
           return Promise.resolve()
@@ -64,10 +80,7 @@ module.exports = (Photos, Products, Series) => {
                 seriesIdList.map((seriesId) => {
                   return Products.find({ where: { seriesId: seriesId } })
                 })
-              ).catch((error) => {
-                logging.error(error, '批次圖檔寫入... 失敗')
-                return Promise.reject(error)
-              })
+              ).catch(logging.reject('批次圖檔寫入... 失敗'))
             })
             .then((representativeProducts) => {
               // get a list of photos of these products
@@ -75,36 +88,19 @@ module.exports = (Photos, Products, Series) => {
               // purpose: indicate the representative photo of each series
               return Promise.all(
                 representativeProducts.map((product) => {
-                  return Photos.update({
-                    seriesId: product.seriesId
-                  }, {
-                    where: {
-                      primary: true,
-                      productId: product.id
-                    }
-                  })
+                  return Photos.update(
+                    { seriesId: product.seriesId },
+                    { where: { primary: true, productId: product.id } }
+                  )
                 })
-              ).catch((error) => {
-                logging.error(error, '建立產品類別代表圖檔參照... 失敗')
-                return Promise.reject(error)
-              })
+              ).catch(logging.reject('建立產品類別代表圖檔參照... 失敗'))
             })
         })
-        .then(() => {
-          return Promise.resolve()
-        })
-        .catch((error) => {
-          return Promise.reject(error)
-        })
+        .then(Promise.resolve)
+        .catch(Promise.reject)
     })
-    .then(() => {
-      logging.warning('批次圖檔寫入... 成功')
-      return Promise.resolve()
-    })
-    .catch((error) => {
-      logging.error(error, 'resetDatabase/photo.js errored...')
-      return Promise.reject(error)
-    })
+    .then(logging.resolve('批次圖檔寫入... 成功'))
+    .catch(logging.reject('批次圖檔寫入... 失敗'))
 }
 
 function randomNumberFromRange (floor, ceiling) {

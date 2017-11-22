@@ -3,6 +3,20 @@ const path = require('path')
 const eVars = require('./eVars')
 const logging = require('../controllers/logging')
 
+const dropSchemaSequence = [
+  'carousels',
+  'registrations',
+  'contacts',
+  'companies',
+  'countries',
+  'flags',
+  'labels',
+  'products',
+  'tags',
+  'series',
+  'photos'
+]
+
 const sqliteConfig = {
   dialect: 'sqlite',
   storage: path.resolve(path.join(eVars.SQLITE_PATH, `${eVars.SYS_REF}.db`)),
@@ -16,7 +30,8 @@ const sqliteConfig = {
     updatedAt: null, // 'updatedAt',
     deletedAt: null // 'deletedAt'
   },
-  operatorsAliases: false
+  operatorsAliases: false,
+  dropSchemaSequence
 }
 
 const mysqlConfig = {
@@ -24,7 +39,7 @@ const mysqlConfig = {
   host: eVars.MYSQL_HOST,
   port: eVars.MYSQL_PORT,
   database: eVars.MYSQL_DB_NAME,
-  username: eVars.MYSQL_USER,
+  username: eVars.MYSQL_ACCOUNT,
   password: eVars.MYSQL_PASS,
   logging: eVars.ORM_VERBOSE ? logging.warning : false,
   timezone: eVars.TIMEZONE,
@@ -45,7 +60,8 @@ const mysqlConfig = {
     updatedAt: null, // 'updatedAt',
     deletedAt: null // 'deletedAt'
   },
-  operatorsAliases: false
+  operatorsAliases: false,
+  dropSchemaSequence
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 # PRODUCT CATALOG
 
-simple product catalog website and backend with product data, user and client management functionalities suitable for small businesses, written with react and node.js
+simple product catalog website and backend with product data, contact management functionalities suitable for small businesses, written with react and node.js
 
 ## INSTALL
 
@@ -16,13 +16,8 @@ simple product catalog website and backend with product data, user and client ma
 2. glup removeLogs - remove *.log from the entire project file structure
 3. gulp resetDatabase - 將資料庫淨空或者淨空後再填入基礎或測試資料
 
-   * options:
-
-    --setting (development | staging | production): 由 config/database.js 取得指定淨空的資料庫連線設定. 預設: 'development'
-
-    --seed: 植入資料
-
-   * example: **gulp resetDatabase --setting development --seed**
+   * options: --seed: 植入資料
+   * example: **gulp resetDatabase --seed**
 
 ### npm
 

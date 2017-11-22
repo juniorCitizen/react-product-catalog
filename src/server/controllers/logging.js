@@ -4,7 +4,8 @@ module.exports = {
   console: messageToConsole,
   warning: warningToConsole,
   error: errorToConsole,
-  reject: rejectFailedPromise
+  reject: rejectFailedPromise,
+  resolve: resolvePromise
 }
 
 function messageToConsole (message) {
@@ -35,5 +36,12 @@ function rejectFailedPromise (customMessage = null) {
     messageToConsole(error.message)
     messageToConsole(error.stack)
     return Promise.reject(error)
+  }
+}
+
+function resolvePromise (customMessage = null) {
+  return (resolved) => {
+    if (customMessage) console.log(chalk.yellow.bold(customMessage))
+    return Promise.resolve(resolved)
   }
 }

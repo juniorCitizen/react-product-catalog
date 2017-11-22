@@ -4,72 +4,67 @@ const seriesData = [{
   id: 0,
   name: 'Crutches',
   order: 0,
-  publish: true
+  active: true
 }, {
   id: 1,
   name: 'Canes',
   order: 1,
-  publish: true
+  active: true
 }, {
   id: 2,
   name: 'Forearm Crutches',
   order: 2,
-  publish: true
+  active: true
 }, {
   id: 3,
   name: 'Quad Canes',
   order: 3,
-  publish: true
+  active: true
 }, {
   id: 4,
   name: 'Bath Seats',
   order: 4,
-  publish: true
+  active: true
 }, {
   id: 5,
   name: 'Walkers',
   order: 5,
-  publish: true
+  active: true
 }, {
   id: 6,
   name: 'Commode Chairs',
   order: 6,
-  publish: true
+  active: true
 }, {
   id: 7,
   name: 'Bathroom Safety',
   order: 7,
-  publish: true
+  active: true
 }, {
   id: 8,
   name: 'Patient-Aids',
   order: 8,
-  publish: true
+  active: true
 }, {
   id: 9,
   name: 'Rollators',
   order: 9,
-  publish: true
+  active: true
 }, {
   id: 10,
   name: 'Accessories',
   order: 10,
-  publish: true
+  active: true
 }]
 
 module.exports = (Series) => {
   return Series
     .bulkCreate(seriesData)
     .then(() => {
-      logging.warning('寫入產品系列資料... 成功')
+      logging.warning('寫入產品類別/系列資料... 成功')
       return Series.findAll()
     })
     .map(series => series.id)
-    .then((seriesIdList) => {
-      return Promise.resolve(seriesIdList)
-    })
-    .catch((error) => {
-      logging.error(error, 'resetDatabase/series.js errored...')
-      return Promise.resolve(error)
-    })
+    .then((seriesIdList) => Promise.resolve(seriesIdList))
+    .catch(logging.reject('產品類別/系列資料寫入失敗'))
 }

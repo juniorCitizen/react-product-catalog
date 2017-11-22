@@ -5,9 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: () => {
-        return uuidV4().toUpperCase()
-      },
+      defaultValue: () => uuidV4().toUpperCase(),
       validate: { isUUID: 4 }
     },
     primary: {
@@ -21,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     encoding: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     mimeType: {
       type: DataTypes.STRING,
@@ -35,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BLOB,
       allowNull: false
     },
-    publish: {
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false

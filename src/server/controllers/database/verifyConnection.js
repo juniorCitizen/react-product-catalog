@@ -7,8 +7,5 @@ module.exports = (db) => {
       logging.console('資料庫連線驗證... 成功')
       return Promise.resolve()
     })
-    .catch((error) => {
-      logging.error(error, '資料庫連線驗證... 失敗')
-      return Promise.reject(error)
-    })
+    .catch(logging.reject('資料庫連線驗證... 失敗'))
 }

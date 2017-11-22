@@ -9,21 +9,14 @@ module.exports = (sequelize, sequence) => {
     actions.push(
       sequelize
         .dropSchema(tableName)
-        .then(() => {
-          return Promise.resolve(`${tableName} 資料表已移除...`)
-        })
+        .then(() => Promise.resolve(`${tableName} 資料表已移除...`))
     )
   })
   return Promise
-    .each(actions, (message) => {
-      logging.warning(message)
-    })
+    .each(actions, logging.warning)
     .then(() => {
       logging.warning('所有資料表已成功移除')
       return Promise.resolve()
     })
-    .catch(error => {
-      logging.error(error, 'controllers/database/database.js initialize() {db.sequelize.dropAllSchemas()} errored')
-      return Promise.reject(error)
-    })
+    .catch(logging.reject('資料表刪除失敗'))
 }

@@ -51,47 +51,55 @@ API_ROUTER.route('/carousels/:carouselId/primary')
   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
-// Countries
+// Companies **
 // /////////////////////////////////////////////////////
-const getCountries = require('./countries/getCountries')
-const getFlagByCountryId = require('./countries/getFlagByCountryId')
-API_ROUTER.route('/countries')
-  .get(...getCountries) // get countries
+API_ROUTER.route('/companies')
+  .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/countries/:countryId/flag')
-  .get(...getFlagByCountryId) // get flag from countryId
+API_ROUTER.route('/companies/:companyId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/companies/:companyId/contacts')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+API_ROUTER.route('/companies/:companyId/contacts/:contactId')
+  .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
-// Offices **
+// Countries
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/offices')
-  .get(...require('./offices/getOffices')) // get office dataset complete with country and staff info
+API_ROUTER.route('/countries')
+  .get(...require('./countries/getCountries')) // get countries
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/offices/:officeId')
-  .get(notImplemented)
+API_ROUTER.route('/countries/:countryId/flag')
+  .get(...require('./countries/getFlagByCountryId')) // get flag from countryId
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/offices/:officeId/user')
+
+// /////////////////////////////////////////////////////
+// Flags
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/flags')
   .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/offices/:officeId/user/:userId')
-  .get(notImplemented)
-  .post(notImplemented)
+  .post(...require('./flags/insert')) // insert new flag
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
@@ -294,7 +302,7 @@ function productRequest (req, res) {
 }
 
 // /////////////////////////////////////////////////////
-// series
+// Series
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/series')
   .get(...require('./series/getSeries')) // get series dataset
@@ -326,39 +334,39 @@ API_ROUTER.route('/tokens')
   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
-// Users
+// Contacts
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/users')
-  .get(notImplemented) // get users **
-  .post(...require('./users/addUser')) // add a user to the system
+API_ROUTER.route('/contacts')
+  .get(notImplemented) // get contacts **
+  .post(...require('./contacts/addContact')) // add a contact to the system
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/users/:userId')
-  .get(notImplemented) // get user by id **
+API_ROUTER.route('/contacts/:contactId')
+  .get(notImplemented) // get contact by id **
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented)
-  .delete(notImplemented) // delete user by id **
-API_ROUTER.route('/users/:userId/offices/:officeId')
+  .delete(notImplemented) // delete contact by id **
+API_ROUTER.route('/contacts/:contactId/companies/:companyId')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(notImplemented) // assign user to an office **
+  .patch(notImplemented) // assign contact to a company **
   .delete(notImplemented)
-API_ROUTER.route('/users/:userId/password')
+API_ROUTER.route('/contacts/:contactId/password')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented) // change password **
   .delete(notImplemented)
-API_ROUTER.route('/users/:userId/admin')
+API_ROUTER.route('/contacts/:contactId/admin')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
   .patch(notImplemented) // admin status toggle **
   .delete(notImplemented)
-API_ROUTER.route('/users/:userId/name/:name')
+API_ROUTER.route('/contacts/:contactId/name/:name')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)

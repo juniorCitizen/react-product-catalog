@@ -7,28 +7,22 @@ dotEnv.config()
 const ormVerbose = process.env.ORM_VERBOSE === 'true'
 const logging = require('../../../server/controllers/logging')
 
-module.exports = (Countries, Flags) => {
+module.exports = (Countries) => {
+  let countryDataPath = path.resolve('./node_modules/world-countries/dist/countries.json')
   let flagSvgPath = path.resolve('./node_modules/world-countries/data')
   let countries = []
-  let flags = []
-  return fs.readJson(path.resolve('./node_modules/world-countries/dist/countries.json'))
+  return fs.readJson(countryDataPath)
     .then((countriesInformation) => {
       countriesInformation.forEach((country) => {
+        let id = country.cca3.toLowerCase()
         countries.push({
-          id: country.cca3.toLowerCase(),
+          id,
           name: country.name.common,
-          region: country.region === '' ? 'Other' : country.region
-        })
-        flags.push({
-          id: country.cca3.toLowerCase(),
-          data: fs.readFileSync(path.join(flagSvgPath, country.cca3.toLowerCase() + '.svg'))
+          region: country.region === '' ? 'Other' : country.region,
+          flagSvg: fs.readFileSync(path.join(flagSvgPath, id + '.svg'))
         })
       })
       return Promise.resolve()
-    })
-    .catch((error) => {
-      logging.error(error, 'resetDatabase/countries.js fs.readJson() errored')
-      return Promise.reject(error)
     })
     .then(() => {
       return Promise.each(
@@ -40,25 +34,6 @@ module.exports = (Countries, Flags) => {
         }
       )
     })
-    .then(() => {
-      logging.warning('寫入國家資料... 成功')
-      return Promise.resolve()
-    })
-    .then(() => {
-      return Promise.each(
-        flags.map(flag => Flags.create(flag)),
-        (flag, index, length) => {
-          if (ormVerbose) {
-            logging.console(`進度: ${index + 1}/${length} - ${countries[index].name} 國旗資料已建立`)
-          }
-        }
-      )
-    }).then(() => {
-      logging.warning('寫入國旗圖示資料... 成功')
-      return Promise.resolve()
-    })
-    .catch((error) => {
-      logging.error(error, 'resetDatabase/countries.js errored...')
-      return Promise.reject(error)
-    })
+    .then(logging.resolve('國家/國旗資料建立... 成功'))
+    .catch(logging.reject('國家/國旗資料寫入失敗'))
 }
