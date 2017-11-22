@@ -1,19 +1,17 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { login_user } from '../../actions'
-import { get_series } from '../../actions'
 import config from '../../config'
+import Alert from '../../containers/modal/alert'
 
 const api = config.api
 
-class Series extends React.Component {
+export default class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             series: [],
+            alertShow: false,
+            alertMsg: '',
         }
     }
 
@@ -22,8 +20,18 @@ class Series extends React.Component {
         this.getSeries()
     }
 
-    selectSeries(code) {
-        console.log('select series' + code)
+    selectSeries(id) {
+        let series = this.state.series
+        series = series.map((item) => {
+            let setItem = item
+            setItem.active = item.id === id
+            return setItem
+        })
+        this.setState({
+            series: series,
+            alertShow: true,
+            alertMsg: '您選擇了系列號' + id,
+        })
     }
 
     getSeries() {
@@ -51,7 +59,7 @@ class Series extends React.Component {
     }
 
     render() {
-        const { auth, series } = this.state
+        const { series, alertShow, alertMsg } = this.state
         const { login } = this.props
         return(          
             <div>
@@ -75,17 +83,13 @@ class Series extends React.Component {
                             </li>
                         ))}
                     </ul>
-              </aside>
+                </aside>
+                <Alert 
+                    show={alertShow}
+                    message={alertMsg} 
+                    click_ok={() => {this.setState({alertShow: false})}} 
+                />
             </div>
         )
     }
 }
-
-function mapStateToProps(state) {
-	const { login } = state
-	return {
-        login
-	}
-}
-
-export default connect(mapStateToProps)(Series)
