@@ -43,7 +43,7 @@ simple product catalog website and backend with product data, user and client ma
 ### series
 
 * **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details
-  * response body: 
+  * response data: 
 
         [
           {
