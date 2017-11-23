@@ -168,12 +168,37 @@ otoId/series/:seriesId** - assign a photo to a series
         "address": "777 xxx",
         "contact": "02-12345678",
       },
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
     }
   * auth fail response
     {
       "result": false,
-      "msg": "auth fail0",
+      "msg": "auth fail",
     }
+* **POST protocol://domain:prot/sys_ref/api/admin/login** - admin login and get admin info
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        { // all fields are required
+          "account": "admin001",
+          "password": "**********",
+        }
+  * auth success response
+    {
+      "result": true,
+      "admin_info": {
+        "id": 0,
+        "account": "admin001",
+        "name": "admin name",
+      },
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+    }
+  * auth fail response
+    {
+      "result": false,
+      "msg": "auth fail",
+    }
+
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
   * request header: { "Content-Type": "application/json"}
