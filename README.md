@@ -62,18 +62,6 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
-  * response data: 
-        [
-          {
-            "id": "",
-            "code": "",
-            "name": "",
-            "specification": "",
-            "description": "",
-          },
-        ]
-
 * **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
 
 * **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
@@ -208,6 +196,7 @@ simple product catalog website and backend with product data, user and client ma
   * request header: { "x-access-token": "jwt-token-string" }
 
 ### Login
+
 * **POST protocol://domain:port/sys_ref/api/login/user** 
   * request header: { "Content-Type": "application/json"}
   * request body:
@@ -297,6 +286,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
 ### Series
+
 * **GET protocol://domain:port/sys_ref/api/series** - get series list
   * response data:
 
@@ -355,6 +345,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
 ### Product
+
 * **GET protocol://domain:port/sys_ref/api/product/:code/:page** - get product list by code
   * response data:
 
@@ -482,7 +473,8 @@ simple product catalog website and backend with product data, user and client ma
           msg: "xxxx",
         }
 
-###USER
+### USER
+
 * **POST protocol://domain:port/sys_ref/api/user/register** - register user
   * request header: { "Content-Type": "application/json"}
   * request body:
@@ -555,7 +547,8 @@ simple product catalog website and backend with product data, user and client ma
           msg: "xxxx",
         }
 
-###ADMIN
+### ADMIN
+
 * **POST protocol://domain:port/sys_ref/api/admin** - insert admin
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
@@ -600,7 +593,8 @@ simple product catalog website and backend with product data, user and client ma
           msg: "xxxx",
         }
 
-###ORDER
+### ORDER
+
 * **POST protocol://domain:port/sys_ref/api/order** - insert order
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
