@@ -87,22 +87,6 @@ API_ROUTER.route('/countries')
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-API_ROUTER.route('/countries/:countryId/flag')
-  .get(...require('./countries/getFlagByCountryId')) // get flag from countryId
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-
-// /////////////////////////////////////////////////////
-// Flags
-// /////////////////////////////////////////////////////
-API_ROUTER.route('/flags')
-  .get(notImplemented)
-  .post(...require('./flags/insert')) // insert new flag
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // ///////////////////////////////////////////////////////////////
 // Photos
