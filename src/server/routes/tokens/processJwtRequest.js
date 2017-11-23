@@ -56,11 +56,13 @@ function accountDiscovery (req, res, next) {
 function checkPassword (req, res, next) {
   if (res.statusCode >= 400) return next()
   // hash the submitted password against the salt string
-  let currentHash = encryption
+  let hashedPasswordToCheck = encryption
     .sha512(req.body.password, req.accountData.salt)
-    .passwordHash
+    .hashedPassword
+  console.log(req.accountData.hashedPassword)
+  console.log(hashedPasswordToCheck)
   // compare with the stored hash
-  if (currentHash === req.accountData.password) {
+  if (hashedPasswordToCheck === req.accountData.hashedPassword) {
     // hash checks out
     let token = jwt.sign({
       email: req.body.email,

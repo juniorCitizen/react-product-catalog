@@ -73,7 +73,7 @@ module.exports = (Companies, Contacts) => {
           : process.env.DEFAULT_CONTACT_PASSWORD,
         encryption.saltGen(16)
       )
-      contact.hash = encryptedPassword.passwordHash
+      contact.hashedPassword = encryptedPassword.hashedPassword
       contact.salt = encryptedPassword.salt
     }
   })
