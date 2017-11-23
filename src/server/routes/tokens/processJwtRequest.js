@@ -59,8 +59,6 @@ function checkPassword (req, res, next) {
   let hashedPasswordToCheck = encryption
     .sha512(req.body.password, req.accountData.salt)
     .hashedPassword
-  console.log(req.accountData.hashedPassword)
-  console.log(hashedPasswordToCheck)
   // compare with the stored hash
   if (hashedPasswordToCheck === req.accountData.hashedPassword) {
     // hash checks out
