@@ -66,7 +66,9 @@ module.exports = (Countries, Companies, Contacts, Products, Registrations) => {
                 registrations.push({
                   comments: faker.lorem.paragraph(),
                   contactId: contactEmails[counter],
-                  productId: productIds[counter2]
+                  productId: productIds[counter2],
+                  notified: true,
+                  contacted: true
                 })
               }
             }
