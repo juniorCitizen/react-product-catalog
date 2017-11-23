@@ -43,7 +43,8 @@ simple product catalog website and backend with product data, user and client ma
 ### series
 
 * **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details
-  * response data
+  * response data: 
+  
     {
       [
         {
@@ -87,7 +88,8 @@ simple product catalog website and backend with product data, user and client ma
 ### products
 
 * **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
-  * response data
+  * response data: 
+
     {
       [
         {
@@ -196,7 +198,9 @@ otoId/series/:seriesId** - assign a photo to a series
           "email": "example@example.com",
           "password": "**********",
         }
-  * auth success response data
+
+  * auth success response data:
+
     {
       "result": true,
       "user_info": {
@@ -208,7 +212,9 @@ otoId/series/:seriesId** - assign a photo to a series
       },
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
     }
-  * auth fail response data
+
+  * auth fail response data:
+
     {
       "result": false,
       "msg": "auth fail", // return auth error message
@@ -221,7 +227,9 @@ otoId/series/:seriesId** - assign a photo to a series
           "account": "admin001",
           "password": "**********",
         }
-  * auth success response data
+
+  * auth success response data: 
+
     {
       "result": true,
       "admin_info": {
@@ -231,7 +239,9 @@ otoId/series/:seriesId** - assign a photo to a series
       },
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
     }
-  * auth fail response data
+
+  * auth fail response data:
+
     {
       "result": false,
       "msg": "auth fail", // return auth error message
