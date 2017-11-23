@@ -45,29 +45,27 @@ simple product catalog website and backend with product data, user and client ma
 * **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details
   * response body: 
 
-    {
-      [
-        {
-          id: 0,
-          name: "Canes",
-          list: [
-            { 
-              id: 5,
-              name: "Canes - 1 meter",
-            },
-            {
-              id: 7,
-              name: "Canes - 80 cm",
-            }
-          ]
-        },
-        {
-          id: 1,
-          name: "Forearm Crutches",
-          list: []
-        },
-      ]
-    }
+        [
+          {
+            id: 0,
+            name: "Canes",
+            list: [
+              { 
+                id: 5,
+                name: "Canes - 1 meter",
+              },
+              {
+                id: 7,
+                name: "Canes - 80 cm",
+              }
+            ]
+          },
+          {
+            id: 1,
+            name: "Forearm Crutches",
+            list: []
+          },
+        ]
 
 * **GET protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - get series by id with optional details
 
@@ -89,18 +87,15 @@ simple product catalog website and backend with product data, user and client ma
 
 * **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
   * response data: 
-
-        {
-          [
-            {
-              "id": "",
-              "code": "",
-              "name": "",
-              "specification": "",
-              "description": "",
-            },
-          ]
-        }
+        [
+          {
+            "id": "",
+            "code": "",
+            "name": "",
+            "specification": "",
+            "description": "",
+          },
+        ]
 
 * **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
 
@@ -201,24 +196,24 @@ otoId/series/:seriesId** - assign a photo to a series
 
   * auth success response data:
 
-    {
-      "result": true,
-      "user_info": {
-        "id": 0,
-        "email": "example@example.com",
-        "name": "JS GROUP",
-        "address": "777 xxx",
-        "contact": "02-12345678",
-      },
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
-    }
+        {
+          "result": true,
+          "user_info": {
+            "id": 0,
+            "email": "example@example.com",
+            "name": "JS GROUP",
+            "address": "777 xxx",
+            "contact": "02-12345678",
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+        }
 
   * auth fail response data:
 
-    {
-      "result": false,
-      "msg": "auth fail", // return auth error message
-    }
+        {
+          "result": false,
+          "msg": "auth fail", // return auth error message
+        }
 * **POST protocol://domain:prot/sys_ref/api/admin/login** - admin login and get admin info
   * request header: { "Content-Type": "application/json"}
   * request body:
@@ -230,22 +225,22 @@ otoId/series/:seriesId** - assign a photo to a series
 
   * auth success response data: 
 
-    {
-      "result": true,
-      "admin_info": {
-        "id": 0,
-        "account": "admin001",
-        "name": "admin name",
-      },
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
-    }
+        {
+          "result": true,
+          "admin_info": {
+            "id": 0,
+            "account": "admin001",
+            "name": "admin name",
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+        }
 
   * auth fail response data:
 
-    {
-      "result": false,
-      "msg": "auth fail", // return auth error message
-    }
+        {
+          "result": false,
+          "msg": "auth fail", // return auth error message
+        }
 
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
