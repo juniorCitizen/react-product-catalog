@@ -211,6 +211,7 @@ simple product catalog website and backend with product data, user and client ma
 * **POST protocol://domain:port/sys_ref/api/login/user** 
   * request header: { "Content-Type": "application/json"}
   * request body:
+
         { 
           email: "example@example.com",
           password: "**********",
@@ -232,6 +233,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/login/admin** 
   * request header: { "Content-Type": "application/json"}
   * request body:
+
         { 
           account: "",
           password: "**********",
@@ -253,11 +255,13 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/logout/user** - log out user token
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
   * response data:
+
         {
           result: true,
         }
@@ -265,11 +269,13 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/logout/admin** - log out admin token
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
   * response data:
+
         {
           result: true,
         }
@@ -277,11 +283,13 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/check/token** - check token exists and update token
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
   * response data:
+
         {
           result: true,
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
@@ -291,6 +299,7 @@ simple product catalog website and backend with product data, user and client ma
 ### Series
 **GET protocol://domain:port/sys_ref/api/series** - get series list
   * response data:
+
         [
           {
             id: 0,
@@ -307,12 +316,14 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/series** - insert series
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           name: "xxxx",
           parent: 0,
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -321,6 +332,7 @@ simple product catalog website and backend with product data, user and client ma
 **PUT protocol://domain:port/sys_ref/api/series** - update series
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           id: 1
           name: "xxxx",
@@ -328,6 +340,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -335,6 +348,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **DELETE protocol://domain:port/sys_ref/api/series/:id** - delete series
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -343,6 +357,7 @@ simple product catalog website and backend with product data, user and client ma
 ### Product
 **GET protocol://domain:port/sys_ref/api/product/:code/:page** - get product list by code
   * response data:
+
         {
           list: [
             {
@@ -357,6 +372,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **GET protocol://domain:port/sys_ref/api/product/serach/:string/:page** - get product list by search string
   * response data:
+
         {
           list: [
             {
@@ -373,6 +389,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **GET protocol://domain:port/sys_ref/api/product/detail/:id** - get product deatil by product id
   * response data:
+
         {
           id: 0,
           code: 0,
@@ -384,6 +401,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **GET protocol://domain:port/sys_ref/api/product/hot** - get hot product list 
   * response data:
+
         {
           list: [
             {
@@ -400,6 +418,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **GET protocol://domain:port/sys_ref/api/product/new** - get new product list
   * response data:
+  
         {
           list: [
             {
@@ -417,6 +436,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/product** - insert product
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           id: 0,
           code: "",
@@ -427,6 +447,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -435,6 +456,7 @@ simple product catalog website and backend with product data, user and client ma
 **PUT protocol://domain:port/sys_ref/api/product** - update product
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           id: 0,
           code: "",
@@ -445,6 +467,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -453,6 +476,7 @@ simple product catalog website and backend with product data, user and client ma
 **DELETE protocol://domain:port/sys_ref/api/product/:id** - delete series
   * request header: { "x-access-token": "jwt-token-string" }
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -462,6 +486,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/user/register** - register user
   * request header: { "Content-Type": "application/json"}
   * request body:
+
         { 
           email: "",
           name: "",
@@ -471,6 +496,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           user_info: {
@@ -485,6 +511,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/user** - insert user
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           email: "",
           name: "",
@@ -494,6 +521,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -502,6 +530,7 @@ simple product catalog website and backend with product data, user and client ma
 **PUT protocol://domain:port/sys_ref/api/user** - update user
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           id: 0,
           name: "",
@@ -511,6 +540,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -519,6 +549,7 @@ simple product catalog website and backend with product data, user and client ma
 **DELETE protocol://domain:port/sys_ref/api/user/:id** - delete user
   * request header: { "x-access-token": "jwt-token-string" }
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -528,6 +559,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/admin** - insert admin
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           account: "",
           name: "",
@@ -535,6 +567,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -543,6 +576,7 @@ simple product catalog website and backend with product data, user and client ma
 **PUT protocol://domain:port/sys_ref/api/user** - update admin
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           id: 0,
           name: "",
@@ -550,6 +584,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -559,6 +594,7 @@ simple product catalog website and backend with product data, user and client ma
   * request header: { "x-access-token": "jwt-token-string" }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -568,6 +604,7 @@ simple product catalog website and backend with product data, user and client ma
 **POST protocol://domain:port/sys_ref/api/order** - insert order
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
+
         { 
           user_id: 0,
           order_date: 0,
@@ -581,6 +618,7 @@ simple product catalog website and backend with product data, user and client ma
         }
 
   * response data:
+
         {
           result: true,
           msg: "xxxx",
@@ -588,6 +626,7 @@ simple product catalog website and backend with product data, user and client ma
 
 **GET protocol://domain:port/sys_ref/api/order** - get order list
   * response data:
+  
         {
           {
             id: 0,
