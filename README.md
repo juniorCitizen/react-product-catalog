@@ -43,6 +43,30 @@ simple product catalog website and backend with product data, user and client ma
 ### series
 
 * **GET protocol://domain:port/sys_ref/api/series(?details)** - get series data with optional details
+  * response data
+    {
+      [
+        {
+          id: 0,
+          name: "Canes",
+          list: [
+            { 
+              id: 5,
+              name: "Canes - 1 meter",
+            },
+            {
+              id: 7,
+              name: "Canes - 80 cm",
+            }
+          ]
+        },
+        {
+          id: 1,
+          name: "Forearm Crutches",
+          list: []
+        },
+      ]
+    }
 
 * **GET protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - get series by id with optional details
 
@@ -62,7 +86,21 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset
+* **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
+  * response data
+    {
+      [
+        {
+          id: "",
+          code: "",
+          name: "",
+          specification: "",
+          description: "",
+        },
+      ]
+    }
+
+* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
 
 * **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
 
@@ -158,7 +196,7 @@ otoId/series/:seriesId** - assign a photo to a series
           "email": "example@example.com",
           "password": "**********",
         }
-  * auth success response
+  * auth success response data
     {
       "result": true,
       "user_info": {
@@ -170,10 +208,10 @@ otoId/series/:seriesId** - assign a photo to a series
       },
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
     }
-  * auth fail response
+  * auth fail response data
     {
       "result": false,
-      "msg": "auth fail",
+      "msg": "auth fail", // return auth error message
     }
 * **POST protocol://domain:prot/sys_ref/api/admin/login** - admin login and get admin info
   * request header: { "Content-Type": "application/json"}
@@ -183,7 +221,7 @@ otoId/series/:seriesId** - assign a photo to a series
           "account": "admin001",
           "password": "**********",
         }
-  * auth success response
+  * auth success response data
     {
       "result": true,
       "admin_info": {
@@ -193,10 +231,10 @@ otoId/series/:seriesId** - assign a photo to a series
       },
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
     }
-  * auth fail response
+  * auth fail response data
     {
       "result": false,
-      "msg": "auth fail",
+      "msg": "auth fail", // return auth error message
     }
 
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
