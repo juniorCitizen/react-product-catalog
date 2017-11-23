@@ -12,11 +12,12 @@ module.exports = express.Router()
           title: eVars.SYS_REF,
           faviconSource: `${eVars.APP_ROUTE}/images/favicon.ico`,
           scriptSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/javascripts/app.min.js`
-            : `${eVars.APP_ROUTE}/javascripts/app.js`,
+            ? `${eVars.APP_ROUTE}/app.min.js`
+            : `${eVars.APP_ROUTE}/app.js`,
           styleSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/stylesheets/app.min.css`
-            : `${eVars.APP_ROUTE}/stylesheets/app.css`
+            ? `${eVars.APP_ROUTE}/app.min.css`
+            : `${eVars.APP_ROUTE}/app.css`,
+          appUrl: eVars.APP_ROUTE
         }
       }
       return next()
