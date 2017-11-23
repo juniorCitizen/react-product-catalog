@@ -19,7 +19,7 @@ module.exports = (Countries) => {
           id,
           name: country.name.common,
           region: country.region === '' ? 'Other' : country.region,
-          flagSvg: fs.readFileSync(path.join(flagSvgPath, id + '.svg'))
+          flagSvg: fs.readFileSync(path.join(flagSvgPath, id + '.svg'), 'utf8')
         })
       })
       return Promise.resolve()
