@@ -90,17 +90,17 @@ simple product catalog website and backend with product data, user and client ma
 * **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
   * response data: 
 
-    {
-      [
         {
-          id: "",
-          code: "",
-          name: "",
-          specification: "",
-          description: "",
-        },
-      ]
-    }
+          [
+            {
+              "id": "",
+              "code": "",
+              "name": "",
+              "specification": "",
+              "description": "",
+            },
+          ]
+        }
 
 * **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
 
