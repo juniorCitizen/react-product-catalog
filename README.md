@@ -62,7 +62,19 @@ simple product catalog website and backend with product data, user and client ma
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset
+* **GET protocol://domain:port/sys_ref/api/products/:code** - get product by code
+  * response data: 
+        [
+          {
+            "id": "",
+            "code": "",
+            "name": "",
+            "specification": "",
+            "description": "",
+          },
+        ]
+
+* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
 
 * **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
 
@@ -139,8 +151,7 @@ simple product catalog website and backend with product data, user and client ma
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-* **PATCH protocol://domain:port/sys_ref/api/photos/:pnameh: "SJ GROUP",
-otoId/series/:seriesId** - assign a photo to a series
+* **PATCH protocol://domain:port/sys_ref/api/photos/:pnameh: "SJ GROUP", otoId/series/:seriesId** - assign a photo to a series
 
   * request header: { "x-access-token": "jwt-token-string" }
 
@@ -150,30 +161,6 @@ otoId/series/:seriesId** - assign a photo to a series
 
 ### tokens
 
-* **POST protocol://domain:prot/sys_ref/api/login** - login and get user info
-  * request header: { "Content-Type": "application/json"}
-  * request body:
-
-        { // all fields are required
-          "email": "example@example.com",
-          "password": "**********",
-        }
-  * auth success response
-    {
-      "result": true,
-      "user_info": {
-        "id": 0,
-        "email": "example@example.com",
-        "name": "JS GROUP",
-        "address": "777 xxx",
-        "contact": "02-12345678",
-      },
-    }
-  * auth fail response
-    {
-      "result": false,
-      "msg": "auth fail0",
-    }
 * **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
 
   * request header: { "Content-Type": "application/json"}
@@ -220,6 +207,440 @@ otoId/series/:seriesId** - assign a photo to a series
 
   * request header: { "x-access-token": "jwt-token-string" }
 
+### Login
+* **POST protocol://domain:port/sys_ref/api/login/user** 
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          email: "example@example.com",
+          password: "**********",
+        }
+  
+  * response data:
+
+        {
+          result: true,
+          user_info: {
+            id: 0,
+            email: "example@example.com",
+            name: "JS GROUP",
+          },
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+          msg: "",
+        }
+
+* **POST protocol://domain:port/sys_ref/api/login/admin** 
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          account: "",
+          password: "**********",
+        }
+  
+  * response data:
+
+        {
+          result: true,
+          admin_info: {
+            id: 0,
+            account: "",
+            name: "",
+          },
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+          msg: "",
+        }
+
+* **POST protocol://domain:port/sys_ref/api/logout/user** - log out user token
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+        }
+
+  * response data:
+
+        {
+          result: true,
+        }
+
+* **POST protocol://domain:port/sys_ref/api/logout/admin** - log out admin token
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+        }
+
+  * response data:
+
+        {
+          result: true,
+        }
+
+* **POST protocol://domain:port/sys_ref/api/check/token** - check token exists and update token
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+          msg: "",
+        }
+
+### Series
+* **GET protocol://domain:port/sys_ref/api/series** - get series list
+  * response data:
+
+        [
+          {
+            id: 0,
+            name: "xxxx",
+            list: [
+              {
+                id: 0,
+                name: "xxxxx",
+              },
+            ]
+          },
+        ]
+
+* **POST protocol://domain:port/sys_ref/api/series** - insert series
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          name: "xxxx",
+          parent: 0,
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **PUT protocol://domain:port/sys_ref/api/series** - update series
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          id: 1
+          name: "xxxx",
+          parent: 0,
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **DELETE protocol://domain:port/sys_ref/api/series/:id** - delete series
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+### Product
+* **GET protocol://domain:port/sys_ref/api/product/:code/:page** - get product list by code
+  * response data:
+
+        {
+          list: [
+            {
+              id: 0,
+              name: "xxxx",
+              photo_id: "",
+            },
+          ],
+          current: 1,
+          total: 2,
+        }
+
+* **GET protocol://domain:port/sys_ref/api/product/serach/:string/:page** - get product list by search string
+  * response data:
+
+        {
+          list: [
+            {
+              id: 0,
+              code: 0,
+              series_name: "",
+              name: "xxxx",
+              photo_id: "",
+            },
+          ]
+          current: 1,
+          total: 10,
+        }
+
+* **GET protocol://domain:port/sys_ref/api/product/detail/:id** - get product deatil by product id
+  * response data:
+
+        {
+          id: 0,
+          code: 0,
+          name: "xxxx",
+          specification: "",
+          description: "",
+          photo_id: "",
+        }
+
+* **GET protocol://domain:port/sys_ref/api/product/hot** - get hot product list 
+  * response data:
+
+        {
+          list: [
+            {
+              id: 0,
+              code: 0,
+              series_name: "",
+              name: "xxxx",
+              photo_id: "",
+            },
+          ]
+          current: 1,
+          total: 10,
+        }
+
+* **GET protocol://domain:port/sys_ref/api/product/new** - get new product list
+  * response data:
+  
+        {
+          list: [
+            {
+              id: 0,
+              code: 0,
+              series_name: "",
+              name: "xxxx",
+              photo_id: "",
+            },
+          ]
+          current: 1,
+          total: 10,
+        }
+
+* **POST protocol://domain:port/sys_ref/api/product** - insert product
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          id: 0,
+          code: "",
+          name: "",
+          specification: "",
+          description: "",
+          publish: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **PUT protocol://domain:port/sys_ref/api/product** - update product
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          id: 0,
+          code: "",
+          name: "",
+          specification: "",
+          description: "",
+          publish: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **DELETE protocol://domain:port/sys_ref/api/product/:id** - delete series
+  * request header: { "x-access-token": "jwt-token-string" }
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+###USER
+* **POST protocol://domain:port/sys_ref/api/user/register** - register user
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          email: "",
+          name: "",
+          password: "",
+          address: "",
+          contact: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          user_info: {
+            id: 0,
+            email: "example@example.com",
+            name: "JS GROUP",
+          },
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
+          msg: "xxxx",
+        }
+
+* **POST protocol://domain:port/sys_ref/api/user** - insert user
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          email: "",
+          name: "",
+          password: "",
+          address: "",
+          contact: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **PUT protocol://domain:port/sys_ref/api/user** - update user
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          id: 0,
+          name: "",
+          password: "",
+          address: "",
+          contact: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **DELETE protocol://domain:port/sys_ref/api/user/:id** - delete user
+  * request header: { "x-access-token": "jwt-token-string" }
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+###ADMIN
+* **POST protocol://domain:port/sys_ref/api/admin** - insert admin
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          account: "",
+          name: "",
+          password: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **PUT protocol://domain:port/sys_ref/api/user** - update admin
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          id: 0,
+          name: "",
+          password: "",
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **DELETE protocol://domain:port/sys_ref/api/user/:id** - delete admin
+  * request header: { "x-access-token": "jwt-token-string" }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+###ORDER
+* **POST protocol://domain:port/sys_ref/api/order** - insert order
+  * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
+  * request body:
+
+        { 
+          user_id: 0,
+          order_date: 0,
+          remark: "",
+          detail: [
+            {
+              product_id: 0,
+              quantity: 1,
+            },
+          ],
+        }
+
+  * response data:
+
+        {
+          result: true,
+          msg: "xxxx",
+        }
+
+* **GET protocol://domain:port/sys_ref/api/order** - get order list
+  * response data:
+
+        {
+          {
+            id: 0,
+            user_id: 0,
+            order_date: 0,
+            remark: "",
+            detail: [
+              {
+                product_id: 0,
+                quantity: 1,
+              },
+            ],
+          },
+        }
 
 ## LICENSE
 
