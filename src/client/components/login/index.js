@@ -1,15 +1,22 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Nav from '../navigation'
+import { user_info } from '../../actions'
+import { connect } from 'react-redux'
+import config from '../../config'
 
-export default class Login extends React.Component {
+const api = config.api
+
+class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             form: {
                 email: '',
+                loginId: '',
                 password: '',
+                botPrevention: '',
             },
             msg:{
                 email: '',
@@ -19,8 +26,22 @@ export default class Login extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        this.checkAuth()
+    }
 
+    componentDidMount() {
+        
+    }
+
+    checkAuth() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        let user = []
+        if (token) {
+            dispatch(user_info(user))
+            this.props.history.push("/");
+        }
     }
 
     inputChange(cont, e) {
@@ -35,7 +56,7 @@ export default class Login extends React.Component {
         let { form, msg } = this.state
         let err = false
         Object.keys(form).map((key) => {
-            if (form[key] === '') {
+            if (form[key] === '' && !this.igone(key)) {
                 msg[key] = '不得空白'
                 this.setState({msg: msg})
                 err = true
@@ -44,34 +65,51 @@ export default class Login extends React.Component {
         return err
     }
 
+    igone(key) {
+        let igone = ['botPrevention']
+        let check = false
+        igone.map((item) => {
+            if (item === key) {
+                check = true
+            }
+        })
+        return check
+    }
+
     login() {
+        const { form, msg } = this.state
+        const self = this
         if (this.checkSpace()) {
             return
         }
-        const { form, msg } = this.state
-        let url = ''
-        let form_data = new FormData()
-        Object.keys(form).map((key) => {
-            form_data.append(key, form[key])
+        axios({
+            method: 'post',
+            url: api + 'tokens',
+            data: form,
+            headers: {
+                'x-access-token': window.localStorage["jwt-token"],
+                'Content-Type': 'application/json',
+            }
         })
-
-        axios.post(url, form_data)
         .then(function (response) {
-            let res = response.data
-            if (res.result) {
+            if (response.status === 200) {
+                console.log(response.data)
+                window.localStorage["jwt-token"] = response.data.data
                 self.loginSuccess()
             } else {
-                self.loginError(res.msg)
+                console.log(response.data)
             }
         }).catch(function (error) {
             console.log(error)
-            self.loginError(error)
         })
-        
     }
 
     loginSuccess() {
-
+        const { dispatch } = this.props
+        let user = []
+        dispatch(user_info(user))
+        console.log(window.localStorage["jwt-token"])
+        this.props.history.push("/");
     }
 
     loginError(str) {
@@ -84,7 +122,7 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const { auth, form, msg } = this.state
+        const { form, msg } = this.state
         return (
             <div>
                 <Nav tab="login" />
@@ -97,6 +135,15 @@ export default class Login extends React.Component {
                                     <div className="control">
                                         <input className="input" type="text" placeholder="請輸入電子郵件"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
+                                        />
+                                    </div>
+                                    <p className="help is-danger">{msg.email}</p>
+                                </div>
+                                <div className="field">
+                                    <label className="label">帳號</label>
+                                    <div className="control">
+                                        <input className="input" type="text" placeholder="請輸入帳號"
+                                            value={form.loginId} onChange={this.inputChange.bind(this, 'loginId')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.email}</p>
@@ -137,3 +184,12 @@ const style = {
         padding: '10px',
     },
 }
+
+function mapStateToProps(state) {
+	const { login } = state
+	return {
+        login
+	}
+}
+
+export default connect(mapStateToProps)(Login)

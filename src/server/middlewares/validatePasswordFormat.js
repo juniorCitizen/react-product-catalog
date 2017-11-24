@@ -1,16 +1,13 @@
-const routerResponse = require('../controllers/routerResponse')
-
 module.exports = (req, res, next) => {
   if (!req.body.hasOwnProperty('password')) {
-    routerResponse.json({
-      req, res, statusCode: 401, message: 'password not found'
-    })
-    return next('PASSWORD_NOT_FOUND')
+    res.status(401)
+    let error = new Error('Password not found')
+    return next(error)
   } else if ((req.body.password.length < 8) || (req.body.password.length > 20)) {
-    routerResponse.json({
-      req, res, statusCode: 401, message: 'wrong password format'
-    })
-    return next('WRONG_PASSWORD_FORMAT')
+    res.status(401)
+    let error = new Error('Incorrect password format')
+    error.message = 'Password should be 8 to 20 characters long'
+    return next(error)
   }
-  next()
+  return next()
 }

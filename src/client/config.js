@@ -1,5 +1,8 @@
 export default {
-    server: 'http://localhost:9004',
+    api: 'http://localhost:9004/reactProductCatalog/api/',
+    project: {
+        name: 'reactProductCatalog',
+    },
     contact: {
         name: '秀田醫療器材有限公司',
         info: {
@@ -10,5 +13,18 @@ export default {
             
         },
         slogan: '醫療專業 貼心服務',
-    },
+    }
 }
+
+// note
+/*
+get local storage
+    let value = window.localStorage["local"];
+set local storage
+    window.localStorage["local"] = value;
+get session
+    let value = window.sessionStorage["session"];
+set session
+    window.sessionStorage["session"] = value;
+
+*/

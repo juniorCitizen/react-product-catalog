@@ -1,2 +1,2 @@
 export * from './loginActionType'
-export * from './seriseActionType'
+export * from './seriesActionType'

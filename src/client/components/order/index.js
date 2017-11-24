@@ -7,16 +7,25 @@ export default class Order extends React.Component {
         super(props)
         this.state = {
             auth: false,
+            show: '',
         }
     }
 
+    show() {
+        this.setState({show: 'is-active'})
+    }
+
+    hide() {
+        this.setState({show: ''})
+    }
+
     render() {
-        const { auth } = this.state
+        const { auth, show } = this.state
         return(    
             <div>
                 <Nav tab="order" />
                 <div className="container" style={style.container}>
-                    <h1 className="title">
+                <h1 className="title">
                         This is Order!!!
                     </h1>
                 </div>

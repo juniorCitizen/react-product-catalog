@@ -22,7 +22,6 @@ module.exports = (() => {
     },
     paginationLinkHeader(20, 100),
     (req, res, next) => {
-      console.log(req.resJson)
       return db.Products
         .findAll(req.queryOptions)
         .then(data => {

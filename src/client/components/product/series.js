@@ -1,84 +1,79 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { login_user } from '../../actions'
-import { series_list } from '../../actions'
+import axios from 'axios'
+import config from '../../config'
+import Alert from '../../containers/modal/alert'
 
-class Series extends React.Component {
+const api = config.api
+
+export default class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
-            
-            series: {
-                0: {
-                    name: 'series 1',
-                    active: true,
-                    products: true,
-                    code: '',
-                    sub_list: {
-                        0: {
-                            name: 'series 1-1',
-                            active: true,
-                            sub_list: {},
-                        },
-                        1: {
-                            name: 'series 1-2',
-                            active: false,
-                        },
-                    },
-                },
-                1: {
-                    name: 'series 2',
-                    active: false,
-                    sub_list: {
-                        0: {
-                            name: 'series 2-1',
-                        },
-                    },
-                },
-                2: {
-                    name: 'series 3',
-                    active: false,
-                    sub_list: {
-                        0: {
-                            name: 'series 3-1',
-                        },
-                        1: {
-                            name: 'series 3-2',
-                        },
-                    },
-                }
-            }
+            series: [],
+            alertShow: false,
+            alertMsg: '',
         }
     }
 
     componentDidMount() {
-            
+        this.getSeries()
     }
 
-    selectSeries(code) {
-        alert(code)
+    selectSeries(id) {
+        let series = this.state.series
+        series = series.map((item) => {
+            let setItem = item
+            setItem.active = item.id === id
+            return setItem
+        })
+        this.setState({
+            series: series,
+            alertShow: true,
+            alertMsg: '您選擇了系列號' + id,
+        })
+    }
+
+    getSeries() {
+        const self = this
+        axios({
+            method: 'get',
+            url: api + 'series',
+            data: {},
+            headers: {
+                'x-access-token': window.localStorage["jwt-token"]
+            }
+        })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log(response.data)
+                self.setState({
+                    series: response.data.data
+                })
+            } else {
+                console.log(response.data)
+            }
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     render() {
-        const { auth, series } = this.state
-        const { series_list } = this.props
+        const { series, alertShow, alertMsg } = this.state
         return(          
             <div>
                 <aside className="menu">
                     <ul className="menu-list">
-                        {Object.keys(series).map((key) => (
-                            <li key={key}>
-                                <a className={series[key].active ? "is-active" : ""}>{series[key].name}</a>
-                                {series[key].active &&
+                        {series.map((item, index) => (
+                            <li key={index}>
+                                <a className={item.active ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
+                                {item.sub_list &&
                                     <ul>
-                                        {Object.keys(series[key].sub_list).map((sub_key) => (
-                                            <li key={sub_key}>
-                                            <a className={series[key].sub_list[sub_key].active ? "is-active" : ""}
-                                                onClick={this.selectSeries.bind(this, series[key].sub_list[sub_key].name)}
+                                        {item.sub_list.map((item, index) => (
+                                            <li key={index}>
+                                            <a className={item.active ? "is-active" : ""}
+                                                onClick={this.selectSeries.bind(this, item.id)}
                                             >
-                                                {series[key].sub_list[sub_key].name}</a>
+                                                {item.name}</a>
                                             </li>
                                         ))}
                                     </ul>
@@ -86,22 +81,13 @@ class Series extends React.Component {
                             </li>
                         ))}
                     </ul>
-              </aside>
+                </aside>
+                <Alert 
+                    show={alertShow}
+                    message={alertMsg} 
+                    click_ok={() => {this.setState({alertShow: false})}} 
+                />
             </div>
         )
     }
 }
-
-const style = {
-
-}
-
-function mapStateToProps(state) {
-	const { login, series } = state
-	return {
-        login,
-        series,
-	}
-}
-
-export default connect(mapStateToProps)(Series)

@@ -20,10 +20,20 @@ module.exports = {
   file,
   image,
   json,
-  // redirect: null, // not implemented
+  redirect,
   // stream: null, // not implemented
   template,
   error
+}
+
+function redirect (req, res, next) {
+  if (('resRedirect' in req) || (res.statusCode === 404)) {
+    return res
+      .status(res.statusCode || 301)
+      .redirect(req.resRedirect)
+  } else {
+    return next()
+  }
 }
 
 // not implemented yet
