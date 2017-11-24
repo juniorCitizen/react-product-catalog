@@ -4,7 +4,6 @@ import path from 'path'
 import Promise from 'bluebird'
 
 dotEnv.config()
-const ormVerbose = process.env.ORM_VERBOSE === 'true'
 const logging = require('../../../server/controllers/logging')
 
 module.exports = (Countries) => {
@@ -24,16 +23,7 @@ module.exports = (Countries) => {
       })
       return Promise.resolve()
     })
-    .then(() => {
-      return Promise.each(
-        countries.map(country => Countries.create(country)),
-        (country, index, length) => {
-          if (ormVerbose) {
-            logging.console(`進度: ${index + 1}/${length} - ${country.name} 國家資料已建立`)
-          }
-        }
-      )
-    })
+    .then(() => Countries.bulkCreate(countries))
     .then(logging.resolve('國家/國旗資料建立... 成功'))
     .catch(logging.reject('國家/國旗資料寫入失敗'))
 }
