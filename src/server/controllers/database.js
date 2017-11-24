@@ -59,6 +59,7 @@ function initialize (force = null) {
       db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Products.belongsToMany(db.Tags, injectOptions('productId', 'id', db.Labels))
       db.Tags.belongsToMany(db.Products, injectOptions('tagId', 'id', db.Labels))
+      db.Series.hasMany(db.Series, injectOptions('parentSeriesId', 'id'))
       // photo data relationships
       db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
       db.Series.hasOne(db.Photos, injectOptions('seriesId', 'id'))
