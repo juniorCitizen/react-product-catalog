@@ -20,7 +20,8 @@ module.exports = (Carousels) => {
                 try {
                   data = Buffer.from(piexif.remove(bufferedPhoto.toString('binary')), 'binary')
                 } catch (e) {
-                  logging.warning(`${photoFileName} does not have EXIF information attached`)
+                // if no EXIF data found in the image
+                // buffered data is written directly to the database
                   data = bufferedPhoto
                 }
                 return Carousels.create({
@@ -42,5 +43,4 @@ module.exports = (Carousels) => {
     })
     .then(logging.resolve('批次 carousel 圖檔寫入... 成功'))
     .catch(logging.reject('批次 carousel 圖檔寫入... 失敗'))
-  // .catch(logging.reject('Carousel 圖檔寫入失敗'))
 }
