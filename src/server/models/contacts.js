@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('users', {
+  const Contacts = sequelize.define('contacts', {
     email: {
       type: DataTypes.STRING,
       primaryKey: true,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: true
     },
-    password: {
+    hashedPassword: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'user',
-      plural: 'users'
+      singular: 'contact',
+      plural: 'contacts'
     }
   })
-  return Users
+  return Contacts
 }

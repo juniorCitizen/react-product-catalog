@@ -11,7 +11,7 @@ module.exports = (() => {
     validatePasswordFormat,
     (req, res) => {
       let encryptedPassword = encryption.sha512(req.body.password, encryption.saltGen(16))
-      db.Users
+      db.Contacts
         .create({
           email: req.body.email.toLowerCase(),
           name: req.body.name,
@@ -20,7 +20,7 @@ module.exports = (() => {
           salt: encryptedPassword.salt,
           admin: false
         })
-        .then(() => { return db.Users.findById('loginId') })
+        .then(() => { return db.Contacts.findById('loginId') })
         .then((data) => {
           return routerResponse.json({ req, res, statusCode: 200, data })
         })

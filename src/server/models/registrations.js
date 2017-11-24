@@ -5,23 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: () => {
-        return uuidV4().toUpperCase()
-      },
+      defaultValue: () => uuidV4().toUpperCase(),
       validate: { isUUID: 4 }
-    },
-    company: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: { isEmail: true }
     },
     comments: {
       type: DataTypes.TEXT,
@@ -45,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     paranoid: false,
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    deletedAt: null
+    updatedAt: false,
+    deletedAt: false
   })
   return Registrations
 }

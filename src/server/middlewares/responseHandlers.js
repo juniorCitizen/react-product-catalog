@@ -133,7 +133,7 @@ function template (req, res, next) {
   if (!('resTemplate' in req)) return next()
   return res
     .status(res.statusCode || 200)
-    .type('appliction/html;charset=utf-8')
+    .type('text/html;charset=utf-8')
     .render(req.resTemplate.view, req.resTemplate.data || {})
 }
 

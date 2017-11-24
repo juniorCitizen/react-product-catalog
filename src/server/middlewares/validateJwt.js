@@ -22,14 +22,14 @@ module.exports = (req, res, next) => {
         return next(error)
       }
       // successfully decoded
-      return db.Users.findOne({
+      return db.Contacts.findOne({
         where: {
           email: decodedToken.email.toLowerCase(),
           loginId: decodedToken.loginId,
           admin: true
         }
-      }).then((user) => {
-        if (!user) {
+      }).then((contact) => {
+        if (!contact) {
           res.status(401)
           req.resJson = { message: 'Unauthorized Credentials' }
         }

@@ -16,21 +16,6 @@ const reSyncModels = require('./database/reSyncModels')
 
 const sequelize = new Sequelize(dbConfig)
 
-const dropSchemaSequence = [
-  'users',
-  'flags',
-  'offices',
-  'countries',
-  'interests',
-  'registrations',
-  'labels',
-  'tags',
-  'photos',
-  'products',
-  'series',
-  'carousels'
-]
-
 const db = {
   modelPath: process.env.NODE_ENV === 'development'
     ? path.resolve('./src/server/models')
@@ -49,49 +34,40 @@ function initialize (force = null) {
   return verifyConnection(db)
     .then(() => {
       if (force) {
-        return dropAllSchemas(db.sequelize, dropSchemaSequence)
+        return dropAllSchemas(db.sequelize, dbConfig.dropSchemaSequence)
       } else {
         return Promise.resolve()
       }
     })
-    .then(() => { return prepModels(db) })
+    .then(() => prepModels(db))
     .then(() => {
       registerModels(db)
       return syncModels(db, force)
     })
     .then(() => {
       logging.console('配置 ORM 系統關聯...')
+      // contact information relationships\
+      db.Countries.hasMany(db.Companies, injectOptions('countryId', 'id'))
+      db.Companies.belongsTo(db.Countries, injectOptions('countryId', 'id'))
+      db.Companies.hasMany(db.Contacts, injectOptions('companyId', 'id'))
+      db.Contacts.belongsTo(db.Companies, injectOptions('companyId', 'id'))
+      // contacts and product information relationships
+      db.Contacts.belongsToMany(db.Products, injectOptions('contactId', 'email', db.Registrations))
+      db.Products.belongsToMany(db.Contacts, injectOptions('productId', 'id', db.Registrations))
+      // product information relationships
       db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
-      db.Series.hasOne(db.Photos, injectOptions('seriesId', 'id'))
       db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
-      db.Products.hasMany(db.Photos, injectOptions('productId', 'id'))
-      db.Products.belongsToMany(db.Registrations, injectOptions(
-        'productId', 'id', db.Interests
-      ))
-      db.Products.belongsToMany(db.Tags, injectOptions(
-        'productId', 'id', db.Labels
-      ))
-      db.Photos.belongsTo(db.Products, injectOptions('productId', 'id'))
+      db.Products.belongsToMany(db.Tags, injectOptions('productId', 'id', db.Labels))
+      db.Tags.belongsToMany(db.Products, injectOptions('tagId', 'id', db.Labels))
+      db.Series.hasMany(db.Series, Object.assign({ as: 'childSeries' }, injectOptions('parentSeriesId', 'id')))
+      // photo data relationships
       db.Photos.belongsTo(db.Series, injectOptions('seriesId', 'id'))
-      db.Countries.hasMany(db.Registrations, injectOptions('countryId', 'id'))
-      db.Countries.hasMany(db.Offices, injectOptions('countryId', 'id'))
-      db.Countries.hasOne(db.Flags, injectOptions('id', 'id'))
-      db.Flags.belongsTo(db.Countries, injectOptions('id', 'id'))
-      db.Registrations.belongsTo(db.Countries, injectOptions('countryId', 'id'))
-      db.Registrations.belongsToMany(db.Products, injectOptions(
-        'registrationId', 'id', db.Interests
-      ))
-      db.Offices.belongsTo(db.Countries, injectOptions('countryId', 'id'))
-      db.Offices.hasMany(db.Users, injectOptions('officeId', 'id'))
-      db.Users.belongsTo(db.Offices, injectOptions('officeId', 'id'))
-      db.Tags.belongsToMany(db.Products, injectOptions(
-        'tagId', 'id', db.Labels
-      ))
+      db.Series.hasOne(db.Photos, injectOptions('seriesId', 'id'))
+      db.Products.hasMany(db.Photos, injectOptions('productId', 'id'))
+      db.Photos.belongsTo(db.Products, injectOptions('productId', 'id'))
       return reSyncModels(db, force)
     })
-    .then(() => {
-      return Promise.resolve('資料庫初始化... 成功')
-    })
+    .then(() => Promise.resolve('資料庫初始化... 成功'))
     .catch((error) => {
       logging.error(error, '資料庫初始化... 失敗')
       return Promise.reject(error)
@@ -106,8 +82,8 @@ function injectOptions (foreignKey, targetKey, throughModel = null, otherKey = n
   }, {
     foreignKey: foreignKey,
     targetKey: targetKey
-  }
-    , throughModel === null ? {} : { through: throughModel }
-    , otherKey === null ? {} : { otherKey: otherKey }
+  },
+  throughModel === null ? {} : { through: throughModel },
+  otherKey === null ? {} : { otherKey: otherKey }
   )
 }
