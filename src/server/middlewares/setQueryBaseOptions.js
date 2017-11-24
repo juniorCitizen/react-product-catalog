@@ -1,7 +1,10 @@
 const baseOptions = {
-  series: { order: ['order'] },
+  countries: {
+    attributes: { exclude: ['flagSvg'] },
+    order: ['region', 'name']
+  },
   products: { order: ['code'] },
-  countries: { order: ['name'] }
+  series: { order: ['order'] }
 }
 
 module.exports = (modelReference) => {
