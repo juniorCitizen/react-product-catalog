@@ -4,7 +4,7 @@ const modelReference = 'products'
 
 const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')(modelReference)
 const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')(modelReference)
-const paginationLinkHeader = require('../../middlewares/paginationLinkHeader')
+const paginationProcessing = require('../../middlewares/paginationProcessing')
 
 module.exports = (() => {
   return [
@@ -20,7 +20,7 @@ module.exports = (() => {
         })
         .catch(error => next(error))
     },
-    paginationLinkHeader(20, 100),
+    paginationProcessing(20, 100),
     (req, res, next) => {
       return db.Products
         .findAll(req.queryOptions)

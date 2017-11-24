@@ -5,21 +5,21 @@ const logging = require('../../server/controllers/logging')
 module.exports = () => {
   return (done) => {
     return del(['./**/*.log'], { dryRun: true })
+      // report a list of files being removed
       .then((candidates) => {
-        logging.warning('以下記錄檔即將被刪除')
-        logging.warning(candidates.join('\n'))
+        if (candidates.length === 0) {
+          logging.warning('未發現記錄檔案')
+        } else {
+          logging.warning('以下記錄檔即將被刪除')
+          logging.warning(candidates.join('\n'))
+        }
         return Promise.resolve(candidates)
       })
-      .then((candidates) => {
-        return del(candidates) // del is chosen over fs-extra.remove() due to the ability to work with globs
-      })
-      .then(() => {
-        logging.console('記錄檔清除... 完成')
-        return done()
-      })
-      .catch((error) => {
-        logging.error(error, '記錄檔清除... 失敗')
-        return done(error)
-      })
+      // del is chosen over fs-extra.remove() due to the ability to work with globs
+      .then(candidates => del(candidates))
+      .then(logging.resolve('記錄檔清除作業... 完成'))
+      .then(() => done())
+      .catch(logging.reject('記錄檔清除作業... 失敗'))
+      .catch(done)
   }
 }

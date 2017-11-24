@@ -20,6 +20,9 @@ const detailedOptions = {
       ]
     }
   },
+  countries: () => {
+    return { order: ['region', 'name'] }
+  },
   products: () => {
     return {
       include: [

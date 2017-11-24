@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     color: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     name: {

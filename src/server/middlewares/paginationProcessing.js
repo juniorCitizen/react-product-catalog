@@ -2,34 +2,26 @@ const formatLinkHeader = require('format-link-header')
 
 const eVars = require('../config/eVars')
 
-module.exports = (perPageDefault = 5, perPageCeiling = 20) => {
-  return async (req, res, next) => {
+module.exports = () => {
+  return (req, res, next) => {
     let query = req.query
+
+    // check if pagination is required
+    if (!('per_page' in query) || !('page' in query)) return next()
+
     // get total record count of dataset
     let recordCount = req.dataSourceRecordCount
     // determine per_page value
-    let perPage = 'per_page' in query // if per_page is specified
-      ? perPageCeiling <= 0
-        ? parseInt(query.per_page) // no ceiling is specified, set to user specified value
-        : parseInt(query.per_page) <= perPageCeiling
-          ? parseInt(query.per_page) // set to specified if within ceiling
-          : perPageCeiling // set to ceiling if over ceiling
-      : perPageDefault // use default if perPage not specified
+    let perPage = parseInt(req.query.per_page)
     // calculate last page
     let lastPage = Math.ceil(recordCount / perPage)
     // determin current page
-    let currentPage = 'page' in query
-      ? parseInt(query.page) < 1 // if client specifies
-        ? 1 // set to one, if less than one
-        : parseInt(query.page) > lastPage
-          ? lastPage // set to lastPage if too big
-          : parseInt(query.page) // set to client specified
-      : 1 // set to one, if not found
+    let currentPage = parseInt(req.query.page)
 
     let baseStructure = {
       page: null,
       per_page: null,
-      url: `${eVars.PROTOCOL}://${eVars.DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}/api${req.path}`
+      url: `${eVars.APP_ROUTE}/api${req.path}`
     }
 
     if (lastPage === 1) return next() // exit middleware if there's only one page
