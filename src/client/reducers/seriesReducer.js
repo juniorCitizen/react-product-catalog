@@ -1,17 +1,17 @@
 import {
-    SERIES,
+    SERIES_CODE,
 } from '../constants/actionType'
 import axios from 'axios'
 
 const initalState = {
-    series_list: [],
+    code: null,
 }
 
 export default function series(state = initalState, action) {
     switch (action.type) {
-        case SERIES:
+        case SERIES_CODE:
             return Object.assign({}, state, {
-                series_list: action.series_list
+                code: action.code
             })
         default:
             return state

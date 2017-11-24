@@ -1,11 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+import { set_series_code } from '../../actions'
+import { connect } from 'react-redux'
 import config from '../../config'
-import Alert from '../../containers/modal/alert'
 
 const api = config.api
 
-export default class Series extends React.Component {
+class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,6 +21,8 @@ export default class Series extends React.Component {
     }
 
     selectSeries(id) {
+        const { dispatch } = this.props;
+        dispatch(set_series_code(id))
         let series = this.state.series
         series = series.map((item) => {
             let setItem = item
@@ -28,8 +31,6 @@ export default class Series extends React.Component {
         })
         this.setState({
             series: series,
-            alertShow: true,
-            alertMsg: '您選擇了系列號' + id,
         })
     }
 
@@ -82,12 +83,15 @@ export default class Series extends React.Component {
                         ))}
                     </ul>
                 </aside>
-                <Alert 
-                    show={alertShow}
-                    message={alertMsg} 
-                    click_ok={() => {this.setState({alertShow: false})}} 
-                />
             </div>
         )
     }
 }
+function mapStateToProps(state) {
+	const { series } = state
+	return {
+        series
+	}
+}
+
+export default connect(mapStateToProps)(Series)
