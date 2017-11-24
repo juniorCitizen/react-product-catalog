@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import config from '../../config'
 import { connect } from 'react-redux'
-import config from '../../config'
 
 const api = config.api
 
