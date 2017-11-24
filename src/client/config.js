@@ -1,4 +1,5 @@
 export default {
+    server: 'http://localhost:9004',
     contact: {
         name: '秀田醫療器材有限公司',
         info: {
@@ -9,5 +10,5 @@ export default {
             
         },
         slogan: '醫療專業 貼心服務',
-    }
+    },
 }
