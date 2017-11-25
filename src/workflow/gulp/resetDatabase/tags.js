@@ -10,7 +10,8 @@ module.exports = (Tags) => {
     tags.push({
       id: index,
       name: name,
-      color: faker.random.arrayElement(colors)
+      color: faker.random.arrayElement(colors),
+      active: true
     })
   })
   return Tags

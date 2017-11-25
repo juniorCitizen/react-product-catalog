@@ -39,7 +39,7 @@ module.exports = (Carousels) => {
           (record, index, length) => {
             logging.warning(`carousel 檔案: ${record.get('originalName')} 進度: ${index + 1}/${length}`)
           })
-        .then(Promise.resolve)
+        .then(() => Promise.resolve())
     })
     .then(logging.resolve('批次 carousel 圖檔寫入... 成功'))
     .catch(logging.reject('批次 carousel 圖檔寫入... 失敗'))
