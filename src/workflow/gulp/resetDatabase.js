@@ -62,17 +62,17 @@ module.exports = () => {
             .then(() => countries(db.Countries))
             .then(() => companies(db.Companies, db.Contacts))
             .then(() => series(db.Series))
-            // .then(seriesIdList => products(db.Products, seriesIdList))
-            // .then(() => photos(db.Photos, db.Products, db.Series))
-            // .then(() => tags(db.Tags))
-            // .then(() => labels(db.Products, db.Tags))
-            // .then(() => registrations(
-            //   db.Countries,
-            //   db.Companies,
-            //   db.Contacts,
-            //   db.Products,
-            //   db.Registrations
-            // ))
+            .then(() => products(db.Products, db.Series))
+            .then(() => photos(db.Photos, db.Products, db.Series))
+            .then(() => tags(db.Tags))
+            .then(() => labels(db.Products, db.Tags))
+            .then(() => registrations(
+              db.Countries,
+              db.Companies,
+              db.Contacts,
+              db.Products,
+              db.Registrations
+            ))
             .then(logging.resolve('資料庫重設，並已完成預設資料載入...'))
             .catch(logging.reject('預設資料載入失敗...'))
         }

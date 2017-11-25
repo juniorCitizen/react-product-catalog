@@ -3,7 +3,7 @@ const uuidV4 = require('uuid/v4')
 
 const logging = require('../../../server/controllers/logging')
 
-const LEVEL_ENTRY_COUNT = [10, 10, 10]
+const LEVEL_ENTRY_COUNT = [2, 2, 2]
 
 let menuRecords = []
 
@@ -67,55 +67,5 @@ module.exports = (Series) => {
   return Series
     .bulkCreate(menuRecords) // create first level menu
     .then(logging.resolve('寫入產品類別/系列資料... 成功'))
-    // example to get menu trees dynamically
-    .then(() => Series.max('menuLevel'))
-    .then(maxMenuLevel => {
-      // recursive function to construct nested includeOptions
-      function setupIncludeOption (key, parent, child, counter, ceiling) {
-        parent[key] = Object.assign({}, child)
-        if (counter < (ceiling - 1)) {
-          if (counter === (ceiling - 2)) delete child[key]
-          parent = setupIncludeOption(key, parent[key], child, counter + 1, ceiling)
-        } else {
-          return parent
-        }
-      }
-      // set base option
-      let includeOption = { include: {} }
-      // run recursive function on dynamic menu level
-      setupIncludeOption(
-        'include',
-        includeOption,
-        {
-          model: Series,
-          as: 'childSeries',
-          include: {}
-        },
-        0,
-        maxMenuLevel)
-      let orderOption = ['order']
-      for (let counter = 0; counter < maxMenuLevel; counter++) {
-        orderOption.push(['order'])
-        for (let counter2 = 0; counter2 <= counter; counter2++) {
-          orderOption[counter + 1].splice(0, 0, { model: Series, as: 'childSeries' })
-        }
-      }
-      return Promise.resolve(Object.assign(
-        {},
-        includeOption,
-        { where: { menuLevel: 0 } },
-        orderOption)
-      )
-    })
-    .then((options) => Series.findAll(options))
-    .then((data) => {
-      console.log(data[0].dataValues)
-      console.log(data[0].childSeries[0].dataValues)
-      console.log(data[0].childSeries[0].childSeries[0].dataValues)
-      return Promise.resolve()
-    })
-    .then(() => Series.findAll())
-    .map(series => series.id)
-    .then((seriesIdList) => Promise.resolve(seriesIdList))
     .catch(logging.reject('寫入產品類別/系列資料... 失敗'))
 }
