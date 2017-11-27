@@ -1,17 +1,25 @@
+const uuidV4 = require('uuid/v4')
+
 module.exports = (sequelize, DataTypes) => {
   const Contacts = sequelize.define('contacts', {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: () => uuidV4().toUpperCase(),
+      validate: { isUUID: 4 }
+    },
     email: {
       type: DataTypes.STRING,
-      primaryKey: true,
+      unique: true,
+      allowNull: false,
       validate: { isEmail: true }
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    loginId: {
+    mobile: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: true
     },
     hashedPassword: {
@@ -26,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   }, {
     name: {

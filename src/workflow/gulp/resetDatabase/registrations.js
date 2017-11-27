@@ -39,7 +39,6 @@ module.exports = (Countries, Companies, Contacts, Products, Registrations) => {
         contacts.push({
           email: faker.internet.email().toLowerCase(),
           name: faker.name.firstName(),
-          loginId: 'fake' + counter.toString(),
           hash: encryptedPassword.passwordHash,
           salt: encryptedPassword.salt,
           admin: false,
@@ -49,23 +48,21 @@ module.exports = (Countries, Companies, Contacts, Products, Registrations) => {
       return Companies
         .bulkCreate(companies)
         .then(() => Contacts.bulkCreate(contacts))
-        .then(() => Promise.resolve(contacts))
     })
-    .map(contact => contact.email)
-    .then(contactEmails => {
+    .map(contact => contact.id)
+    .then(contactIdList => {
       return Products
         .findAll()
         .map(product => product.id)
         .then(productIds => {
           let registrations = []
-          for (let counter = 0; counter < contactEmails.length; counter++) {
+          for (let counter = 0; counter < contactIdList.length; counter++) {
             shuffleArray(productIds)
             for (let counter2 = 0; counter2 < INTERESTED_PRODUCT_COUNT; counter2++) {
-              let addTag = (Math.random() < 0.2)
-              if (addTag) {
+              if (Math.random() < 0.2) {
                 registrations.push({
                   comments: faker.lorem.paragraph(),
-                  contactId: contactEmails[counter],
+                  contactId: contactIdList[counter],
                   productId: productIds[counter2],
                   notified: true,
                   contacted: true

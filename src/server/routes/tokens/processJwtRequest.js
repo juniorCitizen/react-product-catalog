@@ -1,16 +1,22 @@
 const jwt = require('jsonwebtoken')
 
-const eVars = require('../../config/eVars')
-
 const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
+const eVars = require('../../config/eVars')
 
-module.exports = [loginInfoPresence, botPrevention, accountDiscovery, checkPassword]
+const validatePasswordFormat = require('../../middlewares/validatePasswordFormat')
+
+module.exports = [
+  loginInfoPresence,
+  validatePasswordFormat,
+  botPrevention,
+  accountDiscovery,
+  checkPassword
+]
 
 function loginInfoPresence (req, res, next) {
   if (
     !('email' in req.body) ||
-    !('loginId' in req.body) ||
     !('password' in req.body) ||
     !('botPrevention' in req.body)
   ) {
@@ -31,10 +37,7 @@ function botPrevention (req, res, next) {
 function accountDiscovery (req, res, next) {
   // find the account
   return db.Contacts.findOne({
-    where: {
-      email: req.body.email.toLowerCase(),
-      loginId: req.body.loginId
-    }
+    where: { email: req.body.email.toLowerCase() }
   }).then(contact => {
     if (!contact) { // account isn't found
       res.status(401)
@@ -56,9 +59,9 @@ function checkPassword (req, res, next) {
   if (hashedPasswordToCheck === req.accountData.hashedPassword) {
     // hash checks out
     let token = jwt.sign({
+      id: req.accountData.id,
       name: req.accountData.name,
       email: req.accountData.email,
-      loginId: req.accountData.loginId,
       admin: req.accountData.admin
     }, eVars.PASS_PHRASE, { expiresIn: '24h' })
     req.resJson = {
