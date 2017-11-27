@@ -26,7 +26,7 @@ class Block extends React.Component {
         this.setState({hot_list: []})
     }
 
-    getPRoductList(code) {
+    getProductList(code) {
         console.log('series code:' + code)
         if (code === null) {
             //this.getHotList()
@@ -62,7 +62,7 @@ class Block extends React.Component {
 
     render() {
         const { series } = this.props
-        this.getPRoductList(series.code)
+        //this.getProductList(series.code)
         const { list, hot_list, new_list } = this.state 
         var hot = (cou) => {
             let arr = []
@@ -83,9 +83,11 @@ class Block extends React.Component {
         return(          
             <div>
                 {series.code === null ? 'no select' : series.code}
-                <div className="columns is-multiline">
-                    {hot(10)}
-                </div>
+                {series.code && 
+                    <div className="columns is-multiline">
+                        {hot(10)}
+                    </div>
+                }
             </div>
         )
     }
