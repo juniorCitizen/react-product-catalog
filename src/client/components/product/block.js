@@ -30,11 +30,7 @@ class Block extends React.Component {
         console.log('series code:' + code)
         if (code === null) {
             //this.getHotList()
-<<<<<<< HEAD
-            //this.getNewList()
-=======
             this.getNewList()
->>>>>>> eefec74f3721c9874b6356f0684b472296df0ab7
             return
         }
         return
