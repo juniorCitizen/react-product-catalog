@@ -50,7 +50,8 @@ module.exports = (Companies, Contacts) => {
   }, {
     email: 'cathy.liu@gentry-way.com.tw',
     name: 'Cathy Liu',
-    companyId: taiwanOfficeId
+    companyId: taiwanOfficeId,
+    loginId: 'cathy'
   }, {
     email: 'candy.wu@gentry-way.com.tw',
     name: 'Candy Wu',
@@ -62,7 +63,8 @@ module.exports = (Companies, Contacts) => {
   }, {
     email: 'altecqc@msn.com',
     name: 'Johnson Wu',
-    companyId: chinaOfficeId
+    companyId: chinaOfficeId,
+    loginId: 'johnson'
   }]
   contacts.forEach(contact => {
     // generate and encrypt a password for contacts with loginId's

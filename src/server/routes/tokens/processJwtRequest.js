@@ -15,7 +15,7 @@ function loginInfoPresence (req, res, next) {
     !('botPrevention' in req.body)
   ) {
     res.status(400)
-    let error = new Error('Login info is incomplete')
+    let error = new Error('incomplete login information')
     return next(error)
   }
   return next()
@@ -41,12 +41,6 @@ function accountDiscovery (req, res, next) {
       let error = new Error('Unauthorized')
       return next(error)
     }
-    if (contact.admin === false) {
-      // account does not have admin status
-      res.status(401)
-      let error = new Error('Forbidden')
-      return next(error)
-    }
     req.accountData = Object.assign({}, contact.dataValues)
     next()
     return Promise.resolve()
@@ -54,7 +48,6 @@ function accountDiscovery (req, res, next) {
 }
 
 function checkPassword (req, res, next) {
-  if (res.statusCode >= 400) return next()
   // hash the submitted password against the salt string
   let hashedPasswordToCheck = encryption
     .sha512(req.body.password, req.accountData.salt)
@@ -63,12 +56,14 @@ function checkPassword (req, res, next) {
   if (hashedPasswordToCheck === req.accountData.hashedPassword) {
     // hash checks out
     let token = jwt.sign({
-      email: req.body.email,
-      loginId: req.body.loginId
+      name: req.accountData.name,
+      email: req.accountData.email,
+      loginId: req.accountData.loginId,
+      admin: req.accountData.admin
     }, eVars.PASS_PHRASE, { expiresIn: '24h' })
     req.resJson = {
       data: token,
-      message: 'token is supplied for 24 hours'
+      message: `account token with ${(req.accountData.admin) ? 'admin' : 'user'} privilege is supplied for 24 hours`
     }
     return next()
   } else {
