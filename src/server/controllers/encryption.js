@@ -17,6 +17,6 @@ function sha512 (password, salt) {
   let value = hash.digest('hex')
   return {
     salt: salt,
-    passwordHash: value
+    hashedPassword: value
   }
 }

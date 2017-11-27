@@ -9,10 +9,7 @@ module.exports = (db, force = null) => {
     db.syncOps.push(
       db[modelName]
         .sync(force ? { force: true } : { force: false })
-        .catch((error) => {
-          logging.error(error)
-          return Promise.reject(error)
-        })
+        .catch(logging.reject)
     )
   })
   return Promise
@@ -25,7 +22,5 @@ module.exports = (db, force = null) => {
       logging.console(`資料庫${force ? '強制刷新並' : ''}同步... 完成`)
       return Promise.resolve()
     })
-    .catch((error) => {
-      logging.error(error, '資料庫同步... 失敗')
-    })
+    .catch(logging.reject('資料庫同步... 失敗'))
 }

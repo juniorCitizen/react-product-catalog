@@ -30,7 +30,11 @@ class Block extends React.Component {
         console.log('series code:' + code)
         if (code === null) {
             //this.getHotList()
+<<<<<<< HEAD
             //this.getNewList()
+=======
+            this.getNewList()
+>>>>>>> eefec74f3721c9874b6356f0684b472296df0ab7
             return
         }
         return
@@ -69,9 +73,12 @@ class Block extends React.Component {
             for (var i = 0; i < cou; i++) {
                 arr.push(
                     <div className="column is-2" key={i} style={style.images}>
-                        <figure className="image is-128x128">
-                            <img src="https://bulma.io/images/placeholders/256x256.png"/>
-                        </figure>
+                        <div className="v-image-box">
+                            <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png"/>
+                            <div className="v-image-label">
+                                HI~~~~
+                            </div>
+                        </div>
                     </div>
                 );
             }
@@ -90,10 +97,10 @@ class Block extends React.Component {
 
 const style = {
     images: {
-        margin: '10px',
+        margin: '3px',
         padding: '0',
-        height: '128px',
-        width: '128px',
+        height: '256px',
+        width: '256px',
     }
 }
 

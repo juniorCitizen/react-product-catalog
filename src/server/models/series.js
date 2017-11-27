@@ -1,25 +1,30 @@
+const uuidV4 = require('uuid/v4')
+
 module.exports = (sequelize, DataTypes) => {
   const Series = sequelize.define('series', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      validate: {
-        min: 0
-      }
+      defaultValue: () => uuidV4().toUpperCase(),
+      validate: { isUUID: 4 }
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     order: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    publish: {
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    menuLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     name: {

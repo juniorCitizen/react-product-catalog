@@ -5,14 +5,7 @@ const eVars = require('../../config/eVars')
 const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
 
-module.exports = (() => {
-  return [
-    loginInfoPresence,
-    botPrevention,
-    accountDiscovery,
-    checkPassword
-  ]
-})()
+module.exports = [loginInfoPresence, botPrevention, accountDiscovery, checkPassword]
 
 function loginInfoPresence (req, res, next) {
   if (
@@ -37,24 +30,24 @@ function botPrevention (req, res, next) {
 
 function accountDiscovery (req, res, next) {
   // find the account
-  return db.Users.findOne({
+  return db.Contacts.findOne({
     where: {
       email: req.body.email.toLowerCase(),
       loginId: req.body.loginId
     }
-  }).then(user => {
-    if (!user) { // account isn't found
+  }).then(contact => {
+    if (!contact) { // account isn't found
       res.status(401)
       let error = new Error('Unauthorized')
       return next(error)
     }
-    if (user.admin === false) {
+    if (contact.admin === false) {
       // account does not have admin status
       res.status(401)
       let error = new Error('Forbidden')
       return next(error)
     }
-    req.accountData = Object.assign({}, user.dataValues)
+    req.accountData = Object.assign({}, contact.dataValues)
     next()
     return Promise.resolve()
   }).catch(error => next(error))
@@ -63,11 +56,11 @@ function accountDiscovery (req, res, next) {
 function checkPassword (req, res, next) {
   if (res.statusCode >= 400) return next()
   // hash the submitted password against the salt string
-  let currentHash = encryption
+  let hashedPasswordToCheck = encryption
     .sha512(req.body.password, req.accountData.salt)
-    .passwordHash
+    .hashedPassword
   // compare with the stored hash
-  if (currentHash === req.accountData.password) {
+  if (hashedPasswordToCheck === req.accountData.hashedPassword) {
     // hash checks out
     let token = jwt.sign({
       email: req.body.email,

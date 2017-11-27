@@ -11,18 +11,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    primary: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
     originalName: {
       type: DataTypes.STRING,
       allowNull: false
     },
     encoding: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     mimeType: {
       type: DataTypes.STRING,
@@ -35,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     data: {
       type: DataTypes.BLOB,
       allowNull: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     name: {

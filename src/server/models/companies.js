@@ -1,8 +1,12 @@
+const uuidV4 = require('uuid/v4')
+
 module.exports = (sequelize, DataTypes) => {
-  const Offices = sequelize.define('offices', {
+  const Companies = sequelize.define('companies', {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: () => uuidV4().toUpperCase(),
+      validate: { isUUID: 4 }
     },
     title: {
       type: DataTypes.STRING,
@@ -22,13 +26,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     website: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
+    },
+    host: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     name: {
-      singular: 'office',
-      plural: 'offices'
+      singular: 'company',
+      plural: 'companies'
     }
   })
-  return Offices
+  return Companies
 }
