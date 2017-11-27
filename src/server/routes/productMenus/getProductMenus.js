@@ -113,7 +113,7 @@ function constructTagMenu (seriesTreeNode) {
       }
     })
   })
-  seriesTreeNode.tagMenu = []
+  seriesTreeNode.tagMenus = []
   return Promise
     .each(tagList, tag => {
       return db.Tags
@@ -130,7 +130,7 @@ function constructTagMenu (seriesTreeNode) {
           ]
         })
         .then(tag => {
-          seriesTreeNode.tagMenu.push(tag[0])
+          seriesTreeNode.tagMenus.push(tag[0])
           return Promise.resolve()
         })
     })
