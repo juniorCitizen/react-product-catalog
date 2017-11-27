@@ -8,9 +8,20 @@ const logging = require('../controllers/logging')
 // (any other string would default to 'admin')
 // on 'user' - if account found next()
 // on 'admin' - if account found and 'admin' === true next()
+// on 'self' - used on /api/contacts/:contactId,
+//    - decoded payload must be the same as :contactId
+//    - used to restrict user to access endpoints with its own id
+// on 'none' - skip validation process on purpose
 
 module.exports = (restrictionLevel = 'admin') => {
   return (req, res, next) => {
+    if (restrictionLevel === 'none') return next()
+    // error checking
+    if (['admin', 'self', 'user'].indexOf(restrictionLevel) === -1) {
+      res.status(500)
+      let error = new Error(`Restriction level ${restrictionLevel} is not valid`)
+      return next(error)
+    }
     if (!eVars.ENFORCE_VALIDATION) {
       logging.warning('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!')
       return next()
@@ -28,16 +39,31 @@ module.exports = (restrictionLevel = 'admin') => {
           return next(error)
         }
         // token is successfully decoded
+        if (
+          (restrictionLevel === 'self') &&
+          (
+            !('contactId' in req.params) ||
+            (decodedToken.id !== req.params.contactId)
+          )
+        ) {
+          // route must have a req.params and match token payload id
+          res.status(400)
+          let error = new Error('id presented in token payload does not match route')
+          return next(error)
+        }
         return db.Contacts.findOne({
-          where: (restrictionLevel !== 'user')
-            ? { // find admin account
+          where: (restrictionLevel !== 'admin')
+            ? (restrictionLevel === 'self')
+              ? { // find admin and user account with matching id and email
+                email: decodedToken.email.toLowerCase(),
+                id: decodedToken.id
+              }
+              : { // find admin and user account with just matching email
+                email: decodedToken.email.toLowerCase()
+              }
+            : { // find admin account only
               email: decodedToken.email.toLowerCase(),
-              loginId: decodedToken.loginId,
               admin: true
-            }
-            : { // find admin and user account
-              email: decodedToken.email.toLowerCase(),
-              loginId: decodedToken.loginId
             }
         }).then(contact => {
           if (!contact) { // nothing found

@@ -12,11 +12,6 @@ const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
 
-// //////////////////////////////////////////////////////
-// API router specific pre-routing processing middlewares
-// //////////////////////////////////////////////////////
-API_ROUTER.use(require('../middlewares/routingRecorder/init'))
-
 // /////////////////////////////////////////////////////
 // Utilities
 // /////////////////////////////////////////////////////
@@ -324,11 +319,11 @@ API_ROUTER.route('/tokens')
   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
-// Contacts
+// Company and contact information
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/contacts')
   .get(notImplemented) // get contacts **
-  .post(...require('./contacts/addContact')) // add a contact to the system
+  .post(...require('./contacts/addContact')) // add a contact
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
@@ -336,7 +331,7 @@ API_ROUTER.route('/contacts/:contactId')
   .get(notImplemented) // get contact by id **
   .post(notImplemented)
   .put(notImplemented)
-  .patch(notImplemented)
+  .patch(notImplemented) // update contact
   .delete(notImplemented) // delete contact by id **
 API_ROUTER.route('/contacts/:contactId/companies/:companyId')
   .get(notImplemented)
@@ -366,7 +361,6 @@ API_ROUTER.route('/contacts/:contactId/name/:name')
 // ///////////////////////////////////////////////////////
 // API router specific post-routing processing middlewares
 // ///////////////////////////////////////////////////////
-API_ROUTER.use(require('../middlewares/routingRecorder/reporting'))
 API_ROUTER.use(responseHandlers.file)
 API_ROUTER.use(responseHandlers.image)
 API_ROUTER.use(responseHandlers.json)
