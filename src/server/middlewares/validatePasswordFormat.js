@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  if (!req.body.hasOwnProperty('password')) {
+  if (!('password' in req.body)) {
     res.status(401)
     let error = new Error('Password not found')
     return next(error)

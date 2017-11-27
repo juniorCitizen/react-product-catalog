@@ -64,11 +64,11 @@ module.exports = (Companies, Contacts) => {
     name: 'Johnson Wu',
     companyId: chinaOfficeId
   }]
-  contacts.forEach((contact) => {
+  contacts.forEach(contact => {
     // generate and encrypt a password for contacts with loginId's
-    if (contact.hasOwnProperty('loginId')) {
+    if ('loginId' in contact) {
       let encryptedPassword = encryption.sha512(
-        (contact.hasOwnProperty('password') && (contact.password !== null))
+        (('password' in contact) && (contact.password !== null))
           ? contact.password
           : process.env.DEFAULT_CONTACT_PASSWORD,
         encryption.saltGen(16)
