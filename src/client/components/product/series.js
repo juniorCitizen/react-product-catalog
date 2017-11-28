@@ -31,12 +31,12 @@ class Series extends React.Component {
     setSeriesActive(series, id) {
         series && series.map((item) => {
             item.selected = item.id === id
-            item.tagMenus && item.tagMenus.map((sub) => {
+            item.childSeries && item.childSeries.map((sub) => {
                 if (sub.id === id) {
                     item.selected = true
                 }
             })
-            item.tagMenus = this.setSeriesActive(item.tagMenus, id)
+            item.childSeries = this.setSeriesActive(item.childSeries, id)
         })
         return series
     }
@@ -74,9 +74,9 @@ class Series extends React.Component {
                         {series.map((item, index) => (
                             <li key={index}>
                                 <a className={item.selected ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
-                                {item.tagMenus && item.selected &&
+                                {item.childSeries && item.selected &&
                                     <ul>
-                                        {item.tagMenus.map((item, index) => (
+                                        {item.childSeries.map((item, index) => (
                                             <li key={index}>
                                             <a className={item.selected ? "is-active" : ""}
                                                 onClick={this.selectSeries.bind(this, item.id)}

@@ -1,16 +1,16 @@
 import {
-    SERIES_CODE,
+    UPDATE_ORDER,
 } from '../constants/actionType'
 
 const initalState = {
-    code: null,
+    order: null,
 }
 
-export default function series(state = initalState, action) {
+export default function order(state = initalState, action) {
     switch (action.type) {
-        case SERIES_CODE:
+        case UPDATE_ORDER:
             return Object.assign({}, state, {
-                code: action.code
+                order: action.order
             })
         default:
             return state

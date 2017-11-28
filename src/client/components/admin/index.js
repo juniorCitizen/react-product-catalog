@@ -68,6 +68,7 @@ class Admin extends React.Component {
     render() {
         const { select, confirmShow, confirmMsg } = this.state
         const { login, match } = this.props
+        console.log(this.props)
         const url = match.url
         const auth = login.admin_info.auth
         return( 

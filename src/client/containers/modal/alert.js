@@ -23,7 +23,7 @@ export default class Alert extends React.Component {
         return(    
             <div className={"modal" + show}>
                 <div className="modal-background"></div>
-                <div className="modal-card">
+                <div className="modal-card modal-alert">
                     <header className="modal-card-head">
                         <p className="modal-card-title">
                             <span className={"icon is-medium has-text-" + iconType}>
