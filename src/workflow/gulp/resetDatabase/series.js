@@ -3,7 +3,7 @@ const uuidV4 = require('uuid/v4')
 
 const logging = require('../../../server/controllers/logging')
 
-const LEVEL_ENTRY_COUNT = [2, 2, 2]
+const LEVEL_ENTRY_COUNT = [3, 2]
 
 let menuRecords = []
 

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import config from '../../config'
+import Detail from './detail'
 
 const api = config.api
 
@@ -15,6 +16,12 @@ class Block extends React.Component {
             new_list: [],
             current: 0,
             total: 0,
+            show_detail: false,
+            product_info: {
+                name: '',
+                specification: '',
+                description: '',
+            },
         }
     }
 
@@ -60,19 +67,27 @@ class Block extends React.Component {
         })
     }
 
+    showDetail(item) {
+        console.log(item)
+        this.setState({
+            show_detail: true,
+            product_info: item,
+        })
+    }
+
     render() {
-        const { series } = this.props
+        const { series, product } = this.props
         //this.getProductList(series.code)
-        const { list, hot_list, new_list } = this.state 
-        var hot = (cou) => {
+        const { list, hot_list, new_list, show_detail, product_info } = this.state 
+        var prod_list = (data, event) => {
             let arr = []
-            for (var i = 0; i < cou; i++) {
+            for (var i = 0; i < data.length; i++) {
                 arr.push(
                     <div className="column is-2" key={i} style={style.images}>
                         <div className="v-image-box">
                             <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png"/>
                             <div className="v-image-label">
-                                HI~~~~
+                                product descirption
                             </div>
                         </div>
                     </div>
@@ -82,12 +97,21 @@ class Block extends React.Component {
         }
         return(          
             <div>
-                {series.code === null ? 'no select' : series.code}
                 {series.code && 
                     <div className="columns is-multiline">
-                        {hot(10)}
+                        {product.products.map((item, index) => (
+                            <div className="column is-2" key={index} style={style.images}>
+                                <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
+                                    <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png"/>
+                                    <div className="v-image-label">
+                                        product descirption
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 }
+                <Detail show={show_detail} info={product_info}/>
             </div>
         )
     }
@@ -103,9 +127,10 @@ const style = {
 }
 
 function mapStateToProps(state) {
-	const { series } = state
+	const { series, product } = state
 	return {
-		series
+        series,
+        product,
 	}
 }
 

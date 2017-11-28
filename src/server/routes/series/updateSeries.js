@@ -23,7 +23,7 @@ module.exports = (() => {
             return db.Series
               .findAndCountAll(trxObj)
               .then((result) => {
-                if (!req.body.hasOwnProperty('order')) {
+                if (!('order' in req.body)) {
                   return Promise.resolve(originalPosition)
                 } else if (req.body.order > (result.count - 1)) {
                   return Promise.resolve(result.count)

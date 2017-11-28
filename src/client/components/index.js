@@ -5,6 +5,7 @@ import '../assets/bulma.scss'
 
 import Content from './content'
 import Product from './product'
+import Detail from './product/detail'
 import Login from './login'
 import Register from './register'
 import Order from './order'
@@ -28,6 +29,7 @@ class Main extends React.Component {
                 <div>            
                     <Logo />
                     <Route exact path="/" component={Product}/>
+                    <Route path="/product/detail/:id" component={Detail}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/contact" component={Contact}/>

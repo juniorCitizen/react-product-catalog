@@ -1,5 +1,10 @@
+const api = 'http://localhost:9004/reactProductCatalog/api/'
+
 export default {
-    api: 'http://localhost:9004/reactProductCatalog/api/',
+    api: api,
+    route: {
+        productMenu: api + '/productMenus',
+    },
     project: {
         name: 'reactProductCatalog',
     },

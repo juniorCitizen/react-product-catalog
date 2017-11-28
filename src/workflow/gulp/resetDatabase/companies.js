@@ -34,7 +34,7 @@ module.exports = (Companies, Contacts) => {
   let contacts = [{
     email: 'admin@nowhere.com',
     name: 'Administrator',
-    loginId: 'admin',
+    password: null,
     admin: true
   }, {
     email: 'gentry88@ms46.hinet.net',
@@ -44,8 +44,7 @@ module.exports = (Companies, Contacts) => {
     email: 'david.tsai@gentry-way.com.tw',
     name: 'David Tsai',
     companyId: taiwanOfficeId,
-    loginId: 'david',
-    password: 'test',
+    password: 'testtest',
     admin: true
   }, {
     email: 'cathy.liu@gentry-way.com.tw',
@@ -64,11 +63,11 @@ module.exports = (Companies, Contacts) => {
     name: 'Johnson Wu',
     companyId: chinaOfficeId
   }]
-  contacts.forEach((contact) => {
-    // generate and encrypt a password for contacts with loginId's
-    if (contact.hasOwnProperty('loginId')) {
+  contacts.forEach(contact => {
+    // generate and encrypt a password for contacts with a password property
+    if ('password' in contact) {
       let encryptedPassword = encryption.sha512(
-        (contact.hasOwnProperty('password') && (contact.password !== null))
+        (contact.password !== null)
           ? contact.password
           : process.env.DEFAULT_CONTACT_PASSWORD,
         encryption.saltGen(16)
