@@ -57,7 +57,7 @@ simple product catalog website and backend with product data, contact management
 
 ### products
 
-* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset  
+* **GET protocol://domain:port/sys_ref/api/products/count** - get total number of records in product dataset
 
 * **GET protocol://domain:port/sys_ref/api/products(?per_page=x&page=y&details)** - get product catalog with optional details and pagination
 
@@ -142,20 +142,6 @@ simple product catalog website and backend with product data, contact management
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-### tokens
-
-* **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
-
-  * request header: { "Content-Type": "application/json"}
-  * request body:
-
-        { // all fields are required
-          "email": "admin@nowhere.com",
-          "loginId": "admin",
-          "password": "0000",
-          "botPrevention": ""
-        }
-
 ### regions
 
 * **GET protocol://domain:port/sys_ref/api/regions** - get a list of world regions
@@ -190,17 +176,31 @@ simple product catalog website and backend with product data, contact management
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-### Login
+### tokens
 
-* **POST protocol://domain:port/sys_ref/api/login/user** 
+* **POST protocol://domain:port/sys_ref/api/tokens** - apply for jwt token to access data modification end points
+
   * request header: { "Content-Type": "application/json"}
   * request body:
 
-        { 
+        { // all fields are required
+          "email": "admin@nowhere.com",
+          "loginId": "admin",
+          "password": "0000",
+          "botPrevention": ""
+        }
+
+### Login
+
+* **POST protocol://domain:port/sys_ref/api/login/user**
+  * request header: { "Content-Type": "application/json"}
+  * request body:
+
+        {
           email: "example@example.com",
           password: "**********",
         }
-  
+
   * response data:
 
         {
@@ -214,15 +214,15 @@ simple product catalog website and backend with product data, contact management
           msg: "",
         }
 
-* **POST protocol://domain:port/sys_ref/api/login/admin** 
+* **POST protocol://domain:port/sys_ref/api/login/admin**
   * request header: { "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           account: "",
           password: "**********",
         }
-  
+
   * response data:
 
         {
@@ -240,7 +240,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
@@ -254,7 +254,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
@@ -268,7 +268,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...mMCexXfI",
         }
 
@@ -302,7 +302,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           name: "xxxx",
           parent: 0,
         }
@@ -318,7 +318,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           id: 1
           name: "xxxx",
           parent: 0,
@@ -385,7 +385,7 @@ simple product catalog website and backend with product data, contact management
           photo_id: "",
         }
 
-* **GET protocol://domain:port/sys_ref/api/product/hot** - get hot product list 
+* **GET protocol://domain:port/sys_ref/api/product/hot** - get hot product list
   * response data:
 
         {
@@ -404,7 +404,7 @@ simple product catalog website and backend with product data, contact management
 
 * **GET protocol://domain:port/sys_ref/api/product/new** - get new product list
   * response data:
-  
+
         {
           list: [
             {
@@ -423,7 +423,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           id: 0,
           code: "",
           name: "",
@@ -443,7 +443,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           id: 0,
           code: "",
           name: "",
@@ -474,7 +474,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           email: "",
           name: "",
           password: "",
@@ -499,7 +499,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           email: "",
           name: "",
           password: "",
@@ -518,7 +518,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           id: 0,
           name: "",
           password: "",
@@ -548,7 +548,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           account: "",
           name: "",
           password: "",
@@ -565,7 +565,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           id: 0,
           name: "",
           password: "",
@@ -594,7 +594,7 @@ simple product catalog website and backend with product data, contact management
   * request header: { "x-access-token": "jwt-token-string", "Content-Type": "application/json"}
   * request body:
 
-        { 
+        {
           user_id: 0,
           order_date: 0,
           remark: "",

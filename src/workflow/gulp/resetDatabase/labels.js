@@ -7,7 +7,7 @@ dotEnv.config()
 const logging = require('../../../server/controllers/logging')
 
 const TAG_COUNT_FLOOR = 2
-const TAG_COUNT_CEILING = 10
+const TAG_COUNT_CEILING = 3
 
 module.exports = (Products, Tags) => {
   return Promise
