@@ -4,8 +4,6 @@ import { set_series_code } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
-const api = config.api
-
 class Series extends React.Component {
     constructor(props) {
         super(props)
@@ -17,28 +15,37 @@ class Series extends React.Component {
     }
 
     componentDidMount() {
-        //this.getSeries()
+        this.getSeries()
     }
 
     selectSeries(id) {
         const { dispatch } = this.props;
         dispatch(set_series_code(id))
         let series = this.state.series
-        series = series.map((item) => {
-            let setItem = item
-            setItem.active = item.id === id
-            return setItem
-        })
+        series = this.setSeriesActive(series, id)
         this.setState({
             series: series,
         })
+    }
+
+    setSeriesActive(series, id) {
+        series && series.map((item) => {
+            item.selected = item.id === id
+            item.tagMenus && item.tagMenus.map((sub) => {
+                if (sub.id === id) {
+                    item.selected = true
+                }
+            })
+            item.tagMenus = this.setSeriesActive(item.tagMenus, id)
+        })
+        return series
     }
 
     getSeries() {
         const self = this
         axios({
             method: 'get',
-            url: api + 'series',
+            url: config.route.productMenu,
             data: {},
             headers: {
                 'x-access-token': window.localStorage["jwt-token"]
@@ -66,12 +73,12 @@ class Series extends React.Component {
                     <ul className="menu-list">
                         {series.map((item, index) => (
                             <li key={index}>
-                                <a className={item.active ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
-                                {item.sub_list &&
+                                <a className={item.selected ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
+                                {item.tagMenus && item.selected &&
                                     <ul>
-                                        {item.sub_list.map((item, index) => (
+                                        {item.tagMenus.map((item, index) => (
                                             <li key={index}>
-                                            <a className={item.active ? "is-active" : ""}
+                                            <a className={item.selected ? "is-active" : ""}
                                                 onClick={this.selectSeries.bind(this, item.id)}
                                             >
                                                 {item.name}</a>

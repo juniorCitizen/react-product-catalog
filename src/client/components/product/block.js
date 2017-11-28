@@ -82,7 +82,6 @@ class Block extends React.Component {
         }
         return(          
             <div>
-                {series.code === null ? 'no select' : series.code}
                 {series.code && 
                     <div className="columns is-multiline">
                         {hot(10)}
