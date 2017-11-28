@@ -4,68 +4,56 @@ const db = require('../controllers/database')
 const eVars = require('../config/eVars')
 const logging = require('../controllers/logging')
 
-// restrictionLevel could be 'admin' or 'user'
-// (any other string would default to 'admin')
-// on 'user' - if account found next()
-// on 'admin' - if account found and 'admin' === true next()
-// on 'self' - used on /api/contacts/:contactId,
-//    - decoded payload must be the same as :contactId
-//    - used to restrict user to access endpoints with its own id
-// on 'none' - skip validation process on purpose
+/*
+restrictionLevel is an object
+{ // parameters are all optional, defaults to general account comparison by email only
+  none: true/false, // skips validation entirely, used on routes that's openly accessable to public
+  admin: true/false, // account found by email lookup must has true as admin field value
+  user: true/false // matches token payload id to account id found by query email, also need to match req.params.contactId
+}
+*/
 
-module.exports = (restrictionLevel = 'admin') => {
+module.exports = ({ none = false, admin = false, user = false } = {}) => {
   return (req, res, next) => {
-    if (restrictionLevel === 'none') return next()
-    // error checking
-    if (['admin', 'self', 'user'].indexOf(restrictionLevel) === -1) {
-      res.status(500)
-      let error = new Error(`Restriction level ${restrictionLevel} is not valid`)
-      return next(error)
-    }
+    // system is configured to skip validation
     if (!eVars.ENFORCE_VALIDATION) {
       logging.warning('SYSTEM IS CONFIGURED TO SKIP TOKEN VALIDATION !!!')
       return next()
-    } else {
-      let accessToken = req.get('x-access-token')
-      if (!accessToken) { // if there is no token, return an error
+    }
+    // skip validation on purpose
+    if (none === true) return next()
+    // grab token from request header
+    let accessToken = req.get('x-access-token')
+    if (!accessToken) { // if there is no token, return an error
+      res.status(401)
+      let error = new Error('Missing Token')
+      return next(error)
+    }
+    // process the received request header
+    return jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
+      if (error) { // if decoding error is encountered
         res.status(401)
-        let error = new Error('Missing Token')
         return next(error)
       }
-      // if a token is found
-      return jwt.verify(accessToken, eVars.PASS_PHRASE, (error, decodedToken) => {
-        if (error) { // if decoding error is encountered
-          res.status(401)
-          return next(error)
-        }
-        // token is successfully decoded
-        if (
-          (restrictionLevel === 'self') &&
-          (
-            !('contactId' in req.params) ||
-            (decodedToken.id !== req.params.contactId)
-          )
-        ) {
-          // route must have a req.params and match token payload id
+      // token is successfully decoded
+      if (user === true) {
+        // if restriction level is set to 'self: true'
+        if (!('contactId' in req.params) || (decodedToken.id !== req.params.contactId)) {
+          // route must have a req.params.contactId and matching token payload id
           res.status(400)
-          let error = new Error('id presented in token payload does not match route')
+          let error = new Error('id in token payload does not match route')
           return next(error)
         }
-        return db.Contacts.findOne({
-          where: (restrictionLevel !== 'admin')
-            ? (restrictionLevel === 'self')
-              ? { // find admin and user account with matching id and email
-                email: decodedToken.email.toLowerCase(),
-                id: decodedToken.id
-              }
-              : { // find admin and user account with just matching email
-                email: decodedToken.email.toLowerCase()
-              }
-            : { // find admin account only
-              email: decodedToken.email.toLowerCase(),
-              admin: true
-            }
-        }).then(contact => {
+      }
+      // base query option
+      // system issued token should already have an email with only lowercased letters
+      let queryOptions = { email: decodedToken.email } // valid for looking up all matching contacts
+      // add admin restriction
+      if (admin === true) Object.assign(queryOptions, { admin: true })
+      // add restriction against user's own records
+      if (user === true) Object.assign(queryOptions, { id: decodedToken.id })
+      return db.Contacts.findOne(queryOptions)
+        .then(contact => {
           if (!contact) { // nothing found
             res.status(401)
             let error = new Error('Unauthorized Credentials')
@@ -75,7 +63,6 @@ module.exports = (restrictionLevel = 'admin') => {
           }
           return Promise.resolve()
         }).catch((error) => next(error))
-      })
-    }
+    })
   }
 }
