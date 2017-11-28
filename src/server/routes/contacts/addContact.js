@@ -15,8 +15,9 @@ module.exports = [
   // admin === true, a admin level middleware validation will be activated
   (req, res, next) => {
     // client attempted to register a admin account
-    if (req.body.admin === 'true') return validateJwt('admin')(req, res, next)
-    return next()
+    return (('admin' in req.body) && (req.body.admin === 'true'))
+      ? validateJwt({ admin: true })(req, res, next)
+      : next()
   },
   (req, res, next) => {
     // start transaction
