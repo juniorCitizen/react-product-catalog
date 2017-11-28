@@ -33,7 +33,7 @@ API_ROUTER.route('/series/:seriesId')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(notImplemented)
+  .patch(...require('./series/patchSeries')) // patching series properties
   .delete(...require('./series/removeSeries')) // delete series by id
 
 API_ROUTER.route('/tokens')
@@ -314,12 +314,6 @@ function productRequest (req, res) {
 // /////////////////////////////////////////////////////
 // Series
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/series/name/:name')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Tokens
