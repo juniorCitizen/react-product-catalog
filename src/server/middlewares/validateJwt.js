@@ -52,7 +52,7 @@ module.exports = ({ none = false, admin = false, user = false } = {}) => {
       if (admin === true) Object.assign(queryOptions, { admin: true })
       // add restriction against user's own records
       if (user === true) Object.assign(queryOptions, { id: decodedToken.id })
-      return db.Contacts.findOne(queryOptions)
+      return db.Contacts.findOne({ where: queryOptions })
         .then(contact => {
           if (!contact) { // nothing found
             res.status(401)

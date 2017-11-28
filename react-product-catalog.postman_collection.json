@@ -1,0 +1,2398 @@
+{
+	"info": {
+		"name": "react-product-catalog",
+		"_postman_id": "bbaf5256-d09c-48cf-cbe7-bd2efccfb01a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "assets",
+			"item": [
+				{
+					"name": "serve up static assets (favicon.ico as example)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"reactProductCatalog",
+								"images",
+								"logos",
+								"favicon.ico"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contacts",
+			"description": "",
+			"item": [
+				{
+					"name": "register a user or admin account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "botPrevention",
+									"value": "",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "countryId",
+									"value": "twn",
+									"description": "optional, set to 'twn' (Taiwan) if omitted",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "My Fake Company",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "123 Nowhere Road, Taiwan",
+									"description": "optional",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "06-6666666",
+									"description": "optional",
+									"type": "text"
+								},
+								{
+									"key": "fax",
+									"value": "",
+									"description": "optional",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "",
+									"description": "optional",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "David Tsai",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aaachiayu.tsai.personal@gmail.com",
+									"description": "required (must be unique)",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "",
+									"description": "optional",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "00000000",
+									"description": "required (8~20 characters)",
+									"type": "text"
+								},
+								{
+									"key": "admin",
+									"value": "false",
+									"description": "optional, default to false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"reactProductCatalog",
+								"api",
+								"contacts"
+							]
+						},
+						"description": "1. Content-Type: 'application/x-www-form-urlencoded' or 'application/json'\n2. when req.body.admin is true, meaning registering an 'admin' account.  valid jwt must present in the x-access-token header\n3. upon success, a 24 hours token will be issued with the following properties in the payload:\n\t* name\n\t* email\n\t* admin"
+					},
+					"response": [
+						{
+							"id": "270dba28-089a-4b7c-99ff-52c2a6a5c80a",
+							"name": "register a user account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "countryId",
+											"value": "twn",
+											"description": "optional, set to 'twn' (Taiwan) if omitted",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "My Fake Company",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "123 Nowhere Road, Taiwan",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "telephone",
+											"value": "06-6666666",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "fax",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "website",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "David Tsai",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "chiayu.tsai.personal@gmail.com",
+											"description": "required (must be unique)",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "00000000",
+											"description": "required (8~20 characters)",
+											"type": "text"
+										},
+										{
+											"key": "admin",
+											"value": "false",
+											"description": "optional, default to false",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "458",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Nov 2017 15:30:28 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ca-4eYCTZjk094TULvXhJSZunrZ8Po\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 161,
+							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
+						},
+						{
+							"id": "529798df-b722-4921-874b-c9caffe7f93d",
+							"name": "attempt to register an admin account without proper credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "countryId",
+											"value": "twn",
+											"description": "optional, set to 'twn' (Taiwan) if omitted",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "My Fake Company",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "123 Nowhere Road, Taiwan",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "telephone",
+											"value": "06-6666666",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "fax",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "website",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "David Tsai",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fakeemail@gmail.com",
+											"description": "required (must be unique)",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "optional",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "00000000",
+											"description": "required (8~20 characters)",
+											"type": "text"
+										},
+										{
+											"key": "admin",
+											"value": "true",
+											"description": "optional, default to false",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2683",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Nov 2017 15:32:01 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a7b-QH8UR1aUsCC8z9waIDkEeN5YjeQ\"",
+									"name": "ETag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 44,
+							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:23:21\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:18:63)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\"}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "utilities",
+			"description": "",
+			"item": [
+				{
+					"name": "get total record counts on models or specified composite models",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:9004/reactProductCatalog/api/recordCount/regions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"reactProductCatalog",
+								"api",
+								"recordCount",
+								"regions"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "untested",
+			"description": "",
+			"item": [
+				{
+					"name": "offices",
+					"description": "",
+					"item": [
+						{
+							"name": "get a list of offices with details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/offices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"offices"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "countries",
+					"description": "",
+					"item": [
+						{
+							"name": "get regions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"productMenus"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "get countries with optional pagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/countries?page=3&per_page=1&details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"countries"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3",
+											"equals": true
+										},
+										{
+											"key": "per_page",
+											"value": "1",
+											"equals": true
+										},
+										{
+											"key": "details",
+											"value": "",
+											"equals": false
+										}
+									]
+								},
+								"description": "url query options:\n1. per_page: integer\n2. page: integer\n3. details"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "series",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "request for series data with optional details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "request for series by 'id' with optional details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/2?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"2"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										},
+										"description": "products=true query is optional"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "POST",
+							"item": [],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "PUT",
+							"item": [
+								{
+									"name": "update series with optional details",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwOTM5MjQ1LCJleHAiOjE1MTEwMjU2NDV9.5vuSCBgk7AZn1d3JZnbvU1o6IxSFI4kuJQjQWu-CBAI"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Test Series\",\n\t\"order\": 1,\n\t\"publish\": false\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/1?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"1"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "request for product data with optional details and pagination",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=3&page=5&details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products"
+											],
+											"query": [
+												{
+													"key": "per_page",
+													"value": "3",
+													"equals": true
+												},
+												{
+													"key": "page",
+													"value": "5",
+													"equals": true
+												},
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "request for product by 'id' with optional details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												"6E530E5A-3507-412E-909F-84F706369BE4"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "insert new product and optional photos and tags with optional details",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
+											},
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "code",
+													"value": "aaaaaaa",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "testName",
+													"type": "text"
+												},
+												{
+													"key": "specification",
+													"value": "test spec\ntext spec 2",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "taeltjasklda;sdkfjskdjf;skdlfjsdkfj;sadfkj;sdfkj;sdfjs;dfljsf\nasdfjk;aslka;sldfj;aslfaj;sdfj;adfj\naks;dlfjsdkfjsljdf;slkdf;salfj;asdfkj\na;sldkfj;sdfj;alskfj;asjf",
+													"type": "text"
+												},
+												{
+													"key": "tags[0]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "tags[1]",
+													"value": "6",
+													"type": "text"
+												},
+												{
+													"key": "primaryPhoto",
+													"type": "file",
+													"value": ""
+												},
+												{
+													"key": "secondaryPhotos",
+													"type": "file",
+													"value": ""
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "PUT",
+							"item": [
+								{
+									"name": "update product record (multiple fields)",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\":\"testCode\",\n\t\"name\":\"testName\",\n\t\"specification\":\"test specification\",\n\t\"description\":\"test description\",\n\t\"seriesId\": 3,\n\t\"publish\": false\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												"6E530E5A-3507-412E-909F-84F706369BE4"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "PATCH",
+							"item": [
+								{
+									"name": "assign a product to a series",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4/series/4?details",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												"6E530E5A-3507-412E-909F-84F706369BE4",
+												"series",
+												"4"
+											],
+											"query": [
+												{
+													"key": "details",
+													"value": "",
+													"equals": false
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "delete product record by id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												"6E530E5A-3507-412E-909F-84F706369BE4"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "carousels",
+					"item": [
+						{
+							"name": "get carousel image by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/16",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels",
+										"16"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "add carousel photo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMjI4NDI3LCJleHAiOjE1MTEzMTQ4Mjd9.moeQqJtRH741Jt_tjBMRs12qiKAwR4B1XNZYsC3Rf2E"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"description": "",
+											"type": "file",
+											"src": "38BB0221271ED5786D725A478DCA4952.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "set carousel's primary status to true and all the others to false",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMTY4NzMxLCJleHAiOjE1MTEyNTUxMzF9.S8lwJcpC8js9euFJJD9Xw65GtOCmEYHHz1QEHWG46gM"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/4/primary",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels",
+										"4",
+										"primary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update carousel order",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2/order/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels",
+										"2",
+										"order",
+										"2"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "delete a carousel image record",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels",
+										"2"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "photos",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "get photo by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/91F6265B-4680-4525-9153-0A10DE6C812D",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"91F6265B-4680-4525-9153-0A10DE6C812D"
+											]
+										},
+										"description": null
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "batch photo inserts",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMjI4NDI3LCJleHAiOjE1MTEzMTQ4Mjd9.moeQqJtRH741Jt_tjBMRs12qiKAwR4B1XNZYsC3Rf2E"
+											},
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "primary",
+													"value": "false",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "seriesId",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "photos",
+													"type": "file",
+													"src": "FB1D65956E5700369B4BB2C3DE57C190.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos"
+											]
+										},
+										"description": null
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "PATCH",
+							"item": [
+								{
+									"name": "assign a photo to a series",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDk4NjIxLCJleHAiOjE1MTExODUwMjF9.QBT-QGC_GBEcWZRirr_zf4jiKR9JW7IUYTmvUJD9r9Q"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/BFBECCEC-CD3E-467A-974A-C76075BCFB76/series/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"BFBECCEC-CD3E-467A-974A-C76075BCFB76",
+												"series",
+												"5"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "assign a photo to a product",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwNjI3Mjg5LCJleHAiOjE1MTA3MTM2ODl9.DsTfpU7fzen6KsGgYf0A6I8VmGfeWO3v290i3gP2cNI"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/E6980A29-936B-450F-B797-6B965325AC3B/products/9E4EA92C-290F-4CFF-A140-750D599854CB",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"E6980A29-936B-450F-B797-6B965325AC3B",
+												"products",
+												"9E4EA92C-290F-4CFF-A140-750D599854CB"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "publish/unpublish a photo",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwNjM3MjYwLCJleHAiOjE1MTA3MjM2NjB9.vES3ZjhII3jVyieCivGtqdFUkL4H-q91mXk8zKNlsHg"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/C192B534-8491-4C6F-BBE8-4BB97D795781",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"C192B534-8491-4C6F-BBE8-4BB97D795781"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "assign a product to a series",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwNjI3Mjg5LCJleHAiOjE1MTA3MTM2ODl9.DsTfpU7fzen6KsGgYf0A6I8VmGfeWO3v290i3gP2cNI"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/64688096-7A4C-49AD-88AB-1AEB2FC27D19",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"64688096-7A4C-49AD-88AB-1AEB2FC27D19"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "not working",
+			"description": "",
+			"item": [
+				{
+					"name": "serve up index.html from template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:9004/reactProductCatalog",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"reactProductCatalog"
+							]
+						},
+						"description": "this route doesn't work properly at this time:\n1. in order to use templates, an 'index.html' cannot exist in the static asset directory\n2. if templates isn't used, another method must be devised on how to pass frontend/backend shared constants\n3. if only static assets are to be served, maybe consider to serve directly from nginx\n\nneeds to settle how the frontend will generate\n1. index.html,\n2. app.js(app.min.js),\n3. app.css(app.min.css),\n4. and the other css libs to be included(whether to use cdn or copy from local, bulma/font-awesome)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "working",
+			"description": "",
+			"item": [
+				{
+					"name": "series",
+					"description": "",
+					"item": [
+						{
+							"name": "insert a new series",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg0Nzc0OCwiZXhwIjoxNTExOTM0MTQ4fQ.KfWYV6S4pSZFOyFj2LbaB5vJm76HDBl5_EUK8wIEH1k"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/series",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"series"
+									]
+								},
+								"description": "1. request header:\n\t* Content-Type:\n\t\t* application/x-www-form-urlencoded\n\t\t* application/json\n\t* x-access-token: jwt token string (admin privilege required)\n2. request body:\n\t* name: string\n\t* parentSeriesId: uuid string \n3. response:\n\t* header - Content-Type: application/json\n\t* body: see postman example\n4. notes:\n\t* series name is not uniqu, so a tree node may have multiple duplicating series of the same name\n\t* new series is placed at the end of ordering"
+							},
+							"response": [
+								{
+									"id": "ffc1bbe4-0cc9-4bff-9419-4e4db1080335",
+									"name": "insert a new series",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg0Nzc0OCwiZXhwIjoxNTExOTM0MTQ4fQ.KfWYV6S4pSZFOyFj2LbaB5vJm76HDBl5_EUK8wIEH1k",
+												"disabled": false
+											},
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "new test series",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "parentSeriesId",
+													"value": "B65EBF10-D987-4493-B61C-225BC49E26D8",
+													"description": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "291",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 05:47:39 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"123-aiC12tVgjuFQBw59zZpjPg9xIkg\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 87,
+									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						},
+						{
+							"name": "remove series by id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg0Nzc0OCwiZXhwIjoxNTExOTM0MTQ4fQ.KfWYV6S4pSZFOyFj2LbaB5vJm76HDBl5_EUK8wIEH1k"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/series/4D089769-CE31-49A8-9DA2-C217D0D557F8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"series",
+										"4D089769-CE31-49A8-9DA2-C217D0D557F8"
+									]
+								},
+								"description": "1. request header:\r\n\t* Content-Type: application/json\r\n\t* x-access-token: jwt token string (admin privilege required)\r\n2. request body: none\r\n3. response:\r\n\t* header - Content-Type: application/json\r\n\t* body: see postman example (data = number of records deleted)\r\n4. notes:\r\n\t* only prevent against childSeries and associated products\r\n\t* photo associates are either\r\n\t\t1. deleted: the photo is not associated with anything else\r\n\t\t2. seriesId set to 'NULL': if the photo is associated with other products"
+							},
+							"response": [
+								{
+									"id": "42b20404-3c1d-4328-a887-604bf91e326e",
+									"name": "remove series by id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg0Nzc0OCwiZXhwIjoxNTExOTM0MTQ4fQ.KfWYV6S4pSZFOyFj2LbaB5vJm76HDBl5_EUK8wIEH1k"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/2C7E4510-3D10-4E63-8007-EB37F07AD422",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"2C7E4510-3D10-4E63-8007-EB37F07AD422"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "167",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 07:54:47 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"a7-29KiX6722twWZA2JD8rjiA3LOxw\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 117,
+									"body": "{\"data\":1,\"method\":\"delete\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						},
+						{
+							"name": "patching a series record",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/series/CEE85C24-3344-4067-B919-4769CDE948B1?parentSeriesId=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"series",
+										"CEE85C24-3344-4067-B919-4769CDE948B1"
+									],
+									"query": [
+										{
+											"key": "parentSeriesId",
+											"value": "",
+											"equals": true
+										}
+									]
+								},
+								"description": "1. request headers:\n\t* x-access-token: jwt string\n2. request url query:\n\t* name - patch series name\n\t* active - patch active status (true/false)\n\t* order - patch order field value within a childSeries tree (min: 0, max: sibling count - 1, will be limited to this range automatically without error)\n\t* parentSeriesId - move a series under another series node (provide no value to url query to move series to root, e.g. \"?parentSeriesId=\")\n3. response header: application/json\n4. response body: see examples (returns the updated series record without additional data)\n5. notes:\n\t* move a series under another always puts at the end of the existing childSeries\n\t* menuLevel value cannot be updated directly\n\t* only **ONE** query will be processed at a time in the above listed sequence"
+							},
+							"response": [
+								{
+									"id": "fab981c6-192a-484d-9af2-221b1246c0ac",
+									"name": "if no url query is set",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1985",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 15:57:23 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"7c1-KEY+rI0lCtha8W7aOr/j7Pb8HJs\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 53,
+									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
+								},
+								{
+									"id": "465f410e-a24b-4179-b2c2-e3310489488d",
+									"name": "patching the name (2nd url query does not work)",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689"
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "matrix3",
+													"equals": true
+												},
+												{
+													"key": "active",
+													"value": "false",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "347",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 16:16:59 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"15b-o6TuXQRmw3/r+VUg6yGZeGbl5zs\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 44,
+									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								},
+								{
+									"id": "050088e5-3662-4f6e-ba8c-0a3d7cbaa62a",
+									"name": "patching active state",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689"
+											],
+											"query": [
+												{
+													"key": "active",
+													"value": "true",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "333",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 16:19:27 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"14d-WDiBSRwvJQP2NB5d+AeR7KkfpBU\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 56,
+									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								},
+								{
+									"id": "a98a3f2e-568a-4524-8211-51444293bc65",
+									"name": "patching a series order within the same tree",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689"
+											],
+											"query": [
+												{
+													"key": "order",
+													"value": "-1",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "330",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 16:50:13 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"14a-B4wqAP2SdmiESItJjuTfz3wgre4\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 62,
+									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								},
+								{
+									"id": "728df9b7-4898-4515-8f73-c4c5fbb4bfdc",
+									"name": "move a series to root level",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5OUU3M0E3LTRBMDAtNEQwNS1BRkY4LTA3MDkwNDU2NjhEQiIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTg4NDQxMiwiZXhwIjoxNTExOTcwODEyfQ.3sXN8x5fVhOJYbherSskylEzW9r-MEx_I82v4gvWhpk",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/CEE85C24-3344-4067-B919-4769CDE948B1?parentSeriesId=",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												"CEE85C24-3344-4067-B919-4769CDE948B1"
+											],
+											"query": [
+												{
+													"key": "parentSeriesId",
+													"value": "",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "305",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 17:10:26 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"131-R5hoUr+bmD8DQm3U/Yfdoq62ND8\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 110,
+									"body": "{\"data\":{\"id\":\"CEE85C24-3344-4067-B919-4769CDE948B1\",\"name\":\"microchip\",\"order\":5,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/CEE85C24-3344-4067-B919-4769CDE948B1?parentSeriesId=\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "productMenus",
+					"description": "",
+					"item": [
+						{
+							"name": "get tree structured product menus",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"productMenus"
+									]
+								},
+								"description": "bug: some menus does not get the tagMenu (should at least have a empty array []), seems to be happening on new series inserts still without associations 'products'"
+							},
+							"response": [
+								{
+									"id": "d362d3e4-06d3-4fe2-a713-ec5726fa9f93",
+									"name": "get tree structured product menus",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"productMenus"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "7037",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 04:02:38 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1b7d-463yTEjdWKGukUpI1Ajh8pP9CSo\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 185,
+									"body": "{\"data\":[{\"id\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"name\":\"firewall\",\"order\":0,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"0C289D27-95E2-4E5D-ADFB-D7FEE244A1D9\",\"code\":\"231-3DMGY3\",\"active\":true,\"tags\":[]},{\"id\":\"E5A6E703-1ACE-4DC7-877E-D80F6C9505E0\",\"code\":\"420-CH8KEN\",\"active\":true,\"tags\":[]},{\"id\":\"A48836E1-394D-420A-9364-921CC8050ABA\",\"code\":\"844-76BG29\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"419C5871-B770-4F01-8F37-CB7860133E60\",\"code\":\"741-UAKLXL\",\"active\":true,\"tags\":[]},{\"id\":\"913E6768-4AAC-47CB-99C9-77D2381B7E12\",\"code\":\"785-57AY3G\",\"active\":true,\"tags\":[]},{\"id\":\"B9804610-D0AF-4C2F-88FD-E61EBA0C24C3\",\"code\":\"862-TFGBKD\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"47A26F86-6990-46E6-95C0-3B3345B3463F\",\"name\":\"pixel\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"5F350C10-E0F1-4117-A53D-0861810E36E4\",\"code\":\"463-XEMEV0\",\"active\":true,\"tags\":[]},{\"id\":\"CA9936AD-6FA1-4FB3-BC2F-289D252B4D59\",\"code\":\"499-58M2KN\",\"active\":true,\"tags\":[]},{\"id\":\"9F16DDD0-60EF-47CE-A662-806A2056A460\",\"code\":\"748-LB8A1U\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[]},{\"id\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"name\":\"hard drive\",\"order\":1,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"651ED3A4-5D0D-4161-9BBE-B52907940C29\",\"code\":\"186-1O75Z9\",\"active\":true,\"tags\":[]},{\"id\":\"2C561A5F-6903-4529-A6D4-23B8F65B72C6\",\"code\":\"297-CIQCPS\",\"active\":true,\"tags\":[]},{\"id\":\"F9E196F5-D428-410D-A4F8-C4A5CD08829F\",\"code\":\"627-RFNPSM\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"CEE85C24-3344-4067-B919-4769CDE948B1\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"EC9B8DA2-D993-45A0-8CE1-4BFFD4AFF883\",\"code\":\"474-D8A9VJ\",\"active\":true,\"tags\":[]},{\"id\":\"A28E9466-A9E3-4D4F-A965-E0A68A6CDAE7\",\"code\":\"694-B5YLRT\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"929C8B8D-4FF8-46FE-9039-463903377D7C\",\"name\":\"circuit\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"E5A80D05-6936-4767-86DA-631D82A317CA\",\"code\":\"149-5NO69G\",\"active\":true,\"tags\":[]},{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}},{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]},{\"id\":\"B5349E94-E21B-4C68-B81F-9609B587D56A\",\"code\":\"465-I5C0K2\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}}]},{\"id\":0,\"name\":\"Featured\",\"color\":\"DarkKhaki\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}}]},{\"id\":11,\"name\":\"New\",\"color\":\"LimeGreen\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]}]}],\"tagMenus\":[]},{\"id\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"name\":\"interface\",\"order\":2,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"4630578C-128C-40AD-9F28-A25FD56454DF\",\"code\":\"124-ZC4Z0I\",\"active\":true,\"tags\":[]},{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"tags\":[{\"id\":10,\"name\":\"Discount\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}},{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]},{\"id\":\"EF50070C-B85C-48FE-919E-BB9B3BBCBF13\",\"code\":\"944-KLHCW6\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"C3539411-E6DC-4BC3-B833-9976FAC1EA87\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"products\":[{\"id\":\"10FB3F85-C5CA-4449-B6F9-6865D0B8161A\",\"code\":\"255-D4L6G6\",\"active\":true,\"tags\":[]},{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}]}],\"tagMenus\":[{\"id\":10,\"name\":\"Discount\",\"color\":\"LavenderBlush\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}}]},{\"id\":8,\"name\":\"Extra Large\",\"color\":\"YellowGreen\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]}]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/productMenus\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "tokens",
+					"item": [
+						{
+							"name": "request for json web token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "david.tsai@gentry-way.com.tw",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testtest",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"tokens"
+									]
+								},
+								"description": "1. Content-Type:\n\t* application/x-www-form-urlencoded\n\t* application/json\n2. required fields\n\t* email\n\t* password\n\t* botPrevention\n3. a token valid for 24 hours will be issued regardless of the account's admin field status, payload:\n\t* id\n\t* name\n\t* email\n\t* admin\n4. notes: request by account with NULL password field will fail"
+							},
+							"response": [
+								{
+									"id": "04a4b200-8b9b-489d-9b0a-ddd0ddf6fcc9",
+									"name": "request for json web token by application/json on admin account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"tokens"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "454",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 Nov 2017 14:24:22 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1c6-qBEtOKks3kJqt2rRDCfyn9BWyX0\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 53,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}

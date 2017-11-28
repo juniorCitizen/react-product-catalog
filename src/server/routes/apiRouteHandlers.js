@@ -13,6 +13,37 @@ const responseHandlers = require('../middlewares/responseHandlers')
 const API_ROUTER = express.Router()
 
 // /////////////////////////////////////////////////////
+// working API endpoints
+// /////////////////////////////////////////////////////
+API_ROUTER.route('/productMenus')
+  .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+API_ROUTER.route('/series')
+  .get(notImplemented)
+  .post(...require('./series/insertSeries')) // insert a new series
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+API_ROUTER.route('/series/:seriesId')
+  .get(notImplemented)
+  .post(notImplemented)
+  .put(notImplemented)
+  .patch(...require('./series/patchSeries')) // patching series properties
+  .delete(...require('./series/removeSeries')) // delete series by id
+
+API_ROUTER.route('/tokens')
+  .get(notImplemented)
+  .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
+  .put(notImplemented)
+  .patch(notImplemented)
+  .delete(notImplemented)
+
+// /////////////////////////////////////////////////////
 // Utilities
 // /////////////////////////////////////////////////////
 API_ROUTER.get('/recordCount/:modelReference', ...require('./utilities/getTotalRecordCount'))
@@ -82,12 +113,6 @@ API_ROUTER.route('/countries')
   .put(notImplemented)
   .patch(notImplemented)
   .delete(notImplemented)
-
-// /////////////////////////////////////////////////////
-// Product Menu
-// /////////////////////////////////////////////////////
-API_ROUTER.route('/productMenus')
-  .get(...require('./productMenus/getProductMenus'))
 
 // ///////////////////////////////////////////////////////////////
 // Photos
@@ -289,34 +314,10 @@ function productRequest (req, res) {
 // /////////////////////////////////////////////////////
 // Series
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/series')
-  .get(...require('./series/getSeries')) // get series dataset
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/series/name/:name')
-  .get(notImplemented)
-  .post(...require('./series/insertSeries')) // create new series record
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/series/:seriesId')
-  .get(...require('./series/getSeriesById')) // get series by id
-  .post(notImplemented)
-  .put(...require('./series/updateSeries')) // update multiple series fields by id
-  .patch(notImplemented)
-  .delete(...require('./series/removeSeries')) // delete series by id
 
 // /////////////////////////////////////////////////////
 // Tokens
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/tokens')
-  .get(notImplemented)
-  .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Company and contact information
