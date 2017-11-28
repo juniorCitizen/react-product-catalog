@@ -20,7 +20,7 @@ class Product extends React.Component {
                             <Series />
                         </div>
                         <div className="column">
-                            <Block />
+                            <Block history={this.props.history}/>
                         </div>
                     </div>
                 </div>

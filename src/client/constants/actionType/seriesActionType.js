@@ -1,1 +1,1 @@
-export const SERIES = 'SERIES'
+export const SERIES_CODE = 'SERIES_CODE'

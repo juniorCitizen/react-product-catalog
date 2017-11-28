@@ -1,11 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import { set_series_code } from '../../actions'
+import { connect } from 'react-redux'
 import config from '../../config'
-import Alert from '../../containers/modal/alert'
 
-const api = config.api
-
-export default class Series extends React.Component {
+class Series extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,28 +15,37 @@ export default class Series extends React.Component {
     }
 
     componentDidMount() {
-        this.getSeries()
+        //this.getSeries()
     }
 
     selectSeries(id) {
+        const { dispatch } = this.props;
+        dispatch(set_series_code(id))
         let series = this.state.series
-        series = series.map((item) => {
-            let setItem = item
-            setItem.active = item.id === id
-            return setItem
-        })
+        series = this.setSeriesActive(series, id)
         this.setState({
             series: series,
-            alertShow: true,
-            alertMsg: '您選擇了系列號' + id,
         })
+    }
+
+    setSeriesActive(series, id) {
+        series && series.map((item) => {
+            item.selected = item.id === id
+            item.childSeries && item.childSeries.map((sub) => {
+                if (sub.id === id) {
+                    item.selected = true
+                }
+            })
+            item.childSeries = this.setSeriesActive(item.childSeries, id)
+        })
+        return series
     }
 
     getSeries() {
         const self = this
         axios({
             method: 'get',
-            url: api + 'series',
+            url: config.route.productMenu,
             data: {},
             headers: {
                 'x-access-token': window.localStorage["jwt-token"]
@@ -65,12 +73,12 @@ export default class Series extends React.Component {
                     <ul className="menu-list">
                         {series.map((item, index) => (
                             <li key={index}>
-                                <a className={item.active ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
-                                {item.sub_list &&
+                                <a className={item.selected ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
+                                {item.childSeries && item.selected &&
                                     <ul>
-                                        {item.sub_list.map((item, index) => (
+                                        {item.childSeries.map((item, index) => (
                                             <li key={index}>
-                                            <a className={item.active ? "is-active" : ""}
+                                            <a className={item.selected ? "is-active" : ""}
                                                 onClick={this.selectSeries.bind(this, item.id)}
                                             >
                                                 {item.name}</a>
@@ -82,12 +90,15 @@ export default class Series extends React.Component {
                         ))}
                     </ul>
                 </aside>
-                <Alert 
-                    show={alertShow}
-                    message={alertMsg} 
-                    click_ok={() => {this.setState({alertShow: false})}} 
-                />
             </div>
         )
     }
 }
+function mapStateToProps(state) {
+	const { series } = state
+	return {
+        series
+	}
+}
+
+export default connect(mapStateToProps)(Series)

@@ -1,7 +1,7 @@
 import { 
-    SERIES,
+    SERIES_CODE,
 } from '../constants/actionType'
   
-export function get_series(series_code = null) {
-    return {type: SERIES, series_code}
+export function set_series_code(code) {
+    return {type: SERIES_CODE, code}
 }
