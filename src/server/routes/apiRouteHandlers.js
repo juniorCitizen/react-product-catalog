@@ -25,9 +25,11 @@ API_ROUTER.route('/photos/:photoId')
 
 API_ROUTER.route('/photos/:photoId/products/:productId')
   .post(...require('./photos/assignPhoto').toProduct) // assign productId to a photo
+  .delete(...require('./photos/removePhoto').fromProduct) // remove productId from a photo
 
 API_ROUTER.route('/photos/:photoId/series/:seriesId')
   .post(...require('./photos/assignPhoto').toSeries) // assign seriesId to a photo
+  .delete(...require('./photos/removePhoto').fromSeries) // remove seriesId from a photo
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
