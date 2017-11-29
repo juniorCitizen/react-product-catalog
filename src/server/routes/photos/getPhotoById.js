@@ -10,19 +10,18 @@ const placeHolder = `<?xml version="1.0" encoding="utf-8"?>
 <circle cx="24" cy="11" r="2"/>
 </svg>`
 
-module.exports = (() => {
-  return [
-    (req, res, next) => {
-      let id = req.params.photoId.toUpperCase()
-      return db.Photos
-        .findById(id)
-        .then((photo) => {
-          req.resImage = photo === null
-            ? { mimeType: 'image/svg+xml', data: Buffer.from(placeHolder) }
-            : { mimeType: photo.mimeType, data: Buffer.from(photo.data) }
-          next()
-          return Promise.resolve()
-        })
-        .catch(error => next(error))
-    }]
-})()
+module.exports = [
+  (req, res, next) => {
+    let id = req.params.photoId.toUpperCase()
+    return db.Photos
+      .findById(id)
+      .then((photo) => {
+        req.resImage = photo === null
+          ? { mimeType: 'image/svg+xml', data: Buffer.from(placeHolder) }
+          : { mimeType: photo.mimeType, data: Buffer.from(photo.data) }
+        next()
+        return Promise.resolve()
+      })
+      .catch(error => next(error))
+  }
+]
