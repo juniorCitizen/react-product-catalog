@@ -15,17 +15,11 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
-// API_ROUTER.route('/photos')
-//   .get(notImplemented)
-//   .post(...require('./photos/insertPhotos')) // batch insert photos
-//   .put(notImplemented)
-//   .patch(notImplemented)
-//   .delete(notImplemented)
+API_ROUTER.route('/photos')
+  .post(...require('./photos/uploadPhotos')) // batch upload photos
 
 API_ROUTER.route('/photos/:photoId')
   .get(...require('./photos/getPhotoById')) // get photo by id
-// .post(notImplemented)
-// .put(notImplemented)
 // .patch(...require('./photos/togglePhotoPublishState')) // publish/unpublish a photo
 // .delete(...require('./photos/removePhotoById')) // remove photo by id
 
