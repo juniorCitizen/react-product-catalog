@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { admin_info } from '../../../actions'
 import { connect } from 'react-redux'
 import config from '../../../config'
+import { jwt_info } from '../../../lib/index'
 
 const api = config.api
 
@@ -30,11 +31,10 @@ class Login extends React.Component {
 
     checkAuth() {
         const { dispatch, login } = this.props
-        const token = window.localStorage["jwt-token"]
+        const token = window.localStorage["jwt-admin-token"]
         if (token) {
-            let admin = []
-            dispatch(admin_info(admin))
-            this.props.history.push("/");
+            dispatch(admin_info(jwt_info(token)))
+            this.props.history.push("/admin");
         }
     }
 

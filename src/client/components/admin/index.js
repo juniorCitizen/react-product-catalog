@@ -62,7 +62,7 @@ class Admin extends React.Component {
         const { dispatch } = this.props
         window.localStorage["jwt-admin-token"] = ''
         dispatch(admin_logout())
-        this.props.history.push("/");
+        this.props.history.push("/admin");
     }
     
     render() {

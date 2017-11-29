@@ -104,9 +104,8 @@ class Login extends React.Component {
 
     loginSuccess() {
         const { dispatch } = this.props
-        let user = []
-        dispatch(user_info(user))
-        console.log(window.localStorage["jwt-token"])
+        const token = window.localStorage["jwt-token"]
+        dispatch(user_info(jwt_info(token)))
         this.props.history.push("/");
     }
 
