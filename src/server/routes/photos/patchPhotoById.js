@@ -37,10 +37,11 @@ module.exports = [
             where: { id: req.params.photoId.toUpperCase() }
           }))
       })
-      .then(() => db.Photos.findById(req.params.photoId.toUpperCase()))
-      .then(updatedRecord => {
-        let data = updatedRecord.dataValues
-        delete data.data
+      .then(() => db.Photos
+        .findById(req.params.photoId.toUpperCase(), {
+          attributes: { exclude: ['data'] }
+        }))
+      .then(data => {
         req.resJson = { data }
         next()
         return Promise.resolve()
