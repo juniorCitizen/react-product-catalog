@@ -5,6 +5,7 @@ export default {
     route: {
         productMenu: api + '/productMenus',
         register: api + '/contacts',
+        tokens: api + '/tokens',
     },
     project: {
         name: 'reactProductCatalog',

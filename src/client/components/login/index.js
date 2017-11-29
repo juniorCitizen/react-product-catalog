@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Nav from '../navigation'
 import { user_info } from '../../actions'
 import { connect } from 'react-redux'
+import qs from 'qs'
 import config from '../../config'
 
 class Login extends React.Component {
@@ -81,11 +82,11 @@ class Login extends React.Component {
         }
         axios({
             method: 'post',
-            url: config.route.register,
-            data: form,
+            url: config.route.tokens,
+            data: qs.stringify(form),
             headers: {
                 'x-access-token': window.localStorage["jwt-token"],
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
         .then(function (response) {
@@ -132,15 +133,6 @@ class Login extends React.Component {
                                     <div className="control">
                                         <input className="input" type="text" placeholder="請輸入電子郵件"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
-                                        />
-                                    </div>
-                                    <p className="help is-danger">{msg.email}</p>
-                                </div>
-                                <div className="field">
-                                    <label className="label">帳號</label>
-                                    <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入帳號"
-                                            value={form.loginId} onChange={this.inputChange.bind(this, 'loginId')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.email}</p>

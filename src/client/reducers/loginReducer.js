@@ -8,11 +8,11 @@ import {
 const initalState = {
     user_info: {
         auth: false,
-        info: [],
+        info: null,
     },
     admin_info: {
         auth: false,
-        info: [],
+        info: null,
     }
 }
 
@@ -22,7 +22,7 @@ export default function login(state = initalState, action) {
             return Object.assign({}, state, {
                 user_info: {
                     auth: true,
-                    info: action.info
+                    info: action.info,
                 }
             })
         case ADMIN_INFO:
@@ -36,14 +36,14 @@ export default function login(state = initalState, action) {
             return Object.assign({}, state, {
                 user_info: {
                     auth: false,
-                    info: [],
+                    info: null,
                 }
             })
         case ADMIN_LOGOUT: 
             return Object.assign({}, state, {
                 admin_info: {
                     auth: false,
-                    info: []
+                    info: null,
                 }
             })
         default:
