@@ -11,10 +11,12 @@ module.exports = [
     }
     // find the parentSeries
     let parent = await db.Series
-      .findById(req.body.parentSeriesId.toUpperCase() || null)
+      .findById(!('parentSeriesId' in req.body)
+        ? null
+        : req.body.parentSeriesId.toUpperCase())
       .catch(error => next(error))
     // set properties according to status of found(or missing) parent
-    if (parent) {
+    if ('parentSeriesId' in req.body) {
       seriesData.menuLevel = parent.menuLevel + 1
       seriesData.parentSeriesId = parent.id
     } else {
