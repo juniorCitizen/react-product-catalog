@@ -15,6 +15,34 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
+// API_ROUTER.route('/photos')
+//   .get(notImplemented)
+//   .post(...require('./photos/insertPhotos')) // batch insert photos
+//   .put(notImplemented)
+//   .patch(notImplemented)
+//   .delete(notImplemented)
+
+API_ROUTER.route('/photos/:photoId')
+  .get(...require('./photos/getPhotoById')) // get photo by id
+// .post(notImplemented)
+// .put(notImplemented)
+// .patch(...require('./photos/togglePhotoPublishState')) // publish/unpublish a photo
+// .delete(...require('./photos/removePhotoById')) // remove photo by id
+
+// API_ROUTER.route('/photos/:photoId/products/:productId')
+//   .get(notImplemented)
+//   .post(notImplemented)
+//   .put(notImplemented)
+//   .patch(...require('./photos/assignPhoto').toProduct) // assign a photo to a product
+//   .delete(notImplemented)
+
+// API_ROUTER.route('/photos/:photoId/series/:seriesId')
+//   .get(notImplemented)
+//   .post(notImplemented)
+//   .put(notImplemented)
+//   .patch(...require('./photos/assignPhoto').toSeries) // assign a photo to a series
+//   .delete(notImplemented)
+
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
 
@@ -103,33 +131,6 @@ API_ROUTER.route('/countries')
 // ///////////////////////////////////////////////////////////////
 // Photos
 // ///////////////////////////////////////////////////////////////
-API_ROUTER.route('/photos')
-  .get(notImplemented)
-  .post(...require('./photos/insertPhotos')) // batch insert photos
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-
-API_ROUTER.route('/photos/:photoId')
-  .get(...require('./photos/getPhotoById')) // get photo by id
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./photos/togglePhotoPublishState')) // publish/unpublish a photo
-  .delete(...require('./photos/removePhotoById')) // remove photo by id
-
-API_ROUTER.route('/photos/:photoId/products/:productId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./photos/assignPhoto').toProduct) // assign a photo to a product
-  .delete(notImplemented)
-
-API_ROUTER.route('/photos/:photoId/series/:seriesId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./photos/assignPhoto').toSeries) // assign a photo to a series
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Products
