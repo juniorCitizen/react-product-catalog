@@ -33,22 +33,22 @@ API_ROUTER.route('/photos/:photoId/series/:seriesId')
 
 API_ROUTER.route('/products')
   .get(...require('./products/getProducts')) // get product dataset
-  .post(...require('./products/insertProduct')) // create new product complete with optional photos and tags
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
+//   .post(...require('./products/insertProduct')) // create new product complete with optional photos and tags
+//   .put(notImplemented)
+//   .patch(notImplemented)
+//   .delete(notImplemented)
 API_ROUTER.route('/products/:productId')
   .get(...require('./products/getProductById')) // get product record by id
-  .post(notImplemented)
-  .put(...require('./products/updateProduct')) // update multiple product fields by id
-  .patch(notImplemented)
+  //   .post(notImplemented)
+  //   .put(...require('./products/updateProduct')) // update multiple product fields by id
+  //   .patch(notImplemented)
   .delete(...require('./products/deleteProduct')) // delete product by id
-API_ROUTER.route('/products/:productId/series/:seriesId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./products/assignToSeries')) // assign a product to a series
-  .delete(notImplemented)
+// API_ROUTER.route('/products/:productId/series/:seriesId')
+//   .get(notImplemented)
+//   .post(notImplemented)
+//   .put(notImplemented)
+//   .patch(...require('./products/assignToSeries')) // assign a product to a series
+//   .delete(notImplemented)
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
