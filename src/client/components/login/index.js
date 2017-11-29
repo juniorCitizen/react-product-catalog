@@ -6,15 +6,12 @@ import { user_info } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
-const api = config.api
-
 class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             form: {
                 email: '',
-                loginId: '',
                 password: '',
                 botPrevention: '',
             },
@@ -84,7 +81,7 @@ class Login extends React.Component {
         }
         axios({
             method: 'post',
-            url: api + 'tokens',
+            url: config.route.register,
             data: form,
             headers: {
                 'x-access-token': window.localStorage["jwt-token"],
@@ -92,12 +89,12 @@ class Login extends React.Component {
             }
         })
         .then(function (response) {
+            console.log(response.data)
             if (response.status === 200) {
-                console.log(response.data)
                 window.localStorage["jwt-token"] = response.data.data
                 self.loginSuccess()
             } else {
-                console.log(response.data)
+                loginError(response.error.message)
             }
         }).catch(function (error) {
             console.log(error)
