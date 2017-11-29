@@ -19,7 +19,7 @@ module.exports = [
       })
       .catch(error => next(error))
   },
-  paginationProcessing(),
+  paginationProcessing,
   (req, res, next) => {
     return db.Countries
       .findAll(req.queryOptions)
