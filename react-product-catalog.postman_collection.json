@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "614359c5-2966-4cd1-a6ec-5dd101cdc1fe",
+							"id": "8c381f71-3fff-42de-b57c-a44caa4aad7b",
 							"name": "register a user account",
 							"originalRequest": {
 								"method": "POST",
@@ -298,7 +298,7 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "da68a1bb-e69c-499d-befa-433988494a8c",
+							"id": "e5c98b83-fb90-43c6-9905-0997d36da770",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
 								"method": "POST",
@@ -1154,7 +1154,7 @@
 							},
 							"response": [
 								{
-									"id": "6fa822c4-68e0-4621-86ef-6004540a893f",
+									"id": "653374a1-4694-4e73-823a-7196166fd7c6",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"method": "POST",
@@ -1283,7 +1283,7 @@
 							},
 							"response": [
 								{
-									"id": "783cb27c-e3a9-42cd-a410-e9042fd97881",
+									"id": "f2753abd-968f-4564-a480-4f0ef8ff64f0",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"method": "POST",
@@ -1397,7 +1397,7 @@
 							},
 							"response": [
 								{
-									"id": "8c29dced-ea36-447c-8aa2-f33d6215afca",
+									"id": "2137b16c-cc34-43fa-bc5c-0d5ba075a106",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -1521,7 +1521,7 @@
 							},
 							"response": [
 								{
-									"id": "40161f49-4404-427a-a13b-51cba09ed51f",
+									"id": "21cca65a-a79e-45ea-bb9a-d7a9474a0402",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1643,7 +1643,7 @@
 							},
 							"response": [
 								{
-									"id": "fcab8819-4fb2-4dc9-80e6-fb72c0498cf0",
+									"id": "243c41e6-4254-45a7-adf4-a6fde028738c",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1755,7 +1755,7 @@
 							},
 							"response": [
 								{
-									"id": "a929403b-e652-47bd-8c71-a4499f88e445",
+									"id": "4fe4e5c5-f936-4c39-a31c-6f5c76af1c86",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1869,7 +1869,7 @@
 							},
 							"response": [
 								{
-									"id": "df7bc808-86cd-45ff-8dd5-89371f3186fd",
+									"id": "3a53ac65-93ad-458a-adb8-aae0fd09ffd8",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1965,7 +1965,7 @@
 								"header": [],
 								"body": {},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3&details",
+									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1979,12 +1979,12 @@
 									"query": [
 										{
 											"key": "per_page",
-											"value": "2",
+											"value": "1",
 											"equals": true
 										},
 										{
 											"key": "page",
-											"value": "3",
+											"value": "17",
 											"equals": true
 										},
 										{
@@ -1994,11 +1994,11 @@
 										}
 									]
 								},
-								"description": "1. request:\n\t* headers: n/a\n\t* url query:\n\t\t1. per_page=integer - specify how many records per page (automatically limited to between 1 and record count)\n\t\t2. page=integer - specify the page\n\t\t3. details - gives optional 'tags' and 'photos' properties in the data body\n\t* body: n/a\n2. response: see example\n\t* headers:\n\t\t1. Content-Type: application/json,\n\t\t2. Link: pagination string to be parsed with parse-link-header\n\t* body:\n\t\t1. data: contains a list of products (with optional details, tags, photos)\n\t\t2. pagination: pagination related information\n3. notes: per_page and page must both be present in order to trigger pagination functionality"
+								"description": "1. request:\n\t* headers: n/a\n\t* url query:\n\t\t1. per_page=integer - specify how many records per page (automatically limited to between 1 and record count)\n\t\t2. page=integer - specify the page\n\t\t3. details - gives optional 'tags' and 'photos' properties in the data body\n\t\t4. inactive - allow searching for inactive (active=false) products\n\t* body: n/a\n2. response: see example\n\t* headers:\n\t\t1. Content-Type: application/json,\n\t\t2. Link: pagination string to be parsed with parse-link-header\n\t* body:\n\t\t1. data: contains a list of products (with optional details, tags, photos)\n\t\t2. pagination: pagination related information\n3. notes:\n\t* per_page and page must both be present in order to trigger pagination functionality\n\t* by default, only active records are retrieved"
 							},
 							"response": [
 								{
-									"id": "b68c4f32-8914-47a0-85c4-3d9fcaf80958",
+									"id": "b62232f5-c665-4f9f-a33b-ed491056bfcf",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
@@ -2089,7 +2089,7 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "c75be6e4-663c-4cc0-b739-0ed8f2c2620d",
+									"id": "e117edbc-b16d-47a4-a104-f51100e9c729",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
@@ -2210,7 +2210,7 @@
 							},
 							"response": [
 								{
-									"id": "1c12a0c3-4671-4ef2-9d39-8f8c0ebe3388",
+									"id": "22ca78e9-2fca-426d-b8cd-260316248227",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"method": "GET",
@@ -2314,7 +2314,7 @@
 							},
 							"response": [
 								{
-									"id": "372542fe-0911-4727-8b76-9c626f207c40",
+									"id": "9070bd35-a46b-4e8f-ba2d-126cbc51212e",
 									"name": "delete product record by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2425,7 +2425,7 @@
 							},
 							"response": [
 								{
-									"id": "a9fd3faa-a8ff-49dd-bdc1-4829fb21d1ab",
+									"id": "e3e696dc-80dd-4163-9fa5-639b9f3bbbb9",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"method": "GET",
@@ -2530,7 +2530,7 @@
 							},
 							"response": [
 								{
-									"id": "8bf4942d-5a8e-4bb1-8d63-b70ff06ddc3d",
+									"id": "1632cfc6-9dcd-45c3-8941-81dc52738baf",
 									"name": "example",
 									"originalRequest": {
 										"method": "GET",
@@ -2637,7 +2637,7 @@
 							},
 							"response": [
 								{
-									"id": "2c06e6c5-6c37-4335-9920-ec738ee51f06",
+									"id": "c3a1209c-5175-4241-bc2f-8f14c8436693",
 									"name": "insert a new series",
 									"originalRequest": {
 										"method": "POST",
@@ -2768,7 +2768,7 @@
 							},
 							"response": [
 								{
-									"id": "ab14010a-bb5b-443a-a583-6b04f72bee21",
+									"id": "d10bce21-2577-4249-8c44-c417a46d4065",
 									"name": "remove series by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2887,7 +2887,7 @@
 							},
 							"response": [
 								{
-									"id": "786a84f8-06c7-4e24-9a8c-2101850993bb",
+									"id": "1489c193-dc53-4d66-8dbc-f5ece7187e22",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2967,7 +2967,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "134fbe54-3bc6-4773-8766-edfb10483e63",
+									"id": "ab4ff9d2-91db-4de3-91b6-f43cc7a24ce4",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3059,7 +3059,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "f4018390-6fa4-4ded-9c76-5f6cf5f90296",
+									"id": "eac0c775-8728-4f2d-a147-6607f8319852",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3146,7 +3146,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "9f1879bc-eb7e-4e1d-a59b-08aad2b905d1",
+									"id": "e9ed2e21-de61-48f3-a4bb-c6d3d89a1691",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3233,7 +3233,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "83921097-ea79-4b94-ba8c-92495acd3090",
+									"id": "c81ef359-04ac-4d49-868a-74df5e089a86",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3377,7 +3377,7 @@
 							},
 							"response": [
 								{
-									"id": "c0336205-8479-43be-9ea6-6dee720ac2df",
+									"id": "be29328e-f274-4212-a3dd-cbec32eb7af5",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"method": "POST",
