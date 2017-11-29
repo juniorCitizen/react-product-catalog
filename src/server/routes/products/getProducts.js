@@ -20,7 +20,7 @@ module.exports = (() => {
         })
         .catch(error => next(error))
     },
-    paginationProcessing(20, 100),
+    paginationProcessing,
     (req, res, next) => {
       return db.Products
         .findAll(req.queryOptions)
