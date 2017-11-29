@@ -102,10 +102,15 @@ function json (req, res, next) {
   if ('linkHeader' in req) {
     Object.assign(req.resJson, {
       pagination: {
-        totalRecords: req.linkHeader.last.per_page * req.linkHeader.last.page,
+        totalRecords: req.dataSourceRecordCount,
         totalPages: req.linkHeader.last.page,
         perPage: req.linkHeader.last.per_page,
-        currentPage: req.linkHeader.self.page
+        currentPage: req.linkHeader.self.page,
+        first: req.linkHeader.first.url,
+        prev: req.linkHeader.prev === undefined ? undefined : req.linkHeader.prev.url,
+        self: req.linkHeader.self.url,
+        next: req.linkHeader.next === undefined ? undefined : req.linkHeader.next.url,
+        last: req.linkHeader.last.url
       }
     })
   }
