@@ -30,7 +30,7 @@ class Login extends React.Component {
 
     checkAuth() {
         const { dispatch, login } = this.props
-        const token = window.localStorage["jwt-admin-token"]
+        const token = window.localStorage["jwt-token"]
         if (token) {
             let admin = []
             dispatch(admin_info(admin))

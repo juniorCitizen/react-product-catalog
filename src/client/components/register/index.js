@@ -41,7 +41,16 @@ class Register  extends React.Component {
     }
 
     componentDidMount() {
+        this.checkAuth()
+    }
 
+    checkAuth() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (token) {
+            dispatch(user_info(jwt_info(token)))
+            this.props.history.push("/");
+        }
     }
 
     inputChange(cont, e) {
@@ -117,7 +126,6 @@ class Register  extends React.Component {
 
     submitSuccess() {
         const { dispatch } = this.props
-        let user = []
         dispatch(user_info(user))
         console.log(window.localStorage["jwt-token"])
         this.props.history.push("/");
