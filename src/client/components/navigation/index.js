@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { user_info, user_logout } from '../../actions'
 import Confirm from '../../containers/modal/confirm'
+import { jwt_info } from '../../lib/index'
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -40,10 +41,8 @@ class Navigation extends React.Component {
     checkLogin() {
         const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
-        const auth = login.user_info.auth
-        let user = []
         if (token) {
-            dispatch(user_info(user))
+            dispatch(user_info(jwt_info(token)))
         }
     }
 
@@ -65,7 +64,7 @@ class Navigation extends React.Component {
         const { select, confirmShow, confirmMsg } = this.state
         const { login } = this.props
         const auth = login.user_info.auth
-        console.log(login)
+        console.log(login.user_info)
         return( 
             <div>
                 <div className="container">

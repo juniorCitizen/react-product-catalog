@@ -1,8 +1,14 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Nav from '../navigation'
+import { user_info } from '../../actions'
+import { connect } from 'react-redux'
+import config from '../../config'
+import qs from 'qs'
+import { jwt_info } from '../../lib/index'
 
-export default class Register  extends React.Component {
+class Register  extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -11,9 +17,16 @@ export default class Register  extends React.Component {
                 email: '',
                 password: '',
                 confirm: '',
+                mobile: null,
+                website: null,
+                fax: null,
                 name: '',
                 address: '',
-                contact: '',
+                telephone: '',
+                company: 'My Fake Company',
+                countryId: 'twn',
+                botPrevention: null,
+                admin: false,
             },
             msg:{
                 email: '',
@@ -21,7 +34,7 @@ export default class Register  extends React.Component {
                 confirm: '',
                 name: '',
                 address: '',
-                contact: '',
+                telephone: '',
                 submit: '',
             },
             isLoading: false,
@@ -29,7 +42,16 @@ export default class Register  extends React.Component {
     }
 
     componentDidMount() {
+        this.checkAuth()
+    }
 
+    checkAuth() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (token) {
+            dispatch(user_info(jwt_info(token)))
+            this.props.history.push("/");
+        }
     }
 
     inputChange(cont, e) {
@@ -38,6 +60,7 @@ export default class Register  extends React.Component {
         form[cont] = text
         msg[cont] = ''
         this.setState({ form: form })
+        this.checkPassword()
     }
 
     checkEmail() {
@@ -49,7 +72,9 @@ export default class Register  extends React.Component {
         if (form.password !== form.confirm) {
            msg.confirm = '密碼與確認密碼不一致'
            this.setState({msg: msg}) 
+           return
         }
+        this.setState({msg: msg})
     }
 
     checkSpace() {
@@ -57,6 +82,7 @@ export default class Register  extends React.Component {
         let err = false
         Object.keys(form).map((key) => {
             if (form[key] === '') {
+                console.log(key + ' can\'t  empty')
                 msg[key] = '必填'
                 this.setState({msg: msg})
                 err = true
@@ -70,29 +96,39 @@ export default class Register  extends React.Component {
             return
         }
         const { form, msg } = this.state
+        const self = this
         let url = ''
+        delete form.confirm;
         let form_data = new FormData()
         Object.keys(form).map((key) => {
             form_data.append(key, form[key])
         })
-
-        axios.post(url, form_data)
+        axios({
+            method: 'post',
+            url: config.route.register,
+            data: qs.stringify(form),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
         .then(function (response) {
-            let res = response.data
-            if (res.result) {
+            console.log(response.data)
+            if (response.status === 200) {
+                window.localStorage["jwt-token"] = response.data.data
                 self.submitSuccess()
             } else {
                 self.submitError(res.msg)
             }
         }).catch(function (error) {
             console.log(error)
-            self.submitError(error)
         })
-        
     }
 
     submitSuccess() {
-
+        const { dispatch } = this.props
+        const token = window.localStorage["jwt-token"]
+        dispatch(user_info(jwt_info(token)))
+        this.props.history.push("/");
     }
 
     submitError(str) {
@@ -105,7 +141,7 @@ export default class Register  extends React.Component {
     }
 
     render() {
-        const { auth, form, msg } = this.state
+        const { auth, form, msg, confirm } = this.state
         return (
             <div>
                 <Nav tab="register"/>
@@ -135,7 +171,7 @@ export default class Register  extends React.Component {
                                     <label className="label">確認密碼</label>
                                     <div className="control">
                                         <input className="input" type="password" placeholder="再次確認密碼"
-                                            value={form.confirm} onChange={this.inputChange.bind(this, 'confirm')}
+                                            value={confirm} onChange={this.inputChange.bind(this, 'confirm')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.confirm}</p>
@@ -162,10 +198,10 @@ export default class Register  extends React.Component {
                                     <label className="label">聯絡電話</label>
                                     <div className="control">
                                         <input className="input" type="text" placeholder="請輸入聯絡電話" 
-                                            value={form.contact} onChange={this.inputChange.bind(this, 'contact')}
+                                            value={form.telephone} onChange={this.inputChange.bind(this, 'telephone')}
                                         />
                                     </div>
-                                    <p className="help is-danger">{msg.contact}</p>
+                                    <p className="help is-danger">{msg.telephone}</p>
                                 </div>
                                 <div className="field-body">
                                     <div className="field">
@@ -194,3 +230,12 @@ const style = {
         padding: '10px',
     },
 }
+
+function mapStateToProps(state) {
+	const { login } = state
+	return {
+        login
+	}
+}
+
+export default connect(mapStateToProps)(Register)

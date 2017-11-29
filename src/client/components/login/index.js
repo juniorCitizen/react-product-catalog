@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import Nav from '../navigation'
 import { user_info } from '../../actions'
 import { connect } from 'react-redux'
+import qs from 'qs'
 import config from '../../config'
-
-const api = config.api
+import { jwt_info } from '../../lib/index'
 
 class Login extends React.Component {
     constructor(props) {
@@ -14,7 +14,6 @@ class Login extends React.Component {
         this.state = {
             form: {
                 email: '',
-                loginId: '',
                 password: '',
                 botPrevention: '',
             },
@@ -37,9 +36,8 @@ class Login extends React.Component {
     checkAuth() {
         const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
-        let user = []
         if (token) {
-            dispatch(user_info(user))
+            dispatch(user_info(jwt_info(token)))
             this.props.history.push("/");
         }
     }
@@ -57,6 +55,7 @@ class Login extends React.Component {
         let err = false
         Object.keys(form).map((key) => {
             if (form[key] === '' && !this.igone(key)) {
+                console.log(key + ' can\'t  empty')
                 msg[key] = '不得空白'
                 this.setState({msg: msg})
                 err = true
@@ -84,20 +83,19 @@ class Login extends React.Component {
         }
         axios({
             method: 'post',
-            url: api + 'tokens',
-            data: form,
+            url: config.route.tokens,
+            data: qs.stringify(form),
             headers: {
-                'x-access-token': window.localStorage["jwt-token"],
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
         .then(function (response) {
+            console.log(response.data)
             if (response.status === 200) {
-                console.log(response.data)
                 window.localStorage["jwt-token"] = response.data.data
                 self.loginSuccess()
             } else {
-                console.log(response.data)
+                loginError(response.error.message)
             }
         }).catch(function (error) {
             console.log(error)
@@ -106,9 +104,8 @@ class Login extends React.Component {
 
     loginSuccess() {
         const { dispatch } = this.props
-        let user = []
-        dispatch(user_info(user))
-        console.log(window.localStorage["jwt-token"])
+        const token = window.localStorage["jwt-token"]
+        dispatch(user_info(jwt_info(token)))
         this.props.history.push("/");
     }
 
@@ -133,17 +130,8 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">電子郵件</label>
                                     <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入電子郵件"
+                                        <input className="input" type="text" placeholder="請輸入電子郵件"  maxLength="20"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
-                                        />
-                                    </div>
-                                    <p className="help is-danger">{msg.email}</p>
-                                </div>
-                                <div className="field">
-                                    <label className="label">帳號</label>
-                                    <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入帳號"
-                                            value={form.loginId} onChange={this.inputChange.bind(this, 'loginId')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.email}</p>
@@ -151,7 +139,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">密碼</label>
                                     <div className="control">
-                                        <input className="input" type="password" placeholder="請輸入密碼"
+                                        <input className="input" type="password" placeholder="請輸入密碼"  maxLength="20"
                                             value={form.password} onChange={this.inputChange.bind(this, 'password')}
                                         />
                                     </div>
