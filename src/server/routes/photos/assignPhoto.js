@@ -3,42 +3,60 @@ const db = require('../../controllers/database')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = {
-  toSeries: assignPhotoToSeries(),
-  toProduct: assignPhotoToProduct()
+  toSeries: assignSeriesId(),
+  toProduct: assignProductId()
 }
 
-function assignPhotoToProduct () {
-  return [validateJwt, (req, res, next) => {
-    return db.Photos
-      .findById(req.params.photoId.toUpperCase())
-      .then(targetRecord => {
-        return targetRecord.update({ productId: req.params.productId.toUpperCase() })
-      })
-      .then(updatedRecord => {
-        let data = updatedRecord.dataValues
-        delete data.data
+function assignProductId () {
+  return [
+    validateJwt({ admin: true }),
+    (req, res, next) => {
+      return db.Photos
+        .update({
+          productId: req.params.productId.toUpperCase(),
+          primary: false
+        }, {
+          where: { id: req.params.photoId.toUpperCase() }
+        })
+        .then(() => db.Photos
+          .findById(req.params.photoId.toUpperCase(), {
+            attributes: { exclude: ['data'] }
+          }))
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
+    }
+  ]
+}
+
+function assignSeriesId () {
+  return [
+    validateJwt({ admin: true }),
+    (req, res, next) => {
+      return db.sequelize.transaction(trx => {
+        // make sure no other photo has the same seriesId
+        return db.Photos
+          .update({ seriesId: null }, {
+            where: { seriesId: req.params.seriesId.toUpperCase() },
+            transaction: trx
+          })
+          // actually update the target
+          .then(() => db.Photos.update({
+            seriesId: req.params.seriesId.toUpperCase()
+          }, {
+            where: { id: req.params.photoId.toUpperCase() },
+            transaction: trx
+          }))
+      }).then(() => db.Photos.findById(req.params.photoId.toUpperCase(), {
+        attributes: { exclude: ['data'] }
+      })).then(data => {
         req.resJson = { data }
         next()
         return Promise.resolve()
-      })
-      .catch(error => next(error))
-  }]
-}
-
-function assignPhotoToSeries () {
-  return [validateJwt, (req, res, next) => {
-    return db.Photos
-      .findById(req.params.photoId.toUpperCase())
-      .then(targetRecord => {
-        return targetRecord.update({ seriesId: parseInt(req.params.seriesId) })
-      })
-      .then(updatedRecord => {
-        let data = updatedRecord.dataValues
-        delete data.data
-        req.resJson = { data }
-        next()
-        return Promise.resolve()
-      })
-      .catch(error => next(error))
-  }]
+      }).catch(error => next(error))
+    }
+  ]
 }

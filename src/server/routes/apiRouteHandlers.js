@@ -23,19 +23,11 @@ API_ROUTER.route('/photos/:photoId')
   .patch(...require('./photos/patchPhotoById')) // patching primary or active status
   .delete(...require('./photos/removePhotoById')) // remove photo by id
 
-// API_ROUTER.route('/photos/:photoId/products/:productId')
-//   .get(notImplemented)
-//   .post(notImplemented)
-//   .put(notImplemented)
-//   .patch(...require('./photos/assignPhoto').toProduct) // assign a photo to a product
-//   .delete(notImplemented)
+API_ROUTER.route('/photos/:photoId/products/:productId')
+  .post(...require('./photos/assignPhoto').toProduct) // assign productId to a photo
 
-// API_ROUTER.route('/photos/:photoId/series/:seriesId')
-//   .get(notImplemented)
-//   .post(notImplemented)
-//   .put(notImplemented)
-//   .patch(...require('./photos/assignPhoto').toSeries) // assign a photo to a series
-//   .delete(notImplemented)
+API_ROUTER.route('/photos/:photoId/series/:seriesId')
+  .post(...require('./photos/assignPhoto').toSeries) // assign seriesId to a photo
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
