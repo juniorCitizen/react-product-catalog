@@ -6,6 +6,7 @@ import { user_info } from '../../actions'
 import { connect } from 'react-redux'
 import qs from 'qs'
 import config from '../../config'
+import { jwt_info } from '../../lib/index'
 
 class Login extends React.Component {
     constructor(props) {

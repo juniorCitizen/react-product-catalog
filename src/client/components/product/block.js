@@ -26,18 +26,18 @@ class Block extends React.Component {
     }
 
     getHotList() {
-        this.setState({new_list: []})
+        this.setState({hot_list: []})
     }
 
     getNewList() {
-        this.setState({hot_list: []})
+        this.setState({new_list: []})
     }
 
     getProductList(code) {
         console.log('series code:' + code)
         if (code === null) {
             //this.getHotList()
-            this.getNewList()
+            //this.getNewList()
             return
         }
         return

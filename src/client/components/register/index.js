@@ -6,6 +6,7 @@ import { user_info } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 import qs from 'qs'
+import { jwt_info } from '../../lib/index'
 
 class Register  extends React.Component {
     constructor(props) {

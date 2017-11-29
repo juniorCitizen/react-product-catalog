@@ -15,7 +15,7 @@ class Series extends React.Component {
     }
 
     componentDidMount() {
-        //this.getSeries()
+        this.getSeries()
     }
 
     selectSeries(id) {

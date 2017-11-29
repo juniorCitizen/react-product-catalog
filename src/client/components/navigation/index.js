@@ -55,7 +55,7 @@ class Navigation extends React.Component {
 
     logout() {
         const { dispatch } = this.props
-        window.localStorage["jwt-token"] = null
+        window.localStorage["jwt-token"] = ''
         dispatch(user_logout())
         window.location = '/'
     }
