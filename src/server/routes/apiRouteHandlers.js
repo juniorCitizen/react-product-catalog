@@ -39,10 +39,10 @@ API_ROUTER.route('/products')
 //   .delete(notImplemented)
 API_ROUTER.route('/products/:productId')
   .get(...require('./products/getProductById')) // get product record by id
-//   .post(notImplemented)
-//   .put(...require('./products/updateProduct')) // update multiple product fields by id
-//   .patch(notImplemented)
-//   .delete(...require('./products/deleteProduct')) // delete product by id
+  //   .post(notImplemented)
+  //   .put(...require('./products/updateProduct')) // update multiple product fields by id
+  //   .patch(notImplemented)
+  .delete(...require('./products/deleteProduct')) // delete product by id
 // API_ROUTER.route('/products/:productId/series/:seriesId')
 //   .get(notImplemented)
 //   .post(notImplemented)
