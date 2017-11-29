@@ -20,7 +20,7 @@ API_ROUTER.route('/photos')
 
 API_ROUTER.route('/photos/:photoId')
   .get(...require('./photos/getPhotoById')) // get photo by id
-  // .patch(...require('./photos/togglePhotoPublishState')) // publish/unpublish a photo
+  .patch(...require('./photos/patchPhotoById')) // patching primary or active status
   .delete(...require('./photos/removePhotoById')) // remove photo by id
 
 // API_ROUTER.route('/photos/:photoId/products/:productId')
