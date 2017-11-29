@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "011daede-29ba-4edd-b1dd-f058cbed3290",
+							"id": "51b33cbe-6974-4407-ac7f-086465986f81",
 							"name": "register a user account",
 							"originalRequest": {
 								"method": "POST",
@@ -298,7 +298,7 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "8eb6bf51-b5b2-4060-9f7a-f9077bec2e3e",
+							"id": "ac029f97-56a1-4e2d-93d0-46b72e0f18b1",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
 								"method": "POST",
@@ -1269,39 +1269,7 @@
 						},
 						{
 							"name": "DELETE",
-							"item": [
-								{
-									"name": "assign a product to a series",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwNjI3Mjg5LCJleHAiOjE1MTA3MTM2ODl9.DsTfpU7fzen6KsGgYf0A6I8VmGfeWO3v290i3gP2cNI"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/64688096-7A4C-49AD-88AB-1AEB2FC27D19",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"64688096-7A4C-49AD-88AB-1AEB2FC27D19"
-											]
-										}
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"_postman_isSubFolder": true
 						}
 					],
@@ -1375,7 +1343,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMjI4NDI3LCJleHAiOjE1MTEzMTQ4Mjd9.moeQqJtRH741Jt_tjBMRs12qiKAwR4B1XNZYsC3Rf2E"
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkyMTk2OCwiZXhwIjoxNTEyMDA4MzY4fQ.oqEh-UwNKu2Q4NFUh8LEjKcHhdoAq5t5ImDHhEnW0Ks"
 									},
 									{
 										"key": "Content-Type",
@@ -1386,24 +1354,11 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "primary",
-											"value": "false",
-											"type": "text"
-										},
-										{
-											"key": "publish",
-											"value": "true",
-											"type": "text"
-										},
-										{
-											"key": "seriesId",
-											"value": "3",
-											"type": "text"
-										},
-										{
 											"key": "photos",
-											"value": "",
-											"type": "file"
+											"description": "",
+											"type": "file",
+											"src": "GT-20061BR with wrist strap.JPG",
+											"disabled": true
 										}
 									]
 								},
@@ -1424,7 +1379,7 @@
 							},
 							"response": [
 								{
-									"id": "3fb20c70-8473-40b9-86a1-dc85a9fa2d4f",
+									"id": "0f6c6a2e-1d16-4e05-8a2a-b8616f3bf705",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"method": "POST",
@@ -1521,6 +1476,119 @@
 									"body": "{\"data\":[\"04BEEF97-8B07-45D0-B754-FE6C57FCD4ED\",\"538396E7-3E4D-4068-8E2E-362934BBE7EE\"],\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/photos\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								}
 							]
+						},
+						{
+							"name": "delete photo by id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTEwNjI3Mjg5LCJleHAiOjE1MTA3MTM2ODl9.DsTfpU7fzen6KsGgYf0A6I8VmGfeWO3v290i3gP2cNI"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/photos/64688096-7A4C-49AD-88AB-1AEB2FC27D19",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"photos",
+										"64688096-7A4C-49AD-88AB-1AEB2FC27D19"
+									]
+								},
+								"description": "request\n\theader: x-access-token: jwt token with admin privilege\nresponse\n\theader: application/json\n\tbody: upon success, data will be an integer of how many records are removed (should always be 1)"
+							},
+							"response": [
+								{
+									"id": "2bbab703-6112-45ab-ae9e-967a4fa1d4f0",
+									"name": "delete photo by id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"photos",
+												"3CC6E7B9-A296-438E-A015-6221FEF8C15D"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "167",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 29 Nov 2017 06:58:04 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"a7-bD/EpKU6xRdHlQPNbhwefc4KHhY\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 78,
+									"body": "{\"data\":1,\"method\":\"delete\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
 						}
 					],
 					"_postman_isSubFolder": true
@@ -1552,7 +1620,7 @@
 							},
 							"response": [
 								{
-									"id": "6e669aad-5f56-4f9a-a133-f1557c437d9f",
+									"id": "9d59b2fb-7c17-4ea7-ba75-d9e28f34e349",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"method": "GET",
@@ -1657,7 +1725,7 @@
 							},
 							"response": [
 								{
-									"id": "593fcf88-cb1c-4b68-b763-d40cce038384",
+									"id": "9e15bf42-66f2-42b1-9e53-11a4ca4ea5d5",
 									"name": "example",
 									"originalRequest": {
 										"method": "GET",
@@ -1764,7 +1832,7 @@
 							},
 							"response": [
 								{
-									"id": "4c744ccb-f99d-4a7a-b512-affd1bac545e",
+									"id": "bca91ea6-fe6d-40a9-abcb-12420f3cffa5",
 									"name": "insert a new series",
 									"originalRequest": {
 										"method": "POST",
@@ -1895,7 +1963,7 @@
 							},
 							"response": [
 								{
-									"id": "2e3be36d-81a0-4aae-bbc5-60f66111e320",
+									"id": "e8c5f9d5-a3cf-46ba-b1a4-39b9aedbafe7",
 									"name": "remove series by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2014,7 +2082,7 @@
 							},
 							"response": [
 								{
-									"id": "463b236d-62b1-41ec-be93-944240681892",
+									"id": "369b105b-f1e9-4680-8208-14ad2cee40ed",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2094,7 +2162,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "7f5d51d1-7d74-4d5c-b2cc-353d79b9bfc1",
+									"id": "a61582fa-7b6d-4e22-8a03-e71931ac3749",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2186,7 +2254,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "561164c1-e52c-475b-a93c-fff0a5d238f1",
+									"id": "ddd7194f-101c-4498-b327-17c50ef277dc",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2273,7 +2341,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "198d2c06-c76d-4870-a618-48cac6fb3ce2",
+									"id": "76f79f18-213a-4bf6-90bd-a1c22abc0bb3",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2360,7 +2428,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "89d10bcd-6c90-459c-a641-68875dfa0099",
+									"id": "b9600b9c-ce64-481d-b647-812cd4b628d8",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2504,7 +2572,7 @@
 							},
 							"response": [
 								{
-									"id": "6a09b4a8-9f14-4c37-918f-3228d053789a",
+									"id": "94a0d1ab-df15-4160-bd64-c5c4e21cf64a",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"method": "POST",

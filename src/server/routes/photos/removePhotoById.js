@@ -4,7 +4,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = (() => {
   return [
-    validateJwt,
+    validateJwt({ admin: true }),
     (req, res, next) => {
       return db.Photos
         .destroy({ where: { id: req.params.photoId.toUpperCase() } })
