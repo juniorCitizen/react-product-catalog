@@ -16,7 +16,7 @@ const detailedOptions = {
         'order',
         [db.Products, 'code'],
         [db.Products, db.Tags, 'name'],
-        [db.Products, db.Photos, 'primary', 'DESC']
+        [db.Products, db.Photos, 'primary', 'desc']
       ]
     }
   },
@@ -32,7 +32,7 @@ const detailedOptions = {
       order: [
         'code',
         [db.Tags, 'name'],
-        [db.Photos, 'primary', 'DESC']
+        [db.Photos, 'primary', 'desc']
       ]
     }
   }
