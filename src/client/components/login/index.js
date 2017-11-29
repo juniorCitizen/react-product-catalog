@@ -55,6 +55,7 @@ class Login extends React.Component {
         let err = false
         Object.keys(form).map((key) => {
             if (form[key] === '' && !this.igone(key)) {
+                console.log(key + ' can\'t  empty')
                 msg[key] = '不得空白'
                 this.setState({msg: msg})
                 err = true
@@ -85,7 +86,6 @@ class Login extends React.Component {
             url: config.route.tokens,
             data: qs.stringify(form),
             headers: {
-                'x-access-token': window.localStorage["jwt-token"],
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
@@ -130,7 +130,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">電子郵件</label>
                                     <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入電子郵件"
+                                        <input className="input" type="text" placeholder="請輸入電子郵件"  maxLength="20"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
                                         />
                                     </div>
@@ -139,7 +139,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">密碼</label>
                                     <div className="control">
-                                        <input className="input" type="password" placeholder="請輸入密碼"
+                                        <input className="input" type="password" placeholder="請輸入密碼"  maxLength="20"
                                             value={form.password} onChange={this.inputChange.bind(this, 'password')}
                                         />
                                     </div>

@@ -34,11 +34,9 @@ class Admin extends React.Component {
 
     checkAdmin() {
         const { dispatch, login } = this.props
-        console.log(login)
         const token = window.localStorage["jwt-admin-token"]
-        let admin = []
         if (token) {
-            dispatch(admin_info(info))
+            dispatch(admin_info(jwt_info(token)))
         }
     }
 

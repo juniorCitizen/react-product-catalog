@@ -4,21 +4,20 @@ import { Link } from 'react-router-dom'
 import { admin_info } from '../../../actions'
 import { connect } from 'react-redux'
 import config from '../../../config'
+import qs from 'qs'
 import { jwt_info } from '../../../lib/index'
-
-const api = config.api
 
 class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            token: '',
             form: {
-                loginId: '',
+                email: '',
                 password: '',
+                botPrevention: '',
             },
             msg:{
-                loginId: '',
+                email: '',
                 password: '',
             },
             isLoading: false,
@@ -50,7 +49,8 @@ class Login extends React.Component {
         let { form, msg } = this.state
         let err = false
         Object.keys(form).map((key) => {
-            if (form[key] === '') {
+            if (form[key] === '' && !this.igone(key)) {
+                console.log(key + ' can\'t  empty')
                 msg[key] = '不得空白'
                 this.setState({msg: msg})
                 err = true
@@ -59,31 +59,35 @@ class Login extends React.Component {
         return err
     }
 
+    igone(key) {
+        let igone = ['botPrevention']
+        let check = false
+        igone.map((item) => {
+            if (item === key) {
+                check = true
+            }
+        })
+        return check
+    }
+
     login() {
         const { form, msg } = this.state
         const self = this
         if (this.checkSpace()) {
             return
         }
-        this.loginSuccess()
-        return
         axios({
             method: 'post',
-            url: api + 'tokens',
-            data: form,
+            url: config.route.tokens,
+            data: qs.stringify(form),
             headers: {
-                'x-access-token': window.localStorage["jwt-admin-token"],
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
         .then(function (response) {
             if (response.status === 200) {
                 console.log(response.data)
-                window.localStorage["jwt-admin-token"] = response.data.data
-                self.setState({
-                    token: response.data.data,
-                })
-                self.loginSuccess()
+                self.tokenCheck(response.data.data)
             } else {
                 console.log(response.data)
             }
@@ -92,18 +96,28 @@ class Login extends React.Component {
         })
     }
 
+    tokenCheck(token) {
+        if (jwt_info(token).admin) {
+            window.localStorage["jwt-admin-token"] = token
+            this.loginSuccess()
+            return
+        }
+        this.loginError('您沒有管理員權限')
+    }
+
     loginSuccess() {
         const { dispatch, match } = this.props
-        let admin = []
-        dispatch(admin_info(admin))
-        console.log(window.localStorage["jwt-admin-token"])
-        this.props.history.push(match.url + '/product');
+        const token = window.localStorage["jwt-admin-token"]
+        if (token) {
+            dispatch(admin_info(jwt_info(token)))
+            this.props.history.push(match.url + '/admin');
+        }
     }
 
     loginError(str) {
         let msg = this.state.msg
         msg.submit = str
-        self.setState({
+        this.setState({
             msg: msg,
             isLoading: false
         })
@@ -120,8 +134,8 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">帳號</label>
                                     <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入帳號"
-                                            value={form.loginId} onChange={this.inputChange.bind(this, 'loginId')}
+                                        <input className="input" type="text" placeholder="請輸入帳號" maxLength="20"
+                                            value={form.email} onChange={this.inputChange.bind(this, 'email')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.email}</p>
@@ -129,7 +143,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">密碼</label>
                                     <div className="control">
-                                        <input className="input" type="password" placeholder="請輸入密碼"
+                                        <input className="input" type="password" placeholder="請輸入密碼" maxLength="20"
                                             value={form.password} onChange={this.inputChange.bind(this, 'password')}
                                         />
                                     </div>
@@ -141,7 +155,7 @@ class Login extends React.Component {
                                             <button className="button is-primary" onClick={this.login.bind(this)}>
                                                 登入
                                             </button>
-                                            <span className="help is-danger">{msg.login}</span>
+                                            <span className="help is-danger">{msg.submit}</span>
                                         </div>
                                     </div>
                                 </div>

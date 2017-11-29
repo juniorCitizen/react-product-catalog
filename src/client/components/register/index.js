@@ -108,7 +108,6 @@ class Register  extends React.Component {
             url: config.route.register,
             data: qs.stringify(form),
             headers: {
-                'x-access-token': window.localStorage["jwt-token"],
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
