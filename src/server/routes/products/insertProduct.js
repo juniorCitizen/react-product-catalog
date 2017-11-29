@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const piexif = require('piexifjs')
-const uploads = require('multer')({ dest: require('path').resolve('./upload') })
+const uploads = require('multer')({ dest: require('path').resolve('./uploads') })
 
 const db = require('../../controllers/database')
 const eVars = require('../../config/eVars')
