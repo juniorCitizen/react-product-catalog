@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "270dba28-089a-4b7c-99ff-52c2a6a5c80a",
+							"id": "2599a122-7934-4ba6-b37d-9aa1c88ee0b4",
 							"name": "register a user account",
 							"originalRequest": {
 								"method": "POST",
@@ -298,7 +298,7 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "529798df-b722-4921-874b-c9caffe7f93d",
+							"id": "c1b50e79-045f-411a-b62a-4029e526acad",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
 								"method": "POST",
@@ -1463,7 +1463,7 @@
 							},
 							"response": [
 								{
-									"id": "ffc1bbe4-0cc9-4bff-9419-4e4db1080335",
+									"id": "7548574d-6715-4834-add2-b691a0dc80b6",
 									"name": "insert a new series",
 									"originalRequest": {
 										"method": "POST",
@@ -1594,7 +1594,7 @@
 							},
 							"response": [
 								{
-									"id": "42b20404-3c1d-4328-a887-604bf91e326e",
+									"id": "c853d450-d239-4948-bed6-dd85e35c65c5",
 									"name": "remove series by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1713,7 +1713,7 @@
 							},
 							"response": [
 								{
-									"id": "fab981c6-192a-484d-9af2-221b1246c0ac",
+									"id": "d771d556-456e-443a-b478-71331dbda7d2",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1793,7 +1793,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "465f410e-a24b-4179-b2c2-e3310489488d",
+									"id": "d487e48b-1a77-4ff2-8bcf-a99703b069f5",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1885,7 +1885,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "050088e5-3662-4f6e-ba8c-0a3d7cbaa62a",
+									"id": "593c48e9-d55e-4665-8291-e2ccb03cef32",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1972,7 +1972,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "a98a3f2e-568a-4524-8211-51444293bc65",
+									"id": "e32b651f-1168-40ce-94c9-1b4b6fe59168",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2059,7 +2059,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "728df9b7-4898-4515-8f73-c4c5fbb4bfdc",
+									"id": "d0dd831f-d580-46a5-89e3-5fab4ea787d5",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2173,11 +2173,11 @@
 										"productMenus"
 									]
 								},
-								"description": "bug: some menus does not get the tagMenu (should at least have a empty array []), seems to be happening on new series inserts still without associations 'products'"
+								"description": ""
 							},
 							"response": [
 								{
-									"id": "d362d3e4-06d3-4fe2-a713-ec5726fa9f93",
+									"id": "aea2576f-6137-413b-9558-a70b4b6af36f",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"method": "GET",
@@ -2307,7 +2307,7 @@
 							},
 							"response": [
 								{
-									"id": "04a4b200-8b9b-489d-9b0a-ddd0ddf6fcc9",
+									"id": "c90264d0-d5e7-465e-baa0-a1b41358844e",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"method": "POST",

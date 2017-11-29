@@ -81,6 +81,7 @@ function traverseSeriesTree (seriesTreeLevel) {
             }
           })
       } else {
+        seriesTreeNode.tagMenus = []
         // calls this function again to traverse it's child nodes
         if (seriesTreeNode.childSeries.length > 0) {
           return traverseSeriesTree(seriesTreeNode.childSeries)
@@ -129,12 +130,11 @@ function constructTagMenu (seriesTreeNode) {
             [db.Products, 'code']
           ]
         })
-        .then(tag => {
-          seriesTreeNode.tagMenus.push(tag[0])
-          return Promise.resolve()
-        })
     })
-    .then(() => Promise.resolve())
+    .then(tag => {
+      if (tag && tag.length > 0) seriesTreeNode.tagMenus.push(tag[0])
+      return Promise.resolve()
+    })
     .catch(error => Promise.reject(error))
 }
 
