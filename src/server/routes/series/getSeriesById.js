@@ -1,20 +1,27 @@
 const db = require('../../controllers/database')
 
-const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')('series')
-const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')('series')
-
-module.exports = (() => {
-  return [
-    setBaseQueryParameters,
-    setResponseDetailLevel,
-    (req, res, next) => {
-      return db.Series
-        .findById(req.params.seriesId, req.queryOptions)
-        .then((data) => {
-          req.resJson = { data: data.get({ plain: true }) }
-          next()
-          return Promise.resolve()
-        })
-        .catch(error => next(error))
-    }]
-})()
+module.exports = [
+  (req, res, next) => {
+    return db.Series
+      .findAll({
+        where: { id: req.params.seriesId.toUpperCase() },
+        include: [{
+          model: db.Products,
+          include: [{
+            model: db.Photos,
+            attributes: { exclude: ['data'] }
+          }]
+        }],
+        order: [
+          [db.Products, 'code'],
+          [db.Products, db.Photos, 'primary', 'desc']
+        ]
+      })
+      .then((data) => {
+        req.resJson = { data }
+        next()
+        return Promise.resolve()
+      })
+      .catch(error => next(error))
+  }
+]

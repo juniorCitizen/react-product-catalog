@@ -17,31 +17,17 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 API_ROUTER.route('/series')
-  .get(notImplemented)
   .post(...require('./series/insertSeries')) // insert a new series
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 API_ROUTER.route('/series/:seriesId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
+  .get(...require('./series/getSeriesById')) // get series details by id
   .patch(...require('./series/patchSeries')) // patching series properties
   .delete(...require('./series/removeSeries')) // delete series by id
 
 API_ROUTER.route('/tokens')
-  .get(notImplemented)
   .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Utilities
