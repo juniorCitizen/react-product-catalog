@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "06e8cd8a-ad0c-47ee-afee-ee8d68e02881",
+							"id": "58d94997-d163-45d5-85c6-bf55feafa71c",
 							"name": "register a user account",
 							"originalRequest": {
 								"method": "POST",
@@ -298,7 +298,7 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "033c9dc0-a6b8-491d-a0fd-e67b81c2a2cc",
+							"id": "ec85a07d-10a1-4ba7-8990-37f32ac9de57",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
 								"method": "POST",
@@ -1164,32 +1164,7 @@
 					"item": [
 						{
 							"name": "GET",
-							"item": [
-								{
-									"name": "get photo by id",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/91F6265B-4680-4525-9153-0A10DE6C812D",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"91F6265B-4680-4525-9153-0A10DE6C812D"
-											]
-										},
-										"description": null
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"_postman_isSubFolder": true
 						},
 						{
@@ -1428,17 +1403,152 @@
 			"description": "",
 			"item": [
 				{
-					"name": "series",
+					"name": "photos",
 					"description": "",
 					"item": [
 						{
-							"name": "get one series record with child products and photos",
+							"name": "get photo by id",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"body": {},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/series/606D647E-5172-49A6-9A53-740E21FD1608",
+									"raw": "http://localhost:9004/reactProductCatalog/api/photos/91F6265B-4680-4525-9153-0A10DE6C812D",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"photos",
+										"91F6265B-4680-4525-9153-0A10DE6C812D"
+									]
+								},
+								"description": "1. request:\n\t* headers: n/a\n\t* body: n/a\n2. response:\n\t* header: depends on the image type\n\t* body: raw image\n3. notes: if photo not found and svg place holder will be issued"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "productMenus",
+					"description": "",
+					"item": [
+						{
+							"name": "get tree structured product menus",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"productMenus"
+									]
+								},
+								"description": ""
+							},
+							"response": [
+								{
+									"id": "c098d5e2-31c0-41e5-a68e-41e54d571afd",
+									"name": "get tree structured product menus",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"productMenus"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "7037",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 28 Nov 2017 04:02:38 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1b7d-463yTEjdWKGukUpI1Ajh8pP9CSo\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 185,
+									"body": "{\"data\":[{\"id\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"name\":\"firewall\",\"order\":0,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"0C289D27-95E2-4E5D-ADFB-D7FEE244A1D9\",\"code\":\"231-3DMGY3\",\"active\":true,\"tags\":[]},{\"id\":\"E5A6E703-1ACE-4DC7-877E-D80F6C9505E0\",\"code\":\"420-CH8KEN\",\"active\":true,\"tags\":[]},{\"id\":\"A48836E1-394D-420A-9364-921CC8050ABA\",\"code\":\"844-76BG29\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"419C5871-B770-4F01-8F37-CB7860133E60\",\"code\":\"741-UAKLXL\",\"active\":true,\"tags\":[]},{\"id\":\"913E6768-4AAC-47CB-99C9-77D2381B7E12\",\"code\":\"785-57AY3G\",\"active\":true,\"tags\":[]},{\"id\":\"B9804610-D0AF-4C2F-88FD-E61EBA0C24C3\",\"code\":\"862-TFGBKD\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"47A26F86-6990-46E6-95C0-3B3345B3463F\",\"name\":\"pixel\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"5F350C10-E0F1-4117-A53D-0861810E36E4\",\"code\":\"463-XEMEV0\",\"active\":true,\"tags\":[]},{\"id\":\"CA9936AD-6FA1-4FB3-BC2F-289D252B4D59\",\"code\":\"499-58M2KN\",\"active\":true,\"tags\":[]},{\"id\":\"9F16DDD0-60EF-47CE-A662-806A2056A460\",\"code\":\"748-LB8A1U\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[]},{\"id\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"name\":\"hard drive\",\"order\":1,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"651ED3A4-5D0D-4161-9BBE-B52907940C29\",\"code\":\"186-1O75Z9\",\"active\":true,\"tags\":[]},{\"id\":\"2C561A5F-6903-4529-A6D4-23B8F65B72C6\",\"code\":\"297-CIQCPS\",\"active\":true,\"tags\":[]},{\"id\":\"F9E196F5-D428-410D-A4F8-C4A5CD08829F\",\"code\":\"627-RFNPSM\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"CEE85C24-3344-4067-B919-4769CDE948B1\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"EC9B8DA2-D993-45A0-8CE1-4BFFD4AFF883\",\"code\":\"474-D8A9VJ\",\"active\":true,\"tags\":[]},{\"id\":\"A28E9466-A9E3-4D4F-A965-E0A68A6CDAE7\",\"code\":\"694-B5YLRT\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"929C8B8D-4FF8-46FE-9039-463903377D7C\",\"name\":\"circuit\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"E5A80D05-6936-4767-86DA-631D82A317CA\",\"code\":\"149-5NO69G\",\"active\":true,\"tags\":[]},{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}},{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]},{\"id\":\"B5349E94-E21B-4C68-B81F-9609B587D56A\",\"code\":\"465-I5C0K2\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}}]},{\"id\":0,\"name\":\"Featured\",\"color\":\"DarkKhaki\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}}]},{\"id\":11,\"name\":\"New\",\"color\":\"LimeGreen\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]}]}],\"tagMenus\":[]},{\"id\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"name\":\"interface\",\"order\":2,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"4630578C-128C-40AD-9F28-A25FD56454DF\",\"code\":\"124-ZC4Z0I\",\"active\":true,\"tags\":[]},{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"tags\":[{\"id\":10,\"name\":\"Discount\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}},{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]},{\"id\":\"EF50070C-B85C-48FE-919E-BB9B3BBCBF13\",\"code\":\"944-KLHCW6\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"C3539411-E6DC-4BC3-B833-9976FAC1EA87\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"products\":[{\"id\":\"10FB3F85-C5CA-4449-B6F9-6865D0B8161A\",\"code\":\"255-D4L6G6\",\"active\":true,\"tags\":[]},{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}]}],\"tagMenus\":[{\"id\":10,\"name\":\"Discount\",\"color\":\"LavenderBlush\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}}]},{\"id\":8,\"name\":\"Extra Large\",\"color\":\"YellowGreen\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]}]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/productMenus\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "series",
+					"description": "",
+					"item": [
+						{
+							"name": "get series details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/series/C23551E5-4310-4BBF-B7E8-C26EBC162E9D",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1448,14 +1558,14 @@
 										"reactProductCatalog",
 										"api",
 										"series",
-										"606D647E-5172-49A6-9A53-740E21FD1608"
+										"C23551E5-4310-4BBF-B7E8-C26EBC162E9D"
 									]
 								},
 								"description": "1. request\n\t* header: n/a\n\t* body: n/a\n2. response:\n\t* header: application/json\n\t* response: see example\n\t\t1. a list of product is under 'products' array property\n\t\t2. under each product, a list of photo details (without actual photo data) is listed under 'photos' array properties\n3. notes:\n\t* primary photos is always listed as photos[0]\n\t* products are sorted by 'code' property"
 							},
 							"response": [
 								{
-									"id": "163bb9c4-4647-4583-9fcb-ae8cc85914d3",
+									"id": "05a79f26-904a-4159-b016-6804dd05edb9",
 									"name": "example",
 									"originalRequest": {
 										"method": "GET",
@@ -1562,7 +1672,7 @@
 							},
 							"response": [
 								{
-									"id": "c7b0bc36-1e6d-458b-b796-12c7d1c378a8",
+									"id": "3af53cda-6ac1-43fa-af58-0cc9c8ee63c3",
 									"name": "insert a new series",
 									"originalRequest": {
 										"method": "POST",
@@ -1693,7 +1803,7 @@
 							},
 							"response": [
 								{
-									"id": "4d37dc13-32fd-4dad-b5c7-bb0716615a8a",
+									"id": "94fd712f-fcca-40e3-820c-b6029e060a13",
 									"name": "remove series by id",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1812,7 +1922,7 @@
 							},
 							"response": [
 								{
-									"id": "aa26befd-24de-457f-9043-92efd564bdd1",
+									"id": "4d4bb401-4048-4606-ae5c-e35485b5d234",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1892,7 +2002,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "903da9cc-7cdb-4a5c-ab3c-e006b8b7bea2",
+									"id": "b6d5e236-2fc3-4e34-98b4-e69418a8662e",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -1984,7 +2094,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "ba194e79-25a0-4030-9b09-821e3f63f0e0",
+									"id": "a95fe62d-f2e2-4bbc-8bce-de33e7da439c",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2071,7 +2181,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "23c549dc-8930-4dac-82a6-9bed76ea3e3b",
+									"id": "c205121a-7154-462d-b8d7-c81f89eb3834",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2158,7 +2268,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "c9d2bba0-c585-44e8-af75-b539038d15ee",
+									"id": "ed6f7b38-367f-4675-94de-a7b13dabb20c",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2250,110 +2360,6 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "productMenus",
-					"description": "",
-					"item": [
-						{
-							"name": "get tree structured product menus",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"productMenus"
-									]
-								},
-								"description": ""
-							},
-							"response": [
-								{
-									"id": "37f890b3-9690-4d49-b972-2fe0701324ac",
-									"name": "get tree structured product menus",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"productMenus"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"_postman_previewtype": "text",
-									"header": [
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "*",
-											"name": "Access-Control-Allow-Origin",
-											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive",
-											"name": "Connection",
-											"description": "Options that are desired for the connection"
-										},
-										{
-											"key": "Content-Length",
-											"value": "7037",
-											"name": "Content-Length",
-											"description": "The length of the response body in octets (8-bit bytes)"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8",
-											"name": "Content-Type",
-											"description": "The mime type of this content"
-										},
-										{
-											"key": "Date",
-											"value": "Tue, 28 Nov 2017 04:02:38 GMT",
-											"name": "Date",
-											"description": "The date and time that the message was sent"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"1b7d-463yTEjdWKGukUpI1Ajh8pP9CSo\"",
-											"name": "ETag",
-											"description": "An identifier for a specific version of a resource, often a message digest"
-										},
-										{
-											"key": "X-Powered-By",
-											"value": "Express",
-											"name": "X-Powered-By",
-											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-										}
-									],
-									"cookie": [],
-									"responseTime": 185,
-									"body": "{\"data\":[{\"id\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"name\":\"firewall\",\"order\":0,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"0C289D27-95E2-4E5D-ADFB-D7FEE244A1D9\",\"code\":\"231-3DMGY3\",\"active\":true,\"tags\":[]},{\"id\":\"E5A6E703-1ACE-4DC7-877E-D80F6C9505E0\",\"code\":\"420-CH8KEN\",\"active\":true,\"tags\":[]},{\"id\":\"A48836E1-394D-420A-9364-921CC8050ABA\",\"code\":\"844-76BG29\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"419C5871-B770-4F01-8F37-CB7860133E60\",\"code\":\"741-UAKLXL\",\"active\":true,\"tags\":[]},{\"id\":\"913E6768-4AAC-47CB-99C9-77D2381B7E12\",\"code\":\"785-57AY3G\",\"active\":true,\"tags\":[]},{\"id\":\"B9804610-D0AF-4C2F-88FD-E61EBA0C24C3\",\"code\":\"862-TFGBKD\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"47A26F86-6990-46E6-95C0-3B3345B3463F\",\"name\":\"pixel\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\",\"products\":[{\"id\":\"5F350C10-E0F1-4117-A53D-0861810E36E4\",\"code\":\"463-XEMEV0\",\"active\":true,\"tags\":[]},{\"id\":\"CA9936AD-6FA1-4FB3-BC2F-289D252B4D59\",\"code\":\"499-58M2KN\",\"active\":true,\"tags\":[]},{\"id\":\"9F16DDD0-60EF-47CE-A662-806A2056A460\",\"code\":\"748-LB8A1U\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[]},{\"id\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"name\":\"hard drive\",\"order\":1,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"651ED3A4-5D0D-4161-9BBE-B52907940C29\",\"code\":\"186-1O75Z9\",\"active\":true,\"tags\":[]},{\"id\":\"2C561A5F-6903-4529-A6D4-23B8F65B72C6\",\"code\":\"297-CIQCPS\",\"active\":true,\"tags\":[]},{\"id\":\"F9E196F5-D428-410D-A4F8-C4A5CD08829F\",\"code\":\"627-RFNPSM\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"CEE85C24-3344-4067-B919-4769CDE948B1\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"EC9B8DA2-D993-45A0-8CE1-4BFFD4AFF883\",\"code\":\"474-D8A9VJ\",\"active\":true,\"tags\":[]},{\"id\":\"A28E9466-A9E3-4D4F-A965-E0A68A6CDAE7\",\"code\":\"694-B5YLRT\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"929C8B8D-4FF8-46FE-9039-463903377D7C\",\"name\":\"circuit\",\"order\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"865471C4-2E2B-4D1D-9026-B70589A61E23\",\"products\":[{\"id\":\"E5A80D05-6936-4767-86DA-631D82A317CA\",\"code\":\"149-5NO69G\",\"active\":true,\"tags\":[]},{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}},{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]},{\"id\":\"B5349E94-E21B-4C68-B81F-9609B587D56A\",\"code\":\"465-I5C0K2\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"CA9FA93A-6E1E-4BD2-AD18-80EE5EF68D4F\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":4}}]},{\"id\":0,\"name\":\"Featured\",\"color\":\"DarkKhaki\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"16345571-D535-453D-9C5B-3B2472ACB889\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":0}}]},{\"id\":11,\"name\":\"New\",\"color\":\"LimeGreen\",\"active\":true,\"products\":[{\"id\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"code\":\"355-31L6WB\",\"active\":true,\"labels\":{\"id\":\"54A5E647-DB0E-46FB-BDE5-BD168D687EA1\",\"productId\":\"BC845D07-626E-400C-B8CE-E67FC27016C3\",\"tagId\":11}}]}]}],\"tagMenus\":[]},{\"id\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"name\":\"interface\",\"order\":2,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"4630578C-128C-40AD-9F28-A25FD56454DF\",\"code\":\"124-ZC4Z0I\",\"active\":true,\"tags\":[]},{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"tags\":[{\"id\":10,\"name\":\"Discount\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}},{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]},{\"id\":\"EF50070C-B85C-48FE-919E-BB9B3BBCBF13\",\"code\":\"944-KLHCW6\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"C3539411-E6DC-4BC3-B833-9976FAC1EA87\",\"name\":\"microchip\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"954584C4-0C08-4E45-828D-7F21EA2E0BDD\",\"products\":[{\"id\":\"10FB3F85-C5CA-4449-B6F9-6865D0B8161A\",\"code\":\"255-D4L6G6\",\"active\":true,\"tags\":[]},{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"color\":\"DimGray\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"9D7D48A1-67FA-4876-AD34-6992A433995E\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":4}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"code\":\"962-VLB8E3\",\"active\":true,\"labels\":{\"id\":\"7163625B-A1C2-460C-81A2-CD5C6648F252\",\"productId\":\"1DF7D6BA-53D5-4733-BEAC-CC946B5ECC79\",\"tagId\":3}}]}]}],\"tagMenus\":[{\"id\":10,\"name\":\"Discount\",\"color\":\"LavenderBlush\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"D25DFA0B-AF0A-4C2B-9CCE-1CB0E4688ED8\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":10}}]},{\"id\":8,\"name\":\"Extra Large\",\"color\":\"YellowGreen\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"C3F5DC56-1A39-49DD-9F80-5FF02E9EDFA0\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":8}}]},{\"id\":3,\"name\":\"Heavy Duty\",\"color\":\"HoneyDew\",\"active\":true,\"products\":[{\"id\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"code\":\"463-HQPRV5\",\"active\":true,\"labels\":{\"id\":\"547702F2-6902-4B13-AB72-457BD306750E\",\"productId\":\"B429E2E9-930E-4D51-92CC-8167AF83960E\",\"tagId\":3}}]}]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/productMenus\",\"statusCode\":200,\"message\":\"200 OK\"}"
-								}
-							]
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
 					"name": "tokens",
 					"item": [
 						{
@@ -2406,7 +2412,7 @@
 							},
 							"response": [
 								{
-									"id": "bc70e68a-823b-4c39-bf8e-d8d663e670ec",
+									"id": "fb4b2362-1302-4a27-9178-9fa9ae6b2e5e",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"method": "POST",
