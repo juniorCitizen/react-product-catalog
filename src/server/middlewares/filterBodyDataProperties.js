@@ -3,10 +3,10 @@
 // also fields such as uuid field are automatically capitalized
 
 const expectedFields = {
-  series: ['name', 'order', 'publish'],
+  series: ['name', 'displaySequence', 'publish'],
   products: ['code', 'name', 'specification', 'description', 'publish', 'seriesId'],
   photos: ['primary', 'productId', 'seriesId', 'publish'],
-  carousels: ['order', 'primary']
+  carousels: ['displaySequence', 'primary']
 }
 
 const capEnforcedFields = {

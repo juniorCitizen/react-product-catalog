@@ -15,15 +15,15 @@ module.exports = (() => {
           }
           return db.Carousels
             .update({
-              order: db.sequelize.literal('`order`-1')
+              displaySequence: db.sequelize.literal('`displaySequence`-1')
             }, {
-              where: { order: { [db.Sequelize.Op.gt]: targetCarousel.order } },
+              where: { displaySequence: { [db.Sequelize.Op.gt]: targetCarousel.displaySequence } },
               transaction: trx
             })
             .then(() => targetCarousel.destroy(trxObj))
             .then(() => db.Carousels.findAll({
               attributes: { exclude: ['data'] },
-              order: ['order'],
+              order: ['displaySequence'],
               transaction: trx
             }))
         })

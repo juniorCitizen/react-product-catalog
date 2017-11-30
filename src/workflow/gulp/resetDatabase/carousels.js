@@ -26,7 +26,7 @@ module.exports = (Carousels) => {
                 }
                 return Carousels.create({
                   id: index,
-                  order: index,
+                  displaySequence: index,
                   originalName: photoFileName,
                   encoding: '7bit',
                   mimeType: 'image/jpeg',

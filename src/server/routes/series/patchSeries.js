@@ -5,7 +5,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 const patchingFunctions = {
   name: patchName,
-  order: patchOrder,
+  displaySequence: patchDisplaySequence,
   active: patchActive,
   parentSeriesId: patchParentSeriesId
 }
@@ -27,7 +27,7 @@ module.exports = [
     }
     if ('name' in req.query) return patchingFunctions['name'](req, res, next)
     else if ('active' in req.query) return patchingFunctions['active'](req, res, next)
-    else if ('order' in req.query) return patchingFunctions['order'](req, res, next)
+    else if ('displaySequence' in req.query) return patchingFunctions['displaySequence'](req, res, next)
     else if ('parentSeriesId' in req.query) return patchingFunctions['parentSeriesId'](req, res, next)
     else {
       res.status(400)
@@ -66,11 +66,11 @@ function patchActive (req, res, next) {
     .catch(error => next(error))
 }
 
-function patchOrder (req, res, next) {
+function patchDisplaySequence (req, res, next) {
   let targetSeriesId = req.params.seriesId.toUpperCase()
   let parentSeriesId = null
   let originalPosition = null
-  let targetPosition = parseInt(req.query.order)
+  let targetPosition = parseInt(req.query.displaySequence)
   return db.Series
     // find the target record
     .findById(targetSeriesId)
@@ -81,7 +81,7 @@ function patchOrder (req, res, next) {
         next(error)
         return Promise.resolve()
       } else {
-        originalPosition = series.order
+        originalPosition = series.displaySequence
         parentSeriesId = series.parentSeriesId
         return db.Series.findAll({ where: { parentSeriesId } })
       }
@@ -95,14 +95,14 @@ function patchOrder (req, res, next) {
       return db.Series.findAll({
         where: {
           parentSeriesId: parentSeriesId,
-          order: {
+          displaySequence: {
             [db.Sequelize.Op.between]: [
               originalPosition <= targetPosition ? originalPosition : targetPosition,
               originalPosition <= targetPosition ? targetPosition : originalPosition
             ]
           }
         },
-        order: ['order']
+        order: ['displaySequence']
       }).catch(error => next(error))
     })
     .then(siblings => db.sequelize.transaction(trx => { // start transaction
@@ -115,11 +115,11 @@ function patchOrder (req, res, next) {
           if (originalPosition < targetPosition) {
             if (sibling.id !== targetSeriesId) {
               return sibling
-                .decrement({ order: 1 }, trxObj)
+                .decrement({ displaySequence: 1 }, trxObj)
                 .catch(error => next(error))
             } else {
               return sibling
-                .update({ order: targetPosition }, trxObj)
+                .update({ displaySequence: targetPosition }, trxObj)
                 .catch(error => next(error))
             }
           }
@@ -127,11 +127,11 @@ function patchOrder (req, res, next) {
           if (originalPosition > targetPosition) {
             if (sibling.id !== targetSeriesId) {
               return sibling
-                .increment({ order: 1 }, trxObj)
+                .increment({ displaySequence: 1 }, trxObj)
                 .catch(error => next(error))
             } else {
               return sibling
-                .update({ order: targetPosition }, trxObj)
+                .update({ displaySequence: targetPosition }, trxObj)
                 .catch(error => next(error))
             }
           }
@@ -161,7 +161,7 @@ function patchParentSeriesId (req, res, next) {
         next(error)
         return Promise.resolve()
       } else {
-        originalPosition = series.order
+        originalPosition = series.displaySequence
         originalParentSeriesId = series.parentSeriesId
         return Promise.resolve()
       }
@@ -169,8 +169,8 @@ function patchParentSeriesId (req, res, next) {
     // find the siblings under the target series
     .then(() => db.Series.findAll({ where: { parentSeriesId: targetParentSeriesId || null } }))
     .then(targetSiblings => db.sequelize.transaction(trx => {
-      let orderAdjustQuery = 'UPDATE `series` SET `order`=`order`-1 WHERE `parentSeriesId`=:originalParentSeriesId AND `order`>:originalPosition;'
-      let targetUpdateQuery = 'UPDATE `series` SET `order`=:lastPosition, `parentSeriesId`=:targetParentSeriesId, `menuLevel`=:menuLevel WHERE `id`=:targetSeriesId;'
+      let orderAdjustQuery = 'UPDATE `series` SET `displaySequence`=`displaySequence`-1 WHERE `parentSeriesId`=:originalParentSeriesId AND `displaySequence`>:originalPosition;'
+      let targetUpdateQuery = 'UPDATE `series` SET `displaySequence`=:lastPosition, `parentSeriesId`=:targetParentSeriesId, `menuLevel`=:menuLevel WHERE `id`=:targetSeriesId;'
       return db.sequelize
         .query(orderAdjustQuery, {
           replacements: {

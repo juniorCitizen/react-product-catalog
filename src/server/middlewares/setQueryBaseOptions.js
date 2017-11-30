@@ -4,7 +4,7 @@ const baseOptions = {
     order: ['region', 'name']
   },
   products: { order: ['code'] },
-  series: { order: ['order'] }
+  series: { order: ['displaySequence'] }
 }
 
 module.exports = (modelReference) => {

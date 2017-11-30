@@ -6,28 +6,27 @@ const setBaseQueryParameters = require('../../middlewares/setQueryBaseOptions')(
 const setResponseDetailLevel = require('../../middlewares/setResponseDetailLevel')(modelReference)
 const paginationProcessing = require('../../middlewares/paginationProcessing')
 
-module.exports = (() => {
-  return [
-    setBaseQueryParameters,
-    setResponseDetailLevel,
-    (req, res, next) => {
-      return db.Products
-        .findAndCountAll()
-        .then(result => {
-          req.dataSourceRecordCount = result.count
-          next()
-          return Promise.resolve()
-        })
-        .catch(error => next(error))
-    },
-    paginationProcessing,
-    (req, res, next) => {
-      return db.Products
-        .findAll(req.queryOptions)
-        .then(data => {
-          req.resJson = { data }
-          return next()
-        })
-        .catch(error => next(error))
-    }]
-})()
+module.exports = [
+  setBaseQueryParameters,
+  setResponseDetailLevel,
+  (req, res, next) => {
+    return db.Products
+      .findAndCountAll()
+      .then(result => {
+        req.dataSourceRecordCount = result.count
+        next()
+        return Promise.resolve()
+      })
+      .catch(error => next(error))
+  },
+  paginationProcessing,
+  (req, res, next) => {
+    return db.Products
+      .findAll(req.queryOptions)
+      .then(data => {
+        req.resJson = { data }
+        return next()
+      })
+      .catch(error => next(error))
+  }
+]

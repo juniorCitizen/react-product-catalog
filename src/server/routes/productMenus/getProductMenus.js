@@ -25,11 +25,11 @@ module.exports = [
         setupIncludeOptions(maxMenuLevel, includeOptions)
         // construct order query options
         let orderOptions = []
-        orderOptions.push('order')
+        orderOptions.push('displaySequence')
         orderOptions.push([db.Products, 'code'])
         orderOptions.push([db.Products, db.Tags, 'name'])
         for (let counter = 0; counter < maxMenuLevel; counter++) {
-          orderOptions.push(['order'])
+          orderOptions.push(['displaySequence'])
           orderOptions.push([db.Products, 'code'])
           orderOptions.push([db.Products, db.Tags, 'name'])
           for (let counter2 = 0; counter2 <= counter; counter2++) {

@@ -12,18 +12,18 @@ module.exports = (() => {
     let dataset = await db.Carousels
       .findAll({
         attributes: { exclude: ['data'] },
-        order: ['order']
+        order: ['displaySequence']
       })
       .catch(error => next(error))
-    let originalPosition = target.order
-    let intendedPosition = parseInt(req.params.order)
+    let originalPosition = target.displaySequence
+    let intendedPosition = parseInt(req.params.displaySequence)
     let targetPosition = getTargetPosition(intendedPosition, dataset.length)
     if (originalPosition === targetPosition) {
       // return the original dataset if the
-      // specified order does not change data
+      // specified displaySequence does not change data
       req.resJson = {
         data: dataset,
-        message: `Carousel of id: '${req.params.carouselId}' is already at order position: '${req.params.order}'`
+        message: `Carousel of id: '${req.params.carouselId}' is already at displaySequence position: '${req.params.displaySequence}'`
       }
       return next()
     }
@@ -38,18 +38,18 @@ module.exports = (() => {
       let adjustment = (originalPosition > targetPosition)
         ? '+ 1'
         : '- 1'
-      let queryString = `UPDATE \`carousels\` SET \`order\` = \`order\` ${adjustment} WHERE \`order\` BETWEEN ${floor} AND ${ceiling};`
+      let queryString = `UPDATE \`carousels\` SET \`displaySequence\` = \`displaySequence\` ${adjustment} WHERE \`displaySequence\` BETWEEN ${floor} AND ${ceiling};`
       // run the adjustment query
       return db.sequelize
         .query(queryString, { transaction: trx })
-        // update target if dataset order is successfully adjusted
-        .then(() => target.update({ order: targetPosition }, { transaction: trx }))
+        // update target if dataset displaySequence is successfully adjusted
+        .then(() => target.update({ displaySequence: targetPosition }, { transaction: trx }))
         .catch(error => next(error))
     }).then(() => {
-      // query the new dataset after order adjustment
+      // query the new dataset after displaySequence adjustment
       return db.Carousels.findAll({
         attributes: { exclude: ['data'] },
-        order: ['order']
+        order: ['displaySequence']
       }).catch(Promise.reject)
     }).then(data => {
       req.resJson = { data }
