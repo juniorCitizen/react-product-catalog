@@ -1,4 +1,5 @@
 import React from 'react'
+import config from '../../config'
 
 export default class Logo extends React.Component {
     render() {
@@ -8,7 +9,7 @@ export default class Logo extends React.Component {
                     <div className="container">
                         <div className="" style={style.box}>       
                             <h1 className="title">
-                                This is LOGO!!!
+                                This is LOGO4444!!! {"ref " + config.env.SYS_REF}
                             </h1>
                         </div>
                     </div>

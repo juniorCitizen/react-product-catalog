@@ -10,13 +10,16 @@ module.exports = express.Router()
         view: 'index',
         data: {
           title: eVars.SYS_REF,
-          faviconSource: `${eVars.APP_ROUTE}/images/favicon.ico`,
+          faviconSource: `${eVars.APP_ROUTE}/favicon.ico`,
           scriptSource: !eVars.devMode
             ? `${eVars.APP_ROUTE}/app.min.js`
             : `${eVars.APP_ROUTE}/app.js`,
+          vendorSource: !eVars.devMode
+            ? `${eVars.APP_ROUTE}/vendor.min.js`
+            : `${eVars.APP_ROUTE}/vendor.js`,
           styleSource: !eVars.devMode
             ? `${eVars.APP_ROUTE}/app.min.css`
-            : `${eVars.APP_ROUTE}/app.css`,
+            : `${eVars.APP_ROUTE}/app-bluma.css`,
           appUrl: eVars.APP_ROUTE
         }
       }

@@ -124,7 +124,6 @@
     "lint": "eslint --color src *.js *.jsx --cache",
     "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js",
-    "test-run": "cross-env NODE_ENV=development webpack --watch webpack.config.babel.js ",
-    "serv": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js webpack --watch webpack.config.babel.js"
+    "serv": "cross-env NODE_ENV=development webpack --env production && nodemon --config nodemon.dev.json src/server/server.js"
   }
 }

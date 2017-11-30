@@ -77,8 +77,8 @@ Promise.each( // 依序執行服務原件的啟動程序
         endpoint: `/${eVars.SYS_REF}`,
         path: (() => {
           return eVars.devMode
-            ? path.resolve('./src/client/assets')
-            : path.resolve('./dist/assets')
+            ? path.resolve('./dist/public')
+            : path.resolve('./dist/public')
         })()
       },
       client: {

@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../assets/bulma.scss'
+import config from '../config'
 
 import Content from './content'
 import Product from './product'
@@ -20,7 +21,7 @@ class Main extends React.Component {
         super(props)
         this.state = {}
     }
-
+    //paap
     render() {
         const { login } = this.props
         const auth = login.user_info.auth
@@ -28,14 +29,14 @@ class Main extends React.Component {
             <BrowserRouter>  
                 <div>            
                     <Logo />
-                    <Route exact path="/" component={Product}/>
-                    <Route path="/product/detail/:id" component={Detail}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/contact" component={Contact}/>
-                    {auth && <Route path="/order" component={Order}/>}
-                    {auth && <Route path="/modify" component={Modify}/>}
-                    <Route path="/admin" component={Admin}/>
+                    <Route exact path={config.env.SYS_REF + "/"} component={Product}/>
+                    <Route path="~/product/detail/:id" component={Detail}/>
+                    <Route path="~/login" component={Login}/>
+                    <Route path="~/register" component={Register}/>
+                    <Route path="~/contact" component={Contact}/>
+                    {auth && <Route path="~/order" component={Order}/>}
+                    {auth && <Route path="~/modify" component={Modify}/>}
+                    <Route path="~/admin" component={Admin}/>
                 </div>
             </BrowserRouter>
         )
