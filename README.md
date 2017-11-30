@@ -48,7 +48,7 @@ simple product catalog website and backend with product data, contact management
 * **PUT protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - update multiple fields of a series record by id
 
   * request header: { "x-access-token": "jwt-token-string" , "Content-Type": "application/json"}
-  * request body: { "name": "hello", "order": 7 }
+  * request body: { "name": "hello", "displaySequence": 7 }
 
 * **DELETE protocol://domain:port/sys_ref/api/series/:seriesId(?details)** - delete a series record by id
 
@@ -168,7 +168,7 @@ simple product catalog website and backend with product data, contact management
 
   * request header: { "x-access-token": "jwt-token-string" }
 
-* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/order/:order** - update carousel order
+* **PATCH protocol://domain:port/sys_ref/api/carousels/:carouselId/displaySequence/:displaySequence** - update carousel displaySequence
 
   * request header: { "x-access-token": "jwt-token-string" }
 
