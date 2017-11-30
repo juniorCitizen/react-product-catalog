@@ -46,12 +46,13 @@ API_ROUTER.route('/products/:productId')
 API_ROUTER.route('/products/:productId/series/:seriesId')
   //   .get(notImplemented)
   .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
-//   .put(notImplemented)
-// .patch(notImplemented)
-//   .delete(notImplemented)
+  //   .put(notImplemented)
+  // .patch(notImplemented)
+  .delete(...require('./products/removeProductAssociation').fromSeries) // disassociate a product from a series
 
 API_ROUTER.route('/products/:productId/tags/:tagId')
-  .post(...require('./products/assignProductAssociation').toTags) // associate a product to a tag
+  .post(...require('./products/assignProductAssociation').toTags) // tagging a product
+  .delete(...require('./products/removeProductAssociation').fromTag) // untag a product
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
