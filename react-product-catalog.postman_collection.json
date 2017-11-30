@@ -142,107 +142,14 @@
 					},
 					"response": [
 						{
-							"id": "8b58f234-7f49-474d-9327-a042040129f6",
+							"id": "62f4230c-e88e-428b-a45b-1fc487234e65",
 							"name": "register a user account",
 							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
+								"header": [],
 								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "botPrevention",
-											"value": "",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "countryId",
-											"value": "twn",
-											"description": "optional, set to 'twn' (Taiwan) if omitted",
-											"type": "text"
-										},
-										{
-											"key": "company",
-											"value": "My Fake Company",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "address",
-											"value": "123 Nowhere Road, Taiwan",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "telephone",
-											"value": "06-6666666",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "fax",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "website",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "name",
-											"value": "David Tsai",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "aaachiayu.tsai.personal@gmail.com",
-											"description": "required (must be unique)",
-											"type": "text"
-										},
-										{
-											"key": "mobile",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "00000000",
-											"description": "required (8~20 characters)",
-											"type": "text"
-										},
-										{
-											"key": "admin",
-											"value": "false",
-											"description": "optional, default to false",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"contacts"
-									]
-								},
-								"description": "1. Content-Type: 'application/x-www-form-urlencoded' or 'application/json'\n2. when req.body.admin is true, meaning registering an 'admin' account.  valid jwt must present in the x-access-token header\n3. upon success, a 24 hours token will be issued with the following properties in the payload:\n\t* name\n\t* email\n\t* admin"
+									"mode": "raw",
+									"raw": ""
+								}
 							},
 							"status": "OK",
 							"code": 200,
@@ -297,107 +204,14 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "fdc16710-295f-4b5d-bcd7-a7b0bff0dda6",
+							"id": "4aa619b4-3280-4fc6-889a-60a8e0523c6e",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
+								"header": [],
 								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "botPrevention",
-											"value": "",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "countryId",
-											"value": "twn",
-											"description": "optional, set to 'twn' (Taiwan) if omitted",
-											"type": "text"
-										},
-										{
-											"key": "company",
-											"value": "My Fake Company",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "address",
-											"value": "123 Nowhere Road, Taiwan",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "telephone",
-											"value": "06-6666666",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "fax",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "website",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "name",
-											"value": "David Tsai",
-											"description": "required",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "aaachiayu.tsai.personal@gmail.com",
-											"description": "required (must be unique)",
-											"type": "text"
-										},
-										{
-											"key": "mobile",
-											"value": "",
-											"description": "optional",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "00000000",
-											"description": "required (8~20 characters)",
-											"type": "text"
-										},
-										{
-											"key": "admin",
-											"value": "false",
-											"description": "optional, default to false",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"contacts"
-									]
-								},
-								"description": "1. Content-Type: 'application/x-www-form-urlencoded' or 'application/json'\n2. when req.body.admin is true, meaning registering an 'admin' account.  valid jwt must present in the x-access-token header\n3. upon success, a 24 hours token will be issued with the following properties in the payload:\n\t* name\n\t* email\n\t* admin"
+									"mode": "raw",
+									"raw": ""
+								}
 							},
 							"status": "Unauthorized",
 							"code": 401,
@@ -1069,46 +883,14 @@
 							},
 							"response": [
 								{
-									"id": "076f79d6-1326-4fd9-86f6-c1602bac807e",
+									"id": "cae6a64a-3be4-49b3-8303-bc2b81517226",
 									"name": "batch photo inserts",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkyMTk2OCwiZXhwIjoxNTEyMDA4MzY4fQ.oqEh-UwNKu2Q4NFUh8LEjKcHhdoAq5t5ImDHhEnW0Ks"
-											},
-											{
-												"key": "Content-Type",
-												"value": "multipart/form-data"
-											}
-										],
+										"header": [],
 										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "photos",
-													"value": "",
-													"description": "",
-													"type": "file",
-													"disabled": true
-												}
-											]
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos"
-											]
-										},
-										"description": "1. request:\n\t* headers:\n\t\t1. x-access-token: jwt token with admin privilege\n\t\t2. Content-Type: multipart/form-data\n\t* body: {\"photos\":[uploaded photo list]}\n2. response: on success, data property contains a list of photoId's\n3. notes:\n\t* physical photos are removed from server after request is completed\n\t* file types are limited to: .jpg .jpeg .png .gif .svg .bmp\n\t* file size are limited to 500kb each\n\t* uploaded photos are not associated with any product or series, and active field is false"
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1195,34 +977,14 @@
 							},
 							"response": [
 								{
-									"id": "1731f6df-d532-4615-b860-d535e1fec815",
+									"id": "9fd241fd-abf5-426a-ab17-aeb2d348553f",
 									"name": "assign productId to a photo",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8/products/30D25238-F8F7-404E-8E84-318615845F94",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"20491857-8CDB-4F69-82CA-662095D08EE8",
-												"products",
-												"30D25238-F8F7-404E-8E84-318615845F94"
-											]
-										},
-										"description": "1. request\n\t* headers: x-access-token: jwt string with admin privilege\n\t* body: n/a\n2. response:\n\t* headers: application/json\n\t* body: see example (data properties is a photo record object without the actual data)\n3. notes: to prevent against multiple primary photos due to the reassignment, primary photo is always set to false"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1309,34 +1071,14 @@
 							},
 							"response": [
 								{
-									"id": "a094ea53-4c47-40af-b0fb-4514055d0d80",
+									"id": "0bf14a03-d4b0-47c8-b6e0-1b8f9a9fc2f8",
 									"name": "assign a photo to a series",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDk4NjIxLCJleHAiOjE1MTExODUwMjF9.QBT-QGC_GBEcWZRirr_zf4jiKR9JW7IUYTmvUJD9r9Q"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/AC840C53-5B1A-41C4-8C16-77B3B089E483/series/F574716D-ABDC-4E38-B480-74314894C2EC",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"AC840C53-5B1A-41C4-8C16-77B3B089E483",
-												"series",
-												"F574716D-ABDC-4E38-B480-74314894C2EC"
-											]
-										},
-										"description": "1. request\n\t* headers: x-access-token: jwt string with admin privilege\n\t* body: n/a\n2. response:\n\t* headers: application/json\n\t* body: see example (data properties is a photo record object without the actual data)\n3. note: since each series should only have 1 representative photo, before the actual update, another update query runs to make sure no photo has this seriesId"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1433,44 +1175,14 @@
 							},
 							"response": [
 								{
-									"id": "8add3b1a-d7eb-4a48-908a-f59c5d7fe9dc",
+									"id": "dd685958-474a-4266-95b3-232e7f05d55b",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8?active=false&primary=false",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"20491857-8CDB-4F69-82CA-662095D08EE8"
-											],
-											"query": [
-												{
-													"key": "active",
-													"value": "false",
-													"equals": true
-												},
-												{
-													"key": "primary",
-													"value": "false",
-													"equals": true
-												}
-											]
-										},
-										"description": "1. request\n\t* headers: x-access-token: jwt token with admin privilege\n\t* query url: both can exist at the same time, but at least one must be present\n\t\t1. ?active=true/false\n\t\t2. ?primary=true/false\n\t* body: n/a\n\n2. response\n\t* headers: application/json\n\t* body: 'data' property is a json reprentation of the updated photo record (without the actual photo data)\n\n3. note: if 'primary' is being updated to true.  System will update 'primary' field of all the other photos with the same 'productId' to false"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1555,32 +1267,14 @@
 							},
 							"response": [
 								{
-									"id": "695a8358-ab60-4b1c-8378-4f77fb022602",
+									"id": "66166c47-a53a-47ee-a504-628408a77360",
 									"name": "delete photo by id",
 									"originalRequest": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"3CC6E7B9-A296-438E-A015-6221FEF8C15D"
-											]
-										},
-										"description": "request\n\theader: x-access-token: jwt token with admin privilege\nresponse\n\theader: application/json\n\tbody: upon success, data will be an integer of how many records are removed (should always be 1)"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1667,34 +1361,14 @@
 							},
 							"response": [
 								{
-									"id": "7cc8d963-81a2-44e1-af8d-e79e3a7df908",
+									"id": "7ff5fbc7-08e7-4b95-a058-9ca2fc0b3873",
 									"name": "remove productId from a photo",
 									"originalRequest": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/products/34A83578-DEFD-4E8C-A88F-45AA5B04C5EC",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"photos",
-												"436C1F0C-C6B8-43C9-904D-7B93CCDADEFD",
-												"products",
-												"34A83578-DEFD-4E8C-A88F-45AA5B04C5EC"
-											]
-										},
-										"description": "1. request:\n\t* header: x-access-token: jwt token with admin privilege\n\t* body: n/a\n2. response:\n\t* header: application/json\n\t* body: data property is an object of the updated photo record without the image data\n3. notes:\n\t* primary state will automatically be set to false, **if the photo is not associated with any series, the active state will ask be set to false**\n\t* will only be updated if both photoId and productId checks out"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1781,7 +1455,7 @@
 							},
 							"response": [
 								{
-									"id": "431746e3-e4d5-4630-aab6-d2f0684e1a8b",
+									"id": "0fdd4a09-69e6-41a4-9205-23dad4f0e3c6",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1916,7 +1590,7 @@
 							},
 							"response": [
 								{
-									"id": "33d57de6-d19a-487b-beb0-1316455c28f2",
+									"id": "49f4bd96-a147-46be-802e-e6467b3f480e",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
@@ -2018,7 +1692,7 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "4edf8af9-7390-48fc-a58d-5d3fa1c1b9f1",
+									"id": "74b7bfc3-8986-47b9-a37d-be9bda540e79",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
@@ -2151,33 +1825,14 @@
 							},
 							"response": [
 								{
-									"id": "7a7abe73-9d28-4ce7-b829-2f6f422a2f3c",
+									"id": "745cec26-fb10-4303-bad9-299da7b0cbb6",
 									"name": "request for product by 'id'",
 									"originalRequest": {
-										"method": "GET",
 										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"products",
-												":productId"
-											],
-											"variable": [
-												{
-													"key": "productId",
-													"value": "AD8ED578-7F47-4D8D-9FEB-A049C62460C1"
-												}
-											]
-										},
-										"description": "1. request:\n\t* header: n/a\n\t* body: n/a\n2. response:\n\t* header: {\"Content-Type\": \"application/json\"}\n\t* body: see example\n\t\t* data: full details of a product record\n3. notes: provides full details except actual photo data"
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2302,39 +1957,13 @@
 							},
 							"response": [
 								{
-									"id": "90d188bf-2a5d-43ff-9483-7c4310c63f50",
+									"id": "cb5797c4-09e8-49b5-98a6-04ac11986087",
 									"name": "insert new product record",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVBODYwNzc1LUUyRTAtNEZGNi04MEZFLUNDQ0Q1M0QyRTQ0OCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAwNjQ4OSwiZXhwIjoxNTEyMDkyODg5fQ.hJF666LAvFGZOiDh85Y_iGvi3KQkG2dfOq4J3Q0Em6E",
-												"disabled": false
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"name": "Content-Type",
-												"value": "application/json"
-											}
-										],
+										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"code\": \"NEW PRODUCT\",\r\n\t\"name\": \"new product\",\r\n\t\"specification\": \"specification line 1\\nspecification line 2 specification line 2 specification line 2\\nspecidescription line 1\\ndescription line 2 description line 2 description line 2\\ndescription line 3 description line 3\\ndescription line 4\\ndescription line 5 description line 5 description line 5\\ndescription line 6 description line 6fication line 3 specification line 3\\nspecification line 4\\nspecification line 5 specification line 5 specification line 5\\nspecification line 6 specification line 6\",\r\n\t\"description\": \"description line 1\\ndescription line 2 description line 2 description line 2\\ndescription line 3 description line 3\\ndescription line 4\\ndescription line 5 description line 5 description line 5\\ndescription line 6 description line 6\"\r\n}"
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"products"
-											]
+											"raw": ""
 										}
 									},
 									"status": "OK",
@@ -2451,63 +2080,14 @@
 							},
 							"response": [
 								{
-									"id": "1b61e7be-a680-42be-b14c-079267f398ba",
+									"id": "e87e5353-8802-48ba-8726-9c0d921f44ce",
 									"name": "insert new product record",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVBODYwNzc1LUUyRTAtNEZGNi04MEZFLUNDQ0Q1M0QyRTQ0OCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAwNjQ4OSwiZXhwIjoxNTEyMDkyODg5fQ.hJF666LAvFGZOiDh85Y_iGvi3KQkG2dfOq4J3Q0Em6E"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/x-www-form-urlencoded"
-											}
-										],
+										"header": [],
 										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "code",
-													"value": "new111",
-													"description": "string, required (must be unique)",
-													"type": "text"
-												},
-												{
-													"key": "name",
-													"value": "new product name",
-													"description": "string, required",
-													"type": "text"
-												},
-												{
-													"key": "specification",
-													"value": "specification line 1\nspecification line 2 specification line 2 specification line 2\nspecidescription line 1\ndescription line 2 description line 2 description line 2\ndescription line 3 description line 3\ndescription line 4\ndescription line 5 description line 5 description line 5\ndescription line 6 description line 6fication line 3 specification line 3\nspecification line 4\nspecification line 5 specification line 5 specification line 5\nspecification line 6 specification line 6",
-													"description": "text, optional, default null",
-													"type": "text"
-												},
-												{
-													"key": "description",
-													"value": "description line 1\ndescription line 2 description line 2 description line 2\ndescription line 3 description line 3\ndescription line 4\ndescription line 5 description line 5 description line 5\ndescription line 6 description line 6",
-													"description": "text, optional, default null",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"products"
-											]
-										},
-										"description": "1. request:\n\t* headers:\n\t\t1. Content-Type:\n\t\t\t* x-www-form-urlencoded\n\t\t\t* multipart/form-data\n\t\t\t* application/json\n\t\t2. x-access-token: jwt string with admin privilege\n\t* body:\n\t\t1. code: string (must be unique)\n\t\t2. name: string\n\t\t3. specification: text\n\t\t4. description: text\n2. response:\n\t* headers: application/json\n\t* body: \n3. notes: n/a"
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2562,6 +2142,278 @@
 									"body": "{\"data\":{\"id\":\"4708B032-CFB8-4BAA-B0FF-5F1EEFC57B9B\",\"active\":false,\"code\":\"NEW PRODUCT\",\"name\":\"new product\",\"specification\":\"specification line 1\\nspecification line 2 specification line 2 specification line 2\\nspecidescription line 1\\ndescription line 2 description line 2 description line 2\\ndescription line 3 description line 3\\ndescription line 4\\ndescription line 5 description line 5 description line 5\\ndescription line 6 description line 6fication line 3 specification line 3\\nspecification line 4\\nspecification line 5 specification line 5 specification line 5\\nspecification line 6 specification line 6\",\"description\":\"description line 1\\ndescription line 2 description line 2 description line 2\\ndescription line 3 description line 3\\ndescription line 4\\ndescription line 5 description line 5 description line 5\\ndescription line 6 description line 6\"},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								}
 							]
+						},
+						{
+							"name": "tag a product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"products",
+										":productId",
+										"tags",
+										":tagId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "D83B87B6-BD75-497F-B781-5A8F66C080C4",
+											"description": "uuidV4"
+										},
+										{
+											"key": "tagId",
+											"value": "0",
+											"description": "integer"
+										}
+									]
+								},
+								"description": "1. request:\n\t+ headers: {\"x-access-token\":\"jwt string\"}\n\t+ parameters:\n\t\t* productId:\n\t\t* tagId:\n\t+ queries: n/a\n\t+ body: n/a\n2. response:\n\t+ headers: {\"Content-Type\":\"application/json\"}\n\t+ body:\n\t\t* data: product object with details\n\t\t\t- tags: tag objects\n\t\t\t- photos: photo objects without photoId\n3. notes: n/a"
+							},
+							"response": [
+								{
+									"id": "5d2b86eb-e5ae-4cab-8e0d-716b3866d87d",
+									"name": "tag a product",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												":productId",
+												"tags",
+												":tagId"
+											],
+											"variable": [
+												{
+													"key": "productId",
+													"value": "D83B87B6-BD75-497F-B781-5A8F66C080C4"
+												},
+												{
+													"key": "tagId",
+													"value": "0"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "5259",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Nov 2017 12:16:57 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"148b-C4pJBPG+VmbuHKnvFkQOARoq1jc\"",
+											"name": "ETag",
+											"description": ""
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"responseTime": "100",
+									"body": "{\"data\":{\"id\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"code\":\"875-6Y8CNH\",\"name\":\"Handmade Frozen Sausages\",\"specification\":\"Nisi laborum explicabo enim pariatur cupiditate ipsa est. Itaque illo aliquid maxime vitae nisi nihil sit. Quia cumque sed molestiae esse sit et rerum. Ut at deleniti minus ea nihil nihil velit est. Assumenda id et.\",\"description\":\"Sit eaque quia sint repellat rerum voluptate. Sint ducimus consectetur aut expedita at commodi ipsa. Libero repellat temporibus quo qui recusandae iure eligendi quis a. Rerum voluptate doloribus et iusto consequuntur rerum inventore aut.\\nUt in molestiae nihil hic eum facilis ea enim. Repellat quibusdam sit non libero culpa itaque ducimus ut. Quae eum eaque similique.\\nQuae impedit vel. Repudiandae vero animi. Magnam sint amet rerum illo. Repellendus sit alias corporis officia modi at quod fuga.\\nFugit et pariatur qui ullam facere corrupti doloremque ut quis. Nostrum a neque cumque illo vitae magni. Sunt corporis cupiditate vel consequatur id error laborum. Quibusdam ad non molestiae.\",\"active\":true,\"seriesId\":\"330CE504-237F-4A51-AE59-727A914E3C4D\",\"tags\":[{\"id\":1,\"name\":\"Discontinued\",\"color\":\"SkyBlue\",\"active\":true,\"labels\":{\"id\":\"0F7D5E1A-90FB-418F-B3D7-FF53669D464A\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"tagId\":1}},{\"id\":0,\"name\":\"Featured\",\"color\":\"Gold\",\"active\":true,\"labels\":{\"id\":\"63497FA0-C659-476F-AE87-A8286D0EFD51\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"tagId\":0}}],\"photos\":[{\"id\":\"D2522D4E-318D-4B2A-B014-882848F21A93\",\"primary\":true,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":\"330CE504-237F-4A51-AE59-727A914E3C4D\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"353575B7-DD23-49D7-A030-DF76E501A160\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"C6FF9F1E-C9CD-4018-805B-1E9FD6F54AD3\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"284480EC-AD3D-4D38-8C54-ED610BE9E488\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"F3818EAE-71EA-4502-B4FF-676D78BDA14E\",\"primary\":false,\"originalName\":\"GT8.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6483,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"5E16D5F1-2ABE-4493-8CB9-9B966B99F749\",\"primary\":false,\"originalName\":\"GT-3.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9119,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"1EB2DC01-DFC9-40EF-AC11-24A926636E5C\",\"primary\":false,\"originalName\":\"GT50.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7484,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"DF4060FB-6A32-4241-A699-0011915F206C\",\"primary\":false,\"originalName\":\"GT18.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18789,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"B928F1DA-6ED0-4548-AB3A-5E3C3D8939D0\",\"primary\":false,\"originalName\":\"GT41.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12199,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"EC85642E-C7B8-4CBC-B3B6-C93F977857E3\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"A34BDF7D-116B-4210-99F9-ADE832DE44EB\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"1A62316E-6C34-4703-9746-C26DC88E1621\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"FA37EE48-AA47-4881-9CB9-5947365D229F\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"E76BBC24-937C-4CB0-B8BB-2A155DB51768\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"35DD6191-BC59-4989-842C-C89D7A840308\",\"primary\":false,\"originalName\":\"GT31.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5308,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"A1B4E997-5F79-4EEE-AD75-8EE43EE9362B\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"}]},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products/D83B87B6-BD75-497F-B781-5A8F66C080C4/tags/0\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						},
+						{
+							"name": "categorize a product to a series",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"products",
+										":productId",
+										"series",
+										":seriesId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "D83B87B6-BD75-497F-B781-5A8F66C080C4",
+											"description": "uuidV4"
+										},
+										{
+											"key": "seriesId",
+											"value": "A175D61B-7A6A-483F-9F1D-39C09EB9B325",
+											"description": "uuidV4"
+										}
+									]
+								},
+								"description": "1. request:\n\t+ headers: {\"x-access-token\":\"jwt string\"}\n\t+ parameters:\n\t\t* productId:\n\t\t* seriesId\n\t+ queries: n/a\n\t+ body: n/a\n2. response:\n\t+ headers: {\"Content-Type\":\"application/json\"}\n\t+ body:\n\t\t* data: product object with details\n\t\t\t- tags: tag objects\n\t\t\t- photos: photo objects without photoId\n3. notes: n/a"
+							},
+							"response": [
+								{
+									"id": "9632c649-1625-47c4-9e32-d2b26ccc292f",
+									"name": "categorize a product to a series",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"products",
+												":productId",
+												"series",
+												":seriesId"
+											],
+											"variable": [
+												{
+													"key": "productId",
+													"value": "D83B87B6-BD75-497F-B781-5A8F66C080C4",
+													"description": "uuidV4"
+												},
+												{
+													"key": "seriesId",
+													"value": "A175D61B-7A6A-483F-9F1D-39C09EB9B325",
+													"description": "uuidV4"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "5296",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Nov 2017 12:36:58 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"14b0-pE/sYe911NXPGXlB/s/n7esl7x0\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 99,
+									"body": "{\"data\":{\"id\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"code\":\"875-6Y8CNH\",\"name\":\"Handmade Frozen Sausages\",\"specification\":\"Nisi laborum explicabo enim pariatur cupiditate ipsa est. Itaque illo aliquid maxime vitae nisi nihil sit. Quia cumque sed molestiae esse sit et rerum. Ut at deleniti minus ea nihil nihil velit est. Assumenda id et.\",\"description\":\"Sit eaque quia sint repellat rerum voluptate. Sint ducimus consectetur aut expedita at commodi ipsa. Libero repellat temporibus quo qui recusandae iure eligendi quis a. Rerum voluptate doloribus et iusto consequuntur rerum inventore aut.\\nUt in molestiae nihil hic eum facilis ea enim. Repellat quibusdam sit non libero culpa itaque ducimus ut. Quae eum eaque similique.\\nQuae impedit vel. Repudiandae vero animi. Magnam sint amet rerum illo. Repellendus sit alias corporis officia modi at quod fuga.\\nFugit et pariatur qui ullam facere corrupti doloremque ut quis. Nostrum a neque cumque illo vitae magni. Sunt corporis cupiditate vel consequatur id error laborum. Quibusdam ad non molestiae.\",\"active\":true,\"seriesId\":\"A175D61B-7A6A-483F-9F1D-39C09EB9B325\",\"tags\":[{\"id\":1,\"name\":\"Discontinued\",\"color\":\"SkyBlue\",\"active\":true,\"labels\":{\"id\":\"0F7D5E1A-90FB-418F-B3D7-FF53669D464A\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"tagId\":1}},{\"id\":0,\"name\":\"Featured\",\"color\":\"Gold\",\"active\":true,\"labels\":{\"id\":\"63497FA0-C659-476F-AE87-A8286D0EFD51\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\",\"tagId\":0}}],\"photos\":[{\"id\":\"D2522D4E-318D-4B2A-B014-882848F21A93\",\"primary\":true,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":\"330CE504-237F-4A51-AE59-727A914E3C4D\",\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"353575B7-DD23-49D7-A030-DF76E501A160\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"C6FF9F1E-C9CD-4018-805B-1E9FD6F54AD3\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"284480EC-AD3D-4D38-8C54-ED610BE9E488\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"F3818EAE-71EA-4502-B4FF-676D78BDA14E\",\"primary\":false,\"originalName\":\"GT8.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6483,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"5E16D5F1-2ABE-4493-8CB9-9B966B99F749\",\"primary\":false,\"originalName\":\"GT-3.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9119,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"1EB2DC01-DFC9-40EF-AC11-24A926636E5C\",\"primary\":false,\"originalName\":\"GT50.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7484,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"DF4060FB-6A32-4241-A699-0011915F206C\",\"primary\":false,\"originalName\":\"GT18.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18789,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"B928F1DA-6ED0-4548-AB3A-5E3C3D8939D0\",\"primary\":false,\"originalName\":\"GT41.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12199,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"EC85642E-C7B8-4CBC-B3B6-C93F977857E3\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"A34BDF7D-116B-4210-99F9-ADE832DE44EB\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"1A62316E-6C34-4703-9746-C26DC88E1621\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"FA37EE48-AA47-4881-9CB9-5947365D229F\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"E76BBC24-937C-4CB0-B8BB-2A155DB51768\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"35DD6191-BC59-4989-842C-C89D7A840308\",\"primary\":false,\"originalName\":\"GT31.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5308,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"},{\"id\":\"A1B4E997-5F79-4EEE-AD75-8EE43EE9362B\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"D83B87B6-BD75-497F-B781-5A8F66C080C4\"}]},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products/D83B87B6-BD75-497F-B781-5A8F66C080C4/series/A175D61B-7A6A-483F-9F1D-39C09EB9B325\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
 						}
 					],
 					"_postman_isSubFolder": true
@@ -2593,26 +2445,14 @@
 							},
 							"response": [
 								{
-									"id": "6a5a5523-2303-49b0-b7ba-4b91e0d49af3",
+									"id": "77dca746-af00-4902-a07d-547fd43bb1b4",
 									"name": "get tree structured product menus",
 									"originalRequest": {
-										"method": "GET",
 										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"productMenus"
-											]
-										},
-										"description": "1. request:\n\t* headers: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: structured tree nodes in json format\n3. notes: n/a"
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2706,34 +2546,14 @@
 							},
 							"response": [
 								{
-									"id": "855ccbca-31c1-4fee-ab10-98c0b6bcc75f",
+									"id": "8c172b39-5698-4708-bc39-857545ab43cd",
 									"name": "example",
 									"originalRequest": {
-										"method": "GET",
 										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series",
-												":seriesId"
-											],
-											"variable": [
-												{
-													"key": "seriesId",
-													"value": "2ABE71C3-715F-4046-A07A-3BAC8EDB258C",
-													"description": "uuidV4"
-												}
-											]
-										},
-										"description": "1. request\n\t* headers: n/a\n\t* parameters: seriesId\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* response: see example\n\t\t1. data: series object\n\t\t\t* 'products' property - a list of associated product objects\n\t\t\t\t* 'photos' property- a list of photo objects without actual photo data\n3. notes:\n\t* primary photos is always listed as photos[0]\n\t* products are sorted by 'code' property"
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2831,45 +2651,14 @@
 							},
 							"response": [
 								{
-									"id": "4b564971-bd7f-4841-bd08-a19dd6f00d6d",
+									"id": "f9d357e2-d4ef-458b-a4dd-0dae6e7eaaa3",
 									"name": "insert a new series",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/x-www-form-urlencoded"
-											},
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
-											}
-										],
+										"header": [],
 										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "name",
-													"value": "test3",
-													"description": "",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series"
-											]
-										},
-										"description": "1. request\n\t* headers:\n\t\t1. Content-Type:\n\t\t\t* multipart/form-data\n\t\t\t* application/x-www-form-urlencoded\n\t\t\t* application/json\n\t\t2. x-access-token: jwt token\n\t* body:\n\t\t1. name: string\n\t\t2. parentSeriesId: uuidV4 (omit to place at root level)\n3. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: see examples\n\t\t1. data: series record object without details\n4. notes:\n\t* series name is not uniqu, so a tree node may have multiple duplicating series of the same name\n\t* new series is always placed at the end of displaySequence\n\t* displaySequence is automatically determined"
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2924,45 +2713,14 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "d17ba00d-6b96-42d6-a66e-f786dd08b63a",
+									"id": "fd6b6935-e072-4fb0-9f77-e159fe2793e7",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/x-www-form-urlencoded"
-											},
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
-											}
-										],
+										"header": [],
 										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "name",
-													"value": "test3",
-													"description": "",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series"
-											]
-										},
-										"description": "1. request\n\t* headers:\n\t\t1. Content-Type:\n\t\t\t* multipart/form-data\n\t\t\t* application/x-www-form-urlencoded\n\t\t\t* application/json\n\t\t2. x-access-token: jwt token\n\t* body:\n\t\t1. name: string\n\t\t2. parentSeriesId: uuidV4 (omit to place at root level)\n3. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: see examples\n\t\t1. data: series record object without details\n4. notes:\n\t* series name is not uniqu, so a tree node may have multiple duplicating series of the same name\n\t* new series is always placed at the end of displaySequence\n\t* displaySequence is automatically determined"
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -3054,39 +2812,14 @@
 							},
 							"response": [
 								{
-									"id": "82061bb9-08f4-499c-bae1-7dd2d690e99b",
+									"id": "9671da0f-71d3-4863-850d-253836ae9dbb",
 									"name": "remove series by id",
 									"originalRequest": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
-											}
-										],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series",
-												":seriesId"
-											],
-											"variable": [
-												{
-													"key": "seriesId",
-													"value": "62EA252B-C874-4618-BB2B-53EE411DC422",
-													"description": "uuidV4"
-												}
-											]
-										},
-										"description": "1. request\r\n\t* headers: {\"x-access-token\":\"jwt token\"}\r\n\t* parameters: seriesId\r\n\t* body: n/a\r\n2. response:\r\n\t* headers: {\"Content-Type\":\"application/json\"}\r\n\t* body:\r\n\t\t1. data: integer representing the number of records deleted (should always be 1 on success)\r\n3. notes:\r\n\t* server will return error if the target record has childSeries (other series with the target's id as parentSeriesId)\r\n\t* associated photos and products will have 'seriesId' field removed\r\n\t* for associated photos that are **not** associated with any products:\r\n\t\t1. seriesId = NULL\r\n\t\t2. active = false\r\n\t\t3. primary = false\r\n\t* for associated photos that are associated with a product:\r\n\t\t1. seriesId = NULL\r\n\t* all associated products\r\n\t\t1. seriesId = NULL\r\n\t\t2. active = false"
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -3206,7 +2939,7 @@
 							},
 							"response": [
 								{
-									"id": "66bf1aac-55ce-407c-857e-097241b07466",
+									"id": "1d1875b5-1e31-43b3-851d-6329d64883cd",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3321,7 +3054,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "e81a0aa4-bfc2-4476-a4e0-07aa1aefbfdc",
+									"id": "d540cac5-91bb-4aab-ba05-dd8acf2fd662",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3436,7 +3169,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "03d99b77-9671-430d-9b7e-f174190cc4d6",
+									"id": "43af5c92-b2ab-426e-9ded-392a489144ef",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3551,7 +3284,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "71714318-a028-404c-8653-d422949eff73",
+									"id": "f72f8a4c-0038-43b0-8aad-6693ed9f92c6",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3666,7 +3399,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "62496933-ff21-475a-9961-2a1e33a735a2",
+									"id": "a6319b5c-7e00-4eb9-a931-aea502a75af6",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3819,34 +3552,14 @@
 							},
 							"response": [
 								{
-									"id": "39ff7bc3-09e4-4d20-88aa-01bd2ea30ec8",
+									"id": "f7eadf75-53a8-4227-a720-36e9fc1b9c85",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											}
-										],
+										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"tokens"
-											]
-										},
-										"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -3901,34 +3614,14 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
 								},
 								{
-									"id": "a1b503e7-d5f5-47ad-a89c-ea0f6934961d",
+									"id": "8d159102-074d-4779-919a-f0efb4730478",
 									"name": "request for json web token using json headers",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											}
-										],
+										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
-										},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"tokens"
-											]
-										},
-										"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
+											"raw": ""
+										}
 									},
 									"status": "OK",
 									"code": 200,
