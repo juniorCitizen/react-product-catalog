@@ -24,16 +24,16 @@ API_ROUTER.route('/photos/:photoId')
   .delete(...require('./photos/removePhotoById')) // remove photo by id
 
 API_ROUTER.route('/photos/:photoId/products/:productId')
-  .post(...require('./photos/assignPhoto').toProduct) // assign productId to a photo
-  .delete(...require('./photos/removePhoto').fromProduct) // remove productId from a photo
+  .post(...require('./photos/assignPhotoAssociation').toProduct) // assign productId to a photo
+  .delete(...require('./photos/removePhotoAssociation').fromProduct) // remove productId from a photo
 
 API_ROUTER.route('/photos/:photoId/series/:seriesId')
-  .post(...require('./photos/assignPhoto').toSeries) // assign seriesId to a photo
-  .delete(...require('./photos/removePhoto').fromSeries) // remove seriesId from a photo
+  .post(...require('./photos/assignPhotoAssociation').toSeries) // assign seriesId to a photo
+  .delete(...require('./photos/removePhotoAssociation').fromSeries) // remove seriesId from a photo
 
 API_ROUTER.route('/products')
   .get(...require('./products/getProducts')) // get product dataset
-//   .post(...require('./products/insertProduct')) // create new product complete with optional photos and tags
+  .post(...require('./products/insertProduct')) // create new product record
 //   .put(notImplemented)
 //   .patch(notImplemented)
 //   .delete(notImplemented)
