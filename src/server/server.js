@@ -105,7 +105,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     // ////////////// Post-Routing Global Middlewares ////////////////////////
     logging.console('載入 post-routing 全域 middlewares....')
     app.use((req, res, next) => {
-      logging.warning(`客戶端要求不存在的頁面: ${eVars.HOST}${req.path}`)
+      logging.warning(`客戶端要求不存在的頁面: ${req.method.toLowerCase()} ${eVars.APP_ROUTE}${req.path}`)
       res.status(404)
       return res.redirect(`${eVars.APP_ROUTE}`)
     })
