@@ -1,9 +1,12 @@
+const multer = require('multer')
+
 const db = require('../../controllers/database')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
   validateJwt({ admin: true }), // validate against token for admin privilege
+  multer().none(),
   async (req, res, next) => {
     let seriesData = {
       name: req.body.name,
