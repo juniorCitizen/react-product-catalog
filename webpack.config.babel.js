@@ -57,7 +57,7 @@ const commonConfig = merge([
 const productionConfig = merge([
   {
     entry: {
-      vendor: ['react']
+      vendor: ['react', 'react-dom']
     },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
