@@ -1,35 +1,29 @@
+const Promise = require('bluebird')
+
 const db = require('../../controllers/database')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
   validateJwt({ admin: true }), // validate against token for admin privilege
-  checkForAssociations,
+  checkChildSeries,
   (req, res, next) => {
-    let seriesId = req.params.seriesId.toUpperCase()
+    let targetSeriesId = req.params.seriesId.toUpperCase()
     // start transactions
     return db.sequelize
       .transaction(trx => {
-        // find all the photos with same seriesId
-        return db.Photos
-          .findAll({ where: { seriesId }, transaction: trx })
-          .then(photos => {
-            // map the photos found into promises and run it with promise.all
-            return Promise
-              .all(photos.map(photo => {
-                // check if the found photos are associated with any products
-                return (photo.productId === null)
-                  // if not, remove photos
-                  ? photo.destroy({ transaction: trx })
-                  // if yes, set SeriesId to null
-                  : photo.update({ seriesId: null }, { transaction: trx })
-              }))
-          })
+        // query to process associated photos that has product association
+        let query1 = db.Photos.update({ seriesId: null }, { where: { seriesId: targetSeriesId, productId: { [db.Sequelize.Op.ne]: null } }, transaction: trx })
+        // query to process associated photos that does not have product association
+        let query2 = db.Photos.update({ seriesId: null, primary: false, active: false }, { where: { seriesId: targetSeriesId, productId: null }, transaction: trx })
+        // disassociate any associated products
+        let query3 = db.Products.update({ seriesId: null, active: false }, { where: { seriesId: targetSeriesId }, transaction: trx })
+        // run above queries in sequence
+        return Promise
+          .each([query1, query2, query3], () => Promise.resolve())
           // remove the actual series record
-          .then(() => db.Series.destroy({
-            where: { id: seriesId },
-            transaction: trx
-          }))
+          .then(() => db.Series.destroy({ where: { id: targetSeriesId }, transaction: trx }))
+          .catch(error => next(error))
       })
       .then(data => {
         req.resJson = { data }
@@ -41,17 +35,9 @@ module.exports = [
 ]
 
 // check if childSeries exists
-function checkForAssociations (req, res, next) {
+function checkChildSeries (req, res, next) {
   return db.Series
-    .findAll({
-      include: [{
-        model: db.Products
-      }, {
-        model: db.Series,
-        as: 'childSeries'
-      }],
-      where: { id: req.params.seriesId.toUpperCase() }
-    })
+    .findAll({ include: [{ model: db.Series, as: 'childSeries' }], where: { id: req.params.seriesId.toUpperCase() } })
     .then(series => {
       // seriesId is not found in the database
       if (series[0] === undefined) {
@@ -64,13 +50,6 @@ function checkForAssociations (req, res, next) {
       if (series[0].childSeries.length > 0) {
         res.status(400)
         let error = new Error('Not permitted to remove series that holds children series')
-        next(error)
-        return Promise.resolve()
-      }
-      // there are products associated with series
-      if (series[0].products.length > 0) {
-        res.status(400)
-        let error = new Error('Not permitted to remove series with product associations')
         next(error)
         return Promise.resolve()
       }
