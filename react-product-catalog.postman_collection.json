@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "19a17f5c-0a4c-4a49-a503-ba601214902c",
+							"id": "a0b4bee6-2d3b-4b25-9ead-29b14a86a2c9",
 							"name": "register a user account",
 							"originalRequest": {
 								"header": [],
@@ -204,7 +204,7 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "8e8dac1e-3d46-42af-a233-119623e08b10",
+							"id": "67cec131-53dd-4f90-bf8b-f206566a15c7",
 							"name": "attempt to register an admin account without proper credentials",
 							"originalRequest": {
 								"header": [],
@@ -883,7 +883,7 @@
 							},
 							"response": [
 								{
-									"id": "7feda197-9089-4345-9c6e-442a22dac2c2",
+									"id": "76ad2a90-30fa-46d0-a7d2-0cf2f7f4684b",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"header": [],
@@ -977,7 +977,7 @@
 							},
 							"response": [
 								{
-									"id": "ccdd9c35-fd2e-4549-9e9b-1904c1cea456",
+									"id": "71afc014-1790-4da3-b514-1998d380720a",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"header": [],
@@ -1071,7 +1071,7 @@
 							},
 							"response": [
 								{
-									"id": "17e27377-b78d-4a5e-9628-2a03195c7951",
+									"id": "9e768b95-1d44-4cef-9e45-e2377562696b",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"header": [],
@@ -1175,7 +1175,7 @@
 							},
 							"response": [
 								{
-									"id": "cc43b674-7440-4806-b39d-ca64837fd747",
+									"id": "d1e42450-db5a-4d8b-b17e-a392e54f2c73",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"header": [],
@@ -1267,7 +1267,7 @@
 							},
 							"response": [
 								{
-									"id": "71908c7d-0044-40e4-a53b-7c2ba4d9c229",
+									"id": "16bad033-6655-4342-a334-267f11c2ffd5",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"header": [],
@@ -1361,7 +1361,7 @@
 							},
 							"response": [
 								{
-									"id": "aa4e9a68-c7cb-47fe-95ec-eeb18f4ed6a7",
+									"id": "0b8367af-8fa9-4397-9285-dff12749ebe5",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"header": [],
@@ -1455,7 +1455,7 @@
 							},
 							"response": [
 								{
-									"id": "821c2036-a520-4260-a062-06b72b9531fe",
+									"id": "c5ac0af6-7f85-46e1-8afa-2068e01e4a5a",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1590,7 +1590,7 @@
 							},
 							"response": [
 								{
-									"id": "540638b7-50ad-4e5f-8b8f-a0bd20cedabf",
+									"id": "f303f832-0354-4af6-8b0b-6c1831da2494",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
@@ -1692,7 +1692,7 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "d2204290-21ba-4d78-8934-18fdebabcc8a",
+									"id": "4b0e7ebf-28c1-4d87-aa63-0679a2122662",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
@@ -1825,7 +1825,7 @@
 							},
 							"response": [
 								{
-									"id": "2349a97d-e315-4a06-ac55-c1f18794bee8",
+									"id": "b634408e-26ed-4793-a770-b8dda54d34a2",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"header": [],
@@ -1957,7 +1957,7 @@
 							},
 							"response": [
 								{
-									"id": "1b500830-e815-4afe-a959-7c345209d48a",
+									"id": "b44b38a8-b652-4eb8-b0a9-50e392ce4d96",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -2080,7 +2080,7 @@
 							},
 							"response": [
 								{
-									"id": "f8c8eec9-e37f-4806-a6fe-d8b56cd77ec9",
+									"id": "8a4b2a7d-c922-4dae-8245-f250c8402cab",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -2186,7 +2186,7 @@
 							},
 							"response": [
 								{
-									"id": "e58f9fb8-3089-4a71-8654-f288fdbe1156",
+									"id": "805ccf11-12de-421d-a18e-ee7c2915f323",
 									"name": "tag a product",
 									"originalRequest": {
 										"method": "POST",
@@ -2321,7 +2321,7 @@
 							},
 							"response": [
 								{
-									"id": "baca4045-43c3-4c18-b064-0187d09ac9aa",
+									"id": "0f3b7e17-f1bb-4676-861c-9af855716730",
 									"name": "untag a product",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2458,7 +2458,7 @@
 							},
 							"response": [
 								{
-									"id": "a10886ce-686f-415f-a8ac-748c681e197f",
+									"id": "9267d673-4539-4728-950f-5c703cdf449f",
 									"name": "categorize a product to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -2581,12 +2581,12 @@
 									"variable": [
 										{
 											"key": "productId",
-											"value": "D83B87B6-BD75-497F-B781-5A8F66C080C4",
+											"value": "96D35B2C-713A-4AAF-89FB-56DBBE420B66",
 											"description": "uuidV4"
 										},
 										{
 											"key": "seriesId",
-											"value": "A175D61B-7A6A-483F-9F1D-39C09EB9B325",
+											"value": "5C865710-EB1B-4431-893D-38153BC758BB",
 											"description": "uuidV4"
 										}
 									]
@@ -2595,7 +2595,7 @@
 							},
 							"response": [
 								{
-									"id": "e085f1ed-f901-4694-b7f2-2b8cc2c85d06",
+									"id": "1bd3afd4-b04e-4c6a-b67f-3f921604e5c7",
 									"name": "remove a product from a series",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2720,7 +2720,7 @@
 							},
 							"response": [
 								{
-									"id": "cfa378f7-2815-4023-81ac-a88341d410d9",
+									"id": "bd35ed63-601e-4d4e-908d-e99db00850e9",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"header": [],
@@ -2821,7 +2821,7 @@
 							},
 							"response": [
 								{
-									"id": "4335bfc9-64e8-470a-96b9-942a94022b9f",
+									"id": "f7b8e17b-1305-45e5-b8ac-2400e6b7b38b",
 									"name": "example",
 									"originalRequest": {
 										"header": [],
@@ -2926,7 +2926,7 @@
 							},
 							"response": [
 								{
-									"id": "5a61a46a-cdf9-40ca-815e-25e266b956f6",
+									"id": "c94c6606-8fd9-4090-9be5-d74ff763b938",
 									"name": "insert a new series",
 									"originalRequest": {
 										"header": [],
@@ -2988,7 +2988,7 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "0a2756e5-d547-4843-a4fa-2420578db40d",
+									"id": "0804fc5a-0fcd-4f04-a8f6-713ca81743fa",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
 										"header": [],
@@ -3087,7 +3087,7 @@
 							},
 							"response": [
 								{
-									"id": "0fcac385-1e81-4ec2-8ce3-580472aed83a",
+									"id": "1eeab69a-d004-4f6e-af97-5cb4660a0f89",
 									"name": "remove series by id",
 									"originalRequest": {
 										"header": [],
@@ -3214,7 +3214,7 @@
 							},
 							"response": [
 								{
-									"id": "d3bce2ba-a06e-44dd-af85-948172c8cb15",
+									"id": "5619b3b6-a06f-44d9-92a0-469723c90bd8",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3329,7 +3329,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "5ebf112e-fc74-417c-a06c-813e6722844d",
+									"id": "e2d12ee0-c389-4bc9-a6d4-508c69025e7b",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3444,7 +3444,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "17d74d46-f7fc-4a6e-9133-5e930ba0d767",
+									"id": "6d591162-67b6-481f-8fe1-07741b83b238",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3559,7 +3559,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "dac4930e-fe81-426f-b7be-9eeaa55b08ea",
+									"id": "6073ab63-feee-44ca-a540-3d878a1a14c1",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3674,7 +3674,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "f914da74-8571-4714-92cc-274f2019846d",
+									"id": "c0beeebb-5260-4d72-9530-2ec0f0a2805f",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3827,7 +3827,7 @@
 							},
 							"response": [
 								{
-									"id": "0acb0416-c6ae-447e-811b-4be077a7946a",
+									"id": "f7431893-8190-4438-8123-916ad8fa8934",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"header": [],
@@ -3889,7 +3889,7 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
 								},
 								{
-									"id": "e06c7fde-e7cc-4982-8b71-ff6f41088f8b",
+									"id": "f5461938-5075-4af7-8499-ed5d9c880ac8",
 									"name": "request for json web token using json headers",
 									"originalRequest": {
 										"header": [],
@@ -3949,6 +3949,159 @@
 									"cookie": [],
 									"responseTime": 44,
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBFRTBBQzkxLUUxNTAtNDIzQy05M0MxLTUwNDYzQzBENkY5RSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAxNjQ3NCwiZXhwIjoxNTEyMTAyODc0fQ.4PGlTMlktXrJDOzpEiKypP1TkwWeAtjSPwvs-LMXZ_s\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "utilities",
+					"description": "",
+					"item": [
+						{
+							"name": "common single field patch",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference/field/:fieldReference",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"model",
+										":modelReference",
+										"field",
+										":fieldReference"
+									],
+									"variable": [
+										{
+											"key": "modelReference",
+											"value": "products"
+										},
+										{
+											"key": "fieldReference",
+											"value": "description"
+										}
+									]
+								},
+								"description": "1. request\n\t* headers\n\t\t1. Content-Type: application/json\n\t\t2. x-access-token: jwt string\n\t* parameters n/a\n\t* queries: n/a\n\t* body:\n\t\t1. id: recordId\n\t\t2. value: value to be patched to the record\n2. response: 'data' property is an object of the record (without association details)\n3. notes\n\t* only specific fields of specific models are supported\n\t\t- carousel: n/a,\n\t\t- companies: title, address, telephone, fax, website\n\t\t- contacts: email, name, mobile\n\t\t- countries: n/a,\n\t\t- labels: n/a,\n\t\t- photos: n/a,\n\t\t- products: name, specification, description\n\t\t- registration: n/a\n\t\t- series: name\n\t\t- tags: color (should be a string color that's recognizable by in html/css)\n\n\t* for id and value, json body in the request header should already be passing in the correct value types (for integers/boolean), server does not type cast"
+							},
+							"response": [
+								{
+									"id": "4938c564-d714-465a-8452-08dd73f29c06",
+									"name": "common single field patch",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4",
+												"disabled": false
+											},
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"id\":\"AD8ED578-7F47-4D8D-9FEB-A049C62460C1\",\n\t\"value\":\"line1\\nline2\"\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference/field/:fieldReference",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"model",
+												":modelReference",
+												"field",
+												":fieldReference"
+											],
+											"variable": [
+												{
+													"key": "modelReference",
+													"value": "products"
+												},
+												{
+													"key": "fieldReference",
+													"value": "description"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "447",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Nov 2017 15:32:33 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1bf-7sk8+e/yd6A/gyTEij71jSrGXL0\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 88,
+									"body": "{\"data\":{\"id\":\"AD8ED578-7F47-4D8D-9FEB-A049C62460C1\",\"code\":\"858-IMRL88\",\"name\":\"WOW!!! It worked again!!!\",\"specification\":\"Accusantium quisquam aut itaque consequatur voluptas quasi. Sapiente ea corporis.\",\"description\":\"line1\\nline2\",\"active\":true,\"seriesId\":\"5C865710-EB1B-4431-893D-38153BC758BB\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/products/field/description\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								}
 							]
 						}

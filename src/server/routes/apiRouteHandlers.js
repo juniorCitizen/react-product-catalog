@@ -41,13 +41,10 @@ API_ROUTER.route('/products/:productId')
   .get(...require('./products/getProductById')) // get product record by id
   //   .post(notImplemented)
   //   .put(...require('./products/updateProduct')) // update multiple product fields by id
-  //   .patch(notImplemented)
+  // .patch(notImplemented) // patch a field in the target product id
   .delete(...require('./products/deleteProduct')) // delete product by id
 API_ROUTER.route('/products/:productId/series/:seriesId')
-  //   .get(notImplemented)
   .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
-  //   .put(notImplemented)
-  // .patch(notImplemented)
   .delete(...require('./products/removeProductAssociation').fromSeries) // disassociate a product from a series
 
 API_ROUTER.route('/products/:productId/tags/:tagId')
@@ -70,6 +67,9 @@ API_ROUTER.route('/series/:seriesId/products')
 
 API_ROUTER.route('/tokens')
   .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
+
+API_ROUTER.route('/model/:modelReference/field/:fieldReference')
+  .patch(...require('./utilities/patchRecordField'))
 
 // /////////////////////////////////////////////////////
 // Utilities
@@ -351,11 +351,11 @@ API_ROUTER.use(responseHandlers.json)
 API_ROUTER.use(responseHandlers.redirect)
 API_ROUTER.use(responseHandlers.template)
 API_ROUTER.use((req, res, next) => {
-  logging.warning(`客戶端要求不存在的 API 端點: ${eVars.HOST}${req.path}`)
+  logging.warning(`客戶端要求不存在的 API 端點: ${req.method.toLowerCase()} ${eVars.APP_ROUTE}${req.path}`)
   res.status(404)
   return res.json({
     method: req.method.toLowerCase(),
-    endpoint: `${eVars.HOST}${req.path}`,
+    endpoint: `${eVars.APP_ROUTE}${req.path}`,
     message: '端點不存在'
   })
 }) // catch all api calls that fell through
