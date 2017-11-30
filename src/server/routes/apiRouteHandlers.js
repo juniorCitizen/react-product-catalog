@@ -33,7 +33,7 @@ API_ROUTER.route('/photos/:photoId/series/:seriesId')
 
 API_ROUTER.route('/products')
   .get(...require('./products/getProducts')) // get product dataset
-// .post(...require('./products/insertProduct')) // create new product record
+  .post(...require('./products/insertProduct')) // create new product record
 //   .put(notImplemented)
 //   .patch(notImplemented)
 //   .delete(notImplemented)
