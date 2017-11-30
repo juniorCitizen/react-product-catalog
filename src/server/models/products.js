@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     specification: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     active: {
       type: DataTypes.BOOLEAN,
