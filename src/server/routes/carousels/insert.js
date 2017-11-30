@@ -19,7 +19,7 @@ module.exports = (() => {
           req.resJson = {
             data: {
               id: newCarousel.id,
-              order: newCarousel.order,
+              displaySequence: newCarousel.displaySequence,
               primary: newCarousel.primary,
               originalName: newCarousel.originalName,
               encoding: newCarousel.encoding,
@@ -48,7 +48,7 @@ function prepImageData (req, res, next) {
         .catch(error => logging.error(error, 'carousel temp file removal failure...'))
       req.imageData = {
         id: await nextAvailableId(),
-        order: await nextAvailableValueInSequence(),
+        displaySequence: await nextAvailableValueInSequence(),
         primary: false,
         originalName: uploadedImage.originalname,
         encoding: uploadedImage.encoding,
@@ -81,10 +81,10 @@ function nextAvailableValueInSequence () {
   let nextAvailableValueInSequence = 0
   return db.Carousels
     .findAll()
-    .map(carousels => carousels.order)
-    .then((orderSequence) => {
-      // loop through and find the next available order sequence value
-      while (orderSequence.indexOf(nextAvailableValueInSequence) !== -1) {
+    .map(carousels => carousels.displaySequence)
+    .then((sequenceList) => {
+      // loop through and find the next available displaySequence value
+      while (sequenceList.indexOf(nextAvailableValueInSequence) !== -1) {
         nextAvailableValueInSequence++
       }
       return Promise.resolve(nextAvailableValueInSequence)
