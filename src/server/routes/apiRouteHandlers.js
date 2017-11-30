@@ -43,12 +43,15 @@ API_ROUTER.route('/products/:productId')
   //   .put(...require('./products/updateProduct')) // update multiple product fields by id
   //   .patch(notImplemented)
   .delete(...require('./products/deleteProduct')) // delete product by id
-// API_ROUTER.route('/products/:productId/series/:seriesId')
-//   .get(notImplemented)
-//   .post(notImplemented)
+API_ROUTER.route('/products/:productId/series/:seriesId')
+  //   .get(notImplemented)
+  .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
 //   .put(notImplemented)
-//   .patch(...require('./products/assignToSeries')) // assign a product to a series
+// .patch(notImplemented)
 //   .delete(notImplemented)
+
+API_ROUTER.route('/products/:productId/tags/:tagId')
+  .post(...require('./products/assignProductAssociation').toTags) // associate a product to a tag
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
@@ -60,6 +63,9 @@ API_ROUTER.route('/series/:seriesId')
   .get(...require('./series/getSeriesById')) // get series details by id
   .patch(...require('./series/patchSeries')) // patching series properties
   .delete(...require('./series/removeSeries')) // delete series by id
+
+API_ROUTER.route('/series/:seriesId/products')
+  .post(...require('./products/insertProduct')) // insert product record and associate with seriesId
 
 API_ROUTER.route('/tokens')
   .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
@@ -84,11 +90,11 @@ API_ROUTER.route('/carousels/:carouselId')
   .put(notImplemented)
   .patch(notImplemented)
   .delete(...require('./carousels/deleteById')) // remove a carousel image by id
-API_ROUTER.route('/carousels/:carouselId/order/:order')
+API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
   .get(notImplemented)
   .post(notImplemented)
   .put(notImplemented)
-  .patch(...require('./carousels/updateOrderById')) // update order of carousels
+  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
   .delete(notImplemented)
 API_ROUTER.route('/carousels/:carouselId/primary')
   .get(notImplemented)
