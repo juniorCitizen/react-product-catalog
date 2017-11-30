@@ -6,7 +6,7 @@ const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
   validateJwt({ admin: true }), // validate against token for admin privilege
-  checkChildSeries,
+  checkPresenceOfChildSeries,
   (req, res, next) => {
     let targetSeriesId = req.params.seriesId.toUpperCase()
     // start transactions
@@ -19,8 +19,7 @@ module.exports = [
         // disassociate any associated products
         let query3 = db.Products.update({ seriesId: null, active: false }, { where: { seriesId: targetSeriesId }, transaction: trx })
         // run above queries in sequence
-        return Promise
-          .each([query1, query2, query3], () => Promise.resolve())
+        return Promise.each([query1, query2, query3], () => Promise.resolve())
           // remove the actual series record
           .then(() => db.Series.destroy({ where: { id: targetSeriesId }, transaction: trx }))
           .catch(error => next(error))
@@ -35,7 +34,7 @@ module.exports = [
 ]
 
 // check if childSeries exists
-function checkChildSeries (req, res, next) {
+function checkPresenceOfChildSeries (req, res, next) {
   return db.Series
     .findAll({ include: [{ model: db.Series, as: 'childSeries' }], where: { id: req.params.seriesId.toUpperCase() } })
     .then(series => {
