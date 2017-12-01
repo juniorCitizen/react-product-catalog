@@ -50,6 +50,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "reload": "^2.2.2",
     "sequelize": "^4.23.2",
     "sqlite3": "^3.1.13",
     "uuid": "^3.1.0",
@@ -112,7 +113,7 @@
     "source-map-support": "^0.5.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.12.1",
+    "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^2.9.4",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1",
@@ -124,6 +125,6 @@
     "lint": "eslint --color src *.js *.jsx --cache",
     "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004",
-    "start-all": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004 webpack --env production"
+    "start-all": "cross-env NODE_ENV=development supervisor -w server, src/server/server.js -e node,js,html app"
   }
 }
