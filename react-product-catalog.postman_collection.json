@@ -7,241 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "contacts",
-			"description": "",
-			"item": [
-				{
-					"name": "register a user or admin account",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "botPrevention",
-									"value": "",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "countryId",
-									"value": "twn",
-									"description": "optional, set to 'twn' (Taiwan) if omitted",
-									"type": "text"
-								},
-								{
-									"key": "company",
-									"value": "My Fake Company",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "address",
-									"value": "123 Nowhere Road, Taiwan",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "telephone",
-									"value": "06-6666666",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "fax",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "website",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "name",
-									"value": "David Tsai",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "aaachiayu.tsai.personal@gmail.com",
-									"description": "required (must be unique)",
-									"type": "text"
-								},
-								{
-									"key": "mobile",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "00000000",
-									"description": "required (8~20 characters)",
-									"type": "text"
-								},
-								{
-									"key": "admin",
-									"value": "false",
-									"description": "optional, default to false",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9004",
-							"path": [
-								"reactProductCatalog",
-								"api",
-								"contacts"
-							]
-						},
-						"description": "1. Content-Type: 'application/x-www-form-urlencoded' or 'application/json'\n2. when req.body.admin is true, meaning registering an 'admin' account.  valid jwt must present in the x-access-token header\n3. upon success, a 24 hours token will be issued with the following properties in the payload:\n\t* name\n\t* email\n\t* admin"
-					},
-					"response": [
-						{
-							"id": "506ae0fa-88fd-4133-9c7f-d1dbea6d840c",
-							"name": "register a user account",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "458",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 27 Nov 2017 15:30:28 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"1ca-4eYCTZjk094TULvXhJSZunrZ8Po\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": 161,
-							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
-						},
-						{
-							"id": "ad943535-818e-4c2d-a5df-9c3bce247f49",
-							"name": "attempt to register an admin account without proper credentials",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "2683",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 27 Nov 2017 15:32:01 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"a7b-QH8UR1aUsCC8z9waIDkEeN5YjeQ\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": 44,
-							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:23:21\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:18:63)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\"}}"
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "untested",
 			"description": "",
 			"item": [
@@ -348,16 +113,6 @@
 				{
 					"name": "series",
 					"item": [
-						{
-							"name": "GET",
-							"item": [],
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "POST",
-							"item": [],
-							"_postman_isSubFolder": true
-						},
 						{
 							"name": "PUT",
 							"item": [
@@ -719,7 +474,7 @@
 							},
 							"response": [
 								{
-									"id": "69f6c7fd-5371-446b-8073-b1c7bce4dfc1",
+									"id": "3996f790-0bda-4963-b452-41a1678e1e0b",
 									"name": "serve up static assets (favicon.ico as example)",
 									"originalRequest": {
 										"method": "GET",
@@ -816,6 +571,850 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "contacts",
+					"description": "",
+					"item": [
+						{
+							"name": "login with contact information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"tokens"
+									]
+								},
+								"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
+							},
+							"response": [
+								{
+									"id": "35ff8851-c98b-41de-8319-a5c3b72d5516",
+									"name": "request for json web token by application/json on admin account",
+									"originalRequest": {
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "454",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 Nov 2017 14:24:22 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1c6-qBEtOKks3kJqt2rRDCfyn9BWyX0\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 53,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								},
+								{
+									"id": "bca746f6-fdb7-4bc1-9436-e33b3648f1e3",
+									"name": "request for json web token using json headers",
+									"originalRequest": {
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "465",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Nov 2017 04:34:34 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1d1-R/0NFlBep+OPd9p5o3UzaN3vVGs\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 44,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBFRTBBQzkxLUUxNTAtNDIzQy05M0MxLTUwNDYzQzBENkY5RSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAxNjQ3NCwiZXhwIjoxNTEyMTAyODc0fQ.4PGlTMlktXrJDOzpEiKypP1TkwWeAtjSPwvs-LMXZ_s\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								}
+							]
+						},
+						{
+							"name": "register a user or admin account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "My Fake Company",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "David Tsai",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "aaachiayu.tsai.personal@gmail.com",
+											"description": "required (must be unique)",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "00000000",
+											"description": "required (8~20 characters)",
+											"type": "text"
+										},
+										{
+											"key": "countryId",
+											"value": "twn",
+											"description": "optional, set to 'twn' (Taiwan) if omitted",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": "123 Nowhere Road, Taiwan",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "telephone",
+											"value": "06-6666666",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "fax",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "website",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "admin",
+											"value": "false",
+											"description": "optional, default to false",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts"
+									]
+								},
+								"description": "1. request:\n\t* headers:\n\t\t- Content-Type:\n\t\t\t1. application/json\n\t\t\t2. x-www-form-urlencoded\n\t\t\t3. multipart/form-data\n\t\t- x-access-token: jwt string (optional, but must be present and with admin privilege when attempting to register an admin contact)\n\t* params: n/a\n\t* queries: n/a\n\t* body:\n\t\t1. botPrevention - required\n\t\t2. company - required\n\t\t3. name - required\n\t\t4. email - required\n\t\t5. password - required (empty string will be set to NULL, otherwise must be 8~20 chars in length)\n\t\t6. countryId\n\t\t7. address\n\t\t8. telephone\n\t\t9. fax\n\t\t10. website\n\t\t11. mobile\n\t\t12. admin\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: jwt string upon success\n3. notes:\n\t* upon success, a 24 hours token will be issued with the following properties in the payload:\n\t\t1. id\n\t\t2. name\n\t\t3. email\n\t\t4. admin\n\t* email will be validated at insertion\n\t* contacts with NULL password field is only used for contact display, will not be able to login"
+							},
+							"response": [
+								{
+									"id": "15c1a69f-d075-4d0a-a8be-58cefd20fc80",
+									"name": "register a user account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "twn",
+													"description": "optional, set to 'twn' (Taiwan) if omitted",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "company",
+													"value": "My Fake Company",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "123 Nowhere Road, Taiwan",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "06-6666666",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "c1haiayu.tsai.personal@gmail.com",
+													"description": "required (must be unique)",
+													"type": "text"
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "password",
+													"value": "00000000",
+													"description": "required (8~20 characters)",
+													"type": "text"
+												},
+												{
+													"key": "admin",
+													"value": "false",
+													"description": "optional, default to false",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "521",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:16:50 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"209-GCglTobaW1l0iXIgvid9fsNGV9Q\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 140,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZEQUExQkY1LUJBRjUtNDNDRS05OENBLUM2MDZGMzczOUQ5RCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJjMWhhaWF5dS50c2FpLnBlcnNvbmFsQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNTEyMTQxNDEwLCJleHAiOjE1MTIyMjc4MTB9.2pyDf9-LhUMCyPYtTr2v721U9ssDpgIj3TH_Mm9-S-4\",\"message\":\"User account 'c1haiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
+								},
+								{
+									"id": "6b44b7fa-c275-4828-bc1d-0e4d325dcb75",
+									"name": "attemp to register a admin contact without jwt or valid priviage",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "company",
+													"value": "my fake company",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "test@test.com",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "00000000",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "address",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "admin",
+													"value": "true",
+													"description": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2123",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:27:35 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"84b-wxDeTqPuQ2JMs+doY3In81WghdU\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 60,
+									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
+								},
+								{
+									"id": "910e6c60-5c28-45f6-94ae-8afeb8163f21",
+									"name": "creation of contact record without ability to login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded",
+												"disabled": false
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "company",
+													"value": "my fake company",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "tesst1@test.com",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"description": "",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "address",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "admin",
+													"value": "true",
+													"description": "",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "186",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:45:31 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ba-/fyw9RVcTILW2ifYrsPld7eGnFU\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 161,
+									"body": "{\"message\":\"Contact record for 'tesst1@test.com' without login privilege is created\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
+								},
+								{
+									"id": "45381922-10c4-4ebf-b4bb-5c3180697bab",
+									"name": "attemp to register admin account without password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"botPrevention\":\"\",\n\t\"company\":\"my fake company\",\n\t\"name\":\"David Tsai\",\n\t\"email\":\"tesssssst1@test.com\",\n\t\"password\":\"\",\n\t\"admin\": true\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2766",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 16:06:13 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ace-qOv1j0CTWeyq038Gqe8YPv7sTqc\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 1590,
+									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Password is required for admin account registration\",\"stack\":\"Error: Password is required for admin account registration\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:25:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at multerMiddleware (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:18:41)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\"}}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "photos",
 					"description": "",
 					"item": [
@@ -886,7 +1485,7 @@
 							},
 							"response": [
 								{
-									"id": "2f19e948-108b-467e-bdf4-badcc3aad739",
+									"id": "e3a71944-ac87-48af-9527-2a93adb872d8",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"header": [],
@@ -980,7 +1579,7 @@
 							},
 							"response": [
 								{
-									"id": "58157e47-03ea-4441-80d5-725e7ae33ceb",
+									"id": "0991cbbc-8d38-495b-888e-2c3561986c7d",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"header": [],
@@ -1074,7 +1673,7 @@
 							},
 							"response": [
 								{
-									"id": "f14218e5-1f73-4337-82bd-d0e209516e09",
+									"id": "22c922b7-cfcf-44ee-adbe-1a304e7c7ee9",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"header": [],
@@ -1178,7 +1777,7 @@
 							},
 							"response": [
 								{
-									"id": "6da8b1f3-ae1b-4644-b0fb-750600fa7d0a",
+									"id": "0f9a45f2-fd10-4813-8fdf-d88ea9084f28",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"header": [],
@@ -1270,7 +1869,7 @@
 							},
 							"response": [
 								{
-									"id": "4a469077-f75d-49a1-bb70-16c33a8f1801",
+									"id": "5284d9bd-7655-4238-a232-75fdfd724fa5",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"header": [],
@@ -1364,7 +1963,7 @@
 							},
 							"response": [
 								{
-									"id": "488c4a39-5b8c-4802-af93-77133f5e6461",
+									"id": "77966793-c2e1-469f-9e64-d1156996dae0",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"header": [],
@@ -1458,7 +2057,7 @@
 							},
 							"response": [
 								{
-									"id": "1054762e-31a1-42f4-bb65-2d91cf55036e",
+									"id": "d905ade4-1353-45f3-a74f-5f8ab960a7ab",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1593,7 +2192,7 @@
 							},
 							"response": [
 								{
-									"id": "6540c972-cc5e-4f7f-a838-a1d80ca6ef88",
+									"id": "26fa955e-d410-499c-978b-999a2b1b949a",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
@@ -1695,7 +2294,7 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "dcdd9e75-8ab1-4ebe-b420-d07f53f04ea1",
+									"id": "b6a3c530-05ad-4e6c-9474-185b0e1abc7f",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
@@ -1828,7 +2427,7 @@
 							},
 							"response": [
 								{
-									"id": "a2e62537-e68a-4955-9408-72a27266f369",
+									"id": "d1c088f9-44dd-422d-965b-9d983e948dcc",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"header": [],
@@ -1960,7 +2559,7 @@
 							},
 							"response": [
 								{
-									"id": "c9517ed0-d3c5-4291-a3b6-2a57b1355c86",
+									"id": "0140eae4-dd28-4575-b9d9-af6cc2077db2",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -2083,7 +2682,7 @@
 							},
 							"response": [
 								{
-									"id": "3787b66e-2233-4623-b33a-e822f90f7e0d",
+									"id": "3b48f39d-9225-49a7-8e77-07c33a33bfb0",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -2189,7 +2788,7 @@
 							},
 							"response": [
 								{
-									"id": "9ebe9fb7-4975-4518-b0d9-9a3527e57fa2",
+									"id": "e6d073da-0ce8-48d6-8c9f-e394e2e69ee4",
 									"name": "tag a product",
 									"originalRequest": {
 										"method": "POST",
@@ -2324,7 +2923,7 @@
 							},
 							"response": [
 								{
-									"id": "ea822aff-f84e-4b99-bfc7-742d0f676966",
+									"id": "c02bfbac-cc86-4c2c-94f8-0d8de7d8f236",
 									"name": "untag a product",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2461,7 +3060,7 @@
 							},
 							"response": [
 								{
-									"id": "d44d5c2e-715b-488a-94fc-44d8957f32a5",
+									"id": "c9ce8334-734d-4911-bf97-d4684342da02",
 									"name": "categorize a product to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -2598,7 +3197,7 @@
 							},
 							"response": [
 								{
-									"id": "64d730f3-b2d4-4dca-aa0e-c3b4b5c5a16d",
+									"id": "643ca160-3814-43dc-8d6f-a25e2376f771",
 									"name": "remove a product from a series",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2723,7 +3322,7 @@
 							},
 							"response": [
 								{
-									"id": "f22f415a-4693-4c7b-bf46-f6a2b8404e4e",
+									"id": "00ece247-6b04-48de-ae28-4d3d13b0af1c",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"header": [],
@@ -2816,7 +3415,7 @@
 							},
 							"response": [
 								{
-									"id": "e4370996-6b84-46ec-93e9-7a6876f1adcb",
+									"id": "ce3bc4df-baff-4e9f-a53b-90dad4ac5c9e",
 									"name": "get tree structured series menu at root level",
 									"originalRequest": {
 										"method": "GET",
@@ -2921,7 +3520,7 @@
 							},
 							"response": [
 								{
-									"id": "ca598d87-f52c-43ce-a360-b211515398ff",
+									"id": "7baa0c51-38e8-4023-bbde-bf39d40ab835",
 									"name": "get subTree of a series by id",
 									"originalRequest": {
 										"method": "GET",
@@ -3045,7 +3644,7 @@
 							},
 							"response": [
 								{
-									"id": "b82049da-6851-4cce-a54a-92e0e784a315",
+									"id": "2339527a-7cdf-40b6-86d3-93b596c447e1",
 									"name": "insert a new series",
 									"originalRequest": {
 										"header": [],
@@ -3107,7 +3706,7 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "c1fdc76e-080b-4f58-b3ff-253294827da8",
+									"id": "ebc44126-4700-4913-b132-ee4d61c05b4d",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
 										"header": [],
@@ -3206,7 +3805,7 @@
 							},
 							"response": [
 								{
-									"id": "bbfabca0-2e60-4e3a-99e1-6f632284b2ed",
+									"id": "12ca2d88-4634-4125-ad3c-797f16a199f4",
 									"name": "remove series by id",
 									"originalRequest": {
 										"header": [],
@@ -3333,7 +3932,7 @@
 							},
 							"response": [
 								{
-									"id": "a1463a9e-5b77-42c0-ba29-7640192972a3",
+									"id": "d2c3f37a-4295-4373-a1fa-1a69d2313374",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3448,7 +4047,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "ea3790ee-37cf-46cc-8b3d-d499f8c3feb7",
+									"id": "1bce4a73-9f4e-4f20-8e0c-80ce69266e1f",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3563,7 +4162,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "cb7957fd-f2fd-42af-a02e-ced1b86871c2",
+									"id": "034f5e66-66c1-4a69-92eb-68c1318cbeaa",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3678,7 +4277,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "1bf038c1-d0cf-4d21-afca-95ba6ac6fc56",
+									"id": "b3597616-bfa8-413a-a8d1-94652401cbb3",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3793,7 +4392,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "c8f8c605-fa70-478a-95aa-a650ebe13882",
+									"id": "8fcbc98b-cd3e-40ef-9c17-5618340642e6",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3913,168 +4512,6 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "tokens",
-					"item": [
-						{
-							"name": "request for json web token",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"tokens"
-									]
-								},
-								"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
-							},
-							"response": [
-								{
-									"id": "4c421ad2-def7-43c3-9564-846c194238da",
-									"name": "request for json web token by application/json on admin account",
-									"originalRequest": {
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"_postman_previewtype": "text",
-									"header": [
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "*",
-											"name": "Access-Control-Allow-Origin",
-											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive",
-											"name": "Connection",
-											"description": "Options that are desired for the connection"
-										},
-										{
-											"key": "Content-Length",
-											"value": "454",
-											"name": "Content-Length",
-											"description": "The length of the response body in octets (8-bit bytes)"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8",
-											"name": "Content-Type",
-											"description": "The mime type of this content"
-										},
-										{
-											"key": "Date",
-											"value": "Mon, 27 Nov 2017 14:24:22 GMT",
-											"name": "Date",
-											"description": "The date and time that the message was sent"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"1c6-qBEtOKks3kJqt2rRDCfyn9BWyX0\"",
-											"name": "ETag",
-											"description": "An identifier for a specific version of a resource, often a message digest"
-										},
-										{
-											"key": "X-Powered-By",
-											"value": "Express",
-											"name": "X-Powered-By",
-											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-										}
-									],
-									"cookie": [],
-									"responseTime": 53,
-									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
-								},
-								{
-									"id": "2af1612e-207b-4615-8764-d4bf0c76a9c1",
-									"name": "request for json web token using json headers",
-									"originalRequest": {
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"_postman_previewtype": "text",
-									"header": [
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "*",
-											"name": "Access-Control-Allow-Origin",
-											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive",
-											"name": "Connection",
-											"description": "Options that are desired for the connection"
-										},
-										{
-											"key": "Content-Length",
-											"value": "465",
-											"name": "Content-Length",
-											"description": "The length of the response body in octets (8-bit bytes)"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8",
-											"name": "Content-Type",
-											"description": "The mime type of this content"
-										},
-										{
-											"key": "Date",
-											"value": "Thu, 30 Nov 2017 04:34:34 GMT",
-											"name": "Date",
-											"description": "The date and time that the message was sent"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"1d1-R/0NFlBep+OPd9p5o3UzaN3vVGs\"",
-											"name": "ETag",
-											"description": "An identifier for a specific version of a resource, often a message digest"
-										},
-										{
-											"key": "X-Powered-By",
-											"value": "Express",
-											"name": "X-Powered-By",
-											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-										}
-									],
-									"cookie": [],
-									"responseTime": 44,
-									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBFRTBBQzkxLUUxNTAtNDIzQy05M0MxLTUwNDYzQzBENkY5RSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAxNjQ3NCwiZXhwIjoxNTEyMTAyODc0fQ.4PGlTMlktXrJDOzpEiKypP1TkwWeAtjSPwvs-LMXZ_s\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
-								}
-							]
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
 					"name": "utilities",
 					"description": "",
 					"item": [
@@ -4115,7 +4552,7 @@
 							},
 							"response": [
 								{
-									"id": "8ef04c7d-876f-42aa-a7e0-06cc1516f0f4",
+									"id": "61a2e9c7-869b-414a-a835-1d760d21dae8",
 									"name": "get record count of 'photos' table",
 									"originalRequest": {
 										"method": "GET",
@@ -4202,7 +4639,7 @@
 									"body": "{\"data\":517,\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/photos?recordCount\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "bbf4f7f1-8483-4134-991f-79f614267472",
+									"id": "8bf834d0-c1b7-4131-bb98-37fbd4534755",
 									"name": "get record count of composite data of 'region' field of 'countries' table",
 									"originalRequest": {
 										"method": "GET",
@@ -4335,7 +4772,7 @@
 							},
 							"response": [
 								{
-									"id": "ce023c2e-97da-4429-9be4-3e59848abe0b",
+									"id": "79fb2630-4091-4e31-ac62-ea068ada711f",
 									"name": "common single field patch",
 									"originalRequest": {
 										"method": "PATCH",

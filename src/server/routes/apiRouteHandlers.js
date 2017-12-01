@@ -15,18 +15,38 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
+API_ROUTER.route('/tokens')
+  .post(...require('./tokens/processJwtRequest')) // login
+API_ROUTER.route('/contacts')
+  .get(notImplemented) // get contacts **
+  .post(...require('./contacts/addContact')) // add a contact
+API_ROUTER.route('/companies')
+  .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
+API_ROUTER.route('/companies/:companyId')
+API_ROUTER.route('/companies/:companyId/contacts')
+API_ROUTER.route('/companies/:companyId/contacts/:contactId')
+API_ROUTER.route('/contacts/:contactId')
+  .get(notImplemented) // get contact by id **
+  .patch(notImplemented) // update contact
+  .delete(notImplemented) // delete contact by id **
+API_ROUTER.route('/contacts/:contactId/companies/:companyId')
+  .patch(notImplemented) // assign contact to a company **
+API_ROUTER.route('/contacts/:contactId/password')
+  .patch(notImplemented) // change password **
+API_ROUTER.route('/contacts/:contactId/admin')
+  .patch(notImplemented) // admin status toggle **
+API_ROUTER.route('/contacts/:contactId/name/:name')
+  .patch(notImplemented) // change name **
+
 API_ROUTER.route('/photos')
   .post(...require('./photos/uploadPhotos')) // batch upload photos
-
 API_ROUTER.route('/photos/:photoId')
   .get(...require('./photos/getPhotoById')) // get photo by id
   .patch(...require('./photos/patchPhotoById')) // patching primary or active status
   .delete(...require('./photos/removePhotoById')) // remove photo by id
-
 API_ROUTER.route('/photos/:photoId/products/:productId')
   .post(...require('./photos/assignPhotoAssociation').toProduct) // assign productId to a photo
   .delete(...require('./photos/removePhotoAssociation').fromProduct) // remove productId from a photo
-
 API_ROUTER.route('/photos/:photoId/series/:seriesId')
   .post(...require('./photos/assignPhotoAssociation').toSeries) // assign seriesId to a photo
   .delete(...require('./photos/removePhotoAssociation').fromSeries) // remove seriesId from a photo
@@ -34,14 +54,8 @@ API_ROUTER.route('/photos/:photoId/series/:seriesId')
 API_ROUTER.route('/products')
   .get(...require('./products/getProducts')) // get product dataset
   .post(...require('./products/insertProduct')) // create new product record
-//   .put(notImplemented)
-//   .patch(notImplemented)
-//   .delete(notImplemented)
 API_ROUTER.route('/products/:productId')
   .get(...require('./products/getProductById')) // get product record by id
-  //   .post(notImplemented)
-  //   .put(...require('./products/updateProduct')) // update multiple product fields by id
-  // .patch(notImplemented) // patch a field in the target product id
   .delete(...require('./products/deleteProduct')) // delete product by id
 API_ROUTER.route('/products/:productId/series/:seriesId')
   .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
@@ -53,25 +67,18 @@ API_ROUTER.route('/products/:productId/tags/:tagId')
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
-
 API_ROUTER.route('/series')
-  .get(...require('./series/getSeries'))
+  .get(...require('./series/getSeries')) // get product listing by tree structure (root level)
   .post(...require('./series/insertSeries')) // insert a new series
-
 API_ROUTER.route('/series/:seriesId')
-  .get(...require('./series/getSeriesById')) // get series details by id
+  .get(...require('./series/getSeriesById')) // get product listing by tree structure (with specified series as root)
   .patch(...require('./series/patchSeries')) // patching series properties
   .delete(...require('./series/removeSeries')) // delete series by id
-
 API_ROUTER.route('/series/:seriesId/products')
   .post(...require('./products/insertProduct')) // insert product record and associate with seriesId
 
-API_ROUTER.route('/tokens')
-  .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
-
 API_ROUTER.route('/model/:modelReference')
   .get(...require('./utilities/getRecordCount'))
-
 API_ROUTER.route('/model/:modelReference/field/:fieldReference')
   .patch(...require('./utilities/patchRecordField'))
 
@@ -110,30 +117,6 @@ API_ROUTER.route('/carousels/:carouselId/primary')
 // /////////////////////////////////////////////////////
 // Companies **
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/companies')
-  .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/companies/:companyId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/companies/:companyId/contacts')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/companies/:companyId/contacts/:contactId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Countries
@@ -308,42 +291,6 @@ function productRequest (req, res) {
 // /////////////////////////////////////////////////////
 // Company and contact information
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/contacts')
-  .get(notImplemented) // get contacts **
-  .post(...require('./contacts/addContact')) // add a contact
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/contacts/:contactId')
-  .get(notImplemented) // get contact by id **
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented) // update contact
-  .delete(notImplemented) // delete contact by id **
-API_ROUTER.route('/contacts/:contactId/companies/:companyId')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented) // assign contact to a company **
-  .delete(notImplemented)
-API_ROUTER.route('/contacts/:contactId/password')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented) // change password **
-  .delete(notImplemented)
-API_ROUTER.route('/contacts/:contactId/admin')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented) // admin status toggle **
-  .delete(notImplemented)
-API_ROUTER.route('/contacts/:contactId/name/:name')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented) // change name **
-  .delete(notImplemented)
 
 // ///////////////////////////////////////////////////////
 // API router specific post-routing processing middlewares
