@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
 
 const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
@@ -7,6 +8,7 @@ const eVars = require('../../config/eVars')
 const validatePasswordFormat = require('../../middlewares/validatePasswordFormat')
 
 module.exports = [
+  multer().none(),
   loginInfoPresence,
   validatePasswordFormat,
   botPrevention,

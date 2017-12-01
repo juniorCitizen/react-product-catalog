@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         min: 0
       }
     },
-    order: {
+    displaySequence: {
       type: DataTypes.INTEGER,
       allowNull: false
     },

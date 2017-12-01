@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    order: {
+    displaySequence: {
       type: DataTypes.INTEGER,
       allowNull: true
     },

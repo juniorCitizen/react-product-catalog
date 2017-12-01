@@ -7,31 +7,6 @@ module.exports = {
   toProduct: assignProductId()
 }
 
-function assignProductId () {
-  return [
-    validateJwt({ admin: true }),
-    (req, res, next) => {
-      return db.Photos
-        .update({
-          productId: req.params.productId.toUpperCase(),
-          primary: false
-        }, {
-          where: { id: req.params.photoId.toUpperCase() }
-        })
-        .then(() => db.Photos
-          .findById(req.params.photoId.toUpperCase(), {
-            attributes: { exclude: ['data'] }
-          }))
-        .then(data => {
-          req.resJson = { data }
-          next()
-          return Promise.resolve()
-        })
-        .catch(error => next(error))
-    }
-  ]
-}
-
 function assignSeriesId () {
   return [
     validateJwt({ admin: true }),
@@ -57,6 +32,31 @@ function assignSeriesId () {
         next()
         return Promise.resolve()
       }).catch(error => next(error))
+    }
+  ]
+}
+
+function assignProductId () {
+  return [
+    validateJwt({ admin: true }),
+    (req, res, next) => {
+      return db.Photos
+        .update({
+          productId: req.params.productId.toUpperCase(),
+          primary: false
+        }, {
+          where: { id: req.params.photoId.toUpperCase() }
+        })
+        .then(() => db.Photos
+          .findById(req.params.photoId.toUpperCase(), {
+            attributes: { exclude: ['data'] }
+          }))
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
     }
   ]
 }

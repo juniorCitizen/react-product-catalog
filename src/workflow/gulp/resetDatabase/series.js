@@ -12,7 +12,7 @@ for (let counter = 0; counter < LEVEL_ENTRY_COUNT[0]; counter++) {
   menuRecords.push({
     id: uuidV4().toUpperCase(),
     name: faker.hacker.noun(),
-    order: counter,
+    displaySequence: counter,
     active: true,
     menuLevel: 0
   })
@@ -30,7 +30,7 @@ secondLevelMenu.forEach(menuRecord => {
     menuRecords.push({
       id: uuidV4().toUpperCase(),
       name: faker.hacker.noun(),
-      order: counter,
+      displaySequence: counter,
       active: true,
       menuLevel: 1,
       parentSeriesId: menuRecord.id
@@ -55,7 +55,7 @@ thirdLevelMenu.forEach(menuRecord => {
     menuRecords.push({
       id: uuidV4().toUpperCase(),
       name: faker.hacker.noun(),
-      order: counter,
+      displaySequence: counter,
       active: true,
       menuLevel: 2,
       parentSeriesId: menuRecord.id

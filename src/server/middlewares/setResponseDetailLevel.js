@@ -13,7 +13,7 @@ const detailedOptions = {
         model: db.Photos, attributes: { exclude: ['data'] }
       }],
       order: [
-        'order',
+        'displaySequence',
         [db.Products, 'code'],
         [db.Products, db.Tags, 'name'],
         [db.Products, db.Photos, 'primary', 'desc']

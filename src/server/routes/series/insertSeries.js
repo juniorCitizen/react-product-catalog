@@ -1,9 +1,12 @@
+const multer = require('multer')
+
 const db = require('../../controllers/database')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
   validateJwt({ admin: true }), // validate against token for admin privilege
+  multer().none(),
   async (req, res, next) => {
     let seriesData = {
       name: req.body.name,
@@ -28,11 +31,11 @@ module.exports = [
       ? { where: { menuLevel: 0 } }
       : { where: { parentSeriesId: parent.id } }
     let siblings = await db.Series.findAll(searchOptions).catch(error => next(error))
-    // set order value (place at the end of the order)
+    // set displaySequence value (place at the end of the displaySequence)
     if (siblings) {
-      seriesData.order = siblings.length
+      seriesData.displaySequence = siblings.length
     } else {
-      seriesData.order = 0
+      seriesData.displaySequence = 0
     }
     return db.Series
       .create(seriesData)
