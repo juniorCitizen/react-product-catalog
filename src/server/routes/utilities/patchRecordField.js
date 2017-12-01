@@ -12,7 +12,7 @@ module.exports = [
       .then(record => {
         if (!record) {
           res.status(400)
-          let error = new Error(`Record '${id}' is not round in '${model}' `)
+          let error = new Error(`Record '${id}' is not found in '${model}' `)
           return next(error)
         }
         record[field] = value
