@@ -55,6 +55,7 @@ API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
 
 API_ROUTER.route('/series')
+  .get(...require('./series/getSeries'))
   .post(...require('./series/insertSeries')) // insert a new series
 
 API_ROUTER.route('/series/:seriesId')
@@ -68,13 +69,15 @@ API_ROUTER.route('/series/:seriesId/products')
 API_ROUTER.route('/tokens')
   .post(...require('./tokens/processJwtRequest')) // provides jwt's based on credentials validity
 
+API_ROUTER.route('/model/:modelReference')
+  .get(...require('./utilities/getRecordCount'))
+
 API_ROUTER.route('/model/:modelReference/field/:fieldReference')
   .patch(...require('./utilities/patchRecordField'))
 
 // /////////////////////////////////////////////////////
 // Utilities
 // /////////////////////////////////////////////////////
-API_ROUTER.get('/recordCount/:modelReference', ...require('./utilities/getTotalRecordCount'))
 
 // /////////////////////////////////////////////////////
 // Carousels
