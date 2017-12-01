@@ -40,8 +40,8 @@ module.exports = ({ none = false, admin = false, user = false } = {}) => {
         // if restriction level is set to 'self: true'
         if (!('contactId' in req.params) || (decodedToken.id !== req.params.contactId)) {
           // route must have a req.params.contactId and matching token payload id
-          res.status(400)
-          let error = new Error('id in token payload does not match route')
+          res.status(403)
+          let error = new Error('Attempt to access other user\'s information')
           return next(error)
         }
       }
