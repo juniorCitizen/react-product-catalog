@@ -18,17 +18,14 @@ const API_ROUTER = express.Router()
 API_ROUTER.route('/tokens')
   .post(...require('./tokens/processJwtRequest')) // login
 API_ROUTER.route('/contacts')
-  .get(notImplemented) // get contacts **
   .post(...require('./contacts/addContact')) // add a contact
+API_ROUTER.route('/contacts/:contactId')
+  .get(...require('./contacts/getContactById')) // get contact by id **
 API_ROUTER.route('/companies')
   .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
 API_ROUTER.route('/companies/:companyId')
 API_ROUTER.route('/companies/:companyId/contacts')
 API_ROUTER.route('/companies/:companyId/contacts/:contactId')
-API_ROUTER.route('/contacts/:contactId')
-  .get(notImplemented) // get contact by id **
-  .patch(notImplemented) // update contact
-  .delete(notImplemented) // delete contact by id **
 API_ROUTER.route('/contacts/:contactId/companies/:companyId')
   .patch(notImplemented) // assign contact to a company **
 API_ROUTER.route('/contacts/:contactId/password')

@@ -1,25 +1,26 @@
 {
 	"info": {
 		"name": "react-product-catalog",
-		"_postman_id": "bbaf5256-d09c-48cf-cbe7-bd2efccfb01a",
+		"_postman_id": "d9b0901a-5651-2b42-4609-e9297787ef9b",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "untested",
-			"description": "",
 			"item": [
 				{
 					"name": "offices",
-					"description": "",
 					"item": [
 						{
 							"name": "get a list of offices with details",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/offices",
 									"protocol": "http",
@@ -32,8 +33,7 @@
 										"api",
 										"offices"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						}
@@ -42,14 +42,16 @@
 				},
 				{
 					"name": "countries",
-					"description": "",
 					"item": [
 						{
 							"name": "get regions",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
 									"protocol": "http",
@@ -62,8 +64,7 @@
 										"api",
 										"productMenus"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -72,9 +73,12 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/countries?page=3&per_page=1&details",
+									"raw": "http://localhost:9004/reactProductCatalog/api/countries?page=3&per_page=1&details=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -135,7 +139,7 @@
 											"raw": "{\n\t\"name\": \"Test Series\",\n\t\"order\": 1,\n\t\"publish\": false\n}"
 										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series/1?details",
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/1?details=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -226,9 +230,12 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4/series/4?details",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4/series/4?details=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -267,7 +274,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/16",
 									"protocol": "http",
@@ -281,8 +291,7 @@
 										"carousels",
 										"16"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -302,7 +311,6 @@
 										{
 											"key": "image",
 											"value": "",
-											"description": "",
 											"type": "file"
 										}
 									]
@@ -333,7 +341,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMTY4NzMxLCJleHAiOjE1MTEyNTUxMzF9.S8lwJcpC8js9euFJJD9Xw65GtOCmEYHHz1QEHWG46gM"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/4/primary",
 									"protocol": "http",
@@ -362,7 +373,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2/order/2",
 									"protocol": "http",
@@ -378,8 +392,7 @@
 										"order",
 										"2"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -393,7 +406,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2",
 									"protocol": "http",
@@ -407,8 +423,7 @@
 										"carousels",
 										"2"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						}
@@ -419,14 +434,16 @@
 		},
 		{
 			"name": "not working",
-			"description": "",
 			"item": [
 				{
 					"name": "serve up index.html from template",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9004/reactProductCatalog",
 							"protocol": "http",
@@ -446,7 +463,6 @@
 		},
 		{
 			"name": "working",
-			"description": "",
 			"item": [
 				{
 					"name": "assets",
@@ -456,7 +472,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
 									"protocol": "http",
@@ -474,12 +493,15 @@
 							},
 							"response": [
 								{
-									"id": "3996f790-0bda-4963-b452-41a1678e1e0b",
+									"id": "458616ca-90fe-4b54-9345-e4a85d766a7e",
 									"name": "serve up static assets (favicon.ico as example)",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
 											"protocol": "http",
@@ -572,8 +594,215 @@
 				},
 				{
 					"name": "contacts",
-					"description": "",
 					"item": [
+						{
+							"name": "get contact data details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts",
+										":contactId"
+									],
+									"variable": [
+										{
+											"key": "contactId",
+											"value": "55FE81B2-DE83-420A-8444-D0057A2E9BAB"
+										}
+									]
+								},
+								"description": "1. request:\n\t* headers: {\"x-access-token\":jwt}\n\t* params: {\"contactId\":uuidV4}\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: user record\n\t\t\t- company: company information\n3. notes:\n\t* access is only granted when the following conditions are met:\n\t\t1. jwt is issued by server\n\t\t2. jwt payload carries an contact id that matches :contactId\n\t* server only returns one record related to :contactId"
+							},
+							"response": [
+								{
+									"id": "e1dccf9b-704c-4d2a-97a5-e979ae2263d0",
+									"name": "get contact data details",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts",
+												":contactId"
+											],
+											"variable": [
+												{
+													"key": "contactId",
+													"value": "7C31584A-7EC4-484C-959E-9F166E6B32DC"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "846",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 16:59:46 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"34e-UvNRnzQ38N2wQAdyxqSPjV+5xLg\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 64,
+									"body": "{\"data\":{\"id\":\"7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"email\":\"david.tsai@gentry-way.com.tw\",\"name\":\"David Tsai\",\"mobile\":null,\"hashedPassword\":\"be2d498b2e47ff3e00ee3f61806c25908c3bc6c68ba2ba059e89627cd255ce7a691f7f350adad7cfa10986a7d7d1f9027f7921f6af46032b8963f7a71493e9bb\",\"salt\":\"ba5dbfb5e36868d8\",\"admin\":true,\"active\":true,\"companyId\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"company\":{\"id\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"title\":\"Gentry Way Co., Ltd.\",\"address\":\"No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.\",\"telephone\":\"+886-(0)6-6529052\",\"fax\":\"+886-(0)6-6527093\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"countryId\":\"twn\"}},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								},
+								{
+									"id": "367e12e9-1172-4041-8be1-62bbe5484955",
+									"name": "attempt to access other user's data",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts",
+												":contactId"
+											],
+											"variable": [
+												{
+													"key": "contactId",
+													"value": "55FE81B2-DE83-420A-8444-D0057A2E9BAB"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2752",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 17:00:27 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ac0-zAFjOCeq5uzFTYBOEghXpdyV0KM\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 28,
+									"body": "{\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/55FE81B2-DE83-420A-8444-D0057A2E9BAB\",\"message\":\"403 Forbidden\",\"error\":{\"name\":\"Error\",\"message\":\"Attempt to access other user's information\",\"stack\":\"Error: Attempt to access other user's information\\n    at jwt.verify (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:44:23)\\n    at Object.module.exports [as verify] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\jsonwebtoken\\\\verify.js:180:10)\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:33:16\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:354:14)\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:410:3)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\"}}"
+								}
+							]
+						},
 						{
 							"name": "login with contact information",
 							"request": {
@@ -581,12 +810,31 @@
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json"
+										"value": "application/x-www-form-urlencoded"
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "david.tsai@gentry-way.com.tw",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testtest",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "",
+											"type": "text"
+										}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
@@ -605,12 +853,15 @@
 							},
 							"response": [
 								{
-									"id": "35ff8851-c98b-41de-8319-a5c3b72d5516",
+									"id": "8aeb36d8-13f1-4a58-b65c-48378884285e",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -667,12 +918,15 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
 								},
 								{
-									"id": "bca746f6-fdb7-4bc1-9436-e33b3648f1e3",
+									"id": "8cd6abe0-ec32-4af1-9686-c24fff40bf0b",
 									"name": "request for json web token using json headers",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -840,7 +1094,7 @@
 							},
 							"response": [
 								{
-									"id": "15c1a69f-d075-4d0a-a8be-58cefd20fc80",
+									"id": "0a33b23b-1fe5-4c03-ac06-7543ca74bf90",
 									"name": "register a user account",
 									"originalRequest": {
 										"method": "POST",
@@ -1001,7 +1255,7 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZEQUExQkY1LUJBRjUtNDNDRS05OENBLUM2MDZGMzczOUQ5RCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJjMWhhaWF5dS50c2FpLnBlcnNvbmFsQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNTEyMTQxNDEwLCJleHAiOjE1MTIyMjc4MTB9.2pyDf9-LhUMCyPYtTr2v721U9ssDpgIj3TH_Mm9-S-4\",\"message\":\"User account 'c1haiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 								},
 								{
-									"id": "6b44b7fa-c275-4828-bc1d-0e4d325dcb75",
+									"id": "c69dc4ea-2bab-4931-9736-bd7252a53903",
 									"name": "attemp to register a admin contact without jwt or valid priviage",
 									"originalRequest": {
 										"method": "POST",
@@ -1019,79 +1273,67 @@
 												{
 													"key": "botPrevention",
 													"value": "",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "company",
 													"value": "my fake company",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "name",
 													"value": "David Tsai",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "email",
 													"value": "test@test.com",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "password",
 													"value": "00000000",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "countryId",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "address",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "telephone",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "fax",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "website",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "mobile",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "admin",
 													"value": "true",
-													"description": "",
 													"type": "text"
 												}
 											]
@@ -1163,7 +1405,7 @@
 									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
 								},
 								{
-									"id": "910e6c60-5c28-45f6-94ae-8afeb8163f21",
+									"id": "9e652e03-6f06-4d20-9aa4-ea277dc2b839",
 									"name": "creation of contact record without ability to login",
 									"originalRequest": {
 										"method": "POST",
@@ -1172,8 +1414,7 @@
 												"key": "Content-Type",
 												"type": "text",
 												"name": "Content-Type",
-												"value": "application/x-www-form-urlencoded",
-												"disabled": false
+												"value": "application/x-www-form-urlencoded"
 											}
 										],
 										"body": {
@@ -1182,79 +1423,67 @@
 												{
 													"key": "botPrevention",
 													"value": "",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "company",
 													"value": "my fake company",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "name",
 													"value": "David Tsai",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "email",
 													"value": "tesst1@test.com",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "password",
 													"value": "",
-													"description": "",
 													"type": "text"
 												},
 												{
 													"key": "countryId",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "address",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "telephone",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "fax",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "website",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "mobile",
 													"value": "",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												},
 												{
 													"key": "admin",
 													"value": "true",
-													"description": "",
 													"type": "text",
 													"disabled": true
 												}
@@ -1327,7 +1556,7 @@
 									"body": "{\"message\":\"Contact record for 'tesst1@test.com' without login privilege is created\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 								},
 								{
-									"id": "45381922-10c4-4ebf-b4bb-5c3180697bab",
+									"id": "0c29df0f-e860-41a2-8392-ecbb7a7c844f",
 									"name": "attemp to register admin account without password",
 									"originalRequest": {
 										"method": "POST",
@@ -1416,14 +1645,16 @@
 				},
 				{
 					"name": "photos",
-					"description": "",
 					"item": [
 						{
 							"name": "get photo by id",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
 									"protocol": "http",
@@ -1462,7 +1693,6 @@
 										{
 											"key": "photos",
 											"value": "",
-											"description": "",
 											"type": "file",
 											"disabled": true
 										}
@@ -1485,12 +1715,15 @@
 							},
 							"response": [
 								{
-									"id": "e3a71944-ac87-48af-9527-2a93adb872d8",
+									"id": "8522be28-7d36-4cf0-98c0-c1a5181a9925",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1558,7 +1791,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8/products/30D25238-F8F7-404E-8E84-318615845F94",
 									"protocol": "http",
@@ -1579,12 +1815,15 @@
 							},
 							"response": [
 								{
-									"id": "0991cbbc-8d38-495b-888e-2c3561986c7d",
+									"id": "b61ec101-f459-4dba-a1d5-a1ebea73e019",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1652,7 +1891,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDk4NjIxLCJleHAiOjE1MTExODUwMjF9.QBT-QGC_GBEcWZRirr_zf4jiKR9JW7IUYTmvUJD9r9Q"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/AC840C53-5B1A-41C4-8C16-77B3B089E483/series/F574716D-ABDC-4E38-B480-74314894C2EC",
 									"protocol": "http",
@@ -1673,12 +1915,15 @@
 							},
 							"response": [
 								{
-									"id": "22c922b7-cfcf-44ee-adbe-1a304e7c7ee9",
+									"id": "ee0a81eb-dd4e-4ec3-931a-7cf04df48440",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1746,7 +1991,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8?active=false&primary=false",
 									"protocol": "http",
@@ -1777,12 +2025,15 @@
 							},
 							"response": [
 								{
-									"id": "0f9a45f2-fd10-4813-8fdf-d88ea9084f28",
+									"id": "e295ba57-953f-4a49-901a-2667a1fb8cad",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1850,7 +2101,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
 									"protocol": "http",
@@ -1869,12 +2123,15 @@
 							},
 							"response": [
 								{
-									"id": "5284d9bd-7655-4238-a232-75fdfd724fa5",
+									"id": "e021d5e0-b739-4188-a8fa-d71125c46d58",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1942,7 +2199,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/products/34A83578-DEFD-4E8C-A88F-45AA5B04C5EC",
 									"protocol": "http",
@@ -1963,12 +2223,15 @@
 							},
 							"response": [
 								{
-									"id": "77966793-c2e1-469f-9e64-d1156996dae0",
+									"id": "d2a00e5f-5cb5-413f-a9b3-62b7ea4619d0",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2036,7 +2299,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/series/45A8E31A-B933-4195-98C6-4096424C0CB9",
 									"protocol": "http",
@@ -2057,7 +2323,7 @@
 							},
 							"response": [
 								{
-									"id": "d905ade4-1353-45f3-a74f-5f8ab960a7ab",
+									"id": "93346ccb-b3d3-470a-acca-45dcf945a27f",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2067,7 +2333,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/series/45A8E31A-B933-4195-98C6-4096424C0CB9",
 											"protocol": "http",
@@ -2145,16 +2414,18 @@
 				},
 				{
 					"name": "Products",
-					"description": "",
 					"item": [
 						{
 							"name": "get product list with optional details and pagination",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2192,14 +2463,17 @@
 							},
 							"response": [
 								{
-									"id": "26fa955e-d410-499c-978b-999a2b1b949a",
+									"id": "4aa5f277-596a-4e91-90cf-86ae57394e2f",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -2294,14 +2568,17 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "b6a3c530-05ad-4e6c-9474-185b0e1abc7f",
+									"id": "9a0f2c60-de26-4e94-aba6-1ac9c09840a8",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -2402,7 +2679,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId",
 									"protocol": "http",
@@ -2427,12 +2707,15 @@
 							},
 							"response": [
 								{
-									"id": "d1c088f9-44dd-422d-965b-9d983e948dcc",
+									"id": "a72672ea-5b9a-483a-a960-8c05f7dc271e",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2559,12 +2842,15 @@
 							},
 							"response": [
 								{
-									"id": "0140eae4-dd28-4575-b9d9-af6cc2077db2",
+									"id": "d1e58e51-609f-47b0-bc8a-51ef921d3a8f",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2682,12 +2968,15 @@
 							},
 							"response": [
 								{
-									"id": "3b48f39d-9225-49a7-8e77-07c33a33bfb0",
+									"id": "1cb92fa6-691a-40d9-9815-4d6ae80cb901",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2755,7 +3044,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 									"protocol": "http",
@@ -2788,18 +3080,20 @@
 							},
 							"response": [
 								{
-									"id": "e6d073da-0ce8-48d6-8c9f-e394e2e69ee4",
+									"id": "f879e57c-07eb-4f8d-be6c-2e7cd0028790",
 									"name": "tag a product",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 											"protocol": "http",
@@ -2830,6 +3124,7 @@
 									"status": "OK",
 									"code": 200,
 									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "html",
 									"header": [
 										{
 											"key": "Access-Control-Allow-Origin",
@@ -2890,7 +3185,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 									"protocol": "http",
@@ -2923,7 +3221,7 @@
 							},
 							"response": [
 								{
-									"id": "c02bfbac-cc86-4c2c-94f8-0d8de7d8f236",
+									"id": "c60e3be2-60f4-4bea-9b1f-ac0474fbdae0",
 									"name": "untag a product",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2933,7 +3231,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 											"protocol": "http",
@@ -3027,7 +3328,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 									"protocol": "http",
@@ -3060,7 +3364,7 @@
 							},
 							"response": [
 								{
-									"id": "c9ce8334-734d-4911-bf97-d4684342da02",
+									"id": "2dd11962-6de8-4dde-a4c7-e5993ea38999",
 									"name": "categorize a product to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -3070,7 +3374,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 											"protocol": "http",
@@ -3164,7 +3471,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 									"protocol": "http",
@@ -3197,18 +3507,20 @@
 							},
 							"response": [
 								{
-									"id": "643ca160-3814-43dc-8d6f-a25e2376f771",
+									"id": "042ff557-33b5-47e6-ba77-49ff9d2c5718",
 									"name": "remove a product from a series",
 									"originalRequest": {
 										"method": "DELETE",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 											"protocol": "http",
@@ -3297,14 +3609,16 @@
 				},
 				{
 					"name": "productMenus",
-					"description": "",
 					"item": [
 						{
 							"name": "get tree structured product menus",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
 									"protocol": "http",
@@ -3322,12 +3636,15 @@
 							},
 							"response": [
 								{
-									"id": "00ece247-6b04-48de-ae28-4d3d13b0af1c",
+									"id": "31a5e133-564d-4e89-aa61-28524f71b4dc",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3390,14 +3707,16 @@
 				},
 				{
 					"name": "series",
-					"description": "",
 					"item": [
 						{
 							"name": "get series menu at root level",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series",
 									"protocol": "http",
@@ -3415,12 +3734,15 @@
 							},
 							"response": [
 								{
-									"id": "ce3bc4df-baff-4e9f-a53b-90dad4ac5c9e",
+									"id": "191f171d-25b2-4b44-8c42-00e46c36ac23",
 									"name": "get tree structured series menu at root level",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series",
 											"protocol": "http",
@@ -3494,7 +3816,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
 									"protocol": "http",
@@ -3520,12 +3845,15 @@
 							},
 							"response": [
 								{
-									"id": "7baa0c51-38e8-4023-bbde-bf39d40ab835",
+									"id": "c6a884c7-e55a-456b-8947-dcc4fe0bd8cb",
 									"name": "get subTree of a series by id",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
 											"protocol": "http",
@@ -3622,7 +3950,6 @@
 										{
 											"key": "name",
 											"value": "test3",
-											"description": "",
 											"type": "text"
 										}
 									]
@@ -3644,12 +3971,15 @@
 							},
 							"response": [
 								{
-									"id": "2339527a-7cdf-40b6-86d3-93b596c447e1",
+									"id": "34bf1199-947f-4513-abcd-3ef39e133dd0",
 									"name": "insert a new series",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3706,12 +4036,15 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "ebc44126-4700-4913-b132-ee4d61c05b4d",
+									"id": "da347639-0cbd-4bd2-94e4-eb8ed2ee4f52",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3779,7 +4112,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
 									"protocol": "http",
@@ -3805,12 +4141,15 @@
 							},
 							"response": [
 								{
-									"id": "12ca2d88-4634-4125-ad3c-797f16a199f4",
+									"id": "3ba620b3-839d-4bf4-be90-af832ff2de25",
 									"name": "remove series by id",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3878,7 +4217,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 									"protocol": "http",
@@ -3932,7 +4274,7 @@
 							},
 							"response": [
 								{
-									"id": "d2c3f37a-4295-4373-a1fa-1a69d2313374",
+									"id": "30fdc0af-f8c2-4e11-9c8f-a18bffb89d15",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3942,7 +4284,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -4047,7 +4392,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "1bce4a73-9f4e-4f20-8e0c-80ce69266e1f",
+									"id": "8a7dc840-d65a-4b0b-8d8f-1705755baaf7",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4057,7 +4402,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -4162,7 +4510,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "034f5e66-66c1-4a69-92eb-68c1318cbeaa",
+									"id": "d95382a9-b611-409e-8766-4a873d49c903",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4172,7 +4520,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -4277,7 +4628,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "b3597616-bfa8-413a-a8d1-94652401cbb3",
+									"id": "ba824719-79a7-4b69-9b61-e7d73e835bb9",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4287,7 +4638,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -4392,7 +4746,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "8fcbc98b-cd3e-40ef-9c17-5618340642e6",
+									"id": "6c9acf04-cb9e-4891-b068-23b2fe76a4b1",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4402,7 +4756,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -4513,16 +4870,18 @@
 				},
 				{
 					"name": "utilities",
-					"description": "",
 					"item": [
 						{
 							"name": "get total record counts on models or specified composite dataset",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount",
+									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -4552,14 +4911,17 @@
 							},
 							"response": [
 								{
-									"id": "61a2e9c7-869b-414a-a835-1d760d21dae8",
+									"id": "75b3c77b-79fd-4193-9ef3-35e3b71dffea",
 									"name": "get record count of 'photos' table",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount",
+											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -4639,14 +5001,17 @@
 									"body": "{\"data\":517,\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/photos?recordCount\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "8bf834d0-c1b7-4131-bb98-37fbd4534755",
+									"id": "1be73d71-68f1-4cb4-8bef-2f6cd8ec18bd",
 									"name": "get record count of composite data of 'region' field of 'countries' table",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount",
+											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -4741,7 +5106,10 @@
 										"value": "application/json"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference/field/:fieldReference",
 									"protocol": "http",
@@ -4772,15 +5140,14 @@
 							},
 							"response": [
 								{
-									"id": "79fb2630-4091-4e31-ac62-ea068ada711f",
+									"id": "a43b5a4e-16d2-4e78-b8e4-7515c86340cf",
 									"name": "common single field patch",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4"
 											},
 											{
 												"key": "Content-Type",
