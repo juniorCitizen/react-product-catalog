@@ -457,7 +457,7 @@
 							},
 							"response": [
 								{
-									"id": "971c6465-6298-4e5e-81cd-a240f1ddeaa8",
+									"id": "1572e236-d2b5-4fae-ab6a-dcdbbc92ffef",
 									"name": "serve up static assets (favicon.ico as example)",
 									"originalRequest": {
 										"method": "GET",
@@ -594,7 +594,7 @@
 							},
 							"response": [
 								{
-									"id": "767dbb13-0bc3-4940-ac01-b14772bb66d9",
+									"id": "001e322a-4159-4c7b-8869-c91b65f8f1fd",
 									"name": "get contact data details",
 									"originalRequest": {
 										"method": "GET",
@@ -680,7 +680,7 @@
 									"body": "{\"data\":{\"id\":\"7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"email\":\"david.tsai@gentry-way.com.tw\",\"name\":\"David Tsai\",\"mobile\":null,\"hashedPassword\":\"be2d498b2e47ff3e00ee3f61806c25908c3bc6c68ba2ba059e89627cd255ce7a691f7f350adad7cfa10986a7d7d1f9027f7921f6af46032b8963f7a71493e9bb\",\"salt\":\"ba5dbfb5e36868d8\",\"admin\":true,\"active\":true,\"companyId\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"company\":{\"id\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"title\":\"Gentry Way Co., Ltd.\",\"address\":\"No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.\",\"telephone\":\"+886-(0)6-6529052\",\"fax\":\"+886-(0)6-6527093\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"countryId\":\"twn\"}},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "e8155e4f-f887-4843-b414-e66a6aea966d",
+									"id": "d91eacf3-0b74-455a-8889-f720598df34a",
 									"name": "attempt to access other user's data",
 									"originalRequest": {
 										"method": "GET",
@@ -790,7 +790,7 @@
 							},
 							"response": [
 								{
-									"id": "8a44bb0a-8fd6-40b6-b188-8a4d1ad9dd0f",
+									"id": "8a4ff951-31de-4276-aa4e-4299a3c972db",
 									"name": "get project hosting companies with staff and country details",
 									"originalRequest": {
 										"method": "GET",
@@ -914,7 +914,7 @@
 							},
 							"response": [
 								{
-									"id": "df322031-3d27-416d-a751-407276395008",
+									"id": "00cc0deb-3d59-4fd4-affc-cfd07101c455",
 									"name": "request for json web token by application/json on admin account",
 									"originalRequest": {
 										"header": [],
@@ -979,7 +979,7 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
 								},
 								{
-									"id": "538b3196-2242-4564-be04-25144bfee997",
+									"id": "dfbd3a5b-603d-4898-9367-954be6179924",
 									"name": "request for json web token using json headers",
 									"originalRequest": {
 										"header": [],
@@ -1155,7 +1155,7 @@
 							},
 							"response": [
 								{
-									"id": "6adff177-bff9-427f-8cf1-3b2fc2c91c3e",
+									"id": "1fafcdd5-6db9-41d3-af80-9f8068a307f8",
 									"name": "register a user account",
 									"originalRequest": {
 										"method": "POST",
@@ -1316,7 +1316,7 @@
 									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZEQUExQkY1LUJBRjUtNDNDRS05OENBLUM2MDZGMzczOUQ5RCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJjMWhhaWF5dS50c2FpLnBlcnNvbmFsQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNTEyMTQxNDEwLCJleHAiOjE1MTIyMjc4MTB9.2pyDf9-LhUMCyPYtTr2v721U9ssDpgIj3TH_Mm9-S-4\",\"message\":\"User account 'c1haiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 								},
 								{
-									"id": "0b0686ab-d34b-4dc7-b901-1b48c84ac363",
+									"id": "0fecbaef-f409-4600-9308-e1371933292d",
 									"name": "attemp to register a admin contact without jwt or valid priviage",
 									"originalRequest": {
 										"method": "POST",
@@ -1466,7 +1466,7 @@
 									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
 								},
 								{
-									"id": "a75c22a5-349f-45d9-beba-5fc2eebb64dc",
+									"id": "8dce40a8-9a35-4fcd-a217-bf15f2d1b92e",
 									"name": "creation of contact record without ability to login",
 									"originalRequest": {
 										"method": "POST",
@@ -1617,7 +1617,7 @@
 									"body": "{\"message\":\"Contact record for 'tesst1@test.com' without login privilege is created\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 								},
 								{
-									"id": "5960083e-c5f7-4346-80b4-cbb672cf2166",
+									"id": "b9b3f378-890b-4f1c-857c-b07d7a337c5d",
 									"name": "attemp to register admin account without password",
 									"originalRequest": {
 										"method": "POST",
@@ -1776,7 +1776,7 @@
 							},
 							"response": [
 								{
-									"id": "91d22094-d6fe-4da3-932f-a2264e997fe1",
+									"id": "f6fd91ea-3d77-4d7f-a418-17fb13f0e197",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"header": [],
@@ -1876,7 +1876,7 @@
 							},
 							"response": [
 								{
-									"id": "7761f69b-c62b-4633-baf4-e679ea26b44d",
+									"id": "d7cce2e2-669a-4b3c-aa31-b71c795768a2",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"header": [],
@@ -1976,7 +1976,7 @@
 							},
 							"response": [
 								{
-									"id": "8c8cd66d-312a-44b5-8dec-4f9acdca5bb5",
+									"id": "2b59dd15-1291-4e8b-a84e-6420adffe8bd",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"header": [],
@@ -2086,7 +2086,7 @@
 							},
 							"response": [
 								{
-									"id": "ffcd96ab-f6a7-4a81-97cc-b694279905d4",
+									"id": "74477c64-2e27-44e5-8d12-b8da824c4da3",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"header": [],
@@ -2184,7 +2184,7 @@
 							},
 							"response": [
 								{
-									"id": "bd686029-79fd-4d08-a080-aa01c39688d2",
+									"id": "b12bdde5-56fa-4b5f-b282-25923aa1518d",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"header": [],
@@ -2284,7 +2284,7 @@
 							},
 							"response": [
 								{
-									"id": "4385234f-e782-48ba-aea9-b90519184247",
+									"id": "d381d5c8-847a-4cd0-82d9-f1605b9f32fd",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"header": [],
@@ -2384,7 +2384,7 @@
 							},
 							"response": [
 								{
-									"id": "2423d1db-837c-470e-ad71-91cd44bad1b9",
+									"id": "bbea6cb2-20a0-40f8-b0d3-b0ffaefcbddd",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2524,7 +2524,7 @@
 							},
 							"response": [
 								{
-									"id": "aa08a9ad-61f7-4eda-a0ed-0e803ddbf2fa",
+									"id": "9c636a5c-5114-45c3-9bbb-0ed17a5670f0",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
@@ -2629,7 +2629,7 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "53e799ec-3fae-443b-88d6-ac4433a27950",
+									"id": "f679f3bf-97e8-49b0-975b-4b0c3713119f",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
@@ -2768,7 +2768,7 @@
 							},
 							"response": [
 								{
-									"id": "d7ea093e-b4a5-4341-adb9-60395dd2f515",
+									"id": "0e4797e0-3c40-4e2e-9f45-f578b02f4c67",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"header": [],
@@ -2903,7 +2903,7 @@
 							},
 							"response": [
 								{
-									"id": "0d281d68-5bec-471b-9c43-cc2c1a33ea55",
+									"id": "9a434761-a9cf-491a-9cf6-597115fa1271",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -3029,7 +3029,7 @@
 							},
 							"response": [
 								{
-									"id": "763dfdae-65bd-4fa3-91db-4d73cdd19f17",
+									"id": "b48dd8f6-5bb9-4cb0-bf38-6edaa639baa9",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
@@ -3141,7 +3141,7 @@
 							},
 							"response": [
 								{
-									"id": "c7f4314d-c08d-4957-9ff6-6f045abae07a",
+									"id": "af6d77b3-9de5-41cc-b3b8-85617aa0a8a9",
 									"name": "tag a product",
 									"originalRequest": {
 										"method": "POST",
@@ -3282,7 +3282,7 @@
 							},
 							"response": [
 								{
-									"id": "81aa2de4-aafb-43c8-8859-11c497713c34",
+									"id": "9faaa3cd-6c61-46fc-b863-f5cbe77dffcb",
 									"name": "untag a product",
 									"originalRequest": {
 										"method": "DELETE",
@@ -3425,7 +3425,7 @@
 							},
 							"response": [
 								{
-									"id": "4609a193-12fb-4b04-9fbe-9cd00b4afc80",
+									"id": "0146f307-0597-427a-83e7-2ad89c24fb0e",
 									"name": "categorize a product to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -3568,7 +3568,7 @@
 							},
 							"response": [
 								{
-									"id": "8af926e6-3a23-4732-a5ef-5ed904aa9acd",
+									"id": "75b8b63d-d2e4-4339-8f5c-5440dcccf1ac",
 									"name": "remove a product from a series",
 									"originalRequest": {
 										"method": "DELETE",
@@ -3697,7 +3697,7 @@
 							},
 							"response": [
 								{
-									"id": "16ef13e8-f7d3-4083-a402-5b3c66cb61fd",
+									"id": "4520d2f7-e16f-4465-8f32-d524f044fe7e",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"header": [],
@@ -3795,7 +3795,7 @@
 							},
 							"response": [
 								{
-									"id": "2b3bfcfe-6b17-4200-830a-4ecbe68b4341",
+									"id": "b902b260-b3f5-4a14-b5c1-ba566f1c1bba",
 									"name": "get tree structured series menu at root level",
 									"originalRequest": {
 										"method": "GET",
@@ -3906,7 +3906,7 @@
 							},
 							"response": [
 								{
-									"id": "5ea9d324-f027-43a9-ad29-f2bdf3a53c26",
+									"id": "d1f48512-68d8-43a4-91c9-c60d736d6c58",
 									"name": "get subTree of a series by id",
 									"originalRequest": {
 										"method": "GET",
@@ -4032,7 +4032,7 @@
 							},
 							"response": [
 								{
-									"id": "4a836182-4608-403a-8e86-26844c0cfbeb",
+									"id": "f733870f-58bb-4de5-bcfd-c6e849ac578f",
 									"name": "insert a new series",
 									"originalRequest": {
 										"header": [],
@@ -4097,7 +4097,7 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "488ad629-ff87-41b6-883c-985671a1d301",
+									"id": "2805f75c-e080-4ce2-9b4f-1e6173dc0147",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
 										"header": [],
@@ -4202,7 +4202,7 @@
 							},
 							"response": [
 								{
-									"id": "6eebc296-39c3-4155-9133-066f0824f436",
+									"id": "c33dc6f1-49be-4521-8eb8-0224b902b698",
 									"name": "remove series by id",
 									"originalRequest": {
 										"header": [],
@@ -4335,7 +4335,7 @@
 							},
 							"response": [
 								{
-									"id": "51bf66c1-b53a-4ccf-9c7d-1718002b6620",
+									"id": "7ad84144-4b7d-48f5-903f-8bbb48e1c69d",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4453,7 +4453,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "920632fc-f893-4214-b2d1-63b20811bd35",
+									"id": "dee91c76-4833-4420-868f-e5342c84baef",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4571,7 +4571,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "018b180f-bfd8-4de4-a3df-4c7ba5185063",
+									"id": "11a80932-91db-464d-9a21-e4a5905b6aa7",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4689,7 +4689,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "04161aea-f537-49ac-89bf-533771e9e909",
+									"id": "df40c97c-a7b8-431a-9ab5-989021d61d2f",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4807,7 +4807,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "705408b2-8f1b-4c5c-add6-1d757844c20b",
+									"id": "9d0e507c-5754-49f4-a1aa-228cf0825743",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -4933,6 +4933,117 @@
 					"name": "utilities",
 					"item": [
 						{
+							"name": "search product listings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/productSearch?wildCard=extra large",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"productSearch"
+									],
+									"query": [
+										{
+											"key": "wildCard",
+											"value": "extra large",
+											"equals": true
+										}
+									]
+								},
+								"description": "performs case-insensitive comparison of a string against:\n\t1. product code\n\t2. product name\n\t3. product specification\n\t4. product description\n\t5. series name of the associated series to products\n\t6. tag name of the associated tags to products\nto get a list of products and associated details\n\n1. request:\n\t* headers: n/a\n\t* params: n/a\n\t* queries: ?wildCard=string to be searched\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t- data: array of product records with details\n\t\t\t1. series: associated series object\n\t\t\t2. tags: array of tag objects\n\t\t\t3. photos: array of photo objects (without actual photo data)\n3. notes: n/a"
+							},
+							"response": [
+								{
+									"id": "d166db76-0e6d-417e-90f2-f39ea2d4fcb9",
+									"name": "search product listings",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/productSearch?wildCard=extra large",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"productSearch"
+											],
+											"query": [
+												{
+													"key": "wildCard",
+													"value": "extra large",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "49732",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 02 Dec 2017 06:12:57 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c244-52PAVJ+rzJW8ovvC4uFIpEbScXk\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 208,
+									"body": "{\"data\":[{\"id\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"code\":\"339-7ZQR3Z\",\"name\":\"Sleek Fresh Hat\",\"specification\":\"Ex fugiat alias rerum nam consequuntur non quod impedit eos. Suscipit sit sed.\",\"description\":\"Hic minima aut voluptatibus. Impedit quibusdam autem. Nam inventore ducimus repellendus ex quis impedit eum.\\nRerum quas rem consequatur quia perferendis dolores animi ipsa aliquam. Ipsam minus culpa officiis est ut. Et dolorum facilis. Ut reprehenderit fugit.\\nQui sit natus tempore doloribus voluptate dolor in aperiam aut. Ut sit sapiente. Alias et ducimus mollitia aut perferendis non nemo.\\nCorporis sint cumque cum sint cupiditate blanditiis perferendis mollitia molestiae. Illo et quasi. Qui quaerat suscipit et dolores qui sapiente. Eaque est pariatur. Et quaerat aut dolor corrupti molestiae omnis. Deserunt rem in eum nam aspernatur eius.\\nNisi reprehenderit sit neque. Voluptatibus voluptas hic ea. Porro nihil laborum similique molestias corrupti nesciunt magnam aliquam. Vel dolorem in et. Repellendus expedita molestiae.\",\"active\":true,\"series\":{\"id\":\"4BD9381F-2E6F-415C-9017-606E41A98E70\",\"name\":\"monitor\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\"},\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"color\":\"Thistle\",\"active\":true,\"labels\":{\"id\":\"6881ED95-0EF3-46AC-9D42-E7F77F97F077\",\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"tagId\":5}},{\"id\":8,\"name\":\"Extra Large\",\"color\":\"MidnightBlue\",\"active\":true,\"labels\":{\"id\":\"E01587F6-CC95-4614-9E13-086AD3FACFC6\",\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"tagId\":8}}],\"photos\":[{\"id\":\"00DAC8BD-B742-4BBE-8C0A-2980845F95D5\",\"primary\":true,\"originalName\":\"GT41.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12199,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"01540162-8ED3-4442-BCC7-8E864FD8A119\",\"primary\":false,\"originalName\":\"GT41.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12199,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"0B1C9CC5-39C9-469A-8A61-0DC20FFC5225\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"114ABFFF-816C-4A87-94BE-5C027B2EFE25\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"17EA8998-B38E-47A5-BCCE-A064E3756ADD\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"309EDE71-BFE8-4758-9129-EE598FF399AD\",\"primary\":false,\"originalName\":\"GT12.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6818,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"31122425-33C3-4AD3-8314-0F749DF38856\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"3368D100-A261-455D-8137-519D45943FC1\",\"primary\":false,\"originalName\":\"GT21.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7362,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"33FD1D16-95A5-4861-B900-5E59D1E1A704\",\"primary\":false,\"originalName\":\"GT38.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9142,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"38A30E57-1596-4749-A7F6-13B770B32BD0\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"412FA7E7-2C25-4BAB-8CCB-453628605011\",\"primary\":false,\"originalName\":\"GT40.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10560,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"4C5F4293-FC24-4599-873E-164EC1973201\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"58F78D51-5A8A-4936-B421-2202B3A0E555\",\"primary\":false,\"originalName\":\"GT22.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6266,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"5DBA07E9-9707-4F87-9080-BAE7ABE63B12\",\"primary\":false,\"originalName\":\"GT53.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7780,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"63C8D125-F96B-4946-98F5-0BA9F3133601\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"94B01E00-731F-4E66-90DC-100670AF13EF\",\"primary\":false,\"originalName\":\"GT15.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6330,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"9FE81238-F0D5-4262-AD7E-3AF4C4F0845C\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"A14460C6-1D21-482F-99AE-93EE23D90AF6\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"AE3A014B-C8C5-4F21-869E-D69751C17048\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"B2649AD5-5795-49DF-B876-F13FFE79A7E9\",\"primary\":false,\"originalName\":\"GT25.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9021,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"BD48C96E-C5AA-471E-9DD5-8A04DD8021B3\",\"primary\":false,\"originalName\":\"GT23.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10444,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"C4FC5144-016C-4E1A-B6D8-1384D20D34C6\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"C5648D37-B104-42CF-9749-1FDAAF121607\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"C8D5FCE4-D8C8-4109-B3D9-02D7E3EAC114\",\"primary\":false,\"originalName\":\"GT50.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7484,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"CB1911A0-9C87-4F1C-BCBB-128BF7A97429\",\"primary\":false,\"originalName\":\"GT33.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":13580,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"CBDFC528-0FC4-4A69-8654-6B9CDEF6DA37\",\"primary\":false,\"originalName\":\"4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17021,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"CCEBC3F2-973A-42EB-A086-19CDDD5D764B\",\"primary\":false,\"originalName\":\"GT10.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6598,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"D0E5785C-4A78-4461-A996-CF8BD2A05256\",\"primary\":false,\"originalName\":\"GT38.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9142,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"D1584BD0-DCEC-449F-AA94-16F9DA46E8A9\",\"primary\":false,\"originalName\":\"GT38.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9142,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"DBF7ABCE-770D-4B05-AE36-2FA3685911D9\",\"primary\":false,\"originalName\":\"GT29.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6594,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"E052D5D6-62AE-4D34-BF68-23927C047D5A\",\"primary\":false,\"originalName\":\"GT14.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6439,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"E46F3094-F60E-49E1-8DB5-5D0A21C6C525\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"E4A066DB-E5B5-4A98-9A16-67940B6677F8\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"E7357689-C79D-4B48-8C22-A9BCFF5CA863\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"EB8B4AA6-77D5-4850-A3B4-FAE690F5F287\",\"primary\":false,\"originalName\":\"GT58.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6770,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"F76B5A24-B39D-48FA-A9DA-4F0892E2EFC6\",\"primary\":false,\"originalName\":\"a-1010.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22498,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"},{\"id\":\"FE442C7B-F268-431F-9FD6-4C2543D8EE7C\",\"primary\":false,\"originalName\":\"GT5.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9016,\"active\":true,\"seriesId\":null,\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\"}]},{\"id\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"code\":\"410-1D2PHK\",\"name\":\"Fantastic Plastic Keyboard\",\"specification\":\"Et nihil ut nihil maxime nisi accusamus. Quasi aperiam earum blanditiis velit et molestiae itaque sed quisquam. Molestiae ut et aspernatur non maxime omnis laudantium. Blanditiis nulla corporis ad voluptatibus.\",\"description\":\"Quisquam debitis rerum commodi eos est. Quisquam qui ut nihil quibusdam officia aut. Deserunt at voluptatem eum. Facilis autem fugit nihil reprehenderit est soluta et. Fugiat sint aliquid voluptates qui doloremque. Amet accusantium et perferendis eum odio nulla pariatur aut architecto.\\nOdit aliquid et voluptas quo dolore. Fugiat labore reiciendis id tenetur impedit aut delectus impedit velit. Delectus consequatur itaque nobis sunt earum qui voluptate rem. Est saepe rem accusamus consectetur nulla accusantium velit odio eaque. Facilis aliquid eveniet. Quaerat quo deleniti.\\nSunt nemo nam blanditiis ut hic dolorem. Molestiae iste consequatur fugit numquam qui quidem doloribus. Eos dignissimos et error.\\nNobis maxime quos quasi necessitatibus assumenda illum velit qui. Est adipisci non velit qui provident. Ab et molestiae. Rerum aperiam accusantium dolorem dolorum aperiam voluptatum error. Itaque distinctio quis neque dolor non autem. Libero cum consectetur qui.\\nModi laudantium distinctio totam ea. Et voluptatem ut quo non eos. Aut omnis eos id expedita non. Nam facilis commodi in quia velit placeat.\",\"active\":true,\"series\":{\"id\":\"3A25601C-DD89-4B57-9E3F-3665E626B1D5\",\"name\":\"system\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"3D85D7C6-A6B9-46A7-91CC-A12509730B70\"},\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"color\":\"MidnightBlue\",\"active\":true,\"labels\":{\"id\":\"C72227D9-ACAB-460E-ACF2-AA22826C9D52\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"tagId\":8}},{\"id\":14,\"name\":\"Professional Grade\",\"color\":\"DarkOliveGreen\",\"active\":true,\"labels\":{\"id\":\"2037F08F-DB8F-480C-A1CD-6FC34882CD1F\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"tagId\":14}}],\"photos\":[{\"id\":\"5E48AC7A-8B23-40A5-A3FD-CCA75918AB0A\",\"primary\":true,\"originalName\":\"GT21.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7362,\"active\":true,\"seriesId\":\"3A25601C-DD89-4B57-9E3F-3665E626B1D5\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"023FA27A-2AAE-47D8-9919-2D022D790D50\",\"primary\":false,\"originalName\":\"GT25.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9021,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"0887D85A-4654-416D-B79F-2F80D7AA7D25\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"1058D559-21A5-4FB2-8BA0-5389DFB16B2E\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"21426B20-F036-4ADA-86EA-A41C192A8BB7\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"242E3A80-9281-4687-BA45-822124694BCF\",\"primary\":false,\"originalName\":\"GT10.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6598,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"2B555F76-E962-41F4-A151-38D921229BE6\",\"primary\":false,\"originalName\":\"a-1010.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22498,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"2FD7CAAF-D0CE-471D-84C5-A24CE461A6F3\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"3C2D1542-B31D-4A80-9F88-42D1188B13C5\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"40FBADF2-9301-4BFB-8965-213EE807119C\",\"primary\":false,\"originalName\":\"GT46.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4434,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"43ACD70B-404D-4EE2-8791-3E678875A64B\",\"primary\":false,\"originalName\":\"GT35.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":14014,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"4510A787-D161-4F53-B582-AF898563D86C\",\"primary\":false,\"originalName\":\"GT23.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10444,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"4853A8C7-D2C0-4543-9908-196AE6699CE6\",\"primary\":false,\"originalName\":\"GT29.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6594,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"496FBF97-A953-4A64-A8BA-54FDA0F64966\",\"primary\":false,\"originalName\":\"GT46.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4434,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"59A14C94-73F2-46C9-BBF4-88029245D9DA\",\"primary\":false,\"originalName\":\"GT37.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6563,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"5AD9D75B-AC52-4541-81E7-6737271DEB04\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"5BB61EF6-7265-4B44-A943-8B35F3950DCC\",\"primary\":false,\"originalName\":\"GT51.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8429,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"7CE23AA6-6361-49BF-B89A-A0C4D3622CC3\",\"primary\":false,\"originalName\":\"GT8.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6483,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"848DE9B0-4BF9-40DF-B9BF-EE41B8F6B731\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"85564596-FB79-40D8-B156-EEFD61BDFC09\",\"primary\":false,\"originalName\":\"GT48.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8783,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"894218FE-3FCD-4A5F-8589-7E2A613651C4\",\"primary\":false,\"originalName\":\"GT48.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8783,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"897C39EE-797F-4055-8B5B-568C9101D9D0\",\"primary\":false,\"originalName\":\"5.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18978,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"8A6D313C-2DEC-4A67-B9E5-B31331EA7CE2\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"92A5DBBF-AE35-42D7-8723-8D272788E92E\",\"primary\":false,\"originalName\":\"GT22.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6266,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"943ED62C-DFE4-4373-B0A1-56ADB752FEAB\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"9D70901E-2B7C-4661-893F-C624CA82C51C\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"A368E8C1-44B0-4C30-BF5F-31B1B42C6497\",\"primary\":false,\"originalName\":\"GT29.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6594,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"A77A166A-9B30-4CDE-807F-120906DAFC5C\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"AB566E80-4E46-439C-950F-861C1417F0B7\",\"primary\":false,\"originalName\":\"GT58.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6770,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"C00062EE-5BE7-4910-AC78-FE66D6A74368\",\"primary\":false,\"originalName\":\"GT2.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7468,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"C8577BA7-8FF7-4961-AB2D-EDF1FD20DB9C\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"CE931126-25B9-479C-B50A-1CB157D71908\",\"primary\":false,\"originalName\":\"GT45.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4338,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"D53D422F-E0EA-4DB3-A034-10FB243798F6\",\"primary\":false,\"originalName\":\"GT32.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5582,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"DEEC7E6C-462E-4BEB-9DAE-DC7054FABDA3\",\"primary\":false,\"originalName\":\"GT37.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6563,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"E18E926B-E599-4525-B83D-9A825BFA488F\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"E9C2038C-D1CA-4449-815F-9CD99844CF16\",\"primary\":false,\"originalName\":\"GT30.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5168,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"EA74E356-C527-4AEF-9E67-F7844AEF2E0C\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"EDC6DDC0-57D6-4396-9DB7-DBA0B9387ABE\",\"primary\":false,\"originalName\":\"GT24.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7983,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"F1EC08E4-6FB8-4598-970A-83AD344C145A\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"FA839663-F40D-43A4-BB3B-F72CCFE9006C\",\"primary\":false,\"originalName\":\"GT30.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5168,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"},{\"id\":\"FBC1274F-C523-4C96-B1D0-AB8BFCD8675D\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\"}]},{\"id\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"code\":\"634-CCF9OB\",\"name\":\"Unbranded Fresh Chips\",\"specification\":\"Et porro ab dolor quam nobis voluptate. Quibusdam expedita temporibus sapiente quae nostrum nam unde qui.\",\"description\":\"Excepturi harum eos vitae sequi tempore. Similique blanditiis quo eum. Dolorem ducimus omnis nulla sunt. Voluptas illo doloremque quia laboriosam praesentium cumque.\\nError pariatur nam iusto provident ab et rerum libero facere. Autem commodi placeat. Aut fuga omnis.\\nSit in qui deleniti est aut ex quae vel. Officia aut aut nam temporibus nesciunt suscipit. Quasi doloremque architecto reiciendis nam et doloribus sint. Nihil velit ullam. Ad enim quibusdam id quo et est.\\nQui reprehenderit dicta. Sed sit quae quas alias sed fugit modi dicta eligendi. Praesentium aut et minima facere.\",\"active\":true,\"series\":{\"id\":\"0005BF70-1BD7-4981-A197-6D21C924D6F2\",\"name\":\"matrix\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B50B7CF6-28AD-427D-B935-16A2DFAEF1D4\"},\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"color\":\"MidnightBlue\",\"active\":true,\"labels\":{\"id\":\"5E73F83C-E368-43DA-9380-04F4CB61838D\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":8}},{\"id\":14,\"name\":\"Professional Grade\",\"color\":\"DarkOliveGreen\",\"active\":true,\"labels\":{\"id\":\"2330F476-7B3F-4656-BB54-A7F2FD708850\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":14}},{\"id\":15,\"name\":\"accessories\",\"color\":\"DarkSlateBlue\",\"active\":true,\"labels\":{\"id\":\"9C42E36B-D656-4190-B924-B7D6CF73F914\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":15}}],\"photos\":[{\"id\":\"0665A09B-F068-4549-A4A8-442D09E81F02\",\"primary\":true,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"00D4DBA8-0832-4644-899B-E450E8F5FB9C\",\"primary\":false,\"originalName\":\"GT53.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7780,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"01AD8585-A184-4DAC-92B3-A2E9165371DC\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"024D2C0C-6246-4CDC-99E1-EE886FB3B400\",\"primary\":false,\"originalName\":\"GT35.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":14014,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"05BA6B62-14C3-4175-B7E1-77A2DB726C04\",\"primary\":false,\"originalName\":\"GT15.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6330,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"0690BE6C-F244-4118-8C2E-27EE679F174E\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"120C5B5F-15B5-486B-A6CD-1DD422B03DA5\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"1DA15D32-AA3C-4873-88B1-B252B35D7E61\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"2CDCF1DE-BD54-429E-9E38-0D0FAC7E7825\",\"primary\":false,\"originalName\":\"a-1010.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22498,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"3028EF75-1448-4EFA-A3E3-971EDC4E6D20\",\"primary\":false,\"originalName\":\"a-1010.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22498,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"326A280E-70DD-48E0-92E9-821E4C8BC374\",\"primary\":false,\"originalName\":\"GT47.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5014,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"3A4BB7A4-DAD1-4EA0-A25A-F96B201BB900\",\"primary\":false,\"originalName\":\"GT31.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5308,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"4481132C-E766-4C36-834E-C5963A4F3344\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"50465603-4554-422C-86F1-B754FDBA41C9\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"6161ADA1-E865-4F0E-8E7C-4D77F7C5BCEB\",\"primary\":false,\"originalName\":\"GT12.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6818,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"74CB0DFB-C181-48B2-B172-961DFF1CE3E0\",\"primary\":false,\"originalName\":\"GT-1010.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21187,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"857486AD-3815-48B6-BD81-90FCEC2BC3E4\",\"primary\":false,\"originalName\":\"GT21.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7362,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"8A477EA1-F7E0-44DE-8F2C-34066148E925\",\"primary\":false,\"originalName\":\"GT13.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6344,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"994F50DF-3C53-4F7A-B2A0-9E9CD32E780C\",\"primary\":false,\"originalName\":\"GT21.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7362,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"9C240E9A-C500-4685-BBD5-75414C100B02\",\"primary\":false,\"originalName\":\"GT-3.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9119,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"9EB277FA-E575-4740-8097-B9CBA7E5AF72\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"A202FFC4-7427-4E85-BD35-88C018F6BCD8\",\"primary\":false,\"originalName\":\"GT48.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8783,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"A6941559-E085-4E3B-A5E3-0BD8E8C14100\",\"primary\":false,\"originalName\":\"GT38.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9142,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"A7129592-0603-45F5-93AA-6436037C7647\",\"primary\":false,\"originalName\":\"GT42.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10759,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"AD10C5D3-F046-43CA-A3EE-2EFD2CDD1112\",\"primary\":false,\"originalName\":\"GT42.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10759,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"B69B9FAF-E882-456F-A2C3-C28EF32BDBB2\",\"primary\":false,\"originalName\":\"GT13.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6344,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"B9172396-0CD1-41B9-A4BC-886FC36C592C\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D364AB61-824D-4976-B451-54957631A454\",\"primary\":false,\"originalName\":\"GT-1010.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21187,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D42AABD6-F44C-421E-A667-A408D8617E06\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D4367595-F9C1-451F-9222-8E6580D5DFD2\",\"primary\":false,\"originalName\":\"GT40.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10560,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D47249F6-8AF2-4257-BABA-2C364ECCE0EB\",\"primary\":false,\"originalName\":\"GT45.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4338,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D834C460-7A4C-4372-87C3-73CB1343F40C\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D93FDECA-C705-4906-AB83-2AB9C4E90229\",\"primary\":false,\"originalName\":\"2.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":15715,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"D9FE5EDF-EE54-4B98-A6BB-EC71613339E9\",\"primary\":false,\"originalName\":\"GT2.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7468,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"DB514C31-5ECE-48D8-AC34-A76265E65903\",\"primary\":false,\"originalName\":\"GT.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10992,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"DD5D8A25-9836-4112-9647-7DAAC030DC92\",\"primary\":false,\"originalName\":\"GT15.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6330,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"E05C7F34-5C7D-48EE-914E-54C81A7A14C8\",\"primary\":false,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"E42E89FF-CBE8-4086-A094-4C9D4B807467\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"E8F5499C-331C-4DEA-810B-C074B0CF6065\",\"primary\":false,\"originalName\":\"GT33.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":13580,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"EA8308D2-0539-4AB9-A3F8-14AD6FBB365D\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"EFD1562E-934F-4953-8ADA-FB59AE20FEFE\",\"primary\":false,\"originalName\":\"GT30.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5168,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"F67CF9BA-40CF-4DCE-8643-E76432F5593B\",\"primary\":false,\"originalName\":\"GT49.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9372,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"F9B51A2F-E299-4E48-8210-65A13CFF313B\",\"primary\":false,\"originalName\":\"GT32.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5582,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"FA18F453-E4A4-43A3-A5A3-8D4562198270\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"FA40BE01-E0DE-4851-8C38-186202EAC073\",\"primary\":false,\"originalName\":\"GT15.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6330,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"},{\"id\":\"FA97127F-BE48-41C7-953C-F5A2497F2623\",\"primary\":false,\"originalName\":\"GT47.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5014,\"active\":true,\"seriesId\":null,\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\"}]},{\"id\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"code\":\"640-EEWJV3\",\"name\":\"Tasty Steel Soap\",\"specification\":\"Est repellat itaque velit enim minus consectetur quam. Quisquam aut ut.\",\"description\":\"Voluptate ullam consequatur numquam commodi repellat facilis aut aut. Distinctio ratione quaerat et. A necessitatibus suscipit sunt ad aut ducimus aut autem.\\nVoluptatum et rem laboriosam magni minus quis commodi. Consequuntur excepturi iste ut autem molestias facere. In vero voluptas.\\nSed consequatur quas a sit necessitatibus consectetur vero dolore harum. Reprehenderit commodi laboriosam quia dolorem. Sunt animi id recusandae dolores. Accusamus qui quia hic totam ut temporibus fugiat itaque nemo.\\nEum et omnis et rem eum voluptatem necessitatibus. Eum quidem eaque ratione doloribus nulla aut voluptas doloremque. Aut necessitatibus quam exercitationem ut. Voluptate est nihil eos itaque unde velit sunt doloribus. Et blanditiis esse aliquam repellat quo voluptatem. Et earum rerum.\",\"active\":true,\"series\":{\"id\":\"BD3B7ACB-AED3-4AB6-B5C0-3F95691BDD56\",\"name\":\"protocol\",\"displaySequence\":3,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\"},\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"color\":\"Thistle\",\"active\":true,\"labels\":{\"id\":\"C0C62C98-0639-4A64-AE96-EED40147B98C\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"tagId\":5}},{\"id\":8,\"name\":\"Extra Large\",\"color\":\"MidnightBlue\",\"active\":true,\"labels\":{\"id\":\"5544D4D7-371F-4893-8AFC-4DB1820ACE22\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"tagId\":8}}],\"photos\":[{\"id\":\"77B9575D-E19F-4BA6-9AB0-1F4FBA81EC0A\",\"primary\":true,\"originalName\":\"GT49.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9372,\"active\":true,\"seriesId\":\"BD3B7ACB-AED3-4AB6-B5C0-3F95691BDD56\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"10EAB23C-EB7D-4023-8EA8-43939AE5D79E\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"11B6BA20-9467-4D89-8216-11B893963A30\",\"primary\":false,\"originalName\":\"GT42.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10759,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"236D0911-C5C3-4C7B-A0F1-041B86B4A191\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"2C8E60AC-59EB-46BB-924A-9FB81B0C5AB7\",\"primary\":false,\"originalName\":\"GT7.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8675,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"30937DFE-300A-40B0-A346-32FC17D20F26\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"39A68FB6-7FB1-4D21-A589-D04CCEB6E6F0\",\"primary\":false,\"originalName\":\"1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17034,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"3CE13271-BE48-4B35-8C1B-CD41DCB20455\",\"primary\":false,\"originalName\":\"GT7.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8675,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"6D96A0F2-15F8-44D2-AC06-26AE0D7F1740\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"72989547-656A-4FE5-A5AB-DC57BF27A423\",\"primary\":false,\"originalName\":\"aluminumramp.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":20210,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"72A2942F-3F7F-45B5-AD3D-D683AE11215E\",\"primary\":false,\"originalName\":\"GT52.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18042,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"745CE131-C98C-469B-8919-1AB58D1C70AE\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"84BEFB4B-F0B0-42B4-A9F8-8B9996CD692D\",\"primary\":false,\"originalName\":\"GT51.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8429,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"C5C34C84-3C96-4C38-997A-C311FEDB9DD1\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"C6143E92-BCE0-4A02-9257-0E45557D30ED\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"C9815847-68F5-49F6-AB64-23B75920490C\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"DE2FF9D8-075F-45B0-A950-B652C753F580\",\"primary\":false,\"originalName\":\"a-1010.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22498,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"},{\"id\":\"E0B113D0-5F2E-44E0-B26C-0E1D5D2E4AC4\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\"}]},{\"id\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"code\":\"873-DR74IS\",\"name\":\"Practical Granite Computer\",\"specification\":\"Eum ex tempora neque cum tempora ut ratione mollitia enim. Quis enim culpa consequatur beatae sunt aut. Tenetur veritatis deleniti architecto non consequatur fuga eveniet recusandae quod. Et et commodi sapiente exercitationem in.\",\"description\":\"Omnis delectus dolorem non blanditiis nostrum enim. Consequatur non voluptatum eos est. A alias ab est ratione ipsum. Dolor enim quo.\\nQui dolores dicta. Qui est magnam culpa voluptas cumque iusto. Expedita expedita soluta non saepe.\\nMinima velit in ratione harum. Quasi magnam sapiente dicta. Et soluta nulla. Ipsa ut sit quaerat vel placeat.\\nTempore rerum omnis aliquam illo. Fuga sit nam. Ea dolorum aperiam accusantium. Recusandae ut numquam optio consequuntur architecto aut ab qui.\",\"active\":true,\"series\":{\"id\":\"801AC2BE-D92D-4D44-94D8-B0DF59FEE7C8\",\"name\":\"alarm\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\"},\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"color\":\"MidnightBlue\",\"active\":true,\"labels\":{\"id\":\"142FC499-93BE-43B3-B36F-9F7BC13F6810\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":8}},{\"id\":12,\"name\":\"Hot Seller\",\"color\":\"SeaGreen\",\"active\":true,\"labels\":{\"id\":\"30814E9F-0379-498D-9210-F6EE27032083\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":12}},{\"id\":2,\"name\":\"Tool Free\",\"color\":\"SlateGray\",\"active\":true,\"labels\":{\"id\":\"321FCCBC-53A5-41B5-A4E1-9CAA168FE4F3\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":2}}],\"photos\":[{\"id\":\"A14AA26F-C516-4248-BA60-928AF6B9EBBC\",\"primary\":true,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"0E176193-1789-4B52-8259-99489FDD6D64\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"0F2C6D90-D1B2-40F4-8969-3651D6C1C54C\",\"primary\":false,\"originalName\":\"GT21.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7362,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"1466E410-D350-4DCF-911C-1599CC28E0CB\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"15645714-2CB7-4A7B-B555-C50DE681381B\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"3473342A-8A82-4A1F-B501-CABEB5F8EF17\",\"primary\":false,\"originalName\":\"GT38.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9142,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"3C360BEB-ACE6-42C1-9A5E-232B8BE1059E\",\"primary\":false,\"originalName\":\"GT45.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4338,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"4426F0FC-1F1A-4BE7-BE68-3B2AED731039\",\"primary\":false,\"originalName\":\"1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17034,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"44282410-4AFF-4A76-8F4A-BE12F18AF2EB\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"49A6E98E-E1DB-47B5-A1EF-F1AAECF5A799\",\"primary\":false,\"originalName\":\"1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17034,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"4B2D8E53-CEAB-48B5-942C-7C20585CEE5C\",\"primary\":false,\"originalName\":\"GT55.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22926,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"4C1347D0-9A68-4C18-A683-6FDAA5C41FF3\",\"primary\":false,\"originalName\":\"GT58.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6770,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"50B608AB-3307-47FC-815B-DC56D7AFB4FA\",\"primary\":false,\"originalName\":\"GT55.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22926,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"53943914-642E-41BD-AC53-E8FE1C77B961\",\"primary\":false,\"originalName\":\"GT55.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":22926,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"53EE9F82-A7A5-4F41-8304-18CC436DE550\",\"primary\":false,\"originalName\":\"GT29.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6594,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"6AACBECE-91B3-407D-8A1D-3025F01F6D84\",\"primary\":false,\"originalName\":\"GT49.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9372,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"6B2D22F6-EED7-4E86-9559-9B8F20388906\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"6E1948BB-8D20-456B-9094-DFD23267FB8D\",\"primary\":false,\"originalName\":\"GT22.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6266,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"6FBB8D94-0875-4BBF-800B-B8E4FAA3C41A\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"7021B452-CCA6-47EB-A314-D28A99BE55F3\",\"primary\":false,\"originalName\":\"GT14.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6439,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"781127A8-37DF-40F3-8C7D-D53925BAD958\",\"primary\":false,\"originalName\":\"4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17021,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"7CB42CCF-6615-4D56-BC6F-5080AEB97C7A\",\"primary\":false,\"originalName\":\"GT14.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6439,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"84564241-F7D2-4875-817E-52BFC49DAA73\",\"primary\":false,\"originalName\":\"GT12.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6818,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"875F6BE6-F5B8-40FE-B92B-2397A42C16D3\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"8BFFF0BF-C46B-4476-9192-D196713DEDAA\",\"primary\":false,\"originalName\":\"GT47.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5014,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"93ED4AC7-2200-44EF-BAB1-82B1B44D1B88\",\"primary\":false,\"originalName\":\"GT9.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12459,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"9458F4A9-FD48-4BD1-B96A-1B9015060F4D\",\"primary\":false,\"originalName\":\"GT13.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6344,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"97920DFA-7649-44AD-8EFE-3198A72F9A78\",\"primary\":false,\"originalName\":\"GT-1010.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21187,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"97B163FB-5B6D-4163-BBDC-953BC241C04E\",\"primary\":false,\"originalName\":\"GT30.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5168,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"A914DB9F-DBD6-4210-BC9C-37162B971374\",\"primary\":false,\"originalName\":\"GT46.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4434,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"B13A76E0-3C02-4E30-A09B-6F4E657C970D\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"B17BB5F1-0317-4ADE-B355-C843DCB3C97E\",\"primary\":false,\"originalName\":\"GT15.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6330,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"B2B814E1-8BE9-49AA-82E5-CE679C0D8AB0\",\"primary\":false,\"originalName\":\"GT10.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6598,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"BF2F1B2D-E8AE-400A-8A2D-00E8309D272D\",\"primary\":false,\"originalName\":\"GT33.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":13580,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"BF8AEDA3-435C-4494-A207-4977AA625898\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"C3AD0D23-BD7E-443B-9622-37D9477238AA\",\"primary\":false,\"originalName\":\"aluminumramp.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":20210,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"C8F0428B-D00A-4791-B30D-425C7B6B9506\",\"primary\":false,\"originalName\":\"GT50.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7484,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"D7A7CE3C-774E-433A-AE01-F898E38FFE64\",\"primary\":false,\"originalName\":\"GT48.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8783,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"DCF1C739-4605-4EA9-9077-757DA86E92AD\",\"primary\":false,\"originalName\":\"GT36.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6575,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"E2E76DA6-88A2-4B63-A443-D8DC8977F6AE\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"F4347931-ACDD-4D6F-8461-1E1CFF5097DE\",\"primary\":false,\"originalName\":\"GT4.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10469,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"},{\"id\":\"FFAF4D84-96CC-4B27-91A0-2E02CE5B9A31\",\"primary\":false,\"originalName\":\"GT.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10992,\"active\":true,\"seriesId\":null,\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\"}]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/productSearch?wildCard=extra%20large\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						},
+						{
 							"name": "get total record counts on models or specified composite dataset",
 							"request": {
 								"method": "GET",
@@ -4972,7 +5083,7 @@
 							},
 							"response": [
 								{
-									"id": "d3b706c6-ecfe-43c3-947e-70927c861150",
+									"id": "1e41c7cf-5841-47c1-b0b5-5b5c58dce169",
 									"name": "get record count of 'photos' table",
 									"originalRequest": {
 										"method": "GET",
@@ -5062,7 +5173,7 @@
 									"body": "{\"data\":517,\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/photos?recordCount\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "b4e82e70-f88c-496e-af42-bd86921bf05e",
+									"id": "c0a8de1c-a758-4c17-9521-0bbc94e3619b",
 									"name": "get record count of composite data of 'region' field of 'countries' table",
 									"originalRequest": {
 										"method": "GET",
@@ -5201,7 +5312,7 @@
 							},
 							"response": [
 								{
-									"id": "197b1cf5-1eee-4ead-a735-2b38f1223ae2",
+									"id": "48819cd2-fc75-4f5a-8759-1ca0e0174184",
 									"name": "common single field patch",
 									"originalRequest": {
 										"method": "PATCH",

@@ -18,16 +18,11 @@ const API_ROUTER = express.Router()
 API_ROUTER.route('/tokens')
   .post(...require('./tokens/processJwtRequest')) // login
 API_ROUTER.route('/contacts')
-  .post(...require('./contacts/addContact')) // add a contact
+  .post(...require('./contacts/addContact')) // add a contact with company information
 API_ROUTER.route('/contacts/:contactId')
   .get(...require('./contacts/getContactById')) // get contact by id
 API_ROUTER.route('/companies')
   .get(...require('./companies/getHostCompanies')) // get project hosting companies dataset complete with country and staff info
-API_ROUTER.route('/companies/:companyId/contacts')
-API_ROUTER.route('/companies/:companyId/contacts/:contactId')
-API_ROUTER.route('/contacts/:contactId/companies/:companyId').patch(notImplemented) // assign contact to a company **
-API_ROUTER.route('/contacts/:contactId/password').patch(notImplemented) // change password **
-API_ROUTER.route('/contacts/:contactId/admin').patch(notImplemented) // admin status toggle **
 
 API_ROUTER.route('/photos')
   .post(...require('./photos/uploadPhotos')) // batch upload photos
@@ -51,7 +46,6 @@ API_ROUTER.route('/products/:productId')
 API_ROUTER.route('/products/:productId/series/:seriesId')
   .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
   .delete(...require('./products/removeProductAssociation').fromSeries) // disassociate a product from a series
-
 API_ROUTER.route('/products/:productId/tags/:tagId')
   .post(...require('./products/assignProductAssociation').toTags) // tagging a product
   .delete(...require('./products/removeProductAssociation').fromTag) // untag a product
@@ -72,6 +66,8 @@ API_ROUTER.route('/model/:modelReference')
   .get(...require('./utilities/getRecordCount'))
 API_ROUTER.route('/model/:modelReference/field/:fieldReference')
   .patch(...require('./utilities/patchRecordField'))
+API_ROUTER.route('/productSearch')
+  .get(...require('./utilities/productSearch'))
 
 // /////////////////////////////////////////////////////
 // Utilities
