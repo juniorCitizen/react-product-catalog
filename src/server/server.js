@@ -57,12 +57,6 @@ Promise.each( // 依序執行服務原件的啟動程序
     // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
     app.use(require('webpack-hot-middleware')(compiler));
 
-    var reload = require('reload');
-    var http = require('http');
-    
-    var server = http.createServer(app);
-    reload(server, app);
-
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
     app.engine('.hbs', exphbs({
@@ -129,6 +123,13 @@ Promise.each( // 依序執行服務原件的啟動程序
       res.status(404)
       return res.redirect(`${eVars.APP_ROUTE}`)
     })
+
+    // server reload
+    var reload = require('reload');
+    var http = require('http');
+    
+    var server = http.createServer(app);
+    reload(server, app);
 
     // ///////////////// Web Server ///////////////////////////////////////////
     logging.console(`啟動 ${eVars.SYS_REF} 伺服器...`)

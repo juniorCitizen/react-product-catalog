@@ -1,9 +1,9 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var env = process.env
+var env = './src/server/config/eVars'
 
-var publicPath = env.LOCAL_DEV_DOMAIN + ':' + env.PORT
+var publicPath = env.HOST + '/' + env.SYS_REF
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true'
 var babelPolyfill = require('babel-polyfill')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
@@ -20,7 +20,7 @@ module.exports = {
       output: {
         path: path.join(__dirname, 'dist/public'),
         filename: '[name].js',
-        publicPath: '/'
+        publicPath: publicPath,
       },
       /*
       resolve: {
@@ -71,6 +71,10 @@ module.exports = {
       devtool: 'source-map',
 
       plugins: [
+        //new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor'
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
           React: 'react',

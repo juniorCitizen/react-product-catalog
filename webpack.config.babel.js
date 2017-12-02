@@ -39,6 +39,7 @@ const commonConfig = merge([
       historyApiFallback: true,
     },
     plugins: [
+      /*
       new HtmlWebpackPlugin({
         title: eVars.SYS_REF,
         filename: path.join(PATHS.build, 'index.html'),
@@ -48,6 +49,7 @@ const commonConfig = merge([
         showErrors: eVars.NODE_ENV === 'production',
         inject: 'body'
       })
+      */
     ]
   },
   transpiler.babel({ include: PATHS.app }),
