@@ -18,7 +18,7 @@ const API_ROUTER = express.Router()
 API_ROUTER.route('/carousels')
   .post(...require('./carousels/insertCarousel')) // insert a carousel image
 API_ROUTER.route('/carousels/:carouselId')
-  .delete(...require('./carousels/deleteById')) // remove a carousel image by id
+  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
 API_ROUTER.route('/carousels/displaySequence/:displaySequence')
   .get(...require('./carousels/getCarouselBySequence')) // get a carousel image data by displaySequence
 API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
