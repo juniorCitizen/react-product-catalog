@@ -43,6 +43,26 @@ Promise.each( // 依序執行服務原件的啟動程序
     logging.console('初始化 Express 框架...')
     const app = express()
 
+    // ////////////// webpack ///////////////////////////////////////////////
+    var webpack = require('webpack');
+    var config = require('../../webpack.config.js');
+    var compiler = webpack(config);
+
+    // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
+    app.use(require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: config.output.publicPath
+    }));
+
+    // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
+    app.use(require('webpack-hot-middleware')(compiler));
+
+    var reload = require('reload');
+    var http = require('http');
+    
+    var server = http.createServer(app);
+    reload(server, app);
+
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
     app.engine('.hbs', exphbs({
