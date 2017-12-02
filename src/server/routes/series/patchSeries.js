@@ -55,7 +55,7 @@ function patchActive (req, res, next) {
   return db.Series
     .update(
       { active: req.query.active },
-      { where: { id: req.params.seriesId } }
+      { where: { id: req.params.seriesId.toUpperCase() } }
     )
     .then(() => db.Series.findById(req.params.seriesId.toUpperCase()))
     .then(data => {
@@ -72,21 +72,20 @@ function patchDisplaySequence (req, res, next) {
   let originalPosition = null
   let targetPosition = parseInt(req.query.displaySequence)
   return db.Series
-    // find the target record
-    .findById(targetSeriesId)
+    .findById(targetSeriesId) // find the target record
     .then(series => {
-      if (!series) { // record not found
+      if (!series) { // record does not exist
         res.status(400)
-        let error = new Error(`'seriesId' ${targetSeriesId} not found`)
-        next(error)
-        return Promise.resolve()
+        let error = new Error(`'seriesId '${targetSeriesId}' does not exist`)
+        return Promise.reject(error)
       } else {
         originalPosition = series.displaySequence
         parentSeriesId = series.parentSeriesId
         return db.Series.findAll({ where: { parentSeriesId } })
       }
     })
-    .then((siblings) => {
+    .catch(error => next(error))
+    .then(siblings => {
       // limit target position according to the sibling count
       if (targetPosition >= siblings.length) targetPosition = siblings.length - 1
       if (targetPosition < 0) targetPosition = 0
@@ -105,12 +104,11 @@ function patchDisplaySequence (req, res, next) {
         order: ['displaySequence']
       }).catch(error => next(error))
     })
-    .then(siblings => db.sequelize.transaction(trx => { // start transaction
-      console.log(siblings.dataValues)
+    .then(affectedSiblings => db.sequelize.transaction(trx => { // start transaction
       let trxObj = { transaction: trx }
       // loop through each sibling series and adjust order value accordingly
       return Promise
-        .each(siblings, sibling => {
+        .each(affectedSiblings, sibling => {
           // advancing ordering position
           if (originalPosition < targetPosition) {
             if (sibling.id !== targetSeriesId) {
