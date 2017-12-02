@@ -7,7 +7,7 @@ const logging = require('../controllers/logging')
 const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
-const notImplemented = require('../middlewares/notImplemented')
+// const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
@@ -15,6 +15,17 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
+API_ROUTER.route('/carousels')
+  .post(...require('./carousels/insertCarousel')) // insert a carousel image
+API_ROUTER.route('/carousels/:carouselId')
+  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
+API_ROUTER.route('/carousels/displaySequence/:displaySequence')
+  .get(...require('./carousels/getCarouselBySequence')) // get a carousel image data by displaySequence
+API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
+  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
+API_ROUTER.route('/carousels/:carouselId/primary')
+  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
+
 API_ROUTER.route('/contacts')
   .post(...require('./contacts/addContact')) // add a contact with company information
 API_ROUTER.route('/contacts/:contactId')
@@ -81,30 +92,6 @@ API_ROUTER.route('/tokens')
 // /////////////////////////////////////////////////////
 // Carousels
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/carousels')
-  .get(notImplemented)
-  .post(...require('./carousels/insert')) // insert a carousel image
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/carousels/:carouselId')
-  .get(...require('./carousels/selectById')) // get a carousel image data by id
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(...require('./carousels/deleteById')) // remove a carousel image by id
-API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
-  .delete(notImplemented)
-API_ROUTER.route('/carousels/:carouselId/primary')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Companies **
