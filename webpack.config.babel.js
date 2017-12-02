@@ -37,18 +37,7 @@ const commonConfig = merge([
     },
     devServer: {
       historyApiFallback: true,
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: eVars.SYS_REF,
-        filename: path.join(PATHS.build, 'index.html'),
-        favicon: path.join(PATHS.assets, 'images/logos/favicon.ico'),
-        template: path.join(PATHS.assets, 'index.html'),
-        hash: true,
-        showErrors: eVars.NODE_ENV === 'production',
-        inject: 'body'
-      })
-    ]
+    }
   },
   transpiler.babel({ include: PATHS.app }),
   //eslint({ include: PATHS.app, excluede: './src/client' })
@@ -57,7 +46,7 @@ const commonConfig = merge([
 const productionConfig = merge([
   {
     entry: {
-      vendor: ['react']
+      vendor: ['react', 'react-dom']
     },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
