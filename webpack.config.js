@@ -32,9 +32,6 @@ module.exports = {
         filename: '[name].js',
         publicPath: publicPath,
       },
-      devServer: {
-        historyApiFallback: true,
-      },
       module: {
         loaders: [{
           test: /\.js$/,

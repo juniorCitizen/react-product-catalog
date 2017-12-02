@@ -91,7 +91,7 @@ Promise.each( // 依序執行服務原件的啟動程序
       },
       assets: {
         router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}/assets`,
+        endpoint: `/${eVars.SYS_REF}/dist/public`,
         path: (() => {
           return eVars.devMode
             ? path.resolve('./dist/public')
@@ -115,7 +115,12 @@ Promise.each( // 依序執行服務原件的啟動程序
     logging.console(`public assets 實體檔案路徑宣告完成... ${ROUTERS.assets.path}`)
     // setup SPA index.html endpoint
     app.use(ROUTERS.client.endpoint, ROUTERS.client.router)
-    ROUTERS.client.router.use('/', require('./routes/index'))
+    //ROUTERS.client.router.use('*', require('./routes/index'))
+    
+    app.get('*', function (request, response){
+      response.sendFile(path.resolve(__dirname, '../../src/client/assets', 'index.html'))
+    })
+    
     logging.console(`index.html 端點宣告完成... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////
