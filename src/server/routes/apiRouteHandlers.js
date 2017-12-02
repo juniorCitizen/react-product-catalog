@@ -15,14 +15,15 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/tokens')
-  .post(...require('./tokens/processJwtRequest')) // login
 API_ROUTER.route('/contacts')
   .post(...require('./contacts/addContact')) // add a contact with company information
 API_ROUTER.route('/contacts/:contactId')
   .get(...require('./contacts/getContactById')) // get contact by id
 API_ROUTER.route('/companies')
   .get(...require('./companies/getHostCompanies')) // get project hosting companies dataset complete with country and staff info
+
+API_ROUTER.route('/countries')
+  .get(...require('./countries/getCountries')) // get countries
 
 API_ROUTER.route('/photos')
   .post(...require('./photos/uploadPhotos')) // batch upload photos
@@ -63,11 +64,15 @@ API_ROUTER.route('/series/:seriesId/products')
   .post(...require('./products/insertProduct')) // insert product record and associate with seriesId
 
 API_ROUTER.route('/model/:modelReference')
-  .get(...require('./utilities/getRecordCount'))
+  .get(...require('./utilities/getRecordCount')) // get record count of a particular model/table
 API_ROUTER.route('/model/:modelReference/field/:fieldReference')
-  .patch(...require('./utilities/patchRecordField'))
+  .patch(...require('./utilities/patchRecordField')) // common patching route for general data file update
 API_ROUTER.route('/productSearch')
-  .get(...require('./utilities/productSearch'))
+  .get(...require('./utilities/productSearch')) // seach product listing
+API_ROUTER.route('/regions')
+  .get(...require('./countries/getRegions')) // get world regions
+API_ROUTER.route('/tokens')
+  .post(...require('./tokens/processJwtRequest')) // login
 
 // /////////////////////////////////////////////////////
 // Utilities
@@ -108,12 +113,6 @@ API_ROUTER.route('/carousels/:carouselId/primary')
 // /////////////////////////////////////////////////////
 // Countries
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/countries')
-  .get(...require('./countries/getCountries')) // get countries
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // ///////////////////////////////////////////////////////////////
 // Photos
@@ -126,12 +125,6 @@ API_ROUTER.route('/countries')
 // /////////////////////////////////////////////////////
 // Regions
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/regions')
-  .get(...require('./countries/getRegions')) // get regions
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Registrations **
