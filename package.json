@@ -126,12 +126,7 @@
     "build": "webpack --env production",
     "lint": "eslint --color src *.js *.jsx --cache",
     "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
-<<<<<<< HEAD
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004",
     "all": "cross-env NODE_ENV=development supervisor -i src/client -w src/server src/server/server.js"
-=======
-    "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js",
-    "serv": "cross-env NODE_ENV=development webpack --env production && nodemon --config nodemon.dev.json src/server/server.js"
->>>>>>> a96c8dce52180fc2a72bce43a0b538f75f3a373c
   }
 }
