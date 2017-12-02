@@ -70,7 +70,8 @@ module.exports = (req, res, next) => {
     if (linkHeaderProp in req.linkHeader) {
       for (let urlQueryProp in req.query) {
         if ((urlQueryProp !== 'page') && (urlQueryProp !== 'per_page')) {
-          req.linkHeader[linkHeaderProp].url += `&${urlQueryProp}=${req.query[urlQueryProp]}`
+          req.linkHeader[linkHeaderProp].url += `&${urlQueryProp}`
+          if (req.query[urlQueryProp]) req.linkHeader[linkHeaderProp].url += `=${req.query[urlQueryProp]}`
         }
       }
     }
