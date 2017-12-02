@@ -1,38 +1,46 @@
 var path = require('path')
 var webpack = require('webpack')
-
-var env = './src/server/config/eVars'
-
-var publicPath = env.HOST + '/' + env.SYS_REF
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var env = require('./src/server/config/eVars')
+const eVars = process.env
+var publicPath = env.HOST + '/' + env.SYS_REF + '/'
+console.log('##' + publicPath)
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true'
 var babelPolyfill = require('babel-polyfill')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const extractSass = new ExtractTextPlugin({
-   filename: "[name].[contenthash].css",
-   disable: process.env.NODE_ENV === "development"
+  filename: '[name]-bluma.css'
 });
+
+let PATHS = {
+  app: path.resolve('./src/client'),
+  assets: path.resolve('./src/client/assets'),
+  build: path.resolve('./dist/public')
+}
 
 module.exports = {
     entry: {
-        app: [hotMiddlewareScript, 'babel-polyfill', path.resolve('./src/client')]
+        app: [
+          'babel-polyfill', 
+          PATHS.app,
+          hotMiddlewareScript
+        ]
       },
       output: {
-        path: path.join(__dirname, 'dist/public'),
+        path: PATHS.build,
         filename: '[name].js',
         publicPath: publicPath,
       },
-      /*
-      resolve: {
-        extensions: ['.js', '.jsx','css', '.scss']
+      devServer: {
+        historyApiFallback: true,
       },
-      */
       module: {
         loaders: [{
           test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
-          include: path.resolve('./src/client'),
+          include: PATHS.app,
           query: {
             presets: ['es2015', 'react', 'stage-2'],
           },

@@ -51,7 +51,10 @@ Promise.each( // 依序執行服務原件的啟動程序
     // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
     app.use(require('webpack-dev-middleware')(compiler, {
       noInfo: true,
-      publicPath: config.output.publicPath
+      publicPath: config.output.publicPath,
+      stats: {
+        colors: true
+      }
     }));
 
     // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
@@ -88,11 +91,11 @@ Promise.each( // 依序執行服務原件的啟動程序
       },
       assets: {
         router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}`,
+        endpoint: `/${eVars.SYS_REF}/assets`,
         path: (() => {
           return eVars.devMode
-            ? path.resolve('./src/client/assets')
-            : path.resolve('./dist/assets')
+            ? path.resolve('./dist/public')
+            : path.resolve('./dist/public')
         })()
       },
       client: {
@@ -100,7 +103,6 @@ Promise.each( // 依序執行服務原件的啟動程序
         endpoint: `/${eVars.SYS_REF}`
       }
     }
-
     // declaration of routing and endpoint handlers
     logging.console('路由端點宣告...')
     // set up api endpoints
@@ -133,7 +135,8 @@ Promise.each( // 依序執行服務原件的啟動程序
 
     // ///////////////// Web Server ///////////////////////////////////////////
     logging.console(`啟動 ${eVars.SYS_REF} 伺服器...`)
-    return app.listen(eVars.PORT, (error) => {
+    //return app.listen(eVars.PORT, (error) => {
+    return server.listen(eVars.PORT, (error) => {
       if (error) {
         logging.error(error, `${eVars.SYS_REF} 伺服器無法正確啟動...`)
         throw error

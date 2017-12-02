@@ -10,16 +10,19 @@ module.exports = express.Router()
         view: 'index',
         data: {
           title: eVars.SYS_REF,
-          faviconSource: `${eVars.APP_ROUTE}/dist/public/favicon.ico`,
+          faviconSource: `${eVars.APP_ROUTE}/assets/favicon.ico`,
           scriptSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/dist/public/app.min.js`
-            : `${eVars.APP_ROUTE}/dist/public/app.js`,
+            ? `${eVars.APP_ROUTE}/assets/app.min.js`
+            : `${eVars.APP_ROUTE}/assets/app.js`,
           vendorSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/dist/public/vendor.min.js`
-            : `${eVars.APP_ROUTE}/dist/public/vendor.js`,
+            ? `${eVars.APP_ROUTE}/assets/vendor.min.js`
+            : `${eVars.APP_ROUTE}/assets/vendor.js`,
           styleSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/app-bluma.min.css`
-            : `${eVars.APP_ROUTE}/app-bluma.css`,
+            ? `${eVars.APP_ROUTE}/assets/app-bluma.min.css`
+            : `${eVars.APP_ROUTE}/assets/app-bluma.css`,
+          reloadSource: !eVars.devMode
+            ? `${eVars.APP_ROUTE}/reload/reload.js`
+            : `${eVars.APP_ROUTE}/reload/reload.js`,
           appUrl: eVars.APP_ROUTE
         }
       }
