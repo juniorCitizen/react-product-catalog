@@ -20,9 +20,6 @@ module.exports = express.Router()
           styleSource: !eVars.devMode
             ? `${eVars.APP_ROUTE}/assets/app-bluma.min.css`
             : `${eVars.APP_ROUTE}/assets/app-bluma.css`,
-          reloadSource: !eVars.devMode
-            ? `${eVars.APP_ROUTE}/reload/reload.js`
-            : `${eVars.APP_ROUTE}/reload/reload.js`,
           appUrl: eVars.APP_ROUTE
         }
       }
