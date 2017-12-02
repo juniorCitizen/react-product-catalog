@@ -20,20 +20,14 @@ API_ROUTER.route('/tokens')
 API_ROUTER.route('/contacts')
   .post(...require('./contacts/addContact')) // add a contact
 API_ROUTER.route('/contacts/:contactId')
-  .get(...require('./contacts/getContactById')) // get contact by id **
+  .get(...require('./contacts/getContactById')) // get contact by id
 API_ROUTER.route('/companies')
-  .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
-API_ROUTER.route('/companies/:companyId')
+  .get(...require('./companies/getHostCompanies')) // get project hosting companies dataset complete with country and staff info
 API_ROUTER.route('/companies/:companyId/contacts')
 API_ROUTER.route('/companies/:companyId/contacts/:contactId')
-API_ROUTER.route('/contacts/:contactId/companies/:companyId')
-  .patch(notImplemented) // assign contact to a company **
-API_ROUTER.route('/contacts/:contactId/password')
-  .patch(notImplemented) // change password **
-API_ROUTER.route('/contacts/:contactId/admin')
-  .patch(notImplemented) // admin status toggle **
-API_ROUTER.route('/contacts/:contactId/name/:name')
-  .patch(notImplemented) // change name **
+API_ROUTER.route('/contacts/:contactId/companies/:companyId').patch(notImplemented) // assign contact to a company **
+API_ROUTER.route('/contacts/:contactId/password').patch(notImplemented) // change password **
+API_ROUTER.route('/contacts/:contactId/admin').patch(notImplemented) // admin status toggle **
 
 API_ROUTER.route('/photos')
   .post(...require('./photos/uploadPhotos')) // batch upload photos
