@@ -17,10 +17,11 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/carousels')
   .post(...require('./carousels/insertCarousel')) // insert a carousel image
-API_ROUTER.route('/carousels/:carouselId')
-  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
-API_ROUTER.route('/carousels/displaySequence/:displaySequence')
+API_ROUTER.route('/carousels/:displaySequence')
   .get(...require('./carousels/getCarouselBySequence')) // get a carousel image data by displaySequence
+API_ROUTER.route('/carousels/:carouselId')
+  .patch(...require('./carousels/patchCarousel')) // patching carousel record property
+  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
 API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
   .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
 API_ROUTER.route('/carousels/:carouselId/primary')
