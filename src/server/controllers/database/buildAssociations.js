@@ -10,10 +10,8 @@ module.exports = (db) => {
   // contacts and product ordering relationships
   db.Contacts.hasMany(db.PurchaseOrders, injectOptions('contactId', 'id'))
   db.PurchaseOrders.belongsTo(db.Contacts, injectOptions('contactId', 'id'))
-  db.PurchaseOrders.hasMany(db.OrderDetails, injectOptions('purchaseOrderId', 'id'))
-  db.OrderDetails.belongsTo(db.PurchaseOrders, injectOptions('purchaseOrderId', 'id'))
-  db.OrderDetails.hasOne(db.Products, injectOptions('orderDetailId', 'id'))
-  db.Products.belongsTo(db.OrderDetails, injectOptions('orderDetailId', 'id'))
+  db.PurchaseOrders.belongsToMany(db.Products, injectOptions('purchaseOrderId', 'id', db.OrderDetails))
+  db.Products.belongsToMany(db.PurchaseOrders, injectOptions('productId', 'id', db.OrderDetails))
   // product information relationships
   db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
   db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
