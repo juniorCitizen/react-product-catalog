@@ -1,7 +1,7 @@
 const uuidV4 = require('uuid/v4')
 
 module.exports = (sequelize, DataTypes) => {
-  const Registrations = sequelize.define('registrations', {
+  const PurchaseOrders = sequelize.define('purchaseOrders', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
@@ -24,14 +24,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     name: {
-      singular: 'registration',
-      plural: 'registrations'
+      singular: 'purchaseOrder',
+      plural: 'purchaseOrders'
     },
     timestamps: true,
-    paranoid: false,
+    paranoid: true,
     createdAt: 'createdAt',
-    updatedAt: false,
-    deletedAt: false
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
   })
-  return Registrations
+  return PurchaseOrders
 }

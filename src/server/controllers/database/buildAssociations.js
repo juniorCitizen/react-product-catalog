@@ -7,9 +7,13 @@ module.exports = (db) => {
   db.Companies.belongsTo(db.Countries, injectOptions('countryId', 'id'))
   db.Companies.hasMany(db.Contacts, injectOptions('companyId', 'id'))
   db.Contacts.belongsTo(db.Companies, injectOptions('companyId', 'id'))
-  // contacts and product information relationships
-  db.Contacts.belongsToMany(db.Products, injectOptions('contactId', 'id', db.Registrations))
-  db.Products.belongsToMany(db.Contacts, injectOptions('productId', 'id', db.Registrations))
+  // contacts and product ordering relationships
+  db.Contacts.hasMany(db.PurchaseOrders, injectOptions('contactId', 'id'))
+  db.PurchaseOrders.belongsTo(db.Contacts, injectOptions('contactId', 'id'))
+  db.PurchaseOrders.hasMany(db.OrderDetails, injectOptions('purchaseOrderId', 'id'))
+  db.OrderDetails.belongsTo(db.PurchaseOrders, injectOptions('purchaseOrderId', 'id'))
+  db.OrderDetails.hasOne(db.Products, injectOptions('orderDetailId', 'id'))
+  db.Products.belongsTo(db.OrderDetails, injectOptions('orderDetailId', 'id'))
   // product information relationships
   db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
   db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))
