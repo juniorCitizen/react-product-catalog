@@ -16,6 +16,9 @@ var devConfig = {
         publicPath: publicPath
     },
     devtool: 'source-map',
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
         loaders: [{
             test: /\.(png|jpg)$/,
@@ -23,10 +26,17 @@ var devConfig = {
         }, {
             test: /\.scss$/,
             loader: 'style!css?sourceMap!resolve-url!sass?sourceMap'
+        }, {
+            test: /\.jsx?$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/,
+            query: {
+              cacheDirectory: true,
+              presets: ['react', 'es2015']
+            }
         }]
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ]

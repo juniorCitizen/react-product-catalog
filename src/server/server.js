@@ -14,9 +14,9 @@ const Promise = require('bluebird')
 var webpack = require('webpack'),
 webpackDevMiddleware = require('webpack-dev-middleware'),
 webpackHotMiddleware = require('webpack-hot-middleware'),
-webpackDevConfig = require('../../webpack.config.js');
+webpackDevConfig = require('../../webpack.config.js')
 var app = express();
-var compiler = webpack(webpackDevConfig);
+var compiler = webpack(webpackDevConfig)
 
 // attach to the compiler & the server
 app.use(webpackDevMiddleware(compiler, {
@@ -27,19 +27,19 @@ app.use(webpackDevMiddleware(compiler, {
     stats: {
         colors: true
     }
-}));
-app.use(webpackHotMiddleware(compiler));
+}))
+app.use(webpackHotMiddleware(compiler))
 
-var reload = require('reload');
-var http = require('http');
+var reload = require('reload')
+var http = require('http')
 
-var server = http.createServer(app);
-reload(server, app);
-
+//var server = http.createServer(app);
+reload(app)
+/*
 server.listen(3000, function(){
-    console.log('App (dev) is now running on port 3000!');
-});
-
+    console.log('App (dev) is now running on port 3000!')
+})
+*/
 
 // /////////////
 // 客製化模組加載
@@ -72,9 +72,26 @@ Promise.each( // 依序執行服務原件的啟動程序
     // Express 框架啟動配置
     // ///////////////////
 
+    var webpack = require('webpack'),
+    webpackDevMiddleware = require('webpack-dev-middleware'),
+    webpackHotMiddleware = require('webpack-hot-middleware'),
+    webpackDevConfig = require('../../webpack.config.js')
+
     // ////////////// Express Framework /////////////////////////////////////
     logging.console('初始化 Express 框架...')
     const app = express()
+
+    var compiler = webpack(webpackDevConfig)
+    app.use(webpackDevMiddleware(compiler, {
+      
+      // public path should be the same with webpack config
+      publicPath: webpackDevConfig.output.publicPath,
+        noInfo: true,
+        stats: {
+            colors: true
+        }
+    }))
+    app.use(webpackHotMiddleware(compiler))
 
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
