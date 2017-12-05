@@ -48,9 +48,9 @@ Promise.each( // 依序執行服務原件的啟動程序
     const app = express()
 
     // ////////////// webpack ///////////////////////////////////////////////
-    var webpack = require('webpack');
-    var config = require('../../webpack.config.js');
-    var compiler = webpack(config);
+    var webpack = require('webpack')
+    var config = require('../../webpack.config.js')
+    var compiler = webpack(config)
 
     // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
     app.use(require('webpack-dev-middleware')(compiler, {
@@ -59,7 +59,7 @@ Promise.each( // 依序執行服務原件的啟動程序
       stats: {
         colors: true
       }
-    }));
+    }))
 
     // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
     app.use(require('webpack-hot-middleware')(compiler));
@@ -130,17 +130,9 @@ Promise.each( // 依序執行服務原件的啟動程序
       return res.redirect(`${eVars.APP_ROUTE}`)
     })
 
-    // server reload
-    var reload = require('reload');
-    var http = require('http');
-    
-    var server = http.createServer(app);
-    reload(server, app);
-
     // ///////////////// Web Server ///////////////////////////////////////////
     logging.console(`啟動 ${eVars.SYS_REF} 伺服器...`)
-    //return app.listen(eVars.PORT, (error) => {
-    return server.listen(eVars.PORT, (error) => {
+    return app.listen(eVars.PORT, (error) => {
       if (error) {
         logging.error(error, `${eVars.SYS_REF} 伺服器無法正確啟動...`)
         throw error
