@@ -7,4 +7,5 @@ module.exports = (db) => {
     db[modelName] = require(path.join(db.modelPath, db.fileList[index]))(db.sequelize, db.Sequelize)
     logging.console(`${modelName} 資料表註冊... 完成`)
   })
+  return Promise.resolve()
 }

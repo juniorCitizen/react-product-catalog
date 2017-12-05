@@ -15,7 +15,6 @@ const labels = require('./resetDatabase/labels')
 const companies = require('./resetDatabase/companies')
 const photos = require('./resetDatabase/photos')
 const products = require('./resetDatabase/products')
-const registrations = require('./resetDatabase/registrations')
 const series = require('./resetDatabase/series')
 const tags = require('./resetDatabase/tags')
 
@@ -66,13 +65,6 @@ module.exports = () => {
             .then(() => photos(db.Photos, db.Products, db.Series))
             .then(() => tags(db.Tags))
             .then(() => labels(db.Products, db.Tags))
-            .then(() => registrations(
-              db.Countries,
-              db.Companies,
-              db.Contacts,
-              db.Products,
-              db.Registrations
-            ))
             .then(logging.resolve('資料庫重設，並已完成預設資料載入...'))
             .catch(logging.reject('預設資料載入失敗...'))
         }

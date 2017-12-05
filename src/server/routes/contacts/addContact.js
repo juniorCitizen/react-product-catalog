@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
 
 const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
@@ -6,16 +7,35 @@ const eVars = require('../../config/eVars')
 
 const botPrevention = require('../../middlewares/botPrevention')
 const validateJwt = require('../../middlewares/validateJwt')
-const validatePasswordFormat = require('../../middlewares/validatePasswordFormat')
 
 module.exports = [
+  multer().none(),
   botPrevention,
-  validatePasswordFormat,
+  // validate password format,
+  // empty string '' is also valid at registration, otherwise must be 8~20 chars in length
+  (req, res, next) => {
+    if (!('password' in req.body)) {
+      res.status(400)
+      let error = new Error('Password missing')
+      return next(error)
+    } else if (req.body.password === '') {
+      if (!adminValue(req)) return next()
+      res.status(400)
+      let error = new Error('Password is required for admin account registration')
+      return next(error)
+    } else if ((req.body.password.length < 8) || (req.body.password.length > 20)) {
+      res.status(400)
+      let error = new Error('Illegal password length')
+      error.message = 'Password should be 8 to 20 characters long'
+      return next(error)
+    }
+    return next()
+  },
   // registration of an admin account requires a valid jwt with admin privilege
   // admin === true, a admin level middleware validation will be activated
   (req, res, next) => {
-    // client attempted to register a admin account
-    return (('admin' in req.body) && (req.body.admin === 'true'))
+    // validate jwt if the client request is attempting to register an admin contact
+    return adminValue(req)
       ? validateJwt({ admin: true })(req, res, next)
       : next()
   },
@@ -26,54 +46,47 @@ module.exports = [
         let companyData = {
           countryId: req.body.countryId || 'twn',
           title: req.body.company,
-          address: req.body.address,
-          telephone: req.body.telephone,
-          fax: req.body.fax,
-          website: req.body.website,
-          host: false
-        }
-        for (let props in companyData) {
-          if (companyData[props] === '') delete companyData[props]
+          address: req.body.address || undefined,
+          telephone: req.body.telephone || undefined,
+          fax: req.body.fax || undefined,
+          website: req.body.website || undefined
+          // host: false // not implemented
         }
         return db.Companies
           .create(companyData, { transaction: trx })
           .then(newCompany => {
-            let encryptedPassword = encryption.sha512(req.body.password, encryption.saltGen(16))
+            let encryptedPassword = req.body.password !== ''
+              ? encryption.sha512(req.body.password, encryption.saltGen(16))
+              : { hashedPassword: null, salt: null }
             let contactData = {
               email: req.body.email.toLowerCase(),
               name: req.body.name,
-              mobile: req.body.mobile || null,
+              mobile: req.body.mobile || undefined,
               hashedPassword: encryptedPassword.hashedPassword,
               salt: encryptedPassword.salt,
-              admin: (() => {
-                if ('admin' in req.body) {
-                  return req.body.admin === 'true'
-                } else {
-                  return false
-                }
-              })(),
+              admin: adminValue(req),
               companyId: newCompany.id
-            }
-            for (let props in contactData) {
-              if (contactData[props] === '') delete contactData[props]
             }
             return db.Contacts
               .create(contactData, { transaction: trx })
           })
       })
-      .then(newContact => {
-        return db.Contacts
-          .findAll({ where: { email: newContact.email } })
-      })
+      .then(newContact => db.Contacts.findOne({ where: { email: newContact.email } }))
       .then(contact => {
-        let token = jwt.sign({
-          name: contact[0].name,
-          email: contact[0].email,
-          admin: contact[0].admin
-        }, eVars.PASS_PHRASE, { expiresIn: '24h' })
         req.resJson = {
-          data: token,
-          message: `${contact[0].admin ? 'Admin' : 'User'} account '${contact[0].email}' registered successfully. Privilege is supplied for 24 hours`
+          data: contact.hashedPassword
+            ? jwt.sign({
+              id: contact.id,
+              name: contact.name,
+              email: contact.email,
+              admin: contact.admin
+            }, eVars.PASS_PHRASE, { expiresIn: '24h' })
+            : undefined,
+          message: (() => {
+            return !contact.hashedPassword
+              ? `Contact record for '${contact.email}' without login privilege is created`
+              : `${contact.admin ? 'Admin' : 'User'} account '${contact.email}' registered successfully. Privilege is supplied for 24 hours`
+          })()
         }
         next()
         return Promise.resolve()
@@ -81,3 +94,11 @@ module.exports = [
       .catch(error => next(error))
   }
 ]
+
+function adminValue (req) {
+  return 'admin' in req.body
+    ? req.is('application/json')
+      ? req.body.admin === true
+      : req.body.admin === 'true'
+    : false
+}

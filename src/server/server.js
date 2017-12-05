@@ -27,8 +27,7 @@ let preStartupInitSequence = [
   '其他伺服器啟動前置模組 1 初始化...', // dummy stub
   '其他伺服器啟動前置模組 2 初始化...' // dummy stub
 ]
-logging.console('伺服器啟動前置作業...')
-logging.console('前置模組初始化...')
+logging.console('系統上線前置啟動模組初始化...')
 Promise.each( // 依序執行服務原件的啟動程序
   preStartupInitSequence,
   (preStartupMessage = '') => {
@@ -124,20 +123,19 @@ Promise.each( // 依序執行服務原件的啟動程序
       // ///////////////////////////////////////////////////////////
       // modules that can be initialized afterwards goes here
       let postStartupInitSequence = [
+        require('./controllers/verifyAdminAccount').initialize(),
         '伺服器啟動後置模組 1 初始化...', // dummy stub
         '伺服器啟動後置模組 2 初始化...' // dummy stub
       ]
-      logging.console('後置模組初始化...')
+      logging.console('系統上線後置啟動模組初始化...')
+      // runs the post server start init scripts
       return Promise
-        .each( // runs the post server start init scripts
+        .each(
           postStartupInitSequence,
           (postStartupMessage) => {
             logging.console(postStartupMessage)
           })
-        .catch((error) => {
-          logging.error(error)
-          return Promise.reject(error)
-        })
+        .catch(logging.reject)
     })
   })
   .catch((error) => {
