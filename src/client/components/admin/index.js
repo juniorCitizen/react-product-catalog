@@ -7,6 +7,7 @@ import Order from './order'
 import Series from './series'
 import Confirm from '../../containers/modal/confirm'
 import Login from './login'
+import config from'../../config'
 
 class Admin extends React.Component {
     constructor(props) {

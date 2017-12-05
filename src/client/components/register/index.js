@@ -50,7 +50,7 @@ class Register  extends React.Component {
         const token = window.localStorage["jwt-token"]
         if (token) {
             dispatch(user_info(jwt_info(token)))
-            this.props.history.push("/");
+            this.props.history.push(config.sys_ref + "/");
         }
     }
 
@@ -99,10 +99,7 @@ class Register  extends React.Component {
         const self = this
         let url = ''
         delete form.confirm;
-        let form_data = new FormData()
-        Object.keys(form).map((key) => {
-            form_data.append(key, form[key])
-        })
+        console.log(form)
         axios({
             method: 'post',
             url: config.route.register,
@@ -128,7 +125,7 @@ class Register  extends React.Component {
         const { dispatch } = this.props
         const token = window.localStorage["jwt-token"]
         dispatch(user_info(jwt_info(token)))
-        this.props.history.push("/");
+        this.props.history.push(config.sys_ref + "/");
     }
 
     submitError(str) {
