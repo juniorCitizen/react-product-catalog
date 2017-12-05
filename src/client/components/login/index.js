@@ -38,7 +38,7 @@ class Login extends React.Component {
         const token = window.localStorage["jwt-token"]
         if (token) {
             dispatch(user_info(jwt_info(token)))
-            this.props.history.push("/");
+            this.props.history.push(config.sys_ref + "/");
         }
     }
 
@@ -106,7 +106,7 @@ class Login extends React.Component {
         const { dispatch } = this.props
         const token = window.localStorage["jwt-token"]
         dispatch(user_info(jwt_info(token)))
-        this.props.history.push("/");
+        this.props.history.push(config.sys_ref + "/");
     }
 
     loginError(str) {

@@ -29,14 +29,14 @@ class Main extends React.Component {
             <BrowserRouter>  
                 <div>            
                     <Logo />
-                    <Route exact path={config.env.SYS_REF + "/"} component={Product}/>
-                    <Route path="~/product/detail/:id" component={Detail}/>
-                    <Route path="~/login" component={Login}/>
-                    <Route path="~/register" component={Register}/>
-                    <Route path="~/contact" component={Contact}/>
-                    {auth && <Route path="~/order" component={Order}/>}
-                    {auth && <Route path="~/modify" component={Modify}/>}
-                    <Route path="~/admin" component={Admin}/>
+                    <Route exact path={config.sys_ref + "/"} component={Product}/>
+                    <Route path={config.sys_ref + "/product/detail/:id"} component={Detail}/>
+                    <Route path={config.sys_ref + "/login"} component={Login}/>
+                    <Route path={config.sys_ref + "/register"} component={Register}/>
+                    <Route path={config.sys_ref + "/contact"} component={Contact}/>
+                    {auth && <Route path={config.sys_ref + "/order"} component={Order}/>}
+                    {auth && <Route path={config.sys_ref + "/modify"} component={Modify}/>}
+                    <Route path={config.sys_ref + "/admin"} component={Admin}/>
                 </div>
             </BrowserRouter>
         )

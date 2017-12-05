@@ -58,7 +58,7 @@ class Navigation extends React.Component {
         const { dispatch } = this.props
         window.localStorage["jwt-token"] = ''
         dispatch(user_logout())
-        window.location = '/'
+        window.location = config.sys_ref + '/'
     }
 
     render() {
@@ -72,7 +72,7 @@ class Navigation extends React.Component {
                     <div className="tabs is-large">
                         <ul>
                             <li className={select.product}> 
-                                <Link onClick={this.tabActive.bind(this, 'product')} to={config.env.SYS_REF + "/"}>產品列表</Link>
+                                <Link onClick={this.tabActive.bind(this, 'product')} to={config.sys_ref + "/"}>產品列表</Link>
                             </li>
                             {auth ? 
                                 <li className={select.logout}>
@@ -80,25 +80,25 @@ class Navigation extends React.Component {
                                 </li>
                             :
                                 <li className={select.login}>
-                                    <Link onClick={this.tabActive.bind(this, 'login')} to="~/login">會員登入</Link>
+                                    <Link onClick={this.tabActive.bind(this, 'login')} to={config.sys_ref + "/login"}>會員登入</Link>
                                 </li>
                             }
                             {auth ?
                                 <li className={select.modify}>
-                                    <Link onClick={this.tabActive.bind(this, 'modify')} to="~/modify">修改會員資料</Link>
+                                    <Link onClick={this.tabActive.bind(this, 'modify')} to={config.sys_ref + "/modify"}>修改會員資料</Link>
                                 </li>
                             :
                                 <li className={select.register}>
-                                    <Link onClick={this.tabActive.bind(this, 'register')} to="~/register">會員註冊</Link>
+                                    <Link onClick={this.tabActive.bind(this, 'register')} to={config.sys_ref + "/register"}>會員註冊</Link>
                                 </li>
                             }
                             
                             <li className={select.contact}>
-                                <Link onClick={this.tabActive.bind(this, 'contact')} to="~/contact">聯絡我們</Link>
+                                <Link onClick={this.tabActive.bind(this, 'contact')} to={config.sys_ref + "/contact"}>聯絡我們</Link>
                             </li>
                             {auth && 
                                 <li className={select.order}>
-                                    <Link onClick={this.tabActive.bind(this, 'order')} to="~/order">訂購清單</Link>
+                                    <Link onClick={this.tabActive.bind(this, 'order')} to={config.sys_ref + "/order"}>訂購清單</Link>
                                 </li>
                             }
                         </ul>

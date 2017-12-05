@@ -9,7 +9,7 @@ export default class Logo extends React.Component {
                     <div className="container">
                         <div className="" style={style.box}>       
                             <h1 className="title">
-                                This is LOGO!!! {"ref " + config.env.SYS_REF}
+                                This is LOGO!!!
                             </h1>
                         </div>
                     </div>
