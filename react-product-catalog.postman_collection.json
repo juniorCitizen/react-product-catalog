@@ -1,318 +1,26 @@
 {
 	"info": {
 		"name": "react-product-catalog",
-		"_postman_id": "bbaf5256-d09c-48cf-cbe7-bd2efccfb01a",
+		"_postman_id": "d9b0901a-5651-2b42-4609-e9297787ef9b",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "assets",
-			"item": [
-				{
-					"name": "serve up static assets (favicon.ico as example)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9004",
-							"path": [
-								"reactProductCatalog",
-								"images",
-								"logos",
-								"favicon.ico"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "contacts",
-			"description": "",
-			"item": [
-				{
-					"name": "register a user or admin account",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "botPrevention",
-									"value": "",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "countryId",
-									"value": "twn",
-									"description": "optional, set to 'twn' (Taiwan) if omitted",
-									"type": "text"
-								},
-								{
-									"key": "company",
-									"value": "My Fake Company",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "address",
-									"value": "123 Nowhere Road, Taiwan",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "telephone",
-									"value": "06-6666666",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "fax",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "website",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "name",
-									"value": "David Tsai",
-									"description": "required",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "aaachiayu.tsai.personal@gmail.com",
-									"description": "required (must be unique)",
-									"type": "text"
-								},
-								{
-									"key": "mobile",
-									"value": "",
-									"description": "optional",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "00000000",
-									"description": "required (8~20 characters)",
-									"type": "text"
-								},
-								{
-									"key": "admin",
-									"value": "false",
-									"description": "optional, default to false",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9004",
-							"path": [
-								"reactProductCatalog",
-								"api",
-								"contacts"
-							]
-						},
-						"description": "1. Content-Type: 'application/x-www-form-urlencoded' or 'application/json'\n2. when req.body.admin is true, meaning registering an 'admin' account.  valid jwt must present in the x-access-token header\n3. upon success, a 24 hours token will be issued with the following properties in the payload:\n\t* name\n\t* email\n\t* admin"
-					},
-					"response": [
-						{
-							"id": "a0b4bee6-2d3b-4b25-9ead-29b14a86a2c9",
-							"name": "register a user account",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "458",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 27 Nov 2017 15:30:28 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"1ca-4eYCTZjk094TULvXhJSZunrZ8Po\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": 161,
-							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgVHNhaSIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MTE3OTY2MjgsImV4cCI6MTUxMTg4MzAyOH0.NTVGQ0dJ8EWSsrASx8JAYkmWNbtupfzQffBg3KYb9JE\",\"message\":\"User account 'chiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
-						},
-						{
-							"id": "67cec131-53dd-4f90-bf8b-f206566a15c7",
-							"name": "attempt to register an admin account without proper credentials",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "2683",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 27 Nov 2017 15:32:01 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"a7b-QH8UR1aUsCC8z9waIDkEeN5YjeQ\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": 44,
-							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:23:21\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:18:63)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\"}}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "utilities",
-			"description": "",
-			"item": [
-				{
-					"name": "get total record counts on models or specified composite models",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:9004/reactProductCatalog/api/recordCount/regions",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9004",
-							"path": [
-								"reactProductCatalog",
-								"api",
-								"recordCount",
-								"regions"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "untested",
-			"description": "",
 			"item": [
 				{
 					"name": "offices",
-					"description": "",
 					"item": [
 						{
 							"name": "get a list of offices with details",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/offices",
 									"protocol": "http",
@@ -325,8 +33,7 @@
 										"api",
 										"offices"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						}
@@ -335,14 +42,16 @@
 				},
 				{
 					"name": "countries",
-					"description": "",
 					"item": [
 						{
 							"name": "get regions",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
 									"protocol": "http",
@@ -355,8 +64,7 @@
 										"api",
 										"productMenus"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -365,9 +73,12 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/countries?page=3&per_page=1&details",
+									"raw": "http://localhost:9004/reactProductCatalog/api/countries?page=3&per_page=1&details=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -407,77 +118,6 @@
 					"name": "series",
 					"item": [
 						{
-							"name": "GET",
-							"item": [
-								{
-									"name": "request for series data with optional details",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series?details",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series"
-											],
-											"query": [
-												{
-													"key": "details",
-													"value": "",
-													"equals": false
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "request for series by 'id' with optional details",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {},
-										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series/2?details",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "9004",
-											"path": [
-												"reactProductCatalog",
-												"api",
-												"series",
-												"2"
-											],
-											"query": [
-												{
-													"key": "details",
-													"value": "",
-													"equals": false
-												}
-											]
-										},
-										"description": "products=true query is optional"
-									},
-									"response": []
-								}
-							],
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "POST",
-							"item": [],
-							"_postman_isSubFolder": true
-						},
-						{
 							"name": "PUT",
 							"item": [
 								{
@@ -499,7 +139,7 @@
 											"raw": "{\n\t\"name\": \"Test Series\",\n\t\"order\": 1,\n\t\"publish\": false\n}"
 										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/series/1?details",
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/1?details=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -590,9 +230,12 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYwMTk0LCJleHAiOjE1MTExNDY1OTR9.nZ6USZqhwQYotu0qWOjvgFe5y0mNocQCo1t3ylh1trM"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4/series/4?details",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products/6E530E5A-3507-412E-909F-84F706369BE4/series/4?details=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -631,7 +274,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/16",
 									"protocol": "http",
@@ -645,8 +291,7 @@
 										"carousels",
 										"16"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -666,7 +311,6 @@
 										{
 											"key": "image",
 											"value": "",
-											"description": "",
 											"type": "file"
 										}
 									]
@@ -697,7 +341,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMTY4NzMxLCJleHAiOjE1MTEyNTUxMzF9.S8lwJcpC8js9euFJJD9Xw65GtOCmEYHHz1QEHWG46gM"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/4/primary",
 									"protocol": "http",
@@ -726,7 +373,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2/order/2",
 									"protocol": "http",
@@ -742,8 +392,7 @@
 										"order",
 										"2"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						},
@@ -757,7 +406,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDYxNzE1LCJleHAiOjE1MTExNDgxMTV9.dDqmkEXZL6KHLX1XDHD38RFtJD2HURrnrcOrTLF-h3g"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/carousels/2",
 									"protocol": "http",
@@ -771,8 +423,7 @@
 										"carousels",
 										"2"
 									]
-								},
-								"description": ""
+								}
 							},
 							"response": []
 						}
@@ -783,14 +434,16 @@
 		},
 		{
 			"name": "not working",
-			"description": "",
 			"item": [
 				{
 					"name": "serve up index.html from template",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9004/reactProductCatalog",
 							"protocol": "http",
@@ -810,18 +463,1198 @@
 		},
 		{
 			"name": "working",
-			"description": "",
 			"item": [
 				{
+					"name": "assets",
+					"item": [
+						{
+							"name": "serve up static assets (favicon.ico as example)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"images",
+										"logos",
+										"favicon.ico"
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "458616ca-90fe-4b54-9345-e4a85d766a7e",
+									"name": "serve up static assets (favicon.ico as example)",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/images/logos/favicon.ico",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"images",
+												"logos",
+												"favicon.ico"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "image",
+									"_postman_previewtype": "image",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "bytes",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Cache-Control",
+											"value": "public, max-age=0",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1150",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "image/x-icon",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 13:26:33 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"47e-15f828d63c6\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "Last-Modified",
+											"value": "Fri, 03 Nov 2017 15:43:45 GMT",
+											"name": "Last-Modified",
+											"description": "The last modified date for the requested object, in RFC 2822 format"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 42,
+									"body": "\u0000\u0000\u0001\u0000\u0001\u0000\u0010\u0010\u0000\u0000\u0001\u0000 \u0000h\u0004\u0000\u0000\u0016\u0000\u0000\u0000(\u0000\u0000\u0000\u0010\u0000\u0000\u0000 \u0000\u0000\u0000\u0001\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0004\u0000\u0000\u0012\u000b\u0000\u0000\u0012\u000b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������X;�����K���[�����w���������n�V����������˰�t�]������ĥ��ɭ�����r�[���k�����&u������~�f�����[�?���r�������z�~�i�j�R�����t�]������˲�W9��������������ϵ������������������̱������ϵ�������������������r�m�R��������������ʮ���������������������������������������������r�Z�o�W�����g�N�t�]���������������������������������������������������v�R{5�9h\u0017�{�e�����������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "contacts",
+					"item": [
+						{
+							"name": "get contact data details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts",
+										":contactId"
+									],
+									"variable": [
+										{
+											"key": "contactId",
+											"value": "55FE81B2-DE83-420A-8444-D0057A2E9BAB"
+										}
+									]
+								},
+								"description": "1. request:\n\t* headers: {\"x-access-token\":jwt}\n\t* params: {\"contactId\":uuidV4}\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: user record\n\t\t\t- company: company information\n3. notes:\n\t* access is only granted when the following conditions are met:\n\t\t1. jwt is issued by server\n\t\t2. jwt payload carries an contact id that matches :contactId\n\t* server only returns one record related to :contactId"
+							},
+							"response": [
+								{
+									"id": "e1dccf9b-704c-4d2a-97a5-e979ae2263d0",
+									"name": "get contact data details",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts",
+												":contactId"
+											],
+											"variable": [
+												{
+													"key": "contactId",
+													"value": "7C31584A-7EC4-484C-959E-9F166E6B32DC"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "846",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 16:59:46 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"34e-UvNRnzQ38N2wQAdyxqSPjV+5xLg\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 64,
+									"body": "{\"data\":{\"id\":\"7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"email\":\"david.tsai@gentry-way.com.tw\",\"name\":\"David Tsai\",\"mobile\":null,\"hashedPassword\":\"be2d498b2e47ff3e00ee3f61806c25908c3bc6c68ba2ba059e89627cd255ce7a691f7f350adad7cfa10986a7d7d1f9027f7921f6af46032b8963f7a71493e9bb\",\"salt\":\"ba5dbfb5e36868d8\",\"admin\":true,\"active\":true,\"companyId\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"company\":{\"id\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"title\":\"Gentry Way Co., Ltd.\",\"address\":\"No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.\",\"telephone\":\"+886-(0)6-6529052\",\"fax\":\"+886-(0)6-6527093\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"countryId\":\"twn\"}},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								},
+								{
+									"id": "367e12e9-1172-4041-8be1-62bbe5484955",
+									"name": "attempt to access other user's data",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs",
+												"disabled": false
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts",
+												":contactId"
+											],
+											"variable": [
+												{
+													"key": "contactId",
+													"value": "55FE81B2-DE83-420A-8444-D0057A2E9BAB"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2752",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 17:00:27 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ac0-zAFjOCeq5uzFTYBOEghXpdyV0KM\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 28,
+									"body": "{\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/55FE81B2-DE83-420A-8444-D0057A2E9BAB\",\"message\":\"403 Forbidden\",\"error\":{\"name\":\"Error\",\"message\":\"Attempt to access other user's information\",\"stack\":\"Error: Attempt to access other user's information\\n    at jwt.verify (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:44:23)\\n    at Object.module.exports [as verify] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\jsonwebtoken\\\\verify.js:180:10)\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:33:16\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:354:14)\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:410:3)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\"}}"
+								}
+							]
+						},
+						{
+							"name": "login with contact information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "david.tsai@gentry-way.com.tw",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testtest",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"tokens"
+									]
+								},
+								"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
+							},
+							"response": [
+								{
+									"id": "8aeb36d8-13f1-4a58-b65c-48378884285e",
+									"name": "request for json web token by application/json on admin account",
+									"originalRequest": {
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": ""
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "454",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 Nov 2017 14:24:22 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1c6-qBEtOKks3kJqt2rRDCfyn9BWyX0\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 53,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								},
+								{
+									"id": "8cd6abe0-ec32-4af1-9686-c24fff40bf0b",
+									"name": "request for json web token using json headers",
+									"originalRequest": {
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": ""
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "465",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Nov 2017 04:34:34 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1d1-R/0NFlBep+OPd9p5o3UzaN3vVGs\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 44,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBFRTBBQzkxLUUxNTAtNDIzQy05M0MxLTUwNDYzQzBENkY5RSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAxNjQ3NCwiZXhwIjoxNTEyMTAyODc0fQ.4PGlTMlktXrJDOzpEiKypP1TkwWeAtjSPwvs-LMXZ_s\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+								}
+							]
+						},
+						{
+							"name": "register a user or admin account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "botPrevention",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "My Fake Company",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "David Tsai",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "aaachiayu.tsai.personal@gmail.com",
+											"description": "required (must be unique)",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "00000000",
+											"description": "required (8~20 characters)",
+											"type": "text"
+										},
+										{
+											"key": "countryId",
+											"value": "twn",
+											"description": "optional, set to 'twn' (Taiwan) if omitted",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": "123 Nowhere Road, Taiwan",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "telephone",
+											"value": "06-6666666",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "fax",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "website",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "admin",
+											"value": "false",
+											"description": "optional, default to false",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts"
+									]
+								},
+								"description": "1. request:\n\t* headers:\n\t\t- Content-Type:\n\t\t\t1. application/json\n\t\t\t2. x-www-form-urlencoded\n\t\t\t3. multipart/form-data\n\t\t- x-access-token: jwt string (optional, but must be present and with admin privilege when attempting to register an admin contact)\n\t* params: n/a\n\t* queries: n/a\n\t* body:\n\t\t1. botPrevention - required\n\t\t2. company - required\n\t\t3. name - required\n\t\t4. email - required\n\t\t5. password - required (empty string will be set to NULL, otherwise must be 8~20 chars in length)\n\t\t6. countryId\n\t\t7. address\n\t\t8. telephone\n\t\t9. fax\n\t\t10. website\n\t\t11. mobile\n\t\t12. admin\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: jwt string upon success\n3. notes:\n\t* upon success, a 24 hours token will be issued with the following properties in the payload:\n\t\t1. id\n\t\t2. name\n\t\t3. email\n\t\t4. admin\n\t* email will be validated at insertion\n\t* contacts with NULL password field is only used for contact display, will not be able to login"
+							},
+							"response": [
+								{
+									"id": "0a33b23b-1fe5-4c03-ac06-7543ca74bf90",
+									"name": "register a user account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "twn",
+													"description": "optional, set to 'twn' (Taiwan) if omitted",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "company",
+													"value": "My Fake Company",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "123 Nowhere Road, Taiwan",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "06-6666666",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"description": "required",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "c1haiayu.tsai.personal@gmail.com",
+													"description": "required (must be unique)",
+													"type": "text"
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"description": "optional",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "password",
+													"value": "00000000",
+													"description": "required (8~20 characters)",
+													"type": "text"
+												},
+												{
+													"key": "admin",
+													"value": "false",
+													"description": "optional, default to false",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "521",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:16:50 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"209-GCglTobaW1l0iXIgvid9fsNGV9Q\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 140,
+									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZEQUExQkY1LUJBRjUtNDNDRS05OENBLUM2MDZGMzczOUQ5RCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJjMWhhaWF5dS50c2FpLnBlcnNvbmFsQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNTEyMTQxNDEwLCJleHAiOjE1MTIyMjc4MTB9.2pyDf9-LhUMCyPYtTr2v721U9ssDpgIj3TH_Mm9-S-4\",\"message\":\"User account 'c1haiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
+								},
+								{
+									"id": "c69dc4ea-2bab-4931-9736-bd7252a53903",
+									"name": "attemp to register a admin contact without jwt or valid priviage",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "company",
+													"value": "my fake company",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "test@test.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "00000000",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "address",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "admin",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2123",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:27:35 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"84b-wxDeTqPuQ2JMs+doY3In81WghdU\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 60,
+									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
+								},
+								{
+									"id": "9e652e03-6f06-4d20-9aa4-ea277dc2b839",
+									"name": "creation of contact record without ability to login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "botPrevention",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "company",
+													"value": "my fake company",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "David Tsai",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "tesst1@test.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "countryId",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "address",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "telephone",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "fax",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "website",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "mobile",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "admin",
+													"value": "true",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "186",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 15:45:31 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ba-/fyw9RVcTILW2ifYrsPld7eGnFU\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 161,
+									"body": "{\"message\":\"Contact record for 'tesst1@test.com' without login privilege is created\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
+								},
+								{
+									"id": "0c29df0f-e860-41a2-8392-ecbb7a7c844f",
+									"name": "attemp to register admin account without password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"name": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"botPrevention\":\"\",\n\t\"company\":\"my fake company\",\n\t\"name\":\"David Tsai\",\n\t\"email\":\"tesssssst1@test.com\",\n\t\"password\":\"\",\n\t\"admin\": true\n}"
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"contacts"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2766",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 16:06:13 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ace-qOv1j0CTWeyq038Gqe8YPv7sTqc\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 1590,
+									"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Password is required for admin account registration\",\"stack\":\"Error: Password is required for admin account registration\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:25:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at multerMiddleware (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:18:41)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\"}}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "photos",
-					"description": "",
 					"item": [
 						{
 							"name": "get photo by id",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
 									"protocol": "http",
@@ -860,7 +1693,6 @@
 										{
 											"key": "photos",
 											"value": "",
-											"description": "",
 											"type": "file",
 											"disabled": true
 										}
@@ -883,12 +1715,15 @@
 							},
 							"response": [
 								{
-									"id": "76ad2a90-30fa-46d0-a7d2-0cf2f7f4684b",
+									"id": "8522be28-7d36-4cf0-98c0-c1a5181a9925",
 									"name": "batch photo inserts",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -956,7 +1791,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8/products/30D25238-F8F7-404E-8E84-318615845F94",
 									"protocol": "http",
@@ -977,12 +1815,15 @@
 							},
 							"response": [
 								{
-									"id": "71afc014-1790-4da3-b514-1998d380720a",
+									"id": "b61ec101-f459-4dba-a1d5-a1ebea73e019",
 									"name": "assign productId to a photo",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1050,7 +1891,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG5vd2hlcmUuY29tIiwibG9naW5JZCI6ImFkbWluIiwiaWF0IjoxNTExMDk4NjIxLCJleHAiOjE1MTExODUwMjF9.QBT-QGC_GBEcWZRirr_zf4jiKR9JW7IUYTmvUJD9r9Q"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/AC840C53-5B1A-41C4-8C16-77B3B089E483/series/F574716D-ABDC-4E38-B480-74314894C2EC",
 									"protocol": "http",
@@ -1071,12 +1915,15 @@
 							},
 							"response": [
 								{
-									"id": "9e768b95-1d44-4cef-9e45-e2377562696b",
+									"id": "ee0a81eb-dd4e-4ec3-931a-7cf04df48440",
 									"name": "assign a photo to a series",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1144,7 +1991,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/20491857-8CDB-4F69-82CA-662095D08EE8?active=false&primary=false",
 									"protocol": "http",
@@ -1175,12 +2025,15 @@
 							},
 							"response": [
 								{
-									"id": "d1e42450-db5a-4d8b-b17e-a392e54f2c73",
+									"id": "e295ba57-953f-4a49-901a-2667a1fb8cad",
 									"name": "patching photo active / primary status",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1248,7 +2101,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/3CC6E7B9-A296-438E-A015-6221FEF8C15D",
 									"protocol": "http",
@@ -1267,12 +2123,15 @@
 							},
 							"response": [
 								{
-									"id": "16bad033-6655-4342-a334-267f11c2ffd5",
+									"id": "e021d5e0-b739-4188-a8fa-d71125c46d58",
 									"name": "delete photo by id",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1340,7 +2199,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/products/34A83578-DEFD-4E8C-A88F-45AA5B04C5EC",
 									"protocol": "http",
@@ -1361,12 +2223,15 @@
 							},
 							"response": [
 								{
-									"id": "0b8367af-8fa9-4397-9285-dff12749ebe5",
+									"id": "d2a00e5f-5cb5-413f-a9b3-62b7ea4619d0",
 									"name": "remove productId from a photo",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1434,7 +2299,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/series/45A8E31A-B933-4195-98C6-4096424C0CB9",
 									"protocol": "http",
@@ -1455,7 +2323,7 @@
 							},
 							"response": [
 								{
-									"id": "c5ac0af6-7f85-46e1-8afa-2068e01e4a5a",
+									"id": "93346ccb-b3d3-470a-acca-45dcf945a27f",
 									"name": "remove seriesId from a photo",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1465,7 +2333,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZFMTg2QTI4LUREQzEtNDk4Qy1CMkU2LTQ3QzFDM0Q4M0MyQSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMTkzODU1MywiZXhwIjoxNTEyMDI0OTUzfQ.0KOZDDpcR9OAarnkPI4s9Lf_b9LNHxir9nzV27DUcP0"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/photos/436C1F0C-C6B8-43C9-904D-7B93CCDADEFD/series/45A8E31A-B933-4195-98C6-4096424C0CB9",
 											"protocol": "http",
@@ -1543,16 +2414,18 @@
 				},
 				{
 					"name": "Products",
-					"description": "",
 					"item": [
 						{
 							"name": "get product list with optional details and pagination",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+									"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1590,14 +2463,17 @@
 							},
 							"response": [
 								{
-									"id": "f303f832-0354-4af6-8b0b-6c1831da2494",
+									"id": "4aa5f277-596a-4e91-90cf-86ae57394e2f",
 									"name": "request for product data with pagination information but no product details",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -1692,14 +2568,17 @@
 									"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 								},
 								{
-									"id": "4b0e7ebf-28c1-4d87-aa63-0679a2122662",
+									"id": "9a0f2c60-de26-4e94-aba6-1ac9c09840a8",
 									"name": "request for product data with optional details and pagination",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
-											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details&inactive",
+											"raw": "http://localhost:9004/reactProductCatalog/api/products?per_page=1&page=17&details=&inactive=",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -1800,7 +2679,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId",
 									"protocol": "http",
@@ -1825,12 +2707,15 @@
 							},
 							"response": [
 								{
-									"id": "b634408e-26ed-4793-a770-b8dda54d34a2",
+									"id": "a72672ea-5b9a-483a-a960-8c05f7dc271e",
 									"name": "request for product by 'id'",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -1957,12 +2842,15 @@
 							},
 							"response": [
 								{
-									"id": "b44b38a8-b652-4eb8-b0a9-50e392ce4d96",
+									"id": "d1e58e51-609f-47b0-bc8a-51ef921d3a8f",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2080,12 +2968,15 @@
 							},
 							"response": [
 								{
-									"id": "8a4b2a7d-c922-4dae-8245-f250c8402cab",
+									"id": "1cb92fa6-691a-40d9-9815-4d6ae80cb901",
 									"name": "insert new product record",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2153,7 +3044,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 									"protocol": "http",
@@ -2186,18 +3080,20 @@
 							},
 							"response": [
 								{
-									"id": "805ccf11-12de-421d-a18e-ee7c2915f323",
+									"id": "f879e57c-07eb-4f8d-be6c-2e7cd0028790",
 									"name": "tag a product",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 											"protocol": "http",
@@ -2228,6 +3124,7 @@
 									"status": "OK",
 									"code": 200,
 									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "html",
 									"header": [
 										{
 											"key": "Access-Control-Allow-Origin",
@@ -2288,7 +3185,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 									"protocol": "http",
@@ -2321,7 +3221,7 @@
 							},
 							"response": [
 								{
-									"id": "0f3b7e17-f1bb-4676-861c-9af855716730",
+									"id": "c60e3be2-60f4-4bea-9b1f-ac0474fbdae0",
 									"name": "untag a product",
 									"originalRequest": {
 										"method": "DELETE",
@@ -2331,7 +3231,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/tags/:tagId",
 											"protocol": "http",
@@ -2425,7 +3328,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 									"protocol": "http",
@@ -2458,7 +3364,7 @@
 							},
 							"response": [
 								{
-									"id": "9267d673-4539-4728-950f-5c703cdf449f",
+									"id": "2dd11962-6de8-4dde-a4c7-e5993ea38999",
 									"name": "categorize a product to a series",
 									"originalRequest": {
 										"method": "POST",
@@ -2468,7 +3374,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 											"protocol": "http",
@@ -2562,7 +3471,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 									"protocol": "http",
@@ -2595,18 +3507,20 @@
 							},
 							"response": [
 								{
-									"id": "1bd3afd4-b04e-4c6a-b67f-3f921604e5c7",
+									"id": "042ff557-33b5-47e6-ba77-49ff9d2c5718",
 									"name": "remove a product from a series",
 									"originalRequest": {
 										"method": "DELETE",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNDM5NTMsImV4cCI6MTUxMjEzMDM1M30.IS4Dl3FqulLD514MnOyXsg5wiOLXYHH_2kd0VtRn0_E"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/products/:productId/series/:seriesId",
 											"protocol": "http",
@@ -2695,14 +3609,16 @@
 				},
 				{
 					"name": "productMenus",
-					"description": "",
 					"item": [
 						{
 							"name": "get tree structured product menus",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/productMenus",
 									"protocol": "http",
@@ -2720,12 +3636,15 @@
 							},
 							"response": [
 								{
-									"id": "bd35ed63-601e-4d4e-908d-e99db00850e9",
+									"id": "31a5e133-564d-4e89-aa61-28524f71b4dc",
 									"name": "get tree structured product menus",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2788,16 +3707,18 @@
 				},
 				{
 					"name": "series",
-					"description": "",
 					"item": [
 						{
-							"name": "get series details",
+							"name": "get series menu at root level",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
+									"raw": "http://localhost:9004/reactProductCatalog/api/series",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2806,28 +3727,34 @@
 									"path": [
 										"reactProductCatalog",
 										"api",
-										"series",
-										":seriesId"
-									],
-									"variable": [
-										{
-											"key": "seriesId",
-											"value": "2ABE71C3-715F-4046-A07A-3BAC8EDB258C",
-											"description": "uuidV4"
-										}
+										"series"
 									]
 								},
-								"description": "1. request\n\t* headers: n/a\n\t* parameters: seriesId\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* response: see example\n\t\t1. data: series object\n\t\t\t* 'products' property - a list of associated product objects\n\t\t\t\t* 'photos' property- a list of photo objects without actual photo data\n3. notes:\n\t* primary photos is always listed as photos[0]\n\t* products are sorted by 'code' property"
+								"description": "1. request:\n\t* headers: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: structured tree nodes in json format\n3. notes: n/a"
 							},
 							"response": [
 								{
-									"id": "f7b8e17b-1305-45e5-b8ac-2400e6b7b38b",
-									"name": "example",
+									"id": "191f171d-25b2-4b44-8c42-00e46c36ac23",
+									"name": "get tree structured series menu at root level",
 									"originalRequest": {
+										"method": "GET",
 										"header": [],
 										"body": {
 											"mode": "raw",
 											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series"
+											]
 										}
 									},
 									"status": "OK",
@@ -2849,7 +3776,7 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "16836",
+											"value": "34112",
 											"name": "Content-Length",
 											"description": "The length of the response body in octets (8-bit bytes)"
 										},
@@ -2861,13 +3788,13 @@
 										},
 										{
 											"key": "Date",
-											"value": "Wed, 29 Nov 2017 03:03:59 GMT",
+											"value": "Fri, 01 Dec 2017 14:27:27 GMT",
 											"name": "Date",
 											"description": "The date and time that the message was sent"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"41c4-Deci9tj7q1zSvi3asU9PJYwA0nk\"",
+											"value": "W/\"8540-N1uBXFRB0qOoXqFAvmxK7DAzcoI\"",
 											"name": "ETag",
 											"description": "An identifier for a specific version of a resource, often a message digest"
 										},
@@ -2879,8 +3806,127 @@
 										}
 									],
 									"cookie": [],
-									"responseTime": 87,
-									"body": "{\"data\":[{\"id\":\"9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"name\":\"transmitter\",\"order\":0,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"D16976BE-72B7-4569-A9FB-BF33E946ACCA\",\"code\":\"430-E9R2SG\",\"name\":\"Sleek Concrete Chair\",\"specification\":\"Consequatur ex totam temporibus numquam debitis. Est dolorum libero voluptatem consequatur eum eius. Exercitationem vitae occaecati blanditiis.\",\"description\":\"Eius non magnam ducimus quo. Ut at quas cupiditate. Quis blanditiis in qui. Molestiae deserunt quaerat vitae odit sunt omnis ut eaque aut. Voluptate et ratione dignissimos illum numquam nobis molestias aperiam dignissimos.\\nVel eveniet enim. Quae ullam quasi fuga facere nulla. Voluptatem optio omnis culpa qui eum quia consequuntur quos quia.\\nQuae veritatis velit aut ex dolorum ea corrupti velit ea. Enim ea recusandae distinctio provident ipsam. Eum praesentium illum voluptas iste sint animi quos adipisci impedit. Voluptatem odio nihil tenetur quia tempora quis.\\nEa et facere ex nemo. Quos consequuntur maxime et ea laborum. Vel nihil quia sapiente aut et non.\",\"active\":true,\"seriesId\":\"9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"photos\":[{\"id\":\"0C2877C6-5DC3-4539-804B-EA86666991EB\",\"primary\":true,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"D16976BE-72B7-4569-A9FB-BF33E946ACCA\"},{\"id\":\"8747ECD2-C8DE-4F1D-8926-3A8A5DC5E90E\",\"primary\":false,\"originalName\":\"GT.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10992,\"active\":true,\"seriesId\":null,\"productId\":\"D16976BE-72B7-4569-A9FB-BF33E946ACCA\"},{\"id\":\"AAE5B6AD-EF77-4257-8C3F-AC8478F681EA\",\"primary\":false,\"originalName\":\"2.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":15715,\"active\":true,\"seriesId\":null,\"productId\":\"D16976BE-72B7-4569-A9FB-BF33E946ACCA\"},{\"id\":\"C7876EB4-452D-4EAD-9A1B-CD44EC54F979\",\"primary\":false,\"originalName\":\"GT23.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10444,\"active\":true,\"seriesId\":null,\"productId\":\"D16976BE-72B7-4569-A9FB-BF33E946ACCA\"}]},{\"id\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\",\"code\":\"791-I15YM0\",\"name\":\"Awesome Wooden Soap\",\"specification\":\"Odit voluptatem numquam ut iste harum sed consequatur ea. Alias est quia fuga natus quos nihil aliquam inventore quo. Voluptas quae porro aut est dolor. Nesciunt et tenetur deleniti atque rerum saepe.\",\"description\":\"Doloribus voluptatem voluptates in voluptates accusamus eos. Ut sint dicta cum. Sequi et nemo ullam amet provident praesentium et.\\nEos earum aliquid repellendus tempora placeat quia. Aspernatur architecto minima exercitationem ad quo animi provident aut. Nostrum non quisquam alias omnis velit nihil.\\nFuga id molestias quidem aliquid repudiandae aut quia et consequatur. Eius asperiores sed libero autem temporibus voluptas suscipit magnam. Exercitationem omnis autem nam voluptatem ratione. Eos aut recusandae tempora architecto doloribus quos deserunt ad. Illo qui eum alias commodi temporibus aut. Deleniti illum sed error eos modi.\",\"active\":true,\"seriesId\":\"9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"photos\":[{\"id\":\"718FE17A-F4C6-4098-935B-71E1679DF246\",\"primary\":true,\"originalName\":\"2.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":15715,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"07AD1E2A-62CA-4499-BC8A-183997B1957B\",\"primary\":false,\"originalName\":\"GT24.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7983,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"1529BB59-3DED-4B84-BD69-1663D45A1E14\",\"primary\":false,\"originalName\":\"GT35.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":14014,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"1C207CB5-D659-4419-A65B-E7606E57F471\",\"primary\":false,\"originalName\":\"GT34.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":15124,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"2728A7A1-3B16-499D-A8DF-18DAA96DF0BF\",\"primary\":false,\"originalName\":\"GT44.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17811,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"2E1F683A-6827-4DDB-95CF-C46CF7B9AEB7\",\"primary\":false,\"originalName\":\"GT43.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10655,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"3003CC73-ADC8-45DA-9854-D4BF479EDFC7\",\"primary\":false,\"originalName\":\"3.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":25819,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"5221A1F5-DC41-48F2-B680-77CD7B6F1010\",\"primary\":false,\"originalName\":\"GT45.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4338,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"5C463D63-3B2E-41BC-BBA9-083FAA77996A\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"5FE52448-5641-41E4-9B45-21D8F752F518\",\"primary\":false,\"originalName\":\"GT37.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6563,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"645AE2E0-85CB-48F1-A553-2DCC3E2D7F4C\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"78F1780A-C730-4DC5-8664-0ED630B7E6D8\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"831A4D5C-539A-4E85-8E32-31D72A712F4D\",\"primary\":false,\"originalName\":\"GT18.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":18789,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"86A4272F-79CD-4BD9-B8ED-E9BCE87252D3\",\"primary\":false,\"originalName\":\"GT42.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10759,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"8855C113-30F5-448C-968C-AEF9734862BE\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"9187E5CC-FD97-4751-992F-9F3760AF6950\",\"primary\":false,\"originalName\":\"GT40.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10560,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"9E218C59-7613-495E-BF04-2F33B6D337BC\",\"primary\":false,\"originalName\":\"GT20.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6836,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"A228E181-F5EB-46A0-B9F4-00890EC0CD93\",\"primary\":false,\"originalName\":\"GT57.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5755,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"A826B8B0-DF32-43E4-AF0C-C0DDB134BD77\",\"primary\":false,\"originalName\":\"GT12.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6818,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"AE983365-6444-4DD9-8FC4-F061ECAC5D0A\",\"primary\":false,\"originalName\":\"GT14.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6439,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"AEB6FC8B-0030-42B0-9826-D27EBA89B685\",\"primary\":false,\"originalName\":\"GT22.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6266,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"B3E3881D-5A12-490C-9688-F54B940BF0B7\",\"primary\":false,\"originalName\":\"GT12.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6818,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"C9E60E8F-8C15-4431-BBAD-969A16C44E6B\",\"primary\":false,\"originalName\":\"1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":17034,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"DD15044F-EA85-409C-8131-3C6EB3F19939\",\"primary\":false,\"originalName\":\"GT.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10992,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"DDFBB705-A9C2-41CD-B799-02C0ABB824DF\",\"primary\":false,\"originalName\":\"GT16.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8012,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"E77B3A5B-F032-4D78-9D23-5E19196A43C8\",\"primary\":false,\"originalName\":\"aluminumramp.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":20210,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"},{\"id\":\"EB678070-E115-4D1A-B6B0-F41DE3B74780\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"3EAFA0A5-0383-4BE4-972C-48F48D4DAB90\"}]},{\"id\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\",\"code\":\"798-9W73LW\",\"name\":\"Practical Plastic Cheese\",\"specification\":\"Iusto iusto cupiditate quis laudantium magni sint adipisci. Ipsa rerum est iusto. Incidunt ut itaque suscipit nihil. Placeat consequatur delectus maiores enim explicabo. Unde tempore mollitia.\",\"description\":\"Totam ut unde voluptate optio deserunt soluta. Et debitis occaecati ut aut repudiandae officiis cumque nihil. Error magnam quam. Temporibus pariatur voluptatem itaque nobis quia ducimus beatae. Cum veniam atque adipisci ipsam quisquam quia. Voluptatem ipsa dicta.\\nNecessitatibus omnis laudantium nulla autem qui. Quam consequatur est. Iusto nobis unde qui saepe omnis ut. Suscipit vitae beatae neque.\",\"active\":true,\"seriesId\":\"9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"photos\":[{\"id\":\"EBC4ACAB-7496-408D-A1C7-AC14200A0A7A\",\"primary\":true,\"originalName\":\"GT29-1.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6182,\"active\":true,\"seriesId\":\"9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"08B0DA9A-49ED-4F82-A6B2-5BC4F45BC292\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"0FF0F9D3-2D7D-4AB8-A83E-6C67C9C36EF1\",\"primary\":false,\"originalName\":\"GT32.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5582,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"1009AAEA-EB98-4126-96B0-97ACA677F3FE\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"22E2CED5-3388-441C-80AF-CA4ECFF55AFC\",\"primary\":false,\"originalName\":\"GT11.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":21076,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"3BBCC280-72C8-4DC1-8DA2-44AEF062E79B\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"520DFB80-198C-4BAD-8D3C-35752A280C9C\",\"primary\":false,\"originalName\":\"GT48.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8783,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"5B54A9C0-D1C0-4CE1-AE11-195B681C7BEF\",\"primary\":false,\"originalName\":\"GT19.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10684,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"5D6C67AB-CC3A-4C55-B011-58C482246FD7\",\"primary\":false,\"originalName\":\"GT26.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12848,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"5FFBE636-B324-4855-87C5-DC3EBCBFDB35\",\"primary\":false,\"originalName\":\"GT31.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5308,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"659E1B6E-3B38-4F70-B6F9-C4E13C3CBFA9\",\"primary\":false,\"originalName\":\"GT32.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":5582,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"662126CD-D29B-4EB6-9726-6857284D3536\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"692D0485-16FC-41D8-B707-5649249B3909\",\"primary\":false,\"originalName\":\"GT39.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6732,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"6C19390D-D3C3-469E-9D6B-3584B23065EA\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"728AE0C4-32CC-44A7-B16F-4B6A1DB53AAF\",\"primary\":false,\"originalName\":\"GT33.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":13580,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"73685980-C73A-4E32-B7B0-4159A56107E8\",\"primary\":false,\"originalName\":\"GT7.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":8675,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"771A67C2-5F33-4FBB-8B1C-128E94D51464\",\"primary\":false,\"originalName\":\"GT-3.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9119,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"7B26C0FF-1F08-47A3-AE15-4F959086F8D1\",\"primary\":false,\"originalName\":\"GT40.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":10560,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"7F442039-4B59-4EAB-AA7F-631957F1F55F\",\"primary\":false,\"originalName\":\"GT6.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":11090,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"A52C0ABF-BFAB-4E6C-B1CC-B93AEDB34AD8\",\"primary\":false,\"originalName\":\"GT25.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9021,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"ADF94017-3372-4633-B0F6-9886FBE1E9CB\",\"primary\":false,\"originalName\":\"GT25.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9021,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"B1907D47-F3DC-4054-AF3F-E239728085D6\",\"primary\":false,\"originalName\":\"GT45.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4338,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"B8F1AA59-FF64-4D85-B4EC-D736B078D7D4\",\"primary\":false,\"originalName\":\"GT17.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9293,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"C447C586-E954-4FBE-98E1-0E9B7939D746\",\"primary\":false,\"originalName\":\"GT9.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12459,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"C59D1E14-5EFC-4561-9513-706AAAA653BC\",\"primary\":false,\"originalName\":\"GT-3.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":9119,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"C816EF18-65C9-44AE-AE12-561C51292D0C\",\"primary\":false,\"originalName\":\"GT8.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6483,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"D0B71922-F122-4382-A840-E096790263CA\",\"primary\":false,\"originalName\":\"aluminumramp.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":20210,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"E45A0A99-30F9-4AE9-8C3F-DB2B381C4B12\",\"primary\":false,\"originalName\":\"GT9.gif\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":12459,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"EAAE5E49-C8B1-4E8E-A6CF-8C7F85E85C0E\",\"primary\":false,\"originalName\":\"aluminumramp.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":20210,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"},{\"id\":\"F2879C9C-7348-483B-90C4-659AAA1DDEFE\",\"primary\":false,\"originalName\":\"GT53.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":7780,\"active\":true,\"seriesId\":null,\"productId\":\"6209724A-1EA1-401E-8D2A-B2236A94A6D5\"}]}]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/9E1D7950-74FA-4C7A-84A7-2AFEE06741CF\",\"statusCode\":200,\"message\":\"200 OK\"}"
+									"responseTime": 620,
+									"body": "{\"data\":[{\"id\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"name\":\"transmitter\",\"displaySequence\":0,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"E875B304-648B-4245-9C07-6350C904E930\",\"code\":\"565-T8M1K6\",\"active\":true,\"tags\":[]},{\"id\":\"1B4B0CF9-2356-49AC-8F23-47D78234C13A\",\"code\":\"720-5SP3WF\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"name\":\"monitor\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"products\":[{\"id\":\"4065603F-7149-4C07-A9CC-41F1A232C5CB\",\"code\":\"525-JZEF52\",\"active\":true,\"tags\":[]},{\"id\":\"46D50664-CFEE-4B7E-BA9A-861934E2B3B5\",\"code\":\"849-RXFQJ4\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"57A9B027-CC25-4ACE-B0CD-8B8A1150FC05\",\"name\":\"matrix\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"04F6BC19-4F05-4DE6-B6B2-51FD5C40051F\",\"code\":\"676-EXCZGC\",\"active\":true,\"tags\":[]},{\"id\":\"5E17C7F9-ACB5-471D-94AB-341BAF31F1B3\",\"code\":\"773-D8K8Z9\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"DB5CB1FD-32BA-4294-871E-1815CFA21867\",\"name\":\"pixel\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"9C4C543C-D6FB-4D58-97A4-68EEAD452DBC\",\"code\":\"185-6KYIW9\",\"active\":true,\"tags\":[]},{\"id\":\"777146A0-3F51-4A38-BC8D-EFA43C926ED2\",\"code\":\"412-6WPSGQ\",\"active\":true,\"tags\":[]},{\"id\":\"D2B7B2EF-0A43-4515-B96C-543847947126\",\"code\":\"811-YZT0RJ\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"3CA6C61D-745C-405B-9F31-ED3997EF99A3\",\"name\":\"system\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"code\":\"292-CBYCHQ\",\"active\":true,\"tags\":[{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"3CA4E70D-F402-4D98-A4E1-98AB34BEA90F\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":0}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"18FBFE55-E40A-4D6C-80B7-25E7C04F5B4B\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":11}}]},{\"id\":\"C8801BF1-AB44-4187-83CC-66611EA2B85C\",\"code\":\"583-MT7OZF\",\"active\":true,\"tags\":[]},{\"id\":\"CF337987-63C5-4311-A1EC-E2495754ADA7\",\"code\":\"956-OGAULB\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"3CA4E70D-F402-4D98-A4E1-98AB34BEA90F\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":0}}]}],\"tagMenus\":[]},{\"id\":\"517AFA91-54B3-47AF-AF83-DF85D90E2620\",\"name\":\"array\",\"displaySequence\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"products\":[{\"id\":\"DEE2054B-A866-4432-A80A-99835520E2C8\",\"code\":\"140-EUPACF\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"50A08800-4002-4334-B696-DADE5DB96AA2\",\"productId\":\"DEE2054B-A866-4432-A80A-99835520E2C8\",\"tagId\":7}},{\"id\":9,\"name\":\"Extra Small\",\"active\":true,\"labels\":{\"id\":\"68E08CED-FAFD-4ED7-BE76-A87D4C8B0369\",\"productId\":\"DEE2054B-A866-4432-A80A-99835520E2C8\",\"tagId\":9}}]},{\"id\":\"9ED7B2FF-DF32-407D-9B45-257102ED1A7C\",\"code\":\"596-IXTPJX\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"7FC9F08E-927A-4802-872F-C910083F704D\",\"name\":\"panel\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"517AFA91-54B3-47AF-AF83-DF85D90E2620\",\"products\":[{\"id\":\"77295692-8CF7-4C2E-9462-70976E5BA67E\",\"code\":\"434-0WVB3L\",\"active\":true,\"tags\":[]},{\"id\":\"758E475A-0360-4128-8743-68BAAC64BF32\",\"code\":\"795-PZZAA4\",\"active\":true,\"tags\":[]},{\"id\":\"51AD4656-FC57-4926-A282-40E1A9772CD2\",\"code\":\"841-T8U8GI\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"FEE58DCA-A8EC-4CAC-A1E6-30262C022CC4\",\"name\":\"bus\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"517AFA91-54B3-47AF-AF83-DF85D90E2620\",\"products\":[{\"id\":\"844B71A7-986F-4A66-A8D5-093AB688DEDB\",\"code\":\"539-FRY44J\",\"active\":true,\"tags\":[]},{\"id\":\"489BEBD3-79BE-4BC3-8CDA-C80A73499CB4\",\"code\":\"783-TKQD6M\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"50A08800-4002-4334-B696-DADE5DB96AA2\",\"productId\":\"DEE2054B-A866-4432-A80A-99835520E2C8\",\"tagId\":7}}]},{\"id\":\"B50B7CF6-28AD-427D-B935-16A2DFAEF1D4\",\"name\":\"system\",\"displaySequence\":2,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"products\":[{\"id\":\"165C0730-C4CD-407D-B3AE-3235E3C5732F\",\"code\":\"271-2ZUEZN\",\"active\":true,\"tags\":[]},{\"id\":\"B1B11352-3624-4F20-BA86-ED2BD8D8D6CA\",\"code\":\"626-OJY9B7\",\"active\":true,\"tags\":[]},{\"id\":\"DE4C32FF-FD1F-474C-AC10-18FEFCCDB3F0\",\"code\":\"706-Z0A2LS\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"6F7F2435-3B97-4F81-A0C9-E43DD82ECA6A\",\"name\":\"port\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B50B7CF6-28AD-427D-B935-16A2DFAEF1D4\",\"products\":[{\"id\":\"88362D68-2BC9-4C8E-B5B1-39C2E1E67190\",\"code\":\"384-04KOV6\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"FFC64498-AFC7-4BE2-AEB1-A016F00B8D83\",\"productId\":\"88362D68-2BC9-4C8E-B5B1-39C2E1E67190\",\"tagId\":4}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"D2AF6C08-B2BD-4D7D-BB08-E8841BDAAC73\",\"productId\":\"88362D68-2BC9-4C8E-B5B1-39C2E1E67190\",\"tagId\":3}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"F5C3387C-681C-4214-9B81-044DB1634F03\",\"productId\":\"88362D68-2BC9-4C8E-B5B1-39C2E1E67190\",\"tagId\":11}}]},{\"id\":\"6EF37DC7-D158-44C1-8FC6-556A52C284A3\",\"code\":\"437-0UXPL8\",\"active\":true,\"tags\":[]},{\"id\":\"F56F7440-A97E-4CB0-BBA2-22E1E32B255C\",\"code\":\"990-ULYLNJ\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"FFC64498-AFC7-4BE2-AEB1-A016F00B8D83\",\"productId\":\"88362D68-2BC9-4C8E-B5B1-39C2E1E67190\",\"tagId\":4}}]},{\"id\":\"0005BF70-1BD7-4981-A197-6D21C924D6F2\",\"name\":\"matrix\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B50B7CF6-28AD-427D-B935-16A2DFAEF1D4\",\"products\":[{\"id\":\"2181B30F-FD49-435D-A510-DCD178D137FA\",\"code\":\"155-ONRTAX\",\"active\":true,\"tags\":[]},{\"id\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"code\":\"634-CCF9OB\",\"active\":true,\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"5E73F83C-E368-43DA-9380-04F4CB61838D\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":8}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"2330F476-7B3F-4656-BB54-A7F2FD708850\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":14}},{\"id\":15,\"name\":\"accessories\",\"active\":true,\"labels\":{\"id\":\"9C42E36B-D656-4190-B924-B7D6CF73F914\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":15}}]},{\"id\":\"CB3BF47E-AC8F-44F8-A3E8-FC886BA10CE9\",\"code\":\"661-W71SJ3\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"5E73F83C-E368-43DA-9380-04F4CB61838D\",\"productId\":\"20FAC4F0-EE5A-428E-B70F-6B3E9228FD96\",\"tagId\":8}}]}],\"tagMenus\":[]},{\"id\":\"BD3B7ACB-AED3-4AB6-B5C0-3F95691BDD56\",\"name\":\"protocol\",\"displaySequence\":3,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"products\":[{\"id\":\"371F7BA7-0C6C-4ECC-86D0-A3EE0271846E\",\"code\":\"160-S6L1YJ\",\"active\":true,\"tags\":[]},{\"id\":\"B9C8D04D-ACE8-4670-9D30-2DD967B02FFB\",\"code\":\"178-C43KRG\",\"active\":true,\"tags\":[]},{\"id\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"code\":\"640-EEWJV3\",\"active\":true,\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"C0C62C98-0639-4A64-AE96-EED40147B98C\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"tagId\":5}},{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"5544D4D7-371F-4893-8AFC-4DB1820ACE22\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"tagId\":8}}]}],\"childSeries\":[{\"id\":\"B6D2D888-1E97-4318-9203-CC6C1FB33D9A\",\"name\":\"array\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"BD3B7ACB-AED3-4AB6-B5C0-3F95691BDD56\",\"products\":[{\"id\":\"555FD9D3-6CB8-41ED-AD48-82418C22188E\",\"code\":\"550-9S0LE5\",\"active\":true,\"tags\":[]},{\"id\":\"2875FD5F-2E3B-4304-88C5-97FC54D31650\",\"code\":\"772-GL8J7U\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"C0C62C98-0639-4A64-AE96-EED40147B98C\",\"productId\":\"81E01225-A6A9-418E-9FDB-E1AACC316192\",\"tagId\":5}}]}],\"tagMenus\":[]},{\"id\":\"C947C4CC-6944-4033-8A85-07370F210982\",\"name\":\"monitor\",\"displaySequence\":1,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"CEFB28D7-6EB7-4C56-8041-C2876DF1A064\",\"code\":\"484-85C3YN\",\"active\":true,\"tags\":[]},{\"id\":\"3759653D-EE59-456A-B6FA-BA9198754468\",\"code\":\"546-IDFGUG\",\"active\":true,\"tags\":[]},{\"id\":\"E40DFB59-25FD-4CC2-9A05-D7AF45D08ED7\",\"code\":\"722-4IRQ1T\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"3D85D7C6-A6B9-46A7-91CC-A12509730B70\",\"name\":\"alarm\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"C947C4CC-6944-4033-8A85-07370F210982\",\"products\":[{\"id\":\"F421E5FA-B9B1-478D-9BD5-7F7D8369564A\",\"code\":\"509-PFRFWK\",\"active\":true,\"tags\":[]},{\"id\":\"D22A65EA-8F48-4122-B870-CF776213E6A7\",\"code\":\"542-DSGEL2\",\"active\":true,\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"C8D2838F-8160-43F3-9D29-CB691EB161A0\",\"productId\":\"D22A65EA-8F48-4122-B870-CF776213E6A7\",\"tagId\":5}},{\"id\":10,\"name\":\"Discount\",\"active\":true,\"labels\":{\"id\":\"0BC0A2E0-5DA1-450A-964A-82DBBC3C22A9\",\"productId\":\"D22A65EA-8F48-4122-B870-CF776213E6A7\",\"tagId\":10}}]}],\"childSeries\":[{\"id\":\"3A25601C-DD89-4B57-9E3F-3665E626B1D5\",\"name\":\"system\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"3D85D7C6-A6B9-46A7-91CC-A12509730B70\",\"products\":[{\"id\":\"5645239A-E795-40F3-BF8D-33F7C402CC1F\",\"code\":\"260-AXKPJE\",\"active\":true,\"tags\":[]},{\"id\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"code\":\"410-1D2PHK\",\"active\":true,\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"C72227D9-ACAB-460E-ACF2-AA22826C9D52\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"tagId\":8}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"2037F08F-DB8F-480C-A1CD-6FC34882CD1F\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"tagId\":14}}]},{\"id\":\"1565815E-4094-4193-AEAD-3D4A31B19F9C\",\"code\":\"569-GB1NCE\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"C72227D9-ACAB-460E-ACF2-AA22826C9D52\",\"productId\":\"E7901EF4-5E22-494A-AEDD-7E2414EA992E\",\"tagId\":8}}]},{\"id\":\"01F66D55-E048-4FE9-B4E5-48D72DE3531E\",\"name\":\"card\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"3D85D7C6-A6B9-46A7-91CC-A12509730B70\",\"products\":[{\"id\":\"886F81E4-CF71-4290-BB1B-09A281355AC6\",\"code\":\"345-YJ2IM0\",\"active\":true,\"tags\":[]},{\"id\":\"02EF7E96-19BE-4797-B960-14A5004621CB\",\"code\":\"516-N1AFLE\",\"active\":true,\"tags\":[]},{\"id\":\"8F7C6DAB-7567-4849-A821-C081428E9B70\",\"code\":\"893-5MVMO8\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"5F417C92-DFBB-4413-9940-C70D634AC096\",\"name\":\"transmitter\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"3D85D7C6-A6B9-46A7-91CC-A12509730B70\",\"products\":[{\"id\":\"49C6AB3B-76A6-457F-B883-54366DC46512\",\"code\":\"308-KUTK2K\",\"active\":true,\"tags\":[]},{\"id\":\"CFD5BD51-0B20-4A2F-89D8-030E78FEC959\",\"code\":\"354-O0H7AQ\",\"active\":true,\"tags\":[]},{\"id\":\"230B77A0-38B2-45C6-B581-23D52B8266B0\",\"code\":\"392-5BOD75\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"C8D2838F-8160-43F3-9D29-CB691EB161A0\",\"productId\":\"D22A65EA-8F48-4122-B870-CF776213E6A7\",\"tagId\":5}}]}],\"tagMenus\":[]},{\"id\":\"B8C07084-3B11-4A9D-9F72-0F2B23C1F9AD\",\"name\":\"program\",\"displaySequence\":2,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"3FE017E5-3799-4ADF-BE59-3589F711C95C\",\"code\":\"173-D6SZH1\",\"active\":true,\"tags\":[]},{\"id\":\"C3CD1359-39A1-4AC7-B7C7-FA0B90717BCC\",\"code\":\"384-7OVDDT\",\"active\":true,\"tags\":[{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"5A7DE199-60F5-41D7-B81D-33F3FAB894BC\",\"productId\":\"C3CD1359-39A1-4AC7-B7C7-FA0B90717BCC\",\"tagId\":3}},{\"id\":2,\"name\":\"Tool Free\",\"active\":true,\"labels\":{\"id\":\"0DBB4D02-6554-4475-8C6A-D77CE314F94B\",\"productId\":\"C3CD1359-39A1-4AC7-B7C7-FA0B90717BCC\",\"tagId\":2}},{\"id\":15,\"name\":\"accessories\",\"active\":true,\"labels\":{\"id\":\"2497C0FC-91B1-4300-B9EF-B80D2A02E843\",\"productId\":\"C3CD1359-39A1-4AC7-B7C7-FA0B90717BCC\",\"tagId\":15}}]}],\"childSeries\":[{\"id\":\"704C7AE5-8C65-424D-8F16-F5AC6A833286\",\"name\":\"alarm\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"B8C07084-3B11-4A9D-9F72-0F2B23C1F9AD\",\"products\":[{\"id\":\"26D17AF1-38E4-41C6-B42C-309652A944C1\",\"code\":\"193-UHB85P\",\"active\":true,\"tags\":[]},{\"id\":\"E8AA2499-FD4C-43FB-9FD3-CC944DF6D258\",\"code\":\"231-9HDCMD\",\"active\":true,\"tags\":[]},{\"id\":\"62C2A416-42E9-42F2-8CD3-26D41EF49FFF\",\"code\":\"895-CC8M96\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"E200F32E-23B2-47BE-9140-09258AAB0987\",\"productId\":\"62C2A416-42E9-42F2-8CD3-26D41EF49FFF\",\"tagId\":7}},{\"id\":12,\"name\":\"Hot Seller\",\"active\":true,\"labels\":{\"id\":\"97FC1277-E558-4037-92CD-37271271647B\",\"productId\":\"62C2A416-42E9-42F2-8CD3-26D41EF49FFF\",\"tagId\":12}},{\"id\":15,\"name\":\"accessories\",\"active\":true,\"labels\":{\"id\":\"7DBE2543-A717-4261-AAB2-D3E3C491CDF1\",\"productId\":\"62C2A416-42E9-42F2-8CD3-26D41EF49FFF\",\"tagId\":15}}]}],\"childSeries\":[{\"id\":\"9662853A-39CD-4F00-A361-AB9C73B5DD30\",\"name\":\"circuit\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"704C7AE5-8C65-424D-8F16-F5AC6A833286\",\"products\":[{\"id\":\"DDE546B2-2E46-455A-A175-C2627F35BEEF\",\"code\":\"254-BQ1AN0\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"CD78FD3C-BE12-45BB-B79A-EEEA552BE29E\",\"productId\":\"DDE546B2-2E46-455A-A175-C2627F35BEEF\",\"tagId\":4}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"84FCD8DA-6AD9-4D24-8EF0-3B91FB54ACDF\",\"productId\":\"DDE546B2-2E46-455A-A175-C2627F35BEEF\",\"tagId\":3}}]},{\"id\":\"C7BD8E92-599B-4F5E-9337-661F0F36B634\",\"code\":\"255-AG7JRI\",\"active\":true,\"tags\":[]},{\"id\":\"A6E1922D-8FEE-46BF-A7D3-04AE8B368078\",\"code\":\"433-28H1FX\",\"active\":true,\"tags\":[{\"id\":6,\"name\":\"Child\",\"active\":true,\"labels\":{\"id\":\"9D21695F-11AA-4728-9E0B-CB398F4685B5\",\"productId\":\"A6E1922D-8FEE-46BF-A7D3-04AE8B368078\",\"tagId\":6}},{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"09AE624E-B5E0-4DAC-8520-2E5F62330339\",\"productId\":\"A6E1922D-8FEE-46BF-A7D3-04AE8B368078\",\"tagId\":5}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"CD78FD3C-BE12-45BB-B79A-EEEA552BE29E\",\"productId\":\"DDE546B2-2E46-455A-A175-C2627F35BEEF\",\"tagId\":4}}]},{\"id\":\"0DE946FD-F392-4547-B61D-A9BAE79FC0ED\",\"name\":\"panel\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"704C7AE5-8C65-424D-8F16-F5AC6A833286\",\"products\":[{\"id\":\"104FA76C-1625-4F28-9F36-191E697240B6\",\"code\":\"747-N4FR71\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"1EEE4BB4-A3AB-4B57-8211-842D9327F00E\",\"productId\":\"104FA76C-1625-4F28-9F36-191E697240B6\",\"tagId\":4}},{\"id\":1,\"name\":\"Discontinued\",\"active\":true,\"labels\":{\"id\":\"CDA98C39-BCAC-4000-BD2A-6D718EFBC4DB\",\"productId\":\"104FA76C-1625-4F28-9F36-191E697240B6\",\"tagId\":1}},{\"id\":9,\"name\":\"Extra Small\",\"active\":true,\"labels\":{\"id\":\"CF58AD21-85A1-4E04-8DC3-6F03DA20C4AE\",\"productId\":\"104FA76C-1625-4F28-9F36-191E697240B6\",\"tagId\":9}}]},{\"id\":\"511BA22D-744B-4FE3-AAF4-9D7982320AC1\",\"code\":\"929-9OAKT7\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"1EEE4BB4-A3AB-4B57-8211-842D9327F00E\",\"productId\":\"104FA76C-1625-4F28-9F36-191E697240B6\",\"tagId\":4}}]}],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"E200F32E-23B2-47BE-9140-09258AAB0987\",\"productId\":\"62C2A416-42E9-42F2-8CD3-26D41EF49FFF\",\"tagId\":7}}]}],\"tagMenus\":[{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"5A7DE199-60F5-41D7-B81D-33F3FAB894BC\",\"productId\":\"C3CD1359-39A1-4AC7-B7C7-FA0B90717BCC\",\"tagId\":3}}]},{\"id\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"name\":\"microchip\",\"displaySequence\":3,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"D40F2010-1CFD-45A6-9234-ABCB7981E8EF\",\"code\":\"493-MNG0JQ\",\"active\":true,\"tags\":[]},{\"id\":\"FDDCAD01-80C0-42A7-9782-96BE9BBE57EA\",\"code\":\"749-NL45EY\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"96E7E868-C8B3-4426-8A73-B108AB742848\",\"name\":\"feed\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"products\":[{\"id\":\"92D1E8F9-ABD5-4DC1-8F5F-A20D3DC18D95\",\"code\":\"461-12GCO9\",\"active\":true,\"tags\":[]},{\"id\":\"AF1A05FF-5880-44E7-AE78-C0DEBA1AEB9C\",\"code\":\"640-N9NW60\",\"active\":true,\"tags\":[]},{\"id\":\"1052BFAE-871A-4C83-84D9-F5A8569EDC4E\",\"code\":\"708-35E30R\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"D3715D81-1990-4DF9-9140-C725176ADBF3\",\"name\":\"matrix\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"96E7E868-C8B3-4426-8A73-B108AB742848\",\"products\":[{\"id\":\"7B16E637-B2E3-499D-8AD8-58C4543A23A1\",\"code\":\"226-ADSI57\",\"active\":true,\"tags\":[]},{\"id\":\"A1549D7A-7263-412B-963E-FA8DF0CEBC83\",\"code\":\"894-TE7BZ1\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[]},{\"id\":\"0DB61183-94A7-458D-9BC8-883D67A83AA2\",\"name\":\"protocol\",\"displaySequence\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"products\":[{\"id\":\"A975AF08-95BD-4DC8-840F-8D8E752C6AC1\",\"code\":\"619-BPJ6F4\",\"active\":true,\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"235CC8D6-3760-4E76-B932-F2AF1A4272C6\",\"productId\":\"A975AF08-95BD-4DC8-840F-8D8E752C6AC1\",\"tagId\":5}},{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"DA1FCA64-7ADE-49D2-8D2F-38EDBABE06F0\",\"productId\":\"A975AF08-95BD-4DC8-840F-8D8E752C6AC1\",\"tagId\":3}}]},{\"id\":\"CB36F901-691E-4A86-AB43-B6A8B9A5941A\",\"code\":\"760-HALI3W\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"4FD29898-CF9B-4DC8-AEA6-28A5B2EDE3C5\",\"name\":\"sensor\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"0DB61183-94A7-458D-9BC8-883D67A83AA2\",\"products\":[{\"id\":\"54D88551-3C8E-4E64-A486-E86269B1A103\",\"code\":\"717-CF7DPX\",\"active\":true,\"tags\":[]},{\"id\":\"0985C8E6-5BC6-4580-890E-E5A16EC70B58\",\"code\":\"979-SYVD2G\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"235CC8D6-3760-4E76-B932-F2AF1A4272C6\",\"productId\":\"A975AF08-95BD-4DC8-840F-8D8E752C6AC1\",\"tagId\":5}}]},{\"id\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\",\"name\":\"driver\",\"displaySequence\":2,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"products\":[{\"id\":\"C53DBE41-9997-41F6-A146-A2B0C774AD1F\",\"code\":\"872-V1EAR5\",\"active\":true,\"tags\":[]},{\"id\":\"F4227DCF-CE0A-47C2-AE67-A6653EC5BE08\",\"code\":\"997-1PTJ89\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"127FB152-A1F3-4005-99CF-E5014408B31D\",\"name\":\"circuit\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\",\"products\":[{\"id\":\"CDDE4AF3-8AFC-4F46-8828-1944452F236D\",\"code\":\"743-SGPO5X\",\"active\":true,\"tags\":[]},{\"id\":\"FCD24F8D-7608-4F54-869B-D0F63C1A46B4\",\"code\":\"877-GEOLTL\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"801AC2BE-D92D-4D44-94D8-B0DF59FEE7C8\",\"name\":\"alarm\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\",\"products\":[{\"id\":\"FA454CA8-9D4D-4D35-895E-939859428D88\",\"code\":\"103-OY5PW6\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"ED760C50-D2C4-419C-BD26-5EC8E3335BC9\",\"productId\":\"FA454CA8-9D4D-4D35-895E-939859428D88\",\"tagId\":7}},{\"id\":9,\"name\":\"Extra Small\",\"active\":true,\"labels\":{\"id\":\"FFDF1284-57D2-4A14-A8B6-CA97FE917982\",\"productId\":\"FA454CA8-9D4D-4D35-895E-939859428D88\",\"tagId\":9}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"6642DC35-D0D7-4C69-803F-62F9CBE2B7D2\",\"productId\":\"FA454CA8-9D4D-4D35-895E-939859428D88\",\"tagId\":11}}]},{\"id\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"code\":\"873-DR74IS\",\"active\":true,\"tags\":[{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"142FC499-93BE-43B3-B36F-9F7BC13F6810\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":8}},{\"id\":12,\"name\":\"Hot Seller\",\"active\":true,\"labels\":{\"id\":\"30814E9F-0379-498D-9210-F6EE27032083\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":12}},{\"id\":2,\"name\":\"Tool Free\",\"active\":true,\"labels\":{\"id\":\"321FCCBC-53A5-41B5-A4E1-9CAA168FE4F3\",\"productId\":\"0C7CF6F8-DA1B-4737-9C5B-8FD53061E221\",\"tagId\":2}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"ED760C50-D2C4-419C-BD26-5EC8E3335BC9\",\"productId\":\"FA454CA8-9D4D-4D35-895E-939859428D88\",\"tagId\":7}}]},{\"id\":\"4BD9381F-2E6F-415C-9017-606E41A98E70\",\"name\":\"monitor\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"86006B6B-BF6A-4723-ACF1-0C8064204843\",\"products\":[{\"id\":\"0FB4CBFB-4A87-444F-B7BE-37E939EA057A\",\"code\":\"262-OB0LJ4\",\"active\":true,\"tags\":[]},{\"id\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"code\":\"339-7ZQR3Z\",\"active\":true,\"tags\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"6881ED95-0EF3-46AC-9D42-E7F77F97F077\",\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"tagId\":5}},{\"id\":8,\"name\":\"Extra Large\",\"active\":true,\"labels\":{\"id\":\"E01587F6-CC95-4614-9E13-086AD3FACFC6\",\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"tagId\":8}}]},{\"id\":\"2135F5F1-9055-4B92-B6C4-37B9F6C2F289\",\"code\":\"664-RN10R9\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"6881ED95-0EF3-46AC-9D42-E7F77F97F077\",\"productId\":\"E51F31B0-6CDA-42C7-8591-1B848C780CDA\",\"tagId\":5}}]}],\"tagMenus\":[]},{\"id\":\"82C53819-BCFA-4F44-99E9-23FFF1D681A8\",\"name\":\"program\",\"displaySequence\":3,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"products\":[{\"id\":\"CA828BB9-3742-445B-87FF-2FA2AE812319\",\"code\":\"221-GIGU6Q\",\"active\":true,\"tags\":[]},{\"id\":\"D5790C59-EB1B-4D78-8381-5F269CB010D8\",\"code\":\"594-0PSXVB\",\"active\":true,\"tags\":[]},{\"id\":\"BE2950A5-5963-41E0-85E5-9C2F417EDB09\",\"code\":\"987-G4RWKW\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"7D37183B-E0D9-4392-931D-C818538FD8C4\",\"name\":\"transmitter\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"82C53819-BCFA-4F44-99E9-23FFF1D681A8\",\"products\":[{\"id\":\"22D40DE5-4CC2-4832-8AED-CEF5F37BDE9E\",\"code\":\"121-ETY64Y\",\"active\":true,\"tags\":[]},{\"id\":\"5C4A1B06-4C37-4C63-AB37-3CFB7163649F\",\"code\":\"132-VFSQ39\",\"active\":true,\"tags\":[]},{\"id\":\"D2BABD74-8AF9-4BCF-92F7-74175B67EBDA\",\"code\":\"325-WL9D08\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[]},{\"id\":\"2C3D3EC7-B077-4DC8-86B1-B550D1DEF059\",\"name\":\"microchip\",\"displaySequence\":4,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"9ABDA2A6-F66A-4E2D-A29D-5DBE499A03B7\",\"products\":[{\"id\":\"F2F555FA-0EF9-4168-9C16-AB8863C631C2\",\"code\":\"121-HUAY4W\",\"active\":true,\"tags\":[{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"0CA33691-EB1D-491B-919F-55D1BEEF55D2\",\"productId\":\"F2F555FA-0EF9-4168-9C16-AB8863C631C2\",\"tagId\":3}},{\"id\":15,\"name\":\"accessories\",\"active\":true,\"labels\":{\"id\":\"0AB38D6E-20CA-4ED5-BD9E-AFF88B2EDBBE\",\"productId\":\"F2F555FA-0EF9-4168-9C16-AB8863C631C2\",\"tagId\":15}}]},{\"id\":\"2669917A-79E3-457A-987F-0081EC55E252\",\"code\":\"571-WIF49X\",\"active\":true,\"tags\":[]},{\"id\":\"B86A5B64-17EF-48C5-9F0C-20DC2454F305\",\"code\":\"940-47Q569\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"C60F9405-0EF7-4311-87AA-337524FA6B74\",\"name\":\"pixel\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"2C3D3EC7-B077-4DC8-86B1-B550D1DEF059\",\"products\":[{\"id\":\"709BA462-3F83-4CED-8C6F-87460BD164C3\",\"code\":\"100-C2OIIT\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"926666E8-AD8B-4A81-A6E3-BCB79B733B6F\",\"productId\":\"709BA462-3F83-4CED-8C6F-87460BD164C3\",\"tagId\":7}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"2DB3B8BE-482E-4D8D-A70B-569015118A22\",\"productId\":\"709BA462-3F83-4CED-8C6F-87460BD164C3\",\"tagId\":11}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"DC3DA0AF-84E6-45CD-BA88-9EFA5A86DA58\",\"productId\":\"709BA462-3F83-4CED-8C6F-87460BD164C3\",\"tagId\":14}}]},{\"id\":\"D82DD3CF-CD5C-4FE4-9F72-DA5DE547C769\",\"code\":\"377-OSL9XN\",\"active\":true,\"tags\":[]},{\"id\":\"C6842964-638C-43E6-9129-2532EE5F5C8B\",\"code\":\"564-BB9YFG\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"926666E8-AD8B-4A81-A6E3-BCB79B733B6F\",\"productId\":\"709BA462-3F83-4CED-8C6F-87460BD164C3\",\"tagId\":7}}]}],\"tagMenus\":[{\"id\":3,\"name\":\"Heavy Duty\",\"active\":true,\"labels\":{\"id\":\"0CA33691-EB1D-491B-919F-55D1BEEF55D2\",\"productId\":\"F2F555FA-0EF9-4168-9C16-AB8863C631C2\",\"tagId\":3}}]}],\"tagMenus\":[]},{\"id\":\"FDEA15E8-2C1E-4E5F-AEBF-5C4F12EF156D\",\"name\":\"program\",\"displaySequence\":4,\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"products\":[{\"id\":\"BAFEEA61-7CD9-4F97-AEF4-E34F89BB6491\",\"code\":\"231-YC8N7X\",\"active\":true,\"tags\":[]},{\"id\":\"9EEB0217-C7C2-4E96-806A-32B30D2DA83A\",\"code\":\"552-BHOOBZ\",\"active\":true,\"tags\":[]},{\"id\":\"08C296F5-72B6-4F21-8A4A-B5DFD1468075\",\"code\":\"839-SWPCYC\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"245E7116-F5AC-4667-BAA6-22DFFECC3D73\",\"name\":\"application\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"FDEA15E8-2C1E-4E5F-AEBF-5C4F12EF156D\",\"products\":[{\"id\":\"863930C7-7DE9-45E2-B326-393589989C46\",\"code\":\"683-TD1HF9\",\"active\":true,\"tags\":[{\"id\":13,\"name\":\"Consumer Grade\",\"active\":true,\"labels\":{\"id\":\"FB84D59E-8D49-42B1-8286-417DA0A86C49\",\"productId\":\"863930C7-7DE9-45E2-B326-393589989C46\",\"tagId\":13}},{\"id\":9,\"name\":\"Extra Small\",\"active\":true,\"labels\":{\"id\":\"2198EFAB-AAB2-4BF7-B0A3-A14121E79273\",\"productId\":\"863930C7-7DE9-45E2-B326-393589989C46\",\"tagId\":9}}]},{\"id\":\"4CA69D04-2D14-4CB0-BFFE-35E73DDAFA6B\",\"code\":\"932-P0VBL4\",\"active\":true,\"tags\":[{\"id\":6,\"name\":\"Child\",\"active\":true,\"labels\":{\"id\":\"06B33CB2-0234-42D9-9C9F-5F6E6B958619\",\"productId\":\"4CA69D04-2D14-4CB0-BFFE-35E73DDAFA6B\",\"tagId\":6}},{\"id\":5,\"name\":\"Deluxe\",\"active\":true,\"labels\":{\"id\":\"FCEC0406-E20D-4F5C-8842-F9AEE5CB3A6E\",\"productId\":\"4CA69D04-2D14-4CB0-BFFE-35E73DDAFA6B\",\"tagId\":5}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"978D9C11-BE33-43AE-A884-336C54E50C06\",\"productId\":\"4CA69D04-2D14-4CB0-BFFE-35E73DDAFA6B\",\"tagId\":14}}]}],\"childSeries\":[{\"id\":\"7B997A70-B3BD-4E58-8722-F41540EFC3A8\",\"name\":\"matrix\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"245E7116-F5AC-4667-BAA6-22DFFECC3D73\",\"products\":[{\"id\":\"996847BE-70D8-4045-B8D9-CAD98E5E6137\",\"code\":\"161-59706S\",\"active\":true,\"tags\":[]},{\"id\":\"F7A76920-34E5-4525-B9F5-CFBE2AC09623\",\"code\":\"590-97GKNH\",\"active\":true,\"tags\":[]},{\"id\":\"90637A2E-B30D-44C3-99DD-2B0A66B7AA67\",\"code\":\"780-AZTPB1\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]}],\"tagMenus\":[{\"id\":13,\"name\":\"Consumer Grade\",\"active\":true,\"labels\":{\"id\":\"FB84D59E-8D49-42B1-8286-417DA0A86C49\",\"productId\":\"863930C7-7DE9-45E2-B326-393589989C46\",\"tagId\":13}}]},{\"id\":\"5A98309C-76AC-4A28-8A06-CEA725A2C87E\",\"name\":\"application\",\"displaySequence\":1,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"FDEA15E8-2C1E-4E5F-AEBF-5C4F12EF156D\",\"products\":[{\"id\":\"2C74E256-7D08-4BEE-89C7-1B7900F06026\",\"code\":\"125-RXGAJH\",\"active\":true,\"tags\":[]},{\"id\":\"B08145F8-DD83-4DF1-9D8B-7D0F5CA731A2\",\"code\":\"421-TQJPCN\",\"active\":true,\"tags\":[]},{\"id\":\"AE891E13-CB82-4F5A-B81D-0B0DA6EF3496\",\"code\":\"667-953DRV\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"E8563CD5-4D4C-4C15-B04A-C6FB61893779\",\"productId\":\"AE891E13-CB82-4F5A-B81D-0B0DA6EF3496\",\"tagId\":7}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"89FD2947-0166-46C1-9A99-E900D8DB9CC9\",\"productId\":\"AE891E13-CB82-4F5A-B81D-0B0DA6EF3496\",\"tagId\":11}}]}],\"childSeries\":[{\"id\":\"4570BC3A-24BF-446C-9A47-2B2B1AAF6AC1\",\"name\":\"protocol\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"5A98309C-76AC-4A28-8A06-CEA725A2C87E\",\"products\":[{\"id\":\"09E391F9-FEC0-42E2-BC3B-492631647923\",\"code\":\"186-QZCF0M\",\"active\":true,\"tags\":[{\"id\":13,\"name\":\"Consumer Grade\",\"active\":true,\"labels\":{\"id\":\"0265B574-49E5-4744-B941-E9BA6D859DB4\",\"productId\":\"09E391F9-FEC0-42E2-BC3B-492631647923\",\"tagId\":13}},{\"id\":1,\"name\":\"Discontinued\",\"active\":true,\"labels\":{\"id\":\"79DDD5E3-7B14-40DE-A23F-085D46F77EA2\",\"productId\":\"09E391F9-FEC0-42E2-BC3B-492631647923\",\"tagId\":1}},{\"id\":2,\"name\":\"Tool Free\",\"active\":true,\"labels\":{\"id\":\"EAF280AF-F8E8-48E1-9DE4-48460DA94F19\",\"productId\":\"09E391F9-FEC0-42E2-BC3B-492631647923\",\"tagId\":2}}]},{\"id\":\"62EE5F97-2017-4F1C-B169-F3E7C16FD303\",\"code\":\"214-LPYBVA\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":13,\"name\":\"Consumer Grade\",\"active\":true,\"labels\":{\"id\":\"0265B574-49E5-4744-B941-E9BA6D859DB4\",\"productId\":\"09E391F9-FEC0-42E2-BC3B-492631647923\",\"tagId\":13}}]}],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"E8563CD5-4D4C-4C15-B04A-C6FB61893779\",\"productId\":\"AE891E13-CB82-4F5A-B81D-0B0DA6EF3496\",\"tagId\":7}}]},{\"id\":\"92C26038-7B7E-4E2D-A023-581A600733E5\",\"name\":\"hard drive\",\"displaySequence\":2,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"FDEA15E8-2C1E-4E5F-AEBF-5C4F12EF156D\",\"products\":[{\"id\":\"5C1BEA9F-3A54-4DF2-8F63-856D4081554C\",\"code\":\"369-ZSW0HZ\",\"active\":true,\"tags\":[]},{\"id\":\"7D4F7770-176E-4691-8BDF-AFB3908CB2A0\",\"code\":\"555-TMMFHQ\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"EA8F1054-5DA6-4745-A3A3-3B6549484BA5\",\"name\":\"matrix\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"92C26038-7B7E-4E2D-A023-581A600733E5\",\"products\":[{\"id\":\"398429EE-9DC7-45DC-8A3B-69B0F2E54FE9\",\"code\":\"207-XPBT9P\",\"active\":true,\"tags\":[]},{\"id\":\"DF4C2D0E-A97B-4410-A9FB-BF8F83887AA9\",\"code\":\"253-7969ZF\",\"active\":true,\"tags\":[{\"id\":12,\"name\":\"Hot Seller\",\"active\":true,\"labels\":{\"id\":\"48C1E18E-8A86-45A2-A42A-4CCB73FEE2A2\",\"productId\":\"DF4C2D0E-A97B-4410-A9FB-BF8F83887AA9\",\"tagId\":12}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"7B923E82-6EA3-43B5-9010-3339AFD67156\",\"productId\":\"DF4C2D0E-A97B-4410-A9FB-BF8F83887AA9\",\"tagId\":14}},{\"id\":15,\"name\":\"accessories\",\"active\":true,\"labels\":{\"id\":\"4A180D47-B0B2-409C-B33A-69A7F8CE70B6\",\"productId\":\"DF4C2D0E-A97B-4410-A9FB-BF8F83887AA9\",\"tagId\":15}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":12,\"name\":\"Hot Seller\",\"active\":true,\"labels\":{\"id\":\"48C1E18E-8A86-45A2-A42A-4CCB73FEE2A2\",\"productId\":\"DF4C2D0E-A97B-4410-A9FB-BF8F83887AA9\",\"tagId\":12}}]},{\"id\":\"2D3C3836-7FB4-4C32-952E-876D884508B4\",\"name\":\"matrix\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"92C26038-7B7E-4E2D-A023-581A600733E5\",\"products\":[{\"id\":\"34C0EB75-B133-44A4-9D9B-81FB893BE4A0\",\"code\":\"254-D6FAEO\",\"active\":true,\"tags\":[]},{\"id\":\"1EF1EFD9-DA74-4545-B639-7BC60D1F29DF\",\"code\":\"498-YA8VU3\",\"active\":true,\"tags\":[]},{\"id\":\"E008D0C7-B2CE-4F24-B9DE-FB487F82174F\",\"code\":\"635-1L9SX9\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"B10A004C-B8CE-45EA-AF09-01F4A3FDD4AA\",\"name\":\"card\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"92C26038-7B7E-4E2D-A023-581A600733E5\",\"products\":[{\"id\":\"1ED343B0-88A1-442F-A99B-4C1270084B9F\",\"code\":\"806-LNEVKN\",\"active\":true,\"tags\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"0E1AC9B4-25D8-4ADF-A5FB-B20527669707\",\"productId\":\"1ED343B0-88A1-442F-A99B-4C1270084B9F\",\"tagId\":4}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"DAC5CF6F-3C71-407E-B9AC-47D5ADE5CE45\",\"productId\":\"1ED343B0-88A1-442F-A99B-4C1270084B9F\",\"tagId\":11}},{\"id\":14,\"name\":\"Professional Grade\",\"active\":true,\"labels\":{\"id\":\"F320C07E-FDF4-4933-8741-75A207AEA60B\",\"productId\":\"1ED343B0-88A1-442F-A99B-4C1270084B9F\",\"tagId\":14}}]},{\"id\":\"694DAED5-5CA1-4585-A38A-178E76B920A8\",\"code\":\"867-S701SQ\",\"active\":true,\"tags\":[]},{\"id\":\"BDF9B211-AE36-40D3-97B6-521DBCE977B7\",\"code\":\"869-IFCE7O\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":4,\"name\":\"Budget\",\"active\":true,\"labels\":{\"id\":\"0E1AC9B4-25D8-4ADF-A5FB-B20527669707\",\"productId\":\"1ED343B0-88A1-442F-A99B-4C1270084B9F\",\"tagId\":4}}]}],\"tagMenus\":[]},{\"id\":\"841A4A4D-3C62-4807-9F22-64B5C5E3B29E\",\"name\":\"transmitter\",\"displaySequence\":3,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"FDEA15E8-2C1E-4E5F-AEBF-5C4F12EF156D\",\"products\":[{\"id\":\"A4E30724-628F-4470-ACBA-9132D936E143\",\"code\":\"304-HWQ5Q4\",\"active\":true,\"tags\":[]},{\"id\":\"CD8E0752-7D55-43C7-A5D2-5EDD2AA701BC\",\"code\":\"624-MDD6S0\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"5E61D218-64BA-4BD8-A993-C3F27F44E6D3\",\"name\":\"program\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"841A4A4D-3C62-4807-9F22-64B5C5E3B29E\",\"products\":[{\"id\":\"F5A4E35E-3770-49B8-B629-15C411E764CD\",\"code\":\"325-CKZLXW\",\"active\":true,\"tags\":[]},{\"id\":\"ACA58CB5-5659-4BEE-8BC1-FDFB5C873640\",\"code\":\"327-UIM9DH\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"7E72A44A-32E3-4263-92CC-2CD40D13F81A\",\"name\":\"monitor\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"841A4A4D-3C62-4807-9F22-64B5C5E3B29E\",\"products\":[{\"id\":\"050699AE-F90A-42AA-B0C6-E3FA959A622C\",\"code\":\"319-KCS4LS\",\"active\":true,\"tags\":[]},{\"id\":\"85BA87D6-1CE1-4812-87FB-520A37639251\",\"code\":\"874-GXQIH1\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"EBB81B19-0447-4D5C-AFBE-6945749FA1D3\",\"name\":\"circuit\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"841A4A4D-3C62-4807-9F22-64B5C5E3B29E\",\"products\":[{\"id\":\"BD714C95-3A5C-413E-B7D2-4AA58C1EFBE3\",\"code\":\"271-X5JN8K\",\"active\":true,\"tags\":[]},{\"id\":\"BDB46421-8DDC-4539-882B-4C5CB1598FD9\",\"code\":\"464-FK7Y6B\",\"active\":true,\"tags\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"49E063F7-F04D-46F0-9C51-2E2B5B8A4671\",\"productId\":\"BDB46421-8DDC-4539-882B-4C5CB1598FD9\",\"tagId\":7}},{\"id\":13,\"name\":\"Consumer Grade\",\"active\":true,\"labels\":{\"id\":\"5B04FC2E-AE11-4745-885A-C4C171CFFE06\",\"productId\":\"BDB46421-8DDC-4539-882B-4C5CB1598FD9\",\"tagId\":13}}]}],\"childSeries\":[],\"tagMenus\":[{\"id\":7,\"name\":\"Adult\",\"active\":true,\"labels\":{\"id\":\"49E063F7-F04D-46F0-9C51-2E2B5B8A4671\",\"productId\":\"BDB46421-8DDC-4539-882B-4C5CB1598FD9\",\"tagId\":7}}]}],\"tagMenus\":[]}],\"tagMenus\":[]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
+								}
+							]
+						},
+						{
+							"name": "get subTree of a series by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"series",
+										":seriesId"
+									],
+									"variable": [
+										{
+											"key": "seriesId",
+											"value": "D687317C-0A9F-47DA-AAC7-6131AB76A004",
+											"description": "uuidV4"
+										}
+									]
+								},
+								"description": "1. request\n\t* headers: n/a\n\t* parameters: seriesId\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* response: see example\n\t\t1. data: series object\n\t\t\t* 'products' property - a list of associated product objects\n\t\t\t\t* 'photos' property- a list of photo objects without actual photo data\n3. notes:\n\t* primary photos is always listed as photos[0]\n\t* products are sorted by 'code' property"
+							},
+							"response": [
+								{
+									"id": "c6a884c7-e55a-456b-8947-dcc4fe0bd8cb",
+									"name": "get subTree of a series by id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"series",
+												":seriesId"
+											],
+											"variable": [
+												{
+													"key": "seriesId",
+													"value": "D687317C-0A9F-47DA-AAC7-6131AB76A004",
+													"description": "uuidV4"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2369",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 01 Dec 2017 14:15:38 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"941-jbjoJyl+h2GQ1O4IWHcwU83lutI\"",
+											"name": "ETag",
+											"description": "An identifier for a specific version of a resource, often a message digest"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Express",
+											"name": "X-Powered-By",
+											"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+										}
+									],
+									"cookie": [],
+									"responseTime": 71,
+									"body": "{\"data\":[{\"id\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"name\":\"monitor\",\"displaySequence\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"770747AF-5C5E-4B9A-AF01-28DF7D557FD7\",\"products\":[{\"id\":\"4065603F-7149-4C07-A9CC-41F1A232C5CB\",\"code\":\"525-JZEF52\",\"active\":true,\"tags\":[]},{\"id\":\"46D50664-CFEE-4B7E-BA9A-861934E2B3B5\",\"code\":\"849-RXFQJ4\",\"active\":true,\"tags\":[]}],\"childSeries\":[{\"id\":\"57A9B027-CC25-4ACE-B0CD-8B8A1150FC05\",\"name\":\"matrix\",\"displaySequence\":0,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"04F6BC19-4F05-4DE6-B6B2-51FD5C40051F\",\"code\":\"676-EXCZGC\",\"active\":true,\"tags\":[]},{\"id\":\"5E17C7F9-ACB5-471D-94AB-341BAF31F1B3\",\"code\":\"773-D8K8Z9\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"DB5CB1FD-32BA-4294-871E-1815CFA21867\",\"name\":\"pixel\",\"displaySequence\":1,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"9C4C543C-D6FB-4D58-97A4-68EEAD452DBC\",\"code\":\"185-6KYIW9\",\"active\":true,\"tags\":[]},{\"id\":\"777146A0-3F51-4A38-BC8D-EFA43C926ED2\",\"code\":\"412-6WPSGQ\",\"active\":true,\"tags\":[]},{\"id\":\"D2B7B2EF-0A43-4515-B96C-543847947126\",\"code\":\"811-YZT0RJ\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[]},{\"id\":\"3CA6C61D-745C-405B-9F31-ED3997EF99A3\",\"name\":\"system\",\"displaySequence\":2,\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"products\":[{\"id\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"code\":\"292-CBYCHQ\",\"active\":true,\"tags\":[{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"3CA4E70D-F402-4D98-A4E1-98AB34BEA90F\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":0}},{\"id\":11,\"name\":\"New\",\"active\":true,\"labels\":{\"id\":\"18FBFE55-E40A-4D6C-80B7-25E7C04F5B4B\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":11}}]},{\"id\":\"C8801BF1-AB44-4187-83CC-66611EA2B85C\",\"code\":\"583-MT7OZF\",\"active\":true,\"tags\":[]},{\"id\":\"CF337987-63C5-4311-A1EC-E2495754ADA7\",\"code\":\"956-OGAULB\",\"active\":true,\"tags\":[]}],\"childSeries\":[],\"tagMenus\":[{\"id\":0,\"name\":\"Featured\",\"active\":true,\"labels\":{\"id\":\"3CA4E70D-F402-4D98-A4E1-98AB34BEA90F\",\"productId\":\"8399EBAD-129E-4D14-A4CD-B3675A20A973\",\"tagId\":0}}]}],\"tagMenus\":[]}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/D687317C-0A9F-47DA-AAC7-6131AB76A004\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								}
 							]
 						},
@@ -2904,7 +3950,6 @@
 										{
 											"key": "name",
 											"value": "test3",
-											"description": "",
 											"type": "text"
 										}
 									]
@@ -2926,12 +3971,15 @@
 							},
 							"response": [
 								{
-									"id": "c94c6606-8fd9-4090-9be5-d74ff763b938",
+									"id": "34bf1199-947f-4513-abcd-3ef39e133dd0",
 									"name": "insert a new series",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -2988,12 +4036,15 @@
 									"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "0804fc5a-0fcd-4f04-a8f6-713ca81743fa",
+									"id": "da347639-0cbd-4bd2-94e4-eb8ed2ee4f52",
 									"name": "insert a new series with multipart/form-data as content-type",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3061,7 +4112,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId",
 									"protocol": "http",
@@ -3087,12 +4141,15 @@
 							},
 							"response": [
 								{
-									"id": "1eeab69a-d004-4f6e-af97-5cb4660a0f89",
+									"id": "3ba620b3-839d-4bf4-be90-af832ff2de25",
 									"name": "remove series by id",
 									"originalRequest": {
 										"header": [],
 										"body": {
 											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
 											"raw": ""
 										}
 									},
@@ -3160,7 +4217,10 @@
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 									"protocol": "http",
@@ -3214,7 +4274,7 @@
 							},
 							"response": [
 								{
-									"id": "5619b3b6-a06f-44d9-92a0-469723c90bd8",
+									"id": "30fdc0af-f8c2-4e11-9c8f-a18bffb89d15",
 									"name": "if no url query is set",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3224,7 +4284,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -3329,7 +4392,7 @@
 									"body": "{\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Existing elements in the request does not contain any of the expected elements to patch\",\"stack\":\"Error: Existing elements in the request does not contain any of the expected elements to patch\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\series\\\\patchSeries.js:34:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at db.Contacts.findOne.then.contact (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:62:13)\\n    at tryCatcher (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\util.js:16:23)\\n    at Promise._settlePromiseFromHandler (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:512:31)\\n    at Promise._settlePromise (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:569:18)\\n    at Promise._settlePromise0 (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:614:10)\\n    at Promise._settlePromises (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\promise.js:693:18)\\n    at Async._drainQueue (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:133:16)\\n    at Async._drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:143:10)\\n    at Immediate.Async.drainQueues (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\bluebird\\\\js\\\\release\\\\async.js:17:14)\\n    at runCallback (timers.js:789:20)\\n    at tryOnImmediate (timers.js:751:5)\\n    at processImmediate [as _immediateCallback] (timers.js:722:5)\"}}"
 								},
 								{
-									"id": "e2d12ee0-c389-4bc9-a6d4-508c69025e7b",
+									"id": "8a7dc840-d65a-4b0b-8d8f-1705755baaf7",
 									"name": "patching the name (2nd url query does not work)",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3339,7 +4402,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -3444,7 +4510,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?name=matrix3&active=false\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "6d591162-67b6-481f-8fe1-07741b83b238",
+									"id": "d95382a9-b611-409e-8766-4a873d49c903",
 									"name": "patching active state",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3454,7 +4520,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -3559,7 +4628,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?active=true\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "6073ab63-feee-44ca-a540-3d878a1a14c1",
+									"id": "ba824719-79a7-4b69-9b61-e7d73e835bb9",
 									"name": "patching a series order within the same tree",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3569,7 +4638,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -3674,7 +4746,7 @@
 									"body": "{\"data\":{\"id\":\"152EF1FF-A8E4-4F32-935B-F9A2FD8F4689\",\"name\":\"matrix3\",\"order\":0,\"active\":true,\"menuLevel\":1,\"parentSeriesId\":\"562D1B4A-09E4-4950-B658-B659BFE62DF7\"},\"method\":\"patch\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/152EF1FF-A8E4-4F32-935B-F9A2FD8F4689?order=-1\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "c0beeebb-5260-4d72-9530-2ec0f0a2805f",
+									"id": "6c9acf04-cb9e-4891-b068-23b2fe76a4b1",
 									"name": "move a series to root level",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3684,7 +4756,10 @@
 												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwMTcyNzUsImV4cCI6MTUxMjEwMzY3NX0.E7Akc-6teOXRbQLxTK4Y_ahgWmBpWn8GnNb7q141Tlw"
 											}
 										],
-										"body": {},
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
 										"url": {
 											"raw": "http://localhost:9004/reactProductCatalog/api/series/:seriesId?displaySequence=2",
 											"protocol": "http",
@@ -3794,24 +4869,19 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "tokens",
+					"name": "utilities",
 					"item": [
 						{
-							"name": "request for json web token",
+							"name": "get total record counts on models or specified composite dataset",
 							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
+								"method": "GET",
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\":\"admin@nowhere.com\",\n\t\"password\":\"00000000\",\n\t\"botPrevention\":\"\"\n}"
+									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/tokens",
+									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3820,20 +4890,62 @@
 									"path": [
 										"reactProductCatalog",
 										"api",
-										"tokens"
+										"model",
+										":modelReference"
+									],
+									"query": [
+										{
+											"key": "recordCount",
+											"value": "",
+											"equals": false
+										}
+									],
+									"variable": [
+										{
+											"key": "modelReference",
+											"value": "regions"
+										}
 									]
 								},
-								"description": "1. request\n\t* header:\n\t\t1. Content-Type:\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t\t* x-www-form-urlencoded\n\t* body:\n\t\t1. email\n\t\t2. password\n\t\t3. botPrevention\n2. response\n\t* header\n\t* body:\n\t\t1. data: a jwt string containing the following in the payload:\n\t\t\t* id: uuidV4\n\t\t\t* name: string\n\t\t\t* email: email string\n\t\t\t* admin: boolean (indicate if the account has admin privilege or not)\n4. notes:\n\t* request by account with NULL password field will fail\n\t* token is valid for 24 hours"
+								"description": "1. request:\n\t* headers: n/a\n\t* params:\n\t\t- modelReference: can be one of the following (string name of model)\n\t\t\t1. carousels\n\t\t\t2. companies\n\t\t\t3. contacts\n\t\t\t4. countries\n\t\t\t5. labels\n\t\t\t6. photos\n\t\t\t7. products\n\t\t\t8. registrations\n\t\t\t9. series\n\t\t\t10. tags\n\t* queries: 'recordCount' (without value)\n\t* body: n/a\n2. response: data property contains a integer representing the total record count\n3. notes: n/a"
 							},
 							"response": [
 								{
-									"id": "f7431893-8190-4438-8123-916ad8fa8934",
-									"name": "request for json web token by application/json on admin account",
+									"id": "75b3c77b-79fd-4193-9ef3-35e3b71dffea",
+									"name": "get record count of 'photos' table",
 									"originalRequest": {
+										"method": "GET",
 										"header": [],
 										"body": {
 											"mode": "raw",
 											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"model",
+												":modelReference"
+											],
+											"query": [
+												{
+													"key": "recordCount",
+													"value": "",
+													"equals": false
+												}
+											],
+											"variable": [
+												{
+													"key": "modelReference",
+													"value": "photos"
+												}
+											]
 										}
 									},
 									"status": "OK",
@@ -3855,7 +4967,7 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "454",
+											"value": "147",
 											"name": "Content-Length",
 											"description": "The length of the response body in octets (8-bit bytes)"
 										},
@@ -3867,13 +4979,13 @@
 										},
 										{
 											"key": "Date",
-											"value": "Mon, 27 Nov 2017 14:24:22 GMT",
+											"value": "Fri, 01 Dec 2017 13:19:01 GMT",
 											"name": "Date",
 											"description": "The date and time that the message was sent"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"1c6-qBEtOKks3kJqt2rRDCfyn9BWyX0\"",
+											"value": "W/\"93-UO27W2DTSzrZ5GvtUsjZcc+GbhA\"",
 											"name": "ETag",
 											"description": "An identifier for a specific version of a resource, often a message digest"
 										},
@@ -3885,17 +4997,45 @@
 										}
 									],
 									"cookie": [],
-									"responseTime": 53,
-									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZFQTVEN0I2LTVDQTQtNDZBNS04QUU1LTM5Qzc0QjhCQzU3OCIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTE3OTI2NjIsImV4cCI6MTUxMTg3OTA2Mn0.55V30zn8OovrCit98I7MID6X4PqZ_PnWMPGTX7VHris\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+									"responseTime": 91,
+									"body": "{\"data\":517,\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/photos?recordCount\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								},
 								{
-									"id": "f5461938-5075-4af7-8499-ed5d9c880ac8",
-									"name": "request for json web token using json headers",
+									"id": "1be73d71-68f1-4cb4-8bef-2f6cd8ec18bd",
+									"name": "get record count of composite data of 'region' field of 'countries' table",
 									"originalRequest": {
+										"method": "GET",
 										"header": [],
 										"body": {
 											"mode": "raw",
 											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference?recordCount=",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "9004",
+											"path": [
+												"reactProductCatalog",
+												"api",
+												"model",
+												":modelReference"
+											],
+											"query": [
+												{
+													"key": "recordCount",
+													"value": "",
+													"equals": false
+												}
+											],
+											"variable": [
+												{
+													"key": "modelReference",
+													"value": "regions"
+												}
+											]
 										}
 									},
 									"status": "OK",
@@ -3917,7 +5057,7 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "465",
+											"value": "146",
 											"name": "Content-Length",
 											"description": "The length of the response body in octets (8-bit bytes)"
 										},
@@ -3929,13 +5069,13 @@
 										},
 										{
 											"key": "Date",
-											"value": "Thu, 30 Nov 2017 04:34:34 GMT",
+											"value": "Fri, 01 Dec 2017 13:19:57 GMT",
 											"name": "Date",
 											"description": "The date and time that the message was sent"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"1d1-R/0NFlBep+OPd9p5o3UzaN3vVGs\"",
+											"value": "W/\"92-p4BUQd7XwgZNBw1tPE2/Qg4XLwA\"",
 											"name": "ETag",
 											"description": "An identifier for a specific version of a resource, often a message digest"
 										},
@@ -3947,18 +5087,11 @@
 										}
 									],
 									"cookie": [],
-									"responseTime": 44,
-									"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBFRTBBQzkxLUUxNTAtNDIzQy05M0MxLTUwNDYzQzBENkY5RSIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjAxNjQ3NCwiZXhwIjoxNTEyMTAyODc0fQ.4PGlTMlktXrJDOzpEiKypP1TkwWeAtjSPwvs-LMXZ_s\",\"message\":\"account token with admin privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/tokens\",\"statusCode\":200}"
+									"responseTime": 33,
+									"body": "{\"data\":6,\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/model/regions?recordCount\",\"statusCode\":200,\"message\":\"200 OK\"}"
 								}
 							]
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "utilities",
-					"description": "",
-					"item": [
+						},
 						{
 							"name": "common single field patch",
 							"request": {
@@ -3973,7 +5106,10 @@
 										"value": "application/json"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/model/:modelReference/field/:fieldReference",
 									"protocol": "http",
@@ -4004,15 +5140,14 @@
 							},
 							"response": [
 								{
-									"id": "4938c564-d714-465a-8452-08dd73f29c06",
+									"id": "a43b5a4e-16d2-4e78-b8e4-7515c86340cf",
 									"name": "common single field patch",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-access-token",
-												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4",
-												"disabled": false
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkUwQTRGRDdDLUY3N0QtNEY3MC1CQURBLUE2NEM0QTUzMzcwQyIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkBub3doZXJlLmNvbSIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTIwNTMzNTAsImV4cCI6MTUxMjEzOTc1MH0.eZbn6G26u_zubCsc2dOPbTJq1QIAoTTvPScmeLneNa4"
 											},
 											{
 												"key": "Content-Type",

@@ -1,45 +1,90 @@
-var webpack = require('webpack');
-var path = require('path');
+var path = require('path')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var env = require('./src/server/config/eVars')
+const eVars = process.env
+var publicPath = env.HOST + '/' + env.SYS_REF + '/'
+console.log('##' + publicPath)
+var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true'
+var babelPolyfill = require('babel-polyfill')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-var env = process.env
+const extractSass = new ExtractTextPlugin({
+  filename: '[name]-bluma.css'
+});
 
-var publicPath = env.LOCAL_DEV_DOMAIN + ':' + env.PORT;
-var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+let PATHS = {
+  app: path.resolve('./src/client'),
+  assets: path.resolve('./src/client/assets'),
+  build: path.resolve('./dist/public')
+}
 
-var devConfig = {
+module.exports = {
     entry: {
-        app: ['./src/client', hotMiddlewareScript]
-    },
-    output: {
+        app: [
+          'babel-polyfill', 
+          PATHS.app,
+          hotMiddlewareScript
+        ]
+      },
+      output: {
+        path: PATHS.build,
         filename: '[name].js',
-        path: path.resolve('./dist/public'),
-        publicPath: publicPath
-    },
-    devtool: 'source-map',
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    module: {
+        publicPath: publicPath,
+      },
+      module: {
         loaders: [{
-            test: /\.(png|jpg)$/,
-            loader: 'url?limit=8192&context=client&name=[path][name].[ext]'
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          include: PATHS.app,
+          query: {
+            presets: ['es2015', 'react', 'stage-2'],
+          },
+        },{
+          test: /\.css$/,
+          loader: 'style-loader',
         }, {
+          test: /\.(scss|sass)$/,
+          loader: ['style-loader', 'sass-loader'],
+        }, {
+          test: /\.(jpe?g|JPE?G|png|PNG|gif|GIF|svg|SVG|woff|woff2|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'url?limit=1024&name=[sha512:hash:base64:7].[ext]'
+        }],
+        rules: [
+          {
             test: /\.scss$/,
-            loader: 'style!css?sourceMap!resolve-url!sass?sourceMap'
-        }, {
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
+            use: extractSass.extract({
+                use: [{
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader"
+                }],
+                // use style-loader in development 
+                fallback: "style-loader"
+            })
+          }, {
+            test: /\.js$/,
             exclude: /node_modules/,
-            query: {
-              cacheDirectory: true,
-              presets: ['react', 'es2015']
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
             }
-        }]
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
-};
+          }
+        ]
+      },
+      devtool: 'source-map',
 
-module.exports = devConfig;
+      plugins: [
+        //new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+          React: 'react',
+          ReactDOM:'react-dom'
+        }), 
+        extractSass
+      ]
+}
