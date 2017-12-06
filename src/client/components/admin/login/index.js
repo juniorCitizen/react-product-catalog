@@ -29,11 +29,11 @@ class Login extends React.Component {
     }
 
     checkAuth() {
-        const { dispatch, login } = this.props
+        const { dispatch, login, match } = this.props
         const token = window.localStorage["jwt-admin-token"]
         if (token) {
             dispatch(admin_info(jwt_info(token)))
-            this.props.history.push("/admin");
+            this.props.history.push(match.url);
         }
     }
 
@@ -110,7 +110,7 @@ class Login extends React.Component {
         const token = window.localStorage["jwt-admin-token"]
         if (token) {
             dispatch(admin_info(jwt_info(token)))
-            this.props.history.push(match.url + '/admin');
+            this.props.history.push(match.url);
         }
     }
 

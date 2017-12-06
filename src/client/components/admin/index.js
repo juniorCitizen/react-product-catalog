@@ -2,11 +2,13 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { admin_info, admin_logout } from '../../actions'
+import { jwt_info } from '../../lib'
 import Product from './product'
 import Order from './order'
 import Series from './series'
 import Confirm from '../../containers/modal/confirm'
 import Login from './login'
+import User from './user'
 import config from'../../config'
 
 class Admin extends React.Component {
@@ -18,6 +20,7 @@ class Admin extends React.Component {
                 logout: '',
                 order: '',
                 series: '',
+                user: '',
             },
             confirmShow: false,
             confirmMsg: '',
@@ -86,6 +89,9 @@ class Admin extends React.Component {
                                 <li className={select.series}> 
                                     <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
                                 </li>
+                                <li className={select.user}> 
+                                    <Link onClick={this.tabActive.bind(this, 'user')} to={url + "/user"}>帳號管理</Link>
+                                </li>
                                 <li className={select.logout}> 
                                     <a onClick={this.logoutConfirm.bind(this)}>{"登出"}</a>
                                 </li>
@@ -98,6 +104,7 @@ class Admin extends React.Component {
                         <Route path={url + "/product"} component={Product}/>
                         <Route path={url + "/order"} component={Order}/>
                         <Route path={url + "/series"} component={Series}/>
+                        <Route path={url + "/user"} component={User}/>
                     </div>
                 :
                     <Route exact path={url} component={Login}/>

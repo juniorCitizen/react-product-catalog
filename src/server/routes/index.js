@@ -10,7 +10,7 @@ module.exports = express.Router()
         view: 'index',
         data: {
           title: eVars.SYS_REF,
-          faviconSource: `${eVars.APP_ROUTE}/favicon.ico`,
+          faviconSource: `${eVars.APP_ROUTE}/dist/public/favicon.ico`,
           scriptSource: !eVars.devMode
             ? `${eVars.APP_ROUTE}/app.min.js`
             : `${eVars.APP_ROUTE}/app.js`,
