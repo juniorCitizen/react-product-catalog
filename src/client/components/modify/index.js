@@ -42,7 +42,6 @@ class Modify extends React.Component {
     checkAuth() {
         const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
-        console.log(token)
         if (token) {
             dispatch(user_info(jwt_info(token)))
         } else {

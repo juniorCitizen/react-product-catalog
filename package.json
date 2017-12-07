@@ -70,13 +70,15 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
-    "chai": "^3.4.1",
+    "chai": "^4.1.2",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "enzyme": "^3.2.0",
     "enzyme-to-json": "^3.2.2",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.2",
@@ -103,6 +105,7 @@
     "jest": "^21.2.1",
     "jest-junit-reporter": "^1.1.0",
     "less-loader": "^4.0.5",
+    "mocha": "^4.0.1",
     "node-sass": "^4.7.2",
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.2",
@@ -115,9 +118,9 @@
     "source-map-support": "^0.5.0",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.9.1",
+    "webpack": "^3.10.0",
     "webpack-dev-middleware": "^1.12.2",
-    "webpack-dev-server": "^2.9.5",
+    "webpack-dev-server": "^2.9.6",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1",
     "yargs": "^10.0.3"
@@ -128,6 +131,7 @@
     "lint": "eslint --color src *.js *.jsx --cache",
     "lint-backend": "eslint --color src/server src/workflow/gulp .eslintrc.js --cache",
     "watch-server": "cross-env NODE_ENV=development nodemon --config nodemon.dev.json src/server/server.js localhost 9004",
-    "all": "cross-env NODE_ENV=development supervisor -i src/client -w src/server src/server/server.js"
+    "all": "cross-env NODE_ENV=development supervisor -i src/client -w src/server src/server/server.js",
+    "test": "mocha --compilers js:babel-core/register --recursive src/client/test/"
   }
 }
