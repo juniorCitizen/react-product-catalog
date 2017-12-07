@@ -78,12 +78,13 @@ class Login extends React.Component {
     login() {
         const { form, msg } = this.state
         const self = this
+        const url = config.route.contacts.tokens
         if (this.checkSpace()) {
             return
         }
         axios({
             method: 'post',
-            url: config.route.tokens,
+            url: url,
             data: qs.stringify(form),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
