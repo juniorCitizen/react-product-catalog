@@ -16,7 +16,7 @@ const initalState = {
     }
 }
 
-export function login(state = initalState, action) {
+export default function login(state = initalState, action) {
     switch (action.type) {
         case USER_INFO:
             return Object.assign({}, state, {
