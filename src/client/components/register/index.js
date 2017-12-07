@@ -138,7 +138,7 @@ class Register  extends React.Component {
     }
 
     render() {
-        const { auth, form, msg, confirm } = this.state
+        const { auth, form, msg } = this.state
         return (
             <div>
                 <Nav tab="register"/>
@@ -168,7 +168,7 @@ class Register  extends React.Component {
                                     <label className="label">確認密碼</label>
                                     <div className="control">
                                         <input className="input" type="password" placeholder="再次確認密碼"
-                                            value={confirm} onChange={this.inputChange.bind(this, 'confirm')}
+                                            value={form.confirm} onChange={this.inputChange.bind(this, 'confirm')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.confirm}</p>
