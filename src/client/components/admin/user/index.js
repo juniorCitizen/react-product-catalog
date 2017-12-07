@@ -1,4 +1,7 @@
 import React from 'react'
+import axios from 'axios'
+import Form from './form'
+import Confirm from '../../../containers/modal/confirm'
 
 export default class User extends React.Component {
     constructor(props) {
@@ -27,42 +30,42 @@ export default class User extends React.Component {
 
     showAdd() {
         this.setState({
-            showAdd: true,
+            add_show: true,
             s_item: {},
         })
     }
 
     showEdit(item) {
         this.setState({
-            showEdit: true,
+            edit_show: true,
             s_item: item,
         })
     }
 
     showDelete(item) {
         this.setState({
-            showDelete: true,
+            delete_show: true,
             s_item: item,
         })
     }
 
     hideAdd() {
         this.setState({
-            showAdd: false,
+            add_show: false,
             s_item: {},
         })
     }
 
     hideEdit() {
         this.setState({
-            showEdit: false,
+            edit_show: false,
             s_item: {},
         })
     }
 
     hideDelete() {
         this.setState({
-            showDelete: false,
+            delete_show: false,
             s_item: {},
         })
     }
@@ -70,48 +73,6 @@ export default class User extends React.Component {
     searchChange(e) {
         let val = e.target.value
         this.setState({search: val})
-    }
-
-    insertData(item) {
-        axios({
-            method: 'post',
-            url: '',
-            data: null,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
-        .then(function (response) {
-            console.log(response.data)
-            if (response.status === 200) {
-                
-            } else {
-                
-            }
-        }).catch(function (error) {
-            console.log(error)
-        })
-    }
-
-    updateData(item) {
-        axios({
-            method: 'put',
-            url: '',
-            data: null,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
-        .then(function (response) {
-            console.log(response.data)
-            if (response.status === 200) {
-                
-            } else {
-                
-            }
-        }).catch(function (error) {
-            console.log(error)
-        })
     }
 
     deleteData(item) {
@@ -137,6 +98,7 @@ export default class User extends React.Component {
 
     doSearch() {
 
+        return
         axios({
             method: 'get',
             url: '',
@@ -158,7 +120,7 @@ export default class User extends React.Component {
     }
 
     render() {
-        const { list, page, search, add_show, edit_show } = this.state
+        const { list, page, search, add_show, edit_show, delete_show, s_item } = this.state
         return( 
             <div className="container" style={style.container}>
                 <nav className="level" style={style.level}>
@@ -225,6 +187,24 @@ export default class User extends React.Component {
                         ))}
                     </tbody>
                 </table>   
+                {add_show && 
+                    <Form show={add_show} title="新增帳號" type="add"
+                        click_cancel={this.hideAdd.bind(this)} 
+                        item={s_item}
+                    />
+                }
+                {edit_show && 
+                    <Form show={edit_show} title="新增帳號" type="edit"
+                        click_cancel={this.hideEdit.bind(this)} 
+                        item={s_item}
+                    />
+                }
+                {delete_show &&
+                    <Confirm show={delete_show} message="你確定要刪除資料？" 
+                        click_ok={this.deleteData.bind(this)} 
+                        click_cancel={this.hideDelete.bind(this)}
+                    />
+                }
             </div>
         )
     }

@@ -82,6 +82,55 @@ const developmentConfig = merge([
   style.loadSass()
 ])
 
+const newConfig = {
+  entry: { // 打包入口
+    index: "./src/client/index.js",
+    vendor: [  // 将react和react-dom这些单独打包出来，减小打包文件体积
+        "react",
+        "react-dom"
+    ]
+  },
+  output: { // 打包目标路径
+      path: "./dist/public",
+      filename: "[name].js"
+  },
+  resolve: {
+      "extentions": ["", "js"]//当requrie的模块找不到时，添加这些后缀
+  },
+  module: {
+    loaders: [{    // babel loader
+        test: /\.js|.jsx$/,
+        exclude: /node_modules/,
+        loader: "babel",
+        query: {
+          presets: ['es2015', 'react', 'state-1']
+        }
+    }, {
+        test: /\.(scss|sass|css)$/,  // 打包sass和css文件
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader!postcss-loader", {
+        publicPath: '../' // 如果不需要打包成一个css，可以直接{test: /\.css$/,loaders: ['style', 'css'],}
+    })
+    }, {
+        test: /\.(png|jpg|jpng|eot|ttf)$/, // 打包图片和字体文件
+        loader: 'url-loader?limit=8192&name=images/[name].[ext]'
+    }]
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"), //这是之前单独打包出来的react、react-dom等文件
+    new ExtractTextPlugin("app.css"), // 将所有sass/css文件打包成一个index.css文件
+    new webpack.DefinePlugin({
+        "process.env": { 
+            NODE_ENV: JSON.stringify("production") 
+        }
+    }),
+    new webpack.optimize.UglifyJsPlugin({ // 压缩打包后的代码
+        compress: {
+            warnings: false
+        }
+    })
+  ]
+}
+
 module.exports = (env) => {
   if (env === 'production') {
     return merge(commonConfig, productionConfig)

@@ -12,21 +12,15 @@ class Register  extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            auth: false,
             form: {
                 email: '',
                 password: '',
                 confirm: '',
-                mobile: null,
-                website: null,
-                fax: null,
                 name: '',
                 address: '',
                 telephone: '',
-                company: 'My Fake Company',
-                countryId: 'twn',
+                company: '',
                 botPrevention: null,
-                admin: false,
             },
             msg:{
                 email: '',
@@ -58,6 +52,7 @@ class Register  extends React.Component {
         let text = e.target.value
         let { form, msg } = this.state
         form[cont] = text
+        form.company = form.name
         msg[cont] = ''
         this.setState({ form: form })
         this.checkPassword()
@@ -102,7 +97,7 @@ class Register  extends React.Component {
         console.log(form)
         axios({
             method: 'post',
-            url: config.route.register,
+            url: config.route.contacts.register,
             data: qs.stringify(form),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -125,7 +120,7 @@ class Register  extends React.Component {
         const { dispatch } = this.props
         const token = window.localStorage["jwt-token"]
         dispatch(user_info(jwt_info(token)))
-        this.props.history.push(config.sys_ref + "/");
+        this.props.history.push(config.sys_ref + "/")
     }
 
     submitError(str) {
@@ -138,7 +133,7 @@ class Register  extends React.Component {
     }
 
     render() {
-        const { auth, form, msg, confirm } = this.state
+        const { form, msg, isLoading } = this.state
         return (
             <div>
                 <Nav tab="register"/>
@@ -168,7 +163,7 @@ class Register  extends React.Component {
                                     <label className="label">確認密碼</label>
                                     <div className="control">
                                         <input className="input" type="password" placeholder="再次確認密碼"
-                                            value={confirm} onChange={this.inputChange.bind(this, 'confirm')}
+                                            value={form.confirm} onChange={this.inputChange.bind(this, 'confirm')}
                                         />
                                     </div>
                                     <p className="help is-danger">{msg.confirm}</p>

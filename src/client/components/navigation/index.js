@@ -65,7 +65,6 @@ class Navigation extends React.Component {
         const { select, confirmShow, confirmMsg } = this.state
         const { login } = this.props
         const auth = login.user_info.auth
-        console.log(login.user_info)
         return( 
             <div>
                 <div className="container">
