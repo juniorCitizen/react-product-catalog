@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../assets/bulma.scss'
 import config from '../config'
+import { user_info } from '../actions'
+import { jwt_info } from '../lib'
 
 import Content from './content'
 import Product from './product'
@@ -21,7 +23,19 @@ class Main extends React.Component {
         super(props)
         this.state = {}
     }
-    //paap
+
+    componentDidMount() {
+        this.checkLogin()
+    }
+
+    checkLogin() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (token) {
+            dispatch(user_info(jwt_info(token)))
+        }
+    }
+
     render() {
         const { login } = this.props
         const auth = login.user_info.auth
