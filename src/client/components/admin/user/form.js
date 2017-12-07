@@ -28,7 +28,17 @@ export default class Form extends React.Component {
         form[cont] = text
         msg[cont] = ''
         this.setState({ form: form })
-        //this.checkPassword()
+        this.checkPassword()
+    }
+
+    checkPassword() {
+        let { form, msg } = this.state
+        if (form.password !== form.confirm) {
+           msg.confirm = '密碼與確認密碼不一致'
+           this.setState({msg: msg}) 
+           return
+        }
+        this.setState({msg: msg})
     }
 
     checkedChange(e) {
