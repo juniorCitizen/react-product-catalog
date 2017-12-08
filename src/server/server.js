@@ -30,9 +30,7 @@ let preStartupInitSequence = [
 logging.console('系統上線前置啟動模組初始化...')
 Promise.each( // 依序執行服務原件的啟動程序
   preStartupInitSequence,
-  (preStartupMessage = '') => {
-    logging.console(preStartupMessage)
-  })
+  (preStartupMessage = '') => { logging.console(preStartupMessage) })
   .then(() => {
     // ///////////////////
     // Express 框架啟動配置
@@ -132,9 +130,8 @@ Promise.each( // 依序執行服務原件的啟動程序
       return Promise
         .each(
           postStartupInitSequence,
-          (postStartupMessage) => {
-            logging.console(postStartupMessage)
-          })
+          (postStartupMessage) => { logging.console(postStartupMessage) }
+        )
         .catch(logging.reject)
     })
   })
@@ -148,9 +145,9 @@ Promise.each( // 依序執行服務原件的啟動程序
 // //////////////////////
 process.on('unhandledRejection', (error, promise) => {
   logging.error(error, '發現未處理的 Promise Rejection')
-  logging.warning(promise)
+  return logging.warning(promise)
 })
 
 process.on('uncaughtException', (error) => {
-  logging.error(error, '發生未預期 exception !!!')
+  return logging.error(error, '發生未預期 exception !!!')
 })
