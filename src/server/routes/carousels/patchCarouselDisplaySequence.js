@@ -2,14 +2,16 @@ const Promise = require('bluebird')
 
 const db = require('../../controllers/database')
 
+const setQueryBaseOptions = require('../../middlewares/setQueryBaseOptions')('carousels')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
-  validateJwt({ admin: true }),
+  setQueryBaseOptions,
+  validateJwt({ staff: true }),
   (req, res, next) => {
     let targetCarouselId = parseInt(req.params.carouselId)
     let originalPosition = null
-    let targetPosition = parseInt(req.params.displaySequence)
+    let targetPosition = parseInt(req.query.displaySequence)
     return db.Carousels
       .findById(targetCarouselId) // find the target record
       .then(target => {

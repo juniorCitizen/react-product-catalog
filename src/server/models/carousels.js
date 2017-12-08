@@ -30,11 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     data: {
       type: DataTypes.BLOB,
       allowNull: false
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
     }
   }, {
     name: {

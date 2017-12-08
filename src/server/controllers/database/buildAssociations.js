@@ -12,6 +12,11 @@ module.exports = (db) => {
   db.PurchaseOrders.belongsTo(db.Contacts, injectOptions('contactId', 'id'))
   db.PurchaseOrders.belongsToMany(db.Products, injectOptions('purchaseOrderId', 'id', db.OrderDetails))
   db.Products.belongsToMany(db.PurchaseOrders, injectOptions('productId', 'id', db.OrderDetails))
+
+  db.OrderDetails.belongsTo(db.PurchaseOrders, injectOptions('purchaseOrderId', 'id'))
+  db.PurchaseOrders.hasMany(db.OrderDetails, injectOptions('purchaseOrderId', 'id'))
+  db.OrderDetails.belongsTo(db.Products, injectOptions('productId', 'id'))
+  db.Products.hasMany(db.OrderDetails, injectOptions('productId', 'id'))
   // product information relationships
   db.Series.hasMany(db.Products, injectOptions('seriesId', 'id'))
   db.Products.belongsTo(db.Series, injectOptions('seriesId', 'id'))

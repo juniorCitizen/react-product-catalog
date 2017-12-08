@@ -1,4 +1,9 @@
+const eVars = require('../../config/eVars')
+
 const db = require('../../controllers/database')
+
+const setQueryBaseOptions = require('../../middlewares/setQueryBaseOptions')('carousels')
+const paginationProcessing = require('../../middlewares/paginationProcessing')
 
 // free icons from https://icons8.com/icon/pack/free-icons/all
 const placeHolder = `<?xml version="1.0" encoding="utf-8"?>
@@ -11,15 +16,31 @@ const placeHolder = `<?xml version="1.0" encoding="utf-8"?>
 </svg>`
 
 module.exports = [
+  setQueryBaseOptions,
   (req, res, next) => {
-    let id = req.params.photoId.toUpperCase()
-    return db.Photos
-      .findById(id)
-      .then(photo => {
-        req.resImage = photo === null
-          ? { mimeType: 'image/svg+xml', data: Buffer.from(placeHolder) }
-          : { mimeType: photo.mimeType, data: Buffer.from(photo.data) }
+    return db.Carousels
+      .findAndCountAll()
+      .then(result => {
+        req.dataSourceRecordCount = result.count
         next()
+        return Promise.resolve()
+      })
+  },
+  paginationProcessing,
+  (req, res, next) => {
+    return db.Carousels
+      .findAll(req[eVars.SYS_REF].queryOptions)
+      .then(data => {
+        // if pagination url query is set, only get one photo
+        if ('linkHeader' in req) {
+          req.resImage = data.length === 0
+            ? { mimeType: 'image/svg+xml', data: Buffer.from(placeHolder) }
+            : { mimeType: data[0].mimeType, data: Buffer.from(data[0].data) }
+          next()
+        } else { // get a list of existing carousel without photo data
+          req.resJson = { data }
+          next()
+        }
         return Promise.resolve()
       })
       .catch(error => next(error))

@@ -5,41 +5,24 @@ const db = require('../../controllers/database')
 const encryption = require('../../controllers/encryption')
 const eVars = require('../../config/eVars')
 
+const botPrevention = require('../../middlewares/botPrevention')
+const enforceBodyFieldPresence = require('../../middlewares/enforceBodyFieldPresence')
 const validatePasswordFormat = require('../../middlewares/validatePasswordFormat')
 
 module.exports = [
   multer().none(),
-  loginInfoPresence,
+  enforceBodyFieldPresence(['email', 'password', 'botPrevention']),
   validatePasswordFormat,
   botPrevention,
   accountDiscovery,
   checkPassword
 ]
 
-function loginInfoPresence (req, res, next) {
-  if (
-    !('email' in req.body) ||
-    !('password' in req.body) ||
-    !('botPrevention' in req.body)
-  ) {
-    res.status(400)
-    let error = new Error('incomplete login information')
-    return next(error)
-  }
-  return next()
-}
-
-function botPrevention (req, res, next) {
-  if (req.body.botPrevention === '') return next()
-  res.status(401)
-  let error = new Error('Bot-like activity detected')
-  return next(error)
-}
-
 function accountDiscovery (req, res, next) {
   // find the account
   return db.Contacts.findOne({
-    where: { email: req.body.email.toLowerCase() }
+    where: { email: req.body.email.toLowerCase() },
+    include: { model: db.Companies }
   }).then(contact => {
     if (!contact) { // account isn't found
       res.status(401)
@@ -66,9 +49,14 @@ function checkPassword (req, res, next) {
       email: req.accountData.email,
       admin: req.accountData.admin
     }, eVars.PASS_PHRASE, { expiresIn: '24h' })
+    let status = req.accountData.admin
+      ? 'admin'
+      : req.accountData.company.host
+        ? 'staff'
+        : 'user'
     req.resJson = {
       data: token,
-      message: `account token with ${(req.accountData.admin) ? 'admin' : 'user'} privilege is supplied for 24 hours`
+      message: `account token with ${status} privilege is supplied for 24 hours`
     }
     return next()
   } else {
