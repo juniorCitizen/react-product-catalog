@@ -36,9 +36,31 @@ Promise.each( // 依序執行服務原件的啟動程序
     // Express 框架啟動配置
     // ///////////////////
 
+    var webpack = require('webpack'),
+    webpackDevMiddleware = require('webpack-dev-middleware'),
+    webpackHotMiddleware = require('webpack-hot-middleware'),
+    webpackDevConfig = require('../../webpack.config.js')
+
     // ////////////// Express Framework /////////////////////////////////////
     logging.console('初始化 Express 框架...')
     const app = express()
+
+    // ////////////// webpack ///////////////////////////////////////////////
+    var webpack = require('webpack')
+    var config = require('../../webpack.config.js')
+    var compiler = webpack(config)
+
+    // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
+    app.use(require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: config.output.publicPath,
+      stats: {
+        colors: true
+      }
+    }))
+
+    // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
+    app.use(require('webpack-hot-middleware')(compiler));
 
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
@@ -71,11 +93,11 @@ Promise.each( // 依序執行服務原件的啟動程序
       },
       assets: {
         router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}`,
+        endpoint: `/${eVars.SYS_REF}/dist/public`,
         path: (() => {
           return eVars.devMode
-            ? path.resolve('./src/client/assets')
-            : path.resolve('./dist/assets')
+            ? path.resolve('./dist/public')
+            : path.resolve('./dist/public')
         })()
       },
       client: {
@@ -83,7 +105,6 @@ Promise.each( // 依序執行服務原件的啟動程序
         endpoint: `/${eVars.SYS_REF}`
       }
     }
-
     // declaration of routing and endpoint handlers
     logging.console('路由端點宣告...')
     // set up api endpoints
@@ -96,7 +117,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     logging.console(`public assets 實體檔案路徑宣告完成... ${ROUTERS.assets.path}`)
     // setup SPA index.html endpoint
     app.use(ROUTERS.client.endpoint, ROUTERS.client.router)
-    ROUTERS.client.router.use('/', require('./routes/index'))
+    ROUTERS.client.router.use('*', require('./routes/index'))    
     logging.console(`index.html 端點宣告完成... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////

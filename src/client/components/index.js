@@ -2,6 +2,9 @@ import React from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../assets/bulma.scss'
+import config from '../config'
+import { user_info } from '../actions'
+import { jwt_info } from '../lib'
 
 import Content from './content'
 import Product from './product'
@@ -21,6 +24,18 @@ class Main extends React.Component {
         this.state = {}
     }
 
+    componentDidMount() {
+        this.checkLogin()
+    }
+
+    checkLogin() {
+        const { dispatch, login } = this.props
+        const token = window.localStorage["jwt-token"]
+        if (token) {
+            dispatch(user_info(jwt_info(token)))
+        }
+    }
+
     render() {
         const { login } = this.props
         const auth = login.user_info.auth
@@ -28,14 +43,14 @@ class Main extends React.Component {
             <BrowserRouter>  
                 <div>            
                     <Logo />
-                    <Route exact path="/" component={Product}/>
-                    <Route path="/product/detail/:id" component={Detail}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/contact" component={Contact}/>
-                    {auth && <Route path="/order" component={Order}/>}
-                    {auth && <Route path="/modify" component={Modify}/>}
-                    <Route path="/admin" component={Admin}/>
+                    <Route exact path={config.sys_ref + "/"} component={Product}/>
+                    <Route path={config.sys_ref + "/product/detail/:id"} component={Detail}/>
+                    <Route path={config.sys_ref + "/login"} component={Login}/>
+                    <Route path={config.sys_ref + "/register"} component={Register}/>
+                    <Route path={config.sys_ref + "/contact"} component={Contact}/>
+                    {auth && <Route path={config.sys_ref + "/order"} component={Order}/>}
+                    {auth && <Route path={config.sys_ref + "/modify"} component={Modify}/>}
+                    <Route path={config.sys_ref + "/admin"} component={Admin}/>
                 </div>
             </BrowserRouter>
         )

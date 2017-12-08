@@ -1,11 +1,17 @@
-const api = 'http://localhost:9004/reactProductCatalog/api'
-
+//const env = require('../../src/server/config/eVars')
+//const env = process.env
+const sys_ref = '/reactProductCatalog'
+const api = '/reactProductCatalog/api'
 export default {
+    sys_ref: sys_ref,
     api: api,
     route: {
+        contacts: {
+            contacts: api + '/contacts/',
+            register: api + '/contacts',
+            tokens: api + '/tokens'
+        },
         productMenu: api + '/productMenus',
-        register: api + '/contacts',
-        tokens: api + '/tokens',
     },
     project: {
         name: 'reactProductCatalog',
