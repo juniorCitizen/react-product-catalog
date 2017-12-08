@@ -32,7 +32,10 @@ class Admin extends React.Component {
   }
 
   componentDidMount() {
-    let { tab } = this.props
+    const { location, match } = this.props
+    let lonum = location.pathname.length
+    let manum = match.url.length
+    let tab = location.pathname.substr(manum + 1, lonum - manum)
     this.tabActive(tab)
   }
 
@@ -46,6 +49,7 @@ class Admin extends React.Component {
 
   tabActive(tab) {
     let select = this.state
+    console.log(tab)
     Object.keys(select).map((key) => {
       select[key] = ''
     })
@@ -70,10 +74,10 @@ class Admin extends React.Component {
 
   render() {
     const { select, confirmShow, confirmMsg } = this.state
-    const { login, match } = this.props
-    console.log(this.props)
+    const { login, params, match } = this.props
     const url = match.url
     const auth = login.admin_info.auth
+    console.log(this.props)
     return (
       <div>
         {auth &&
@@ -101,10 +105,10 @@ class Admin extends React.Component {
         }
         {auth
           ? <div className="container">
-            <Route path={url + '/product'} component={Product} />
-            <Route path={url + '/order'} component={Order} />
-            <Route path={url + '/series'} component={Series} />
-            <Route path={url + '/user'} component={User} />
+            <Route path={url + '/product'} component={Product}/>
+            <Route path={url + '/order'} component={Order}/>
+            <Route path={url + '/series'} component={Series}/>
+            <Route path={url + '/user'} component={User}/>
           </div>
           : <Route exact path={url} component={Login} />
         }
@@ -120,9 +124,10 @@ class Admin extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { login } = state
+  const { login, params } = state
   return {
-    login
+    login,
+    params,
   }
 }
 
