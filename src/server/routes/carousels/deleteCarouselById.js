@@ -3,14 +3,19 @@ const db = require('../../controllers/database')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
-  validateJwt({ admin: true }),
+  validateJwt({ staff: true }),
   (req, res, next) => {
+    let targetCarouselId = parseInt(req.params.carouselId)
     return db.sequelize.transaction((trx) => {
       let trxObj = { transaction: trx }
       return db.Carousels
-        .findById(parseInt(req.params.carouselId), trxObj)
+        .findById(targetCarouselId, trxObj)
         .then(targetCarousel => {
-          if (!targetCarousel) return Promise.resolve(0) // id does not exist
+          if (!targetCarousel) { // id does not exist
+            res.status(400)
+            let error = new Error(`carouselId ${targetCarouselId} does not exist`)
+            return Promise.reject(error)
+          }
           return db.Carousels
             .update({
               displaySequence: db.sequelize.literal('`displaySequence`-1')
@@ -19,10 +24,10 @@ module.exports = [
               transaction: trx
             })
             .then(() => targetCarousel.destroy(trxObj))
-            .then(() => Promise.resolve(1))
         })
-    }).then((data) => {
-      req.resJson = { data }
+    }).then(() => {
+      let message = `carouselId ${targetCarouselId} removed successfully`
+      req.resJson = { message }
       next()
       return Promise.resolve()
     }).catch(error => next(error))

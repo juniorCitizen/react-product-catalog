@@ -2,30 +2,27 @@ const express = require('express')
 
 const eVars = require('../config/eVars')
 
-const db = require('../controllers/database')
 const logging = require('../controllers/logging')
-const routerResponse = require('../controllers/routerResponse')
 
-const botPrevention = require('../middlewares/botPrevention')
-// const notImplemented = require('../middlewares/notImplemented')
+const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
+
+API_ROUTER.use((req, res, next) => {
+  req[eVars.SYS_REF] = {}
+  next()
+})
 
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
 API_ROUTER.route('/carousels')
+  .get(...require('./carousels/getCarousel')) // get a carousel image data by displaySequence
   .post(...require('./carousels/insertCarousel')) // insert a carousel image
-API_ROUTER.route('/carousels/:displaySequence')
-  .get(...require('./carousels/getCarouselBySequence')) // get a carousel image data by displaySequence
 API_ROUTER.route('/carousels/:carouselId')
-  .patch(...require('./carousels/patchCarousel')) // patching carousel record property
   .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
-API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
-  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
-API_ROUTER.route('/carousels/:carouselId/primary')
-  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
+  .patch(...require('./carousels/patchCarouselDisplaySequence')) // update displaySequence of carousels
 
 API_ROUTER.route('/contacts')
   .post(...require('./contacts/addContact')) // add a contact with company information
@@ -65,6 +62,13 @@ API_ROUTER.route('/products/:productId/tags/:tagId')
 
 API_ROUTER.route('/productMenus')
   .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
+
+API_ROUTER.route('/purchaseOrders')
+  .post(...require('./purchaseOrders/insertPurchaseOrder')) // insert new purchase order
+API_ROUTER.route('/contacts/:contactId/purchaseOrders/:purchaseOrderId')
+  .get(...require('./purchaseOrders/getPurchaseOrderById')) // get purchase order by purchaseOrderId
+  .delete(notImplemented)
+
 API_ROUTER.route('/series')
   .get(...require('./series/getSeries')) // get product listing by tree structure (root level)
   .post(...require('./series/insertSeries')) // insert a new series
@@ -115,138 +119,8 @@ API_ROUTER.route('/tokens')
 // /////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////
-// Registrations **
+// Registrations
 // /////////////////////////////////////////////////////
-API_ROUTER
-  .post('/', botPrevention, registration)
-  .get('/', (req, res) => {
-    db.Registrations
-      .findAll({ order: ['name'] })
-      .then((registrationRecords) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: registrationRecords
-        })
-      })
-      .catch((error) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 500,
-          error: error,
-          message: 'GET /api/registration errored'
-        })
-      })
-  })
-  .get('/byCountryId', (req, res) => {
-    let queryFilter = {
-      where: { id: req.query.countryId },
-      include: [{ model: db.Registrations }],
-      order: [[db.Registrations, 'name']]
-    }
-    db.Countries
-      .findAll(queryFilter)
-      .then((regRecordsByCountry) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 200,
-          data: regRecordsByCountry
-        })
-      })
-      .catch((error) => {
-        return routerResponse.json({
-          req: req,
-          res: res,
-          statusCode: 500,
-          error: error,
-          message: 'GET /api/registration/byCountryId errored'
-        })
-      })
-  })
-  .post('/productRequest', botPrevention, productRequest)
-
-function registration (req, res) {
-  db.Registrations
-    .create(req.body)
-    .then((registration) => {
-      return routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 200,
-        data: registration
-      })
-    })
-    .catch((error) => {
-      return routerResponse.json({
-        req: req,
-        res: res,
-        statusCode: 500,
-        error: error,
-        message: 'POST /api/registration'
-      })
-    })
-}
-
-function productRequest (req, res) {
-  return db.sequelize
-    .transaction((trx) => {
-      let trxObj = { transaction: trx }
-      return db.Registrations
-        .create(req.body, trxObj)
-        .then((newRegistrationRecord) => {
-          let insertProductInfoRequestRecords = []
-          req.body.interestedProducts.map((interestedProductId) => {
-            insertProductInfoRequestRecords.push(
-              db.InterestedProducts.create({
-                registrationId: newRegistrationRecord.id,
-                productId: interestedProductId
-              }, trxObj)
-            )
-          })
-          return Promise
-            .all(insertProductInfoRequestRecords)
-            .then(() => {
-              return db.Registrations.findById(newRegistrationRecord.id, trxObj)
-            })
-            .catch((error) => {
-              console.log(error.name)
-              console.log(error.message)
-              console.log(error.stack)
-              return Promise.reject(error)
-            })
-        })
-        .catch((error) => {
-          console.log(error.name)
-          console.log(error.message)
-          console.log(error.stack)
-          return Promise.reject(error)
-        })
-    })
-    .then((newRegistrationRecord) => {
-      return routerResponse.json({
-        pendingResponse: res,
-        originalRequest: req,
-        statusCode: 200,
-        success: true,
-        data: newRegistrationRecord
-      })
-    })
-    .catch((error) => {
-      console.log(error.name)
-      console.log(error.message)
-      console.log(error.stack)
-      return routerResponse.json({
-        pendingResponse: res,
-        originalRequest: req,
-        statusCode: 500,
-        success: false,
-        error: error
-      })
-    })
-}
 
 // /////////////////////////////////////////////////////
 // Series

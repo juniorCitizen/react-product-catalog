@@ -10,6 +10,9 @@ module.exports = (req, res, next) => {
 
   // get total record count of dataset
   let recordCount = req.dataSourceRecordCount
+
+  if (recordCount === 0) return next()
+
   // determine per_page value
   let perPage = (() => {
     return parseInt(req.query.per_page) > req.dataSourceRecordCount
@@ -76,8 +79,10 @@ module.exports = (req, res, next) => {
       }
     }
   })
+
   req.queryOptions.limit = perPage
   req.queryOptions.offset = perPage * (currentPage - 1)
+
   // put link header into the res object
   res.set('Link', formatLinkHeader(req.linkHeader))
   return next()

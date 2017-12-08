@@ -24,7 +24,7 @@ const modelLookup = {
   tags: 'Tags'
 }
 
-const normalizeId = {
+const normalizedId = {
   carousels: id => parseInt(id),
   companies: id => id.toUpperCase(),
   contacts: id => id.toUpperCase(),
@@ -51,7 +51,7 @@ module.exports = (req, res, next) => {
     let recordId = req.body.id
     req.patchingData = {
       model: modelLookup[modelReference],
-      id: normalizeId[modelReference](recordId),
+      id: normalizedId[modelReference](recordId),
       field: fieldReference,
       value: req.body.value || null
     }

@@ -19,7 +19,7 @@ module.exports = [
         return record.save()
       })
       .then(() => db[model].findById(id))
-      .then((data) => {
+      .then(data => {
         req.resJson = { data }
         next()
         return Promise.resolve()

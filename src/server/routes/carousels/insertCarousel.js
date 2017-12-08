@@ -18,7 +18,7 @@ const db = require('../../controllers/database')
 const validateJwt = require('../../middlewares/validateJwt')
 
 module.exports = [
-  validateJwt({ admin: true }),
+  validateJwt({ staff: true }),
   uploads.single('image'),
   (req, res, next) => {
     return db.Carousels
@@ -28,32 +28,23 @@ module.exports = [
         return fs
           .readFile(uploadedImage.path)
           .then(bufferedImage => Promise.resolve(processExif(bufferedImage)))
-          .then(async photoData => db.Carousels.create({
-            id: await nextAvailableId(),
-            displaySequence: await nextAvailableValueInSequence(),
-            originalName: uploadedImage.originalname,
-            encoding: uploadedImage.encoding,
-            mimeType: uploadedImage.mimetype,
-            size: uploadedImage.size,
-            data: photoData,
-            active: true
-          }))
+          .then(async photoData => db.Carousels
+            .create({
+              id: await nextAvailableId(),
+              displaySequence: await nextAvailableValueInSequence(),
+              originalName: uploadedImage.originalname,
+              encoding: uploadedImage.encoding,
+              mimeType: uploadedImage.mimetype,
+              size: uploadedImage.size,
+              data: photoData
+            }))
       })
       .then(newCarousel => {
-        req.resJson = {
-          data: {
-            id: newCarousel.id,
-            displaySequence: newCarousel.displaySequence,
-            originalName: newCarousel.originalName,
-            encoding: newCarousel.encoding,
-            mimeType: newCarousel.mimeType,
-            size: newCarousel.size,
-            active: newCarousel.active
-          }
-        }
+        req.resJson = { data: newCarousel.displaySequence + 1 }
         next()
         return del(['./uploads/*'])
       })
+      .then(() => Promise.resolve())
       .catch(error => next(error))
   }
 ]
@@ -89,46 +80,4 @@ function nextAvailableValueInSequence () {
     .findAndCountAll()
     .then(result => Promise.resolve(result.count))
     .catch(error => Promise.reject(error))
-  // deprecated
-  //   let nextAvailableValueInSequence = 0
-  //   return db.Carousels
-  //     .findAll()
-  //     .map(carousels => carousels.displaySequence)
-  //     .then(sequenceList => {
-  //       // loop through and find the next available displaySequence value
-  //       while (sequenceList.indexOf(nextAvailableValueInSequence) !== -1) {
-  //         nextAvailableValueInSequence++
-  //       }
-  //       return Promise.resolve(nextAvailableValueInSequence)
-  //     })
-  //     .catch(error => Promise.reject(error))
 }
-
-// deprecated
-// function prepImageData (req, res, next) {
-//   let uploadedImage = req.file
-//   if (!uploadedImage) {
-//     res.status(400)
-//     let error = new Error('No image uploaded')
-//     return next(error)
-//   }
-//   return fs
-//     .readFile(uploadedImage.path)
-//     .then(async bufferedImage => {
-//       fs.remove(uploadedImage.path)
-//         .catch(error => logging.error(error, 'carousel temp file removal failure...'))
-//       req.imageData = {
-//         id: await nextAvailableId(),
-//         displaySequence: await nextAvailableValueInSequence(),
-//         primary: false,
-//         originalName: uploadedImage.originalname,
-//         encoding: uploadedImage.encoding,
-//         mimeType: uploadedImage.mimetype,
-//         size: uploadedImage.size,
-//         data: Buffer.from(piexif.remove(bufferedImage.toString('binary')), 'binary')
-//       }
-//       next()
-//       return Promise.resolve()
-//     })
-//     .catch(error => next(error))
-// }

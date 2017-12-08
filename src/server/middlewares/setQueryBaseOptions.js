@@ -1,10 +1,17 @@
 const baseOptions = {
-  countries: {
-    attributes: { exclude: ['flagSvg'] },
-    order: ['region', 'name']
+  carousels: (req) => {
+    return (('per_page' in req.query) && ('page' in req.query))
+      ? { attributes: ['data', 'mimeType'] }
+      : { attributes: { exclude: ['data'] }, order: ['displaySequence'] }
   },
-  products: { order: ['code'] },
-  series: { order: ['displaySequence'] }
+  countries: () => {
+    return {
+      attributes: { exclude: ['flagSvg'] },
+      order: ['region', 'name']
+    }
+  },
+  products: () => { return { order: ['code'] } },
+  series: () => { return { order: ['displaySequence'] } }
 }
 
 module.exports = (modelReference) => {
@@ -15,7 +22,7 @@ module.exports = (modelReference) => {
       error.message = `資料表模板 ${modelReference} 基礎查詢選項尚未設置`
       return next(error)
     }
-    req.queryOptions = baseOptions[modelReference]
+    req.queryOptions = baseOptions[modelReference](req)
     return next()
   }
 }

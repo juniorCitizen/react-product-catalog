@@ -30,7 +30,6 @@ function accountCreation () {
       return getPassword()
     })
     .then(response => {
-      console.log(`password: ${response}`)
       encrypted = encryption.sha512(response, encryption.saltGen(16))
       return finalConfirmation()
     })
