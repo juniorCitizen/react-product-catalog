@@ -1,5 +1,4 @@
 import React from 'react'
-import Nav from '../navigation'
 
 export default class Order extends React.Component {
   constructor(props) {

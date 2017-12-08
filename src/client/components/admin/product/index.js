@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import Series from '../../product/series'
 import Form from './form'
-import Nav from '../navigation'
 import Confirm from '../../../containers/modal/confirm'
 
 export default class Product extends React.Component {
