@@ -78,7 +78,7 @@ class Login extends React.Component {
         }
         axios({
             method: 'post',
-            url: config.route.tokens,
+            url: config.route.contacts.tokens,
             data: qs.stringify(form),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

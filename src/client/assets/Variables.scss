@@ -162,17 +162,17 @@ $size-large: $size-4 ;
 // 4. Lists and maps
 
 $colors: (
-    "white": ($white, $black), 
-    "black": ($black, $white), 
-    "light": ($light, $light-invert), 
-    "dark": ($dark, $dark-invert), 
-    "primary": ($primary, $primary-invert), 
-    "info": ($info, $info-invert), 
-    "success": ($success, $success-invert), 
-    "warning": ($warning, $warning-invert), 
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "newBlue": ($newBlue, $newBlue-invert),
-    'orange': ($orange, $orange-invert) 
+    'orange': ($orange, $orange-invert)
 ) ;
 
 $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 ;
@@ -180,8 +180,8 @@ $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 ;
 $box-padding: 1rem;
 
 // customer
-// table 
-table tr.is-success td, table tr.is-success th{
+// table
+table tr.is-success td, table tr.is-success th {
     border-color: $success;
 }
 
@@ -207,7 +207,7 @@ table.is-orange tr td, table.is-orange tr th {
 
 .menu-list ul li a.is-active {
     background: #3393fa;
-} 
+}
 
 .modal-alert {
     top: -200px;

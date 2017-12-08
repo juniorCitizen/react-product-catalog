@@ -9,122 +9,121 @@ import Series from './series'
 import Confirm from '../../containers/modal/confirm'
 import Login from './login'
 import User from './user'
-import config from'../../config'
+import config from '../../config'
 
 class Admin extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            select: {
-                product: '',
-                logout: '',
-                order: '',
-                series: '',
-                user: '',
-            },
-            confirmShow: false,
-            confirmMsg: '',
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      select: {
+        product: '',
+        logout: '',
+        order: '',
+        series: '',
+        user: ''
+      },
+      confirmShow: false,
+      confirmMsg: ''
     }
+  }
 
-    componentWillMount() {
-        this.checkAdmin()
-    }
+  componentWillMount() {
+    this.checkAdmin()
+  }
 
-    componentDidMount() {
-        let { tab } = this.props
-        this.tabActive(tab)
-    }
+  componentDidMount() {
+    let { tab } = this.props
+    this.tabActive(tab)
+  }
 
-    checkAdmin() {
-        const { dispatch, login } = this.props
-        const token = window.localStorage["jwt-admin-token"]
-        if (token) {
-            dispatch(admin_info(jwt_info(token)))
-        }
+  checkAdmin() {
+    const { dispatch, login } = this.props
+    const token = window.localStorage['jwt-admin-token']
+    if (token) {
+      dispatch(admin_info(jwt_info(token)))
     }
+  }
 
-    tabActive(tab) {
-        let select = this.state
-        Object.keys(select).map((key) => {
-            select[key] = ''
-        })
-        select[tab] = 'is-active'
-        this.setState({select: select})
-    }
+  tabActive(tab) {
+    let select = this.state
+    Object.keys(select).map((key) => {
+      select[key] = ''
+    })
+    select[tab] = 'is-active'
+    this.setState({ select: select })
+  }
 
-    logoutConfirm() {
-        this.setState({
-            confirmShow: true,
-            confirmMsg: '您確定要登出嗎？'
-        })
-    }
+  logoutConfirm() {
+    this.setState({
+      confirmShow: true,
+      confirmMsg: '您確定要登出嗎？'
+    })
+  }
 
-    logout() {
-        const { dispatch } = this.props
-        window.localStorage["jwt-admin-token"] = ''
-        dispatch(admin_logout())
-        this.setState({confirmShow: false})
-        this.props.history.push(config.sys_ref + "/admin");
-    }
-    
-    render() {
-        const { select, confirmShow, confirmMsg } = this.state
-        const { login, match } = this.props
-        console.log(this.props)
-        const url = match.url
-        const auth = login.admin_info.auth
-        return( 
-            <div>
-                {auth &&
-                    <div className="container">
-                        <div className="tabs is-large">
-                            <ul>
-                                <li className={select.product}> 
-                                    <Link onClick={this.tabActive.bind(this, 'product')} to={url + "/product"}>產品管理</Link>
-                                </li>
-                                <li className={select.order}> 
-                                    <Link onClick={this.tabActive.bind(this, 'order')} to={url + "/order"}>訂單管理</Link>
-                                </li>
-                                <li className={select.series}> 
-                                    <Link onClick={this.tabActive.bind(this, 'series')} to={url + "/series"}>產品分類管理</Link>
-                                </li>
-                                <li className={select.user}> 
-                                    <Link onClick={this.tabActive.bind(this, 'user')} to={url + "/user"}>帳號管理</Link>
-                                </li>
-                                <li className={select.logout}> 
-                                    <a onClick={this.logoutConfirm.bind(this)}>{"登出"}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                }
-                {auth ?
-                    <div className="container">
-                        <Route path={url + "/product"} component={Product}/>
-                        <Route path={url + "/order"} component={Order}/>
-                        <Route path={url + "/series"} component={Series}/>
-                        <Route path={url + "/user"} component={User}/>
-                    </div>
-                :
-                    <Route exact path={url} component={Login}/>
-                }
-                <Confirm 
-                    show={confirmShow}
-                    message={confirmMsg} 
-                    click_ok={this.logout.bind(this)} 
-                    click_cancel={() => {this.setState({confirmShow: false})}} 
-                /> 
+  logout() {
+    const { dispatch } = this.props
+    window.localStorage['jwt-admin-token'] = ''
+    dispatch(admin_logout())
+    this.setState({ confirmShow: false })
+    this.props.history.push(config.sys_ref + '/admin')
+  }
+
+  render() {
+    const { select, confirmShow, confirmMsg } = this.state
+    const { login, match } = this.props
+    console.log(this.props)
+    const url = match.url
+    const auth = login.admin_info.auth
+    return (
+      <div>
+        {auth &&
+          <div className="container">
+            <div className="tabs is-large">
+              <ul>
+                <li className={select.product}>
+                  <Link onClick={this.tabActive.bind(this, 'product')} to={url + '/product'}>產品管理</Link>
+                </li>
+                <li className={select.order}>
+                  <Link onClick={this.tabActive.bind(this, 'order')} to={url + '/order'}>訂單管理</Link>
+                </li>
+                <li className={select.series}>
+                  <Link onClick={this.tabActive.bind(this, 'series')} to={url + '/series'}>產品分類管理</Link>
+                </li>
+                <li className={select.user}>
+                  <Link onClick={this.tabActive.bind(this, 'user')} to={url + '/user'}>帳號管理</Link>
+                </li>
+                <li className={select.logout}>
+                  <a onClick={this.logoutConfirm.bind(this)}>{'登出'}</a>
+                </li>
+              </ul>
             </div>
-        )
-    }
+          </div>
+        }
+        {auth
+          ? <div className="container">
+            <Route path={url + '/product'} component={Product} />
+            <Route path={url + '/order'} component={Order} />
+            <Route path={url + '/series'} component={Series} />
+            <Route path={url + '/user'} component={User} />
+          </div>
+          : <Route exact path={url} component={Login} />
+        }
+        <Confirm
+          show={confirmShow}
+          message={confirmMsg}
+          click_ok={this.logout.bind(this)}
+          click_cancel={() => { this.setState({ confirmShow: false }) }}
+        />
+      </div>
+    )
+  }
 }
 
 function mapStateToProps(state) {
-	const { login } = state
-	return {
-		login
-	}
+  const { login } = state
+  return {
+    login
+  }
 }
 
 export default connect(mapStateToProps)(Admin)
