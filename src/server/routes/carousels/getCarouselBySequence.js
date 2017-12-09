@@ -2,14 +2,14 @@ const db = require('../../controllers/database')
 
 module.exports = (() => {
   return [(req, res, next) => {
-    let id = parseInt(req.params.carouselId)
+    let displaySequence = parseInt(req.params.displaySequence)
     return db.Carousels
-      .findById(id)
+      .findOne({ where: { displaySequence } })
       .then(carousel => {
         if (carousel === null) {
           req.resJson = {
             data: null,
-            message: `carousel (id: ${id}) is missing`
+            message: `carousel at displaySequence '${displaySequence}' is missing`
           }
         } else {
           req.resImage = {

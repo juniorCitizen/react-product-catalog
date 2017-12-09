@@ -7,7 +7,7 @@ const logging = require('../controllers/logging')
 const routerResponse = require('../controllers/routerResponse')
 
 const botPrevention = require('../middlewares/botPrevention')
-const notImplemented = require('../middlewares/notImplemented')
+// const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
@@ -15,28 +15,27 @@ const API_ROUTER = express.Router()
 // /////////////////////////////////////////////////////
 // working API endpoints
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/tokens')
-  .post(...require('./tokens/processJwtRequest')) // login
+API_ROUTER.route('/carousels')
+  .post(...require('./carousels/insertCarousel')) // insert a carousel image
+API_ROUTER.route('/carousels/:displaySequence')
+  .get(...require('./carousels/getCarouselBySequence')) // get a carousel image data by displaySequence
+API_ROUTER.route('/carousels/:carouselId')
+  .patch(...require('./carousels/patchCarousel')) // patching carousel record property
+  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
+API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
+  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
+API_ROUTER.route('/carousels/:carouselId/primary')
+  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
+
 API_ROUTER.route('/contacts')
-  .get(notImplemented) // get contacts **
-  .post(...require('./contacts/addContact')) // add a contact
-API_ROUTER.route('/companies')
-  .get(...require('./companies/getCompanies')) // get company dataset complete with country and staff info
-API_ROUTER.route('/companies/:companyId')
-API_ROUTER.route('/companies/:companyId/contacts')
-API_ROUTER.route('/companies/:companyId/contacts/:contactId')
+  .post(...require('./contacts/addContact')) // add a contact with company information
 API_ROUTER.route('/contacts/:contactId')
-  .get(notImplemented) // get contact by id **
-  .patch(notImplemented) // update contact
-  .delete(notImplemented) // delete contact by id **
-API_ROUTER.route('/contacts/:contactId/companies/:companyId')
-  .patch(notImplemented) // assign contact to a company **
-API_ROUTER.route('/contacts/:contactId/password')
-  .patch(notImplemented) // change password **
-API_ROUTER.route('/contacts/:contactId/admin')
-  .patch(notImplemented) // admin status toggle **
-API_ROUTER.route('/contacts/:contactId/name/:name')
-  .patch(notImplemented) // change name **
+  .get(...require('./contacts/getContactById')) // get contact by id
+API_ROUTER.route('/companies')
+  .get(...require('./companies/getHostCompanies')) // get project hosting companies dataset complete with country and staff info
+
+API_ROUTER.route('/countries')
+  .get(...require('./countries/getCountries')) // get countries
 
 API_ROUTER.route('/photos')
   .post(...require('./photos/uploadPhotos')) // batch upload photos
@@ -60,7 +59,6 @@ API_ROUTER.route('/products/:productId')
 API_ROUTER.route('/products/:productId/series/:seriesId')
   .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
   .delete(...require('./products/removeProductAssociation').fromSeries) // disassociate a product from a series
-
 API_ROUTER.route('/products/:productId/tags/:tagId')
   .post(...require('./products/assignProductAssociation').toTags) // tagging a product
   .delete(...require('./products/removeProductAssociation').fromTag) // untag a product
@@ -78,59 +76,35 @@ API_ROUTER.route('/series/:seriesId/products')
   .post(...require('./products/insertProduct')) // insert product record and associate with seriesId
 
 API_ROUTER.route('/model/:modelReference')
-  .get(...require('./utilities/getRecordCount'))
+  .get(...require('./utilities/getRecordCount')) // get record count of a particular model/table
 API_ROUTER.route('/model/:modelReference/field/:fieldReference')
-  .patch(...require('./utilities/patchRecordField'))
-
-// /////////////////////////////////////////////////////
-// Utilities
-// /////////////////////////////////////////////////////
+  .patch(...require('./utilities/patchRecordField')) // common patching route for general data file update
+API_ROUTER.route('/productSearch')
+  .get(...require('./utilities/productSearch')) // seach product listing
+API_ROUTER.route('/regions')
+  .get(...require('./countries/getRegions')) // get world regions
+API_ROUTER.route('/tokens')
+  .post(...require('./tokens/processJwtRequest')) // login
 
 // /////////////////////////////////////////////////////
 // Carousels
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/carousels')
-  .get(notImplemented)
-  .post(...require('./carousels/insert')) // insert a carousel image
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
-API_ROUTER.route('/carousels/:carouselId')
-  .get(...require('./carousels/selectById')) // get a carousel image data by id
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(...require('./carousels/deleteById')) // remove a carousel image by id
-API_ROUTER.route('/carousels/:carouselId/displaySequence/:displaySequence')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./carousels/updateDisplaySequenceById')) // update displaySequence of carousels
-  .delete(notImplemented)
-API_ROUTER.route('/carousels/:carouselId/primary')
-  .get(notImplemented)
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(...require('./carousels/updatePrimaryStateById')) // set primary state of one carousel to true
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
-// Companies **
+// Companies
+// /////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////
+// Contacts
 // /////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////
 // Countries
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/countries')
-  .get(...require('./countries/getCountries')) // get countries
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
-// ///////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////
 // Photos
-// ///////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////
 // Products
@@ -139,12 +113,6 @@ API_ROUTER.route('/countries')
 // /////////////////////////////////////////////////////
 // Regions
 // /////////////////////////////////////////////////////
-API_ROUTER.route('/regions')
-  .get(...require('./countries/getRegions')) // get regions
-  .post(notImplemented)
-  .put(notImplemented)
-  .patch(notImplemented)
-  .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Registrations **
@@ -289,7 +257,7 @@ function productRequest (req, res) {
 // /////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////
-// Company and contact information
+// Utilities
 // /////////////////////////////////////////////////////
 
 // ///////////////////////////////////////////////////////
