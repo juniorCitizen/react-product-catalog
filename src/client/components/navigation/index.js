@@ -82,11 +82,12 @@ class Navigation extends React.Component {
                                     <Link onClick={this.tabActive.bind(this, 'login')} to={config.sys_ref + "/login"}>會員登入</Link>
                                 </li>
                             }
-                            {auth ?
+                            {auth &&
                                 <li className={select.modify}>
                                     <Link onClick={this.tabActive.bind(this, 'modify')} to={config.sys_ref + "/modify"}>修改會員資料</Link>
                                 </li>
-                            :
+                            }
+                            {false &&
                                 <li className={select.register}>
                                     <Link onClick={this.tabActive.bind(this, 'register')} to={config.sys_ref + "/register"}>會員註冊</Link>
                                 </li>
@@ -95,7 +96,7 @@ class Navigation extends React.Component {
                             <li className={select.contact}>
                                 <Link onClick={this.tabActive.bind(this, 'contact')} to={config.sys_ref + "/contact"}>聯絡我們</Link>
                             </li>
-                            {auth && 
+                            {false && 
                                 <li className={select.order}>
                                     <Link onClick={this.tabActive.bind(this, 'order')} to={config.sys_ref + "/order"}>訂購清單</Link>
                                 </li>

@@ -131,7 +131,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">電子郵件</label>
                                     <div className="control">
-                                        <input className="input" type="text" placeholder="請輸入電子郵件"  maxLength="20"
+                                        <input className="input" type="text" placeholder="請輸入電子郵件"  maxLength="40"
                                             value={form.email} onChange={this.inputChange.bind(this, 'email')}
                                         />
                                     </div>
@@ -140,7 +140,7 @@ class Login extends React.Component {
                                 <div className="field">
                                     <label className="label">密碼</label>
                                     <div className="control">
-                                        <input className="input" type="password" placeholder="請輸入密碼"  maxLength="20"
+                                        <input className="input" type="password" placeholder="請輸入密碼"  maxLength="40"
                                             value={form.password} onChange={this.inputChange.bind(this, 'password')}
                                         />
                                     </div>

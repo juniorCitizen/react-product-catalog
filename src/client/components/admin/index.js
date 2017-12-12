@@ -87,9 +87,9 @@ class Admin extends React.Component {
                 <li className={select.product}>
                   <Link onClick={this.tabActive.bind(this, 'product')} to={url + '/product'}>產品管理</Link>
                 </li>
-                <li className={select.order}>
+                {false && <li className={select.order}>
                   <Link onClick={this.tabActive.bind(this, 'order')} to={url + '/order'}>訂單管理</Link>
-                </li>
+                </li>}
                 <li className={select.series}>
                   <Link onClick={this.tabActive.bind(this, 'series')} to={url + '/series'}>產品分類管理</Link>
                 </li>
