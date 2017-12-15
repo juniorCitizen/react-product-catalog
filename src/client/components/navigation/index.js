@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { user_info, user_logout } from '../../actions'
@@ -43,8 +44,34 @@ class Navigation extends React.Component {
         const { dispatch, login } = this.props
         const token = window.localStorage["jwt-token"]
         if (token) {
-            dispatch(user_info(jwt_info(token)))
+            //dispatch(user_info(jwt_info(token)))
+            this.checkToken(token)
         }
+    }
+
+    checkToken(token) {
+        const { dispatch, login } = this.props
+        const self = this
+        const user = jwt_info(token)
+        axios({
+            method: 'get',
+            url: config.route.contacts.contacts + user.id,
+            data: null,
+            headers: {
+                'x-access-token': token,
+            }
+        })
+        .then(function (response) {
+            dispatch(user_info(jwt_info(token)))
+        }).catch(function (response, error) {
+            if (response.request.status === 401) {
+                window.localStorage["jwt-token"] = ''
+                dispatch(user_logout())
+                window.location = config.sys_ref + '/'
+            } else {
+                console.log(error)
+            }
+        })
     }
 
     logoutConfirm() {

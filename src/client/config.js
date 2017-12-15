@@ -12,6 +12,12 @@ export default {
             tokens: api + '/tokens'
         },
         productMenu: api + '/productMenus',
+        products: {
+            detail: api + '/products/',
+        },
+        photos: {
+            getPhoto: api + '/photos/',
+        },
     },
     project: {
         name: 'reactProductCatalog',

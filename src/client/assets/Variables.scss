@@ -106,6 +106,7 @@ $blue-invert: findColorInvert($blue) ;
 $purple-invert: findColorInvert($purple) ;
 $red-invert: findColorInvert($red) ;
 $newBlue-invert: findColorInvert($newBlue) ;
+$bg-danger-invert: findColorInvert($bg-danger) ;
 
 $primary-invert: $blue-invert ;
 $info-invert: $turquoise-invert ;
@@ -172,7 +173,8 @@ $colors: (
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "newBlue": ($newBlue, $newBlue-invert),
-    'orange': ($orange, $orange-invert)
+    'orange': ($orange, $orange-invert),
+    "bg-danger": ($bg-danger, $bg-danger-invert)
 ) ;
 
 $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 ;
@@ -215,6 +217,7 @@ table.is-orange tr td, table.is-orange tr th {
 
 .modal-large {
     background: #f7f7f7;
+    padding: 5px;
     margin: 0 20px;
     //max-height: calc(100vh - 160px);
     overflow: auto;
@@ -224,7 +227,8 @@ table.is-orange tr td, table.is-orange tr th {
 
 @media screen and (min-width: 769px), print {
     .modal-large {
-        padding: 10px;
+        background: #f7f7f7;
+        padding: 5px;
         margin: 0 auto;
         //max-height: calc(100vh - 40px);
         height: 600px;

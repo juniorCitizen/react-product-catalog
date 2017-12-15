@@ -76,8 +76,8 @@ class Modify extends React.Component {
         let form = this.state.form
         form.email = data.email
         form.name = data.name
-        form.address = data.company.address
-        form.telephone = data.company.telephone
+        form.address = data.company['address'] 
+        form.telephone = data.company['telephone']
         this.setState({form: form})
     }
 
