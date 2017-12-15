@@ -87,7 +87,7 @@ class Block extends React.Component {
                         <div className="v-image-box">
                             <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png"/>
                             <div className="v-image-label">
-                                product descirption
+                                {data[i].id}
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ class Block extends React.Component {
                                 <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
                                     <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png"/>
                                     <div className="v-image-label">
-                                        product descirption
+                                        {item.id}
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { set_series_code } from '../../actions'
+import { set_series_code, update_products } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
@@ -19,7 +19,7 @@ class Series extends React.Component {
     }
 
     selectSeries(id) {
-        const { dispatch } = this.props;
+        const { dispatch } = this.props
         dispatch(set_series_code(id))
         let series = this.state.series
         series = this.setSeriesActive(series, id)
@@ -29,16 +29,26 @@ class Series extends React.Component {
     }
 
     setSeriesActive(series, id) {
+        let self = this
         series && series.map((item) => {
             item.selected = item.id === id
+            if (item.selected) {
+                this.updateProducts(item.products)
+            }
             item.childSeries && item.childSeries.map((sub) => {
                 if (sub.id === id) {
                     item.selected = true
+                    this.updateProducts(sub.products)
                 }
             })
             item.childSeries = this.setSeriesActive(item.childSeries, id)
         })
         return series
+    }
+
+    updateProducts(list) {
+        const { dispatch } = this.props
+        dispatch(update_products(list))
     }
 
     getSeries() {
