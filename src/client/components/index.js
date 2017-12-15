@@ -37,8 +37,9 @@ class Main extends React.Component {
     }
 
     render() {
-        const { login } = this.props
+        const { login, order } = this.props
         const auth = login.user_info.auth
+        const inquiry = order.order.length > 0 ? true: false
         return(  
             <BrowserRouter>  
                 <div>            
@@ -46,9 +47,9 @@ class Main extends React.Component {
                     <Route exact path={config.sys_ref + "/"} component={Product}/>
                     <Route path={config.sys_ref + "/product/detail/:id"} component={Detail}/>
                     <Route path={config.sys_ref + "/login"} component={Login}/>
-                    <Route path={config.sys_ref + "/register"} component={Register}/>
+                    {inquiry && <Route path={config.sys_ref + "/register"} component={Register}/>}
                     <Route path={config.sys_ref + "/contact"} component={Contact}/>
-                    {auth && <Route path={config.sys_ref + "/order"} component={Order}/>}
+                    <Route path={config.sys_ref + "/order"} component={Order}/>
                     {auth && <Route path={config.sys_ref + "/modify"} component={Modify}/>}
                     <Route path={config.sys_ref + "/admin"} component={Admin}/>
                 </div>
@@ -58,9 +59,10 @@ class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-	const { login } = state
+	const { login, order } = state
 	return {
-		login
+        login,
+        order,
 	}
 }
 
