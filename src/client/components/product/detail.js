@@ -13,8 +13,7 @@ class Detail extends React.Component {
   }
 
   componentDidMount() {
-    const { info } = this.props
-    //this.getProductInfo(info.id)
+    
   }
 
   getProductInfo(id) {

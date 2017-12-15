@@ -90,8 +90,9 @@ class Navigation extends React.Component {
 
     render() {
         const { select, confirmShow, confirmMsg } = this.state
-        const { login } = this.props
+        const { login, order } = this.props
         const auth = login.user_info.auth
+        const inquiry = order.order.length > 0 ? true: false
         return( 
             <div>
                 <div className="container">
@@ -100,6 +101,23 @@ class Navigation extends React.Component {
                             <li className={select.product}> 
                                 <Link onClick={this.tabActive.bind(this, 'product')} to={config.sys_ref + "/"}>產品列表</Link>
                             </li>
+                            {inquiry && 
+                                <li className={select.order}>
+                                    <Link className="button is-large is-orange" style={{color: "#FFF"}} onClick={this.tabActive.bind(this, 'order')} 
+                                        to={config.sys_ref + "/order"}
+                                    >
+                                        詢價單
+                                    </Link>
+                                </li>
+                            }
+                             <li className={select.contact}>
+                                <Link onClick={this.tabActive.bind(this, 'contact')} to={config.sys_ref + "/contact"}>聯絡我們</Link>
+                            </li>
+                            {auth &&
+                                <li className={select.modify}>
+                                    <Link onClick={this.tabActive.bind(this, 'modify')} to={config.sys_ref + "/modify"}>修改會員資料</Link>
+                                </li>
+                            }
                             {auth ? 
                                 <li className={select.logout}>
                                     <a onClick={this.logoutConfirm.bind(this)}>會員登出</a>
@@ -109,23 +127,10 @@ class Navigation extends React.Component {
                                     <Link onClick={this.tabActive.bind(this, 'login')} to={config.sys_ref + "/login"}>會員登入</Link>
                                 </li>
                             }
-                            {auth &&
-                                <li className={select.modify}>
-                                    <Link onClick={this.tabActive.bind(this, 'modify')} to={config.sys_ref + "/modify"}>修改會員資料</Link>
-                                </li>
-                            }
+                            
                             {false &&
                                 <li className={select.register}>
                                     <Link onClick={this.tabActive.bind(this, 'register')} to={config.sys_ref + "/register"}>會員註冊</Link>
-                                </li>
-                            }
-                            
-                            <li className={select.contact}>
-                                <Link onClick={this.tabActive.bind(this, 'contact')} to={config.sys_ref + "/contact"}>聯絡我們</Link>
-                            </li>
-                            {false && 
-                                <li className={select.order}>
-                                    <Link onClick={this.tabActive.bind(this, 'order')} to={config.sys_ref + "/order"}>訂購清單</Link>
                                 </li>
                             }
                         </ul>
@@ -143,9 +148,10 @@ class Navigation extends React.Component {
 }
 
 function mapStateToProps(state) {
-	const { login } = state
+	const { login, order } = state
 	return {
-		login
+        login,
+        order,
 	}
 }
 
