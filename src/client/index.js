@@ -7,11 +7,11 @@ import configureStore from './store/configureStore'
 const store = configureStore();
 
 ReactDOM.render((
-    <Provider store={store}>
-        <BrowserRouter> 
-            <Main />
-        </BrowserRouter> 
-    </Provider>
-), app) 
+  <Provider store={store}>
+    <BrowserRouter>
+      <Main />
+    </BrowserRouter>
+  </Provider>
+), app)
 
 

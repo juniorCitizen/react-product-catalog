@@ -1,19 +1,19 @@
 import {
-    UPDATE_PRODUCTS,
+  UPDATE_PRODUCTS,
 } from '../constants/actionType'
 
 const initalState = {
-    products: [],
+  products: [],
 }
 
 export default function product(state = initalState, action) {
-    switch (action.type) {
-        case UPDATE_PRODUCTS:
-            return Object.assign({}, state, {
-                products: action.products
-            })
-        default:
-            return state
-    }
+  switch (action.type) {
+    case UPDATE_PRODUCTS:
+      return Object.assign({}, state, {
+        products: action.products
+      })
+    default:
+      return state
+  }
 }
 
