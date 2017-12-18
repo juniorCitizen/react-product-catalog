@@ -1,5 +1,4 @@
 import React from 'react'
-import SortableTree from 'react-sortable-tree';
 
 export default class Series extends React.Component {
   constructor(props) {
@@ -10,41 +9,147 @@ export default class Series extends React.Component {
   }
 
   componentDidMount() {
-    let list = initData(data)
-    this.setState({list: list})
+    let list = this.resetData(data)
+    this.setState({ list: list })
+
   }
-  
+
+  resetData(data) {
+    let arr = []
+    data.map((item) => {
+      item.tco = item.length
+      arr.push(item)
+      if (item.childSeries !== []) {
+        item.childSeries.map((sitem) => {
+          sitem.tco = item.childSeries.length
+          arr.push(sitem)
+        })
+      }
+    })
+    return arr
+  }
+
+  searchSeries(parId, disSeq) {
+    let { list } = this.state
+    let id = null
+    list.map((item) => {
+      let main = this.getSeriesId(item, parId, disSeq)
+      if (main !== null) {
+        id = main
+      } else {
+        item.childSeries.map((subitem) => {
+          let sub = this.getSeriesId(subitem, parId, disSeq)
+          if (sub !== null) {
+            id = sub
+          }
+        })
+      }
+    })
+    return id
+  }
+
+  getSeriesId(item, parId, disSeq) {
+    let id = null
+    if (item.parentSeriesId === parId) {
+      if (item.displaySequence === disSeq) {
+        id = item.id
+      }
+    }
+    return id
+  }
+
+  onAdd(item) {
+
+  }
+
+  onLeft(item) {
+    let id = this.searchSeries(item.parentSeriesId, item.displaySequence)
+  }
+
+  onUp(item) {
+
+  }
+
+  onRight(item) {
+
+  }
+
+  onDown(item) {
+
+  }
+
+  onDelete(item) {
+
+  }
 
   render() {
     const { list } = this.state
-    console.log(list)
     return (
       <div>
         <div className="container" style={style.container}>
-          <div style={{ height: 700 }}>
-            <SortableTree
-              treeData={list}
-              onChange={list => this.setState({ list })}
-              maxDepth={2}
-            />
-          </div>
+          <table className="table is-bordered is-hoverable is-narrow is-fullwidth">
+            <thead>
+              <tr>
+                <th>分類名稱</th>
+                <th width="269">
+                  <button className="button" style={style.tableButton} >
+                    <span className="icon has-text-info">
+                      <i className="fa fa-plus fa-lg"></i>
+                    </span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.menuLevel ? '----' + item.name : '' + item.name}</td>
+                  <td>
+                    <button className="button" disabled={item.menuLevel === 1} style={style.tableButton} >
+                      <span className="icon has-text-info">
+                        <i className="fa fa-plus fa-lg"></i>
+                      </span>
+                    </button>
+                    <button className="button" disabled={item.menuLevel === 0} style={style.tableButton} onClick={this.onLeft.bind(this, item)}>
+                      <span className="icon">
+                        <i className="fa fa-arrow-left fa-lg"></i>
+                      </span>
+                    </button>
+                    <button className="button" disabled={item.displaySequence === 0} style={style.tableButton}>
+                      <span className="icon">
+                        <i className="fa fa-arrow-up fa-lg"></i>
+                      </span>
+                    </button>
+                    <button className="button" disabled={item.displaySequence + 1 === item.tco} style={style.tableButton}>
+                      <span className="icon">
+                        <i className="fa fa-arrow-down fa-lg"></i>
+                      </span>
+                    </button>
+                    <button className="button" disabled={item.childSeries.length > 0 || item.menuLevel === 1} style={style.tableButton}>
+                      <span className="icon">
+                        <i className="fa fa-arrow-right fa-lg"></i>
+                      </span>
+                    </button>
+                    <button className="button" disabled={item.childSeries.length > 0} style={style.tableButton}>
+                      <span className="icon has-text-danger">
+                        <i className="fa fa-trash fa-lg"></i>
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     )
   }
 }
 
-function initData(obj) {
-  return obj.map((item) => {
-    item.childSeries = initData(item.childSeries)
-    item.title = item.name
-    item.expanded = true
-    item.children = item.childSeries
-    return item
-  })
-}
-
 const style = {
+  tableButton: {
+    margin: '0px 3px 0 3px'
+  },
   container: {
     padding: '10px'
   },

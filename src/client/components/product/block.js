@@ -104,7 +104,7 @@ class Block extends React.Component {
 
 const style = {
   images: {
-    margin: '3px',
+    margin: '2px',
     padding: '0',
     height: '256px',
     width: '256px',
