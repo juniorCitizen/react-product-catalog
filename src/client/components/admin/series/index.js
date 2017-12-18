@@ -25,6 +25,7 @@ export default class Series extends React.Component {
             <SortableTree
               treeData={list}
               onChange={list => this.setState({ list })}
+              maxDepth={2}
             />
           </div>
         </div>
