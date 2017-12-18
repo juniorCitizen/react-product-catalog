@@ -49,7 +49,6 @@ class Admin extends React.Component {
 
   tabActive(tab) {
     let select = this.state
-    console.log(tab)
     Object.keys(select).map((key) => {
       select[key] = ''
     })
@@ -77,7 +76,6 @@ class Admin extends React.Component {
     const { login, params, match } = this.props
     const url = match.url
     const auth = login.admin_info.auth
-    console.log(this.props)
     return (
       <div>
         {auth &&
