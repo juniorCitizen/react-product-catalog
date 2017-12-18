@@ -3,7 +3,7 @@ import faker from 'faker'
 const logging = require('../../../server/controllers/logging')
 
 const PRODUCTS_PER_SERIES_FLOOR = 2
-const PRODUCTS_PER_SERIES_CEILING = 3
+const PRODUCTS_PER_SERIES_CEILING = 30
 
 module.exports = (Products, Series) => {
   return Series
