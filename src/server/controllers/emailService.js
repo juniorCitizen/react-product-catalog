@@ -127,6 +127,9 @@ function createContactEmail (purchaseOrder) {
   let emailOptions = {
     from: `"${eVars.ADMIN}" <${eVars.ADMIN_EMAIL}>`,
     replyTo: eVars.ADMIN_EMAIL,
+    // /////////////////////////////////////////////////////
+    // in development mode, all emails are directed to admin
+    // /////////////////////////////////////////////////////
     to: [eVars.devMode ? eVars.ADMIN_EMAIL : purchaseOrder.contact.email],
     subject: `有關 ${eVars.SYS_REF} 訂單編號: ${purchaseOrder.id}`,
     text: JSON.stringify(purchaseOrder), // temporary
