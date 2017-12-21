@@ -5,7 +5,7 @@ const db = require('../../controllers/database')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
-const Op = db.sequelize.Op
+const Op = db.Sequelize.Op
 
 module.exports = {
   // route handlers
