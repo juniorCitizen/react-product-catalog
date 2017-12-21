@@ -31,6 +31,7 @@ function redirect (req, res, next) {
     return res
       .status(res.statusCode || 301)
       .redirect(req.resRedirect)
+      .end()
   } else {
     return next()
   }
@@ -61,6 +62,7 @@ function file (req, res, next) {
     .status(res.statusCode || 200)
     .type(req.resFile.mimeType)
     .sendFile(req.resFile.filePath)
+    .end()
 }
 
 /*
@@ -79,11 +81,12 @@ function image (req, res, next) {
     .status(res.statusCode || 200)
     .type(req.resImage.mimeType)
     .send(req.resImage.data)
+    .end()
 }
 
 /*
 sends a json response
-set res.status and add req.resJson object to active this middleware
+set res.status and add req.resJson object to activate this middleware
 example:
 res.status(200)
 req.resJson = {
@@ -102,7 +105,7 @@ function json (req, res, next) {
   if ('linkHeader' in req) {
     Object.assign(req.resJson, {
       pagination: {
-        totalRecords: req.dataSourceRecordCount,
+        totalRecords: req.linkHeader.last.per_page * req.linkHeader.last.page,
         totalPages: req.linkHeader.last.page,
         perPage: req.linkHeader.last.per_page,
         currentPage: req.linkHeader.self.page,
@@ -118,6 +121,7 @@ function json (req, res, next) {
     .status(res.statusCode || 200)
     .type('application/json;charset=utf-8')
     .json(req.resJson)
+    .end()
 }
 
 /*
@@ -140,6 +144,7 @@ function template (req, res, next) {
     .status(res.statusCode || 200)
     .type('text/html;charset=utf-8')
     .render(req.resTemplate.view, req.resTemplate.data || {})
+    .end()
 }
 
 // router specific global error handler

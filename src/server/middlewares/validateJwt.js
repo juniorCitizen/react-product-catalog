@@ -42,7 +42,8 @@ module.exports = ({ none = false, admin = false, staff = false, user = false } =
 
       // token decoded, search contact list for account that at least matches in email
       return db.Contacts
-        .findOne({ where: { email: decodedToken.email }, include: { model: db.Companies } })
+        .scope({ method: ['credentialsOnly'] })
+        .findOne({ where: { email: decodedToken.email } })
         .then(contact => {
           // token carries an email that's not registered in the contact records
           if (!contact) {
@@ -53,7 +54,8 @@ module.exports = ({ none = false, admin = false, staff = false, user = false } =
           }
 
           // determine and set user privilege level
-          let privilege = req[eVars.SYS_REF].privilege = contact.admin ? 3 : contact.company.host ? 2 : 1
+          let privilege = req.userPrivilege = contact.admin ? 3 : contact.company.host ? 2 : 1
+          req.registeredUser = contact
 
           // matching account has admin privilege, allow access immediately
           if (privilege === 3) {
@@ -64,7 +66,7 @@ module.exports = ({ none = false, admin = false, staff = false, user = false } =
           // if admin privilege is required
           if (admin && (privilege < 3)) {
             res.status(403)
-            let error = new Error('Only admin accounts are authorizded')
+            let error = new Error('Only admin accounts are authorized')
             next(error)
             return Promise.resolve()
           }

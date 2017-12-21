@@ -31,8 +31,7 @@ module.exports = (Carousels) => {
                   encoding: '7bit',
                   mimeType: 'image/jpeg',
                   size: fs.statSync(path.join(carouselPhotoPath, photoFileName)).size,
-                  data,
-                  active: true
+                  data
                 })
               })
           }),

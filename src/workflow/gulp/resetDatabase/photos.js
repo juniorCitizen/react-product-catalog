@@ -51,7 +51,6 @@ module.exports = (Photos, Products, Series) => {
             mimeType: 'image/jpeg',
             size: fs.statSync(path.join(photoPath, fileNames[photoIndex])).size,
             data: null,
-            active: true,
             productId
           })
         })
@@ -73,7 +72,10 @@ module.exports = (Photos, Products, Series) => {
     // assign seriesId to photos accordingly
     .then(() => Series.findAll()) // get series recordset from database
     // extract a list of series id's and map to an array of product search queries
-    .map(series => Products.findOne({ where: { seriesId: series.id } }))
+    .map(series => Products.findOne({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+      where: { seriesId: series.id }
+    }))
     // runs the queries
     .then(searchQueries => Promise.all(searchQueries))
     .map(product => Photos.update(

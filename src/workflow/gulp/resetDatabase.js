@@ -40,7 +40,7 @@ module.exports = () => {
     db.sequelize = new db.Sequelize(dbConfig)
     return db.sequelize
       // error out if connection not verified
-      .authenticate().catch(logging.reject).catch(done)
+      .authenticate().catch(logging.reject).catch(error => done(error))
       // disable foreign key constraint
       .then(() => disableConstraint(dbConfig.dialect))
       // init by force resetting
@@ -51,15 +51,15 @@ module.exports = () => {
       })
       // re-enable database constraint
       .then(() => enableConstraint(dbConfig.dialect))
+      .then(() => countries(db.Countries))
       .then(() => {
         if (!seed) {
           logging.warning('資料庫淨空完畢，未載入資料...')
           return done()
         } else {
           logging.warning('裝載基礎/預設資料...')
-          return carousels(db.Carousels)
-            .then(() => countries(db.Countries))
-            .then(() => companies(db.Companies, db.Contacts))
+          return companies(db.Companies, db.Contacts)
+            .then(() => carousels(db.Carousels))
             .then(() => series(db.Series))
             .then(() => products(db.Products, db.Series))
             .then(() => photos(db.Photos, db.Products, db.Series))
