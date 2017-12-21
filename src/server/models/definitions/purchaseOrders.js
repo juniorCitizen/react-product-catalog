@@ -52,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt',
     defaultScope: {
-      attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-      order: ['updatedAt']
+      attributes: { exclude: ['deletedAt'] },
+      order: [['updatedAt', 'desc']]
     }
   })
   return PurchaseOrders

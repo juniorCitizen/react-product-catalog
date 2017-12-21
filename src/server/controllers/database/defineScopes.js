@@ -49,6 +49,31 @@ module.exports = (db) => {
       order: [['primary', 'desc']]
     }
   })
+  db.PurchaseOrders.addScope('pending', () => {
+    return {
+      attributes: { exclude: ['deletedAt'] },
+      where: {
+        [db.Sequelize.Op.or]: [
+          { contacted: false },
+          { notified: false }
+        ]
+      },
+      include: [
+        {
+          model: db.Contacts,
+          include: [{
+            model: db.Companies,
+            include: [{ model: db.Countries }]
+          }]
+        },
+        { model: db.Products, through: { attributes: ['quantity'] } }
+      ],
+      order: [
+        ['updatedAt', 'desc'],
+        [db.Products, 'code']
+      ]
+    }
+  })
   db.Series.addScope('siblings', (parentSeriesId = null) => {
     return {
       where: { parentSeriesId },
@@ -110,12 +135,21 @@ module.exports = (db) => {
   })
   db.PurchaseOrders.addScope('detailed', () => {
     return {
-      attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+      attributes: { exclude: ['deletedAt'] },
       include: [
-        { model: db.Contacts, include: [{ model: db.Companies }] },
+        {
+          model: db.Contacts,
+          include: [{
+            model: db.Companies,
+            include: [{ model: db.Countries }]
+          }]
+        },
         { model: db.Products, through: { attributes: ['quantity'] } }
       ],
-      order: [[db.Products, 'code']]
+      order: [
+        'updated',
+        [db.Products, 'code']
+      ]
     }
   })
   db.Series.addScope('detailed', () => {

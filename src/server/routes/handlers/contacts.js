@@ -321,8 +321,8 @@ function parsePurchaseOrderData (req, res, next) {
       // prep purchase order record data
       req.purchaseOrderData = {
         id: uuidV4().toUpperCase(),
-        companyId: req.contactData.id,
-        comments: req.body.comments || undefined,
+        contactId: req.contactData.id,
+        comments: req.body.comments || null,
         contacted: false,
         notified: false
       }
@@ -333,8 +333,8 @@ function parsePurchaseOrderData (req, res, next) {
           purchaseOrderId: req.purchaseOrderData.id,
           productId,
           quantity: !req.is('application/json')
-            ? parseInt(req.body.quantities[index]) || undefined
-            : req.body.quantities[index] || undefined
+            ? parseInt(req.body.quantities[index]) || null
+            : req.body.quantities[index] || null
         })
       })
       return next()
