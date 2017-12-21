@@ -56,15 +56,18 @@ module.exports = {
 
 function broadcastByEmail () {
   logging.warning('sending email...')
+  // if no emails in queue, exits...
   if (emailQueue.length === 0) return Promise.resolve()
+  // sends the first email
   return emailQueue[0]
     .sendAction
     .then(response => {
-      let markComplete = Promise.resolve()
-      // let markComplete = emailQueue[0].type === 'notified'
-      //   ? db.PurchaseOrders.update({ notified: true }, { where: { id: emailQueue[0].purchaseOrderId } })
-      //   : db.PurchaseOrders.update({ contacted: true }, { where: { id: emailQueue[0].purchaseOrderId } })
-      return markComplete
+      let updateContent = {}
+      updateContent[emailQueue[0].type] = true
+      // if success, mark the record as completed depends on type
+      // { notified: true} or { contacted: true }
+      return db.PurchaseOrders
+        .update(updateContent, { where: { id: emailQueue[0].purchaseOrderId } })
         .then(() => {
           emailQueue.shift()
           logging.warning(response)
