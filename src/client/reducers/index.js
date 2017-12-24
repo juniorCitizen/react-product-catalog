@@ -6,11 +6,11 @@ import product from './productReducer'
 import params from './paramsReducer'
 
 const rootReducer = combineReducers({
-    login,
-    series,
-    order,
-    product,
-    params,
+  login,
+  series,
+  order,
+  product,
+  params,
 })
 
 export default rootReducer

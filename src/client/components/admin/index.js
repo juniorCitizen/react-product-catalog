@@ -49,7 +49,6 @@ class Admin extends React.Component {
 
   tabActive(tab) {
     let select = this.state
-    console.log(tab)
     Object.keys(select).map((key) => {
       select[key] = ''
     })
@@ -77,7 +76,6 @@ class Admin extends React.Component {
     const { login, params, match } = this.props
     const url = match.url
     const auth = login.admin_info.auth
-    console.log(this.props)
     return (
       <div>
         {auth &&
@@ -87,9 +85,9 @@ class Admin extends React.Component {
                 <li className={select.product}>
                   <Link onClick={this.tabActive.bind(this, 'product')} to={url + '/product'}>產品管理</Link>
                 </li>
-                <li className={select.order}>
+                {false && <li className={select.order}>
                   <Link onClick={this.tabActive.bind(this, 'order')} to={url + '/order'}>訂單管理</Link>
-                </li>
+                </li>}
                 <li className={select.series}>
                   <Link onClick={this.tabActive.bind(this, 'series')} to={url + '/series'}>產品分類管理</Link>
                 </li>
