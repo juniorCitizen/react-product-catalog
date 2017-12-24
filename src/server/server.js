@@ -2,7 +2,7 @@
 // npm 模組加載
 // ///////////
 const bodyParser = require('body-parser')
-const cors = require('cors')
+const cors = require('cors') // no longer required once client is loaded from this server
 const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require('path')
@@ -15,6 +15,8 @@ const db = require('./controllers/database')
 // const emailSystem = require('./controllers/emails/emails')
 const eVars = require('./config/eVars')
 const logging = require('./controllers/logging')
+
+let app = null
 
 // ///////////////////////////////////////////////////////////
 // 系統部件初始化程序 - 伺服器以及路由配置啟動之前必須啟動的服務原件
@@ -36,31 +38,24 @@ Promise.each( // 依序執行服務原件的啟動程序
     // Express 框架啟動配置
     // ///////////////////
 
-    var webpack = require('webpack'),
-    webpackDevMiddleware = require('webpack-dev-middleware'),
-    webpackHotMiddleware = require('webpack-hot-middleware'),
-    webpackDevConfig = require('../../webpack.config.js')
-
     // ////////////// Express Framework /////////////////////////////////////
     logging.console('初始化 Express 框架...')
-    const app = express()
+    app = express()
 
     // ////////////// webpack ///////////////////////////////////////////////
-    var webpack = require('webpack')
-    var config = require('../../webpack.config.js')
-    var compiler = webpack(config)
-
-    // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
-    app.use(require('webpack-dev-middleware')(compiler, {
-      noInfo: true,
-      publicPath: config.output.publicPath,
-      stats: {
-        colors: true
-      }
-    }))
-
-    // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
-    app.use(require('webpack-hot-middleware')(compiler));
+    // if (eVars.devMode) { // only load in devMode
+    //   const webpack = require('webpack')
+    //   const webpackDevMiddleware = require('webpack-dev-middleware')
+    //   const webpackHotMiddleware = require('webpack-hot-middleware')
+    //   const config = require('../../webpack.config.js')
+    //   const compiler = webpack(config)
+    //   app.use(webpackDevMiddleware(compiler, {
+    //     noInfo: true,
+    //     publicPath: config.output.publicPath,
+    //     stats: { colors: true }
+    //   })) // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
+    //   app.use(webpackHotMiddleware(compiler)) // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
+    // }
 
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
@@ -78,7 +73,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     // ////////////// Pre-Routing Global Middlewares ////////////////////////
     logging.console('載入 pre-routing 全域 middlewares...')
     if (eVars.devMode) { app.use(require('morgan')('dev')) } // request logger
-    app.use(cors()) // enable CORS for all origins
+    app.use(cors()) // enable CORS for all origins (no longer required once client is loaded from this server)
     // parse request with application/x-www-form-urlencoded body data
     app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' })) // for request with large body data
     // parse request with application/json body data
@@ -93,7 +88,7 @@ Promise.each( // 依序執行服務原件的啟動程序
       },
       assets: {
         router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}/dist/public`,
+        endpoint: `/${eVars.SYS_REF}`,
         path: (() => {
           return eVars.devMode
             ? path.resolve('./dist/public')
@@ -117,7 +112,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     logging.console(`public assets 實體檔案路徑宣告完成... ${ROUTERS.assets.path}`)
     // setup SPA index.html endpoint
     app.use(ROUTERS.client.endpoint, ROUTERS.client.router)
-    ROUTERS.client.router.use('*', require('./routes/index'))    
+    ROUTERS.client.router.use('*', require('./routes/index'))
     logging.console(`index.html 端點宣告完成... ${eVars.HOST}${ROUTERS.client.endpoint}`)
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////
@@ -143,6 +138,7 @@ Promise.each( // 依序執行服務原件的啟動程序
       // modules that can be initialized afterwards goes here
       let postStartupInitSequence = [
         require('./controllers/verifyAdminAccount').initialize(),
+        require('./controllers/emailService').initialize(),
         '伺服器啟動後置模組 1 初始化...', // dummy stub
         '伺服器啟動後置模組 2 初始化...' // dummy stub
       ]
@@ -169,6 +165,12 @@ process.on('unhandledRejection', (error, promise) => {
   return logging.warning(promise)
 })
 
+process.on('rejectionHandled', (promise) => {
+  return logging.warning('Rejection handled !!!')
+})
+
 process.on('uncaughtException', (error) => {
   return logging.error(error, '發生未預期 exception !!!')
 })
+
+module.exports = app

@@ -14,13 +14,14 @@ const registerModels = require('./database/registerModels')
 const syncModels = require('./database/syncModels')
 const buildAssociations = require('./database/buildAssociations')
 const reSyncModels = require('./database/reSyncModels')
+const defineScopes = require('./database/defineScopes')
 
 const sequelize = new Sequelize(dbConfig)
 
 const db = {
   modelPath: process.env.NODE_ENV === 'development'
-    ? path.resolve('./src/server/models')
-    : path.resolve('./dist/models'),
+    ? path.resolve('./src/server/models/definitions')
+    : path.resolve('./dist/models/definitions'),
   fileList: [],
   modelList: [],
   Sequelize: Sequelize,
@@ -38,6 +39,7 @@ function initialize (force = null) {
     .then(() => syncModels(db, force))
     .then(() => buildAssociations(db))
     .then(() => reSyncModels(db, force))
+    .then(() => defineScopes(db))
     .then(() => Promise.resolve('資料庫初始化... 成功'))
     .catch(logging.reject('資料庫初始化... 失敗'))
 }

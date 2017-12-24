@@ -4,131 +4,134 @@ const eVars = require('../config/eVars')
 
 const logging = require('../controllers/logging')
 
-const notImplemented = require('../middlewares/notImplemented')
+// const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
 
 const API_ROUTER = express.Router()
 
-API_ROUTER.use((req, res, next) => {
-  req[eVars.SYS_REF] = {}
-  next()
-})
-
-// /////////////////////////////////////////////////////
-// working API endpoints
-// /////////////////////////////////////////////////////
-API_ROUTER.route('/carousels')
-  .get(...require('./carousels/getCarousel')) // get a carousel image data by displaySequence
-  .post(...require('./carousels/insertCarousel')) // insert a carousel image
-API_ROUTER.route('/carousels/:carouselId')
-  .delete(...require('./carousels/deleteCarouselById')) // remove a carousel image by id
-  .patch(...require('./carousels/patchCarouselDisplaySequence')) // update displaySequence of carousels
-
-API_ROUTER.route('/contacts')
-  .post(...require('./contacts/addContact')) // add a contact with company information
-API_ROUTER.route('/contacts/:contactId')
-  .get(...require('./contacts/getContactById')) // get contact by id
-API_ROUTER.route('/companies')
-  .get(...require('./companies/getHostCompanies')) // get project hosting companies dataset complete with country and staff info
-
-API_ROUTER.route('/countries')
-  .get(...require('./countries/getCountries')) // get countries
-
-API_ROUTER.route('/photos')
-  .post(...require('./photos/uploadPhotos')) // batch upload photos
-API_ROUTER.route('/photos/:photoId')
-  .get(...require('./photos/getPhotoById')) // get photo by id
-  .patch(...require('./photos/patchPhotoById')) // patching primary or active status
-  .delete(...require('./photos/removePhotoById')) // remove photo by id
-API_ROUTER.route('/photos/:photoId/products/:productId')
-  .post(...require('./photos/assignPhotoAssociation').toProduct) // assign productId to a photo
-  .delete(...require('./photos/removePhotoAssociation').fromProduct) // remove productId from a photo
-API_ROUTER.route('/photos/:photoId/series/:seriesId')
-  .post(...require('./photos/assignPhotoAssociation').toSeries) // assign seriesId to a photo
-  .delete(...require('./photos/removePhotoAssociation').fromSeries) // remove seriesId from a photo
-
-API_ROUTER.route('/products')
-  .get(...require('./products/getProducts')) // get product dataset
-  .post(...require('./products/insertProduct')) // create new product record
-API_ROUTER.route('/products/:productId')
-  .get(...require('./products/getProductById')) // get product record by id
-  .delete(...require('./products/deleteProduct')) // delete product by id
-API_ROUTER.route('/products/:productId/series/:seriesId')
-  .post(...require('./products/assignProductAssociation').toSeries) // associate a product to a series
-  .delete(...require('./products/removeProductAssociation').fromSeries) // disassociate a product from a series
-API_ROUTER.route('/products/:productId/tags/:tagId')
-  .post(...require('./products/assignProductAssociation').toTags) // tagging a product
-  .delete(...require('./products/removeProductAssociation').fromTag) // untag a product
-
-API_ROUTER.route('/productMenus')
-  .get(...require('./productMenus/getProductMenus')) // get product listing by tree structure
-
-API_ROUTER.route('/purchaseOrders')
-  .post(...require('./purchaseOrders/insertPurchaseOrder')) // insert new purchase order
-API_ROUTER.route('/contacts/:contactId/purchaseOrders/:purchaseOrderId')
-  .get(...require('./purchaseOrders/getPurchaseOrderById')) // get purchase order by purchaseOrderId
-  .delete(notImplemented)
-
-API_ROUTER.route('/series')
-  .get(...require('./series/getSeries')) // get product listing by tree structure (root level)
-  .post(...require('./series/insertSeries')) // insert a new series
-API_ROUTER.route('/series/:seriesId')
-  .get(...require('./series/getSeriesById')) // get product listing by tree structure (with specified series as root)
-  .patch(...require('./series/patchSeries')) // patching series properties
-  .delete(...require('./series/removeSeries')) // delete series by id
-API_ROUTER.route('/series/:seriesId/products')
-  .post(...require('./products/insertProduct')) // insert product record and associate with seriesId
-
-API_ROUTER.route('/model/:modelReference')
-  .get(...require('./utilities/getRecordCount')) // get record count of a particular model/table
-API_ROUTER.route('/model/:modelReference/field/:fieldReference')
-  .patch(...require('./utilities/patchRecordField')) // common patching route for general data file update
-API_ROUTER.route('/productSearch')
-  .get(...require('./utilities/productSearch')) // seach product listing
-API_ROUTER.route('/regions')
-  .get(...require('./countries/getRegions')) // get world regions
-API_ROUTER.route('/tokens')
-  .post(...require('./tokens/processJwtRequest')) // login
+const carousels = require('./handlers/carousels')
+const companies = require('./handlers/companies')
+const contacts = require('./handlers/contacts')
+const countries = require('./handlers/countries')
+const photos = require('./handlers/photos')
+const products = require('./handlers/products')
+const purchaseOrders = require('./handlers/purchaseOrders')
+const series = require('./handlers/series')
+const tags = require('./handlers/tags')
 
 // /////////////////////////////////////////////////////
 // Carousels
 // /////////////////////////////////////////////////////
+API_ROUTER.param('carouselId', carousels.autoFindTarget)
+API_ROUTER.route('/carousels')
+  .get(...carousels.read) // get carousel records
+  .post(...carousels.insert) // insert a carousel image
+API_ROUTER.route('/carousels/:carouselId')
+  .patch(...carousels.patch) // update displaySequence of carousels
+  .delete(...carousels.delete) // remove a carousel image by id
 
 // /////////////////////////////////////////////////////
 // Companies
 // /////////////////////////////////////////////////////
+API_ROUTER.param('companyId', companies.autoFindTarget)
+API_ROUTER.route('/hostingCompanies')
+  .get(...companies.readHosts) // get hosting company's information
+API_ROUTER.route('/companies')
+  .get(...companies.readAll) // get company dataset
+  .post(...companies.insert) // insert a company
+API_ROUTER.route('/companies/:companyId')
+  .get(...companies.readOne) // get company by id
+  .put(...companies.update) // update company information
+  .delete(...companies.delete) // delete a company
+API_ROUTER.route('/companies/:companyId/purchaseOrders')
 
 // /////////////////////////////////////////////////////
 // Contacts
 // /////////////////////////////////////////////////////
+API_ROUTER.param('contactId', contacts.autoFindTarget)
+API_ROUTER.route('/login')
+  .post(...contacts.login) // login by requesting a jwt with user credentials
+API_ROUTER.route('/contacts')
+  .post(contacts.create) // register a contact (optional company/order info creation or association)
+API_ROUTER.route('/contacts/:contactId')
+  .get(...contacts.readOne) // get contact by id
+  .put(...contacts.update) // update a contact
+  .delete(...contacts.delete) // delete contact by id
+API_ROUTER.route('/contacts/:contact/purchaseOrders')
+  .post(...purchaseOrders.create) // insert new purchase order
+API_ROUTER.route('/contactSearch')
+  .get(...contacts.search) // search contact
 
 // /////////////////////////////////////////////////////
 // Countries
 // /////////////////////////////////////////////////////
+API_ROUTER.param('countryId', countries.autoFindTarget)
+API_ROUTER.route('/countries')
+  .get(...countries.readAll) // get countries
+API_ROUTER.route('/countries/:countryId')
+  .get(...countries.readOne) // get flag
+API_ROUTER.route('/regions')
+  .get(...countries.readRegions) // get world regions
 
 // /////////////////////////////////////////////////////
 // Photos
 // /////////////////////////////////////////////////////
+API_ROUTER.param('photoId', photos.autoFindTarget)
+API_ROUTER.route('/photos')
+  .post(...photos.upload) // batch photo uploads
+API_ROUTER.route('/photos/:photoId')
+  .get(...photos.readOne) // get photo image by id
+  .patch(...photos.patch) // patching record fields (primary, seriesId, productId)
+  .delete(...photos.delete) // remove photo by id
 
 // /////////////////////////////////////////////////////
 // Products
 // /////////////////////////////////////////////////////
+API_ROUTER.param('productId', products.autoFindTarget)
+API_ROUTER.route('/productSearch')
+  .get(...products.search) // seach product listing
+API_ROUTER.route('/products')
+  .get(...products.readAll) // get product dataset
+  .post(...products.create) // create new product record
+API_ROUTER.route('/products/:productId')
+  .get(...products.readOne) // get product record by id
+  .put(...products.update) // update product general data
+  .patch(...products.patch) // patch record fields (seriesId)
+  .delete(...products.delete) // delete product by id
 
 // /////////////////////////////////////////////////////
-// Regions
+// Purchase Orders
 // /////////////////////////////////////////////////////
-
-// /////////////////////////////////////////////////////
-// Registrations
-// /////////////////////////////////////////////////////
+API_ROUTER.param('purchaseOrderId', purchaseOrders.autoFindTarget)
+API_ROUTER.route('/purchaseOrders/:purchaseOrderId')
+  .get(...purchaseOrders.readOne) // get purchase order by purchaseOrderId
+//   .delete(notImplemented)
 
 // /////////////////////////////////////////////////////
 // Series
 // /////////////////////////////////////////////////////
+API_ROUTER.param('seriesId', series.autoFindTarget)
+API_ROUTER.route('/series')
+  .get(...series.read) // get product listing by tree structure (root level)
+  .post(...series.createRootNode) // insert new root series
+API_ROUTER.route('/series/:seriesId')
+  .get(...series.read) // get product listing by tree structure (at specific series node)
+  .post(...series.createChildNode) // insert new child series
+  .patch(...series.patch) // patch series properties
+  .delete(...series.delete) // delete series by id
 
 // /////////////////////////////////////////////////////
-// Tokens
+// Tags
 // /////////////////////////////////////////////////////
+API_ROUTER.param('tagId', tags.autoFindTarget)
+API_ROUTER.route('/tags')
+  .get(...tags.readAll) // get a list of tags
+  .post(...tags.insert) // insert tag record
+API_ROUTER.route('/tagColors')
+  .get(...tags.availableColors) // get a list of text name of colors
+API_ROUTER.route('/tags/:tagId')
+  .patch(...tags.patch) // patch tag record
+  .delete(...tags.delete) // delete tag
 
 // /////////////////////////////////////////////////////
 // Utilities
