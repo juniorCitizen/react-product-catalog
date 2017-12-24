@@ -11,15 +11,16 @@ class Product extends React.Component {
   }
 
   render() {
+    console.log(window)
     return (
       <div>
         <Nav tab="product" />
         <div className="container" style={style.container}>
-          <div className="columns">
-            <div className="column is-one-fifth">
+          <div className="columns" style={{height: 'auto'}}>
+            <div className="column is-one-fifth" style={style.series}>
               <Series />
             </div>
-            <div className="column">
+            <div className="column" style={style.block}>
               <Block history={this.props.history} />
             </div>
           </div>
@@ -32,6 +33,13 @@ class Product extends React.Component {
 const style = {
   container: {
     padding: '10px',
+  },
+  series: {
+    height: '100%',
+  },
+  block: {
+    height:  window.visualViewport.height - 163, 
+    overflowY: 'auto',
   },
 }
 

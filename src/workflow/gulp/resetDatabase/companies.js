@@ -12,6 +12,7 @@ module.exports = (Companies, Contacts) => {
   let websiteUrl = `${eVars.PROTOCOL}://${devMode ? eVars.LOCAL_DEV_DOMAIN : eVars.PROD_DOMAIN}:${eVars.PORT}/${eVars.SYS_REF}`
   let taiwanOfficeId = uuidV4().toUpperCase()
   let chinaOfficeId = uuidV4().toUpperCase()
+  let fakeCompanyId = uuidV4().toUpperCase()
   let companies = [{
     id: taiwanOfficeId,
     title: 'Gentry Way Co., Ltd.',
@@ -30,38 +31,44 @@ module.exports = (Companies, Contacts) => {
     website: websiteUrl,
     host: true,
     countryId: 'chn'
+  }, {
+    id: fakeCompanyId,
+    title: 'A Fake Company',
+    website: 'https://www.fakeCompany.com.tw',
+    host: false,
+    countryId: 'twn'
   }]
   let contacts = [{
-    email: 'admin@nowhere.com',
-    name: 'Administrator',
-    password: null,
-    admin: true
-  }, {
-    email: 'gentry88@ms46.hinet.net',
+    email: 'gentry88@ms46.hinet.net'.toLowerCase(),
     name: 'General Service',
     companyId: taiwanOfficeId
   }, {
-    email: 'david.tsai@gentry-way.com.tw',
+    email: 'david.tsai@gentry-way.com.tw'.toLowerCase(),
     name: 'David Tsai',
     companyId: taiwanOfficeId,
     password: 'testtest',
     admin: true
   }, {
-    email: 'cathy.liu@gentry-way.com.tw',
+    email: 'cathy.liu@gentry-way.com.tw'.toLowerCase(),
     name: 'Cathy Liu',
     companyId: taiwanOfficeId
   }, {
-    email: 'candy.wu@gentry-way.com.tw',
+    email: 'candy.wu@gentry-way.com.tw'.toLowerCase(),
     name: 'Candy Wu',
     companyId: taiwanOfficeId
   }, {
-    email: 'gentry@vip.163.com',
+    email: 'gentry@vip.163.com'.toLowerCase(),
     name: 'General Service',
     companyId: chinaOfficeId
   }, {
-    email: 'altecqc@msn.com',
+    email: 'altecqc@msn.com'.toLowerCase(),
     name: 'Johnson Wu',
     companyId: chinaOfficeId
+  }, {
+    email: 'fakeClient@fakeCompany.com.tw'.toLowerCase(),
+    name: 'Fake Client',
+    companyId: fakeCompanyId,
+    password: '00000000'
   }]
   contacts.forEach(contact => {
     // generate and encrypt a password for contacts with a password property
