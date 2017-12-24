@@ -1,5 +1,7 @@
-const api = 'http://localhost:9004/reactProductCatalog/api'
-
+//const env = require('../../src/server/config/eVars')
+//const env = process.env
+const sys_ref = '/reactProductCatalog'
+const api = '/reactProductCatalog/api'
 export default {
   sys_ref: sys_ref,
   api: api,
@@ -7,7 +9,7 @@ export default {
     contacts: {
       contacts: api + '/contacts/',
       register: api + '/contacts',
-      tokens: api + '/tokens'
+      tokens: api + '/tokens',
     },
     productMenu: api + '/productMenus',
     products: {
@@ -27,7 +29,6 @@ export default {
       tel: '(05)2755-699',
       fax: '(05)2755-099',
       mail: '615666@gmail.com',
-
     },
     slogan: '醫療專業 貼心服務',
   }
