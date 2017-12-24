@@ -1,0 +1,78 @@
+<h3>網站於 {{ createdAt }} 接收到以下客戶註冊資訊:</h3>
+
+<table width="60%" cellspacing="2" cellpadding="1" border="1" style="border-collapse:collapse;">
+  <tbody>
+    <tr>
+      <td>
+        <b>記錄編號</b>
+      </td>
+      <td>{{ id }}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>公司</b>
+      </td>
+      <td>{{ company }}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>姓名</b>
+      </td>
+      <td>{{ name }}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>電郵</b>
+      </td>
+      <td>{{ email }}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>國家</b>
+      </td>
+      <td>{{ country }}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>其他問題或意見</b>
+      </td>
+      <td>
+        <pre>{{ comments }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>有興趣的產品</b>
+      </td>
+      <td>
+        <ol>
+          {{#each products}}
+          <li>
+            產品編號：{{ this.code }} - 需求數量：{{ this.orderDetails.quantity }}
+          </li>
+          {{/each}}
+        </ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>請回應客戶聯繫並確認需求，謝謝</p>
+
+<p style="font-size:60%;">EMAIL CONFIDENTIALITY NOTICE:</p>
+<p style="font-size:60%;">電子郵件保密條約:</p>
+
+<p style="font-size:60%;">
+  This email transmission and any attachments contained within may contain information that is confidential or otherwise exempt
+  from disclosure under applicable law and is intended solely for the use of the individual(s) to whom it was intended to
+  be addressed. If you have received this email by mistake, or you are not the intended recipient, any disclosure, dissemination,
+  distribution, copying or other use or retention of this communication or its substance is prohibited. If you have received
+  this communication in error, please immediately report to the author via email that you received this message by mistake
+  and also permanently destroy printed copies and delete the original and all copies of this email and any attachments from
+  your computer.
+</p>
+
+<p style="font-size:60%;">
+  此電子郵件內容以及其附加檔案有可能存在機密資料或者是在適用法規之保障之下不需公開的資訊，僅可由本電子郵件之指定收件人閱讀/使用。若您因誤而收到此郵件，或者您並非指定收件人，將此郵件內容或附加檔案一切形式的公開、散播、複製、保存或其他運用皆不允許。請立即以此電郵回覆原始送件人您因誤收到此郵件之情事，並將此電子郵件所有的原始檔案或副本由您的郵件信箱永久性的刪除
+  (包括將任何由此電郵輸出的實体紙本或其他形式的副本加以銷毀)。
+</p>

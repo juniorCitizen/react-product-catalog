@@ -7,12 +7,8 @@ const supportedParamMethods = [{
 
 module.exports = [
   (req, res, next) => {
-    let queryElements = []
-    for (let key in req.query) {
-      queryElements.push(key)
-    }
     let matchingMethod = supportedParamMethods.find(methodElement => {
-      return methodElement.queryMethod === queryElements[0]
+      return methodElement.queryMethod === Object.keys(req.query)[0]
     })
     if (matchingMethod) {
       return matchingMethod.routeHandler(req, res, next)
@@ -32,9 +28,7 @@ function getRecordCount (req, res, next) {
       .then(data => Promise.resolve(data.length))
   } else {
     let model = req.params.modelReference.charAt(0).toUpperCase() + req.params.modelReference.slice(1)
-    lookupQuery = db[model]
-      .findAndCountAll()
-      .then(data => Promise.resolve(data.count))
+    lookupQuery = db[model].getRecordCount()
   }
   return lookupQuery
     .then(data => {
