@@ -118,8 +118,15 @@ function constructTagMenu (seriesTreeNode) {
     // get the current tag with products that
     // are associated with the current seriesTreeNode
     return db.Tags.findById(tag.id, {
-      include: [{ model: db.Products, where: { seriesId: seriesTreeNode.id } }],
-      order: ['name', [db.Products, 'code']]
+      include: [{
+        model: db.Products,
+        include: [{ model: db.Photos, attributes: ['id', 'primary'] }],
+        where: { seriesId: seriesTreeNode.id }
+      }],
+      order: [
+        'name',
+        [db.Products, 'code']
+      ]
     }).then(tag => {
       // push the tag onto the tagMenu
       if (tag) seriesTreeNode.tagMenu.push(tag)
@@ -135,7 +142,10 @@ function constructIncludeOptions (req, res, next) {
   req.includeOptions = {
     include: [{
       model: db.Products,
-      include: [{ model: db.Tags }]
+      include: [
+        { model: db.Photos, attributes: ['id', 'primary'] },
+        { model: db.Tags }
+      ]
     }, {
       model: db.Series, as: 'childSeries'
     }]
