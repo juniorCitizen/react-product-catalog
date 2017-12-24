@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const isemail = require('isemail')
 
 const db = require('./database')
+const eVars = require('../config/eVars')
 const encryption = require('./encryption')
 const logging = require('./logging')
 
@@ -11,6 +12,7 @@ module.exports = {
 
 function initialize () {
   return db.Contacts
+    .scope({ method: ['credentialsOnly'] })
     .findAll({ where: { name: 'Administrator', admin: true } })
     .then(results => results.length !== 0
       ? Promise.resolve()
@@ -40,8 +42,7 @@ function accountCreation () {
         name: 'Administrator',
         hashedPassword: encrypted.hashedPassword,
         salt: encrypted.salt,
-        admin: true,
-        active: true
+        admin: true
       })
     })
     .catch(error => Promise.reject(error))
@@ -58,6 +59,9 @@ function consentToCreate () {
       type: 'input',
       name: 'email',
       message: 'Enter email of admin account: ',
+      default: (() => {
+        return eVars.devMode ? 'chiayu.tsai.personal@gmail.com' : undefined
+      })(),
       filter: input => input.toLowerCase(),
       validate: input => isemail.validate(input) ? true : 'invalid email format',
       when: response => response.consent
@@ -75,11 +79,17 @@ function getPassword () {
       type: 'password',
       name: 'password',
       message: 'Enter admin password: ',
+      default: (() => {
+        return eVars.devMode ? '00000000' : undefined
+      })(),
       validate: input => validateLength(input) ? true : 'password length must be 8~20 characters'
     }, {
       type: 'password',
       name: 'confirmedPassword',
       message: 'Confirm and enter admin password again: ',
+      default: (() => {
+        return eVars.devMode ? '00000000' : undefined
+      })(),
       validate: input => validateLength(input) ? true : 'password length must be 8~20 characters'
     }])
     .then(response => {

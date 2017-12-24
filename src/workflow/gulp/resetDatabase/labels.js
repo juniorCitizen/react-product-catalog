@@ -27,7 +27,6 @@ module.exports = (Products, Tags) => {
         let addTag = (Math.random() < 0.2)
         if ((tagCount > 0) && addTag) {
           shuffleArray(tags)
-          //
           for (let counter = 0; counter < tagCount; counter++) {
             product.addTags(tags[counter])
           }

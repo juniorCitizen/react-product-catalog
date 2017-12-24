@@ -11,7 +11,7 @@ module.exports = () => {
     let backupPath = path.resolve('./backup/blank.env')
     let liveDotEnvPath = path.resolve('./.env')
     return fs // make sure the directory exist before proceeding
-      .ensureDir(process.env.SQLITE_PATH)
+      .ensureDir(path.resolve('./backup'))
       .then(() => fs.readFile(liveDotEnvPath))
       .then((liveEnvContent) => Promise.resolve(liveEnvContent.toString().split('\n')))
       .then((liveEnvEntries) => {
