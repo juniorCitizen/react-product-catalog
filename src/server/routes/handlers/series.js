@@ -159,16 +159,19 @@ function constructOrderOptions (req, res, next) {
   let orderOptions = req.orderOptions = []
   orderOptions.push('displaySequence')
   orderOptions.push([db.Products, 'code'])
+  orderOptions.push([db.Products, db.Photos, 'primary', 'desc'])
   orderOptions.push([db.Products, db.Tags, 'name'])
   orderOptions.push([{ model: db.Series, as: 'childSeries' }, 'displaySequence'])
   for (let counter = req.targetSeries ? req.targetSeries : 0; counter < req.maxMenuLevel; counter++) {
     orderOptions.push(['displaySequence'])
     orderOptions.push([db.Products, 'code'])
+    orderOptions.push([db.Products, db.Photos, 'primary', 'desc'])
     orderOptions.push([db.Products, db.Tags, 'name'])
     for (let counter2 = 0; counter2 <= counter; counter2++) {
       orderOptions[(counter + 1) * 3 + 1].splice(0, 0, { model: db.Series, as: 'childSeries' })
       orderOptions[(counter + 1) * 3 + 2].splice(0, 0, { model: db.Series, as: 'childSeries' })
       orderOptions[(counter + 1) * 3 + 3].splice(0, 0, { model: db.Series, as: 'childSeries' })
+      orderOptions[(counter + 1) * 3 + 4].splice(0, 0, { model: db.Series, as: 'childSeries' })
     }
   }
   return next()
@@ -494,7 +497,10 @@ function setupIncludeOptions (levelCount, baseIncludeOptions, counter = 0) {
       include: [
         {
           model: db.Products,
-          include: [{ model: db.Tags }]
+          include: [
+            { model: db.Photos, attributes: ['id', 'primary'] },
+            { model: db.Tags }
+          ]
         },
         { model: db.Series, as: 'childSeries' }
       ]
