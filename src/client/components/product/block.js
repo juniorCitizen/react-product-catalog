@@ -6,6 +6,7 @@ import config from '../../config'
 import Detail from './detail'
 
 const api = config.api
+const route = config.route
 
 class Block extends React.Component {
   constructor(props) {
@@ -87,9 +88,9 @@ class Block extends React.Component {
             {product.products.map((item, index) => (
               <div className="column is-2" key={index} style={style.images}>
                 <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
-                  <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png" />
+                  <img className="v-image" src={route.photos.getPhoto + item.photos[0].id} />
                   <div className="v-image-label">
-                    {item.id}
+                    {item.name}
                   </div>
                 </div>
               </div>

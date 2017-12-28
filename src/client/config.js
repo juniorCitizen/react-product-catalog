@@ -9,11 +9,7 @@ export default {
     contacts: {
       contacts: api + '/contacts/',
       register: api + '/contacts',
-<<<<<<< HEAD
-      tokens: api + '/login',
-=======
       tokens: api + '/login'
->>>>>>> 6282a8b2a62afc0b4238b7e32bf780a67b9f4de1
     },
     productMenu: api + '/series',
     products: {
