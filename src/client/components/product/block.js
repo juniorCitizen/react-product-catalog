@@ -79,7 +79,7 @@ class Block extends React.Component {
 
 
   render() {
-    const { series, product } = this.props
+    const { series, product, order } = this.props
     const { list, hot_list, new_list, show_detail } = this.state
     return (
       <div>
@@ -91,6 +91,12 @@ class Block extends React.Component {
                   <img className="v-image" src={route.photos.getPhoto + item.photos[0].id} />
                   <div className="v-image-label">
                     {item.name}
+                    {order.order.map((list, index) => {
+                      if (list.id === item.id) {
+                        return ("1111111")
+                      }
+                    })
+                    }
                   </div>
                 </div>
               </div>
@@ -112,11 +118,21 @@ const style = {
   }
 }
 
+function isOrdered(data, order) {
+  order.map((item, index) => {
+    if (item.id === data.id) {
+      return (true)
+    }
+  })
+  return (false)
+}
+
 function mapStateToProps(state) {
-  const { series, product } = state
+  const { series, product, order } = state
   return {
     series,
     product,
+    order,
   }
 }
 
