@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Nav from '../navigation'
-import { user_info } from '../../actions'
+import { user_info, update_order } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 import qs from 'qs'
@@ -91,6 +91,11 @@ class Register extends React.Component {
       return
     }
     const { form, msg } = this.state
+    const order =  this.props.order.order
+    for (let i = 0; i < order.length; i++) {
+      form['productidlist['+i+']'] = order[i].id
+      form['quantities['+i+']'] = 1
+    }
     const self = this
     let url = ''
     delete form.confirm;
@@ -103,17 +108,23 @@ class Register extends React.Component {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     })
-      .then(function (response) {
-        console.log(response.data)
-        if (response.status === 200) {
-          window.localStorage["jwt-token"] = response.data.data
-          self.submitSuccess()
-        } else {
-          self.submitError(res.msg)
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      console.log(response.data)
+      if (response.status === 200) {
+        window.localStorage["jwt-token"] = response.data.data
+        self.cleanOrder()
+        self.submitSuccess()
+      } else {
+        self.submitError(res.msg)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  cleanOrder() {
+    const { dispatch } = this.props
+    dispatch(update_order([]))
   }
 
   submitSuccess() {
@@ -224,9 +235,10 @@ const style = {
 }
 
 function mapStateToProps(state) {
-  const { login } = state
+  const { login, order } = state
   return {
-    login
+    login,
+    order,
   }
 }
 
