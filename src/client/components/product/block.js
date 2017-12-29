@@ -91,7 +91,11 @@ class Block extends React.Component {
                   <img className="v-image" src={route.photos.getPhoto + item.photos[0].id} />
                   {order.order.map((list, index) => {
                       if (list.id === item.id) {
-                        return (<span className="v-image-order-tag" key={index}>222</span>)
+                        return (
+                          <span className="icon has-text-warning v-image-order-tag" key={index}>
+                            <i className="fa fa-star"></i>
+                          </span>
+                        )
                       }
                     })
                   }
