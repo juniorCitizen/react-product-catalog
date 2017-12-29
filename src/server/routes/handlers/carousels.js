@@ -18,7 +18,7 @@ const db = require('../../controllers/database')
 const pagination = require('../../middlewares/pagination')
 const validateJwt = require('../../middlewares/validateJwt')
 
-const Op = db.sequelize.Op
+const Op = db.Sequelize.Op
 
 // free icons from https://icons8.com/icon/pack/free-icons/all
 // return svg for missing photo substitue

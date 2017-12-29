@@ -144,7 +144,6 @@ function template (req, res, next) {
     .status(res.statusCode || 200)
     .type('text/html;charset=utf-8')
     .render(req.resTemplate.view, req.resTemplate.data || {})
-    .end()
 }
 
 // router specific global error handler

@@ -9,7 +9,7 @@ const eVars = require('../../config/eVars')
 
 const validateJwt = require('../../middlewares/validateJwt')
 
-const Op = db.sequelize.Op
+const Op = db.Sequelize.Op
 
 module.exports = {
   // route handlers

@@ -43,19 +43,19 @@ Promise.each( // 依序執行服務原件的啟動程序
     app = express()
 
     // ////////////// webpack ///////////////////////////////////////////////
-    // if (eVars.devMode) { // only load in devMode
-    //   const webpack = require('webpack')
-    //   const webpackDevMiddleware = require('webpack-dev-middleware')
-    //   const webpackHotMiddleware = require('webpack-hot-middleware')
-    //   const config = require('../../webpack.config.js')
-    //   const compiler = webpack(config)
-    //   app.use(webpackDevMiddleware(compiler, {
-    //     noInfo: true,
-    //     publicPath: config.output.publicPath,
-    //     stats: { colors: true }
-    //   })) // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
-    //   app.use(webpackHotMiddleware(compiler)) // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
-    // }
+    if (eVars.devMode) { // only load in devMode
+      const webpack = require('webpack')
+      const webpackDevMiddleware = require('webpack-dev-middleware')
+      const webpackHotMiddleware = require('webpack-hot-middleware')
+      const config = require('../../webpack.config.js')
+      const compiler = webpack(config)
+      app.use(webpackDevMiddleware(compiler, {
+        noInfo: true,
+        publicPath: config.output.publicPath,
+        stats: { colors: true }
+      })) // 將 webpack 傳入 webpack-dev-middleware 並套用至 app，同時傳入屬性，webpack 就可以被加載進來
+      app.use(webpackHotMiddleware(compiler)) // 將 webpack 傳入 webpack-hot-middleware 並套用至 app，就可達到 HMR 的效果
+    }
 
     // ////////////// Handlebars Template Engine ////////////////////////////
     logging.console('Express Handlebars 模板引擎設定...')
