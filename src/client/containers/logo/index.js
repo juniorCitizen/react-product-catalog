@@ -10,7 +10,7 @@ export default class Logo extends React.Component {
             <div className="" style={style.box}>
               <h1 className="title">
                 This is LOGO!!!
-                            </h1>
+              </h1>
             </div>
           </div>
         </div>
