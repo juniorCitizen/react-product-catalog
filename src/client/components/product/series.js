@@ -18,6 +18,11 @@ class Series extends React.Component {
     this.getSeries()
   }
 
+  componentWillUnmount() {
+    const { dispatch } = this.props
+    dispatch(update_products([]))
+  }
+
   selectSeries(id) {
     const { dispatch } = this.props
     dispatch(set_series_code(id))
