@@ -258,10 +258,15 @@ table.is-orange tr td, table.is-orange tr th {
 .v-image-label {
     padding: 10px;
     color: #FFF;
-    position: relative;
-    top: -86px;
-    height: 80px;
+    position: absolute;
+    bottom: 0px;
     background-color: rgba(0, 0, 0, 0.514);
+}
+
+.v-image-order-tag {
+    position: absolute;
+    top: -180px;
+    right: 0px;
 }
 
 .v-test {

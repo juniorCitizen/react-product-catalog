@@ -6,13 +6,9 @@
   "delay": 200,
   "watch": [
     "src/server",
-    "src/client",
-    "dist/public",
-    "webpack.config.babel.js"
+    "src/client"
   ],
-  "ignore": [
-    "dist/public"
-  ],
+  "ignore": [],
   "runOnChangeOnly": false,
   "verbose": true
 }
