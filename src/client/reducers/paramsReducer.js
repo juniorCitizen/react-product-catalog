@@ -1,16 +1,16 @@
 import {
-  SERIES_CODE,
+  ADMIN_TAB,
 } from '../constants/actionType'
 
 const initalState = {
-  code: null,
+  admin_tab: ''
 }
 
-export default function series(state = initalState, action) {
+export default function params(state = initalState, action) {
   switch (action.type) {
-    case SERIES_CODE:
+    case ADMIN_TAB:
       return Object.assign({}, state, {
-        code: action.code
+        admin_tab: action.tab
       })
     default:
       return state

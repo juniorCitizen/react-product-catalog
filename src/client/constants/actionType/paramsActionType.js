@@ -1,0 +1,1 @@
+export const ADMIN_TAB = 'ADMIN_TAB'
