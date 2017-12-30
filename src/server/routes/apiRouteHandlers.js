@@ -2,7 +2,7 @@ const express = require('express')
 
 const eVars = require('../config/eVars')
 
-const logging = require('../controllers/logging')
+// const logging = require('../controllers/logging')
 
 // const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
