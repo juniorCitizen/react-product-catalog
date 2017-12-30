@@ -171,8 +171,7 @@ function error (error, req, res, next) {
     }
   }
   delete error.customMessage
-  res
+  return res
     .type('application/json;charset=utf-8')
     .json(resJson)
-  return next(error)
 }
