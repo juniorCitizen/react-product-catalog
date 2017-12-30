@@ -2,7 +2,7 @@ const express = require('express')
 
 const eVars = require('../config/eVars')
 
-const logging = require('../controllers/logging')
+// const logging = require('../controllers/logging')
 
 // const notImplemented = require('../middlewares/notImplemented')
 const responseHandlers = require('../middlewares/responseHandlers')
@@ -146,13 +146,10 @@ API_ROUTER.use(responseHandlers.json)
 API_ROUTER.use(responseHandlers.redirect)
 API_ROUTER.use(responseHandlers.template)
 API_ROUTER.use((req, res, next) => {
-  logging.warning(`客戶端要求不存在的 API 端點: ${req.method.toLowerCase()} ${eVars.APP_ROUTE}${req.path}`)
   res.status(404)
-  return res.json({
-    method: req.method.toLowerCase(),
-    endpoint: `${eVars.APP_ROUTE}${req.path}`,
-    message: '端點不存在'
-  })
+  let error = new Error('端點不存在')
+  error.message = `客戶端要求不存在的 API 端點: ${req.method.toLowerCase()} ${eVars.APP_ROUTE}${req.path}`
+  return next(error)
 }) // catch all api calls that fell through
 API_ROUTER.use(responseHandlers.error) // router specific error handler
 
