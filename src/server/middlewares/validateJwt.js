@@ -92,8 +92,10 @@ module.exports = ({ none = false, admin = false, staff = false, user = false } =
             if (privilege === 1) {
               // parse contactId from either req.params or req.body
               let parsedContactId = 'contactId' in req.params
-                ? req.params.contactId.toUpperCase() : 'contactId' in req.body
-                  ? req.body.contactId.toUpperCase() : null
+                ? req.params.contactId.toUpperCase()
+                : 'contactId' in req.body
+                  ? req.body.contactId.toUpperCase()
+                  : null
 
               // contactId parsed from payload does not match request designated contactId
               if (decodedToken.id !== parsedContactId) {

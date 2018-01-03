@@ -139,7 +139,7 @@ Promise.each( // 依序執行服務原件的啟動程序
       // modules that can be initialized afterwards goes here
       let postStartupInitSequence = [
         require('./controllers/verifyAdminAccount').initialize(),
-        require('./controllers/emailService').initialize(),
+        // require('./controllers/emailService').initialize(),
         '伺服器啟動後置模組 1 初始化...', // dummy stub
         '伺服器啟動後置模組 2 初始化...' // dummy stub
       ]
