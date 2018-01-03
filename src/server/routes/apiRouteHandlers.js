@@ -57,7 +57,7 @@ API_ROUTER.route('/contacts/:contactId')
   .get(...contacts.readOne) // get contact by id
   .put(...contacts.update) // update a contact
   .delete(...contacts.delete) // delete contact by id
-API_ROUTER.route('/contacts/:contact/purchaseOrders')
+API_ROUTER.route('/contacts/:contactId/purchaseOrders')
   .post(...purchaseOrders.create) // insert new purchase order
 API_ROUTER.route('/contactSearch')
   .get(...contacts.search) // search contact
