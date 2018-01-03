@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Nav from '../navigation'
 import { connect } from 'react-redux'
 import config from '../../config'
+import qs from 'qs'
 import { remove_order } from '../../actions'
 
 class Order extends React.Component {
@@ -27,17 +28,19 @@ class Order extends React.Component {
   sendOrder() {
     const { login, order } = this.props
     const auth = login.user_info.auth
-    let form = {comments}
-    for (let i = 0; i < order.length; i++) {
-      form['productidlist['+i+']'] = order[i].id
-      form['quantities['+i+']'] = 1
-    }
+    let form = {comments: ''}
+    
     if (auth) {
+      for (let i = 0; i < order.length; i++) {
+        form['productidlist['+i+']'] = order[i].id
+        form['quantities['+i+']'] = 1
+      }
       axios({
         method: 'post',
-        url: config.route.contacts.register,
+        url: config.route.order.purchase + login.user_info.info.id + '/purchaseOrders',
         data: qs.stringify(form),
         headers: {
+          'x-access-token': window.localStorage["jwt-token"],
           'Content-Type': 'application/x-www-form-urlencoded',
         }
       })

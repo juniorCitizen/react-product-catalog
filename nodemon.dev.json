@@ -5,8 +5,7 @@
   "ext": "js hbs",
   "delay": 200,
   "watch": [
-    "src/server",
-    "src/client"
+    "src/server"
   ],
   "ignore": [],
   "runOnChangeOnly": false,

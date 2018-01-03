@@ -15,6 +15,9 @@ export default {
     products: {
       detail: api + '/products/',
     },
+    order: {
+      purchase: api + '/contacts/'
+    },
     photos: {
       getPhoto: api + '/photos/',
     },
