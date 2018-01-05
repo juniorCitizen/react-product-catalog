@@ -94,6 +94,7 @@ class Login extends React.Component {
         console.log(response.data)
         if (response.status === 200) {
           window.localStorage["jwt-token"] = response.data.data
+          console.log(response.data.data)
           self.loginSuccess()
         } else {
           loginError(response.error.message)

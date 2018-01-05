@@ -11,7 +11,6 @@ class Product extends React.Component {
   }
 
   render() {
-    console.log(window)
     return (
       <div>
         <Nav tab="product" />

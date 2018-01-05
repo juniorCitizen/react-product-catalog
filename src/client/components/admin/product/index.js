@@ -1,10 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import Series from '../../product/series'
 import Form from './form'
 import Confirm from '../../../containers/modal/confirm'
+import config from '../../../config'
+import { update_products } from '../../../actions'
 
-export default class Product extends React.Component {
+class Product extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -35,79 +38,96 @@ export default class Product extends React.Component {
     return null
   }
 
-  showAdd () {
+  showAdd() {
     this.setState({
       addShow: true,
       sItem: {}
     })
   }
 
-  showEdit (item) {
+  showEdit(item) {
     this.setState({
       editShow: true,
       sItem: item
     })
   }
 
-  showDelete (item) {
+  showDelete(item) {
     this.setState({
       deleteShow: true,
       sItem: item
     })
   }
 
-  hideAdd () {
+  hideAdd() {
     this.setState({
       addShow: false,
       sItem: {}
     })
   }
 
-  hideEdit () {
+  hideEdit() {
     this.setState({
       editShow: false,
       sItem: {}
     })
   }
 
-  hideDelete () {
+  hideDelete() {
     this.setState({
       deleteShow: false,
       sItem: {}
     })
   }
 
-  searchChange (e) {
+  searchChange(e) {
     let val = e.target.value
     this.setState({ search: val })
   }
 
-  deleteData (item) {
+  deleteData() {
+    const item = this.state.sItem
+    const self = this
     axios({
       method: 'delete',
-      url: '',
+      url: config.route.products.delete + item.id,
       data: null,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'x-access-token': window.localStorage["jwt-admin-token"],
+        'Content-Type': 'application/x-www-form-urlencoded',
       }
     })
-      .then(function (response) {
-        console.log(response.data)
-        if (response.status === 200) {
-          return null
-        } else {
-          return null
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      console.log(response.data)
+      if (response.status === 200) {
+        self.removeProducts(item)
+      } else {
+        return null
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 
-  static doSearch () {
+  removeProducts(item) {
+    const { product } = this.props
+    let newProducts = product.products
+    for (let i = 0; i < newProducts.length; i++) {
+      if (newProducts[i].id === item.id) {
+        newProducts.splice(i, 1)
+      }
+    }
+    const { dispatch } = this.props
+    dispatch(update_products(newProducts))
+    this.hideDelete()
+  }
+
+  doSearch() {
     return null
   }
 
-  render () {
+  render() {
+    const { product } = this.props
     const { list, search, addShow, editShow, deleteShow, sItem } = this.state
     return (
       <div>
@@ -128,7 +148,7 @@ export default class Product extends React.Component {
                             onChange={this.searchChange.bind(this)} />
                         </div>
                         <div className="control">
-                          <button className="button" onClick={Product.doSearch.bind(this)}>
+                          <button className="button" onClick={this.doSearch.bind(this)}>
                             <span className="icon has-text-info">
                               <i className="fa fa-search fa-lg"></i>
                             </span>
@@ -157,20 +177,14 @@ export default class Product extends React.Component {
                     <tr>
                       <th>產品代號</th>
                       <th>品名</th>
-                      <th>規格</th>
-                      <th>說明</th>
-                      <th>啟用</th>
                       <th width="101"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {list.map((item, index) => (
+                    {product.products.map((item, index) => (
                       <tr key={index}>
                         <td>{item.code}</td>
                         <td>{item.name}</td>
-                        <td>{item.specification}</td>
-                        <td>{item.description}</td>
-                        <td>{item.active}</td>
                         <td>
                           <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
                             <span className="icon has-text-info">
@@ -231,3 +245,12 @@ const style = {
     padding: '10px'
   },
 }
+
+function mapStateToProps(state) {
+  const { product } = state
+  return {
+    product,
+  }
+}
+
+export default connect(mapStateToProps)(Product)

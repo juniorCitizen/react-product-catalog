@@ -244,6 +244,7 @@ table.is-orange tr td, table.is-orange tr th {
     transition: all 0.2s ease-in-out;
     height: 256px;
     width: 256px;
+    position: relative;
 }
 
 .v-image-box>.v-image {
@@ -258,10 +259,17 @@ table.is-orange tr td, table.is-orange tr th {
 .v-image-label {
     padding: 10px;
     color: #FFF;
-    position: relative;
-    top: -86px;
+    position: absolute;
+    bottom: 4px;
+    width: 246px;
     height: 80px;
     background-color: rgba(0, 0, 0, 0.514);
+}
+
+.v-image-order-tag {
+    position: absolute;
+    top: 6px;
+    right: 6px;
 }
 
 .v-test {

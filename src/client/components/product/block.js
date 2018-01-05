@@ -6,6 +6,7 @@ import config from '../../config'
 import Detail from './detail'
 
 const api = config.api
+const route = config.route
 
 class Block extends React.Component {
   constructor(props) {
@@ -20,19 +21,9 @@ class Block extends React.Component {
     }
   }
 
-  getHotList() {
-    this.setState({ hot_list: [] })
-  }
-
-  getNewList() {
-    this.setState({ new_list: [] })
-  }
-
   getProductList(code) {
     console.log('series code:' + code)
     if (code === null) {
-      //this.getHotList()
-      //this.getNewList()
       return
     }
     return
@@ -62,23 +53,8 @@ class Block extends React.Component {
       })
   }
 
-  showDetail(item) {
-    this.setState({
-      show_detail: true,
-    })
-    this.refs.detail.getWrappedInstance().getProductInfo(item.id)
-  }
-
-  hideDetail() {
-    this.setState({
-      show_detail: false,
-    })
-    this.refs.detail.getWrappedInstance().doClear()
-  }
-
-
   render() {
-    const { series, product } = this.props
+    const { series, product, order } = this.props
     const { list, hot_list, new_list, show_detail } = this.state
     return (
       <div>
@@ -87,9 +63,19 @@ class Block extends React.Component {
             {product.products.map((item, index) => (
               <div className="column is-2" key={index} style={style.images}>
                 <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
-                  <img className="v-image" src="https://bulma.io/images/placeholders/256x256.png" />
+                  <img className="v-image" src={route.photos.getPhoto + item.photos[0].id} />
+                  {order.order.map((list, index) => {
+                      if (list.id === item.id) {
+                        return (
+                          <span className="icon has-text-warning v-image-order-tag" key={index}>
+                            <i className="fa fa-star"></i>
+                          </span>
+                        )
+                      }
+                    })
+                  }
                   <div className="v-image-label">
-                    {item.id}
+                    {item.name}
                   </div>
                 </div>
               </div>
@@ -111,11 +97,21 @@ const style = {
   }
 }
 
+function isOrdered(data, order) {
+  order.map((item, index) => {
+    if (item.id === data.id) {
+      return (true)
+    }
+  })
+  return (false)
+}
+
 function mapStateToProps(state) {
-  const { series, product } = state
+  const { series, product, order } = state
   return {
     series,
     product,
+    order,
   }
 }
 

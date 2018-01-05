@@ -9,11 +9,16 @@ export default {
     contacts: {
       contacts: api + '/contacts/',
       register: api + '/contacts',
-      tokens: api + '/tokens'
+      tokens: api + '/login'
     },
-    productMenu: api + '/productMenus',
+    productMenu: api + '/series',
     products: {
       detail: api + '/products/',
+      delete: api + '/products/',
+      update: api + '/products/',
+    },
+    order: {
+      purchase: api + '/contacts/'
     },
     photos: {
       getPhoto: api + '/photos/',
@@ -29,7 +34,6 @@ export default {
       tel: '(05)2755-699',
       fax: '(05)2755-099',
       mail: '615666@gmail.com',
-
     },
     slogan: '醫療專業 貼心服務',
   }

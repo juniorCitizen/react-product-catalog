@@ -91,9 +91,9 @@ class Admin extends React.Component {
                 <li className={select.series}>
                   <Link onClick={this.tabActive.bind(this, 'series')} to={url + '/series'}>產品分類管理</Link>
                 </li>
-                <li className={select.user}>
+                {false && <li className={select.user}>
                   <Link onClick={this.tabActive.bind(this, 'user')} to={url + '/user'}>帳號管理</Link>
-                </li>
+                </li>}
                 <li className={select.logout}>
                   <a onClick={this.logoutConfirm.bind(this)}>{'登出'}</a>
                 </li>
@@ -104,9 +104,9 @@ class Admin extends React.Component {
         {auth
           ? <div className="container">
             <Route path={url + '/product'} component={Product}/>
-            <Route path={url + '/order'} component={Order}/>
+            {false && <Route path={url + '/order'} component={Order}/>}
             <Route path={url + '/series'} component={Series}/>
-            <Route path={url + '/user'} component={User}/>
+            {false && <Route path={url + '/user'} component={User}/>}
           </div>
           : <Route exact path={url} component={Login} />
         }
