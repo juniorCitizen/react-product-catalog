@@ -14,17 +14,12 @@ class Modify extends React.Component {
     this.state = {
       form: {
         email: '',
-        password: '',
-        confirm: '',
         name: '',
         address: '',
         telephone: '',
         botPrevention: null,
       },
       msg: {
-        email: '',
-        password: '',
-        confirm: '',
         name: '',
         address: '',
         telephone: '',
@@ -37,6 +32,7 @@ class Modify extends React.Component {
   componentDidMount() {
     this.checkAuth()
     this.getUserInfo()
+    console.log(this.props.login.user_info.info)
   }
 
   checkAuth() {
@@ -118,37 +114,31 @@ class Modify extends React.Component {
     if (this.checkSpace()) {
       return
     }
+    const { login } =  this.props
     const { form, msg } = this.state
     const self = this
     let url = ''
-    delete form.confirm;
+    delete form.email;
     console.log(form)
     axios({
-      method: 'post',
-      url: config.route.register,
+      method: 'put',
+      url: config.route.contacts.contacts + login.user_info.info.id,
       data: qs.stringify(form),
       headers: {
+        'x-access-token': window.localStorage["jwt-token"],
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     })
       .then(function (response) {
         console.log(response.data)
         if (response.status === 200) {
-          window.localStorage["jwt-token"] = response.data.data
-          self.submitSuccess()
+          self.props.history.push(config.sys_ref + "/")
         } else {
           self.submitError(res.msg)
         }
       }).catch(function (error) {
         console.log(error)
       })
-  }
-
-  submitSuccess() {
-    const { dispatch } = this.props
-    const token = window.localStorage["jwt-token"]
-    dispatch(user_info(jwt_info(token)))
-    this.props.history.push(config.sys_ref + "/");
   }
 
   submitError(str) {
@@ -172,29 +162,11 @@ class Modify extends React.Component {
                 <div className="field">
                   <label className="label">電子郵件</label>
                   <div className="control">
-                    <input className="input" type="text" placeholder="請輸入電子郵件"
+                    <input className="input" type="text" placeholder="請輸入電子郵件" disabled={true}
                       value={form.email} onChange={this.inputChange.bind(this, 'email')}
                     />
                   </div>
                   <p className="help is-danger">{msg.email}</p>
-                </div>
-                <div className="field">
-                  <label className="label">密碼</label>
-                  <div className="control">
-                    <input className="input" type="password" placeholder="請輸入密碼"
-                      value={form.password} onChange={this.inputChange.bind(this, 'password')}
-                    />
-                  </div>
-                  <p className="help is-danger">{msg.password}</p>
-                </div>
-                <div className="field">
-                  <label className="label">確認密碼</label>
-                  <div className="control">
-                    <input className="input" type="password" placeholder="再次確認密碼"
-                      value={form.confirm} onChange={this.inputChange.bind(this, 'confirm')}
-                    />
-                  </div>
-                  <p className="help is-danger">{msg.confirm}</p>
                 </div>
                 <div className="field">
                   <label className="label">姓名/公司行號</label>

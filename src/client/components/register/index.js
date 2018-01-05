@@ -93,7 +93,7 @@ class Register extends React.Component {
     const { form, msg } = this.state
     const order =  this.props.order.order
     for (let i = 0; i < order.length; i++) {
-      form['productidlist['+i+']'] = order[i].id
+      form['productIdList['+i+']'] = order[i].id
       form['quantities['+i+']'] = 1
     }
     const self = this

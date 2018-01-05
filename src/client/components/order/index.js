@@ -5,7 +5,7 @@ import Nav from '../navigation'
 import { connect } from 'react-redux'
 import config from '../../config'
 import qs from 'qs'
-import { remove_order } from '../../actions'
+import { remove_order, update_order } from '../../actions'
 
 class Order extends React.Component {
   constructor(props) {
@@ -29,12 +29,14 @@ class Order extends React.Component {
     const { login, order } = this.props
     const auth = login.user_info.auth
     let form = {comments: ''}
+    const self = this
     
     if (auth) {
-      for (let i = 0; i < order.length; i++) {
-        form['productidlist['+i+']'] = order[i].id
+      for (let i = 0; i < order.order.length; i++) {
+        form['productIdList['+i+']'] = order.order[i].id
         form['quantities['+i+']'] = 1
       }
+      console.log(form)
       axios({
         method: 'post',
         url: config.route.order.purchase + login.user_info.info.id + '/purchaseOrders',
@@ -47,9 +49,8 @@ class Order extends React.Component {
       .then(function (response) {
         console.log(response.data)
         if (response.status === 200) {
-          window.localStorage["jwt-token"] = response.data.data
           self.cleanOrder()
-          self.submitSuccess()
+          self.props.history.push(config.sys_ref + "/")
         } else {
           self.submitError(res.msg)
         }
@@ -61,7 +62,10 @@ class Order extends React.Component {
     }
   }
 
-
+  cleanOrder() {
+    const { dispatch } = this.props
+    dispatch(update_order([]))
+  }
 
   render() { 
     const { order } = this.props
