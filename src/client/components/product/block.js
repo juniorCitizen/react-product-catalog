@@ -21,19 +21,9 @@ class Block extends React.Component {
     }
   }
 
-  getHotList() {
-    this.setState({ hot_list: [] })
-  }
-
-  getNewList() {
-    this.setState({ new_list: [] })
-  }
-
   getProductList(code) {
     console.log('series code:' + code)
     if (code === null) {
-      //this.getHotList()
-      //this.getNewList()
       return
     }
     return
@@ -62,21 +52,6 @@ class Block extends React.Component {
         console.log(error)
       })
   }
-
-  showDetail(item) {
-    this.setState({
-      show_detail: true,
-    })
-    this.refs.detail.getWrappedInstance().getProductInfo(item.id)
-  }
-
-  hideDetail() {
-    this.setState({
-      show_detail: false,
-    })
-    this.refs.detail.getWrappedInstance().doClear()
-  }
-
 
   render() {
     const { series, product, order } = this.props

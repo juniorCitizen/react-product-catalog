@@ -10,7 +10,7 @@ export default class Series extends React.Component {
   }
 
   componentDidMount() {
-    let list = initData(data)
+    let list = initData()
     this.setState({list: list})
   }
   
@@ -34,7 +34,11 @@ export default class Series extends React.Component {
   }
 }
 
-function initData(obj) {
+function initData() {
+
+
+
+
   return obj.map((item) => {
     item.childSeries = initData(item.childSeries)
     item.title = item.name

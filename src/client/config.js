@@ -14,6 +14,8 @@ export default {
     productMenu: api + '/series',
     products: {
       detail: api + '/products/',
+      delete: api + '/products/',
+      update: api + '/products/',
     },
     order: {
       purchase: api + '/contacts/'

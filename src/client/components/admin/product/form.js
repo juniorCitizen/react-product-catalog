@@ -104,18 +104,18 @@ export default class Form extends React.Component {
             <div className="field">
               <label className="label">規格</label>
               <div className="control">
-                <input className="input" type="text" placeholder="請輸入規格"
-                  value={form.specification || ''} onChange={this.inputChange.bind(this, 'specification')}
-                />
+                <textarea className="textarea" placeholder="請輸入規格"
+                  value={form.specification || ''}
+                  onChange={this.inputChange.bind(this, 'specification')}/>
               </div>
               <p className="help is-danger">{msg.confirm}</p>
             </div>
             <div className="field">
               <label className="label">說明</label>
               <div className="control">
-                <input className="input" type="text" placeholder="請輸入說明"
-                  value={form.description || ''} onChange={this.inputChange.bind(this, 'description')}
-                />
+                <textarea className="textarea" placeholder="請輸入說明"
+                  value={form.description || ''}
+                  onChange={this.inputChange.bind(this, 'description')}/>
               </div>
               <p className="help is-danger">{msg.description}</p>
             </div>
@@ -139,21 +139,6 @@ export default class Form extends React.Component {
                 </div>
               <p className="help is-danger">{msg.address}</p>
             </div>
-            <div className="field">
-              <label className="label">啟用</label>
-              <div className="control">
-                <label className="radio">
-                  <input type="radio" name="is-active"
-                    value="true" checked={form.active === "true"} onChange={this.checkedChange.bind(this)} />
-                  {'Yes'}
-                </label>
-                <label className="radio">
-                  <input type="radio" name="is-active"
-                    value="false" checked={form.active || 'false' === "false"} onChange={this.checkedChange.bind(this)} />
-                  {'No'}
-                </label>
-              </div>
-            </div>
           </section>
           <footer className="modal-card-foot">
             <button className="button is-success" onClick={this.doSave.bind(this)}>儲存</button>
@@ -164,3 +149,23 @@ export default class Form extends React.Component {
     )
   }
 }
+
+/*
+<div className="field">
+  <label className="label">啟用</label>
+  <div className="control">
+    <label className="radio">
+      <input type="radio" name="is-active"
+        value="true" checked={form.active === "true"} onChange={this.checkedChange.bind(this)} />
+      {'Yes'}
+    </label>
+    <label className="radio">
+      <input type="radio" name="is-active"
+        value="false" checked={form.active || 'false' === "false"} onChange={this.checkedChange.bind(this)} />
+      {'No'}
+    </label>
+  </div>
+</div>
+
+
+*/
