@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import qs from 'qs'
+import config from '../../../config'
+import { update_products } from '../../../actions'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -7,19 +10,71 @@ export default class Form extends React.Component {
     this.state = {
       form: {},
       msg: {
-        email: '',
-        password: '',
-        confirm: '',
         name: '',
-        address: '',
-        telephone: '',
-        submit: '',
+        specification: '',
+        description: '',
+        name: '',
       },
+      series: [],
+      tags: [],
+      processing: false,
     }
   }
 
   componentDidMount() {
     this.setState({ form: this.props.item })
+    this.getSeries()
+    this.getTags()
+  }
+
+  getSeries() {
+    const self = this
+    axios({
+      method: 'get',
+      url: config.route.productMenu,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        let list = self.initSeries([], response.data.data, 0)
+        self.setState({
+          series: list
+        })
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  getTags() {
+    const self = this
+    axios({
+      method: 'get',
+      url: config.route.tag.getTags,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        self.setState({tags: response.data.data})
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  initSeries(list, node, n) {
+    let s = '';
+    for(let i = 0; i < n; i++) {
+      s = s + '-'
+    }
+    node.map((item) => {
+      item.name = s + item.name
+      list.push(item)
+      list = this.initSeries(list, item.childSeries, n+1)
+    })
+    return list
   }
 
   inputChange(cont, e) {
@@ -31,50 +86,49 @@ export default class Form extends React.Component {
     this.checkPassword()
   }
 
-  checkPassword() {
-    let { form, msg } = this.state
-    if (form.password !== form.confirm) {
-      msg.confirm = '密碼與確認密碼不一致'
-      this.setState({ msg: msg })
-      return
-    }
-    this.setState({ msg: msg })
+  seriesChange(e) {
+    let seriesId = e.target.value
+    let form = this.state.form
+    form.seriesId = seriesId
+    this.setState({form: form})
   }
 
-  checkedChange(e) {
-    const val = e.target.value
-    let form = this.state.form
-    form.admin = val
-    this.setState({ form: form })
+  tagChange(e) {
+
   }
 
   doSave() {
+    const { form } = this.state
+    const self = this
     console.log(this.state.form)
-    return
+    this.setState({processing: true})
     axios({
-      method: 'post',
-      url: '',
-      data: null,
+      method: 'put',
+      url: config.route.products.update + form.id,
+      data: qs.stringify(form),
       headers: {
+        'x-access-token': window.localStorage["jwt-admin-token"],
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     })
-      .then(function (response) {
-        console.log(response.data)
-        if (response.status === 200) {
-
-        } else {
-
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      console.log(response.data)
+      if (response.status === 200) {
+        self.setState({processing: false})
+        self.props.click_cancel()
+      } else {
+        console.log(response)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 
   render() {
     const { title, show, click_cancel } = this.props
-    const { form, msg } = this.state
+    const { form, msg, processing, series, tags } = this.state
     const active = show ? ' is-active' : ''
+    const isLoading = processing ? ' is-loading': ''
     return (
       <div className={"modal" + active}>
         <div className="modal-background"></div>
@@ -86,11 +140,10 @@ export default class Form extends React.Component {
             <div className="field">
               <label className="label">產品代號</label>
               <div className="control">
-                <input className="input" type="text" placeholder="請輸入產品代號"
+                <input className="input" type="text" placeholder="請輸入產品代號" disabled={true}
                   value={form.code || ''} onChange={this.inputChange.bind(this, 'code')}
                 />
               </div>
-              <p className="help is-danger">{msg.email}</p>
             </div>
             <div className="field">
               <label className="label">品名</label>
@@ -99,7 +152,7 @@ export default class Form extends React.Component {
                   value={form.name || ''} onChange={this.inputChange.bind(this, 'name')}
                 />
               </div>
-              <p className="help is-danger">{msg.password}</p>
+              <p className="help is-danger">{msg.name}</p>
             </div>
             <div className="field">
               <label className="label">規格</label>
@@ -108,7 +161,7 @@ export default class Form extends React.Component {
                   value={form.specification || ''}
                   onChange={this.inputChange.bind(this, 'specification')}/>
               </div>
-              <p className="help is-danger">{msg.confirm}</p>
+              <p className="help is-danger">{msg.specification}</p>
             </div>
             <div className="field">
               <label className="label">說明</label>
@@ -120,28 +173,62 @@ export default class Form extends React.Component {
               <p className="help is-danger">{msg.description}</p>
             </div>
             <div className="field">
+              <label className="label">分類</label>
+              <div className="control">
+                <div className="select">
+                  <select onChange={this.seriesChange.bind(this)} value={form.seriesId}>
+                    {series.map((item, index) => (
+                      <option 
+                        key={index} 
+                        value={item.id}
+                      >
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">標籤</label>
+              <div className="control">
+                <div className="select is-multiple">
+                  <select multiple onChange={this.tagChange.bind(this)} value={form.seriesId}>
+                    {series.map((item, index) => (
+                      <option 
+                        key={index} 
+                        value={item.id}
+                      >
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="field">
               <label className="label">產品圖片</label>
-                <div class="file has-name is-fullwidth">
-                  <label class="file-label">
-                    <input class="file-input" type="file" name="resume"/>
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fa fa-upload"></i>
+                <div className="file has-name is-fullwidth">
+                  <label className="file-label">
+                    <input className="file-input" type="file" name="resume"/>
+                    <span className="file-cta">
+                      <span className="file-icon">
+                        <i className="fa fa-upload"></i>
                       </span>
-                      <span class="file-label">
+                      <span className="file-label">
                         Choose a file…
                       </span>
                     </span>
-                    <span class="file-name">
-                      Screen Shot 2017-07-29 at 15.54.25.png
+                    <span className="file-name">
+                      ...
                     </span>
                   </label>
                 </div>
-              <p className="help is-danger">{msg.address}</p>
+              <p className="help is-danger">{msg.photo}</p>
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-success" onClick={this.doSave.bind(this)}>儲存</button>
+            <button className={"button is-success" + isLoading} onClick={this.doSave.bind(this)}>儲存</button>
             <button className="button" onClick={click_cancel}>取消</button>
           </footer>
         </div>
@@ -149,23 +236,3 @@ export default class Form extends React.Component {
     )
   }
 }
-
-/*
-<div className="field">
-  <label className="label">啟用</label>
-  <div className="control">
-    <label className="radio">
-      <input type="radio" name="is-active"
-        value="true" checked={form.active === "true"} onChange={this.checkedChange.bind(this)} />
-      {'Yes'}
-    </label>
-    <label className="radio">
-      <input type="radio" name="is-active"
-        value="false" checked={form.active || 'false' === "false"} onChange={this.checkedChange.bind(this)} />
-      {'No'}
-    </label>
-  </div>
-</div>
-
-
-*/

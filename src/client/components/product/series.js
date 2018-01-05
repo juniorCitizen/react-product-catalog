@@ -62,21 +62,19 @@ class Series extends React.Component {
       method: 'get',
       url: config.route.productMenu,
       data: {},
-      headers: {
-        'x-access-token': window.localStorage["jwt-token"]
-      }
+      headers: {}
     })
-      .then(function (response) {
-        if (response.status === 200) {
-          self.setState({
-            series: response.data.data
-          })
-        } else {
-          console.log(response.data)
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      if (response.status === 200) {
+        self.setState({
+          series: response.data.data
+        })
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 
   render() {

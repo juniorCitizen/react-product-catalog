@@ -46,6 +46,7 @@ class Product extends React.Component {
   }
 
   showEdit(item) {
+    console.log(item)
     this.setState({
       editShow: true,
       sItem: item
@@ -177,7 +178,7 @@ class Product extends React.Component {
                     <tr>
                       <th>產品代號</th>
                       <th>品名</th>
-                      <th width="101"></th>
+                      <th width="186"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -186,6 +187,16 @@ class Product extends React.Component {
                         <td>{item.code}</td>
                         <td>{item.name}</td>
                         <td>
+                          <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
+                            <span className="icon has-text-info">
+                              <i className="fa fa-flag fa-fa"></i>
+                            </span>
+                          </button>
+                          <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
+                            <span className="icon has-text-info">
+                              <i className="fa fa-list fa-lg"></i>
+                            </span>
+                          </button>
                           <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
                             <span className="icon has-text-info">
                               <i className="fa fa-edit fa-lg"></i>

@@ -23,6 +23,9 @@ export default {
     photos: {
       getPhoto: api + '/photos/',
     },
+    tag: {
+      getTags: api + '/tags'
+    },
   },
   project: {
     name: 'reactProductCatalog',

@@ -117,7 +117,6 @@ class Modify extends React.Component {
     const { login } =  this.props
     const { form, msg } = this.state
     const self = this
-    let url = ''
     delete form.email;
     console.log(form)
     axios({
