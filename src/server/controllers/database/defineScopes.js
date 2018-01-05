@@ -147,7 +147,7 @@ module.exports = (db) => {
         { model: db.Products, through: { attributes: ['quantity'] } }
       ],
       order: [
-        'updated',
+        'updatedAt',
         [db.Products, 'code']
       ]
     }
