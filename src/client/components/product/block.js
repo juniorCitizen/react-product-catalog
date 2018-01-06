@@ -53,6 +53,20 @@ class Block extends React.Component {
       })
   }
 
+  showDetail(item) {
+    this.setState({
+      show_detail: true,
+    })
+    this.refs.detail.getWrappedInstance().getProductInfo(item.id)
+  }
+
+  hideDetail() {
+    this.setState({
+      show_detail: false,
+    })
+    this.refs.detail.getWrappedInstance().doClear()
+  }
+
   render() {
     const { series, product, order } = this.props
     const { list, hot_list, new_list, show_detail } = this.state
