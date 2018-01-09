@@ -34,11 +34,7 @@ export default class Series extends React.Component {
   }
 }
 
-function initData() {
-
-
-
-
+function initData(obj) {
   return obj.map((item) => {
     item.childSeries = initData(item.childSeries)
     item.title = item.name

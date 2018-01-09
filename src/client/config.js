@@ -16,6 +16,7 @@ export default {
       detail: api + '/products/',
       delete: api + '/products/',
       update: api + '/products/',
+      patchSeries: api + '/products/'
     },
     order: {
       purchase: api + '/contacts/'

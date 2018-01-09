@@ -3,6 +3,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import Series from '../../product/series'
 import Form from './form'
+import ChangeSeries from './series'
+import Tags from './tags'
 import Confirm from '../../../containers/modal/confirm'
 import config from '../../../config'
 import { update_products } from '../../../actions'
@@ -26,7 +28,9 @@ class Product extends React.Component {
       search: '',
       addShow: false,
       editShow: false,
-      deleteShow: false
+      deleteShow: false,
+      seriesShow: false,
+      tagsShow: false,
     }
   }
 
@@ -60,6 +64,20 @@ class Product extends React.Component {
     })
   }
 
+  showSeries(item) {
+    this.setState({
+      seriesShow: true,
+      sItem: item,
+    })
+  }
+
+  showTags(item){
+    this.setState({
+      tagsShow: true,
+      sItem: item,
+    })
+  }
+
   hideAdd() {
     this.setState({
       addShow: false,
@@ -78,6 +96,20 @@ class Product extends React.Component {
     this.setState({
       deleteShow: false,
       sItem: {}
+    })
+  }
+
+  hideSeries() {
+    this.setState({
+      seriesShow: false,
+      sItem: {},
+    })
+  }
+
+  hideTags() {
+    this.setState({
+      tagsShow: false,
+      sItem: {},
     })
   }
 
@@ -129,7 +161,7 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props
-    const { list, search, addShow, editShow, deleteShow, sItem } = this.state
+    const { list, search, addShow, editShow, deleteShow, seriesShow, tagsShow, sItem } = this.state
     return (
       <div>
         <div className="container" style={style.container}>
@@ -187,12 +219,12 @@ class Product extends React.Component {
                         <td>{item.code}</td>
                         <td>{item.name}</td>
                         <td>
-                          <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
+                          <button className="button" style={style.tableButton} onClick={this.showTags.bind(this, item)}>
                             <span className="icon has-text-info">
                               <i className="fa fa-flag fa-fa"></i>
                             </span>
                           </button>
-                          <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
+                          <button className="button" style={style.tableButton} onClick={this.showSeries.bind(this, item)}>
                             <span className="icon has-text-info">
                               <i className="fa fa-list fa-lg"></i>
                             </span>
@@ -230,6 +262,18 @@ class Product extends React.Component {
                     click_cancel={this.hideDelete.bind(this)}
                   />
                 }  
+                {seriesShow && 
+                  <ChangeSeries show={seriesShow} title="變更類別"
+                    click_cancel={this.hideSeries.bind(this)}
+                    item={sItem}
+                  />
+                }
+                {tagsShow && 
+                  <Tags show={tagsShow} title="編輯標籤"
+                    click_cancel={this.hideTags.bind(this)}
+                    item={sItem}
+                  />
+                }
               </div>
           </div>
         </div>
