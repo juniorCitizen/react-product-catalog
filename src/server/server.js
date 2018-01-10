@@ -158,9 +158,9 @@ Promise.each( // 依序執行服務原件的啟動程序
     throw error
   })
 
-// //////////////////////
-// // 錯誤/例外的捕捉與處理
-// //////////////////////
+// ////////////////////
+// 錯誤/例外的捕捉與處理
+// ////////////////////
 process.on('unhandledRejection', (error, promise) => {
   logging.error(error, '發現未處理的 Promise Rejection')
   return logging.warning(promise)
