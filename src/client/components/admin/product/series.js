@@ -30,18 +30,19 @@ export default class Series extends React.Component {
       method: 'get',
       url: config.route.productMenu,
     })
-      .then(function (response) {
-        if (response.status === 200) {
-          let list = self.initSeries([], response.data.data, 0)
-          self.setState({
-            series: list
-          })
-        } else {
-          console.log(response.data)
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      if (response.status === 200) {
+        console.log(response.data.data)
+        //let list = self.initSeries([], response.data.data, 0)
+        self.setState({
+          series: list
+        })
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 
   initSeries(list, node, n) {
