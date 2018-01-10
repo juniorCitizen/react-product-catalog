@@ -32,8 +32,7 @@ export default class Series extends React.Component {
     })
     .then(function (response) {
       if (response.status === 200) {
-        console.log(response.data.data)
-        //let list = self.initSeries([], response.data.data, 0)
+        let list = self.initSeries([], response.data.data, 0)
         self.setState({
           series: list
         })
@@ -89,10 +88,6 @@ export default class Series extends React.Component {
     }).catch(function (error) {
       console.log(error)
     })
-  }
-
-  reSetSeries() {
-
   }
 
   render() {

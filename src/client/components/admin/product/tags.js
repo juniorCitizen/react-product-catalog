@@ -138,58 +138,6 @@ export default class Tags extends React.Component {
           </header>
           <section className="modal-card-body">
             <div className="field">
-              <label className="label">產品代號</label>
-              <div className="control">
-                <input className="input" type="text" placeholder="請輸入產品代號" disabled={true}
-                  value={form.code || ''} onChange={this.inputChange.bind(this, 'code')}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">品名</label>
-              <div className="control">
-                <input className="input" type="text" placeholder="請輸入品名"
-                  value={form.name || ''} onChange={this.inputChange.bind(this, 'name')}
-                />
-              </div>
-              <p className="help is-danger">{msg.name}</p>
-            </div>
-            <div className="field">
-              <label className="label">規格</label>
-              <div className="control">
-                <textarea className="textarea" placeholder="請輸入規格"
-                  value={form.specification || ''}
-                  onChange={this.inputChange.bind(this, 'specification')}/>
-              </div>
-              <p className="help is-danger">{msg.specification}</p>
-            </div>
-            <div className="field">
-              <label className="label">說明</label>
-              <div className="control">
-                <textarea className="textarea" placeholder="請輸入說明"
-                  value={form.description || ''}
-                  onChange={this.inputChange.bind(this, 'description')}/>
-              </div>
-              <p className="help is-danger">{msg.description}</p>
-            </div>
-            <div className="field">
-              <label className="label">分類</label>
-              <div className="control">
-                <div className="select">
-                  <select onChange={this.seriesChange.bind(this)} value={form.seriesId}>
-                    {series.map((item, index) => (
-                      <option 
-                        key={index} 
-                        value={item.id}
-                      >
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="field">
               <label className="label">標籤</label>
               <div className="control">
                 <div className="select is-multiple">
@@ -205,26 +153,6 @@ export default class Tags extends React.Component {
                   </select>
                 </div>
               </div>
-            </div>
-            <div className="field">
-              <label className="label">產品圖片</label>
-                <div className="file has-name is-fullwidth">
-                  <label className="file-label">
-                    <input className="file-input" type="file" name="resume"/>
-                    <span className="file-cta">
-                      <span className="file-icon">
-                        <i className="fa fa-upload"></i>
-                      </span>
-                      <span className="file-label">
-                        Choose a file…
-                      </span>
-                    </span>
-                    <span className="file-name">
-                      ...
-                    </span>
-                  </label>
-                </div>
-              <p className="help is-danger">{msg.photo}</p>
             </div>
           </section>
           <footer className="modal-card-foot">
