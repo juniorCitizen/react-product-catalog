@@ -17,18 +17,18 @@ module.exports = {
     getMenuTree,
     appendTagMenus
   ],
-  createRootNode: [
+  createRootNode: [ // POST /series
     multer().none(),
     validateJwt({ staff: true }),
-    findTarget('params', false, false),
     findNodeSiblings,
     insertRecord,
     findTarget('created', true),
     sendTargetData
   ],
-  createChildNode: [
+  createChildNode: [ // POST /series/:seriesId
     multer().none(),
     validateJwt({ staff: true }),
+    findTarget('params', false, false),
     findNodeSiblings,
     insertRecord,
     findTarget('created', true),
