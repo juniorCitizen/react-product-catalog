@@ -2,49 +2,26 @@ import React from 'react'
 import axios from 'axios'
 import qs from 'qs'
 import config from '../../../config'
+import { connect } from 'react-redux'
 import { update_products } from '../../../actions'
 
-export default class Tags extends React.Component {
+class Tags extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       form: {},
-      msg: {
-        name: '',
-        specification: '',
-        description: '',
-        name: '',
-      },
-      series: [],
+      selected: [],
       tags: [],
       processing: false,
     }
   }
 
   componentDidMount() {
-    this.setState({ form: this.props.item })
-    this.getSeries()
+    this.setState({ 
+      form: this.props.item, 
+    })
     this.getTags()
-  }
-
-  getSeries() {
-    const self = this
-    axios({
-      method: 'get',
-      url: config.route.productMenu,
-    })
-    .then(function (response) {
-      if (response.status === 200) {
-        let list = self.initSeries([], response.data.data, 0)
-        self.setState({
-          series: list
-        })
-      } else {
-        console.log(response.data)
-      }
-    }).catch(function (error) {
-      console.log(error)
-    })
+    this.initTags()
   }
 
   getTags() {
@@ -64,40 +41,36 @@ export default class Tags extends React.Component {
     })
   }
 
-  initSeries(list, node, n) {
-    let s = '';
-    for(let i = 0; i < n; i++) {
-      s = s + '-'
+  initTags() {
+    let tags = this.props.item.tags
+    if (tags.length > 0) {
+      let arr = []
+      tags.map((item) => {
+        arr.push(item.id)
+      })
+      this.setState({selected: arr})
     }
-    node.map((item) => {
-      item.name = s + item.name
-      list.push(item)
-      list = this.initSeries(list, item.childSeries, n+1)
-    })
-    return list
   }
 
-  inputChange(cont, e) {
-    let text = e.target.value
-    let { form, msg } = this.state
-    form[cont] = text
-    msg[cont] = ''
-    this.setState({ form: form })
-    this.checkPassword()
-  }
-
-  seriesChange(e) {
-    let seriesId = e.target.value
-    let form = this.state.form
-    form.seriesId = seriesId
-    this.setState({form: form})
-  }
-
-  tagChange(e) {
-
+  selectTags(e) {
+    let tag = Number(e.target.value)
+    let { selected } = this.state
+    let add = true
+    for (let i = 0; i < selected.length; i++) {
+      if (selected[i] === tag) {
+        selected.splice(i, 1)
+        add = false
+      }
+    }
+    if (add) {
+      selected.push(tag)
+    }
+    this.setState({selected: selected})
   }
 
   doSave() {
+    console.log(this.state.selected)
+    return
     const { form } = this.state
     const self = this
     console.log(this.state.form)
@@ -126,7 +99,7 @@ export default class Tags extends React.Component {
 
   render() {
     const { title, show, click_cancel } = this.props
-    const { form, msg, processing, series, tags } = this.state
+    const { form, tags, selected, processing } = this.state
     const active = show ? ' is-active' : ''
     const isLoading = processing ? ' is-loading': ''
     return (
@@ -141,8 +114,8 @@ export default class Tags extends React.Component {
               <label className="label">標籤</label>
               <div className="control">
                 <div className="select is-multiple">
-                  <select multiple onChange={this.tagChange.bind(this)} value={form.seriesId}>
-                    {series.map((item, index) => (
+                  <select multiple value={selected} onChange={this.selectTags.bind(this)}>
+                    {tags.map((item, index) => (
                       <option 
                         key={index} 
                         value={item.id}
@@ -164,3 +137,12 @@ export default class Tags extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  const { series } = state
+  return {
+    series
+  }
+}
+
+export default connect(mapStateToProps)(Tags)

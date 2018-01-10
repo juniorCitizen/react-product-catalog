@@ -88,7 +88,7 @@ class Series extends React.Component {
 
   modifySeries(list) {
     let { form } = this.state
-    for(let m = 0; m < list.length; m++) {
+    for (let m = 0; m < list.length; m++) {
       for (let i = 0; i < list[m].products.length; i++) {
         if (list[m].products[i].seriesId !== list[m].id) {
           list[m].products.splice(i, 1)
