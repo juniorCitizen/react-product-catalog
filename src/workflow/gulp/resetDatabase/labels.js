@@ -23,8 +23,8 @@ module.exports = (Products, Tags) => {
           min: TAG_COUNT_FLOOR,
           max: TAG_COUNT_CEILING
         })
-        // set a flag to determine if adding a tag (20% chance)
-        let addTag = (Math.random() < 0.2)
+        // set a flag to determine if adding a tag (85% chance)
+        let addTag = (Math.random() < 0.85)
         if ((tagCount > 0) && addTag) {
           shuffleArray(tags)
           for (let counter = 0; counter < tagCount; counter++) {
