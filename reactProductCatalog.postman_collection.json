@@ -8,6 +8,7 @@
 	"item": [
 		{
 			"name": "not working",
+			"description": null,
 			"item": [
 				{
 					"name": "serve up index.html from template",
@@ -99,7 +100,7 @@
 								"login"
 							]
 						},
-						"description": "1. request\n\t  * header:\n\t    1. Content-Type:\n\t\t      * application/json\n\t\t      * multipart/form-data\n\t\t      * x-www-form-urlencoded\n\t  * body:\n\t    1. email*\n\t    2. password*\n2. response\n\t  * header: {\"Content-Type\":\"application/json\"}\n\t  * body:\n\t    1. data: a jwt string containing the following in the payload:\n\t\t      * id: uuidV4\n\t\t      * name: string\n\t\t      * email: email string\n\t\t      * admin: boolean (indicate if the account has admin privilege or not)\n3. notes:\n\t  * request by account with NULL password field will fail\n\t  * token is valid for 24 hours"
+						"description": "1. request\n    * header:\n      1. Content-Type:\n          * application/json\n          * multipart/form-data\n          * x-www-form-urlencoded\n    * body:\n      1. email*\n      2. password*\n2. response\n    * header: {\"Content-Type\":\"application/json\"}\n    * body:\n      1. data: a jwt string containing the following in the payload:\n          * id: uuidV4\n          * name: string\n          * email: email string\n          * admin: boolean (indicate if the account has admin privilege or not)\n3. notes:\n    * request by account with NULL password field will fail\n    * token is valid for 24 hours"
 					},
 					"response": []
 				},
@@ -136,7 +137,6 @@
 								{
 									"key": "comments",
 									"value": "these are my registration comments",
-									"description": "",
 									"type": "text"
 								},
 								{
@@ -200,25 +200,21 @@
 								{
 									"key": "productIdList[0]",
 									"value": "34154839-0746-44A6-9498-F46497B46486",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "productIdList[1]",
 									"value": "F34A4E87-FF43-4EC6-806F-9B364627D14C",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "quantities[0]",
 									"value": "25",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "quantities[1]",
 									"value": "32",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -240,7 +236,156 @@
 					},
 					"response": [
 						{
-							"id": "112ffd6c-3015-472d-b9fc-08057be620a2",
+							"id": "b50e1ec7-9140-44cc-9998-ea6c0dfc40a5",
+							"name": "attemp to register a admin contact without jwt or valid priviage",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "botPrevention",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "my fake company",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "David Tsai",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "00000000",
+											"type": "text"
+										},
+										{
+											"key": "countryId",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "telephone",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "fax",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "website",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "admin",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "2123",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2017 15:27:35 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"84b-wxDeTqPuQ2JMs+doY3In81WghdU\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "60",
+							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
+						},
+						{
+							"id": "d83ae5cf-eb56-4803-b97a-616493b43a93",
 							"name": "register a user account",
 							"originalRequest": {
 								"method": "POST",
@@ -356,43 +501,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "521",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Fri, 01 Dec 2017 15:16:50 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"209-GCglTobaW1l0iXIgvid9fsNGV9Q\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -400,8 +545,8 @@
 							"body": "{\"data\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZEQUExQkY1LUJBRjUtNDNDRS05OENBLUM2MDZGMzczOUQ5RCIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJjMWhhaWF5dS50c2FpLnBlcnNvbmFsQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNTEyMTQxNDEwLCJleHAiOjE1MTIyMjc4MTB9.2pyDf9-LhUMCyPYtTr2v721U9ssDpgIj3TH_Mm9-S-4\",\"message\":\"User account 'c1haiayu.tsai.personal@gmail.com' registered successfully. Privilege is supplied for 24 hours\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
 						},
 						{
-							"id": "4cb6908a-58e9-45eb-adce-744c5a4513c0",
-							"name": "attemp to register a admin contact without jwt or valid priviage",
+							"id": "0be68cc0-d8d3-4006-b98d-68f03fd354b5",
+							"name": "attemp to register admin account without password",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -409,79 +554,12 @@
 										"key": "Content-Type",
 										"type": "text",
 										"name": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
+										"value": "application/json"
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "botPrevention",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "company",
-											"value": "my fake company",
-											"type": "text"
-										},
-										{
-											"key": "name",
-											"value": "David Tsai",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "test@test.com",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "00000000",
-											"type": "text"
-										},
-										{
-											"key": "countryId",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "address",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "telephone",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "fax",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "website",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "mobile",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "admin",
-											"value": "true",
-											"type": "text"
-										}
-									]
+									"mode": "raw",
+									"raw": "{\n\t\"botPrevention\":\"\",\n\t\"company\":\"my fake company\",\n\t\"name\":\"David Tsai\",\n\t\"email\":\"tesssssst1@test.com\",\n\t\"password\":\"\",\n\t\"admin\": true\n}"
 								},
 								"url": {
 									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
@@ -497,59 +575,59 @@
 									]
 								}
 							},
-							"status": "Unauthorized",
-							"code": 401,
+							"status": "Bad Request",
+							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
-									"value": "2123",
+									"value": "2766",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 01 Dec 2017 15:27:35 GMT",
+									"value": "Fri, 01 Dec 2017 16:06:13 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"84b-wxDeTqPuQ2JMs+doY3In81WghdU\"",
+									"value": "W/\"ace-qOv1j0CTWeyq038Gqe8YPv7sTqc\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": "60",
-							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"401 Unauthorized\",\"error\":{\"name\":\"Error\",\"message\":\"Missing Token\",\"stack\":\"Error: Missing Token\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:29:19\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:21:37)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validatePasswordFormat.js:12:10)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Array.<anonymous> (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:53:37)\\n    at listener (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:169:15)\\n    at onFinish (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\on-finished\\\\index.js:100:5)\\n    at callback (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:55:10)\\n    at IncomingMessage.onevent (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\ee-first\\\\index.js:93:5)\\n    at emitNone (events.js:106:13)\\n    at IncomingMessage.emit (events.js:208:7)\\n    at endReadableNT (_stream_readable.js:1056:12)\\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\"}}"
+							"responseTime": "1590",
+							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Password is required for admin account registration\",\"stack\":\"Error: Password is required for admin account registration\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:25:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at multerMiddleware (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:18:41)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\"}}"
 						},
 						{
-							"id": "d98e7d5d-3dec-495e-81c8-a20259672272",
+							"id": "0c280e2a-12ca-4c62-9f77-966838e57f81",
 							"name": "creation of contact record without ability to login",
 							"originalRequest": {
 								"method": "POST",
@@ -655,130 +733,48 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "186",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Fri, 01 Dec 2017 15:45:31 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"ba-/fyw9RVcTILW2ifYrsPld7eGnFU\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
 							"responseTime": "161",
 							"body": "{\"message\":\"Contact record for 'tesst1@test.com' without login privilege is created\",\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"statusCode\":200}"
-						},
-						{
-							"id": "7259e5d6-cac7-416f-a619-f3794d3756d4",
-							"name": "attemp to register admin account without password",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"name": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"botPrevention\":\"\",\n\t\"company\":\"my fake company\",\n\t\"name\":\"David Tsai\",\n\t\"email\":\"tesssssst1@test.com\",\n\t\"password\":\"\",\n\t\"admin\": true\n}"
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/contacts",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"contacts"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "2766",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 01 Dec 2017 16:06:13 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"ace-qOv1j0CTWeyq038Gqe8YPv7sTqc\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": "1590",
-							"body": "{\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts\",\"message\":\"400 Bad Request\",\"error\":{\"name\":\"Error\",\"message\":\"Password is required for admin account registration\",\"stack\":\"Error: Password is required for admin account registration\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\routes\\\\contacts\\\\addContact.js:25:19)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at module.exports (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\botPrevention.js:2:45)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at multerMiddleware (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\multer\\\\lib\\\\make-middleware.js:18:41)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:131:14)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\"}}"
 						}
 					]
 				},
@@ -816,98 +812,11 @@
 								}
 							]
 						},
-						"description": "get a contact information by id\n\n1. request:\n\t* headers: {\"x-access-token\":jwt}\n\t* params: :contactId: uuidV4\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: 'data' property: detailed user data without credential information\n3. notes:\n\t* access is only granted when the following conditions are met:\n\t\t1. jwt is issued by server\n\t\t2. admin and staff has full access\n\t\t3. jwt payload carries an contact id that matches :contactId\n\t* server only returns one record related to :contactId"
+						"description": "get a contact information by id\n\n1. request:\n  * headers: {\"x-access-token\":jwt}\n  * params: :contactId: uuidV4\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body: 'data' property: detailed user data without credential information\n3. notes:\n  * access is only granted when the following conditions are met:\n    1. jwt is issued by server\n    2. admin and staff has full access\n    3. jwt payload carries an contact id that matches :contactId\n  * server only returns one record related to :contactId"
 					},
 					"response": [
 						{
-							"id": "c9d81111-0f30-4b7e-b519-3171a6e5feac",
-							"name": "get contact data details",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"contacts",
-										":contactId"
-									],
-									"variable": [
-										{
-											"key": "contactId",
-											"value": "7C31584A-7EC4-484C-959E-9F166E6B32DC"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "846",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 01 Dec 2017 16:59:46 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"34e-UvNRnzQ38N2wQAdyxqSPjV+5xLg\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [],
-							"responseTime": "64",
-							"body": "{\"data\":{\"id\":\"7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"email\":\"david.tsai@gentry-way.com.tw\",\"name\":\"David Tsai\",\"mobile\":null,\"hashedPassword\":\"be2d498b2e47ff3e00ee3f61806c25908c3bc6c68ba2ba059e89627cd255ce7a691f7f350adad7cfa10986a7d7d1f9027f7921f6af46032b8963f7a71493e9bb\",\"salt\":\"ba5dbfb5e36868d8\",\"admin\":true,\"active\":true,\"companyId\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"company\":{\"id\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"title\":\"Gentry Way Co., Ltd.\",\"address\":\"No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.\",\"telephone\":\"+886-(0)6-6529052\",\"fax\":\"+886-(0)6-6527093\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"countryId\":\"twn\"}},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"statusCode\":200,\"message\":\"200 OK\"}"
-						},
-						{
-							"id": "4e66a997-2cbf-40b5-bcef-fe003da38857",
+							"id": "c66b48ef-96c9-4e27-8ced-9cb73be1399d",
 							"name": "attempt to access other user's data",
 							"originalRequest": {
 								"method": "GET",
@@ -950,48 +859,135 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "2752",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Fri, 01 Dec 2017 17:00:27 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"ac0-zAFjOCeq5uzFTYBOEghXpdyV0KM\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
 							"responseTime": "28",
 							"body": "{\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/55FE81B2-DE83-420A-8444-D0057A2E9BAB\",\"message\":\"403 Forbidden\",\"error\":{\"name\":\"Error\",\"message\":\"Attempt to access other user's information\",\"stack\":\"Error: Attempt to access other user's information\\n    at jwt.verify (C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:44:23)\\n    at Object.module.exports [as verify] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\jsonwebtoken\\\\verify.js:180:10)\\n    at C:\\\\projects\\\\react-product-catalog\\\\src\\\\server\\\\middlewares\\\\validateJwt.js:33:16\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:137:13)\\n    at Route.dispatch (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:112:3)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:281:22\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:354:14)\\n    at param (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:410:3)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at trim_prefix (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:317:13)\\n    at C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:7\\n    at Function.process_params (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:335:12)\\n    at next (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:275:10)\\n    at Function.handle (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:174:3)\\n    at router (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\\n    at Layer.handle [as handle_request] (C:\\\\projects\\\\react-product-catalog\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\"}}"
+						},
+						{
+							"id": "88a92a76-73db-4175-92bb-04da728e34e8",
+							"name": "get contact data details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdDMzE1ODRBLTdFQzQtNDg0Qy05NTlFLTlGMTY2RTZCMzJEQyIsIm5hbWUiOiJEYXZpZCBUc2FpIiwiZW1haWwiOiJkYXZpZC50c2FpQGdlbnRyeS13YXkuY29tLnR3IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMjE0NzQxOCwiZXhwIjoxNTEyMjMzODE4fQ.2i7L4nKjWupguN2cRY9Bv52ByPyO-4yzVDC6O5DubEs"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/contacts/:contactId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"contacts",
+										":contactId"
+									],
+									"variable": [
+										{
+											"key": "contactId",
+											"value": "7C31584A-7EC4-484C-959E-9F166E6B32DC"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "846",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2017 16:59:46 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34e-UvNRnzQ38N2wQAdyxqSPjV+5xLg\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "64",
+							"body": "{\"data\":{\"id\":\"7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"email\":\"david.tsai@gentry-way.com.tw\",\"name\":\"David Tsai\",\"mobile\":null,\"hashedPassword\":\"be2d498b2e47ff3e00ee3f61806c25908c3bc6c68ba2ba059e89627cd255ce7a691f7f350adad7cfa10986a7d7d1f9027f7921f6af46032b8963f7a71493e9bb\",\"salt\":\"ba5dbfb5e36868d8\",\"admin\":true,\"active\":true,\"companyId\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"company\":{\"id\":\"5B1DDB1E-A205-4EE4-B427-7ADF02D79653\",\"title\":\"Gentry Way Co., Ltd.\",\"address\":\"No. 152, Wufu Road, Yanshui District, Tainan City, 737, Taiwan R.O.C.\",\"telephone\":\"+886-(0)6-6529052\",\"fax\":\"+886-(0)6-6527093\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"countryId\":\"twn\"}},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/contacts/7C31584A-7EC4-484C-959E-9F166E6B32DC\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						}
 					]
 				},
@@ -1015,41 +1011,35 @@
 								{
 									"key": "email",
 									"value": "aaa@gmail.com",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "name",
 									"value": "菜市場",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "mobile",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "password",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "companyId",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "admin",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								}
@@ -1075,7 +1065,7 @@
 								}
 							]
 						},
-						"description": "update a contact record according to the access privilege\n\n1. request:\n\t* headers:\n\t\t1. Content-Type:\n\t\t\t* application/x-www-form-urlencoded\n\t\t\t* application/json\n\t\t\t* multipart/form-data\n\t\t2. x-access-token: jwt\n\t* params: :contactId - target contact record id\n\t* body: all are optional, but some props can only be updated with proper privilege\n\t\t1. email\n\t\t2. name\n\t\t3. mobile\n\t\t4. password (admin and user only)\n\t\t5. companyId (admin only)\n\t\t6. admin (admin only)\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: 'data' property contains the edited content record with company details\n3. notes:"
+						"description": "update a contact record according to the access privilege\n\n1. request:\n  * headers:\n    1. Content-Type:\n      * application/x-www-form-urlencoded\n      * application/json\n      * multipart/form-data\n    2. x-access-token: jwt\n  * params: :contactId - target contact record id\n  * body: all are optional, but some props can only be updated with proper privilege\n    1. email\n    2. name\n    3. mobile\n    4. password (admin and user only)\n    5. companyId (admin only)\n    6. admin (admin only)\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body: 'data' property contains the edited content record with company details\n3. notes:"
 					},
 					"response": []
 				},
@@ -1110,7 +1100,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
@@ -1157,11 +1147,11 @@
 								"photos"
 							]
 						},
-						"description": "1. request:\n\t* headers:\n\t\t1. x-access-token: jwt token\n\t\t2. Content-Type: multipart/form-data\n\t* body: {\"photos\":[uploaded photo list]}\n2. response: on success, data property contains a list of photoId's\n3. notes:\n\t* physical photos are removed from server after request is completed\n\t* file types are limited to: .jpg .jpeg .png .gif .svg .bmp\n\t* file size are limited to 500kb each\n\t* uploaded photos are not associated with any product or series, and active field is false"
+						"description": "1. request:\n  * headers:\n    1. x-access-token: jwt token\n    2. Content-Type: multipart/form-data\n  * body: {\"photos\":[uploaded photo list]}\n2. response: on success, data property contains a list of photoId's\n3. notes:\n  * physical photos are removed from server after request is completed\n  * file types are limited to: .jpg .jpeg .png .gif .svg .bmp\n  * file size are limited to 500kb each\n  * uploaded photos are not associated with any product or series, and active field is false"
 					},
 					"response": [
 						{
-							"id": "6b16a844-21f8-41fd-a9ee-46d89a6bdc95",
+							"id": "c3abdd70-3b10-4539-9eaf-ae9f8612967a",
 							"name": "batch photo inserts",
 							"originalRequest": {
 								"header": [],
@@ -1181,43 +1171,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "206",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 06:49:04 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"ce-VIJ877oPJ468dLCONidL5pNUCZA\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1255,7 +1245,7 @@
 								}
 							]
 						},
-						"description": "1. request:\n\t* headers: n/a\n\t* body: n/a\n2. response:\n\t* header: depends on the image type\n\t* body: raw image\n3. notes: if photo not found and svg place holder will be issued"
+						"description": "1. request:\n  * headers: n/a\n  * body: n/a\n2. response:\n  * header: depends on the image type\n  * body: raw image\n3. notes: if photo not found and svg place holder will be issued"
 					},
 					"response": []
 				},
@@ -1312,11 +1302,11 @@
 								}
 							]
 						},
-						"description": "1. request\n\t* headers: x-access-token: jwt token with admin privilege\n\t* query url: both can exist at the same time, but at least one must be present\n\t\t1. ?active=true/false\n\t\t2. ?primary=true/false\n\t* body: n/a\n\n2. response\n\t* headers: application/json\n\t* body: 'data' property is a json reprentation of the updated photo record (without the actual photo data)\n\n3. note: if 'primary' is being updated to true.  System will update 'primary' field of all the other photos with the same 'productId' to false"
+						"description": "1. request\n  * headers: x-access-token: jwt token with admin privilege\n  * query url: both can exist at the same time, but at least one must be present\n    1. ?active=true/false\n    2. ?primary=true/false\n  * body: n/a\n\n2. response\n  * headers: application/json\n  * body: 'data' property is a json reprentation of the updated photo record (without the actual photo data)\n\n3. note: if 'primary' is being updated to true.  System will update 'primary' field of all the other photos with the same 'productId' to false"
 					},
 					"response": [
 						{
-							"id": "5033fafa-e2ae-461d-9a93-d29117a3650b",
+							"id": "55d3a41e-4ffd-4574-8b8d-99de3dc02f96",
 							"name": "patching photo active / primary status",
 							"originalRequest": {
 								"header": [],
@@ -1336,43 +1326,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "416",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 07:42:03 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"1a0-uKhKIhrS4az8cQDZJTYAGq4omBM\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1415,11 +1405,11 @@
 								}
 							]
 						},
-						"description": "request\n\theader: x-access-token: jwt token with admin privilege\nresponse\n\theader: application/json\n\tbody: upon success, data will be an integer of how many records are removed (should always be 1)"
+						"description": "request\n  header: x-access-token: jwt token with admin privilege\nresponse\n  header: application/json\n  body: upon success, data will be an integer of how many records are removed (should always be 1)"
 					},
 					"response": [
 						{
-							"id": "f19100f2-cc7b-42f3-9e34-aecec1ba93b7",
+							"id": "6c6dd5bd-4c03-490c-8c5c-85ceb3e5da6b",
 							"name": "delete photo by id",
 							"originalRequest": {
 								"header": [],
@@ -1439,43 +1429,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "167",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 06:58:04 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"a7-bD/EpKU6xRdHlQPNbhwefc4KHhY\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1534,7 +1524,6 @@
 								{
 									"key": "seriesId",
 									"value": "6AFCF136-94DA-486C-B31D-3328D19EA0E9",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -1552,11 +1541,11 @@
 								"products"
 							]
 						},
-						"description": "1. request:\n\t* headers:\n\t\t1. Content-Type:\n\t\t\t* x-www-form-urlencoded\n\t\t\t* multipart/form-data\n\t\t\t* application/json\n\t\t2. x-access-token: jwt string with admin privilege\n\t* body:\n\t\t1. code: string (must be unique)\n\t\t2. name: string\n\t\t3. specification: text\n\t\t4. description: text\n2. response:\n\t* headers: application/json\n\t* body: \n3. notes: n/a"
+						"description": "1. request:\n  * headers:\n    1. Content-Type:\n      * x-www-form-urlencoded\n      * multipart/form-data\n      * application/json\n    2. x-access-token: jwt string with admin privilege\n  * body:\n    1. code: string (must be unique)\n    2. name: string\n    3. specification: text\n    4. description: text\n2. response:\n  * headers: application/json\n  * body: \n3. notes: n/a"
 					},
 					"response": [
 						{
-							"id": "5a4b036f-684c-4409-9d19-b0b363d17aa3",
+							"id": "9c49161a-da7e-41df-bd45-cc7fb9410cef",
 							"name": "insert new product record",
 							"originalRequest": {
 								"header": [],
@@ -1576,43 +1565,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "987",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Thu, 30 Nov 2017 03:00:17 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"3db-s1NrUh2oaXP0LWY3PoeCqfMKjHs\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1645,26 +1634,23 @@
 							"query": [
 								{
 									"key": "per_page",
-									"value": "1",
-									"equals": true
+									"value": "1"
 								},
 								{
 									"key": "page",
-									"value": "17",
-									"equals": true
+									"value": "17"
 								},
 								{
 									"key": "details",
-									"value": "",
-									"equals": true
+									"value": ""
 								}
 							]
 						},
-						"description": "1. request:\n\t* headers: n/a\n\t* url query:\n\t\t1. per_page=integer - specify how many records per page (automatically limited to between 1 and record count)\n\t\t2. page=integer - specify the page\n\t\t3. details - gives optional 'tags' and 'photos' properties in the data body\n\t\t4. inactive - allow searching for inactive (active=false) products\n\t* body: n/a\n2. response: see example\n\t* headers:\n\t\t1. Content-Type: application/json,\n\t\t2. Link: pagination string to be parsed with parse-link-header\n\t* body:\n\t\t1. data: contains a list of products (with optional details, tags, photos)\n\t\t2. pagination: pagination related information\n3. notes:\n\t* per_page and page must both be present in order to trigger pagination functionality\n\t* by default, only active records are retrieved"
+						"description": "1. request:\n  * headers: n/a\n  * url query:\n    1. per_page=integer - specify how many records per page (automatically limited to between 1 and record count)\n    2. page=integer - specify the page\n    3. details - gives optional 'tags' and 'photos' properties in the data body\n    4. inactive - allow searching for inactive (active=false) products\n  * body: n/a\n2. response: see example\n  * headers:\n    1. Content-Type: application/json,\n    2. Link: pagination string to be parsed with parse-link-header\n  * body:\n    1. data: contains a list of products (with optional details, tags, photos)\n    2. pagination: pagination related information\n3. notes:\n  * per_page and page must both be present in order to trigger pagination functionality\n  * by default, only active records are retrieved"
 					},
 					"response": [
 						{
-							"id": "1ae0c675-842f-4e70-897c-88ef707ab181",
+							"id": "6d67f682-454e-41bf-bdf4-c67b975ecb60",
 							"name": "request for product data with pagination information but no product details",
 							"originalRequest": {
 								"method": "GET",
@@ -1718,49 +1704,49 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "2754",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 14:48:40 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"ac2-VuzZY7G6+emmE9L7TDTvdEJ95os\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "Link",
 									"value": "<http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3>; rel=\"self\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1>; rel=\"first\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9>; rel=\"last\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2>; rel=\"prev\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4>; rel=\"next\"",
 									"name": "Link",
-									"description": "Used to express a typed relationship with another resource, where the relation type is defined by RFC 5988"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1768,7 +1754,7 @@
 							"body": "{\"data\":[{\"id\":\"F3499D35-5780-4B30-828A-19071610AC93\",\"code\":\"265-BCQY7X\",\"name\":\"Rustic Frozen Keyboard\",\"specification\":\"Quo numquam at delectus nesciunt eum qui magnam. Sint voluptatibus aut at sint. Inventore eligendi dicta minus repellat. Corporis minima ipsam harum dignissimos dolor sit ut aut.\",\"description\":\"Atque esse tempora molestiae quod quo eaque quod. Sed iusto deleniti doloremque voluptatem tempore quis praesentium aperiam. Incidunt impedit ea eum quasi repellat nobis quae.\\nFugit iste et. Dolores consequatur eius sequi nobis ut fuga. Distinctio non omnis vitae sint. Non sed voluptas sit dolorem. Itaque accusamus eius exercitationem.\\nEnim temporibus eum facilis placeat repellendus. Necessitatibus blanditiis quia sunt sint quis. Sunt est suscipit facilis et et quis. Ut quibusdam iure sunt molestiae.\\nNeque consequatur beatae necessitatibus est dolores voluptatem quis iste voluptatem. Aut provident non debitis. Molestiae ad aut porro odit dolorem repellat modi iure. Dolore saepe qui delectus voluptates aut minus voluptatem molestiae vel. Asperiores sed provident ut.\\nIure esse necessitatibus. Quia blanditiis maiores ipsum expedita sit consequatur ut consequatur. Quis aut natus sit odit reprehenderit. Sed incidunt at illum veritatis recusandae itaque atque voluptatem. Molestias ipsam quae non in omnis. Ullam quia optio incidunt.\",\"active\":true,\"seriesId\":\"AE10E8E2-8587-40CC-B463-BB36608761A2\"},{\"id\":\"6EB51C5F-D49D-45F5-8FFA-BEE16D7F4266\",\"code\":\"286-Q4OQFI\",\"name\":\"Tasty Concrete Bacon\",\"specification\":\"Laudantium pariatur ex aut omnis beatae rerum. Vel architecto consequatur repellendus consequatur et voluptas neque molestiae reiciendis. Deleniti nemo sint dolore beatae sed iste molestiae sint qui.\",\"description\":\"Ipsum est incidunt perferendis et ut et minus at. In autem pariatur error deserunt. Doloribus quod et earum. Ad adipisci est et quia vitae.\\nTotam ratione soluta tenetur est. Esse tempore inventore nobis harum non aut quo omnis. Aspernatur est sunt voluptatem rerum voluptate nesciunt nemo similique aut.\",\"active\":true,\"seriesId\":\"6923E318-CD0A-4039-A2F0-84C0BDA47C54\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":17,\"totalPages\":9,\"perPage\":2,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2\",\"self\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3\",\"next\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4\",\"last\":\"http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9\"}}"
 						},
 						{
-							"id": "165a5bb5-a116-45ed-bbd8-7557f087cb89",
+							"id": "c521c532-bea3-43b2-8c1d-5ec5ca17700f",
 							"name": "request for product data with optional details and pagination",
 							"originalRequest": {
 								"method": "GET",
@@ -1822,49 +1808,49 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "11620",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 14:50:04 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"2d64-jYlIUQOmrrujLLAz5dNbU4LyqDQ\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "Link",
 									"value": "<http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=3&details=>; rel=\"self\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=1&details=>; rel=\"first\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=9&details=>; rel=\"last\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=2&details=>; rel=\"prev\", <http://localhost:9004/reactProductCatalog/api/products?per_page=2&page=4&details=>; rel=\"next\"",
 									"name": "Link",
-									"description": "Used to express a typed relationship with another resource, where the relation type is defined by RFC 5988"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1902,11 +1888,11 @@
 								}
 							]
 						},
-						"description": "1. request:\n\t* header: n/a\n\t* body: n/a\n2. response:\n\t* header: {\"Content-Type\": \"application/json\"}\n\t* body: see example\n\t\t* data: full details of a product record\n3. notes: provides full details except actual photo data"
+						"description": "1. request:\n  * header: n/a\n  * body: n/a\n2. response:\n  * header: {\"Content-Type\": \"application/json\"}\n  * body: see example\n    * data: full details of a product record\n3. notes: provides full details except actual photo data"
 					},
 					"response": [
 						{
-							"id": "99d80bd8-0241-4899-9499-105de8845026",
+							"id": "59a09709-2f83-412a-bb2d-4e97d5a7fe0c",
 							"name": "request for product by 'id'",
 							"originalRequest": {
 								"header": [],
@@ -1926,43 +1912,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "8458",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Wed, 29 Nov 2017 14:57:31 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"210a-tiZJB9gBzPhW/Ra1pX5zrPG51lw\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -1987,7 +1973,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"code\":\"testCode\",\n\t\"name\":\"testName\",\n\t\"specification\":\"test specification\",\n\t\"description\":\"test description\"\n}"
+							"raw": "{\n  \"code\":\"testCode\",\n  \"name\":\"testName\",\n  \"specification\":\"test specification\",\n  \"description\":\"test description\"\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{domain}}:{{port}}/{{sysRef}}/api/products/:productId",
@@ -2008,7 +1994,8 @@
 									"value": "30458D25-637E-4339-821A-40CF8F1B0B25"
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -2043,7 +2030,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -2076,11 +2063,11 @@
 								}
 							]
 						},
-						"description": "performs case-insensitive comparison of a string against:\n\t1. product code\n\t2. product name\n\t3. product specification\n\t4. product description\n\t5. series name of the associated series to products\n\t6. tag name of the associated tags to products\nto get a list of products and associated details\n\n1. request:\n\t* headers: n/a\n\t* params: n/a\n\t* queries: ?wildCard=string to be searched\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t- data: array of product records with details\n\t\t\t1. series: associated series object\n\t\t\t2. tags: array of tag objects\n\t\t\t3. photos: array of photo objects (without actual photo data)\n3. notes: n/a"
+						"description": "performs case-insensitive comparison of a string against:\n  1. product code\n  2. product name\n  3. product specification\n  4. product description\n  5. series name of the associated series to products\n  6. tag name of the associated tags to products\nto get a list of products and associated details\n\n1. request:\n  * headers: n/a\n  * params: n/a\n  * queries: ?wildCard=string to be searched\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body:\n    - data: array of product records with details\n      1. series: associated series object\n      2. tags: array of tag objects\n      3. photos: array of photo objects (without actual photo data)\n3. notes: n/a"
 					},
 					"response": [
 						{
-							"id": "9e628643-664e-4b0f-879a-9f5179c0bf4f",
+							"id": "424e8664-d887-427b-99d6-1b24e26c702f",
 							"name": "search product listings",
 							"originalRequest": {
 								"method": "GET",
@@ -2118,43 +2105,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "49732",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Sat, 02 Dec 2017 06:12:57 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"c244-52PAVJ+rzJW8ovvC4uFIpEbScXk\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -2211,11 +2198,11 @@
 								}
 							]
 						},
-						"description": "1. request:\n\t+ headers: {\"x-access-token\":\"jwt string\"}\n\t+ parameters: {productId: uuid}\n\t+ queries: {seriesId: uuid}\n\t+ body: n/a\n2. response:\n\t+ headers: {\"Content-Type\":\"application/json\"}\n\t+ body:\n\t\t* data: product object with details\n\t\t\t- tags: tag objects\n\t\t\t- photos: photo objects without photoId\n3. notes: existing series association is replaced"
+						"description": "1. request:\n  + headers: {\"x-access-token\":\"jwt string\"}\n  + parameters: {productId: uuid}\n  + queries: {seriesId: uuid}\n  + body: n/a\n2. response:\n  + headers: {\"Content-Type\":\"application/json\"}\n  + body:\n    * data: product object with details\n      - tags: tag objects\n      - photos: photo objects without photoId\n3. notes: existing series association is replaced"
 					},
 					"response": [
 						{
-							"id": "338aaa04-cb39-4a14-8aef-d6116cbef6aa",
+							"id": "b52ad1ea-99a3-4f6d-ac17-0814905c44b0",
 							"name": "categorize a product to a series",
 							"originalRequest": {
 								"method": "POST",
@@ -2266,43 +2253,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "5296",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Thu, 30 Nov 2017 12:36:58 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"14b0-pE/sYe911NXPGXlB/s/n7esl7x0\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -2339,11 +2326,11 @@
 								"series"
 							]
 						},
-						"description": "1. request:\n\t* headers: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: structured tree nodes in json format\n3. notes: n/a"
+						"description": "1. request:\n  * headers: n/a\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body:\n    1. data: structured tree nodes in json format\n3. notes: n/a"
 					},
 					"response": [
 						{
-							"id": "eeff8ace-068d-4a98-890e-b9257569ad41",
+							"id": "6147603c-c24f-4cc7-9b15-05e74d912437",
 							"name": "get tree structured series menu at root level",
 							"originalRequest": {
 								"method": "GET",
@@ -2374,43 +2361,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "34112",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Fri, 01 Dec 2017 14:27:27 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"8540-N1uBXFRB0qOoXqFAvmxK7DAzcoI\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -2449,11 +2436,11 @@
 								}
 							]
 						},
-						"description": "1. request\n\t* headers: n/a\n\t* parameters: seriesId\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* response: see example\n\t\t1. data: series object\n\t\t\t* 'products' property - a list of associated product objects\n\t\t\t\t* 'photos' property- a list of photo objects without actual photo data\n3. notes:\n\t* primary photos is always listed as photos[0]\n\t* products are sorted by 'code' property"
+						"description": "1. request\n  * headers: n/a\n  * parameters: seriesId\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * response: see example\n    1. data: series object\n      * 'products' property - a list of associated product objects\n        * 'photos' property- a list of photo objects without actual photo data\n3. notes:\n  * primary photos is always listed as photos[0]\n  * products are sorted by 'code' property"
 					},
 					"response": [
 						{
-							"id": "ec0ecfcf-15be-4ef8-ad0f-3e2ebb30410b",
+							"id": "09c760f5-5494-489c-ad5d-3904f7227e53",
 							"name": "get subTree of a series by id",
 							"originalRequest": {
 								"method": "GET",
@@ -2492,43 +2479,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "2369",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Fri, 01 Dec 2017 14:15:38 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"941-jbjoJyl+h2GQ1O4IWHcwU83lutI\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -2570,7 +2557,7 @@
 							},
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4NzE0OUFGLTRCOTAtNDcxQi05MzYxLTg0ODBDOTAwMjA4QyIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMzY1OTU3OCwiZXhwIjoxNTEzNzQ1OTc4fQ.ZRHUN-w2DR7ABi6f3L166rGYAMMgU51zVbwx_iLd9UQ"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkMxRjZCNDA1LTBFRDItNEY0MC05OTZELUFDODEwQjdEN0Q1QiIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNTU2MDMzNCwiZXhwIjoxNTE1NjQ2NzM0fQ.yYhXzjVu5KzrJ0fuOLhp89n9n3CvNrBxSsRSx0dPWuk"
 							}
 						],
 						"body": {
@@ -2600,129 +2587,7 @@
 					},
 					"response": [
 						{
-							"id": "712e3288-16f7-4e8e-bd7a-db4301ca4874",
-							"name": "insert a new series",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
-									"key": "Access-Control-Allow-Origin",
-									"name": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"description": "Options that are desired for the connection",
-									"key": "Connection",
-									"name": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"description": "The length of the response body in octets (8-bit bytes)",
-									"key": "Content-Length",
-									"name": "Content-Length",
-									"value": "291"
-								},
-								{
-									"description": "The mime type of this content",
-									"key": "Content-Type",
-									"name": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"description": "The date and time that the message was sent",
-									"key": "Date",
-									"name": "Date",
-									"value": "Tue, 28 Nov 2017 05:47:39 GMT"
-								},
-								{
-									"description": "An identifier for a specific version of a resource, often a message digest",
-									"key": "ETag",
-									"name": "ETag",
-									"value": "W/\"123-aiC12tVgjuFQBw59zZpjPg9xIkg\""
-								},
-								{
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
-									"key": "X-Powered-By",
-									"name": "X-Powered-By",
-									"value": "Express"
-								}
-							],
-							"cookie": [],
-							"responseTime": "87",
-							"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
-						},
-						{
-							"id": "21d150b1-3338-48bf-b9a1-6a5cbef854e2",
-							"name": "insert a new series with multipart/form-data as content-type",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
-									"key": "Access-Control-Allow-Origin",
-									"name": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"description": "Options that are desired for the connection",
-									"key": "Connection",
-									"name": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"description": "The length of the response body in octets (8-bit bytes)",
-									"key": "Content-Length",
-									"name": "Content-Length",
-									"value": "263"
-								},
-								{
-									"description": "The mime type of this content",
-									"key": "Content-Type",
-									"name": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"description": "The date and time that the message was sent",
-									"key": "Date",
-									"name": "Date",
-									"value": "Thu, 30 Nov 2017 06:54:53 GMT"
-								},
-								{
-									"description": "An identifier for a specific version of a resource, often a message digest",
-									"key": "ETag",
-									"name": "ETag",
-									"value": "W/\"107-3lwLvccrFavwPmS17r5iVGBNLDk\""
-								},
-								{
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
-									"key": "X-Powered-By",
-									"name": "X-Powered-By",
-									"value": "Express"
-								}
-							],
-							"cookie": [],
-							"responseTime": "128",
-							"body": "{\"data\":{\"id\":\"D3B79BB0-0840-431A-9A4C-D459EFFEA3F2\",\"name\":\"test series\",\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"displaySequence\":3},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
-						},
-						{
-							"id": "0fb0416a-c6a8-4033-9de7-23dfe5220297",
+							"id": "360679dc-de73-4c52-a247-6c2f995f2b24",
 							"name": "insert a new series with multipart/form-data as content-type",
 							"originalRequest": {
 								"header": [],
@@ -2783,7 +2648,7 @@
 							"body": "{\"data\":{\"id\":\"D3B79BB0-0840-431A-9A4C-D459EFFEA3F2\",\"name\":\"test series\",\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"displaySequence\":3},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						},
 						{
-							"id": "d708052d-62f1-402e-831b-8b6c4eb405c6",
+							"id": "d09bc9ca-38a9-419a-a2ee-c95ecf5c90e7",
 							"name": "insert a new series",
 							"originalRequest": {
 								"header": [],
@@ -2842,6 +2707,128 @@
 							"cookie": [],
 							"responseTime": "87",
 							"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
+						},
+						{
+							"id": "10c1f080-87f4-4902-abd5-3866bb80636c",
+							"name": "insert a new series",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
+									"key": "Access-Control-Allow-Origin",
+									"name": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"description": "Options that are desired for the connection",
+									"key": "Connection",
+									"name": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"description": "The length of the response body in octets (8-bit bytes)",
+									"key": "Content-Length",
+									"name": "Content-Length",
+									"value": "291"
+								},
+								{
+									"description": "The mime type of this content",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"description": "The date and time that the message was sent",
+									"key": "Date",
+									"name": "Date",
+									"value": "Tue, 28 Nov 2017 05:47:39 GMT"
+								},
+								{
+									"description": "An identifier for a specific version of a resource, often a message digest",
+									"key": "ETag",
+									"name": "ETag",
+									"value": "W/\"123-aiC12tVgjuFQBw59zZpjPg9xIkg\""
+								},
+								{
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
+									"key": "X-Powered-By",
+									"name": "X-Powered-By",
+									"value": "Express"
+								}
+							],
+							"cookie": [],
+							"responseTime": "87",
+							"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
+						},
+						{
+							"id": "80b35c62-0090-456a-b0c3-bc3621cf21a1",
+							"name": "insert a new series with multipart/form-data as content-type",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
+									"key": "Access-Control-Allow-Origin",
+									"name": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"description": "Options that are desired for the connection",
+									"key": "Connection",
+									"name": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"description": "The length of the response body in octets (8-bit bytes)",
+									"key": "Content-Length",
+									"name": "Content-Length",
+									"value": "263"
+								},
+								{
+									"description": "The mime type of this content",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"description": "The date and time that the message was sent",
+									"key": "Date",
+									"name": "Date",
+									"value": "Thu, 30 Nov 2017 06:54:53 GMT"
+								},
+								{
+									"description": "An identifier for a specific version of a resource, often a message digest",
+									"key": "ETag",
+									"name": "ETag",
+									"value": "W/\"107-3lwLvccrFavwPmS17r5iVGBNLDk\""
+								},
+								{
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
+									"key": "X-Powered-By",
+									"name": "X-Powered-By",
+									"value": "Express"
+								}
+							],
+							"cookie": [],
+							"responseTime": "128",
+							"body": "{\"data\":{\"id\":\"D3B79BB0-0840-431A-9A4C-D459EFFEA3F2\",\"name\":\"test series\",\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"displaySequence\":3},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						}
 					]
 				},
@@ -2878,7 +2865,7 @@
 							},
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkI5QjI0QzNBLTUzNUQtNEZGRS1BMkEzLTY0NTgzRkQyRTAwMiIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxMzU4MDAyOSwiZXhwIjoxNTEzNjY2NDI5fQ.WiP961H8Sg3O9sT0NBWdgreVK-8PInAh6oJuIQbkuTE"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkMxRjZCNDA1LTBFRDItNEY0MC05OTZELUFDODEwQjdEN0Q1QiIsImVtYWlsIjoiY2hpYXl1LnRzYWkucGVyc29uYWxAZ21haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNTU2MDMzNCwiZXhwIjoxNTE1NjQ2NzM0fQ.yYhXzjVu5KzrJ0fuOLhp89n9n3CvNrBxSsRSx0dPWuk"
 							}
 						],
 						"body": {
@@ -2886,7 +2873,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Root Level Series 1-4-3",
+									"value": "Root Level Series 1-1",
 									"type": "text"
 								}
 							]
@@ -2907,7 +2894,7 @@
 							"variable": [
 								{
 									"key": "seriesId",
-									"value": "A565AC9A-9F3E-45FA-B086-F6A1E4937349"
+									"value": "67DA908F-7922-46B7-A91A-4436026FB970"
 								}
 							]
 						},
@@ -2915,68 +2902,7 @@
 					},
 					"response": [
 						{
-							"id": "4d1ef1c3-4126-48dc-a622-47d938c774d4",
-							"name": "insert a new series",
-							"originalRequest": {
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
-									"key": "Access-Control-Allow-Origin",
-									"name": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"description": "Options that are desired for the connection",
-									"key": "Connection",
-									"name": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"description": "The length of the response body in octets (8-bit bytes)",
-									"key": "Content-Length",
-									"name": "Content-Length",
-									"value": "291"
-								},
-								{
-									"description": "The mime type of this content",
-									"key": "Content-Type",
-									"name": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"description": "The date and time that the message was sent",
-									"key": "Date",
-									"name": "Date",
-									"value": "Tue, 28 Nov 2017 05:47:39 GMT"
-								},
-								{
-									"description": "An identifier for a specific version of a resource, often a message digest",
-									"key": "ETag",
-									"name": "ETag",
-									"value": "W/\"123-aiC12tVgjuFQBw59zZpjPg9xIkg\""
-								},
-								{
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
-									"key": "X-Powered-By",
-									"name": "X-Powered-By",
-									"value": "Express"
-								}
-							],
-							"cookie": [],
-							"responseTime": "87",
-							"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
-						},
-						{
-							"id": "77c1dc63-6079-4036-9244-779bd4d7e6ef",
+							"id": "715344d0-9c4c-4600-9094-eaae1c78b94d",
 							"name": "insert a new series with multipart/form-data as content-type",
 							"originalRequest": {
 								"header": [],
@@ -3035,6 +2961,67 @@
 							"cookie": [],
 							"responseTime": "128",
 							"body": "{\"data\":{\"id\":\"D3B79BB0-0840-431A-9A4C-D459EFFEA3F2\",\"name\":\"test series\",\"active\":true,\"menuLevel\":0,\"parentSeriesId\":null,\"displaySequence\":3},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
+						},
+						{
+							"id": "cbbfc4af-fe08-4743-afd6-079997e688fa",
+							"name": "insert a new series",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource.",
+									"key": "Access-Control-Allow-Origin",
+									"name": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"description": "Options that are desired for the connection",
+									"key": "Connection",
+									"name": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"description": "The length of the response body in octets (8-bit bytes)",
+									"key": "Content-Length",
+									"name": "Content-Length",
+									"value": "291"
+								},
+								{
+									"description": "The mime type of this content",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"description": "The date and time that the message was sent",
+									"key": "Date",
+									"name": "Date",
+									"value": "Tue, 28 Nov 2017 05:47:39 GMT"
+								},
+								{
+									"description": "An identifier for a specific version of a resource, often a message digest",
+									"key": "ETag",
+									"name": "ETag",
+									"value": "W/\"123-aiC12tVgjuFQBw59zZpjPg9xIkg\""
+								},
+								{
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)",
+									"key": "X-Powered-By",
+									"name": "X-Powered-By",
+									"value": "Express"
+								}
+							],
+							"cookie": [],
+							"responseTime": "87",
+							"body": "{\"data\":{\"id\":\"2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"name\":\"new test series\",\"active\":true,\"menuLevel\":2,\"parentSeriesId\":\"B65EBF10-D987-4493-B61C-225BC49E26D8\",\"order\":4},\"method\":\"post\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						}
 					]
 				},
@@ -3093,7 +3080,7 @@
 								}
 							]
 						},
-						"description": "1. request\n\t* headers: {\"x-access-token\":\"jwt string\"}\n\t* parameters: seriesId: uuidV4\n\t* queries:\n\t\t1. name - string\n\t\t2. active - boolean\n\t\t3. displaySequence - integer\n\t\t\t* min: 0, max: sibling count - 1, will be limited to this range automatically without error\n\t\t4. parentSeriesId - uuidV4\n\t\t\t* provide no value to move series to root, e.g. \"?parentSeriesId\"\n\t* body: n/a\n\t* notes: at least one of the query must be present and only **ONE** query will be processed per request (in the listed precedence)\n2. response\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t1. data: a json representation of the updated product record (no details)\n3. notes:\n\t* patching 'parentSeriesId' always puts it at the end of the existing displaySequence order\n\t* menuLevel value cannot be updated directly, will be determined automatically"
+						"description": "1. request\n  * headers: {\"x-access-token\":\"jwt string\"}\n  * parameters: seriesId: uuidV4\n  * queries:\n    1. name - string\n    2. active - boolean\n    3. displaySequence - integer\n      * min: 0, max: sibling count - 1, will be limited to this range automatically without error\n    4. parentSeriesId - uuidV4\n      * provide no value to move series to root, e.g. \"?parentSeriesId\"\n  * body: n/a\n  * notes: at least one of the query must be present and only **ONE** query will be processed per request (in the listed precedence)\n2. response\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body:\n    1. data: a json representation of the updated product record (no details)\n3. notes:\n  * patching 'parentSeriesId' always puts it at the end of the existing displaySequence order\n  * menuLevel value cannot be updated directly, will be determined automatically"
 					},
 					"response": []
 				},
@@ -3132,11 +3119,11 @@
 								}
 							]
 						},
-						"description": "1. request\r\n\t* headers: {\"x-access-token\":\"jwt token\"}\r\n\t* parameters: seriesId\r\n\t* body: n/a\r\n2. response:\r\n\t* headers: {\"Content-Type\":\"application/json\"}\r\n\t* body:\r\n\t\t1. data: integer representing the number of records deleted (should always be 1 on success)\r\n3. notes:\r\n\t* server will return error if the target record has childSeries (other series with the target's id as parentSeriesId)\r\n\t* associated photos and products will have 'seriesId' field removed\r\n\t* for associated photos that are **not** associated with any products:\r\n\t\t1. seriesId = NULL\r\n\t\t2. active = false\r\n\t\t3. primary = false\r\n\t* for associated photos that are associated with a product:\r\n\t\t1. seriesId = NULL\r\n\t* all associated products\r\n\t\t1. seriesId = NULL\r\n\t\t2. active = false"
+						"description": "1. request\r\n  * headers: {\"x-access-token\":\"jwt token\"}\r\n  * parameters: seriesId\r\n  * body: n/a\r\n2. response:\r\n  * headers: {\"Content-Type\":\"application/json\"}\r\n  * body:\r\n    1. data: integer representing the number of records deleted (should always be 1 on success)\r\n3. notes:\r\n  * server will return error if the target record has childSeries (other series with the target's id as parentSeriesId)\r\n  * associated photos and products will have 'seriesId' field removed\r\n  * for associated photos that are **not** associated with any products:\r\n    1. seriesId = NULL\r\n    2. active = false\r\n    3. primary = false\r\n  * for associated photos that are associated with a product:\r\n    1. seriesId = NULL\r\n  * all associated products\r\n    1. seriesId = NULL\r\n    2. active = false"
 					},
 					"response": [
 						{
-							"id": "c20f8a93-6807-4d38-9d29-051314f98761",
+							"id": "52e8e572-6a37-44b6-91af-b4ae17d94bf7",
 							"name": "remove series by id",
 							"originalRequest": {
 								"header": [],
@@ -3156,43 +3143,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "167",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Tue, 28 Nov 2017 07:54:47 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"a7-29KiX6722twWZA2JD8rjiA3LOxw\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -3200,6 +3187,61 @@
 							"body": "{\"data\":1,\"method\":\"delete\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/series/2C7E4510-3D10-4E63-8007-EB37F07AD422\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						}
 					]
+				},
+				{
+					"name": "get root menu series items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/{{sysRef}}/api/v2/series",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{sysRef}}",
+								"api",
+								"v2",
+								"series"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get menu series items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/{{sysRef}}/api/v2/series/:seriesId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{sysRef}}",
+								"api",
+								"v2",
+								"series",
+								":seriesId"
+							],
+							"variable": [
+								{
+									"key": "seriesId",
+									"value": "EB44F46E-3985-4FA9-A125-11DFAD884FAB"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
@@ -3231,21 +3273,19 @@
 							"query": [
 								{
 									"key": "per_page",
-									"value": "3",
-									"equals": true
+									"value": "3"
 								},
 								{
 									"key": "page",
-									"value": "3",
-									"equals": true
+									"value": "3"
 								}
 							]
 						},
-						"description": "1. request:\n\t* headers: n/a\n\t* params:\n\t\t1. per_page: optional integer\n\t\t2. page: optional integer\n\t\t3. details: no value\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers:\n\t* body:\n\t\tdata: array of countries with or without flagSvg data\n3. notes:\n\t* per_page and page query element must both exist for pagination to work"
+						"description": "1. request:\n  * headers: n/a\n  * params:\n    1. per_page: optional integer\n    2. page: optional integer\n    3. details: no value\n  * queries: n/a\n  * body: n/a\n2. response:\n  * headers:\n  * body:\n    data: array of countries with or without flagSvg data\n3. notes:\n  * per_page and page query element must both exist for pagination to work"
 					},
 					"response": [
 						{
-							"id": "863735ad-5d8c-4999-bed0-f2227a7e7b7e",
+							"id": "52a3647f-9827-4283-96a6-9e6fe9370dd7",
 							"name": "get countries with optional pagination and flag data",
 							"originalRequest": {
 								"method": "GET",
@@ -3293,49 +3333,49 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "1135",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Sat, 02 Dec 2017 07:16:00 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"46f-+H06bEP0lkKMtNAskp/+9gXvbRk\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "Link",
 									"value": "<http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=3&details=>; rel=\"self\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=1&details=>; rel=\"first\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=248&details=>; rel=\"last\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=2&details=>; rel=\"prev\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=4&details=>; rel=\"next\"",
 									"name": "Link",
-									"description": "Used to express a typed relationship with another resource, where the relation type is defined by RFC 5988"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -3343,7 +3383,7 @@
 							"body": "{\"data\":[{\"id\":\"ben\",\"name\":\"Benin\",\"region\":\"Africa\",\"flagSvg\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"no\\\"?>\\r\\n<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" width=\\\"1500\\\" height=\\\"1000\\\" viewBox=\\\"0 0 15 10\\\">\\r\\n<rect width=\\\"15\\\" height=\\\"10\\\" fill=\\\"#fcd116\\\" id=\\\"Yellow\\\"/>\\r\\n<rect width=\\\"15\\\" height=\\\"5\\\" y=\\\"5\\\" fill=\\\"#e8112d\\\" id=\\\"Red\\\"/>\\r\\n<rect width=\\\"6\\\" height=\\\"10\\\" fill=\\\"#008751\\\" id=\\\"Green\\\"/>\\r\\n</svg>\"}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=3&details\",\"statusCode\":200,\"message\":\"200 OK\",\"pagination\":{\"totalRecords\":248,\"totalPages\":248,\"perPage\":1,\"currentPage\":3,\"first\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=1&details=\",\"prev\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=2&details=\",\"self\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=3&details=\",\"next\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=4&details=\",\"last\":\"http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=248&details=\"}}"
 						},
 						{
-							"id": "a8b98d59-83fe-4b2b-9c72-1c25a29341df",
+							"id": "8c55ce5b-c000-48d6-b794-b63934d5b756",
 							"name": "get countries with optional pagination without flag data",
 							"originalRequest": {
 								"method": "GET",
@@ -3392,49 +3432,49 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "691",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Sat, 02 Dec 2017 07:16:55 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"2b3-xE+NFHmBlBMhEsAKbxRS33Fztlk\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "Link",
 									"value": "<http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=3>; rel=\"self\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=1>; rel=\"first\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=248>; rel=\"last\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=2>; rel=\"prev\", <http://localhost:9004/reactProductCatalog/api/countries?per_page=1&page=4>; rel=\"next\"",
 									"name": "Link",
-									"description": "Used to express a typed relationship with another resource, where the relation type is defined by RFC 5988"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -3464,7 +3504,8 @@
 								"api",
 								"regions"
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -3494,7 +3535,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
@@ -3523,7 +3564,7 @@
 								"tags"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -3546,7 +3587,7 @@
 								"tagColors"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -3566,31 +3607,26 @@
 								{
 									"key": "a",
 									"value": "",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "b",
 									"value": "",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "c",
 									"value": "",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "name",
 									"value": "whatever tag",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "color",
 									"value": "Orchid",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -3608,7 +3644,7 @@
 								"tags"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -3650,7 +3686,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -3685,7 +3721,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
@@ -3735,7 +3771,96 @@
 					},
 					"response": [
 						{
-							"id": "b799dd5f-07f4-4dad-ad2c-dd2feffa167e",
+							"id": "60b896c3-3fa8-4afe-b819-e46577e96f3f",
+							"name": "get carousel record list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9004/reactProductCatalog/api/carousels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9004",
+									"path": [
+										"reactProductCatalog",
+										"api",
+										"carousels"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "1",
+											"equals": true,
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "2",
+											"equals": true,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "1233",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2017 02:56:10 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d1-DR+NyZXO4Vln7l2qIpSLDgOlNgM\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "124",
+							"body": "{\"data\":[{\"id\":0,\"displaySequence\":0,\"originalName\":\"1.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":2915569},{\"id\":1,\"displaySequence\":1,\"originalName\":\"2.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6435},{\"id\":2,\"displaySequence\":2,\"originalName\":\"3.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4071833},{\"id\":3,\"displaySequence\":3,\"originalName\":\"4.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6712},{\"id\":4,\"displaySequence\":4,\"originalName\":\"5.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1914059},{\"id\":5,\"displaySequence\":5,\"originalName\":\"6.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6301},{\"id\":6,\"displaySequence\":6,\"originalName\":\"7.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":986447},{\"id\":7,\"displaySequence\":7,\"originalName\":\"8.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6369},{\"id\":8,\"displaySequence\":8,\"originalName\":\"IMG_3681--.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1336062},{\"id\":9,\"displaySequence\":9,\"originalName\":\"IMG_3681--.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1336062}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/carousels\",\"statusCode\":200,\"message\":\"200 OK\"}"
+						},
+						{
+							"id": "b7bf7842-692d-4cf4-88a5-e7d3f0fbcb17",
 							"name": "get carousel image",
 							"originalRequest": {
 								"method": "GET",
@@ -3826,95 +3951,6 @@
 							"cookie": [],
 							"responseTime": "113",
 							"body": "����\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0000`\u0000`\u0000\u0000��\u0000C\u0000\u0002\u0001\u0001\u0002\u0001\u0001\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0002\u0003\u0005\u0003\u0003\u0003\u0003\u0003\u0006\u0004\u0004\u0003\u0005\u0007\u0006\u0007\u0007\u0007\u0006\u0007\u0007\b  \u000b  \b\b\n\b\u0007\u0007\n\r\n\n\u000b\f\f\f\f\u0007  \u000e\u000f\r\f\u000e\u000b\f\f\f��\u0000C\u0001\u0002\u0002\u0002\u0003\u0003\u0003\u0006\u0003\u0003\u0006\f\b\u0007\b\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f��\u0000\u0011\b\u0001�\u0002�\u0003\u0001\"\u0000\u0002\u0011\u0001\u0003\u0011\u0001��\u0000\u001f\u0000\u0000\u0001\u0005\u0001\u0001\u0001\u0001\u0001\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b  \n\u000b��\u0000�\u0010\u0000\u0002\u0001\u0003\u0003\u0002\u0004\u0003\u0005\u0005\u0004\u0004\u0000\u0000\u0001}\u0001\u0002\u0003\u0000\u0004\u0011\u0005\u0012!1A\u0006\u0013Qa\u0007\"q\u00142���\b#B��\u0015R��$3br�  \n\u0016\u0017\u0018\u0019\u001a%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz���������������������������������������������������������������������������\u0000\u001f\u0001\u0000\u0003\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b  \n\u000b��\u0000�\u0011\u0000\u0002\u0001\u0002\u0004\u0004\u0003\u0004\u0007\u0005\u0004\u0004\u0000\u0001\u0002w\u0000\u0001\u0002\u0003\u0011\u0004\u0005!1\u0006\u0012AQ\u0007aq\u0013\"2�\b\u0014B����  #3R�\u0015br�\n\u0016$4�%�\u0017\u0018\u0019\u001a&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz��������������������������������������������������������������������������\u0000\f\u0003\u0001\u0000\u0002\u0011\u0003\u0011\u0000?\u0000�袊\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(��\u0000(����\u0017�/>\u0017�x�/\fx�_\u0005�߮�>��lͥ�xɽm��/��\u0014��e�\u0011�1\\�\u001dm�w���(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�Q?b��%'�����\u0013�p����\u0000\u0010��1x����.���\u001b/\u0004�i�\u0016���_��  �3B�G\bO���;�,�B\u0010.��W�o�\u0017�ǿ�\u001f�\u0013[���o�\u001e'�W�|u���u�U{6��]�z���ןl�y�q2'͖1FT�\n�\u0013Z�P�6���\u001d<����u��6��\u0019�Q�]�-{{�޾����i3��\n~��\u0004d��%��\u0015���׊�!_|:�\u0007�\u001e�Jj\u001e\u0005�����%M:4����1|�^\\�ǖʹ$\u001a�\u001b�\u0000�\u0007~\n~̟\u001d?jmg◍�,�?\u0004?go�\u0015�/\b�Y��}Y��b�\u0010�2��\u0004\"P��\u0015_9�x�;��\u0000ۋ⯊�\nx�������G�~/�Y�Ƴkuko4���P��{��ϸ�r�M����5�~\b�\u0000��~�\u000e?i�\u0014�`�>+���\u0010<mikc��Ǥi�g�ⶅa�\u0012Y�sjLq�\n�V��9�\u0012q�msI���7kݪt�{uw��}\u0013��i�z���`����k^���}\u0017,���O�/���k�  5�)|  ���?6�m�\u0017�7��0�\u001a��炴�\u0017�z\\�i0\b��h�#�=��#�\u001e�HP\u0000�&��Wo��\f�;�d����Q�G�@�io�R���#�_\u0002��\u001c�Ҥ�:�n�\u001b�JWV�\u0019�(H����\\����o�+��!s�c�|~�⮹7ś+V��֥��x��dd6�hb6�  \u000e��\u0011l����殗���\u0017W����>!���>\u0012���iz�ĭQ��\u0011��\u001amյ��\u0005V�[�n���UW1\"|���\u0002����~V�����y���s;4����J/��/�o��\u0000v����\\�٭4���\u0000\u0005���t��&��ɮ�4е�C�~\u001dK\u001b-cI�ԭ��|-��YV+�\u0001@�  e$\u0005�\u0001ڄ�\u001fS�L�<��ѿ�@��c�w^\u001f���Tx��V\u0016�O�t�Ӵ�(`U�\u00168�bI\u000b��ٝٙ��5����㯌?i/�:ώ�w�\u001dK�>-�\r�ڵ\rN�O2k��\u0003�UT*�(\n���\u0002�+鯍�\u0000�_������\u000f�|2��ş��\u0004k�+���������}��!<ح\u0012U��ʸ<u�\\&�r����k��55w�v\\��W+k�j�V&\u0015\u0016�4�Wxr�<����%��8��+r\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u0002�(�\u000f��"
-						},
-						{
-							"id": "304941b5-a0d9-4af4-9081-77537f5e6d33",
-							"name": "get carousel record list",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:9004/reactProductCatalog/api/carousels",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9004",
-									"path": [
-										"reactProductCatalog",
-										"api",
-										"carousels"
-									],
-									"query": [
-										{
-											"key": "per_page",
-											"value": "1",
-											"equals": true,
-											"disabled": true
-										},
-										{
-											"key": "page",
-											"value": "2",
-											"equals": true,
-											"disabled": true
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": ""
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive",
-									"name": "Connection",
-									"description": ""
-								},
-								{
-									"key": "Content-Length",
-									"value": "1233",
-									"name": "Content-Length",
-									"description": ""
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": ""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 08 Dec 2017 02:56:10 GMT",
-									"name": "Date",
-									"description": ""
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"4d1-DR+NyZXO4Vln7l2qIpSLDgOlNgM\"",
-									"name": "ETag",
-									"description": ""
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express",
-									"name": "X-Powered-By",
-									"description": ""
-								}
-							],
-							"cookie": [],
-							"responseTime": "124",
-							"body": "{\"data\":[{\"id\":0,\"displaySequence\":0,\"originalName\":\"1.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":2915569},{\"id\":1,\"displaySequence\":1,\"originalName\":\"2.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6435},{\"id\":2,\"displaySequence\":2,\"originalName\":\"3.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":4071833},{\"id\":3,\"displaySequence\":3,\"originalName\":\"4.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6712},{\"id\":4,\"displaySequence\":4,\"originalName\":\"5.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1914059},{\"id\":5,\"displaySequence\":5,\"originalName\":\"6.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6301},{\"id\":6,\"displaySequence\":6,\"originalName\":\"7.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":986447},{\"id\":7,\"displaySequence\":7,\"originalName\":\"8.jpeg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":6369},{\"id\":8,\"displaySequence\":8,\"originalName\":\"IMG_3681--.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1336062},{\"id\":9,\"displaySequence\":9,\"originalName\":\"IMG_3681--.jpg\",\"encoding\":\"7bit\",\"mimeType\":\"image/jpeg\",\"size\":1336062}],\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/carousels\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						}
 					]
 				},
@@ -3951,11 +3987,11 @@
 								"carousels"
 							]
 						},
-						"description": "1. request:\n\t* headers:\n\t\t1. Content-Type: multipart/form-data\n\t\t2. x-access-token: jwt string\n\t* params: n/a\n\t* queries: n/a\n\t* body: {\"image\":\"photo file\"}\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: data property contains and carousel record object without actual image data\n3. notes:\n\t* allowed file types:\n\t\t1. .jpg\n\t\t2. .jpeg\n\t\t3. .png\n\t\t4. .gif\n\t\t5. .svg\n\t\t6. .bmp\n\t* upload size are limited to 5 mb\n\t* carousel are automatically placed at the end of the displaySequence"
+						"description": "1. request:\n  * headers:\n    1. Content-Type: multipart/form-data\n    2. x-access-token: jwt string\n  * params: n/a\n  * queries: n/a\n  * body: {\"image\":\"photo file\"}\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body: data property contains and carousel record object without actual image data\n3. notes:\n  * allowed file types:\n    1. .jpg\n    2. .jpeg\n    3. .png\n    4. .gif\n    5. .svg\n    6. .bmp\n  * upload size are limited to 5 mb\n  * carousel are automatically placed at the end of the displaySequence"
 					},
 					"response": [
 						{
-							"id": "4eb0a4e9-359f-452c-b09a-db3e2d366b2b",
+							"id": "a0b63cef-fd97-41fb-9cab-7c28f735fc6a",
 							"name": "add carousel photo",
 							"originalRequest": {
 								"method": "POST",
@@ -3999,43 +4035,43 @@
 									"key": "Access-Control-Allow-Origin",
 									"value": "*",
 									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+									"description": ""
 								},
 								{
 									"key": "Connection",
 									"value": "keep-alive",
 									"name": "Connection",
-									"description": "Options that are desired for the connection"
+									"description": ""
 								},
 								{
 									"key": "Content-Length",
 									"value": "253",
 									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8",
 									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"key": "Date",
 									"value": "Sat, 02 Dec 2017 08:34:47 GMT",
 									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"key": "ETag",
 									"value": "W/\"fd-MV7r//T9cnVq2C5kt8TgVAYBYh0\"",
 									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"description": ""
 								},
 								{
 									"key": "X-Powered-By",
 									"value": "Express",
 									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -4078,7 +4114,7 @@
 								}
 							]
 						},
-						"description": "1. request:\n\t* headers:{\"Content-Type\":jwt string}\n\t* params: {\"carouselId\":integer}\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: {\"data\":integer represent how many records were deleted, 1 for success, 0 for not found}\n3. notes: n/a"
+						"description": "1. request:\n  * headers:{\"Content-Type\":jwt string}\n  * params: {\"carouselId\":integer}\n  * queries: n/a\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body: {\"data\":integer represent how many records were deleted, 1 for success, 0 for not found}\n3. notes: n/a"
 					},
 					"response": []
 				},
@@ -4124,7 +4160,7 @@
 					},
 					"response": [
 						{
-							"id": "fd3c2ed3-076d-48c6-92c1-acc172fdc00e",
+							"id": "f2cfe178-2133-4d88-acad-fb687d031e3a",
 							"name": "patching carousel's display order",
 							"originalRequest": {
 								"method": "PATCH",
@@ -4333,11 +4369,11 @@
 								"companies"
 							]
 						},
-						"description": "1. request:\n\t* headers: {Content-Type: jwt string}\n\t* params: n/a\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body: 'data' property contains an array of company records with country and staff details\n3. notes:\n\t* country record does not include the 'flagSvg' data"
+						"description": "1. request:\n  * headers: {Content-Type: jwt string}\n  * params: n/a\n  * queries: n/a\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body: 'data' property contains an array of company records with country and staff details\n3. notes:\n  * country record does not include the 'flagSvg' data"
 					},
 					"response": [
 						{
-							"id": "71493c6a-e567-4b74-a99f-bbf410329456",
+							"id": "da08538c-d304-43d2-aa67-e9bda7bba1c8",
 							"name": "get company records",
 							"originalRequest": {
 								"method": "GET",
@@ -4449,11 +4485,11 @@
 								}
 							]
 						},
-						"description": "1. request:\n\t* headers: {content-type: jwt}\n\t* params: {companyId: uuidV4}\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {content-type: application/json}\n\t* body: 'data' property holds a company record with country and contact details\n3. notes: **admin** and **staff** accounts are allowed to query the whole recordset, **user** accounts can only access info of the company it belongs to"
+						"description": "1. request:\n  * headers: {content-type: jwt}\n  * params: {companyId: uuidV4}\n  * queries: n/a\n  * body: n/a\n2. response:\n  * headers: {content-type: application/json}\n  * body: 'data' property holds a company record with country and contact details\n3. notes: **admin** and **staff** accounts are allowed to query the whole recordset, **user** accounts can only access info of the company it belongs to"
 					},
 					"response": [
 						{
-							"id": "d38c227a-7b16-4019-a5a7-c625671ce988",
+							"id": "fcb0fa7d-ff5f-4132-a85f-797acddf16a4",
 							"name": "get company record by id",
 							"originalRequest": {
 								"method": "GET",
@@ -4538,7 +4574,7 @@
 							"body": "{\"data\":{\"id\":\"91256A86-0E36-4452-8799-5D11CD5E7BEC\",\"title\":\"Gentry Hardware Products Co., Ltd.\",\"address\":\"No. 158, Dongcheng Rd., Dongsheng Town, Zhongshan, Guangdong, China\",\"telephone\":\"+86-760-22229026 ~ 28\",\"fax\":\"+86-760-22820916\",\"website\":\"http://localhost:9004/reactProductCatalog\",\"host\":true,\"active\":true,\"countryId\":\"chn\",\"country\":{\"id\":\"chn\",\"name\":\"China\",\"region\":\"Asia\"},\"contacts\":[{\"email\":\"gentry@vip.163.com\",\"name\":\"General Service\",\"mobile\":null,\"active\":true},{\"email\":\"altecqc@msn.com\",\"name\":\"Johnson Wu\",\"mobile\":null,\"active\":true}]},\"method\":\"get\",\"endpoint\":\"http://localhost:9004/reactProductCatalog/api/companies/91256A86-0E36-4452-8799-5D11CD5E7BEC\",\"statusCode\":200,\"message\":\"200 OK\"}"
 						},
 						{
-							"id": "bfece6f6-9c6d-46b8-80c5-1e98b186b774",
+							"id": "a1bc21c1-2c5f-4319-92a7-a5cb3cc928b1",
 							"name": "attempt to access other companies using a regular user account",
 							"originalRequest": {
 								"method": "GET",
@@ -4646,11 +4682,11 @@
 								"hostingCompanies"
 							]
 						},
-						"description": "Used for contact us / information page\n\n1. request:\n\t* headers: n/a\n\t* params: n/a\n\t* queries: n/a\n\t* body: n/a\n2. response:\n\t* headers: {\"Content-Type\":\"application/json\"}\n\t* body:\n\t\t- data: array of company object (host === true)\n\t\t\t1. country: country record object\n\t\t\t2. contacts: array of contact records\n3. notes:\n\t* country record does not include the 'flagSvg' data\n\t* only gets the project hosting companies (host field is true)"
+						"description": "Used for contact us / information page\n\n1. request:\n  * headers: n/a\n  * params: n/a\n  * queries: n/a\n  * body: n/a\n2. response:\n  * headers: {\"Content-Type\":\"application/json\"}\n  * body:\n    - data: array of company object (host === true)\n      1. country: country record object\n      2. contacts: array of contact records\n3. notes:\n  * country record does not include the 'flagSvg' data\n  * only gets the project hosting companies (host field is true)"
 					},
 					"response": [
 						{
-							"id": "d3aed643-c986-47f5-be98-a30eb809d081",
+							"id": "6fd17862-8690-49ed-ac54-28eaa6ef665d",
 							"name": "get project hosting companies with staff and country details",
 							"originalRequest": {
 								"method": "GET",
@@ -4742,48 +4778,41 @@
 								{
 									"key": "title",
 									"value": "whatEveraaa",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "address",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "telephone",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "fax",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "website",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "host",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "countryId",
 									"value": "",
-									"description": "",
 									"type": "text",
 									"disabled": true
 								}
@@ -4809,7 +4838,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -4844,7 +4873,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
@@ -4874,43 +4903,36 @@
 								{
 									"key": "comments",
 									"value": "I have  nothing to comment",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "productIdList[0]",
 									"value": "1BF8B07E-9843-4E0E-8410-B99E2F72857D",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "productIdList[1]",
 									"value": "C9C6478B-CE0F-42C1-8800-1E9A5999AC6A",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "productIdList[2]",
 									"value": "DB921F03-B771-4EFF-99D3-AA51B8836160",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "quantities[0]",
 									"value": "1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "quantities[1]",
 									"value": "2",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "quantities[2]",
 									"value": "3",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -4936,7 +4958,7 @@
 								}
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
