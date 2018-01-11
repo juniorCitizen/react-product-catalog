@@ -3,11 +3,33 @@ const Promise = require('bluebird')
 
 const db = require('../../controllers/database')
 
+const productQueries = require('../../models/queries/products')
+const seriesQueries = require('../../models/queries/series')
+const tagQueries = require('../../models/queries/tags')
+
 const validateJwt = require('../../middlewares/validateJwt')
 
 const Op = db.Sequelize.Op
 
 module.exports = {
+  getMenuItems: [
+    rejectInvalidTargetRequest,
+    async (req, res, next) => {
+      let query = !req.targetSeries
+        ? seriesQueries.getChildSeries()
+        : seriesQueries.getChildSeries(req.targetSeriesId)
+      let products = await productQueries.getSeriesProducts(!req.targetSeries ? null : req.targetSeriesId)
+      req.resJson = {
+        data: {
+          childSeries: await query,
+          products,
+          tagMenus: await tagQueries.getTagMenus(products)
+        }
+      }
+      next()
+      return Promise.resolve()
+    }
+  ],
   // route handlers
   read: [ // GET /series or /series/:seriesId
     rejectInvalidTargetRequest,
@@ -272,8 +294,10 @@ function findTargetParentSeries (req, res, next) {
         .then(rootNodeSiblings => {
           req.targetParentSeries = {
             id: null,
-            name: 'Root of series tree',
-            childSeries: rootNodeSiblings
+            name: 'Menu Root',
+            childSeries: rootNodeSiblings,
+            tagMenu: [],
+            products: []
           }
           next()
           return Promise.resolve()

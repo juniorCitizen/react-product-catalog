@@ -119,6 +119,10 @@ API_ROUTER.route('/series/:seriesId')
   .post(...series.createChildNode) // insert new child series
   .patch(...series.patch) // patch series properties
   .delete(...series.delete) // delete series by id
+API_ROUTER.route('/v2/series')
+  .get(...series.getMenuItems)
+API_ROUTER.route('/v2/series/:seriesId')
+  .get(...series.getMenuItems)
 
 // /////////////////////////////////////////////////////
 // Tags
