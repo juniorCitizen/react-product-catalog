@@ -31,6 +31,7 @@ export default class Series extends React.Component {
     })
     .then(function (response) {
       if (response.status === 200) {
+        console.log('get Series')
         let list = initList(response.data.data)
         self.setState({
           treeData: list
@@ -166,20 +167,32 @@ export default class Series extends React.Component {
       parentNode = {id: null}
     }
 
-    if (node.displaySequence !== displaySequence) {
-      this.updateNode(node.id, 'displaySequence', displaySequence)
-    }
-
     if (node.parentSeriesId !== parentNode.id) {
       this.updateNode(node.id, 'parentSeriesId', parentNode.id)
+      /*
+      node.parentSeriesId = parentNode.id
+      if (node.parentSeriesId === null) {
+        node.menuLevel = 0
+      }
+      */
     }
 
+    if (node.displaySequence !== displaySequence) {
+      this.updateNode(node.id, 'displaySequence', displaySequence)
+      //node.displaysequence = displaySequence
+    }
+
+    
+
+    /*
     if (node.menuLevel != menuLevel) {
       this.updateNode(node.id, 'menuLevel', menuLevel)
     }
+    */
   }
 
   updateNode(id, str, value) {
+    const self = this
     console.log(id + ',' + str + ',' + value)
     axios({
       method: 'patch',
@@ -192,6 +205,7 @@ export default class Series extends React.Component {
     .then(function (response) {
       if (response.status === 200) {
         console.log(response.data.data)
+        self.getSeries()
       } else {
         console.log(response)
       }
@@ -209,7 +223,7 @@ export default class Series extends React.Component {
   initSeries(list, node) {
     node.map((item) => {
       list.push(item)
-      list = this.initSeries(list, item.childSeries)
+      list = this.initSeries(list, item.children)
     })
     return list
   }
