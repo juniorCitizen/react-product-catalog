@@ -263,7 +263,7 @@ function findNodeSiblings (req, res, next) {
     .findAll({
       where: {
         parentSeriesId: req.targetSeries
-          ? req.targetSeries.id
+          ? req.targetSeries.parentSeriesId
           : null
       }
     })
