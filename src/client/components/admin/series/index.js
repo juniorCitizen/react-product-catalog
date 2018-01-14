@@ -148,6 +148,119 @@ export default class Series extends React.Component {
     })
   }
 
+  nodeChange(e) {
+    console.log(e)
+    const { node, path, prevPath } = e
+    let displaySequence = 0
+    let menuLevel = 0
+    let parentNode = {}
+    let depth = path.length
+    menuLevel = depth - 1
+    
+
+    if (depth > 1) {
+      displaySequence = (path[depth - 1] - path[depth - 2]) - 1
+      parentNode = this.getNode(path[path.length - 2])
+    } else {
+      displaySequence = path[depth - 1]
+      parentNode = {id: null}
+    }
+
+    if (node.displaySequence !== displaySequence) {
+      this.updateNode(node.id, 'displaySequence', displaySequence)
+    }
+
+    if (node.parentSeriesId !== parentNode.id) {
+      this.updateNode(node.id, 'parentSeriesId', parentNode.id)
+    }
+
+    if (node.menuLevel != menuLevel) {
+      this.updateNode(node.id, 'menuLevel', menuLevel)
+    }
+  }
+
+  updateNode(id, str, value) {
+    console.log(id + ',' + str + ',' + value)
+    axios({
+      method: 'patch',
+      url: config.route.series.update + id + '?' + str + '=' + value ,
+      headers: {
+        'x-access-token': window.localStorage["jwt-admin-token"],
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        console.log(response.data.data)
+      } else {
+        console.log(response)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  getNode(ind) {
+    const { treeData } = this.state
+    let list = this.initSeries([], treeData)
+    return list[ind]
+  }
+
+  initSeries(list, node) {
+    node.map((item) => {
+      list.push(item)
+      list = this.initSeries(list, item.childSeries)
+    })
+    return list
+  }
+
+  countNode(obj, coun) {
+    obj.map((item) => {
+      coun = coun + item.childSeries.length
+      coun = coun + this.countNode(item.childSeries, coun)
+    })
+    return coun = coun + obj.length
+  }
+
+  moveParallel(e) {
+    const { node, path, prevPath } = e
+    //const parNode = this.getNodeByPath(path)
+    for (let i = 0; i < path.length; i++) {
+      if (path[i] !== prevPath[i]) {
+        if (i === path.length - 1) {
+          // the last depth
+          // node change sequence at same parent node
+          if (i === 0) {
+
+          } else {
+            let p = path[i - 1]
+          }
+        } else {
+
+        }
+      }
+    }
+    
+  }
+
+  getNodeByPath(path) {
+    const { treeData } = this.state
+    const depth = path.length
+    let node = {}
+    for (let i = 0; i < depth; i++) {
+      if (i === 0) {
+        node = treeData[path[i]-1]
+      }
+      if (i !== 0) {
+        let nPath = path[i-1]
+        node = node.childSeries[(path[i] - nPath) - 1]
+      }
+    }
+    return node
+  }
+
+
+
 
   render() {
     const { treeData, addNewShow, addChildShow } = this.state
@@ -161,10 +274,11 @@ export default class Series extends React.Component {
             <span>新增分類</span>
           </button>
           <div style={{ height: 700 }}>
-            {treeData && 
+            {treeData &&
               <SortableTree
                 treeData={treeData}
                 onChange={treeData => this.setState({ treeData })}
+                onMoveNode={this.nodeChange.bind(this)}
                 maxDepth={2}
                 generateNodeProps={({ node, path }) => ({
                   buttons: [
@@ -218,6 +332,7 @@ export default class Series extends React.Component {
   }
 }
 const getNodeKey = ({ treeIndex }) => treeIndex
+let ind = 0
 
 function initList(obj) {
   return obj.map((item) => {

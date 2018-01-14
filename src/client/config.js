@@ -15,6 +15,7 @@ export default {
     series: {
       add: api + '/series',
       insert: api + '/series/',
+      update: api + '/series/',
       delete: api + '/series/',
     },
     products: {
