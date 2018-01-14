@@ -469,7 +469,6 @@ function patchName (req, res, next) {
 
 // patch parentSeriesId field value
 function patchParentSeriesId (req, res, next) {
-  console.log(req.targetParentSeries.dataValues)
   let originalParentSeriesId = req.targetSeries.parentSeriesId
   let targetParentSeriesId = req.targetParentSeries.id
   return db.sequelize.transaction(transaction => {
