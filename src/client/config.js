@@ -12,6 +12,11 @@ export default {
       tokens: api + '/login'
     },
     productMenu: api + '/series',
+    series: {
+      add: api + '/series',
+      insert: api + '/series/',
+      delete: api + '/series/',
+    },
     products: {
       detail: api + '/products/',
       delete: api + '/products/',
