@@ -134,7 +134,7 @@ class Login extends React.Component {
                 <div className="field">
                   <label className="label">帳號</label>
                   <div className="control">
-                    <input className="input" type="text" placeholder="請輸入帳號" maxLength="20"
+                    <input className="input" type="text" placeholder="請輸入帳號" maxLength="40"
                       value={form.email} onChange={this.inputChange.bind(this, 'email')}
                     />
                   </div>
