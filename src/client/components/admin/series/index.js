@@ -72,6 +72,8 @@ export default class Series extends React.Component {
     .then(function (response) {
       if (response.status === 200) {
         console.log(response)
+        self.getSeries()
+        /*
         self.setState(state => ({
           treeData: addNodeUnderParent({
             treeData: state.treeData,
@@ -81,7 +83,7 @@ export default class Series extends React.Component {
             newNode: initNode(response.data.data),
           }).treeData,
           addChildShow: false,
-        }))
+        }))*/
       } else {
         console.log(response)
       }
@@ -91,13 +93,7 @@ export default class Series extends React.Component {
   }
 
   removeNode(node, path) {
-    this.setState(state => ({
-      treeData: removeNodeAtPath({
-        treeData: state.treeData,
-        path,
-        getNodeKey,
-      }),
-    }))
+    const self = this
     axios({
       method: 'delete',
       url: config.route.series.delete + node.id,
@@ -108,7 +104,15 @@ export default class Series extends React.Component {
     })
     .then(function (response) {
       if (response.status === 200) {
-        console.log(response)
+        self.getSeries()
+        /*
+        self.setState(state => ({
+          treeData: removeNodeAtPath({
+            treeData: state.treeData,
+            path,
+            getNodeKey,
+          }),
+        }))*/
       } else {
         console.log(response)
       }
