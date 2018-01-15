@@ -75,10 +75,6 @@ class Series extends React.Component {
     })
   }
 
-  reload() {
-
-  }
-
   resetSeries() {
     let { series } = this.props.series
     const { dispatch } = this.props

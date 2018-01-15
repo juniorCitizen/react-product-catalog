@@ -2,20 +2,20 @@ import React from 'react'
 import axios from 'axios'
 import qs from 'qs'
 import config from '../../../config'
-import { update_products } from '../../../actions'
+import { connect } from 'react-redux'
+import { series_patch, update_products } from '../../../actions'
 
-export default class Form extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       form: {
-        id: '',
         code: '',
         name: '',
         specification: '',
         description: '',
-        photos: [{id: ''}],
-        tags: [],
+        seriesId: '',
+        photos: [],
       },
       files: [{
         name: '...',
@@ -37,27 +37,62 @@ export default class Form extends React.Component {
   componentDidMount() {
     this.setState({ form: this.props.item? this.props.item: this.state.form })
     this.getSeries()
-    this.getTags()
+    //this.getTags()
   }
 
   getSeries() {
-    const self = this
-    axios({
-      method: 'get',
-      url: config.route.productMenu,
+    let { series } = this.props.series
+    let list  = this.initSeries([], series, 0)
+    if (this.state.form.seriesId === '') {
+      let form = this.state.form
+      form.seriesId = list[0].id
+      this.setState({ form: form })
+    }
+    this.setState({ series: list })
+  }
+
+  seriesChange(e) {
+    let seriesId = e.target.value
+    let form = this.state.form
+    form.seriesId = seriesId
+    this.setState({ form: form})
+  }
+
+  initSeries(list, node, n) {
+    let s = '';
+    for (let i = 0; i < n; i++) {
+      s = s + '-'
+    }
+    node.map((item) => {
+      item.newName = s + item.name
+      list.push(item)
+      list = this.initSeries(list, item.childSeries, n + 1)
     })
-    .then(function (response) {
-      if (response.status === 200) {
-        let list = self.initSeries([], response.data.data, 0)
-        self.setState({
-          series: list
-        })
-      } else {
-        console.log(response.data)
+    return list
+  }
+
+  resetSeries() {
+    let { series } = this.props.series
+    const { dispatch } = this.props
+    let newSeries = this.modifySeries(series)
+    dispatch(series_patch(newSeries))
+  }
+
+  modifySeries(list) {
+    let { form } = this.state
+    for (let m = 0; m < list.length; m++) {
+      for (let i = 0; i < list[m].products.length; i++) {
+        if (list[m].products[i].seriesId !== list[m].id) {
+          list[m].products.splice(i, 1)
+        }
       }
-    }).catch(function (error) {
-      console.log(error)
-    })
+      if (list[m].id === form.seriesId) {
+        list[m].products.push(form)
+      }
+      let childSeries = this.modifySeries(list[m].childSeries)
+      list[m].childSeries = childSeries
+    }
+    return list
   }
 
   getTags() {
@@ -77,43 +112,56 @@ export default class Form extends React.Component {
     })
   }
 
-  initSeries(list, node, n) {
-    let s = '';
-    for(let i = 0; i < n; i++) {
-      s = s + '-'
-    }
-    node.map((item) => {
-      item.name = s + item.name
-      list.push(item)
-      list = this.initSeries(list, item.childSeries, n+1)
-    })
-    return list
-  }
-
   inputChange(cont, e) {
     let text = e.target.value
     let { form, msg } = this.state
     form[cont] = text
     msg[cont] = ''
     this.setState({ form: form })
-    this.checkPassword()
-  }
-
-  seriesChange(e) {
-    let seriesId = e.target.value
-    let form = this.state.form
-    form.seriesId = seriesId
-    this.setState({form: form})
   }
 
   doSave() {
+    this.saveProductInfo()
+  }
+
+  insertPhoto() {
+    const { form, files } = this.state
+    const self = this
+    this.setState({processing: true})
+    let data = { photos: files }
+    if (files[0].thumb) {
+      axios({
+        method: 'post',
+        url: config.route.photos.insert,
+        data: qs.stringify(data),
+        headers: {
+          'x-access-token': window.localStorage["jwt-admin-token"],
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+      .then(function (response) {
+        console.log(response.data)
+        if (response.status === 200) {
+          self.mergeProductPhoto(response.data.data.id)
+        } else {
+          console.log(response)
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
+    } else {
+      self.setState({
+        processing: false,
+      })
+    }
+  }
+
+  mergeProductPhoto(photoId) {
     const { form } = this.state
     const self = this
-    console.log(this.state.form)
-    this.setState({processing: true})
     axios({
-      method: 'put',
-      url: config.route.products.update + form.id,
+      method: 'patch',
+      url: config.route.photos.update + photoId + '?productId' + form.id,
       data: qs.stringify(form),
       headers: {
         'x-access-token': window.localStorage["jwt-admin-token"],
@@ -123,8 +171,50 @@ export default class Form extends React.Component {
     .then(function (response) {
       console.log(response.data)
       if (response.status === 200) {
-        self.setState({processing: false})
+        self.setState({
+          processing: false,
+        })
         self.props.click_cancel()
+      } else {
+        console.log(response)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  saveProductInfo() {
+    const { form } = this.state
+    const self = this
+    let method
+    let apiUrl
+    this.setState({processing: true})
+    if (this.props.type === 'add') {
+      method = 'post'
+      apiUrl = config.route.products.insert
+    } else {
+      method = 'put'
+      apiUrl = config.route.products.update + form.id
+    }
+    delete form.tags
+    axios({
+      method: method,
+      url: apiUrl,
+      data: qs.stringify(form),
+      headers: {
+        'x-access-token': window.localStorage["jwt-admin-token"],
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    })
+    .then(function (response) {
+      console.log(response.data)
+      if (response.status === 200) {
+        self.setState({
+          processing: false,
+          form: response.data.data,
+        })
+        self.resetSeries()
+        self.insertPhoto()
       } else {
         console.log(response)
       }
@@ -158,7 +248,7 @@ export default class Form extends React.Component {
     const { form, msg, processing, series, tags, files } = this.state
     const active = show ? ' is-active' : ''
     const isLoading = processing ? ' is-loading': ''
-    const preView = form.photos[0].id? config.route.photos.getPhoto + form.photos[0].id: ''
+    const preView = form.photos.length > 0? config.route.photos.getPhoto + form.photos[0].id: ''
     const photo = files[0].thumb? files[0].thumb: preView
     return (
       <div className={"modal" + active}>
@@ -171,7 +261,7 @@ export default class Form extends React.Component {
             <div className="field">
               <label className="label">產品代號</label>
               <div className="control">
-                <input className="input" type="text" placeholder="請輸入產品代號" disabled={true}
+                <input className="input" type="text" placeholder="請輸入產品代號"
                   value={form.code || ''} onChange={this.inputChange.bind(this, 'code')}
                 />
               </div>
@@ -202,6 +292,23 @@ export default class Form extends React.Component {
                   onChange={this.inputChange.bind(this, 'description')}/>
               </div>
               <p className="help is-danger">{msg.description}</p>
+            </div>
+            <div className="field">
+              <label className="label">分類</label>
+              <div className="control">
+                <div className="select">
+                  <select onChange={this.seriesChange.bind(this)} value={form.seriesId}>
+                    {series.map((item, index) => (
+                      <option
+                        key={index}
+                        value={item.id}
+                      >
+                        {item.newName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
             <div className="field">
               <label className="label">產品圖片</label>
@@ -238,3 +345,12 @@ export default class Form extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  const { series } = state
+  return {
+    series
+  }
+}
+
+export default connect(mapStateToProps)(Form)

@@ -20,15 +20,18 @@ export default {
     },
     products: {
       detail: api + '/products/',
+      insert: api + '/products',
       delete: api + '/products/',
       update: api + '/products/',
-      patch: api + '/products/'
+      patch: api + '/products/',
     },
     order: {
       purchase: api + '/contacts/'
     },
     photos: {
       getPhoto: api + '/photos/',
+      insert: api + '/photos',
+      update: api + '/photos/'
     },
     tag: {
       getTags: api + '/tags'
