@@ -41,10 +41,8 @@ class Navigation extends React.Component {
   }
 
   checkLogin() {
-    const { dispatch, login } = this.props
     const token = window.localStorage["jwt-token"]
     if (token) {
-      //dispatch(user_info(jwt_info(token)))
       this.checkToken(token)
     }
   }

@@ -97,7 +97,7 @@ class Detail extends React.Component {
                 <div className="content">
                   <h2>{data.name}</h2>
                   {data.tags.map((item, index) => (
-                    <span key={index} className="tag is-info" style={style.tags}>{item.name}</span>
+                    <span key={index} className="tag is-info" style={{backgroundColor: item.color, marginRight: 5}}>{item.name}</span>
                   ))}
                   <h3>產品規格</h3>
                   <p>{data.specification}</p>

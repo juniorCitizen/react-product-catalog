@@ -60,25 +60,23 @@ class Tags extends React.Component {
       if (selected[i] === tag) {
         selected.splice(i, 1)
         add = false
+        this.doSave(tag)
       }
     }
     if (add) {
       selected.push(tag)
+      this.doSave(tag)
     }
     this.setState({selected: selected})
   }
 
-  doSave() {
-    console.log(this.state.selected)
-    return
+  doSave(tag) {
     const { form } = this.state
     const self = this
-    console.log(this.state.form)
     this.setState({processing: true})
     axios({
-      method: 'put',
-      url: config.route.products.update + form.id,
-      data: qs.stringify(form),
+      method: 'patch',
+      url: config.route.products.patch + form.id + '?tagId=' + tag,
       headers: {
         'x-access-token': window.localStorage["jwt-admin-token"],
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -87,8 +85,7 @@ class Tags extends React.Component {
     .then(function (response) {
       console.log(response.data)
       if (response.status === 200) {
-        self.setState({processing: false})
-        self.props.click_cancel()
+        console.log(response)
       } else {
         console.log(response)
       }
@@ -129,8 +126,7 @@ class Tags extends React.Component {
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button className={"button is-success" + isLoading} onClick={this.doSave.bind(this)}>儲存</button>
-            <button className="button" onClick={click_cancel}>取消</button>
+            <button className="button" onClick={click_cancel}>關閉</button>
           </footer>
         </div>
       </div>

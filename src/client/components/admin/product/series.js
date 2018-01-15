@@ -55,7 +55,7 @@ class Series extends React.Component {
     this.setState({ processing: true })
     axios({
       method: 'patch',
-      url: config.route.products.patchSeries + form.id + '?seriesId=' + seriesId,
+      url: config.route.products.patch + form.id + '?seriesId=' + seriesId,
       headers: {
         'x-access-token': window.localStorage["jwt-admin-token"],
         'Content-Type': 'application/x-www-form-urlencoded',

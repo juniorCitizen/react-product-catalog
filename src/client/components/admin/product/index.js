@@ -247,7 +247,6 @@ class Product extends React.Component {
                 {addShow &&
                   <Form show={addShow} title="新增資料" type="add"
                     click_cancel={this.hideAdd.bind(this)}
-                    item={sItem}
                   />
                 }
                 {editShow &&

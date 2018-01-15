@@ -8,12 +8,25 @@ export default class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      form: {},
+      form: {
+        id: '',
+        code: '',
+        name: '',
+        specification: '',
+        description: '',
+        photos: [{id: ''}],
+        tags: [],
+      },
+      files: [{
+        name: '...',
+        thumb: null,
+      }],
       msg: {
         name: '',
         specification: '',
         description: '',
         name: '',
+        photo: '',
       },
       series: [],
       tags: [],
@@ -22,7 +35,7 @@ export default class Form extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ form: this.props.item })
+    this.setState({ form: this.props.item? this.props.item: this.state.form })
     this.getSeries()
     this.getTags()
   }
@@ -93,10 +106,6 @@ export default class Form extends React.Component {
     this.setState({form: form})
   }
 
-  tagChange(e) {
-
-  }
-
   doSave() {
     const { form } = this.state
     const self = this
@@ -124,11 +133,33 @@ export default class Form extends React.Component {
     })
   }
 
+  handlePhoto(e) {
+    let files = e.target.files
+    if (files.length < 1) {
+      return
+    }
+    if (files[0].type.substr(0, 5) !== 'image') {
+      this.setState({msg: {photo: '檔案非圖片格式'}})
+      return 
+    }
+    files[0].thumb = window.URL.createObjectURL(files[0])
+    files = Array.prototype.slice.call(files, 0)
+    // 过滤非图片类型的文件
+    
+    files = files.filter(function (file) {
+      return /image/i.test(file.type)
+    })
+    this.setState({files: files, msg: {photo: ''}})
+    console.log(files)
+  }
+
   render() {
     const { title, show, click_cancel } = this.props
-    const { form, msg, processing, series, tags } = this.state
+    const { form, msg, processing, series, tags, files } = this.state
     const active = show ? ' is-active' : ''
     const isLoading = processing ? ' is-loading': ''
+    const preView = form.photos[0].id? config.route.photos.getPhoto + form.photos[0].id: ''
+    const photo = files[0].thumb? files[0].thumb: preView
     return (
       <div className={"modal" + active}>
         <div className="modal-background"></div>
@@ -173,58 +204,29 @@ export default class Form extends React.Component {
               <p className="help is-danger">{msg.description}</p>
             </div>
             <div className="field">
-              <label className="label">分類</label>
-              <div className="control">
-                <div className="select">
-                  <select onChange={this.seriesChange.bind(this)} value={form.seriesId}>
-                    {series.map((item, index) => (
-                      <option 
-                        key={index} 
-                        value={item.id}
-                      >
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">標籤</label>
-              <div className="control">
-                <div className="select is-multiple">
-                  <select multiple onChange={this.tagChange.bind(this)} value={form.seriesId}>
-                    {series.map((item, index) => (
-                      <option 
-                        key={index} 
-                        value={item.id}
-                      >
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="field">
               <label className="label">產品圖片</label>
                 <div className="file has-name is-fullwidth">
                   <label className="file-label">
-                    <input className="file-input" type="file" name="resume"/>
+                    <input className="file-input" type="file" onChange={(e) => this.handlePhoto(e)}/>
                     <span className="file-cta">
                       <span className="file-icon">
                         <i className="fa fa-upload"></i>
                       </span>
                       <span className="file-label">
-                        Choose a file…
+                        選擇檔案
                       </span>
                     </span>
                     <span className="file-name">
-                      ...
+                      {files[0].name}
                     </span>
                   </label>
                 </div>
               <p className="help is-danger">{msg.photo}</p>
+              {photo && 
+                <figure className="image is-128x128">
+                  <img src={photo} />
+                </figure>
+              }
             </div>
           </section>
           <footer className="modal-card-foot">
