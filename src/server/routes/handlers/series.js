@@ -263,7 +263,7 @@ function findNodeSiblings (req, res, next) {
     .findAll({
       where: {
         parentSeriesId: req.targetSeries
-          ? req.targetSeries.id
+          ? req.targetSeries.parentSeriesId
           : null
       }
     })
@@ -486,9 +486,9 @@ function patchParentSeriesId (req, res, next) {
       return req.targetSeries.update({
         parentSeriesId: targetParentSeriesId,
         displaySequence: req.targetParentSeries.childSeries.length,
-        menuLevel: req.targetParentSeries.menuLevel
-          ? req.targetParentSeries.menuLevel + 1
-          : 0
+        menuLevel: req.targetParentSeries === undefined
+          ? 0
+          : req.targetParentSeries.menuLevel + 1
       }, { transaction })
     })
   }).then(() => {
