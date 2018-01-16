@@ -35,18 +35,18 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ form: this.props.item? this.props.item: this.state.form })
-    this.getSeries()
+    let item = this.props.item? this.props.item: this.state.form
+    this.setState({ form: item })
+    this.getSeries(item)
     //this.getTags()
   }
 
-  getSeries() {
+  getSeries(item) {
     let { series } = this.props.series
     let list  = this.initSeries([], series, 0)
-    if (this.state.form.seriesId === '') {
-      let form = this.state.form
-      form.seriesId = list[0].id
-      this.setState({ form: form })
+    if (item.seriesId === '') {
+      item.seriesId = list[0].id
+      this.setState({ form: item })
     }
     this.setState({ series: list })
   }
@@ -150,9 +150,8 @@ class Form extends React.Component {
         console.log(error)
       })
     } else {
-      self.setState({
-        processing: false,
-      })
+      self.setState({ processing: false })
+      self.props.click_cancel()
     }
   }
 
@@ -171,9 +170,7 @@ class Form extends React.Component {
     .then(function (response) {
       console.log(response.data)
       if (response.status === 200) {
-        self.setState({
-          processing: false,
-        })
+        self.setState({ processing: false })
         self.props.click_cancel()
       } else {
         console.log(response)
