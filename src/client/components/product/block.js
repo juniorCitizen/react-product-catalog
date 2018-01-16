@@ -77,7 +77,7 @@ class Block extends React.Component {
             {product.products.map((item, index) => (
               <div className="column is-2" key={index} style={style.images}>
                 <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
-                  <img className="v-image" src={route.photos.getPhoto + item.photos[0].id} />
+                  <img className="v-image" src={getPhoto(item)} />
                   {order.order.map((list, index) => {
                       if (list.id === item.id) {
                         return (
@@ -109,6 +109,13 @@ const style = {
     height: '256px',
     width: '256px',
   }
+}
+
+function getPhoto(product) {
+  if (product.photos.length > 0) {
+    return route.photos.getPhoto + product.photos[0].id
+  }
+  return null
 }
 
 function isOrdered(data, order) {

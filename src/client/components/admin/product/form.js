@@ -128,12 +128,13 @@ class Form extends React.Component {
     const { form, files } = this.state
     const self = this
     this.setState({processing: true})
-    let data = { photos: files }
+    var formData = new FormData()
+    formData.append("photos", files[0])
     if (files[0].thumb) {
       axios({
         method: 'post',
         url: config.route.photos.insert,
-        data: qs.stringify(data),
+        data: formData,
         headers: {
           'x-access-token': window.localStorage["jwt-admin-token"],
           'Content-Type': 'multipart/form-data',
@@ -142,7 +143,7 @@ class Form extends React.Component {
       .then(function (response) {
         console.log(response.data)
         if (response.status === 200) {
-          self.mergeProductPhoto(response.data.data.id)
+          self.mergeProductPhoto(response.data.data[0])
         } else {
           console.log(response)
         }
@@ -160,7 +161,7 @@ class Form extends React.Component {
     const self = this
     axios({
       method: 'patch',
-      url: config.route.photos.update + photoId + '?productId' + form.id,
+      url: config.route.photos.update + photoId + '?productId=' + form.id,
       data: qs.stringify(form),
       headers: {
         'x-access-token': window.localStorage["jwt-admin-token"],
