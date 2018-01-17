@@ -53,6 +53,36 @@ class Series extends React.Component {
     dispatch(update_products(list))
   }
 
+  activeSeries(series, code) {
+    let active = false
+    if (series.length > 0) {
+      series.map((item) => {
+        if (item.id === code) {
+          active = true
+          item.selected = active
+        }
+        if (!active && item.childSeries.length > 0) {
+          active = this.activeSeries(item.childSeries, code)
+          item.selected = active
+        }
+      })
+      return active
+    }
+  }
+
+  setProducts(series, code) {
+    const { dispatch } = this.props
+    for (let i = 0; i < series.length; i++) {
+      if (series[i].id = code) {
+        dispatch(update_products(series[i].products))
+      } else {
+        if (series[i].childSeries.length > 0) {
+          this.setProducts(series[i].childSeries)
+        }
+      }
+    }
+  }
+
   getSeries() {
     const self = this
     axios({
@@ -79,7 +109,8 @@ class Series extends React.Component {
 
   render() {
     const { alertShow, alertMsg } = this.state
-    const { series } = this.props.series
+    const { series, code } = this.props.series
+    this.activeSeries(series, code)
     return (
       <div>
         <aside className="menu">

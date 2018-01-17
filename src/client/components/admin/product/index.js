@@ -7,7 +7,7 @@ import ChangeSeries from './series'
 import Tags from './tags'
 import Confirm from '../../../containers/modal/confirm'
 import config from '../../../config'
-import { update_products } from '../../../actions'
+import { update_products, series_patch } from '../../../actions'
 
 class Product extends React.Component {
   constructor (props) {
@@ -113,6 +113,27 @@ class Product extends React.Component {
     })
   }
 
+  getSeries() {
+    const self = this
+    const { dispatch } = this.props
+    
+    axios({
+      method: 'get',
+      url: config.route.productMenu,
+      data: {},
+      headers: {}
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        dispatch(series_patch(response.data.data))
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
   searchChange(e) {
     let val = e.target.value
     this.setState({ search: val })
@@ -133,7 +154,9 @@ class Product extends React.Component {
     .then(function (response) {
       console.log(response.data)
       if (response.status === 200) {
-        self.removeProducts(item)
+        //self.removeProducts(item)
+        self.getSeries()
+        self.hideDelete()
       } else {
         return null
       }

@@ -51,6 +51,47 @@ class Form extends React.Component {
     this.setState({ series: list })
   }
 
+  resetSeries() {
+    const self = this
+    const { dispatch } = this.props
+    const { series, code } = this.props.series
+    console.log('series reseting')
+    axios({
+      method: 'get',
+      url: config.route.productMenu,
+      data: {},
+      headers: {}
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        console.log('series reseted')
+        dispatch(series_patch(response.data.data))
+        self.setProducts(series, code)
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  setProducts(series, code) {
+    const { dispatch } = this.props
+    console.log('setting products')
+    console.log('seriesId:' + code)
+    for (let i = 0; i < series.length; i++) {
+      if (series[i].id === code) {
+        console.log('update product list')
+        console.log(series[i].products)
+        dispatch(update_products(series[i].products))
+      } else {
+        if (series[i].childSeries.length > 0) {
+          this.setProducts(series[i].childSeries, code)
+        }
+      }
+    }
+  }
+
   seriesChange(e) {
     let seriesId = e.target.value
     let form = this.state.form
@@ -71,7 +112,7 @@ class Form extends React.Component {
     return list
   }
 
-  resetSeries() {
+  _resetSeries() {
     let { series } = this.props.series
     const { dispatch } = this.props
     let newSeries = this.modifySeries(series)
@@ -131,6 +172,7 @@ class Form extends React.Component {
     var formData = new FormData()
     formData.append("photos", files[0])
     if (files[0].thumb) {
+      console.log('photo uploading')
       axios({
         method: 'post',
         url: config.route.photos.insert,
@@ -141,8 +183,8 @@ class Form extends React.Component {
         }
       })
       .then(function (response) {
-        console.log(response.data)
         if (response.status === 200) {
+          console.log('photo uploaded')
           self.mergeProductPhoto(response.data.data[0])
         } else {
           console.log(response)
@@ -151,6 +193,7 @@ class Form extends React.Component {
         console.log(error)
       })
     } else {
+      console.log('photo no change')
       self.setState({ processing: false })
       self.props.click_cancel()
     }
@@ -159,6 +202,7 @@ class Form extends React.Component {
   mergeProductPhoto(photoId) {
     const { form } = this.state
     const self = this
+    console.log('product & photo merging ')
     axios({
       method: 'patch',
       url: config.route.photos.update + photoId + '?productId=' + form.id,
@@ -169,9 +213,16 @@ class Form extends React.Component {
       }
     })
     .then(function (response) {
-      console.log(response.data)
       if (response.status === 200) {
-        self.setState({ processing: false })
+        console.log('product & photo merged')
+        let form = self.state.form
+        let photos = {id: photoId}
+        form.photos.push(photos)
+        self.setState({ 
+          processing: false,
+          form: form,
+        })
+        self.resetSeries()
         self.props.click_cancel()
       } else {
         console.log(response)
@@ -195,6 +246,7 @@ class Form extends React.Component {
       apiUrl = config.route.products.update + form.id
     }
     delete form.tags
+    console.log('product info saving')
     axios({
       method: method,
       url: apiUrl,
@@ -204,9 +256,9 @@ class Form extends React.Component {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     })
-    .then(function (response) {
-      console.log(response.data)
+    .then(function (response) { 
       if (response.status === 200) {
+        console.log('product info saved')
         self.setState({
           processing: false,
           form: response.data.data,
