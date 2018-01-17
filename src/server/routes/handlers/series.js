@@ -12,7 +12,32 @@ const validateJwt = require('../../middlewares/validateJwt')
 const Op = db.Sequelize.Op
 
 module.exports = {
-  getMenuItems: [
+  // route handlers
+  getSeriesMenu: [ // GET /v3/series
+    (req, res, next) => {
+      return seriesQueries
+        .getSeriesMenu()
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
+    }
+  ],
+  getSeriesWithProducts: [ // GET /v3/series/:seriesId
+    (req, res, next) => {
+      return seriesQueries
+        .getSeriesWithProducts(req.params.seriesId.toUpperCase())
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
+    }
+  ],
+  getMenuItems: [ // GET /v2/series or /v2/series/:seriesId
     rejectInvalidTargetRequest,
     async (req, res, next) => {
       let query = !req.targetSeries
@@ -30,7 +55,6 @@ module.exports = {
       return Promise.resolve()
     }
   ],
-  // route handlers
   read: [ // GET /series or /series/:seriesId
     rejectInvalidTargetRequest,
     getMaxMenuLevel,
@@ -184,7 +208,7 @@ function constructOrderOptions (req, res, next) {
   orderOptions.push([db.Products, db.Photos, 'primary', 'desc'])
   orderOptions.push([db.Products, db.Tags, 'name'])
   orderOptions.push([{ model: db.Series, as: 'childSeries' }, 'displaySequence'])
-  for (let counter = req.targetSeries ? req.targetSeries : 0; counter < req.maxMenuLevel; counter++) {
+  for (let counter = req.targetSeries ? req.targetSeries.menuLevel : 0; counter < req.maxMenuLevel; counter++) {
     orderOptions.push(['displaySequence'])
     orderOptions.push([db.Products, 'code'])
     orderOptions.push([db.Products, db.Photos, 'primary', 'desc'])
