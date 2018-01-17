@@ -37,8 +37,11 @@ class Login extends React.Component {
     const { dispatch, login } = this.props
     const token = window.localStorage["jwt-token"]
     if (token) {
-      dispatch(user_info(jwt_info(token)))
-      this.props.history.push(config.sys_ref + "/");
+      let user = jwt_info(token)
+      if (user.ext*1000 > new Date().getTime()) {
+        dispatch(user_info(user))
+        this.props.history.push(config.sys_ref + "/")
+      }
     }
   }
 

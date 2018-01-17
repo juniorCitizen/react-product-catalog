@@ -32,8 +32,20 @@ class Login extends React.Component {
     const { dispatch, login, match } = this.props
     const token = window.localStorage["jwt-admin-token"]
     if (token) {
-      dispatch(admin_info(jwt_info(token)))
-      this.props.history.push(match.url);
+      let user = jwt_info(token)
+      if (user.ext*1000 > new Date().getTime()) {
+        dispatch(admin_info(user))
+        this.props.history.push(match.url)
+      }
+    }
+  }
+
+  checkTokenExp(token) {
+    user = jwt_info(token)
+    if (user.ext*1000 < new Date().getTime()) {
+      
+    } else {
+      this.setState({login: true})
     }
   }
 
