@@ -18,6 +18,8 @@ const uuidV4 = require('uuid/v4')
 const db = require('../../controllers/database')
 const eVars = require('../../config/eVars')
 
+const photoQueries = require('../../models/queries/photos')
+
 const validateJwt = require('../../middlewares/validateJwt')
 const products = require('./products')
 const series = require('./series')
@@ -34,6 +36,29 @@ const placeHolderSvg = `<?xml version="1.0" encoding="utf-8"?>
   </svg>`
 
 module.exports = {
+  assignPrimaryPhoto: [ // PATCH /primaryPhotos/:photoId/products/:productId
+    (req, res, next) => {
+      if (!req.targetPhoto || !req.targetProduct) {
+        let error = new Error('Both target photo and product must be valid')
+        error.status = 400
+        return next(error)
+      }
+      return db.sequelize.transaction(transaction => {
+        return photoQueries
+          .revokePrimaryPhotoStatus(req.targetProductId, transaction)
+          .then(() => {
+            return photoQueries.assignPrimaryPhotoToProduct(req.targetPhotoId, req.targetProductId, transaction)
+          })
+      })
+        .then(() => photoQueries.getPhotoById(req.targetPhotoId))
+        .then(data => {
+          req.resJson = { data }
+          next()
+          return Promise.resolve()
+        })
+        .catch(error => next(error))
+    }
+  ],
   upload: [ // POST /photos
     validateJwt({ staff: true }),
     multer.array('photos', eVars.SECONDARY_PHOTO_COUNT_CEILING + 1),
