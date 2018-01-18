@@ -17,6 +17,7 @@ const uuidV4 = require('uuid/v4')
 
 const db = require('../../controllers/database')
 const eVars = require('../../config/eVars')
+const logging = require('../../controllers/logging')
 
 const photoQueries = require('../../models/queries/photos')
 
@@ -36,7 +37,32 @@ const placeHolderSvg = `<?xml version="1.0" encoding="utf-8"?>
   </svg>`
 
 module.exports = {
-  assignPrimaryPhoto: [ // PATCH /primaryPhotos/:photoId/products/:productId
+  insertPrimaryPhoto: [ // POST /api/primaryPhotos
+    validateJwt({ staff: true }),
+    multer.single('photo'),
+    products.findTarget('body', true, true),
+    products.rejectInvalidTargetProduct,
+    (req, res, next) => {
+      return preparePhotoData(req.file)
+        .then(data => {
+          data.primary = true
+          data.productId = req.body.productId.toUpperCase()
+          return db.sequelize.transaction(transaction => {
+            return photoQueries
+              .revokePrimaryPhotoStatus(req.targetProductId, transaction)
+              .then(() => photoQueries.insertPhoto(data, transaction))
+              .then(() => Promise.resolve(data.id))
+          }).then(photoId => {
+            return photoQueries.getPhotoById(photoId)
+          }).then(data => {
+            req.resJson = { data }
+            next()
+            return Promise.resolve()
+          }).catch(error => Promise.reject(error))
+        }).catch(error => next(error))
+    }
+  ],
+  assignPrimaryPhoto: [ // PATCH /api/primaryPhotos/:photoId/products/:productId
     products.rejectInvalidTargetProduct,
     rejectInvalidTargetPhoto,
     validateJwt({ staff: true }),
@@ -46,17 +72,16 @@ module.exports = {
           .revokePrimaryPhotoStatus(req.targetProductId, transaction)
           .then(() => photoQueries
             .assignPrimaryPhotoToProduct(req.targetPhotoId, req.targetProductId, transaction))
-      })
-        .then(() => photoQueries.getPhotoById(req.targetPhotoId))
-        .then(data => {
-          req.resJson = { data }
-          next()
-          return Promise.resolve()
-        })
-        .catch(error => next(error))
+      }).then(() => {
+        return photoQueries.getPhotoById(req.targetPhotoId)
+      }).then(data => {
+        req.resJson = { data }
+        next()
+        return Promise.resolve()
+      }).catch(error => next(error))
     }
   ],
-  upload: [ // POST /photos
+  upload: [ // POST /api/photos
     validateJwt({ staff: true }),
     multer.array('photos', eVars.SECONDARY_PHOTO_COUNT_CEILING + 1),
     preparePhotoDataReadingActions,
@@ -64,10 +89,10 @@ module.exports = {
     deleteTempPhotos,
     supplyNewPhotoIdListSummary
   ],
-  readOne: [ // GET /photos/:photoId
+  readOne: [ // GET /api/photos/:photoId
     getPhotoImageById
   ],
-  patch: [ // PATCH /photos/:photoId
+  patch: [ // PATCH /api/photos/:photoId
     validateJwt({ staff: true }),
     products.findTarget('query', true, false),
     series.findTarget('query', true, false),
@@ -75,7 +100,7 @@ module.exports = {
     findTarget('params', true),
     sendPhotoData
   ],
-  delete: [ // DELETE /photos/:photos
+  delete: [ // DELETE /api/photos/:photos
     validateJwt({ staff: true }),
     deletePhotoRecord
   ],
@@ -239,6 +264,28 @@ function patchPhotoPrimaryStatus (req, res, next) {
     next()
     return Promise.resolve()
   }).catch(error => next(error))
+}
+
+// prepare a photo object from multer processed request upload
+function preparePhotoData (uploadedPhoto) {
+  return fs
+    .readFile(uploadedPhoto.path)
+    .then(bufferedPhoto => {
+      return del(uploadedPhoto.path)
+        .then(() => Promise.resolve({
+          id: uuidV4().toUpperCase(),
+          originalName: uploadedPhoto.originalname,
+          encoding: uploadedPhoto.encoding,
+          mimeType: uploadedPhoto.mimetype,
+          size: uploadedPhoto.size,
+          data: bufferedPhoto
+        }))
+        .catch(error => Promise.reject(error))
+    })
+    .catch(error => {
+      logging.error(error, '/routes/handlers/photos.preparePhotoData() errored')
+      return Promise.reject(error)
+    })
 }
 
 // prepare an array of photo data from upload photos

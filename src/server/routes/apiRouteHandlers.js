@@ -84,7 +84,7 @@ API_ROUTER.route('/photos/:photoId')
   .patch(...photos.patch) // patching record fields (primary, seriesId, productId)
   .delete(...photos.delete) // remove photo by id
 API_ROUTER.route('/primaryPhotos')
-  .post() // insert a new photo and assign as primary photo to a product
+  .post(...photos.insertPrimaryPhoto) // insert a new photo and assign as primary photo to a product
 API_ROUTER.route('/primaryPhotos/:photoId/products/:productId')
   .patch(...photos.assignPrimaryPhoto) // associate an existing photo to a product and assign as the primary
 

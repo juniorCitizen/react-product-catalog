@@ -4,6 +4,7 @@ const logging = require('../../controllers/logging')
 module.exports = {
   assignPrimaryPhotoToProduct,
   getPhotoById,
+  insertPhoto,
   revokePrimaryPhotoStatus
 }
 
@@ -21,15 +22,27 @@ function assignPrimaryPhotoToProduct (photoId, productId, transaction = null) {
     })
 }
 
-// get photo by id
+// get photo object by id
 function getPhotoById (photoId) {
   return db.Photos
     .findById(photoId)
-    .then(data => Promise.resolve(data))
+    .then(data => {
+      return Promise.resolve(data)
+    })
     .catch(error => {
       logging.error(error, '/models/queries/photos.getPhotoById() errored')
       return Promise.reject(error)
     })
+}
+
+// insert one photo to the photos table
+function insertPhoto (data, transaction) {
+  let query = transaction
+    ? db.Photos.create(data, { transaction })
+    : db.Photos.create(data)
+  return query
+    .then(() => Promise.resolve())
+    .catch(error => Promise.reject(error))
 }
 
 // revoke any primary photos of a particular product
