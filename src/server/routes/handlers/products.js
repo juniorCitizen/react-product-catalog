@@ -56,8 +56,19 @@ module.exports = {
   // common middlewares
   autoFindTarget,
   findTarget,
+  rejectInvalidTargetProduct,
   sendTargetData
   // specialized middlewares
+}
+
+// reject request if target product does not exist
+function rejectInvalidTargetProduct (req, res, next) {
+  if (!req.targetProduct) {
+    let error = new Error('Target product must be valid')
+    error.status = 400
+    return next(error)
+  }
+  return next()
 }
 
 // find target product record indicated by the request route.param() with :productId

@@ -37,18 +37,15 @@ const placeHolderSvg = `<?xml version="1.0" encoding="utf-8"?>
 
 module.exports = {
   assignPrimaryPhoto: [ // PATCH /primaryPhotos/:photoId/products/:productId
+    products.rejectInvalidTargetProduct,
+    rejectInvalidTargetPhoto,
+    validateJwt({ staff: true }),
     (req, res, next) => {
-      if (!req.targetPhoto || !req.targetProduct) {
-        let error = new Error('Both target photo and product must be valid')
-        error.status = 400
-        return next(error)
-      }
       return db.sequelize.transaction(transaction => {
         return photoQueries
           .revokePrimaryPhotoStatus(req.targetProductId, transaction)
-          .then(() => {
-            return photoQueries.assignPrimaryPhotoToProduct(req.targetPhotoId, req.targetProductId, transaction)
-          })
+          .then(() => photoQueries
+            .assignPrimaryPhotoToProduct(req.targetPhotoId, req.targetProductId, transaction))
       })
         .then(() => photoQueries.getPhotoById(req.targetPhotoId))
         .then(data => {
@@ -85,10 +82,21 @@ module.exports = {
   // common middlewares
   autoFindTarget,
   findTarget,
+  rejectInvalidTargetPhoto,
   // specialized middlewares
   clearPhotoAssociations,
   getPhotoImageById,
   deleteTempPhotos
+}
+
+// reject request if target photo does not exist
+function rejectInvalidTargetPhoto (req, res, next) {
+  if (!req.targetPhoto) {
+    let error = new Error('Target photo must be valid')
+    error.status = 400
+    return next(error)
+  }
+  return next()
 }
 
 // find target photo record indicated by the request route.param() with :photoId
