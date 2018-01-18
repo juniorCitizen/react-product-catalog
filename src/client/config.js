@@ -13,6 +13,7 @@ export default {
     },
     productMenu: api + '/series',
     series: {
+      list: api + '/v3/series',
       add: api + '/series',
       insert: api + '/series/',
       update: api + '/series/',

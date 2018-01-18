@@ -1,20 +1,20 @@
 import {
-  SERIES_CODE,
-  SERIES_PATCH,
+  SERIES_SELECTED,
+  SERIES_UPDATE,
 } from '../constants/actionType'
 
 const initalState = {
-  code: null,
+  selectedId: null,
   series: [],
 }
 
 export default function series(state = initalState, action) {
   switch (action.type) {
-    case SERIES_CODE:
+    case SERIES_SELECTED:
       return Object.assign({}, state, {
-        code: action.code
+        selectedId: action.id
       })
-    case SERIES_PATCH:
+    case SERIES_UPDATE:
       return Object.assign({}, state, {
         series: action.series
       })
