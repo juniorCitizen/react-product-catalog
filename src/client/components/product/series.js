@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { set_series_code, series_patch, update_products } from '../../actions'
+import { seriesSelected, seriesUpdate, update_products } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
@@ -14,7 +14,7 @@ class Series extends React.Component {
   }
 
   componentDidMount() {
-    this.getSeries()
+    //this.getSeries()
   }
 
   componentWillUnmount() {
@@ -24,10 +24,10 @@ class Series extends React.Component {
 
   selectSeries(id) {
     const { dispatch } = this.props
-    dispatch(set_series_code(id))
+    dispatch(seriesSelected(id))
     let { series } = this.props.series
     series = this.setSeriesActive(series, id)
-    dispatch(series_patch(series))
+    dispatch(seriesUpdate(series))
   }
 
   setSeriesActive(series, id) {
@@ -53,16 +53,16 @@ class Series extends React.Component {
     dispatch(update_products(list))
   }
 
-  activeSeries(series, code) {
+  activeSeries(series, selected) {
     let active = false
     if (series.length > 0) {
       series.map((item) => {
-        if (item.id === code) {
+        if (item.id === selected) {
           active = true
           item.selected = active
         }
         if (!active && item.childSeries.length > 0) {
-          active = this.activeSeries(item.childSeries, code)
+          active = this.activeSeries(item.childSeries, selected)
           item.selected = active
         }
       })
@@ -70,10 +70,10 @@ class Series extends React.Component {
     }
   }
 
-  setProducts(series, code) {
+  setProducts(series, selected) {
     const { dispatch } = this.props
     for (let i = 0; i < series.length; i++) {
-      if (series[i].id = code) {
+      if (series[i].id = selected) {
         dispatch(update_products(series[i].products))
       } else {
         if (series[i].childSeries.length > 0) {
@@ -87,7 +87,7 @@ class Series extends React.Component {
     const self = this
     axios({
       method: 'get',
-      url: config.route.productMenu,
+      url: config.route.series.list,
       data: {},
       headers: {}
     })
@@ -104,13 +104,13 @@ class Series extends React.Component {
 
   setSeries(series) {
     const { dispatch } = this.props
-    dispatch(series_patch(series))
+    dispatch(seriesUpdate(series))
   }
 
   render() {
     const { alertShow, alertMsg } = this.state
-    const { series, code } = this.props.series
-    this.activeSeries(series, code)
+    const { series, selected } = this.props.series
+    this.activeSeries(series, selected)
     return (
       <div>
         <aside className="menu">
@@ -118,7 +118,7 @@ class Series extends React.Component {
             {series.map((item, index) => (
               <li key={index}>
                 <a className={item.selected ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
-                {item.childSeries && item.selected &&
+                {item.hasOwnProperty('childSeries') && item.selected &&
                   <ul>
                     {item.childSeries.map((item, index) => (
                       <li key={index}>

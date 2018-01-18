@@ -1,12 +1,12 @@
 import {
-  SERIES_CODE,
-  SERIES_PATCH,
+  SERIES_SELECTED,
+  SERIES_UPDATE,
 } from '../constants/actionType'
 
-export function set_series_code(code) {
-  return { type: SERIES_CODE, code }
+export function seriesSelected(seriesId) {
+  return { type: SERIES_SELECTED, seriesId }
 }
 
-export function series_patch(series) {
-  return { type: SERIES_PATCH, series}
+export function seriesUpdate(series) {
+  return { type: SERIES_UPDATE  , series}
 }
