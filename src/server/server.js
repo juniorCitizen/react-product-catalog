@@ -42,7 +42,7 @@ Promise.each( // 依序執行服務原件的啟動程序
     logging.console('初始化 Express 框架...')
     app = express()
 
-    // ////////////// webpack ///////////////////////////////////////////////
+    // /////////// webpack ///////////////////////////////////////////////
     if (eVars.devMode) { // only load in devMode
       logging.console('啟動 Webpack HMR...')
       const webpack = require('webpack')
