@@ -119,10 +119,14 @@ API_ROUTER.route('/series/:seriesId')
   .post(...series.createChildNode) // insert new child series
   .patch(...series.patch) // patch series properties
   .delete(...series.delete) // delete series by id
-API_ROUTER.route('/v2/series')
+API_ROUTER.route('/v2/series') // get root level series menu
   .get(...series.getMenuItems)
-API_ROUTER.route('/v2/series/:seriesId')
+API_ROUTER.route('/v2/series/:seriesId') // get series menu at a particular node and tagMenu plus products
   .get(...series.getMenuItems)
+API_ROUTER.route('/v3/series') // get full series menu structure (plain series object without association info)
+  .get(...series.getSeriesMenu)
+API_ROUTER.route('/v3/series/:seriesId') // get series by id and its associated product information
+  .get(...series.getSeriesWithProducts)
 
 // /////////////////////////////////////////////////////
 // Tags

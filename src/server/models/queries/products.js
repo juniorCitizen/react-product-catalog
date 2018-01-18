@@ -25,7 +25,7 @@ function getSeriesProducts (seriesId) {
     })
     .then(series => Promise.resolve(series.products))
     .catch(error => {
-      logging.error(error, '/models/queries/series.getSeriesProducts() errored')
+      logging.error(error, '/models/queries/products.getSeriesProducts() errored')
       return Promise.reject(error)
     })
 }
