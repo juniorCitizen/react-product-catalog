@@ -1,12 +1,12 @@
 import {
-  SERIES_SELECTED,
-  SERIES_UPDATE,
+  SELECTED_SERIES_ID,
+  UPDATE_SERIES,
 } from '../constants/actionType'
 
-export function seriesSelected(seriesId) {
-  return { type: SERIES_SELECTED, seriesId }
+export function selectedSeriesId(seriesId) {
+  return { type: SELECTED_SERIES_ID, seriesId }
 }
 
-export function seriesUpdate(series) {
-  return { type: SERIES_UPDATE  , series}
+export function updateSeries(series) {
+  return { type: UPDATE_SERIES, series}
 }

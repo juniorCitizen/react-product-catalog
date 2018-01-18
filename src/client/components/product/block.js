@@ -70,32 +70,31 @@ class Block extends React.Component {
   render() {
     const { series, product, order } = this.props
     const { list, hot_list, new_list, show_detail } = this.state
+    console.log(product.products)
     return (
       <div>
-        {series.code &&
-          <div className="columns is-multiline" style={{ marginTop: '1px' }}>
-            {product.products.map((item, index) => (
-              <div className="column is-2" key={index} style={style.images}>
-                <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
-                  <img className="v-image" src={getPhoto(item)} />
-                  {order.order.map((list, index) => {
-                      if (list.id === item.id) {
-                        return (
-                          <span className="icon has-text-warning v-image-order-tag" key={index}>
-                            <i className="fa fa-star"></i>
-                          </span>
-                        )
-                      }
-                    })
-                  }
-                  <div className="v-image-label">
-                    {item.name}
-                  </div>
+        <div className="columns is-multiline" style={{ marginTop: '1px' }}>
+          {product.products.map((item, index) => (
+            <div className="column is-2" key={index} style={style.images}>
+              <div className="v-image-box" onClick={this.showDetail.bind(this, item)}>
+                <img className="v-image" src={getPhoto(item)} />
+                {order.order.map((list, index) => {
+                    if (list.id === item.id) {
+                      return (
+                        <span className="icon has-text-warning v-image-order-tag" key={index}>
+                          <i className="fa fa-star"></i>
+                        </span>
+                      )
+                    }
+                  })
+                }
+                <div className="v-image-label">
+                  {item.name}
                 </div>
               </div>
-            ))}
-          </div>
-        }
+            </div>
+          ))}
+        </div>
         <Detail show={show_detail} ref="detail" hide={this.hideDetail.bind(this)} />
       </div>
     )
