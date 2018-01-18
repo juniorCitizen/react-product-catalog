@@ -9,7 +9,7 @@ export default {
     contacts: {
       contacts: api + '/contacts/',
       register: api + '/contacts',
-      tokens: api + '/login'
+      tokens: api + '/login',
     },
     productMenu: api + '/series',
     series: {
@@ -28,15 +28,16 @@ export default {
       patch: api + '/products/',
     },
     order: {
-      purchase: api + '/contacts/'
+      purchase: api + '/contacts/',
     },
     photos: {
       getPhoto: api + '/photos/',
       insert: api + '/photos',
-      update: api + '/photos/'
+      update: api + '/photos/',
+      primary: api + '/primaryPhotos',
     },
     tag: {
-      getTags: api + '/tags'
+      getTags: api + '/tags',
     },
   },
   project: {

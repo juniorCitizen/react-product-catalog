@@ -18,12 +18,13 @@ export default class Confirm extends React.Component {
   }
 
   render() {
-    const { message, click_ok, click_cancel } = this.props
+    const { loading, message, click_ok, click_cancel } = this.props
     const btn_ok = this.props.btn_ok || this.state.btn_ok
     const btn_cancel = this.props.btn_cancel || this.state.btn_cancel
     const icon = this.props.icon || this.state.icon
     const iconType = this.props.iconType || this.state.iconType
     const show = this.props.show ? ' is-active' : ''
+    const isLoading = loading ? ' is-loading': ''
     return (
       <div className={"modal" + show}>
         <div className="modal-background"></div>
@@ -36,11 +37,10 @@ export default class Confirm extends React.Component {
             </p>
           </header>
           <section className="modal-card-body">
-
             <h2 className="title is-2">{message}</h2>
           </section>
           <footer className="modal-card-foot">
-            <button className={"button " + btn_ok.type} onClick={click_ok}>
+            <button className={"button " + btn_ok.type + isLoading} onClick={click_ok}>
               {btn_ok.text}
             </button>
             <button className={"button " + btn_cancel.type} onClick={click_cancel}>
