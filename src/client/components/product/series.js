@@ -32,15 +32,22 @@ class Series extends React.Component {
 
   setSeriesActive(series, id) {
     let self = this
+    console.log(series)
     series.map((item) => {
       if (item.id === id) {
         item.selected = true
         this.getProducts(item.id)
       } else {
-        if (item.childSeries !== undefined) {
-          item.childSeries = this.setSeriesActive(item.childSeries, id)
-        }
+        item.selected = false
       }
+      if (item.childSeries !== undefined) {
+        item.childSeries = this.setSeriesActive(item.childSeries, id)
+        item.childSeries.map((sub) => {
+          if (sub.id === id || sub.selected) {
+            item.selected = true
+          }
+        })
+      } 
     })
     return series
   }
