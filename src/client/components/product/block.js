@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import config from '../../config'
 import Detail from './detail'
+import { updateProducts } from '../../actions/index';
 
 const api = config.api
 const route = config.route
@@ -12,7 +13,6 @@ class Block extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [],
       hot_list: [],
       new_list: [],
       current: 0,
@@ -21,36 +21,33 @@ class Block extends React.Component {
     }
   }
 
-  getProductList(code) {
-    console.log('series code:' + code)
-    if (code === null) {
-      return
-    }
-    return
+  componentDidMount() {
+    
+  }
+
+  getProducts(id) {
+    const self = this
+    console.log(id)
     axios({
       method: 'get',
-      url: api + 'product/' + code + '/1',
-      data: null,
-      headers: {
-        'x-access-token': window.localStorage["jwt-token"],
-        'Content-Type': 'application/json',
-      }
+      url: config.route.series.products + id,
     })
-      .then(function (response) {
-        if (response.status === 200) {
-          let data = response.data
-          self.setState({
-            list: data.list,
-            current: data.current,
-            total: data.total,
-          })
-          self.loginSuccess()
-        } else {
-          console.log(response.data)
-        }
-      }).catch(function (error) {
-        console.log(error)
-      })
+    .then(function (response) {
+      if (response.status === 200) {
+        let series = response.data.data[0]
+        self.setState({ products: series.products })
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  updateProducts(list) {
+    const { dispatch } = this.props
+    console.log(list)
+    dispatch(updateProducts(list))
   }
 
   showDetail(item) {
@@ -69,8 +66,7 @@ class Block extends React.Component {
 
   render() {
     const { series, product, order } = this.props
-    const { list, hot_list, new_list, show_detail } = this.state
-    console.log(product.products)
+    const { products, hot_list, new_list, show_detail } = this.state
     return (
       <div>
         <div className="columns is-multiline" style={{ marginTop: '1px' }}>

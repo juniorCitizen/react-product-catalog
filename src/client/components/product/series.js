@@ -32,7 +32,6 @@ class Series extends React.Component {
 
   setSeriesActive(series, id) {
     let self = this
-    console.log(series)
     series.map((item) => {
       if (item.id === id) {
         item.selected = true
@@ -54,7 +53,6 @@ class Series extends React.Component {
 
   getProducts(id) {
     const self = this
-    console.log('get products')
     axios({
       method: 'get',
       url: config.route.series.products + id,

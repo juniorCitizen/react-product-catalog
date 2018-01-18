@@ -43,7 +43,7 @@ class Form extends React.Component {
 
   getSeries(item) {
     let { series } = this.props.series
-    let list  = this.initSeries([], series, 0)
+    let list = this.initSeries([], series, 0)
     if (item.seriesId === '') {
       item.seriesId = list[0].id
       this.setState({ form: item })
@@ -107,7 +107,9 @@ class Form extends React.Component {
     node.map((item) => {
       item.newName = s + item.name
       list.push(item)
-      list = this.initSeries(list, item.childSeries, n + 1)
+      if (item.childSeries !== undefined) {
+        list = this.initSeries(list, item.childSeries, n + 1)
+      }
     })
     return list
   }
