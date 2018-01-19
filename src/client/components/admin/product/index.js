@@ -240,22 +240,6 @@ class Product extends React.Component {
               <nav className="level" style={style.level}>
                 <div className="level-left">
                   <div className="level-item">
-                    <div className="" style={style.toolBar}>
-                      <div className="field has-addons">
-                        <div className="control">
-                          <input className="input" type="text" placeholder="輸入搜尋值"
-                            value={search}
-                            onChange={this.searchChange.bind(this)} />
-                        </div>
-                        <div className="control">
-                          <button className="button" onClick={this.doSearch.bind(this)}>
-                            <span className="icon has-text-info">
-                              <i className="fa fa-search fa-lg"></i>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div className="level-right">
@@ -275,25 +259,26 @@ class Product extends React.Component {
                 <table className="table is-bordered is-striped is-narrow is-fullwidth">
                   <thead>
                     <tr>
+                      <th>產品圖片</th>
                       <th>產品代號</th>
                       <th>品名</th>
-                      <th width="186"></th>
+                      <th width="144"></th>
                     </tr>
                   </thead>
                   <tbody>
                     {product.products.map((item, index) => (
                       <tr key={index}>
+                        <td>
+                          <figure className="image is-48x48">
+                            <img src={config.route.photos.getPhoto + item.photos[0].id}/>
+                          </figure>
+                        </td>
                         <td>{item.code}</td>
                         <td>{item.name}</td>
                         <td>
                           <button className="button" style={style.tableButton} onClick={this.showTags.bind(this, item)}>
                             <span className="icon has-text-info">
                               <i className="fa fa-flag fa-fa"></i>
-                            </span>
-                          </button>
-                          <button className="button" style={style.tableButton} onClick={this.showSeries.bind(this, item)}>
-                            <span className="icon has-text-info">
-                              <i className="fa fa-list fa-lg"></i>
                             </span>
                           </button>
                           <button className="button" style={style.tableButton} onClick={this.showEdit.bind(this, item)}>
@@ -366,6 +351,27 @@ const style = {
   container: {
     padding: '10px'
   },
+}
+
+function seache() {
+  return (
+    <div className="" style={style.toolBar}>
+      <div className="field has-addons">
+        <div className="control">
+          <input className="input" type="text" placeholder="輸入搜尋值"
+            value={search}
+            onChange={this.searchChange.bind(this)} />
+        </div>
+        <div className="control">
+          <button className="button" onClick={this.doSearch.bind(this)}>
+            <span className="icon has-text-info">
+              <i className="fa fa-search fa-lg"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function mapStateToProps(state) {
