@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { set_series_code, series_patch, update_products } from '../../actions'
+import { selectedSeriesId, updateSeries, updateProducts } from '../../actions'
 import { connect } from 'react-redux'
 import config from '../../config'
 
@@ -19,77 +19,66 @@ class Series extends React.Component {
 
   componentWillUnmount() {
     const { dispatch } = this.props
-    dispatch(update_products([]))
+    dispatch(updateProducts([]))
   }
 
   selectSeries(id) {
     const { dispatch } = this.props
-    dispatch(set_series_code(id))
     let { series } = this.props.series
+    dispatch(selectedSeriesId(id))
     series = this.setSeriesActive(series, id)
-    dispatch(series_patch(series))
+    dispatch(updateSeries(series))
   }
 
   setSeriesActive(series, id) {
     let self = this
-    series && series.map((item) => {
-      item.selected = item.id === id
-      if (item.selected) {
-        this.updateProducts(item.products)
+    series.map((item) => {
+      if (item.id === id) {
+        item.selected = true
+        this.getProducts(item.id)
+      } else {
+        item.selected = false
       }
-      item.childSeries && item.childSeries.map((sub) => {
-        if (sub.id === id) {
-          item.selected = true
-          this.updateProducts(sub.products)
-        }
-      })
-      item.childSeries = this.setSeriesActive(item.childSeries, id)
+      if (item.childSeries !== undefined) {
+        item.childSeries = this.setSeriesActive(item.childSeries, id)
+        item.childSeries.map((sub) => {
+          if (sub.id === id || sub.selected) {
+            item.selected = true
+          }
+        })
+      } 
     })
     return series
   }
 
+  getProducts(id) {
+    const self = this
+    axios({
+      method: 'get',
+      url: config.route.series.products + id,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        let series = response.data.data[0]
+        self.updateProducts(series.products)
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
   updateProducts(list) {
     const { dispatch } = this.props
-    dispatch(update_products(list))
-  }
-
-  activeSeries(series, code) {
-    let active = false
-    if (series.length > 0) {
-      series.map((item) => {
-        if (item.id === code) {
-          active = true
-          item.selected = active
-        }
-        if (!active && item.childSeries.length > 0) {
-          active = this.activeSeries(item.childSeries, code)
-          item.selected = active
-        }
-      })
-      return active
-    }
-  }
-
-  setProducts(series, code) {
-    const { dispatch } = this.props
-    for (let i = 0; i < series.length; i++) {
-      if (series[i].id = code) {
-        dispatch(update_products(series[i].products))
-      } else {
-        if (series[i].childSeries.length > 0) {
-          this.setProducts(series[i].childSeries)
-        }
-      }
-    }
+    dispatch(updateProducts(list))
   }
 
   getSeries() {
     const self = this
     axios({
       method: 'get',
-      url: config.route.productMenu,
-      data: {},
-      headers: {}
+      url: config.route.series.list,
     })
     .then(function (response) {
       if (response.status === 200) {
@@ -104,13 +93,12 @@ class Series extends React.Component {
 
   setSeries(series) {
     const { dispatch } = this.props
-    dispatch(series_patch(series))
+    dispatch(updateSeries(series))
   }
 
   render() {
     const { alertShow, alertMsg } = this.state
-    const { series, code } = this.props.series
-    this.activeSeries(series, code)
+    const { series, selectedId } = this.props.series
     return (
       <div>
         <aside className="menu">
@@ -118,7 +106,7 @@ class Series extends React.Component {
             {series.map((item, index) => (
               <li key={index}>
                 <a className={item.selected ? "is-active" : ""} onClick={this.selectSeries.bind(this, item.id)}>{item.name}</a>
-                {item.childSeries && item.selected &&
+                {item.hasOwnProperty('childSeries') && item.selected &&
                   <ul>
                     {item.childSeries.map((item, index) => (
                       <li key={index}>

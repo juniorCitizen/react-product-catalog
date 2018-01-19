@@ -3,7 +3,7 @@ import axios from 'axios'
 import qs from 'qs'
 import config from '../../../config'
 import { connect } from 'react-redux'
-import { series_patch, update_products } from '../../../actions'
+import { updateSeries, updateProducts } from '../../../actions'
 
 class Form extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Form extends React.Component {
 
   getSeries(item) {
     let { series } = this.props.series
-    let list  = this.initSeries([], series, 0)
+    let list = this.initSeries([], series, 0)
     if (item.seriesId === '') {
       item.seriesId = list[0].id
       this.setState({ form: item })
@@ -54,19 +54,16 @@ class Form extends React.Component {
   resetSeries() {
     const self = this
     const { dispatch } = this.props
-    const { series, code } = this.props.series
-    console.log('series reseting')
+    const { selectedId } = this.props.series
     axios({
       method: 'get',
-      url: config.route.productMenu,
-      data: {},
-      headers: {}
+      url: config.route.series.list,
     })
     .then(function (response) {
       if (response.status === 200) {
-        console.log('series reseted')
-        dispatch(series_patch(response.data.data))
-        self.setProducts(series, code)
+        let series = self.setSeriesActive(response.data.data, selectedId)
+        console.log(series)
+        dispatch(updateSeries(series))
       } else {
         console.log(response.data)
       }
@@ -75,22 +72,51 @@ class Form extends React.Component {
     })
   }
 
-  setProducts(series, code) {
-    const { dispatch } = this.props
-    console.log('setting products')
-    console.log('seriesId:' + code)
-    for (let i = 0; i < series.length; i++) {
-      if (series[i].id === code) {
-        console.log('update product list')
-        console.log(series[i].products)
-        dispatch(update_products(series[i].products))
+  setSeriesActive(series, id) {
+    let self = this
+    series.map((item) => {
+      if (item.id === id) {
+        item.selected = true
+        this.getProducts(item.id)
       } else {
-        if (series[i].childSeries.length > 0) {
-          this.setProducts(series[i].childSeries, code)
-        }
+        item.selected = false
       }
-    }
+      if (item.childSeries !== undefined) {
+        item.childSeries = this.setSeriesActive(item.childSeries, id)
+        item.childSeries.map((sub) => {
+          if (sub.id === id || sub.selected) {
+            item.selected = true
+          }
+        })
+      } 
+    })
+    return series
   }
+
+  getProducts(id) {
+    const self = this
+    axios({
+      method: 'get',
+      url: config.route.series.products + id,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        let series = response.data.data[0]
+        console.log(series.products)
+        self.updateProducts(series.products)
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  updateProducts(list) {
+    const { dispatch } = this.props
+    dispatch(updateProducts(list))
+  }
+ 
 
   seriesChange(e) {
     let seriesId = e.target.value
@@ -107,7 +133,9 @@ class Form extends React.Component {
     node.map((item) => {
       item.newName = s + item.name
       list.push(item)
-      list = this.initSeries(list, item.childSeries, n + 1)
+      if (item.childSeries !== undefined) {
+        list = this.initSeries(list, item.childSeries, n + 1)
+      }
     })
     return list
   }
@@ -116,7 +144,7 @@ class Form extends React.Component {
     let { series } = this.props.series
     const { dispatch } = this.props
     let newSeries = this.modifySeries(series)
-    dispatch(series_patch(newSeries))
+    dispatch(updateSeries(newSeries))
   }
 
   modifySeries(list) {
@@ -170,12 +198,12 @@ class Form extends React.Component {
     const self = this
     this.setState({processing: true})
     var formData = new FormData()
-    formData.append("photos", files[0])
+    formData.append('productId', form.id)
+    formData.append('photo', files[0])
     if (files[0].thumb) {
-      console.log('photo uploading')
       axios({
         method: 'post',
-        url: config.route.photos.insert,
+        url: config.route.photos.primary,
         data: formData,
         headers: {
           'x-access-token': window.localStorage["jwt-admin-token"],
@@ -184,8 +212,10 @@ class Form extends React.Component {
       })
       .then(function (response) {
         if (response.status === 200) {
-          console.log('photo uploaded')
-          self.mergeProductPhoto(response.data.data[0])
+          console.log(response.data.data)
+          self.setState({processing: false})
+          self.props.click_cancel()
+          //self.mergeProductPhoto(response.data.data[0])
         } else {
           console.log(response)
         }
@@ -202,10 +232,9 @@ class Form extends React.Component {
   mergeProductPhoto(photoId) {
     const { form } = this.state
     const self = this
-    console.log('product & photo merging ')
     axios({
       method: 'patch',
-      url: config.route.photos.update + photoId + '?productId=' + form.id,
+      url: config.route.photos.primary + photoId + '/products/' + form.id,
       data: qs.stringify(form),
       headers: {
         'x-access-token': window.localStorage["jwt-admin-token"],
@@ -214,7 +243,7 @@ class Form extends React.Component {
     })
     .then(function (response) {
       if (response.status === 200) {
-        console.log('product & photo merged')
+        console.log(response.data.data)
         let form = self.state.form
         let photos = {id: photoId}
         form.photos.push(photos)
@@ -246,7 +275,6 @@ class Form extends React.Component {
       apiUrl = config.route.products.update + form.id
     }
     delete form.tags
-    console.log('product info saving')
     axios({
       method: method,
       url: apiUrl,
@@ -258,7 +286,7 @@ class Form extends React.Component {
     })
     .then(function (response) { 
       if (response.status === 200) {
-        console.log('product info saved')
+        console.log(response.data.data)
         self.setState({
           processing: false,
           form: response.data.data,

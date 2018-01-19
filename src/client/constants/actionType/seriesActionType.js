@@ -1,2 +1,2 @@
-export const SERIES_CODE = 'SERIES_CODE'
-export const SERIES_PATCH = 'SERIES_PATCH'
+export const SELECTED_SERIES_ID = 'SELECTED_SERIES_ID'
+export const UPDATE_SERIES = 'UPDATE_SERIES'

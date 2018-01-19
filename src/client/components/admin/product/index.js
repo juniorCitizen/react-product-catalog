@@ -7,7 +7,7 @@ import ChangeSeries from './series'
 import Tags from './tags'
 import Confirm from '../../../containers/modal/confirm'
 import config from '../../../config'
-import { update_products, series_patch } from '../../../actions'
+import { updateProducts, updateSeries } from '../../../actions'
 
 class Product extends React.Component {
   constructor (props) {
@@ -31,15 +31,12 @@ class Product extends React.Component {
       deleteShow: false,
       seriesShow: false,
       tagsShow: false,
+      loading: false,
     }
   }
 
   componentDidMount () {
-    this.getProducts()
-  }
 
-  getProducts() {
-    return null
   }
 
   showAdd() {
@@ -116,22 +113,67 @@ class Product extends React.Component {
   getSeries() {
     const self = this
     const { dispatch } = this.props
-    
+    const { selectedId } = this.props.series
     axios({
       method: 'get',
-      url: config.route.productMenu,
-      data: {},
-      headers: {}
+      url: config.route.series.list,
     })
     .then(function (response) {
       if (response.status === 200) {
-        dispatch(series_patch(response.data.data))
+        let series = self.setSeriesActive(response.data.data, selectedId)
+        console.log(series)
+        dispatch(updateSeries(series))
       } else {
         console.log(response.data)
       }
     }).catch(function (error) {
       console.log(error)
     })
+  }
+
+  setSeriesActive(series, id) {
+    let self = this
+    series.map((item) => {
+      if (item.id === id) {
+        item.selected = true
+        this.getProducts(item.id)
+      } else {
+        item.selected = false
+      }
+      if (item.childSeries !== undefined) {
+        item.childSeries = this.setSeriesActive(item.childSeries, id)
+        item.childSeries.map((sub) => {
+          if (sub.id === id || sub.selected) {
+            item.selected = true
+          }
+        })
+      } 
+    })
+    return series
+  }
+
+  getProducts(id) {
+    const self = this
+    axios({
+      method: 'get',
+      url: config.route.series.products + id,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        let series = response.data.data[0]
+        console.log(series.products)
+        self.updateProducts(series.products)
+      } else {
+        console.log(response.data)
+      }
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  updateProducts(list) {
+    const { dispatch } = this.props
+    dispatch(updateProducts(list))
   }
 
   searchChange(e) {
@@ -142,6 +184,7 @@ class Product extends React.Component {
   deleteData() {
     const item = this.state.sItem
     const self = this
+    this.setState({loading: true})
     axios({
       method: 'delete',
       url: config.route.products.delete + item.id,
@@ -154,14 +197,15 @@ class Product extends React.Component {
     .then(function (response) {
       console.log(response.data)
       if (response.status === 200) {
-        //self.removeProducts(item)
         self.getSeries()
         self.hideDelete()
+        self.setState({loading: false})
       } else {
-        return null
+        self.setState({loading: false})
       }
     }).catch(function (error) {
       console.log(error)
+      self.setState({loading: false})
     })
   }
 
@@ -184,7 +228,7 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props
-    const { list, search, addShow, editShow, deleteShow, seriesShow, tagsShow, sItem } = this.state
+    const { list, search, addShow, editShow, deleteShow, seriesShow, tagsShow, sItem, loading } = this.state
     return (
       <div>
         <div className="container" style={style.container}>
@@ -280,6 +324,7 @@ class Product extends React.Component {
                 }
                 {deleteShow &&
                   <Confirm show={deleteShow} message="你確定要刪除資料？"
+                    loading={loading}
                     click_ok={this.deleteData.bind(this)}
                     click_cancel={this.hideDelete.bind(this)}
                   />
@@ -324,9 +369,10 @@ const style = {
 }
 
 function mapStateToProps(state) {
-  const { product } = state
+  const { product, series } = state
   return {
     product,
+    series,
   }
 }
 

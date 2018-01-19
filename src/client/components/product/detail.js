@@ -83,9 +83,11 @@ class Detail extends React.Component {
         <div className="modal-large">
           <div className="columns" style={style.columns}>
             <div className="column is-two-fifths" style={style.column}>
-              <figure>
-                {data && <img style={style.image} src={config.route.photos.getPhoto + data.photos[0].id} />}
-              </figure>
+              {data &&
+                <figure>
+                  {data.photos.length > 0 && <img style={style.image} src={config.route.photos.getPhoto + data.photos[0].id} />}
+                </figure>
+              }
               {data && data.ordered === false ?
                 <button className="button is-orange" onClick={this.addOrder.bind(this)}>加入詢價清單</button>
                 :
