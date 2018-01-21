@@ -74,47 +74,33 @@ Promise.each( // 依序執行服務原件的啟動程序
     // ////////////// Pre-Routing Global Middlewares ////////////////////////
     logging.console('載入 pre-routing 全域 middlewares...')
     if (eVars.devMode) { app.use(require('morgan')('dev')) } // request logger
-    app.use(cors()) // enable CORS for all origins (no longer required once client is loaded from this server)
+    if (eVars.devMode) { app.use(cors()) } // no longer required once client is loaded from this server
     // parse request with application/x-www-form-urlencoded body data
-    app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' })) // for request with large body data
+    // for request with large body data
+    app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }))
     // parse request with application/json body data
-    app.use(bodyParser.json({ limit: '5mb' })) // for request with large body data
+    // for request with large body data
+    app.use(bodyParser.json({ limit: '5mb' }))
 
     // ///////////// Routing Setup //////////////////////////////////////////
-    logging.console('路由器端點定義...')
-    const ROUTERS = {
-      api: {
-        router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}/api`
-      },
-      assets: {
-        router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}`,
-        path: (() => {
-          return eVars.devMode
-            ? path.resolve('./dist/public')
-            : path.resolve('./dist/public')
-        })()
-      },
-      client: {
-        router: express.Router(),
-        endpoint: `/${eVars.SYS_REF}`
-      }
-    }
     // declaration of routing and endpoint handlers
     logging.console('路由端點宣告...')
     // set up api endpoints
-    app.use(ROUTERS.api.endpoint, ROUTERS.api.router)
-    ROUTERS.api.router.use('/', require('./routes/apiRouteHandlers'))
+    let apiRouter = express.Router()
+    app.use(`/${eVars.SYS_REF}/api`, apiRouter)
+    apiRouter.use('/', require('./routes/apiRouteHandlers'))
     logging.console('API 端點宣告完成')
     // setup public assets endpoint
-    app.use(ROUTERS.assets.endpoint, ROUTERS.assets.router)
-    ROUTERS.assets.router.use(express.static(ROUTERS.assets.path))
-    logging.console(`public assets 實體檔案路徑宣告完成... ${ROUTERS.assets.path}`)
+    let assetRouter = express.Router()
+    let assetLocation = path.resolve('./dist/public')
+    app.use(`/${eVars.SYS_REF}`, assetRouter)
+    assetRouter.use(express.static(assetLocation))
+    logging.console(`public assets 實體檔案路徑宣告完成... ${assetLocation}`)
     // setup SPA index.html endpoint
-    app.use(ROUTERS.client.endpoint, ROUTERS.client.router)
-    ROUTERS.client.router.use('*', require('./routes/index'))
-    logging.console(`index.html 端點宣告完成... ${eVars.HOST}${ROUTERS.client.endpoint}`)
+    let clientRouter = express.Router()
+    app.use(`/${eVars.SYS_REF}`, clientRouter)
+    clientRouter.use('*', require('./routes/index'))
+    logging.console(`index.html 端點宣告完成... ${eVars.HOST}/${eVars.SYS_REF}`)
 
     // ////////////// Post-Routing Global Middlewares ////////////////////////
     logging.console('載入 post-routing 全域 middlewares....')
