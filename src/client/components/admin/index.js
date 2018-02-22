@@ -11,6 +11,8 @@ import Login from './login'
 import User from './user'
 import config from '../../config'
 
+import Test from './test'
+
 class Admin extends React.Component {
   constructor(props) {
     super(props)
@@ -112,6 +114,7 @@ class Admin extends React.Component {
             {false && <Route path={url + '/order'} component={Order}/>}
             <Route path={url + '/series'} component={Series}/>
             {false && <Route path={url + '/user'} component={User}/>}
+            <Route path={url + '/test'} component={Test}/>
           </div>
           : <Route exact path={url} component={Login} />
         }
